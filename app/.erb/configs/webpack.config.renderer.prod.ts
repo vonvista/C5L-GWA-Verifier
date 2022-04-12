@@ -57,13 +57,42 @@ const configuration: webpack.Configuration = {
               importLoaders: 1,
             },
           },
-          'sass-loader',
+          {
+            // style, css, sass loaders...
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins:
+                  [
+                    require('tailwindcss'),
+                    require('autoprefixer'),
+                  ]
+              }
+            },
+          },
         ],
         include: /\.module\.s?(c|a)ss$/,
       },
       {
         test: /\.s?(a|c)ss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [
+          MiniCssExtractPlugin.loader, 
+          'css-loader', 
+          'sass-loader',
+          {
+            // style, css, sass loaders...
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins:
+                  [
+                    require('tailwindcss'),
+                    require('autoprefixer'),
+                  ]
+              }
+            },
+          },
+        ],
         exclude: /\.module\.s?(c|a)ss$/,
       },
       // Fonts
