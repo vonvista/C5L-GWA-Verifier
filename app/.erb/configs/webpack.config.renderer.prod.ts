@@ -3,7 +3,7 @@
  */
 
 import path from 'path';
-import webpack from 'webpack';
+import webpack, { LoaderOptionsPlugin } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
@@ -57,6 +57,7 @@ const configuration: webpack.Configuration = {
               importLoaders: 1,
             },
           },
+          'sass-loader',
           {
             // style, css, sass loaders...
             loader: 'postcss-loader',
