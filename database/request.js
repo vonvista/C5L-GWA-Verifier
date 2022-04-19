@@ -94,3 +94,26 @@ request('http://localhost:3001/grade/add',{method:"POST",form: grade2},function(
 request('http://localhost:3001/grade/find-all',function(err,res,body) {
     console.log(body);
 });
+
+
+/* COURSE TEST */
+
+course1 = {
+    CourseName: "WIKA 1",
+    Units: 3,
+    CourseType: "required"
+}
+
+course2 = {
+    CourseName: "PI 10",
+    Units: 3,
+    CourseType: "required"
+}
+
+request('http://localhost:3001/course/add',{method:"POST",form: course1},function(err,req,body) {
+    console.log(body);
+});
+
+request('http://localhost:3001/course/add',{method:"POST",form: course2},function(err,req,body) {
+    console.log(body);
+});
