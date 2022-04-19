@@ -247,111 +247,13 @@ exports.courseDeleteOne = function(req, res, next) {
     }
   });
 }
-/* 
-// -----------------------------STUDENT  S E C T I O N----------------------------------------
 
-// STUDENT SCHEMA
-const studentSchema = new Schema({
-  _id: {type: Number, required : true, unique: true},
-  FirstName : {type: String, required : true},
-  LastName : {type: String, required : true},
-  MiddleName : {type: String, required : true},
-  Degree: 
-},{autoCreate:true});
-
-
-// models for the database
-// NOTE: creating a model with a unique attribute will cause mongoose to auto-create a collection for the model
-// USER MODEL
-const User = db.model('user',userSchema);
-
-
-// find all users
-exports.userFindAll = function(req, res, next) {
-User.find(function(err, users) {
-  if (!err) { res.send(users) }
-});
-}
-
-exports.userFind = function(req, res, next) {
-User.findOne({Username:req.body.Username}, function(err, User){
-  if(!err) {res.send(User);}
-});
-}
-
-// add user
-exports.userAdd = function(req, res, next) {
-// UNCOMMENT TO SEE REQUEST CONTENTS AND MAPPING TO USER MODEL
-// console.log(req.body);
-
-var newUser = new User({
-  Username: req.body.Username,
-  FirstName: req.body.FirstName,
-  MiddleName: req.body.MiddleName,
-  LastName: req.body.LastName,
-  Position: req.body.Position,
-  Role: req.body.Role,
-  Password: req.body.Password
-});
-// console.log(newUser);
-
-
-newUser.save(function(err) {
-  if (!err) { res.send(newUser)}
-  else { res.send('Unable to save user') }
-});
-}
-
-
-
-// delete a user
-exports.userDelete = function(req, res, next) {
-// console.log(req.body);
-User.findOneAndDelete({Username : req.body.Username},function(err, User){
-  if(!err && User){
-    res.send('Successfully deleted ' + User.Username);
-  } else {
-    res.send('Unable to delete user');
-  }
-});
-}
-
-// clean collection
-exports.userDeleteAll = function(req, res, next) {
-// console.log(req.body);
-User.deleteMany({},function(err){
-  if(!err){
-    res.send('Successfully deleted users');
-  } else {
-    res.send('Unable to delete users');
-  }
-});
-}
-
-// update a user
-exports.userUpdate = function(req, res, next) {
-// console.log(req.body);
-User.updateOne({Username : req.body.Username},{"$set":{
-  "FirstName": req.body.FirstName,
-  "MiddleName": req.body.MiddleName,
-  "LastName": req.body.LastName,
-  "Position": req.body.Position,
-  "Role": req.body.Role,
-  "Password": req.body.Password
-}}, {new : true}, function(err,result){
-  if(!err && User){
-    res.send(result);
-  } else {
-    res.send('Unable to update user');
-  }
-})
-} */
 
 // -----------------------------D E G R E E  S E C T I O N----------------------------------------
 
 // DEGREE SCHEMA
 const degreeSchema = new Schema({
-  _id: {type: String, required : true, enum : ['BSAMAT', 'BSMATH', 'BSMST', 'BSAPHY', 'BSCS',
+  DegreeID: {type: String, required : true, enum : ['BSAMAT', 'BSMATH', 'BSMST', 'BSAPHY', 'BSCS',
   'BSCHEM', 'BSAGCHEM', 'BSSTAT', 'BSBIO', 'BSSOCIO', 'BAPHILO', 'BACA']},
   DegreeName: {type: String, required : true},
   Major: {type: String, required : false},
@@ -365,13 +267,13 @@ const Degree = db.model('degree', degreeSchema);
 
 // find degree
 exports.degreeFindAll = function(req, res, next) {
-Course.find(function(err, degree) {
+Degree.find(function(err, degree) {
   if (!err) { res.send(degree) }
 });
 }
 
 exports.degreeFind = function(req, res, next) {
-Degree.findOne({_id:req.body._id}, function(err, User){
+Degree.findOne({DegreeID:req.body.DegreeID}, function(err, Degree){
   if(!err) {res.send(Degree);}
 });
 }
@@ -380,14 +282,14 @@ Degree.findOne({_id:req.body._id}, function(err, User){
 exports.degreeAdd = function(req, res, next) {
   
   var newDegree = new Degree({
-    _id: req.body._id,
+    DegreeID: req.body.DegreeID,
     DegreeName: req.body.DegreeName,
     Major: req.body.Major,
     RequiredUnits: req.body.RequiredUnits
   });
   console.log(newDegree);
 
-  newCourse.save(function(err) {
+  newDegree.save(function(err) {
     if (!err) { res.send(newDegree)}
     else { res.send('Unable to save degree') }
   });
@@ -395,7 +297,7 @@ exports.degreeAdd = function(req, res, next) {
 
 // update degree
 exports.degreeUpdate = function(req, res, next) {
-Degree.updateOne({_id:req.body._id},{"$set":{
+Degree.updateOne({DegreeID:req.body.DegreeID},{"$set":{
   "DegreeID": req.body._id,
   "DegreeName": req.body.DegreeName,
   "Major": req.body.Major,
@@ -405,6 +307,78 @@ Degree.updateOne({_id:req.body._id},{"$set":{
     res.send(result);
   } else {
     res.send('Unable to update degree');
+  }
+})
+}
+
+
+// -----------------------------S T U D E N T  S E C T I O N----------------------------------------
+
+// STUDENT SCHEMA
+const studentSchema = new Schema({
+  StudentID: {type: String, required : true, unique: true},
+  FirstName : {type: String, required : true},
+  LastName : {type: String, required : true},
+  MiddleName : {type: String, required : true},
+  Degree: {type: Schema.Types.ObjectId, ref: 'degree'},
+  TotalUnits: {type: Number, required : true},
+  OverallGWA: {type: Number, required : true},
+},{autoCreate:true});
+
+
+
+// STUDENT MODEL
+const Student = db.model('student', studentSchema);
+
+
+// find student
+exports.studentFindAll = function(req, res, next) {
+Student.find(function(err, student) {
+  if (!err) { res.send(student) }
+});
+}
+
+exports.studentFind = function(req, res, next) {
+Student.findOne({StudentID:req.body.StudentID}, function(err, Student){
+  if(!err) {res.send(Student);}
+});
+}
+
+// add student
+exports.studentAdd = function(req, res, next) {
+  
+  var newStudent = new Student({
+    StudentID: req.body.StudentID,
+    FirstName: req.body.FirstName,
+    MiddleName: req.body.MiddleName,
+    LastName: req.body.LastName,
+    Degree: req.body.Degree,
+    TotalUnits: req.body.TotalUnits,
+    OverallGWA: req.body.OverallGWA
+  });
+  console.log(newStudent);
+
+  newStudent.save(function(err) {
+    if (!err) { res.send(newStudent)}
+    else { res.send('Unable to save student') }
+  });
+}
+
+// update student
+exports.studentUpdate = function(req, res, next) {
+Student.updateOne({_id:req.body._id},{"$set":{
+  "StudentNo.": req.body.StudentID,
+  "FirstName": req.body.FirstName,
+  "MiddleName": req.body.MiddleName,
+  "LastName": req.body.LastName,
+  "Degree": req.body.Degree,
+  "TotalUnits": req.body.TotalUnits,
+  "OverallGWA": req.body.OverallGWA  
+}}, {new : true}, function(err,result){
+  if(!err && Student){
+    res.send(result);
+  } else {
+    res.send('Unable to update student');
   }
 })
 }

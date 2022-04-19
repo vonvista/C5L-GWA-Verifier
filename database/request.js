@@ -122,14 +122,14 @@ request('http://localhost:3001/course/add',{method:"POST",form: course2},functio
 //DEGREE TEST
 
 degree1 = {
-    _id: "BSCS",
+    DegreeID: "BSCS",
     DegreeName: "Bachelor of Science in Computer Science",
     Major: "N/A",
     RequiredUnits: 130
 }
 
 degree2 = {
-    _id: "BSAGCHEM",
+    DegreeID: "BSAGCHEM",
     DegreeName: "Bachelor of Science in Agricultural Chemistry",
     Major: "Animal Science",
     RequiredUnits: 190
@@ -140,5 +140,35 @@ request('http://localhost:3001/course/add',{method:"POST",form: degree1},functio
 });
 
 request('http://localhost:3001/course/add',{method:"POST",form: degree2},function(err,req,body) {
+    console.log(body);
+});
+
+//STUDENT TEST
+
+student1 = {
+    StudentID: "201912345",
+    FirstName: "Leni",
+    LastName: "Robredo",
+    MiddleName: "Gerona",
+    Degree: "BSCS",
+    TotalUnits: 100,
+    OverallGWA: 1.00
+}
+
+student2 = {
+    StudentID: "201967892",
+    FirstName: "Isko",
+    LastName: "Moreno",
+    MiddleName: "Withdraw",
+    Degree: "BSMST",
+    TotalUnits: 79,
+    OverallGWA: 2.75
+}
+
+request('http://localhost:3001/course/add',{method:"POST",form: student1},function(err,req,body) {
+    console.log(body);
+});
+
+request('http://localhost:3001/course/add',{method:"POST",form: student2},function(err,req,body) {
     console.log(body);
 });

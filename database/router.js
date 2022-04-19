@@ -53,4 +53,10 @@ module.exports = (app) => {
   app.get('/degree/find', controller.degreeFindOne);
   app.get('/degree/find-all', controller.degreeFindAll);
   app.put('/degree/update', controller.degreeUpdateOne);
+
+   // STUDENT ROUTES
+   app.post('/student/add', controller.studentAdd);
+   app.get('/student/find', controller.studentFindOne);
+   app.get('/student/find-all', controller.studentFindAll);
+   app.put('/student/update', controller.studentUpdateOne);
 }
