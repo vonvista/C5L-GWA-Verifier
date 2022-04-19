@@ -34,7 +34,6 @@ grade1 = {
 grade2 = {
     Value: "1.0",
     Year: "2021-2022",
-    Semester: "2S"
 }
 
 request('http://localhost:3001/grade/add',{method:"POST",form: grade1},function(err,req,body) {
