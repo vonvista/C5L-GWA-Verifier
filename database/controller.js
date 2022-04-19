@@ -7,14 +7,14 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
-// collection for users
 // name of the database will be BALANGKAS
 const db = mongoose.createConnection('mongodb://localhost:27017/KALATAS', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
 
-// Schemas
+// -----------------------------U S E R S   S E C T I O N----------------------------------------
+
 // USER SCHEMA
 const userSchema = new Schema({
     Username : {type: String, required : true, unique: true},

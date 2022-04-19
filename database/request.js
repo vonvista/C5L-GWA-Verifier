@@ -5,7 +5,7 @@
  */
 const request = require('request');
 
-// USER TEST
+// -----------------------------U S E R S   S E C T I O N----------------------------------------
 user1 = {
     Username: "user1",
     FirstName : "First",
