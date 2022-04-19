@@ -170,7 +170,6 @@ exports.gradeAdd = function(req, res, next) {
 
 
 }
-}
 
 
 // -----------------------------C O U R S E   S E C T I O N----------------------------------------
