@@ -36,23 +36,32 @@ newUser2 = {
     Password : "hatdog"
 }
 
-request('http://localhost:3001/user/add',{method:"POST",form: user1},function(err,req,body) {
-    console.log("SENDING : " + body);
-});
+// add request
+// request('http://localhost:3001/user/add',{method:"POST",form: user1},function(err,req,body) {
+//     console.log("SENDING : " + body);
+// });
 
-request('http://localhost:3001/user/add',{method:"POST",form: user2},function(err,req,body) {
-    console.log("SENDING : " + body);
-});
+// request('http://localhost:3001/user/add',{method:"POST",form: user2},function(err,req,body) {
+//     console.log("SENDING : " + body);
+// });
 
+// view all
 // request('http://localhost:3001/user/find-all',function(err,res,body) {
 //     console.log(body);
 // });
 
+// delete one by username
 // request('http://localhost:3001/user/delete',{method:"DELETE",form: {Username: user2.Username}},function(err,req,body) {
     //     console.log(body);
     // });
     
-request('http://localhost:3001/user/update', {method:"PUT",form: newUser2},function(err,res,body) {
-    console.log(err);
+// update user
+// request('http://localhost:3001/user/update', {method:"PUT",form: newUser2},function(err,res,body) {
+//     console.log(err);
+//     console.log(body);
+// });
+
+// find one
+request('http://localhost:3001/user/find',{method:"GET",form:{Username:"user1"}},function(err,res,body) {
     console.log(body);
 });

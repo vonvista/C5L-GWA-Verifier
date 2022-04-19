@@ -26,6 +26,7 @@ module.exports = (app) => {
  
   // USER ROUTES
    app.get('/user/find-all', controller.userFindAll);
+   app.get('/user/find', controller.userFind);
    app.post('/user/add', controller.userAdd);
    app.delete('/user/delete', controller.userDelete);
    app.put('/user/update', controller.userUpdate);

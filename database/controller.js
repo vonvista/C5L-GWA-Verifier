@@ -47,8 +47,14 @@ const User = db.model('user',userSchema);
  */
 // find all users
 exports.userFindAll = function(req, res, next) {
-  User.find((err, users) => {
+  User.find(function(err, users) {
     if (!err) { res.send(users) }
+  });
+}
+
+exports.userFind = function(req, res, next) {
+  User.findOne({Username:req.body.Username}, function(err, User){
+    if(!err) {res.send(User);}
   });
 }
 
