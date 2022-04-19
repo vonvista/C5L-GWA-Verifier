@@ -28,4 +28,5 @@ module.exports = (app) => {
    app.get('/user/find-all', controller.userFindAll);
    app.post('/user/add', controller.userAdd);
    app.delete('/user/delete', controller.userDelete);
+   app.put('/user/update', controller.userUpdate);
 }
