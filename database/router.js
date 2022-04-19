@@ -27,4 +27,12 @@ module.exports = (app) => {
   // USER ROUTES
    app.get('/user/find-all', controller.userFindAll);
    app.post('/user/add', controller.userAdd);
+
+  // COURSE ROUTES
+  app.post('/course/add', controller.courseAdd);
+  app.get('/course/find', controller.courseFindOne);
+  app.get('/course/find-all', controller.courseFindAll);
+  app.put('/course/update', controller.courseUpdateOne);
+  app.delete('/course/delete', controller.courseDeleteOne);
+
 }

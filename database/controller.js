@@ -93,3 +93,61 @@ const Course = db.model('course',courseSchema);
  * functions - create/add, read/find, update, delete
  * NOTE: need to change the functions to be specific to the collection (in this case, users)
  */
+
+// create/add course
+exports.courseAdd = function(req, res, next) {
+  // UNCOMMENT TO SEE REQUEST CONTENTS AND MAPPING TO USER MODEL
+  // console.log(req.body);
+  
+  var newCourse = new Course({
+    CourseName: req.body.CourseName,
+    Units: req.body.Units,
+    CourseType: req.body.CourseType
+  });
+  console.log(newCourse);
+
+  newCourse.save(function(err) {
+    if (!err) { res.send(newCourse)}
+    else { res.send('Unable to save user') }
+  });
+}
+
+// find one course
+exports.courseFindOne = function(req, res, next) {
+  Course.findOne((err, course) => {
+    if (!err) {res.send(course)}
+  });
+}
+
+// find all course
+exports.courseFindAll = function(req, res, next) {
+  Course.find((err, courses) => {
+    if (!err) { res.send(courses) }
+  });
+}
+
+// update one course
+exports.courseUpdateOne = function(req, res, next) {
+  Course.updateOne({CourseName: req.body.CourseName}, {"$set":{
+    CourseName: req.body.CourseName,
+    Units: req.body.Units,
+    CourseType: req.body.CourseType
+  }}, {new : true}, function(err, result){
+    if (!err & Course){
+      res.send(result);
+    } else {
+      res.send('Unable to update course');
+    }
+  });
+}
+
+// delete one course
+exports.courseDeleteOne = function(req, res, next) {
+  Course.findOneAndDelete({CourseName: req.body.CourseName}, function(err, Course){
+    if(!err && Course) {
+      res.send('Successfully deleted ' + Course.CourseName);
+    } else {
+      res.send('Unable to delete course');
+    }
+  });
+}
