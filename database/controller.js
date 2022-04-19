@@ -5,32 +5,29 @@
  */
 
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema;
 
-// used to create a connection to the collection SOCMEDIA
-const userbase = mongoose.createConnection('mongodb://localhost:27017/SOCMEDIA', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+// collection for users
+// name of the database will be BALANGKAS
+const db = mongoose.createConnection('mongodb://localhost:27017/BALANGKAS', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 })
-// used to create a connection to the collection FEEDPOSTS
-const posts = mongoose.createConnection('mongodb://localhost:27017/FEEDPOSTS', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
+
+// Schemas
+const userSchema = new Schema({
+    Username : {type: String, required : true, unique: true},
+    First_name : {type: String, required : true},
+    Last_name : {type: String, required : true},
+    Middle_name : {type: String, required : true},
+    Position : {type: String, required : true},
+    Role : {type: String, required : true, enum : ['user','admin']},
+    Password : {type: String, required : true}
+  },{autoCreate:true});
 
 // models for the database
-const User = userbase.model('User', {
-  fname:String,
-  lname:String,
-  email:String,
-  password:String,
-  login:Boolean
-})
-
-const Post = posts.model('Post', {
-  author:String,
-  content:String,
-  timestamp:Date
-})
+// NOTE: creating a model with a unique attribute will cause mongoose to auto-create a collection for the model
+const User = db.model('user',userSchema);
 
 
 /**
@@ -39,139 +36,39 @@ const Post = posts.model('Post', {
  * <code>
  * }
  */
-// Posts feed section
-exports.findAllPosts = (req, res, next) => {
-  Post.find((err, posts) => {
-    if(!err){res.send(posts)}
-  })
-}
-exports.findByAuthor = (req, res, next) => {
-  if (!req.query.id) { return res.send('No id provided') }
 
-  Post.findOne({ _id: req.query.id}, (err, Post) => {
-    if (!err) { res.send(User) }
-  })
-}
 
-exports.post = (req, res, next) => {
-  // console.log(req.body)
-
-  var newPost = new Post({
-    author: req.body.author,
-    content: req.body.content,
-    timestamp: req.body.timestamp
-  })
-
-  newPost.save((err) => {
-    if (!err) { res.send(newPost)}
-    else { res.send('Unable to save Post') }
-  })
-}
-
-exports.findByIdPOST = (req, res, next) => {
-  // console.log(req.query.id)
-  if (!req.query.id) { return res.send('No id provided') }
-
-  User.findOne({ _id: req.query.id}, (err, User) => {
-    if (!err) { res.send(User) }
-  })
-}
-
-exports.deletePostById = (req, res, next) => {
-  // console.log(req.body.id)
-  Post.findOneAndDelete({_id: req.body.id},{}, (err, post) => {
-    if (!err && post) {
-      res.send('Successfully deleted ' + post.id)
-    }
-    else {
-      res.send('Unable to delete Post')
-    }
-  })
-}
-
-exports.findPostAndUpdate = (req, res, next) => {
-  // console.log(req.body)
-  Post.updateOne({_id: req.body.id},{
-    "$set": {
-      "content": req.body.content,
-      "timestamp": req.body.timestamp
-    }
-  }, {new: true}, (err, result) => {
-    if (!err) res.json(result)
-  })
-}
-
-// Userbase section
+/**
+ * SECTION : users
+ * functions - findAll, add
+ * NOTE: need to change the functions to be specific to the collection (in this case, users)
+ */
+// find all users
 exports.findAll = (req, res, next) => {
   User.find((err, users) => {
     if (!err) { res.send(users) }
   })
 }
 
-exports.findById = (req, res, next) => {
-  if (!req.query.id) { return res.send('No id provided') }
-
-  User.findOne({ _id: req.query.id}, (err, User) => {
-    if (!err) { res.send(User) }
-  })
-}
-
-exports.findByForm = (req, res, next) => {
-  if (!req.query.email) {return res.send('Insufficient data provided')}
-
-  User.findOne({email: req.query.email} , (err, User) => {
-    if(!err) {res.send(User)}
-  })
-}
-
-
+// add user
 exports.add = (req, res, next) => {
-  // console.log(req.body)
+  // UNCOMMENT TO SEE REQUEST CONTENTS AND MAPPING TO USER MODEL
+  // console.log(req.body);
+  // console.log(newUser);
 
   var newUser = new User({
-    fname: req.body.fname,
-    lname: req.body.lname,
-    email: req.body.email,
-    password: req.body.password,
-    login: req.body.login
-  })
+    Username: req.body.Username,
+    First_name: req.body.First_name,
+    Middle_name: req.body.Middle_name,
+    Last_name: req.body.Last_name,
+    Position: req.body.Position,
+    Role: req.body.Role,
+    Password: req.body.Password
+  });
+
 
   newUser.save((err) => {
     if (!err) { res.send(newUser)}
-    else { res.send('Unable to save User') }
-  })
-}
-
-exports.deleteById = (req, res, next) => {
-  User.findOneAndDelete({ _id: req.body.id }, (err, User) => {
-    if (!err && User) {
-      res.send('Successfully deleted ' + User.email)
-    }
-    else {
-      res.send('Unable to delete User')
-    }
-  })
-}
-
-exports.LoginUpdate = (req, res, next) => {
-  // console.log(req.query.login)
-  let status = req.query.login
-  // console.log(status)  
-    User.updateOne({_id: req.query.id},{
-      "$set": {"login":status}
-    },(err, result) => {
-      if(!err)res.json(result)
-    })
-    User.findOne({_id: req.query.id}, (err, User) => {
-      if(!err) {
-        console.log(User)
-      }
-    })
-}
-
-exports.loggedIn = (req, res, next) => {  
-  User.findOne({login: true}, (err, User) => {
-    // console.log(User)
-    if(!err) {res.send(User)}
+    else { res.send('Unable to save user') }
   })
 }

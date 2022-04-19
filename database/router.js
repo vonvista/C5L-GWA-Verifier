@@ -23,19 +23,7 @@ module.exports = (app) => {
    * 
    * app.get, app.post, app.delete, app.put
    */
-   app.get('/login-toggle', controller.LoginUpdate)
-   app.get('/logged-in', controller.loggedIn)
- 
-   app.get('/find-all-posts', controller.findAllPosts)
-   app.get('/find-by-id-post', controller.findByIdPOST)
-   app.get('/find-by-author', controller.findByAuthor)
-   app.post('/post', controller.post)
-   app.delete('/delete-post-by-id', controller.deletePostById)
-   app.put('/edit-post-by-id', controller.findPostAndUpdate)
  
    app.get('/find-all', controller.findAll)
-   app.get('/find-by-id', controller.findById)
-   app.get('/find-by-form', controller.findByForm)
    app.post('/add', controller.add)
-   app.post('/delete-by-id', controller.deleteById)
 }
