@@ -74,3 +74,14 @@ exports.userAdd = function(req, res, next) {
     else { res.send('Unable to save user') }
   });
 }
+
+exports.userDelete = function(req, res, next) {
+  console.log(req.body);
+  User.findOneAndDelete({Username : req.body.Username},function(err, User){
+    if(!err && User){
+      res.send('Successfully deleted ' + User.Username);
+    } else {
+      res.send('Unable to delete user');
+    }
+  });
+}

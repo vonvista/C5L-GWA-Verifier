@@ -16,8 +16,30 @@ user1 = {
     Password : "1234"    
 }
 
+user2 = {
+    Username: "user2",
+    FirstName : "Second",
+    MiddleName : "Middle",
+    LastName : "Last",
+    Position : "Test User for Database",
+    Role : "user",
+    Password : "5678"    
+}
+
 request('http://localhost:3001/user/add',{method:"POST",form: user1},function(err,req,body) {
+    console.log("SENDING : " + body);
+});
+
+request('http://localhost:3001/user/add',{method:"POST",form: user2},function(err,req,body) {
+    console.log("SENDING : " + body);
+});
+
+request('http://localhost:3001/user/find-all',function(err,res,body) {
     console.log(body);
+});
+
+request('http://localhost:3001/user/delete',{method:"DELETE",form: {Username: user2.Username}},function(err,req,body) {
+    console.log("SENDING : " + body);
 });
 
 request('http://localhost:3001/user/find-all',function(err,res,body) {
