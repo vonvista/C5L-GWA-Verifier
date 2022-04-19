@@ -117,3 +117,28 @@ request('http://localhost:3001/course/add',{method:"POST",form: course1},functio
 request('http://localhost:3001/course/add',{method:"POST",form: course2},function(err,req,body) {
     console.log(body);
 });
+
+
+//DEGREE TEST
+
+degree1 = {
+    _id: "BSCS",
+    DegreeName: "Bachelor of Science in Computer Science",
+    Major: "N/A",
+    RequiredUnits: 130
+}
+
+degree2 = {
+    _id: "BSAGCHEM",
+    DegreeName: "Bachelor of Science in Agricultural Chemistry",
+    Major: "Animal Science",
+    RequiredUnits: 190
+}
+
+request('http://localhost:3001/course/add',{method:"POST",form: degree1},function(err,req,body) {
+    console.log(body);
+});
+
+request('http://localhost:3001/course/add',{method:"POST",form: degree2},function(err,req,body) {
+    console.log(body);
+});
