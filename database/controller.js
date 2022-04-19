@@ -26,20 +26,12 @@ const userSchema = new Schema({
     Password : {type: String, required : true}
   },{autoCreate:true});
 
-// COURSE SCHEMA
-const courseSchema = new Schema({
-  CourseName: {type: String, required: true, unique: true},
-  Units: {type: Number, required: true},
-  CourseType: {type: String, required: true, enum: ['required', 'non-academic', 'electives']}
-},{autoCreate:true});
 
 // models for the database
 // NOTE: creating a model with a unique attribute will cause mongoose to auto-create a collection for the model
 // USER MODEL
 const User = db.model('user',userSchema);
 
-// COURSE MODEL
-const Course = db.model('course',courseSchema);
 
 /**
  * METHODS
@@ -83,3 +75,21 @@ exports.userAdd = function(req, res, next) {
     else { res.send('Unable to save user') }
   });
 }
+
+// -----------------------------C O U R S E   S E C T I O N----------------------------------------
+
+// COURSE SCHEMA
+const courseSchema = new Schema({
+  CourseName: {type: String, required: true, unique: true},
+  Units: {type: Number, required: true},
+  CourseType: {type: String, required: true, enum: ['required', 'non-academic', 'electives']}
+},{autoCreate:true});
+
+// COURSE MODEL
+const Course = db.model('course',courseSchema);
+
+/**
+ * SECTION : COURSE
+ * functions - add, find, delete, edit
+ * NOTE: need to change the functions to be specific to the collection (in this case, users)
+ */
