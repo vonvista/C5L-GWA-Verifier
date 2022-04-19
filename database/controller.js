@@ -7,14 +7,14 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
-// collection for users
 // name of the database will be BALANGKAS
 const db = mongoose.createConnection('mongodb://localhost:27017/KALATAS', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
 
-// Schemas
+// -----------------------------U S E R S   S E C T I O N----------------------------------------
+
 // USER SCHEMA
 const userSchema = new Schema({
     Username : {type: String, required : true, unique: true},
@@ -47,8 +47,14 @@ const User = db.model('user',userSchema);
  */
 // find all users
 exports.userFindAll = function(req, res, next) {
-  User.find((err, users) => {
+  User.find(function(err, users) {
     if (!err) { res.send(users) }
+  });
+}
+
+exports.userFind = function(req, res, next) {
+  User.findOne({Username:req.body.Username}, function(err, User){
+    if(!err) {res.send(User);}
   });
 }
 
@@ -66,7 +72,7 @@ exports.userAdd = function(req, res, next) {
     Role: req.body.Role,
     Password: req.body.Password
   });
-  console.log(newUser);
+  // console.log(newUser);
   
 
   newUser.save(function(err) {
@@ -75,6 +81,49 @@ exports.userAdd = function(req, res, next) {
   });
 }
 
+
+// delete a user
+exports.userDelete = function(req, res, next) {
+  // console.log(req.body);
+  User.findOneAndDelete({Username : req.body.Username},function(err, User){
+    if(!err && User){
+      res.send('Successfully deleted ' + User.Username);
+    } else {
+      res.send('Unable to delete user');
+    }
+  });
+}
+
+// clean collection
+exports.userDeleteAll = function(req, res, next) {
+  // console.log(req.body);
+  User.deleteMany({},function(err){
+    if(!err){
+      res.send('Successfully deleted users');
+    } else {
+      res.send('Unable to delete users');
+    }
+  });
+}
+
+// update a user
+exports.userUpdate = function(req, res, next) {
+  // console.log(req.body);
+  User.updateOne({Username : req.body.Username},{"$set":{
+    "FirstName": req.body.FirstName,
+    "MiddleName": req.body.MiddleName,
+    "LastName": req.body.LastName,
+    "Position": req.body.Position,
+    "Role": req.body.Role,
+    "Password": req.body.Password
+  }}, {new : true}, function(err,result){
+    if(!err && User){
+      res.send(result);
+    } else {
+      res.send('Unable to update user');
+    }
+  })
+}
 // -----------------------------G R A D E S   S E C T I O N----------------------------------------
 
 // GRADE SCHEMA
@@ -116,4 +165,5 @@ exports.gradeAdd = function(req, res, next) {
     if (!err) { res.send(newGrade)}
     else { res.send('Unable to save grade') }
   });
+
 }
