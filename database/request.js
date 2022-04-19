@@ -135,11 +135,11 @@ degree2 = {
     RequiredUnits: 190
 }
 
-request('http://localhost:3001/course/add',{method:"POST",form: degree1},function(err,req,body) {
+request('http://localhost:3001/degree/add',{method:"POST",form: degree1},function(err,req,body) {
     console.log(body);
 });
 
-request('http://localhost:3001/course/add',{method:"POST",form: degree2},function(err,req,body) {
+request('http://localhost:3001/degree/add',{method:"POST",form: degree2},function(err,req,body) {
     console.log(body);
 });
 
@@ -165,10 +165,10 @@ student2 = {
     OverallGWA: 2.75
 }
 
-request('http://localhost:3001/course/add',{method:"POST",form: student1},function(err,req,body) {
+request('http://localhost:3001/student/add',{method:"POST",form: student1},function(err,req,body) {
     console.log(body);
 });
 
-request('http://localhost:3001/course/add',{method:"POST",form: student2},function(err,req,body) {
+request('http://localhost:3001/student/add',{method:"POST",form: student2},function(err,req,body) {
     console.log(body);
 });
