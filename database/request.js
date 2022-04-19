@@ -70,3 +70,27 @@ request('http://localhost:3001/user/find',{method:"GET",form:{Username:"user1"}}
 request('http://localhost:3001/user/delete-all',{method:"DELETE"},function(err,res,body) {
     console.log(body);
 });
+
+// GRADE TEST
+grade1 = {
+    Value: "INC",
+    Year: "2021-2022",
+    Semester: "1S"
+}
+
+grade2 = {
+    Value: "1.0",
+    Year: "2021-2022",
+}
+
+request('http://localhost:3001/grade/add',{method:"POST",form: grade1},function(err,req,body) {
+    console.log(body);
+});
+
+request('http://localhost:3001/grade/add',{method:"POST",form: grade2},function(err,req,body) {
+    console.log(body);
+});
+
+request('http://localhost:3001/grade/find-all',function(err,res,body) {
+    console.log(body);
+});
