@@ -29,6 +29,7 @@ module.exports = (app) => {
    app.get('/user/find', controller.userFind);
    app.post('/user/add', controller.userAdd);
 
+
    app.delete('/user/delete', controller.userDelete);
    app.delete('/user/delete-all', controller.userDeleteAll);
    app.put('/user/update', controller.userUpdate);
@@ -38,4 +39,11 @@ module.exports = (app) => {
    app.get('/grade/find-all', controller.gradeFindAll);
    app.post('/grade/add', controller.gradeAdd);
 
+
+  // COURSE ROUTES
+  app.post('/course/add', controller.courseAdd);
+  app.get('/course/find', controller.courseFindOne);
+  app.get('/course/find-all', controller.courseFindAll);
+  app.put('/course/update', controller.courseUpdateOne);
+  app.delete('/course/delete', controller.courseDeleteOne);
 }
