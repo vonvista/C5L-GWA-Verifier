@@ -27,4 +27,8 @@ module.exports = (app) => {
   // USER ROUTES
    app.get('/user/find-all', controller.userFindAll);
    app.post('/user/add', controller.userAdd);
+  
+  // GRADE ROUTES
+   app.get('/grade/find-all', controller.gradeFindAll);
+   app.post('/grade/add', controller.gradeAdd);
 }
