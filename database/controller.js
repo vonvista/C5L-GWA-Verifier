@@ -17,9 +17,9 @@ const db = mongoose.createConnection('mongodb://localhost:27017/KALATAS', {
 // Schemas
 const userSchema = new Schema({
     Username : {type: String, required : true, unique: true},
-    First_name : {type: String, required : true},
-    Last_name : {type: String, required : true},
-    Middle_name : {type: String, required : true},
+    FirstName : {type: String, required : true},
+    LastName : {type: String, required : true},
+    MiddleName : {type: String, required : true},
     Position : {type: String, required : true},
     Role : {type: String, required : true, enum : ['user','admin']},
     Password : {type: String, required : true}
@@ -44,30 +44,30 @@ const User = db.model('user',userSchema);
  * NOTE: need to change the functions to be specific to the collection (in this case, users)
  */
 // find all users
-exports.findAll = (req, res, next) => {
+exports.findAll = function(req, res, next) {
   User.find((err, users) => {
     if (!err) { res.send(users) }
   })
 }
 
 // add user
-exports.add = (req, res, next) => {
+exports.add = function(req, res, next) {
   // UNCOMMENT TO SEE REQUEST CONTENTS AND MAPPING TO USER MODEL
   // console.log(req.body);
   // console.log(newUser);
 
   var newUser = new User({
     Username: req.body.Username,
-    First_name: req.body.First_name,
-    Middle_name: req.body.Middle_name,
-    Last_name: req.body.Last_name,
+    FirstName: req.body.FirstName,
+    MiddleName: req.body.MiddleName,
+    LastName: req.body.LastName,
     Position: req.body.Position,
     Role: req.body.Role,
     Password: req.body.Password
   });
 
 
-  newUser.save((err) => {
+  newUser.save(function(err) {
     if (!err) { res.send(newUser)}
     else { res.send('Unable to save user') }
   })
