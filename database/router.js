@@ -34,5 +34,4 @@ module.exports = (app) => {
   app.get('/course/find-all', controller.courseFindAll);
   app.put('/course/update', controller.courseUpdateOne);
   app.delete('/course/delete', controller.courseDeleteOne);
-
 }
