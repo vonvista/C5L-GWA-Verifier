@@ -14,7 +14,7 @@ How to use:
     
 function userInput(props) {
 
-    // function component for input field forms
+    // function component for input field boxes
 
     return(
         <>
