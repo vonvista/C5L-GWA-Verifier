@@ -74,3 +74,46 @@ exports.userAdd = function(req, res, next) {
     else { res.send('Unable to save user') }
   });
 }
+
+// -----------------------------G R A D E S   S E C T I O N----------------------------------------
+
+// GRADE SCHEMA
+const gradeSchema = new Schema({
+  Value: {type: String, required: true},
+  Year: {type: String, required: true},
+  Semester: {type: String, required: true}
+},{autoCreate:true})
+
+// GRADE MODEL
+const Grade = db.model('grade', gradeSchema);
+
+/**
+ * SECTION : grades
+ * functions - findAll, add
+ */
+
+// Find all grades
+exports.gradeFindAll = function(req, res, next) {
+  Grade.find((err, grades) => {
+    if (!err) { res.send(grades) }
+  });
+}
+
+// Add grade
+exports.gradeAdd = function(req, res, next) {
+  // UNCOMMENT TO SEE REQUEST CONTENTS AND MAPPING TO USER MODEL
+  // console.log(req.body);
+  
+  var newGrade = new Grade({
+    Value: req.body.Value,
+    Year: req.body.Year,
+    Semester: req.body.Semester
+  });
+  console.log(newGrade);
+  
+
+  newGrade.save(function(err) {
+    if (!err) { res.send(newGrade)}
+    else { res.send('Unable to save grade') }
+  });
+}
