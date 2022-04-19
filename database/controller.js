@@ -81,7 +81,7 @@ exports.userAdd = function(req, res, next) {
 const gradeSchema = new Schema({
   Value: {type: String, required: true},
   Year: {type: String, required: true},
-  Semester: {type: String, required: true}
+  Semester: String
 },{autoCreate:true})
 
 // GRADE MODEL
