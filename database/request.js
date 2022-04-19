@@ -62,14 +62,14 @@ request('http://localhost:3001/user/add',{method:"POST",form: user2},function(er
 // });
 
 // find one
-request('http://localhost:3001/user/find',{method:"GET",form:{Username:"user1"}},function(err,res,body) {
-    console.log(body);
-});
+// request('http://localhost:3001/user/find',{method:"GET",form:{Username:"user1"}},function(err,res,body) {
+//     console.log(body);
+// });
 
 // delete all
-request('http://localhost:3001/user/delete-all',{method:"DELETE"},function(err,res,body) {
-    console.log(body);
-});
+// request('http://localhost:3001/user/delete-all',{method:"DELETE"},function(err,res,body) {
+//     console.log(body);
+// });
 
 // GRADE TEST
 grade1 = {
