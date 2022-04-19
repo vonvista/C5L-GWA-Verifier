@@ -37,13 +37,13 @@ newUser2 = {
 }
 
 // add request
-// request('http://localhost:3001/user/add',{method:"POST",form: user1},function(err,req,body) {
-//     console.log("SENDING : " + body);
-// });
+request('http://localhost:3001/user/add',{method:"POST",form: user1},function(err,req,body) {
+    console.log("SENDING : " + body);
+});
 
-// request('http://localhost:3001/user/add',{method:"POST",form: user2},function(err,req,body) {
-//     console.log("SENDING : " + body);
-// });
+request('http://localhost:3001/user/add',{method:"POST",form: user2},function(err,req,body) {
+    console.log("SENDING : " + body);
+});
 
 // view all
 // request('http://localhost:3001/user/find-all',function(err,res,body) {
@@ -63,5 +63,10 @@ newUser2 = {
 
 // find one
 request('http://localhost:3001/user/find',{method:"GET",form:{Username:"user1"}},function(err,res,body) {
+    console.log(body);
+});
+
+// delete all
+request('http://localhost:3001/user/delete-all',{method:"DELETE"},function(err,res,body) {
     console.log(body);
 });

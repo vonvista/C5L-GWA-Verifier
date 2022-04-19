@@ -93,6 +93,18 @@ exports.userDelete = function(req, res, next) {
   });
 }
 
+// clean collection
+exports.userDeleteAll = function(req, res, next) {
+  // console.log(req.body);
+  User.deleteMany({},function(err){
+    if(!err){
+      res.send('Successfully deleted users');
+    } else {
+      res.send('Unable to delete users');
+    }
+  });
+}
+
 // update a user
 exports.userUpdate = function(req, res, next) {
   // console.log(req.body);
