@@ -15,6 +15,7 @@ const db = mongoose.createConnection('mongodb://localhost:27017/KALATAS', {
 })
 
 // Schemas
+// USER SCHEMA
 const userSchema = new Schema({
     Username : {type: String, required : true, unique: true},
     FirstName : {type: String, required : true},
@@ -27,6 +28,7 @@ const userSchema = new Schema({
 
 // models for the database
 // NOTE: creating a model with a unique attribute will cause mongoose to auto-create a collection for the model
+// USER MODEL
 const User = db.model('user',userSchema);
 
 
@@ -44,18 +46,17 @@ const User = db.model('user',userSchema);
  * NOTE: need to change the functions to be specific to the collection (in this case, users)
  */
 // find all users
-exports.findAll = function(req, res, next) {
+exports.userFindAll = function(req, res, next) {
   User.find((err, users) => {
     if (!err) { res.send(users) }
-  })
+  });
 }
 
 // add user
-exports.add = function(req, res, next) {
+exports.userAdd = function(req, res, next) {
   // UNCOMMENT TO SEE REQUEST CONTENTS AND MAPPING TO USER MODEL
   // console.log(req.body);
-  // console.log(newUser);
-
+  
   var newUser = new User({
     Username: req.body.Username,
     FirstName: req.body.FirstName,
@@ -65,10 +66,11 @@ exports.add = function(req, res, next) {
     Role: req.body.Role,
     Password: req.body.Password
   });
-
+  console.log(newUser);
+  
 
   newUser.save(function(err) {
     if (!err) { res.send(newUser)}
     else { res.send('Unable to save user') }
-  })
+  });
 }

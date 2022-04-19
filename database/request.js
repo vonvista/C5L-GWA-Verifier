@@ -16,10 +16,10 @@ user1 = {
     Password : "1234"    
 }
 
-request('http://localhost:3001/add',{method:"POST",form: user1},function(err,req,body) {
+request('http://localhost:3001/user/add',{method:"POST",form: user1},function(err,req,body) {
     console.log(body);
 });
 
-request('http://localhost:3001/find-all',function(err,res,body) {
+request('http://localhost:3001/user/find-all',function(err,res,body) {
     console.log(body);
 });
