@@ -1,7 +1,10 @@
 import { render } from 'react-dom';
+import InputSample from '../frontend/components/InputSamples'
 import App from './App';
 
-render(<App />, document.getElementById('root'));
+//render(<App />, document.getElementById('root'));
+render(<InputSample />, document.getElementById('root'));
+
 
 // calling IPC exposed from preload script
 window.electron.ipcRenderer.once('ipc-example', (arg) => {
