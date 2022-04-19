@@ -90,6 +90,6 @@ const Course = db.model('course',courseSchema);
 
 /**
  * SECTION : COURSE
- * functions - add, find, delete, edit
+ * functions - create/add, read/find, update, delete
  * NOTE: need to change the functions to be specific to the collection (in this case, users)
  */
