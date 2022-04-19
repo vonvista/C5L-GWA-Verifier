@@ -9,7 +9,7 @@ const Schema = mongoose.Schema;
 
 // collection for users
 // name of the database will be BALANGKAS
-const db = mongoose.createConnection('mongodb://localhost:27017/BALANGKAS', {
+const db = mongoose.createConnection('mongodb://localhost:27017/KALATAS', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })

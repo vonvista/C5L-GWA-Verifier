@@ -7,7 +7,7 @@ Don't forget to run `npm install` and `npm audit fix` to install the `node_modul
 ### Launching the database
 Run `node index.js`.
 
-It will log a `"Server started at port 3001"` message. You may also run `mongo.exe` and find the `BALANGKAS` database.
+It will log a `"Server started at port 3001"` message. You may also run `mongo.exe` and find the `KALATAS` database.
 
 ### Test
 For testing, you may choose to do `npm install request` and modify the `request.js` file you will run using `node ./request.js`. This file will contain the url request that you will send in order to test the mongodb server.
