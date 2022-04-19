@@ -26,11 +26,20 @@ const userSchema = new Schema({
     Password : {type: String, required : true}
   },{autoCreate:true});
 
+// COURSE SCHEMA
+const courseSchema = new Schema({
+  CourseName: {type: String, required: true, unique: true},
+  Units: {type: Number, required: true},
+  CourseType: {type: String, required: true, enum: ['required', 'non-academic', 'electives']}
+},{autoCreate:true});
+
 // models for the database
 // NOTE: creating a model with a unique attribute will cause mongoose to auto-create a collection for the model
 // USER MODEL
 const User = db.model('user',userSchema);
 
+// COURSE MODEL
+const Course = db.model('course',courseSchema);
 
 /**
  * METHODS
