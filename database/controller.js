@@ -167,7 +167,11 @@ exports.gradeAdd = function(req, res, next) {
     if (!err) { res.send(newGrade)}
     else { res.send('Unable to save grade') }
   });
+
+
 }
+}
+
 
 // -----------------------------C O U R S E   S E C T I O N----------------------------------------
 

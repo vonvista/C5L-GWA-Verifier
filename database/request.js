@@ -62,14 +62,14 @@ request('http://localhost:3001/user/add',{method:"POST",form: user2},function(er
 // });
 
 // find one
-request('http://localhost:3001/user/find',{method:"GET",form:{Username:"user1"}},function(err,res,body) {
-    console.log(body);
-});
+// request('http://localhost:3001/user/find',{method:"GET",form:{Username:"user1"}},function(err,res,body) {
+//     console.log(body);
+// });
 
 // delete all
-request('http://localhost:3001/user/delete-all',{method:"DELETE"},function(err,res,body) {
-    console.log(body);
-});
+// request('http://localhost:3001/user/delete-all',{method:"DELETE"},function(err,res,body) {
+//     console.log(body);
+// });
 
 // GRADE TEST
 grade1 = {
@@ -92,5 +92,28 @@ request('http://localhost:3001/grade/add',{method:"POST",form: grade2},function(
 });
 
 request('http://localhost:3001/grade/find-all',function(err,res,body) {
+    console.log(body);
+});
+
+
+/* COURSE TEST */
+
+course1 = {
+    CourseName: "WIKA 1",
+    Units: 3,
+    CourseType: "required"
+}
+
+course2 = {
+    CourseName: "PI 10",
+    Units: 3,
+    CourseType: "required"
+}
+
+request('http://localhost:3001/course/add',{method:"POST",form: course1},function(err,req,body) {
+    console.log(body);
+});
+
+request('http://localhost:3001/course/add',{method:"POST",form: course2},function(err,req,body) {
     console.log(body);
 });
