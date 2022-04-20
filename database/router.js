@@ -1,9 +1,7 @@
 /**
- * NOTE: This is from a copy of my router.js in exer 10 in CMSC 100
- * WIP DO NOT USE AS IS
- * Carlos Angelo L. Rayel | 19-04-2022
+ * ROUTER
+ * File for the url routes for accessing the database functions
  */
-
 const controller = require('./controller');
 
 module.exports = (app) => {
@@ -24,10 +22,40 @@ module.exports = (app) => {
   app.put('/degree/update', controller.degreeUpdateOne);
   app.delete('/degree/delete', controller.degreeDeleteOne);
 
+  
   // STUDENT ROUTES
   app.post('/student/add', controller.studentAdd);
   app.get('/student/find', controller.studentFindOne);
   app.get('/student/find-all', controller.studentFindAll);
   app.put('/student/update', controller.studentUpdateOne);
   app.delete('/student/delete', controller.studentDeleteOne);
+
+  
+  // USER ROUTES
+  app.get('/user/find-all', controller.userFindAll);
+  app.get('/user/find', controller.userFind);
+  app.post('/user/add', controller.userAdd);
+
+
+  app.delete('/user/delete', controller.userDelete);
+  app.delete('/user/delete-all', controller.userDeleteAll);
+  app.put('/user/update', controller.userUpdate);
+
+  
+  // GRADE ROUTES
+  app.get('/grade/find-all', controller.gradeFindAll);
+  app.post('/grade/add', controller.gradeAdd);
+  app.get('/grade/find', controller.gradeFindOne);
+  app.delete('/grade/delete-all', controller.gradeDeleteAll);
+  app.put('/grade/update', controller.gradeUpdateOne);
+  app.delete('/grade/delete', controller.gradeDeleteOne);
+
+  
+  // COURSE ROUTES
+  app.post('/course/add', controller.courseAdd);
+  app.get('/course/find', controller.courseFindOne);
+  app.get('/course/find-all', controller.courseFindAll);
+  app.put('/course/update', controller.courseUpdateOne);
+  app.delete('/course/delete', controller.courseDeleteOne);
+
 }

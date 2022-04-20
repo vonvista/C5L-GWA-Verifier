@@ -216,6 +216,8 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "@headlessui/react": "^1.5.0",
+    "@heroicons/react": "^1.0.6",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
     "electron-debug": "^3.2.0",
@@ -223,6 +225,8 @@
     "electron-updater": "^4.6.5",
     "express": "^4.17.3",
     "history": "^5.3.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.23",
     "mongoose": "^6.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
