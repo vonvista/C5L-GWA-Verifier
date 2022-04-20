@@ -45,6 +45,10 @@ request('http://localhost:3001/user/add',{method:"POST",form: user2},function(er
     console.log("SENDING : " + body);
 });
 
+request('http://localhost:3001/user/add',{method:"POST",form: newUser2},function(err,req,body) {
+    console.log("SENDING : " + body);
+});
+
 // view all
 // request('http://localhost:3001/user/find-all',function(err,res,body) {
 //     console.log(body);
@@ -110,10 +114,24 @@ course2 = {
     CourseType: "required"
 }
 
+course3 = {
+    CourseName: "ARTS 1",
+    Units: 3,
+    CourseType: "required"
+}
+
 request('http://localhost:3001/course/add',{method:"POST",form: course1},function(err,req,body) {
     console.log(body);
 });
 
 request('http://localhost:3001/course/add',{method:"POST",form: course2},function(err,req,body) {
+    console.log(body);
+});
+
+request('http://localhost:3001/course/add',{method:"POST",form: course3},function(err,req,body) {
+    console.log(body);
+});
+
+request('http://localhost:3001/course/find',{method:"GET",form:{CourseName:"WIKA 1"}},function(err,res,body) {
     console.log(body);
 });
