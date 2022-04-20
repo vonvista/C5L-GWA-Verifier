@@ -1,9 +1,7 @@
 /**
- * NOTE: This is a copy of my controller.js in exer 10 in CMSC 100.
- * WIP: DO NOT USE AS-IS
- * Carlos Angelo L. Rayel | 19-04-2022
+ * CONTROLLER
+ * controller file to hold the functions of the database
  */
-
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
@@ -14,7 +12,7 @@ const db = mongoose.createConnection('mongodb://localhost:27017/KALATAS', {
 })
 
 // -----------------------------U S E R S   S E C T I O N----------------------------------------
-
+// Primary contributer - Carlos Rayel
 // USER SCHEMA
 const userSchema = new Schema({
     Username : {type: String, required : true, unique: true},
@@ -43,7 +41,7 @@ const User = db.model('user',userSchema);
 
 /**
  * SECTION : users
- * functions - findAll, add
+ * functions - findAll, add, find, delete, update, deleteAll
  * NOTE: need to change the functions to be specific to the collection (in this case, users)
  */
 // find all users

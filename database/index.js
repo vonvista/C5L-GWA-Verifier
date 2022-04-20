@@ -1,8 +1,7 @@
 /**
- * NOTE: This is a copy of my index.js in exer 10 in CMSC 100
- * Carlos Angelo L. Rayel | 19-04-2022
+ * INDEX
+ * Launchpoint file for the database
  */
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
