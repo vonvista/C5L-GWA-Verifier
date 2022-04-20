@@ -43,7 +43,10 @@ module.exports = (app) => {
   // GRADE ROUTES
   app.get('/grade/find-all', controller.gradeFindAll);
   app.post('/grade/add', controller.gradeAdd);
-
+  app.get('/grade/find', controller.gradeFindOne);
+  app.delete('/grade/delete-all', controller.gradeDeleteAll);
+  app.put('/grade/update', controller.gradeUpdateOne);
+  app.delete('/grade/delete', controller.gradeDeleteOne);
 
   // COURSE ROUTES
   app.post('/course/add', controller.courseAdd);
