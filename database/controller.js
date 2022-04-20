@@ -383,6 +383,18 @@ Degree.updateOne({DegreeID:req.body.DegreeID},{"$set":{
 })
 }
 
+// delete degree
+exports.degreeDeleteOne = function(req, res, next) {
+  // console.log(req.body);
+  Degree.findOneAndDelete({DegreeID:req.body.DegreeID},function(err, Degree){
+    if(!err && Degree){
+      res.send('Successfully deleted');
+    } else {
+      res.send('Unable to delete degree');
+    }
+  });
+}
+
 
 // -----------------------------S T U D E N T  S E C T I O N----------------------------------------
 
@@ -438,7 +450,7 @@ exports.studentAdd = function(req, res, next) {
 
 // update student
 exports.studentUpdateOne = function(req, res, next) {
-Student.updateOne({_id:req.body._id},{"$set":{
+Student.updateOne({StudentID: req.body.StudentID},{"$set":{
   "StudentNo.": req.body.StudentID,
   "FirstName": req.body.FirstName,
   "MiddleName": req.body.MiddleName,
@@ -453,4 +465,16 @@ Student.updateOne({_id:req.body._id},{"$set":{
     res.send('Unable to update student');
   }
 })
+}
+
+// delete student
+exports.studentDeleteOne = function(req, res, next) {
+  // console.log(req.body);
+  Student.findOneAndDelete({StudentID: req.body.StudentID},function(err, Student){
+    if(!err && Student){
+      res.send('Successfully deleted');
+    } else {
+      res.send('Unable to delete student');
+    }
+  });
 }

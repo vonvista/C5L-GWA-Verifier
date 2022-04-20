@@ -20,13 +20,17 @@ module.exports = (app) => {
   app.get('/degree/find', controller.degreeFindOne);
   app.get('/degree/find-all', controller.degreeFindAll);
   app.put('/degree/update', controller.degreeUpdateOne);
+  app.delete('/degree/delete', controller.degreeDeleteOne);
 
+  
   // STUDENT ROUTES
   app.post('/student/add', controller.studentAdd);
   app.get('/student/find', controller.studentFindOne);
   app.get('/student/find-all', controller.studentFindAll);
   app.put('/student/update', controller.studentUpdateOne);
+  app.delete('/student/delete', controller.studentDeleteOne);
 
+  
   // USER ROUTES
   app.get('/user/find-all', controller.userFindAll);
   app.get('/user/find', controller.userFind);
@@ -46,10 +50,12 @@ module.exports = (app) => {
   app.put('/grade/update', controller.gradeUpdateOne);
   app.delete('/grade/delete', controller.gradeDeleteOne);
 
+  
   // COURSE ROUTES
   app.post('/course/add', controller.courseAdd);
   app.get('/course/find', controller.courseFindOne);
   app.get('/course/find-all', controller.courseFindAll);
   app.put('/course/update', controller.courseUpdateOne);
   app.delete('/course/delete', controller.courseDeleteOne);
+
 }
