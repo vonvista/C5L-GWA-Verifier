@@ -45,6 +45,10 @@ newUser2 = {
 //     console.log("SENDING : " + body);
 // });
 
+// request('http://localhost:3001/user/add',{method:"POST",form: newUser2},function(err,req,body) {
+//     console.log("SENDING : " + body);
+// });
+
 // view all
 // request('http://localhost:3001/user/find-all',function(err,res,body) {
 //     console.log(body);
