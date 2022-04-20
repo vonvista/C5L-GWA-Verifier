@@ -17,37 +17,6 @@ module.exports = (app) => {
     next();
   })
 
-  /**
-   * methods:
-   * format: app.<method>('<url>',controller.<controller_method>)
-   * 
-   * app.get, app.post, app.delete, app.put
-   */
- 
-  // USER ROUTES
-   app.get('/user/find-all', controller.userFindAll);
-   app.get('/user/find', controller.userFind);
-   app.post('/user/add', controller.userAdd);
-
-
-   app.delete('/user/delete', controller.userDelete);
-   app.delete('/user/delete-all', controller.userDeleteAll);
-   app.put('/user/update', controller.userUpdate);
-
-  
-  // GRADE ROUTES
-   app.get('/grade/find-all', controller.gradeFindAll);
-   app.post('/grade/add', controller.gradeAdd);
-
-
-  // COURSE ROUTES
-  app.post('/course/add', controller.courseAdd);
-  app.get('/course/find', controller.courseFindOne);
-  app.get('/course/find-all', controller.courseFindAll);
-  app.put('/course/update', controller.courseUpdateOne);
-  app.delete('/course/delete', controller.courseDeleteOne);
-
-
   // DEGREE ROUTES
   app.post('/degree/add', controller.degreeAdd);
   app.get('/degree/find', controller.degreeFindOne);
