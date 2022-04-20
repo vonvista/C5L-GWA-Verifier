@@ -18,6 +18,14 @@ module.exports = {
         montserrat: ['Montserrat'],
         inter: ['Inter'],
       },
+      backgroundImage: {
+        'baybayin': "url('/assets/icons/baybayin.png')",
+      },
+      screens: {
+        '1.5xl': '1366px',
+        '3xl': '1728px',
+        'qhd':'2560px'
+      }
     },
   },
   plugins: [],
