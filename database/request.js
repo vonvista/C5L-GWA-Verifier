@@ -37,17 +37,17 @@ newUser2 = {
 }
 
 // add request
-request('http://localhost:3001/user/add',{method:"POST",form: user1},function(err,req,body) {
-    console.log("SENDING : " + body);
-});
+// request('http://localhost:3001/user/add',{method:"POST",form: user1},function(err,req,body) {
+//     console.log("SENDING : " + body);
+// });
 
-request('http://localhost:3001/user/add',{method:"POST",form: user2},function(err,req,body) {
-    console.log("SENDING : " + body);
-});
+// request('http://localhost:3001/user/add',{method:"POST",form: user2},function(err,req,body) {
+//     console.log("SENDING : " + body);
+// });
 
-request('http://localhost:3001/user/add',{method:"POST",form: newUser2},function(err,req,body) {
-    console.log("SENDING : " + body);
-});
+// request('http://localhost:3001/user/add',{method:"POST",form: newUser2},function(err,req,body) {
+//     console.log("SENDING : " + body);
+// });
 
 // view all
 // request('http://localhost:3001/user/find-all',function(err,res,body) {
@@ -87,51 +87,84 @@ grade2 = {
     Year: "2021-2022",
 }
 
-request('http://localhost:3001/grade/add',{method:"POST",form: grade1},function(err,req,body) {
-    console.log(body);
-});
+// request('http://localhost:3001/grade/add',{method:"POST",form: grade1},function(err,req,body) {
+//     console.log(body);
+// });
 
-request('http://localhost:3001/grade/add',{method:"POST",form: grade2},function(err,req,body) {
-    console.log(body);
-});
+// request('http://localhost:3001/grade/add',{method:"POST",form: grade2},function(err,req,body) {
+//     console.log(body);
+// });
 
-request('http://localhost:3001/grade/find-all',function(err,res,body) {
-    console.log(body);
-});
+// request('http://localhost:3001/grade/find-all',function(err,res,body) {
+//     console.log(body);
+// });
 
 
 /* COURSE TEST */
 
 course1 = {
-    CourseName: "WIKA 1",
+    CourseName: "Mga Pag-aaral sa Wika (?)",
+    CourseAbbr: "WIKA 1",
     Units: 3,
     CourseType: "required"
 }
 
 course2 = {
-    CourseName: "PI 10",
+    CourseName: "Life and Works of Jose Rizal",
+    CourseAbbr: "PI 10",
     Units: 3,
     CourseType: "required"
 }
 
 course3 = {
-    CourseName: "ARTS 1",
+    CourseName: "Sining ...",
+    CourseAbbr: "ARTS 1",
     Units: 3,
     CourseType: "required"
 }
 
-request('http://localhost:3001/course/add',{method:"POST",form: course1},function(err,req,body) {
-    console.log(body);
-});
+course3update = {
+    CourseName: "... Sining",
+    CourseAbbr: "ARTS 1",
+    Units: 4,
+    CourseType: "non-academic"
+}
 
-request('http://localhost:3001/course/add',{method:"POST",form: course2},function(err,req,body) {
-    console.log(body);
-});
+course4 = {
+    CourseName: "Film (?)",
+    CourseAbbr: "HUM 3",
+    Units: 3,
+    CourseType: "electives"
+}
 
-request('http://localhost:3001/course/add',{method:"POST",form: course3},function(err,req,body) {
-    console.log(body);
-});
+// request('http://localhost:3001/course/add',{method:"POST",form: course1},function(err,req,body) {
+//     console.log(body);
+// });
 
-request('http://localhost:3001/course/find',{method:"GET",form:{CourseName:"WIKA 1"}},function(err,res,body) {
-    console.log(body);
-});
+// request('http://localhost:3001/course/add',{method:"POST",form: course2},function(err,req,body) {
+//     console.log(body);
+// });
+
+// request('http://localhost:3001/course/add',{method:"POST",form: course3},function(err,req,body) {
+//     console.log(body);
+// });
+
+// request('http://localhost:3001/course/add',{method:"POST",form: course4},function(err,req,body) {
+//     console.log(body);
+// });
+
+// request('http://localhost:3001/course/find',{method:"GET",form:{CourseAbbr:"WIKA 1"}},function(err,res,body) {
+//     console.log(body);
+// });
+
+// request('http://localhost:3001/course/find-all',function(err,res,body) {
+//     console.log(body);
+// });
+
+// request('http://localhost:3001/course/update', {method:"PUT",form: course3update},function(err,res,body) {
+//     console.log(body);
+// });
+
+// request('http://localhost:3001/course/delete',{method:"DELETE",form: {CourseAbbr: course4.CourseAbbr}},function(err,req,body) {
+//     console.log(body);
+// });
