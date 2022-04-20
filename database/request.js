@@ -37,22 +37,22 @@ newUser2 = {
 }
 
 // add request
-// request('http://localhost:3001/user/add',{method:"POST",form: user1},function(err,req,body) {
-//     console.log("SENDING : " + body);
-// });
+request('http://localhost:3001/user/add',{method:"POST",form: user1},function(err,req,body) {
+    console.log("SENDING : " + body);
+});
 
-// request('http://localhost:3001/user/add',{method:"POST",form: user2},function(err,req,body) {
-//     console.log("SENDING : " + body);
-// });
+request('http://localhost:3001/user/add',{method:"POST",form: user2},function(err,req,body) {
+    console.log("SENDING : " + body);
+});
 
-// request('http://localhost:3001/user/add',{method:"POST",form: newUser2},function(err,req,body) {
-//     console.log("SENDING : " + body);
-// });
+request('http://localhost:3001/user/add',{method:"POST",form: newUser2},function(err,req,body) {
+    console.log("SENDING : " + body);
+});
 
 // view all
-// request('http://localhost:3001/user/find-all',function(err,res,body) {
-//     console.log(body);
-// });
+request('http://localhost:3001/user/find-all',function(err,res,body) {
+    console.log(body);
+});
 
 // delete one by username
 // request('http://localhost:3001/user/delete',{method:"DELETE",form: {Username: user2.Username}},function(err,req,body) {
@@ -76,7 +76,7 @@ newUser2 = {
 // });
 
 /* COURSE TEST */
-
+/*
 course1 = {
     CourseName: "Mga Pag-aaral sa Wika (?)",
     CourseAbbr: "WIKA 1",
@@ -256,3 +256,5 @@ newGrade2 = {
 // request('http://localhost:3001/grade/delete',{method:"DELETE",form: {Student: "626015cd10c6532872850a76", Course: "626004cc0fe58c4537bbaa16"}},function(err,req,body) {
 //     console.log(body);
 // });
+=======
+*/

@@ -1,9 +1,7 @@
 /**
- * NOTE: This is from a copy of my router.js in exer 10 in CMSC 100
- * WIP DO NOT USE AS IS
- * Carlos Angelo L. Rayel | 19-04-2022
+ * ROUTER
+ * File for the url routes for accessing the database functions
  */
-
 const controller = require('./controller');
 
 module.exports = (app) => {
