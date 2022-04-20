@@ -130,6 +130,8 @@ exports.userUpdate = function(req, res, next) {
 
 // GRADE SCHEMA
 const gradeSchema = new Schema({
+  Student: {type: Schema.Types.ObjectId, ref: 'student', required: true},
+  Course: {type: Schema.Types.ObjectId, ref: 'course', required: true},
   Value: {type: String, required: true},
   Year: {type: String, required: true},
   Semester: String
@@ -156,6 +158,8 @@ exports.gradeAdd = function(req, res, next) {
   // console.log(req.body);
   
   var newGrade = new Grade({
+    Student: mongoose.Types.ObjectId(req.body.Student),
+    Course: mongoose.Types.ObjectId(req.body.Course),
     Value: req.body.Value,
     Year: req.body.Year,
     Semester: req.body.Semester
