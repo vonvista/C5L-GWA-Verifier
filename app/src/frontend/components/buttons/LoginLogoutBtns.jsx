@@ -2,7 +2,7 @@ import 'tailwindcss/tailwind.css';
 import logout from '../../../../assets/icons/logout.svg';
 
 export const LoginBtn = () => {
-  const loginbtn = `w-96 h-11 bg-login-green rounded-xl text-white font-montserrat font-bold hover:shadow-lg hover:bg-login-green-hover`;
+  const loginbtn = `w-6/12 h-11 1.75xl:text-lg bg-login-green rounded-lg text-white font-montserrat font-bold hover:shadow-lg hover:bg-login-green-hover`;
 
   return (
     <>
