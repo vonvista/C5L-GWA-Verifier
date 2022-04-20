@@ -128,6 +128,8 @@ exports.userUpdate = function(req, res, next) {
 
 // GRADE SCHEMA
 const gradeSchema = new Schema({
+  Student: {type: Schema.Types.ObjectId, ref: 'student', required: true},
+  Course: {type: Schema.Types.ObjectId, ref: 'course', required: true},
   Value: {type: String, required: true},
   Year: {type: String, required: true},
   Semester: String
@@ -136,9 +138,13 @@ const gradeSchema = new Schema({
 // GRADE MODEL
 const Grade = db.model('grade', gradeSchema);
 
+// COMBINATION OF STUDENT AND COURSE ID IS UNIQUE
+gradeSchema.index({Student: 1, Course: 1} , {unique: true});
+
 /**
  * SECTION : grades
- * functions - findAll, add
+ * functions - gradeFindAll (read), gradeFindOne (read one element), gradeAdd (create), gradeUpdateOne (update), 
+ *             gradeDeleteOne (delete one element), gradeDeleteAll (delete)
  */
 
 // Find all grades
@@ -148,12 +154,25 @@ exports.gradeFindAll = function(req, res, next) {
   });
 }
 
+// Find one grade
+exports.gradeFindOne = function(req, res, next) {
+  Grade.findOne((err, grade) => {
+    if (err) {
+      res.send('Unable to find grade')
+    } else {
+      res.send(grade)
+    }
+  });
+}
+
 // Add grade
 exports.gradeAdd = function(req, res, next) {
   // UNCOMMENT TO SEE REQUEST CONTENTS AND MAPPING TO USER MODEL
   // console.log(req.body);
   
   var newGrade = new Grade({
+    Student: mongoose.Types.ObjectId(req.body.Student),
+    Course: mongoose.Types.ObjectId(req.body.Course),
     Value: req.body.Value,
     Year: req.body.Year,
     Semester: req.body.Semester
@@ -169,6 +188,48 @@ exports.gradeAdd = function(req, res, next) {
 
 }
 
+// Update a grade by using Student and Course
+exports.gradeUpdateOne = function(req, res, next) {
+  // console.log(req.body);
+
+  Grade.updateOne({Student: req.body.Student, Course: req.body.Course},{"$set":{
+    "Student": req.body.Student,
+    "Course": req.body.Course,
+    "Value": req.body.Value,
+    "Year": req.body.Year,
+    "Semester": req.body.Semester
+  }}, {new : true}, function(err,result){
+    if(!err && Grade){
+      res.send(result);
+    } else {
+      res.send('Unable to update grade');
+    }
+  })
+} 
+
+// Delete a grade by using Student and Course
+exports.gradeDeleteOne = function(req, res, next) {
+  // console.log(req.body);
+  Grade.findOneAndDelete({Student: req.body.Student, Course: req.body.Course},function(err, Grade){
+    if(!err && Grade){
+      res.send('Successfully deleted ' + req.body.Student + " " + req.body.Course);
+    } else {
+      res.send('Unable to delete grade');
+    }
+  });
+}
+
+// Delete grade collection
+exports.gradeDeleteAll = function(req, res, next) {
+  // console.log(req.body);
+  Grade.deleteMany({},function(err){
+    if(!err){
+      res.send('Successfully deleted grades');
+    } else {
+      res.send('Unable to delete grades');
+    }
+  });
+}
 
 // -----------------------------C O U R S E   S E C T I O N----------------------------------------
 

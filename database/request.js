@@ -75,32 +75,6 @@ request('http://localhost:3001/user/find-all',function(err,res,body) {
 //     console.log(body);
 // });
 
-/*
-// GRADE TEST
-grade1 = {
-    Value: "INC",
-    Year: "2021-2022",
-    Semester: "1S"
-}
-
-grade2 = {
-    Value: "1.0",
-    Year: "2021-2022",
-}
-
-// request('http://localhost:3001/grade/add',{method:"POST",form: grade1},function(err,req,body) {
-//     console.log(body);
-// });
-
-// request('http://localhost:3001/grade/add',{method:"POST",form: grade2},function(err,req,body) {
-//     console.log(body);
-// });
-
-// request('http://localhost:3001/grade/find-all',function(err,res,body) {
-//     console.log(body);
-// });
-
-
 /* COURSE TEST */
 /*
 course1 = {
@@ -223,4 +197,64 @@ request('http://localhost:3001/student/add',{method:"POST",form: student1},funct
 request('http://localhost:3001/student/add',{method:"POST",form: student2},function(err,req,body) {
     console.log(body);
 });
+
+// GRADE TEST
+grade1 = {
+    Student: "626015cd10c6532872850a76",
+    Course: "626004cc0fe58c4537bbaa16",
+    Value: "INC",
+    Year: "2021-2022",
+    Semester: "1S"
+}
+
+grade2 = {
+    Student: "626015cd10c6532872850a78",
+    Course: "626004cc0fe58c4537bbaa16",
+    Value: "1.0",
+    Year: "2021-2022",
+}
+
+newGrade2 = {
+    Student: "626015cd10c6532872850a78",
+    Course: "626004cc0fe58c4537bbaa16",
+    Value: "1.25",
+    Year: "2021-2022",
+}
+
+// add grade1
+// request('http://localhost:3001/grade/add',{method:"POST",form: grade1},function(err,req,body) {
+//     console.log(body);
+// });
+
+// add grade2
+// request('http://localhost:3001/grade/add',{method:"POST",form: grade2},function(err,req,body) {
+//     console.log(body);
+// });
+
+// update grade2
+// request('http://localhost:3001/grade/update', {method:"PUT",form: newGrade2},function(err,res,body) {
+//     console.log(err);
+//     console.log(body);
+// });
+
+// find one grade
+// request('http://localhost:3001/grade/find',{method:"GET",form:{Student: "626015cd10c6532872850a76", Course: "626004cc0fe58c4537bbaa16"}},function(err,res,body) {
+//     console.log(body);
+// });
+
+// find all grades
+// request('http://localhost:3001/grade/find-all',function(err,res,body) {
+//     console.log(body);
+// });
+
+// delete all
+// request('http://localhost:3001/grade/delete-all',{method:"DELETE"},function(err,res,body) {
+//    console.log(body);
+// });
+
+// delete one grade
+// request('http://localhost:3001/grade/delete',{method:"DELETE",form: {Student: "626015cd10c6532872850a76", Course: "626004cc0fe58c4537bbaa16"}},function(err,req,body) {
+//     console.log(body);
+// });
+=======
 */
