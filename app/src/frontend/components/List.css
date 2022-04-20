@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
+/* Table Elements */
+.table-container {
+    max-width: 1230px;
+    max-height: 554px;
+    margin: auto;
+    margin-top: 88px;
+}
+
+.students-table {
+    /* min-width: 200px; */
+    table-layout: fixed;
+    border-collapse: collapse;
+    overflow: hidden;
+    /* box-shadow: 0 5px 4px -4px rgba(0, 0, 0, 0.15); */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+}
+
+/* Th elements*/
+.students-table thead {
+    background: white;
+    /* box-shadow: 0px 4px 4px -4px rgba(0, 0, 0, 0.25); */
+    border-radius: 15px 15px 0px 0px ;
+    border-bottom: 3px solid #F5F6F8;
+}
+
+.students-table thead tr {
+    font-size: 20px;
+    font-style: normal;
+    /* font-family: 'Montserrat', sans-serif; */
+    text-align: left;
+    color: #969696;
+}
+
+.students-table th {
+    padding: 8.5px 20px;
+}
+
+/* Tbody elements */
+.students-table tbody tr:hover {
+    background-color: #FFFDED;
+}
+
+.students-table tbody {
+    background: white;
+    /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
+    border-radius: 0px 0px 15px 15px;
+    color: black;
+    
+    height: 500px;
+    overflow: auto;
+    display: block;
+    white-space: nowrap;
+}
+
+.students-table thead, 
+.students-table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.students-table tbody tr {
+    border-bottom: 1px solid #F5F6F8;
+}
+
+/* Adding rounded corners on thead */
+/* .students-table>th:nth-child(1) {
+    border-radius: 40px 0 0 0;
+} */
+
+/* .students-table>thead>tr>th:nth-child(1)>div {
+    margin-left: 80px;
+}
+
+.students-table>th:nth-last-child(1) {
+    border-radius: 0 40px 0 0;
+}
+
+.students-table>thead>tr>th:nth-last-child(1)>div {
+    margin-right: 80px;
+} */
+
+/* Td elements */
+.students-table td {
+    font-size: 17px;
+    padding: 8.5px 20px;
+    overflow: hidden;
+}
+
+/* .students-table>tbody>tr>td:nth-child(1) > div {
+    margin-left: 80px;
+    border-radius: 20px 0 0 20px;
+}
+.students-table>tbody>tr>td:nth-last-child(1) > div {
+    margin-right: 80px;
+    border-radius: 0 20px 20px 0;
+} */
+
+/* .students-table>tbody>tr>td > div {
+    padding: 10px 10px;
+} */
+
+/* .students-table tr th{
+    width: 40%;
+} */
+
+
+/* Column Elements */
+.student-name {
+    font-weight: bold;
+    width: 325px;
+}
+
+.student-number {
+    width: 200px !important;
+}
+
+.student-degree {
+    width: 325px;
+}
+
+.student-gwa {
+    width: 120px !important;
+}
+
+/* Status Elements */
+.students-status {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 17px;
+    width: 125px;
+    height: 31px;
+    padding: 0 !important;
+}
+
+.student-status{
+    width: 125px !important;
+    padding: 0px !important;
+    text-align: center;
+}
+
+.status[data-status="Checked"]:after{
+    content : "Checked";
+    background-color: #BBDABB;
+    color: black;
+    border-radius: 50px;
+    display: block;
+    text-align: center;
+}
+
+.status[data-status="Unchecked"]:after{
+    content : "Unchecked";
+    background-color: #F29B9B;
+    color: black;
+    border-radius: 50px;
+    display: block;
+    text-align: center;
+}
+
+.status[data-status="Pending"]:after{
+    content : "Pending";
+    background-color: #F2C293;
+    color: #FF1111;
+    border-radius: 50px;
+    display: block;
+    text-align: center;
+}
+
+/* Action Elements */
+.student-action {
+    text-align: center;
+}
+
+
+
+
+
+
+/* OLD STATUS ELEMENTS (WITH FUNCTIONS IN DASHBOARD) */
+/* .students-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    width: 125px;
+    height: 31px;
+} 
+
+.student-status{
+    width: 125px !important;
+    padding: 0px !important;
+    text-align: center;
+}
+
+.status-checked {
+    background-color: #BBDABB;
+    color: black;
+    border-radius: 50px;
+}
+
+.status-unchecked {
+    background-color: #F29B9B;
+    color: black;
+    border-radius: 50px;
+}
+
+.status-pending {
+    background-color: #F2C293;
+    color: #FF1111;
+    border-radius: 50px;
+} */
+
+
+
+
