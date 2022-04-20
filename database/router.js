@@ -23,9 +23,32 @@ module.exports = (app) => {
   app.get('/degree/find-all', controller.degreeFindAll);
   app.put('/degree/update', controller.degreeUpdateOne);
 
-   // STUDENT ROUTES
-   app.post('/student/add', controller.studentAdd);
-   app.get('/student/find', controller.studentFindOne);
-   app.get('/student/find-all', controller.studentFindAll);
-   app.put('/student/update', controller.studentUpdateOne);
+  // STUDENT ROUTES
+  app.post('/student/add', controller.studentAdd);
+  app.get('/student/find', controller.studentFindOne);
+  app.get('/student/find-all', controller.studentFindAll);
+  app.put('/student/update', controller.studentUpdateOne);
+
+  // USER ROUTES
+  app.get('/user/find-all', controller.userFindAll);
+  app.get('/user/find', controller.userFind);
+  app.post('/user/add', controller.userAdd);
+
+
+  app.delete('/user/delete', controller.userDelete);
+  app.delete('/user/delete-all', controller.userDeleteAll);
+  app.put('/user/update', controller.userUpdate);
+
+  
+  // GRADE ROUTES
+  app.get('/grade/find-all', controller.gradeFindAll);
+  app.post('/grade/add', controller.gradeAdd);
+
+
+  // COURSE ROUTES
+  app.post('/course/add', controller.courseAdd);
+  app.get('/course/find', controller.courseFindOne);
+  app.get('/course/find-all', controller.courseFindAll);
+  app.put('/course/update', controller.courseUpdateOne);
+  app.delete('/course/delete', controller.courseDeleteOne);
 }
