@@ -5,7 +5,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
-// name of the database will be BALANGKAS
+// name of the database will be KALATAS
 const db = mongoose.createConnection('mongodb://localhost:27017/KALATAS', {
   useNewUrlParser: true,
   useUnifiedTopology: true
