@@ -1,0 +1,32 @@
+.modal-content {
+    background-color: #fefefe;
+    border-radius: 10px;
+    margin: 5% auto;
+    padding: 15px;
+    border: 1px solid #888;
+    flex-direction: column;
+    width: 367px;
+    height: 500px;
+    position: relative;
+}
+
+.modal-body{
+    background-color: #fefefe;
+    position: relative;
+    margin: 3px;
+    padding: 0px;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+hr{
+    display: block;
+    margin-top: 8px;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: ridge;
+    border-width: 1.5px;
+}
