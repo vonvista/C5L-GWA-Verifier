@@ -1,41 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 /* Table Elements */
 .table-container {
-    max-width: 1230px;
-    max-height: 554px;
-    margin: auto;
-    margin-top: 88px;
+    margin-top: 12.18836565096953vh;       /*88px*/
+    margin-bottom: 9.141274238227147vh;    /* 66px */
 }
 
 .students-table {
-    /* min-width: 200px; */
+    max-width: 80.078125vw;      /*1230px*/
+    max-height: 70.6371191135734vh;      /*510px*/
+
     table-layout: fixed;
     border-collapse: collapse;
     overflow: hidden;
     /* box-shadow: 0 5px 4px -4px rgba(0, 0, 0, 0.15); */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    border-radius: 15px;
+    box-shadow: 0 0 2.770083102493075vh rgba(0, 0, 0, 0.15);      /*0 0 20px*/
+    border-radius:  0.9765625vw;    /*15px*/
 }
 
 /* Th elements*/
 .students-table thead {
     background: white;
-    /* box-shadow: 0px 4px 4px -4px rgba(0, 0, 0, 0.25); */
-    border-radius: 15px 15px 0px 0px ;
-    border-bottom: 3px solid #F5F6F8;
+    border-radius: 0.9765625vw 0.9765625vw 0vw 0vw ;      /* 15px 15px 0 0 */
+    border-bottom: 0.4155124653739612vh solid #F5F6F8;   /* 3px */
 }
 
 .students-table thead tr {
-    font-size: 20px;
+    font-size: 1.3020833333333333vw;    /* 20px */
     font-style: normal;
-    /* font-family: 'Montserrat', sans-serif; */
     text-align: left;
     color: #969696;
 }
 
-.students-table th {
-    padding: 8.5px 20px;
+.students-table th,
+.students-table td {
+    padding: 1.1772853185595569vh 1.3020833333333333vw;    /* 8.5px 20px */
 }
 
 /* Tbody elements */
@@ -45,14 +44,12 @@
 
 .students-table tbody {
     background: white;
-    /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
-    border-radius: 0px 0px 15px 15px;
+    border-radius: 0px 0px 0.9765625vw 0.9765625vw;   /* 0px 0px 15px 15px */
     color: black;
     
-    height: 500px;
+    height: 65.73130193905817vh;  /* 474.58px */
     overflow: auto;
     display: block;
-    white-space: nowrap;
 }
 
 .students-table thead, 
@@ -60,70 +57,37 @@
     display: table;
     width: 100%;
     table-layout: fixed;
+    white-space: nowrap;
+    font-family: 'Montserrat', sans-serif;
 }
-
-.students-table tbody tr {
-    border-bottom: 1px solid #F5F6F8;
-}
-
-/* Adding rounded corners on thead */
-/* .students-table>th:nth-child(1) {
-    border-radius: 40px 0 0 0;
-} */
-
-/* .students-table>thead>tr>th:nth-child(1)>div {
-    margin-left: 80px;
-}
-
-.students-table>th:nth-last-child(1) {
-    border-radius: 0 40px 0 0;
-}
-
-.students-table>thead>tr>th:nth-last-child(1)>div {
-    margin-right: 80px;
-} */
 
 /* Td elements */
 .students-table td {
-    font-size: 17px;
-    padding: 8.5px 20px;
+    font-size: 1.1067708333333333vw;    /* 17px */
+    border-bottom: 0.13850415512465375vh solid #F5F6F8; /* 1px */
     overflow: hidden;
 }
 
-/* .students-table>tbody>tr>td:nth-child(1) > div {
-    margin-left: 80px;
-    border-radius: 20px 0 0 20px;
+.students-table tbody > tr:last-child > td {
+    border-bottom: 0;
 }
-.students-table>tbody>tr>td:nth-last-child(1) > div {
-    margin-right: 80px;
-    border-radius: 0 20px 20px 0;
-} */
-
-/* .students-table>tbody>tr>td > div {
-    padding: 10px 10px;
-} */
-
-/* .students-table tr th{
-    width: 40%;
-} */
-
 
 /* Column Elements */
 .student-name {
     font-weight: bold;
-    width: 325px;
+    width: 21.158854166666668vw;      /* 325px */
 }
 
 .student-number {
-    width: 200px !important;
+    width: 13.020833333333334vw !important;    /* 200px */
 }
 
 .student-degree {
-    width: 325px;
+    width: 21.158854166666668vw;   /* 325px */
 }
 
 .student-gwa {
-    width: 120px !important;
+    width: 7.8125vw !important;    /* 120px */
 }
 
 /* Status Elements */
@@ -131,15 +95,14 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: 17px;
-    width: 125px;
-    height: 31px;
+    font-size: 1.1067708333333333vw;    /* 17px */
+    width: 8.138020833333334vw;  /* 125 */
+    height: 4.293628808864266vh;   /* 31px */
     padding: 0 !important;
 }
 
 .student-status{
-    width: 125px !important;
-    padding: 0px !important;
+    width: 8.138020833333334vw !important;  /* 125px */
     text-align: center;
 }
 
@@ -147,7 +110,7 @@
     content : "Checked";
     background-color: #BBDABB;
     color: black;
-    border-radius: 50px;
+    border-radius: 3.2552083333333335vw;    /* 50px */
     display: block;
     text-align: center;
 }
@@ -156,7 +119,7 @@
     content : "Unchecked";
     background-color: #F29B9B;
     color: black;
-    border-radius: 50px;
+    border-radius: 3.2552083333333335vw;
     display: block;
     text-align: center;
 }
@@ -165,7 +128,7 @@
     content : "Pending";
     background-color: #F2C293;
     color: #FF1111;
-    border-radius: 50px;
+    border-radius: 3.2552083333333335vw;
     display: block;
     text-align: center;
 }
