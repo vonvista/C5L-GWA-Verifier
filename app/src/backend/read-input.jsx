@@ -3,10 +3,10 @@
 // NOTES: made use of npm package pdfjs-dist
 
 // Assumptions:
-// - course names have spaces in between
 // - 'term' is the total units for that semester
 // - details after the subject line should conform to the weird formatting of the sample data
 // - each file has only *ONE* page to process
+// - names are assumed to have only *ONE* last name
 
 const pdfjs = require('pdfjs-dist/legacy/build/pdf');
 const pdfWorker = require('pdfjs-dist/legacy/build/pdf.worker.entry');
@@ -73,12 +73,34 @@ const Test = () => {
         line += item.str;
         // else process the line to update the studentData object
       } else {
+        const tempArray = line.split(' ');
         if (lineNum == 0) {
-          studentData.name = line;
+          // if name has a middle initial (as indicated by the period)
+          if (tempArray[tempArray.length-1].indexOf('.') !== -1){
+            let firstname = '';
+            // loop that starts at the second element
+            for (let i=1; i < tempArray.length-1; i++){
+              firstname += tempArray[i] + " ";
+            }
+            // middle name is the last element of the temp array and everything else is the first name
+            studentData.firstname = firstname.trim();
+            studentData.middlename = tempArray[tempArray.length-1];
+          
+          // else if there is no middle initial present
+          } else {
+            let firstname = '';
+            // loop that starts at the second element
+            for (let i=1; i < tempArray.length; i++){
+              firstname += tempArray[i] + " ";
+            }
+            // no middle name and everything else is the first name
+            studentData.firstname = firstname.trim();
+          }
+          // assumes that the first element will always be the last name
+          studentData.lastname = tempArray[0];
         } else if (lineNum == 1) {
           studentData.program = line;
         } else if (lineNum > 2) {
-          const tempArray = line.split(' ');
           if (tempArray.length > 2 && numOfLineAfterSubjs == 0) {
             // explaining all the hard-coded numbers
             // each line has at most 8 indices
@@ -90,10 +112,16 @@ const Test = () => {
             // line indices:     0        1   2   3    4
             if (hasNumber(tempArray[0])) {
               courses[arrayIndex] = tempArray[0];
-              grades[arrayIndex] = tempArray[1];
-              units[arrayIndex] = tempArray[2];
-              weights[arrayIndex] = tempArray[3];
-              cumulative[arrayIndex] = tempArray[4];
+              // if element does not have a number, keep it as a string (ie. S, INC, DRP)
+              if (hasNumber(tempArray[1])){
+                grades[arrayIndex] = parseFloat(tempArray[1]);
+              } else {
+                grades[arrayIndex] = tempArray[1];
+              }
+              // remove numbers inside parenthesis before converting to int
+              units[arrayIndex] = parseInt(tempArray[2].replace(/ *\([^)]*\) */g, ""));
+              weights[arrayIndex] = parseFloat(tempArray[3]);
+              cumulative[arrayIndex] = parseFloat(tempArray[4]);
               // index of the last word in the line
               let lastWordIndex = 4;
               
@@ -101,7 +129,7 @@ const Test = () => {
               if (lastWordIndex + 2 < tempArray.length) {
                 // update all the preceding indices with the same term and sem
                 for (let i = lastIndexWithoutTermAndSem; i <= arrayIndex; i++) {
-                  term[i] = tempArray[lastWordIndex + 1];
+                  term[i] = parseInt(tempArray[lastWordIndex + 1]);
                   sem[i] = tempArray[lastWordIndex + 2];
                 }
                 lastIndexWithoutTermAndSem = arrayIndex + 1;
@@ -111,10 +139,16 @@ const Test = () => {
               // line format : ENG 1(AH)   2   3   6   6
               // line indices:  0    1     2   3   4   5
               courses[arrayIndex] = tempArray[0] + ' ' + tempArray[1];
-              grades[arrayIndex] = tempArray[2];
-              units[arrayIndex] = tempArray[3];
-              weights[arrayIndex] = tempArray[4];
-              cumulative[arrayIndex] = tempArray[5];
+              // if element does not have a number, keep it as a string (ie. S, INC, DRP)
+              if (hasNumber(tempArray[2])){
+                grades[arrayIndex] = parseFloat(tempArray[2]);
+              } else {
+                grades[arrayIndex] = tempArray[2];
+              }
+              // remove numbers inside parenthesis before converting to int
+              units[arrayIndex] = parseInt(tempArray[3].replace(/ *\([^)]*\) */g, ""));
+              weights[arrayIndex] = parseFloat(tempArray[4]);
+              cumulative[arrayIndex] = parseFloat(tempArray[5]);
               // index of the last word in the line
               let lastWordIndex = 5;
 
@@ -122,7 +156,7 @@ const Test = () => {
               if (lastWordIndex + 2 < tempArray.length) {
                 // update all the preceding indices with the same term and sem
                 for (let i = lastIndexWithoutTermAndSem; i <= arrayIndex; i++) {
-                  term[i] = tempArray[lastWordIndex + 1];
+                  term[i] = parseInt(tempArray[lastWordIndex + 1]);
                   sem[i] = tempArray[lastWordIndex + 2];
                 }
                 lastIndexWithoutTermAndSem = arrayIndex + 1;
@@ -132,11 +166,11 @@ const Test = () => {
           } else {
             // !! ---- NOTE: Formatting of the sample data is really weird (ie. UNITS EARNED not aligned with anything)
             if (numOfLineAfterSubjs == 0) {
-              studentData.totalunits = tempArray[0];
+              studentData.totalunits = parseInt(tempArray[0]);
             } else if (numOfLineAfterSubjs == 1) {
-              studentData.gwa = tempArray[1];
+              studentData.gwa = parseFloat(tempArray[1]);
             } else if (numOfLineAfterSubjs == 2) {
-              studentData.totalunits2 = tempArray[0];
+              studentData.totalunits2 = parseInt(tempArray[0]);
             }
             numOfLineAfterSubjs += 1;
           }
