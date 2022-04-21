@@ -1,5 +1,5 @@
 import 'tailwindcss/tailwind.css';
-import {LoginBtn} from '../frontend/components/buttons/LoginLogoutBtns';
+import { LoginBtn } from '../frontend/components/buttons/LoginLogoutBtns';
 import TextBtn from '../frontend/components/buttons/TextBtn';
 import AppIcon from '../../assets/icons/icon.png';
 import userInput from '../frontend/components/inputs/Input';
@@ -16,7 +16,7 @@ const Login = () => {
                 {/* App Icon */}
                 <div className="">
                     <img
-                        className="rounded-full scale-75 -mt-20 xl:scale-100 1.75xl:scale-125 2xl:mt-2"justify-center 
+                        className="rounded-full scale-75 -mt-20 xl:scale-100 1.75xl:scale-150 2xl:mt-2"justify-center 
                         width= "300"
                         height= "300"
                         src={AppIcon}

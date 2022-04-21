@@ -84,7 +84,7 @@ const AdminNav = () => {
                 <div className=" grid grid-cols-1 cursor-pointer">
 
                     {/* Admin Dashboard */}
-                    <a href="#" className={` ${isHovering? "mt-0 xl:mt-5" : "mt-2" } duration-300 flex gap-x-4  items-center p-1 1.5xl:p-2 hover:bg-secondary-red hover:text-highlight`}>
+                    <div className={` ${isHovering? "mt-0 xl:mt-5" : "mt-2" } duration-300 flex gap-x-4  items-center p-1 1.5xl:p-2 hover:bg-secondary-red hover:text-highlight`}>
                         <div>
                             <svg className={` ${isHovering? "ml-6 1.5xl:ml-6": "ml-5 1.5xl:ml-4"} scale-90 1.5xl:scale-100 duration-300  fill-current`} xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 36 36" >
                                 <path d="M33 19a1 1 0 0 1-.71-.29L18 4.41 3.71 18.71A1 1 0 0 1 2.3 17.3l15-15a1 1 0 0 1 1.41 0l15 15A1 1 0 0 1 33 19Z" class="clr-i-solid clr-i-solid-path-1"/>
@@ -95,10 +95,10 @@ const AdminNav = () => {
                         <div className="pl-3 flex-shrink-0 ">
                             <span>Admin Dashboard</span>
                         </div>
-                    </a>
+                    </div>
 
                     {/* User System */}
-                    <a href="#" className="inline-flex mt-2 items-center p-1 1.5xl:p-2 hover:bg-secondary-red hover:text-highlight">
+                    <div className="inline-flex mt-2 items-center p-1 1.5xl:p-2 hover:bg-secondary-red hover:text-highlight">
                         <div>
                             <svg className={` ${isHovering? "ml-5":"ml-4 1.5xl:ml-3"} scale-90 1.5xl:scale-100 fill-current duration-300`} xmlns="http://www.w3.org/2000/svg" width="35" height="30" viewBox="0 0 640 512">
                                 <path d="M319.9 320c57.41 0 103.1-46.56 103.1-104s-46.54-104-103.1-104c-57.41 0-103.1 46.56-103.1 104-.9 57.4 45.7 104 103.1 104zm50 32h-99.8C191.6 352 128 411.7
@@ -111,10 +111,10 @@ const AdminNav = () => {
                         <div className="pl-7 flex-shrink-0">
                             <span>User System</span>
                         </div>
-                    </a>
+                    </div>
 
                     {/* Curriculum Management */}
-                    <a href="#" className="inline-flex mt-2 items-center p-1 1.5xl:p-2 hover:bg-secondary-red hover:text-highlight">
+                    <div className="inline-flex mt-2 items-center p-1 1.5xl:p-2 hover:bg-secondary-red hover:text-highlight">
                         <div>
                             <svg className={` ${isHovering? "ml-6":"ml-5 1.5xl:ml-4"} scale-90 1.5xl:scale-100 fill-current duration-300`} xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                                 <path d="M8 5h13v2H8V5Zm-5-.5h3v3H3v-3Zm0 6h3v3H3v-3Zm0 6h3v3H3v-3ZM8 11h13v2H8v-2Zm0 6h13v2H8v-2Z"/>
@@ -124,12 +124,12 @@ const AdminNav = () => {
                             <span>Curriculum Management</span>
                         </div>
 
-                    </a>
+                    </div>
                 </div>
             </div>
 
             {/* Logout */}
-            <a href="#" className="absolute bottom-8 flex gap-x-4 items-center p-2 text-sm xl:text-lg 2xl:text-xl hover:text-highlight">
+            <div className="absolute bottom-8 flex gap-x-4 items-center p-2 text-sm xl:text-lg 2xl:text-xl hover:text-highlight">
                 <div>
                     <svg className="ml-5 fill-current scale-90 1.5xl:scale-100" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
                         <path d="M4 18h2v2h12V4H6v2H4V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3zm2-7h7v2H6v3l-5-4 5-4v3z"/>
@@ -138,7 +138,7 @@ const AdminNav = () => {
                 <div className="pl-3">
                     <span>Logout</span>
                 </div>
-            </a>
+            </div>
         </div>
     );
 }
