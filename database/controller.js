@@ -478,3 +478,81 @@ exports.studentDeleteOne = function(req, res, next) {
     }
   });
 }
+
+
+// -----------------------------H I S T O R Y  S E C T I O N----------------------------------------
+
+// HISTORY SCHEMA
+const historySchema = new Schema({
+  User: {type: Schema.Types.ObjectId, ref: 'user', required: true},
+  Date : {type: String, required : true},
+  Time : {type: String, required : true},
+  Action: {type: String, required: true, enum: ['create', 'read', 'update', 'delete']},
+  Concern: {type: String, required: true, enum: ['student', 'degree', 'course', 'grade']},
+},{autoCreate:true});
+
+
+
+// HISTORY MODEL
+const History = db.model('history', historySchema);
+
+
+// find history
+exports.historyFindAll = function(req, res, next) {
+History.find(function(err, history) {
+  if (!err) { res.send(history) }
+});
+}
+
+exports.historyFindOne = function(req, res, next) {
+History.findOne(function(err, History){
+  if(!err) {res.send(History);}
+});
+}
+
+// add history
+exports.historyAdd = function(req, res, next) {
+  
+  var newHistory = new History({
+    User:mongoose.Types.ObjectId(req.body.User),
+    Date: req.body.Date,
+    Time: req.body.Time,
+    Action: req.body.Action,
+    Concern: req.body.Concern
+  });
+  console.log(newHistory);
+
+  newHistory.save(function(err) {
+    if (!err) { res.send(newHistory)}
+    else { res.send('Unable to save history') }
+  });
+}
+
+// update history
+exports.historyUpdateOne = function(req, res, next) {
+History.updateOne({User: req.body.User},{"$set":{
+  "User": req.body.User,
+  "Date": req.body.Date,
+  "Time": req.body.Time,
+  "Action": req.body.Action,
+  "Concern": req.body.Concern
+}}, {new : true}, function(err,result){
+  if(!err && History){
+    res.send(result);
+  } else {
+    res.send('Unable to update history');
+  }
+})
+}
+
+// delete all history
+exports.historyDeleteAll = function(req, res, next) {
+  // console.log(req.body);
+  History.deleteMany({},function(err){
+    if(!err){
+      res.send('Successfully deleted history');
+    } else {
+      res.send('Unable to delete history');
+    }
+  });
+}

@@ -76,7 +76,7 @@ request('http://localhost:3001/user/find-all',function(err,res,body) {
 // });
 
 /* COURSE TEST */
-/*
+
 course1 = {
     CourseName: "Mga Pag-aaral sa Wika (?)",
     CourseAbbr: "WIKA 1",
@@ -245,7 +245,6 @@ request('http://localhost:3001/student/delete',{method:"DELETE",form: {StudentID
 }); */
 
 
-
 // GRADE TEST
 grade1 = {
     Student: "626015cd10c6532872850a76",
@@ -304,5 +303,51 @@ newGrade2 = {
 // request('http://localhost:3001/grade/delete',{method:"DELETE",form: {Student: "626015cd10c6532872850a76", Course: "626004cc0fe58c4537bbaa16"}},function(err,req,body) {
 //     console.log(body);
 // });
-*/
 
+
+// HISTORY TEST
+
+history1 = {
+    User: "6261a622b1e9d4e16f7b2846",
+    Date: "11/21/20",
+    Time: "11:00",
+    Action: "read",
+    Concern: "student"
+}
+
+history2 = {
+    User: "6261a622b1e9d4e16f7b2848",
+    Date: "2/05/21",
+    Time: "23:00",
+    Action: "delete",
+    Concern: "degree"
+}
+
+newhistory2 = {
+    User: "6261a622b1e9d4e16f7b2848",
+    Date: "2/13/21",
+    Time: "4:00",
+    Action: "update",
+    Concern: "course"
+}
+
+// request('http://localhost:3001/history/add',{method:"POST",form: history1},function(err,req,body) {
+//     console.log(body);
+// });
+
+// request('http://localhost:3001/history/add',{method:"POST",form: history2},function(err,req,body) {
+//     console.log(body);
+// });
+
+request('http://localhost:3001/history/update', {method:"PUT",form: newhistory2},function(err,res,body) {
+    console.log(err);
+    console.log(body);
+});
+
+// request('http://localhost:3001/history/delete-all',{method:"DELETE"},function(err,res,body) {
+//    console.log(body);
+// });
+
+// request('http://localhost:3001/grade/delete-all',{method:"DELETE"},function(err,res,body) {
+//    console.log(body);
+// });
