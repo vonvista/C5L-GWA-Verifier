@@ -1,0 +1,146 @@
+/*
+ * @NOTE: Prepend a `~` to css file paths that are in your node_modules
+ *        See https://github.com/webpack-contrib/sass-loader#imports
+ */
+ @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/*  body {
+  position: relative;
+  color: white;
+  height: 100vh;
+  background: linear-gradient(
+    200.96deg,
+    #fedc2a -29.09%,
+    #dd5789 51.77%,
+    #7a2c9e 129.35%
+  );
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  justify-content: center;
+} */
+
+.UserTable {
+  max-width: 700px;
+  border-collapse: collapse;
+  margin: 50px 20px 20px 20px;
+  font-size: 0.9em;
+  border-radius: 10px 10px 10px 10px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.UserTable thead tr{
+  background-color: #F5F6F8;
+  color: #969696;
+  text-align: left;
+  font-size: 15px;
+  border-bottom: 3px solid #F5F6F8;
+}
+
+.UserTable th {
+  padding: 12px 15px;
+  background-color: #FAFAFB;
+  font-weight: 600;
+}
+
+.UserTable td {
+  padding: 7px 15px;
+  font-size: 13px;
+  color: black;
+  background-color: #FAFAFB;
+}
+
+tr:hover td{
+  background-color: #FFFDED;
+}
+
+.UserTable .pos_header {
+  text-align: center;
+  width: 40px;
+}
+
+.uname {
+  font-weight: 600;
+  width: 200px;
+}
+
+.pos_container{
+  border-radius: 0px 0px 0px 0px;
+}
+
+.position[data-status="Basic"]:after{
+  content : "Basic";
+  font-weight: 600;
+  background-color: #F29B9B;
+  border-radius: 15px;
+  display: block;
+  width: 50px;
+  text-align: center;
+}
+
+.position[data-status="Admin"]:after{
+  content : "Admin";
+  font-weight: 600;
+  background-color: #BBDABB;
+  border-radius: 15px;
+  display: block;
+  width: 50px;
+  text-align: center;
+}
+
+.actions {
+  background-color: #FAFAFB;
+  margin: auto;
+  text-align: center;
+}
+
+.UserTable .act_header {
+  text-align: center;
+}
+
+@media (max-width: 500px) {
+  .UserTable thead{
+    display: none;
+  };
+
+  .UserTable, .UserTable tbody, .UserTable tr, .UserTable td{
+    display: block;
+    max-width: 450px;
+    text-align: right;
+    padding-right: 25px;
+  }
+
+  .UserTable tbody, .UserTable tr, .UserTable td{
+    width: 425px;
+  }
+
+
+  .UserTable tr{
+    margin-bottom: 15px;
+    overflow: hidden;
+    border-radius: 10px 10px 10px 10px;
+  }
+
+  .UserTable tbody tr td{
+    text-align: right;
+    position: relative;
+  }
+
+  .UserTable tr{
+    display: block;
+    max-width: 450px;
+    text-align: right;
+    padding-right: 25px;
+  }
+
+  .UserTable td:before{
+    content: attr(data-label);
+    z-index: 1;
+    text-align: left;
+    left: 0;
+    margin-left: 10px;
+    position: absolute;
+    color: #969696;
+    font-weight: 600;
+  } 
+}

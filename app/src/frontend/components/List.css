@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/* Table Elements */
+.table-container {
+    margin-top: 12.18836565096953vh;       /*88px*/
+    margin-bottom: 9.141274238227147vh;    /* 66px */
+}
+
+.students-table {
+    max-width: 80.078125vw;      /*1230px*/
+    max-height: 70.6371191135734vh;      /*510px*/
+
+    table-layout: fixed;
+    border-collapse: collapse;
+    overflow: hidden;
+    /* box-shadow: 0 5px 4px -4px rgba(0, 0, 0, 0.15); */
+    box-shadow: 0 0 2.770083102493075vh rgba(0, 0, 0, 0.15);      /*0 0 20px*/
+    border-radius:  0.9765625vw;    /*15px*/
+}
+
+/* Th elements*/
+.students-table thead {
+    background: white;
+    border-radius: 0.9765625vw 0.9765625vw 0vw 0vw ;      /* 15px 15px 0 0 */
+    border-bottom: 0.4155124653739612vh solid #F5F6F8;   /* 3px */
+}
+
+.students-table thead tr {
+    font-size: 1.3020833333333333vw;    /* 20px */
+    font-style: normal;
+    text-align: left;
+    color: #969696;
+}
+
+.students-table th,
+.students-table td {
+    padding: 1.1772853185595569vh 1.3020833333333333vw;    /* 8.5px 20px */
+}
+
+/* Tbody elements */
+.students-table tbody tr:hover {
+    background-color: #FFFDED;
+}
+
+.students-table tbody {
+    background: white;
+    border-radius: 0px 0px 0.9765625vw 0.9765625vw;   /* 0px 0px 15px 15px */
+    color: black;
+    
+    height: 65.73130193905817vh;  /* 474.58px */
+    overflow: auto;
+    display: block;
+}
+
+.students-table thead, 
+.students-table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    white-space: nowrap;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Td elements */
+.students-table td {
+    font-size: 1.1067708333333333vw;    /* 17px */
+    border-bottom: 0.13850415512465375vh solid #F5F6F8; /* 1px */
+    overflow: hidden;
+}
+
+.students-table tbody > tr:last-child > td {
+    border-bottom: 0;
+}
+
+/* Column Elements */
+.student-name {
+    font-weight: bold;
+    width: 21.158854166666668vw;      /* 325px */
+}
+
+.student-number {
+    width: 13.020833333333334vw !important;    /* 200px */
+}
+
+.student-degree {
+    width: 21.158854166666668vw;   /* 325px */
+}
+
+.student-gwa {
+    width: 7.8125vw !important;    /* 120px */
+}
+
+/* Status Elements */
+.students-status {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.1067708333333333vw;    /* 17px */
+    width: 8.138020833333334vw;  /* 125 */
+    height: 4.293628808864266vh;   /* 31px */
+    padding: 0 !important;
+}
+
+.student-status{
+    width: 8.138020833333334vw !important;  /* 125px */
+    text-align: center;
+}
+
+.status[data-status="Checked"]:after{
+    content : "Checked";
+    background-color: #BBDABB;
+    color: black;
+    border-radius: 3.2552083333333335vw;    /* 50px */
+    display: block;
+    text-align: center;
+}
+
+.status[data-status="Unchecked"]:after{
+    content : "Unchecked";
+    background-color: #F29B9B;
+    color: black;
+    border-radius: 3.2552083333333335vw;
+    display: block;
+    text-align: center;
+}
+
+.status[data-status="Pending"]:after{
+    content : "Pending";
+    background-color: #F2C293;
+    color: #FF1111;
+    border-radius: 3.2552083333333335vw;
+    display: block;
+    text-align: center;
+}
+
+/* Action Elements */
+.student-action {
+    text-align: center;
+}
+
+
+
+
+
+
+/* OLD STATUS ELEMENTS (WITH FUNCTIONS IN DASHBOARD) */
+/* .students-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    width: 125px;
+    height: 31px;
+} 
+
+.student-status{
+    width: 125px !important;
+    padding: 0px !important;
+    text-align: center;
+}
+
+.status-checked {
+    background-color: #BBDABB;
+    color: black;
+    border-radius: 50px;
+}
+
+.status-unchecked {
+    background-color: #F29B9B;
+    color: black;
+    border-radius: 50px;
+}
+
+.status-pending {
+    background-color: #F2C293;
+    color: #FF1111;
+    border-radius: 50px;
+} */
+
+
+
+
