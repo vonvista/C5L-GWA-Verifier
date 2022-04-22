@@ -13,6 +13,8 @@ function isRequired(val) {
     return val != null && val.trim().length > 0;
 }
 
+
+
 const Login = () => {
 
     // Setup for input form
@@ -30,6 +32,23 @@ const Login = () => {
 
     const {values, errors, touched, changeHandler, submitHandler} = useForm(initialState, validations);
     const errorStyle = "block w-full mt-1 pl-1 text-sm text-red-300"
+
+    const handleLogIn = () => {
+        const credentials = {
+            email: this.state.email,
+            password: this.state.pass
+        }
+
+        // fetch("http://localhost:3001/login",{
+        //     method: "POST",
+        //     headers: { "Content-Type":"application/json" },
+        //     body: JSON.stringify(credentials)
+        //     })
+        // .then(response => response.json())
+        // .then(body => {
+        //     console.log(body)
+        // })
+    }
 
     return (
         <main class="grid grid-cols-38/62">
@@ -114,7 +133,7 @@ const Login = () => {
 
                     {/* Login Button */}
                     <div class="login-button text-sidebar-text">
-                        <LoginBtn />
+                        <LoginBtn handleClick={handleLogIn}/>
                     </div>                    
                 </form>
 
