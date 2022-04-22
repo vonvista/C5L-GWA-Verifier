@@ -33,6 +33,7 @@ img {
 .input-content{
     width: 50%;
     font-size: 1.25vw;
+    overflow: hidden;
 }
 
 .input-label{
@@ -58,10 +59,12 @@ img {
     bottom: 17rem;
     left: 0px;
     right: 0px;
+    font-size: 1.25vw;
 }
 
 .footer{
-    bottom: 2.5rem;
+    bottom: 2vw;
+    font-size: 1.25vw;
     align-items: center;
     justify-content: center;
     column-gap: 5vw;

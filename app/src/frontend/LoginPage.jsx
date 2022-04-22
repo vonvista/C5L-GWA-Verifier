@@ -1,7 +1,8 @@
+import { isRequired, useForm } from './hooks/useForm';
 import 'tailwindcss/tailwind.css';
 import './LoginPage.css';
-import { isRequired, useForm } from './hooks/useForm';
 
+{/* Components */}
 import { LoginBtn } from '../frontend/components/buttons/LoginLogoutBtns';
 import TextBtn from '../frontend/components/buttons/TextBtn';
 import AppIcon from '../../assets/icons/icon.png';
@@ -14,7 +15,7 @@ function isRequired(val) {
 
 const Login = () => {
 
-    // Setup for form
+    // Setup for input form
     const initialState = {
         databaseIP: '',
         username: '',
@@ -52,8 +53,10 @@ const Login = () => {
                 
                 <form class="input-group" onSubmit={submitHandler}>
 
-                    {/* Input form */}
+                    {/* Div container for input form */}
                     <div class="flex justify-center">               
+                        
+                        {/* Input form */}
                         <div class="input-content form">
                             <div class="pb-4">
                                 <Input
@@ -112,14 +115,14 @@ const Login = () => {
                     {/* Login Button */}
                     <div class="login-button text-sidebar-text">
                         <LoginBtn />
-                    </div>
+                    </div>                    
                 </form>
 
                 {/* Footer */}
                 <div class="flex footer absolute inset-x-0">
-                    <a href="#"><TextBtn text="Terms of Use"/></a>
-                    <a href="#"><TextBtn text="Help"/></a>
-                    <a href="#"><TextBtn text="Privacy Policy"/></a>
+                    <span><TextBtn text="Terms of Use"/></span>
+                    <span><TextBtn text="Help"/></span>
+                    <span><TextBtn text="Privacy Policy"/></span>
                 </div>
             </section>
         </main>
