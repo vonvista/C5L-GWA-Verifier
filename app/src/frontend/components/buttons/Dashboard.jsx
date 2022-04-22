@@ -4,11 +4,12 @@ import 'tailwindcss/tailwind.css';
 // Function contains the button in the dashboard
 // icon prop: svg file
 // text prop: text label
-const DashboardBtn = ({ icon, text }) => {
+// handleClick prop: function to handle click event
+const DashboardBtn = ({ icon, text, handleClick }) => {
   const textClass = `w-1/6 h-14 text-sm hover:bg-red-hover rounded-lg justify-items-center bg-red`;
   return (
     <>
-      <button className={textClass} type="button">
+      <button className={textClass} type="button" onClick={handleClick}>
         <img
           className="pb-1 grow-0 inline-flex"
           width="30px"
