@@ -137,11 +137,11 @@ exports.userLogin = async function(req, res, next) {
     if(passwordMatch){
       res.send(user);
     } else {
-      res.send('Incorrect password');
+      res.send({err:'Incorrect password'});
     }
   }
   else {
-    res.send('User not found');
+    res.send({err:'User not found'});
   }
 }
 

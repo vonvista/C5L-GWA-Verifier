@@ -1,19 +1,19 @@
 import { isRequired, useForm } from './hooks/useForm';
 import 'tailwindcss/tailwind.css';
 import './LoginPage.css';
+import Swal from 'sweetalert2'
+
 
 {/* Components */}
 import { LoginBtn } from '../frontend/components/buttons/LoginLogoutBtns';
 import TextBtn from '../frontend/components/buttons/TextBtn';
 import AppIcon from '../../assets/icons/icon.png';
 import Input from '../frontend/components/inputs/Input';
-
+//import { electron } from 'process';
 
 function isRequired(val) {
     return val != null && val.trim().length > 0;
 }
-
-
 
 const Login = () => {
 
@@ -35,19 +35,55 @@ const Login = () => {
 
     const handleLogIn = () => {
         const credentials = {
-            email: this.state.email,
-            password: this.state.pass
+            Username: values.username,
+            Password: values.password
         }
 
-        // fetch("http://localhost:3001/login",{
-        //     method: "POST",
-        //     headers: { "Content-Type":"application/json" },
-        //     body: JSON.stringify(credentials)
-        //     })
-        // .then(response => response.json())
-        // .then(body => {
-        //     console.log(body)
-        // })
+        //console.log(credentials)
+        const ip = values.databaseIP
+        
+        fetch(`http://${ip}:3001/user/login`,{
+            method: "POST",
+            headers: { "Content-Type":"application/json" },
+            body: JSON.stringify(credentials)
+            })
+        .then(response => response.json())
+        .then(body => {
+            console.log(body)
+            if(body.err){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: body.err,
+                })
+            }
+            else { //success state
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Successfully logged in!',
+                })
+                //TODO: Route to dashboard, waiting lang muna
+                localStorage.setItem("FirstName", body.FirstName)
+                localStorage.setItem("LastName", body.LastName)
+                localStorage.setItem("MiddleName", body.MiddleName)
+                localStorage.setItem("Password", body.Password)
+                localStorage.setItem("Position", body.Position)
+                localStorage.setItem("Role", body.Role)
+                localStorage.setItem("Username", body.Username)
+                localStorage.setItem("ServerIP", ip)
+            }
+           
+        })
+        .catch(err => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Server Error',
+                text: 'Check if the server is running or if database IP is correct',
+            })
+        })
+        
+        
     }
 
     return (
