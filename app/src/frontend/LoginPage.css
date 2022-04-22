@@ -1,0 +1,70 @@
+img {
+    width: 30vw;
+    height: auto;
+}
+
+.app-name{
+    font-weight: bold;
+    font-size: 3.5vw;
+}
+
+.second-name{
+    margin-top: 3px;
+    font-size: 2.5vw;
+}
+
+.page-title{
+    padding-top: 12vh;
+    font-size: 2.25vw;
+    justify-content: center;
+}
+
+.input-group{
+    padding-top: 8vh;
+    justify-content: center;
+}
+
+.form{
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem 0.5rem;
+    background-color: rgb(255 255 255);
+}
+
+.input-content{
+    width: 50%;
+    font-size: 1.25vw;
+}
+
+.input-label{
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: rgb(55 65 81);
+}
+
+.input-style{
+    border-width: 1px;
+    border-radius: 0.25rem;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    color: rgb(55 65 81);
+    line-height: 1.25;
+}
+
+.login-button{
+    display: flex;
+    justify-content: center;
+    margin-top: 4vh;
+    bottom: 17rem;
+    left: 0px;
+    right: 0px;
+}
+
+.footer{
+    bottom: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5vw;
+    opacity: 0.5;
+    color: rgb(254 202 202);
+}
