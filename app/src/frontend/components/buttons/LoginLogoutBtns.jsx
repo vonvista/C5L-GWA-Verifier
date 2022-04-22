@@ -6,7 +6,7 @@ export const LoginBtn = () => {
 
   return (
     <>
-      <button className={loginbtn} type="button">
+      <button className={loginbtn} type="submit">
         Log In
       </button>
     </>

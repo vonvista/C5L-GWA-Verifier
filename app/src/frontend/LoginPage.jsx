@@ -1,75 +1,125 @@
 import 'tailwindcss/tailwind.css';
+import './LoginPage.css';
+import { isRequired, useForm } from './hooks/useForm';
+
 import { LoginBtn } from '../frontend/components/buttons/LoginLogoutBtns';
 import TextBtn from '../frontend/components/buttons/TextBtn';
 import AppIcon from '../../assets/icons/icon.png';
-import userInput from '../frontend/components/inputs/Input';
+import Input from '../frontend/components/inputs/Input';
 
+
+function isRequired(val) {
+    return val != null && val.trim().length > 0;
+}
 
 const Login = () => {
 
+    // Setup for form
+    const initialState = {
+        databaseIP: '',
+        username: '',
+        password: ''
+    }
+
+    const validations = [
+        ({databaseIP}) => isRequired(databaseIP) || {databaseIP: 'Database IP is required'},
+        ({username}) => isRequired(username) || {username: 'Username is required'},
+        ({password}) => isRequired(password) || {password: 'Password is required'}
+    ]
+
+    const {values, errors, touched, changeHandler, submitHandler} = useForm(initialState, validations);
+    const errorStyle = "block w-full mt-1 pl-1 text-sm text-red-300"
+
     return (
-        <main className="grid grid-cols-38/62">
+        <main class="grid grid-cols-38/62">
 
             {/* Left Section */}
-            <section className="flex flex-col h-screen justify-center items-center bg-primary-red text-highlight">
+            <section class="flex flex-col h-screen justify-center items-center bg-primary-red text-highlight">
                 
                 {/* App Icon */}
-                <div className="">
-                    <img
-                        className="rounded-full scale-75 -mt-20 xl:scale-100 1.75xl:scale-150 2xl:mt-2"justify-center 
-                        width= "300"
-                        height= "300"
-                        src={AppIcon}
-                    />
-                </div>
+                <div><img src={AppIcon} /></div>
 
                 {/* App Name */}
-                <div className="xl:mt-8 1.75xl:mt-20 text-4xl xl:text-5xl 1.75xl:text-6xl  font-bold">KALATAS:</div>
-                <div className="mt-3 xl:mt-5 text-3xl 1.75xl:text-4xl 3xl:text-5xl">CAS GWA Verifier</div>
+                <div class="app-name">KALATAS:</div>
+                <div class="second-name">CAS GWA Verifier</div>
             </section>
 
             {/* Right Section */}
-            <section className="flex flex-col h-screen relative bg-secondary-red">
+            <section class="flex-rows-4 h-screen relative bg-secondary-red">
 
                 {/* Page Title */}
-                <span className="flex justify-center mt-20 1.5xl:mt-24 1.75xl:mt-32 3xl:mt-44 text-2xl 1.75xl:text-3xl text-sidebar-text">User Login</span>
-                <div className="flex justify-center mt-16 1.75xl:mt-20 3xl:mt-26">
+                <span class="flex page-title text-sidebar-text">User Login</span>
+                
+                <form class="input-group" onSubmit={submitHandler}>
 
                     {/* Input form */}
-                    <div class="w-6/12 text-base 1.75xl:text-xl">
-                        <form class="bg-white rounded-lg px-5 pt-4 pb-0">
-                            <div class="mb-4">
-                                <label class="block text-gray-700 font-bold mb-2" for="databaseIP">
-                                    Database IP
-                                </label>
-                                <input class="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight" id="db-ip" type="text" placeholder="Database IP"/>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-gray-700 font-bold mb-2" for="username">
-                                    Username
-                                </label>
-                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" id="username" type="text" placeholder="Username"/>
-                            </div>
-                            <div class="mb-6">
-                                <label class="block text-gray-700 font-bold mb-2" for="password">
-                                    Password
-                                </label>
-                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight" id="password" type="password" placeholder="******************"/>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                    <div class="flex justify-center">               
+                        <div class="input-content form">
+                            <div class="pb-4">
+                                <Input
+                                    labelStyle="input-label"                            // styling for label
+                                    labelVal="Database IP"                              // label text
+                                    inputStyle="shadow input-style"                     // styling for input
+                                    name="databaseIP"                                   // name of label-input components
+                                    inputType="text"                                    // type of input password, email, text, etc.
+                                    inputPlaceholder="Database IP"                      // placeholder text for input
+                                    value={values.databaseIP}                           // value of the input
+                                    changeHandler={changeHandler}                       // change handling   
+                                    />
 
-                {/* Login Button */}
-                <div className="flex justify-center items-center text-sidebar-text 1.5xl:mt-4">
-                    <LoginBtn />
-                </div>
+                                {touched.databaseIP && errors.databaseIP && 
+                                    <p class={errorStyle}>{errors.databaseIP}</p>   // error message
+                                }
+
+                            </div>
+                            <div class="pb-4">
+                                <Input
+                                    labelStyle="input-label"                            // styling for label
+                                    labelVal="Username"                                 // label text
+                                    inputStyle="shadow input-style"                     // styling for input
+                                    name="username"                                     // name of label-input components
+                                    inputType="text"                                    // type of input password, email, text, etc.
+                                    inputPlaceholder="Username"                         // placeholder text for input
+                                    value={values.username}                             // value of the input
+                                    changeHandler={changeHandler}                       // change handling   
+                                    />
+
+                                {touched.username && errors.username && 
+                                    <p class={errorStyle}>{errors.username}</p>     // error message
+                                }
+
+                            </div>
+                            <div class="pb-4">
+                                <Input
+                                    labelStyle="input-label"                            // styling for label
+                                    labelVal="Password"                                 // label text
+                                    inputStyle="shadow input-style"                     // styling for input
+                                    name="password"                                     // name of label-input components
+                                    inputType="password"                                // type of input password, email, text, etc.
+                                    inputPlaceholder="******************"               // placeholder text for input
+                                    value={values.password}                             // value of the input
+                                    changeHandler={changeHandler}                       // change handling   
+                                    />
+
+                                {touched.password && errors.password && 
+                                    <p class={errorStyle}>{errors.password}</p>     // error message
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Login Button */}
+                    <div class="login-button text-sidebar-text">
+                        <LoginBtn />
+                    </div>
+                </form>
 
                 {/* Footer */}
-                <div className="absolute inset-x-0 flex bottom-10 justify-center gap-x-10 1.5xl:gap-x-16 3xl:gap-x-20 items-center text-red-200 opacity-50">
-                    <span>Terms of Use</span>
-                    <span>Help</span>
-                    <span>Privacy Policy</span>
+                <div class="flex footer absolute inset-x-0">
+                    <a href="#"><TextBtn text="Terms of Use"/></a>
+                    <a href="#"><TextBtn text="Help"/></a>
+                    <a href="#"><TextBtn text="Privacy Policy"/></a>
                 </div>
             </section>
         </main>
