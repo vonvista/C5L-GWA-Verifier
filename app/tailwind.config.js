@@ -22,8 +22,12 @@ module.exports = {
       },
       screens: {
         '1.5xl': '1366px',
+        '1.75xl': '1512px',
         '3xl': '1728px',
         'qhd':'2560px'
+      },
+      gridTemplateColumns:{
+        '38/62': '38% 62%'
       }
     },
   },
