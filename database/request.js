@@ -6,7 +6,7 @@
 const request = require('request');
 
 // -----------------------------U S E R S   S E C T I O N----------------------------------------
-user1 = {
+/* user1 = {
     Username: "user2",
     FirstName : "First",
     MiddleName : "Middle",
@@ -34,7 +34,7 @@ newUser2 = {
     Position : "Test User for Database",
     Role : "user",
     Password : "hatdog"
-}
+} */
 
 // add request
 // request('http://localhost:3001/user/add',{method:"POST",form: user1},function(err,req,body) {
@@ -76,7 +76,7 @@ newUser2 = {
 // });
 
 /* COURSE TEST */
-/*
+
 course1 = {
     CourseName: "Mga Pag-aaral sa Wika (?)",
     CourseAbbr: "WIKA 1",
@@ -245,7 +245,6 @@ request('http://localhost:3001/student/delete',{method:"DELETE",form: {StudentID
 }); */
 
 
-
 // GRADE TEST
 grade1 = {
     Student: "626015cd10c6532872850a76",
@@ -305,8 +304,56 @@ newGrade2 = {
 //     console.log(body);
 // });
 
+
 //login request
 request('http://localhost:3001/user/login',{method:"GET",form: {Username: "user2", Password: "1234"}},function(err,req,body) {
     console.log(body);
 });
 
+
+// HISTORY TEST
+
+history1 = {
+    User: "6261a622b1e9d4e16f7b2846",
+    Date: "11/21/20",
+    Time: "11:00",
+    Description: "delete",
+    Details: "deleted student record with id 34845834534",
+}
+
+history2 = {
+    User: "6261a622b1e9d4e16f7b2848",
+    Date: "2/05/21",
+    Time: "23:00",
+    Description: "create",
+    Details: "created student record with id 43556457467",
+}
+
+newhistory2 = {
+    User: "6261a622b1e9d4e16f7b2848",
+    Date: "2/13/21",
+    Time: "4:00",
+    Description: "update",
+    Details: "updated student record with id 43556457467",
+}
+
+// request('http://localhost:3001/history/add',{method:"POST",form: history1},function(err,req,body) {
+//     console.log(body);
+// });
+
+// request('http://localhost:3001/history/add',{method:"POST",form: history2},function(err,req,body) {
+//     console.log(body);
+// });
+
+// request('http://localhost:3001/history/update', {method:"PUT",form: newhistory2},function(err,res,body) {
+//     console.log(err);
+//     console.log(body);
+// });
+
+request('http://localhost:3001/history/delete-all',{method:"DELETE"},function(err,res,body) {
+   console.log(body);
+});
+
+// request('http://localhost:3001/grade/delete-all',{method:"DELETE"},function(err,res,body) {
+//    console.log(body);
+// });

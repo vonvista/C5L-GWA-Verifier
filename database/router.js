@@ -15,6 +15,14 @@ module.exports = (app) => {
     next();
   })
 
+  // HISTORY ROUTES
+  app.post('/history/add', controller.historyAdd);
+  app.get('/history/find', controller.historyFindOne);
+  app.get('/history/find-all', controller.historyFindAll);
+  app.put('/history/update', controller.historyUpdateOne);
+  app.delete('/history/delete-all', controller.historyDeleteAll);
+
+
   // DEGREE ROUTES
   app.post('/degree/add', controller.degreeAdd);
   app.get('/degree/find', controller.degreeFindOne);

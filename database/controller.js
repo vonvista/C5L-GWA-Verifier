@@ -3,7 +3,7 @@
  * controller file to hold the functions of the database
  */
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+// const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema;
 
 saltRounds = 8; // number of rounds to hash the password
@@ -27,10 +27,12 @@ const userSchema = new Schema({
     Password : {type: String, required : true}
   },{autoCreate:true});
 
+
 // models for the database
 // NOTE: creating a model with a unique attribute will cause mongoose to auto-create a collection for the model
 // USER MODEL
 const User = db.model('user',userSchema);
+
 
 /**
  * METHODS
@@ -76,6 +78,7 @@ exports.userAdd = async function(req, res, next) {
   });
   // console.log(newUser);
 
+
   newUser.save(function(err) {
     if (!err) { res.send(newUser)}
     else { res.send('Unable to save user') }
@@ -111,7 +114,7 @@ exports.userDeleteAll = function(req, res, next) {
 // update a user
 exports.userUpdate = function(req, res, next) {
   // console.log(req.body);
-
+  
   User.updateOne({Username : req.body.Username},{"$set":{
     "FirstName": req.body.FirstName,
     "MiddleName": req.body.MiddleName,
@@ -497,6 +500,85 @@ exports.studentDeleteOne = function(req, res, next) {
       res.send('Successfully deleted');
     } else {
       res.send('Unable to delete student');
+    }
+  });
+}
+
+
+// -----------------------------H I S T O R Y  S E C T I O N----------------------------------------
+
+// HISTORY SCHEMA
+
+
+const historySchema = new Schema({
+  User: {type: Schema.Types.ObjectId, ref: 'user', required: true},
+  Date : {type: String, required : true},
+  Time : {type: String, required : true},
+  Description: {type: String, required : true, enum : ['create', 'read', 'update', 'delete']}, // short string ng change na nagyari
+  Details: {type: String, required : true}, // long string
+}, {autoCreate:true});
+
+
+// HISTORY MODEL
+const History = db.model('history', historySchema);
+
+
+// find history
+exports.historyFindAll = function(req, res, next) {
+History.find(function(err, history) {
+  if (!err) { res.send(history) }
+});
+}
+
+exports.historyFindOne = function(req, res, next) {
+History.findOne(function(err, History){
+  if(!err) {res.send(History);}
+});
+}
+
+// add history
+exports.historyAdd = function(req, res, next) {
+  
+  var newHistory = new History({
+    User: mongoose.Types.ObjectId(req.body.User),
+    Date: req.body.Date,
+    Time: req.body.Time,
+    Description: req.body.Description,
+    Details: req.body.Details,
+  });
+  console.log(newHistory);
+
+  newHistory.save(function(err) {
+    if (!err) { res.send(newHistory)}
+    else { res.send('Unable to save history') }
+  });
+}
+
+// update history
+exports.historyUpdateOne = function(req, res, next) {
+History.updateOne({User: req.body.User},{"$set":{
+  "User": req.body.User,
+  "Date": req.body.Date,
+  "Time": req.body.Time,
+  "Description": req.body.Description,
+  "Details": req.body.Details,
+},}, {new : true}, function(err,result){
+  if(!err && History){
+    res.send(result);
+  } else {
+    res.send('Unable to update history');
+  }
+})
+}
+
+// delete all history
+exports.historyDeleteAll = function(req, res, next) {
+  // console.log(req.body);
+  History.deleteMany({},function(err){
+    if(!err){
+      res.send('Successfully deleted history');
+    } else {
+      res.send('Unable to delete history');
     }
   });
 }
