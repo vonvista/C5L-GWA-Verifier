@@ -3,7 +3,7 @@
  * controller file to hold the functions of the database
  */
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+// const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema;
 
 saltRounds = 8; // number of rounds to hash the password
@@ -27,10 +27,12 @@ const userSchema = new Schema({
     Password : {type: String, required : true}
   },{autoCreate:true});
 
+
 // models for the database
 // NOTE: creating a model with a unique attribute will cause mongoose to auto-create a collection for the model
 // USER MODEL
 const User = db.model('user',userSchema);
+
 
 /**
  * METHODS
@@ -76,6 +78,7 @@ exports.userAdd = async function(req, res, next) {
   });
   // console.log(newUser);
 
+
   newUser.save(function(err) {
     if (!err) { res.send(newUser)}
     else { res.send('Unable to save user') }
@@ -111,7 +114,7 @@ exports.userDeleteAll = function(req, res, next) {
 // update a user
 exports.userUpdate = function(req, res, next) {
   // console.log(req.body);
-
+  
   User.updateOne({Username : req.body.Username},{"$set":{
     "FirstName": req.body.FirstName,
     "MiddleName": req.body.MiddleName,
@@ -505,14 +508,15 @@ exports.studentDeleteOne = function(req, res, next) {
 // -----------------------------H I S T O R Y  S E C T I O N----------------------------------------
 
 // HISTORY SCHEMA
+
+
 const historySchema = new Schema({
   User: {type: Schema.Types.ObjectId, ref: 'user', required: true},
   Date : {type: String, required : true},
   Time : {type: String, required : true},
-  Action: {type: String, required: true, enum: ['create', 'read', 'update', 'delete']},
-  Concern: {type: String, required: true, enum: ['student', 'degree', 'course', 'grade']},
-},{autoCreate:true});
-
+  Description: {type: String, required : true, enum : ['create', 'read', 'update', 'delete']}, // short string ng change na nagyari
+  Details: {type: String, required : true}, // long string
+}, {autoCreate:true});
 
 
 // HISTORY MODEL
@@ -536,11 +540,11 @@ History.findOne(function(err, History){
 exports.historyAdd = function(req, res, next) {
   
   var newHistory = new History({
-    User:mongoose.Types.ObjectId(req.body.User),
+    User: mongoose.Types.ObjectId(req.body.User),
     Date: req.body.Date,
     Time: req.body.Time,
-    Action: req.body.Action,
-    Concern: req.body.Concern
+    Description: req.body.Description,
+    Details: req.body.Details,
   });
   console.log(newHistory);
 
@@ -556,9 +560,9 @@ History.updateOne({User: req.body.User},{"$set":{
   "User": req.body.User,
   "Date": req.body.Date,
   "Time": req.body.Time,
-  "Action": req.body.Action,
-  "Concern": req.body.Concern
-}}, {new : true}, function(err,result){
+  "Description": req.body.Description,
+  "Details": req.body.Details,
+},}, {new : true}, function(err,result){
   if(!err && History){
     res.send(result);
   } else {
