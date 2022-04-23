@@ -337,22 +337,22 @@ newhistory2 = {
     Details: "updated student record with id 43556457467",
 }
 
-request('http://localhost:3001/history/add',{method:"POST",form: history1},function(err,req,body) {
-    console.log(body);
-});
+// request('http://localhost:3001/history/add',{method:"POST",form: history1},function(err,req,body) {
+//     console.log(body);
+// });
 
-request('http://localhost:3001/history/add',{method:"POST",form: history2},function(err,req,body) {
-    console.log(body);
-});
+// request('http://localhost:3001/history/add',{method:"POST",form: history2},function(err,req,body) {
+//     console.log(body);
+// });
 
 // request('http://localhost:3001/history/update', {method:"PUT",form: newhistory2},function(err,res,body) {
 //     console.log(err);
 //     console.log(body);
 // });
 
-// request('http://localhost:3001/history/delete-all',{method:"DELETE"},function(err,res,body) {
-//    console.log(body);
-// });
+request('http://localhost:3001/history/delete-all',{method:"DELETE"},function(err,res,body) {
+   console.log(body);
+});
 
 // request('http://localhost:3001/grade/delete-all',{method:"DELETE"},function(err,res,body) {
 //    console.log(body);

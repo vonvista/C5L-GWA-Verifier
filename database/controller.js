@@ -579,6 +579,9 @@ History.updateOne({User: req.body.User},{"$set":{
 // delete all history
 exports.historyDeleteAll = function(req, res, next) {
   // console.log(req.body);
+  User.updateMany({},{"$set":{"History":[]}},function(err, result){
+    console.log(result);
+  });
   History.deleteMany({},function(err){
     if(!err){
       res.send('Successfully deleted history');
