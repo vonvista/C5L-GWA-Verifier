@@ -1,12 +1,18 @@
 import 'tailwindcss/tailwind.css';
 import add from '../../../../assets/icons/add.svg';
-// Function contains the Add button from Student Record View/Edit Page
-const Add = () => {
+
+
+//Function contains the Add button from Student Record View/Edit Page
+//
+//PROPS:
+//handleClick: function to handle click event
+//
+const Add = ({ handleClick }) => {
   const addbtn = `w-20 h-8 bg-login-green m-2 rounded-xl text-white font-montserrat font-bold hover:shadow-lg hover:bg-login-green-hover`;
 
   return (
     <>
-      <button className={addbtn} type="button">
+      <button className={addbtn} type="button" onClick={handleClick}>
         <img
           className="p-0.25 ml-0.25 mr-1.5 inline-flex"
           width="20px"

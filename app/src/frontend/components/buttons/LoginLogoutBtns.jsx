@@ -1,19 +1,29 @@
 import 'tailwindcss/tailwind.css';
 import logout from '../../../../assets/icons/logout.svg';
 
-export const LoginBtn = () => {
-  const loginbtn = `w-96 h-11 bg-login-green rounded-xl text-white font-montserrat font-bold hover:shadow-lg hover:bg-login-green-hover`;
+//Button for login 
+//
+//PROPS:
+//handleClick: function to handle click event
+//
+export const LoginBtn = ({ handleClick }) => {
+  const loginbtn = `w-6/12 h-11 1.75xl:text-lg bg-login-green rounded-lg text-white font-montserrat font-bold hover:shadow-lg hover:bg-login-green-hover`;
 
   return (
     <>
-      <button className={loginbtn} type="button">
+      <button className={loginbtn} type="submit" onClick={handleClick}>
         Log In
       </button>
     </>
   );
 };
 
-export const LogoutBtn = () => {
+//Button for login 
+//
+//PROPS:
+//handleClick: function to handle click event
+//
+export const LogoutBtn = ({ handleClick }) => {
   const textClass = `w-1/6 h-14 text-sm hover:bg-red-hover rounded-lg justify-items-center bg-red`;
   return (
     <>

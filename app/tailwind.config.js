@@ -5,7 +5,6 @@ module.exports = {
       colors: {
         'login-green': '#2A7146',
         'login-green-hover': '#35724df5',
-        red: '#562323',
         'primary-red': '#371010',
         'secondary-red': '#562323',
         'red-hover': '#5a3535',
@@ -23,8 +22,12 @@ module.exports = {
       },
       screens: {
         '1.5xl': '1366px',
+        '1.75xl': '1512px',
         '3xl': '1728px',
         'qhd':'2560px'
+      },
+      gridTemplateColumns:{
+        '38/62': '38% 62%'
       }
     },
   },

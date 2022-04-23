@@ -3,7 +3,10 @@
  * controller file to hold the functions of the database
  */
 const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema;
+
+saltRounds = 8; // number of rounds to hash the password
 
 // name of the database will be KALATAS
 const db = mongoose.createConnection('mongodb://localhost:27017/KALATAS', {
@@ -24,12 +27,10 @@ const userSchema = new Schema({
     Password : {type: String, required : true}
   },{autoCreate:true});
 
-
 // models for the database
 // NOTE: creating a model with a unique attribute will cause mongoose to auto-create a collection for the model
 // USER MODEL
 const User = db.model('user',userSchema);
-
 
 /**
  * METHODS
@@ -58,9 +59,11 @@ exports.userFind = function(req, res, next) {
 }
 
 // add user
-exports.userAdd = function(req, res, next) {
+exports.userAdd = async function(req, res, next) {
   // UNCOMMENT TO SEE REQUEST CONTENTS AND MAPPING TO USER MODEL
   // console.log(req.body);
+
+  const hashedPassword = await bcrypt.hash(req.body.Password, saltRounds); //encrpyt password first -vov
   
   var newUser = new User({
     Username: req.body.Username,
@@ -69,10 +72,9 @@ exports.userAdd = function(req, res, next) {
     LastName: req.body.LastName,
     Position: req.body.Position,
     Role: req.body.Role,
-    Password: req.body.Password
+    Password: hashedPassword
   });
   // console.log(newUser);
-  
 
   newUser.save(function(err) {
     if (!err) { res.send(newUser)}
@@ -109,6 +111,7 @@ exports.userDeleteAll = function(req, res, next) {
 // update a user
 exports.userUpdate = function(req, res, next) {
   // console.log(req.body);
+
   User.updateOne({Username : req.body.Username},{"$set":{
     "FirstName": req.body.FirstName,
     "MiddleName": req.body.MiddleName,
@@ -124,6 +127,25 @@ exports.userUpdate = function(req, res, next) {
     }
   })
 }
+
+//user login -vov
+exports.userLogin = async function(req, res, next) {
+  
+  const user = await User.findOne({Username: req.body.Username});
+  if(user){
+    const passwordMatch = await bcrypt.compare(req.body.Password, user.Password);
+    if(passwordMatch){
+      res.send(user);
+    } else {
+      res.send({err:'Incorrect password'});
+    }
+  }
+  else {
+    res.send({err:'User not found'});
+  }
+}
+
+
 // -----------------------------G R A D E S   S E C T I O N----------------------------------------
 
 // GRADE SCHEMA
