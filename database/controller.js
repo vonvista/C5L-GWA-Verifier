@@ -587,6 +587,9 @@ exports.historyDeleteAll = function(req, res, next) {
 /**
  * Note section
  * Contributors: Carlos Rayel
+ * 
+ * General tip for backend: use the ids you obtain from 'studentFindOne' and 'userFind'
+ * to put into the fields
  */
 
 // NOTE SCHEMA

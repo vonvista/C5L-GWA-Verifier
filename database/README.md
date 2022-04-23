@@ -11,3 +11,13 @@ It will log a `"Server started at port 3001"` message. You may also run `mongo.e
 
 ### Test
 For testing, you may choose to do `npm install request` and modify the `request.js` file you will run using `node ./request.js`. This file will contain the url request that you will send in order to test the mongodb server.
+
+
+# Current Progress
+Implemented Collections:
+* Users
+* Students
+* Courses
+* Degrees
+* Histories
+* Notes
