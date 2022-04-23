@@ -46,13 +46,13 @@
     background: white;
     border-radius: 0px 0px 0.9765625vw 0.9765625vw;   /* 0px 0px 15px 15px */
     color: black;
-    
+
     height: 65.73130193905817vh;  /* 474.58px */
     overflow: auto;
     display: block;
 }
 
-.students-table thead, 
+.students-table thead,
 .students-table tbody tr {
     display: table;
     width: 100%;
@@ -151,7 +151,7 @@
     font-size: 17px;
     width: 125px;
     height: 31px;
-} 
+}
 
 .student-status{
     width: 125px !important;

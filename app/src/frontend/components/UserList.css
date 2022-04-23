@@ -1,139 +1,173 @@
-/*
- * @NOTE: Prepend a `~` to css file paths that are in your node_modules
- *        See https://github.com/webpack-contrib/sass-loader#imports
- */
- @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 
-/*  body {
-  position: relative;
-  color: white;
-  height: 100vh;
-  background: linear-gradient(
-    200.96deg,
-    #fedc2a -29.09%,
-    #dd5789 51.77%,
-    #7a2c9e 129.35%
-  );
-  font-family: 'Montserrat', sans-serif;
-  display: flex;
-  justify-content: center;
-} */
-
-.UserTable {
-  max-width: 700px;
+/* Table Elements */
+.user-table {
+  max-width: 80.078125vw;      /*1230px*/
+  max-height: 70.6371191135734vh;      /*510px*/
+  table-layout: fixed;
   border-collapse: collapse;
-  margin: 50px 20px 20px 20px;
-  font-size: 0.9em;
-  border-radius: 10px 10px 10px 10px;
   overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 5px 4px -4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 2.770083102493075vh rgba(0, 0, 0, 0.15);      /*0 0 20px*/
+  border-radius:  0.9765625vw ;    /*15px*/
 }
 
-.UserTable thead tr{
-  background-color: #F5F6F8;
-  color: #969696;
+.user-table thead tr{
+  font-size: 1.3020833333333333vw;    /* 20px */
+  font-style: normal;
   text-align: left;
-  font-size: 15px;
-  border-bottom: 3px solid #F5F6F8;
+  color: #969696;
 }
 
-.UserTable th {
-  padding: 12px 15px;
-  background-color: #FAFAFB;
-  font-weight: 600;
+.user-table th, .user-table td {
+  padding: 1.1772853185595569vh 1.3020833333333333vw;    /* 8.5px 20px */
 }
 
-.UserTable td {
-  padding: 7px 15px;
-  font-size: 13px;
+/* Tbody elements */
+.user-table tbody tr:hover {
+  background-color: #FFFDED;
+}
+
+.user-table tbody {
+  background: white;
+  border-radius: 0px 0px 0.9765625vw 0.9765625vw;   /* 0px 0px 15px 15px */
   color: black;
-  background-color: #FAFAFB;
+  height: 65.73130193905817vh;  /* 474.58px */
+  overflow: overlay;
+  display: block;
+}
+
+/* Scrollbar Elements */
+.user-table tbody::-webkit-scrollbar {
+  width: 10px;
+}
+
+.user-table tbody::-webkit-scrollbar-track {
+  background-color: #3d3d3d2a;
+  border-radius: 100px;
+}
+
+.user-table tbody::-webkit-scrollbar-thumb {
+  background-color: #0f0f0f2d;;
+  border-radius: 100px;
+}
+
+.user-table tbody::-webkit-scrollbar-thumb:hover {
+  background-color: #0f0f0f48;;
+  border-radius: 100px;
+}
+
+.user-table thead,
+.user-table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    white-space: nowrap;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Td elements */
+.user-table td {
+  font-size: 1.1067708333333333vw;    /* 17px */
+  border-bottom: 0.13850415512465375vh solid #F5F6F8; /* 1px */
+  overflow: hidden;
+}
+
+.user-table tbody > tr:last-child > td {
+  border-bottom: 0;
 }
 
 tr:hover td{
   background-color: #FFFDED;
 }
 
-.UserTable .pos_header {
+/* Column Elements */
+.user-uname {
+  font-weight: bold;
+  width: 13.020833333333334vw !important;    /* 200px */
+}
+
+.user-name {
+  width: 21.158854166666668vw;      /* 325px */
+}
+
+/* Position Elements */
+.user-position {
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  width: 40px;
-}
-
-.uname {
-  font-weight: 600;
-  width: 200px;
-}
-
-.pos_container{
-  border-radius: 0px 0px 0px 0px;
-}
-
-.position[data-status="Basic"]:after{
-  content : "Basic";
-  font-weight: 600;
-  background-color: #F29B9B;
-  border-radius: 15px;
-  display: block;
-  width: 50px;
+  font-size: 1.1067708333333333vw;    /* 17px */
+  width: 8.138020833333334vw;  /* 125 */
+  height: 4.293628808864266vh;   /* 31px */
+  padding: 0 !important;
   text-align: center;
 }
 
 .position[data-status="Admin"]:after{
+  margin-left: 2vw;
   content : "Admin";
-  font-weight: 600;
   background-color: #BBDABB;
-  border-radius: 15px;
+  color: black;
+  border-radius: 3.2552083333333335vw;    /* 50px */
   display: block;
-  width: 50px;
-  text-align: center;
+  width: 5.5vw;
 }
 
-.actions {
-  background-color: #FAFAFB;
-  margin: auto;
-  text-align: center;
+.position[data-status="User"]:after{
+  margin-left: 2vw;
+  content : "User";
+  background-color: #F29B9B;
+  color: black;
+  border-radius: 3.2552083333333335vw;
+  display: block;
+  width: 5.5vw;
 }
 
-.UserTable .act_header {
+/* Action Elements */
+.user-action {
   text-align: center;
+  width: 8.138020833333334vw !important;  /* 125px */
 }
 
-@media (max-width: 500px) {
-  .UserTable thead{
+
+
+
+/* @media (max-width: 500px) {
+  .user-table thead{
     display: none;
   };
 
-  .UserTable, .UserTable tbody, .UserTable tr, .UserTable td{
+  .user-table, .user-table tbody, .user-table tr, .user-table td{
     display: block;
     max-width: 450px;
     text-align: right;
     padding-right: 25px;
   }
 
-  .UserTable tbody, .UserTable tr, .UserTable td{
+  .user-table tbody, .user-table tr, .user-table td{
     width: 425px;
   }
 
 
-  .UserTable tr{
+  .user-table tr{
     margin-bottom: 15px;
     overflow: hidden;
     border-radius: 10px 10px 10px 10px;
   }
 
-  .UserTable tbody tr td{
+  .user-table tbody tr td{
     text-align: right;
     position: relative;
   }
 
-  .UserTable tr{
+  .user-table tr{
     display: block;
     max-width: 450px;
     text-align: right;
     padding-right: 25px;
   }
 
-  .UserTable td:before{
+  .user-table td:before{
     content: attr(data-label);
     z-index: 1;
     text-align: left;
@@ -142,5 +176,5 @@ tr:hover td{
     position: absolute;
     color: #969696;
     font-weight: 600;
-  } 
-}
+  }
+} */

@@ -9,7 +9,7 @@ const List = ({ table, data}) => {
     const DegreeProgram = ({ data }) => {
         return (
             <>
-                <table class="table-auto">    
+                <table class="table-auto">
                     <thead>
                         <tr>
                             <th>Program</th>
@@ -17,7 +17,7 @@ const List = ({ table, data}) => {
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>  
+                    <tbody>
                         {data.map((program, index) => (
                             <tr key = { index }>
                                 <td>{program.programName}</td>
@@ -35,7 +35,7 @@ const List = ({ table, data}) => {
     const Course = ({ data }) => {
         return (
             <>
-                <table class="table-auto">    
+                <table class="table-auto">
                     <thead>
                         <tr>
                             <th>Course Title</th>
@@ -44,7 +44,7 @@ const List = ({ table, data}) => {
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>  
+                    <tbody>
                         {data.map((course, index) => (
                             <tr key = { index }>
                                 <td>{course.title}</td>
@@ -60,29 +60,29 @@ const List = ({ table, data}) => {
     }
 
     // Eyds Angeles
-    // This table is about 
+    // This table is about
     const Eyds = ({data}) => {
         console.log(data);
         return (
           <>
-            <table className="UserTable">
+            <table className="user-table">
               <thead>
                   <tr>
-                  <th>Username</th>
-                  <th>Name</th>
-                  <th className = "pos_header">Position</th>
-                  <th className = "act_header">Actions</th>
+                  <th className='user-uname'>Username</th>
+                  <th className='user-name'>Name</th>
+                  <th className='user-position'>Position</th>
+                  <th className='user-action'>Actions</th>
                   </tr>
               </thead>
               <tbody>
                 {data.map((user, index) => (
                     <tr key = {index}>
-                      <td data-label = "Username"  className='uname'>{user.uname}</td>
-                      <td data-label = "Name">{user.name}</td>
-                      <td data-label = "Position" className='pos_container'>
+                      <td data-label = "Username"  className='user-uname'>{user.uname}</td>
+                      <td data-label = "Name" className='user-name'>{user.name}</td>
+                      <td data-label = "Position" className='user-position'>
                         <td data-status={user.position} className='position'></td>
                       </td>
-                      <td data-label = "Actions" className='actions'>
+                      <td data-label = "Actions" className='user-action'>
                         <Actions/>
                       </td>
                     </tr>
@@ -93,7 +93,7 @@ const List = ({ table, data}) => {
           </>
         )
       }
-    
+
     // Maurice Paguagan
     // Function for the Color-coded statuses
     /* const Status = ({ status }) => {
@@ -133,7 +133,7 @@ const List = ({ table, data}) => {
             )
         }
     } */
-    
+
     // Function for Displaying the Student List on the Dashboard
     const StudentList = ({ data }) => {
         return (

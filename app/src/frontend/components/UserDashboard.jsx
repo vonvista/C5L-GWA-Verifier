@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import List from './List';
 import UploadFileBtn from './buttons/UploadFileBtn';
 import Pagination from './Pagination';
-// import './UserList.css';
+import './UserList.css';
 import './List.css';
 
 
@@ -108,11 +108,46 @@ const UserDashboard = () => {
       {
         "uname": "mau_23",
         "name": "Maurice Paguagan",
-        "position": "Basic"
+        "position": "User"
       },
       {
         "uname": "dyurj_45",
         "name": "George Gragas",
+        "position": "Admin"
+      },
+      {
+        "uname": "erl_23",
+        "name": "Erl Lacuban",
+        "position": "User"
+      },
+      {
+        "uname": "tere_28",
+        "name": "Tere Ursolino",
+        "position": "User"
+      },
+      {
+        "uname": "qreentine",
+        "name": "Koreen Merida",
+        "position": "Admin"
+      },
+      {
+        "uname": "romel_klow",
+        "name": "Carl Romel Dimacali",
+        "position": "User"
+      },
+      {
+        "uname": "otin_g",
+        "name": "Ysab Parayno",
+        "position": "User"
+      },
+      {
+        "uname": "jepi_clown",
+        "name": "Jeffy Escartin",
+        "position": "User"
+      },
+      {
+        "uname": "reg_booth",
+        "name": "Reginald Recario",
         "position": "Admin"
       }
     ]
@@ -122,18 +157,20 @@ const UserDashboard = () => {
         // setRows(Program);
         // setRows(Users);
     }, []);
-    
+
     // Get current rows
 
 
     return(
         <>
             {/* <div><UploadFileBtn /></div> */}
-            <div className='table-container'>
+            {/* <div className='table-container'>
                 <List table={1} data={rows}/>
-            </div>
+            </div> */}
             {/* <List table={2} data={Program}></List> */}
-            {/* <List table={3} data={Users}></List> */}
+            <div className='table-container'>
+                <List table={3} data={Users}></List>
+            </div>
             {/* <div><Pagination /></div> */}
         </>
     )

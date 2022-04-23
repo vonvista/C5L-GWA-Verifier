@@ -3,34 +3,34 @@ import { useState, useCallback, useRef } from 'react';
 import user from '../../../assets/icons/default-user-icon.jpg';
 
 
-/* Importing to Pages
+/* Importing to Pages*/
 <div>
-    <div><Sidebar /></div>
+    {/* <div><Sidebar /></div> */}
     <div className="absolute inset-0 flex ml-24 items-center">
-        <span>Page Contents</span>    
+        <span>Page Contents</span>
     </div>
 </div>
-*/
+
 
 
 // Referenced from https://www.30secondsofcode.org/react/s/use-hover
 const useHover = () => {
     const [isHovering, setIsHovering] = useState(true);
-  
+
     const handleMouseOver = useCallback(() => setIsHovering(true), []);
     const handleMouseOut = useCallback(() => setIsHovering(false), []);
-  
+
     const nodeRef = useRef();
-  
+
     const callbackRef = useCallback(
       node => {
         if (nodeRef.current) {
           nodeRef.current.removeEventListener('mouseover', handleMouseOver);
           nodeRef.current.removeEventListener('mouseout', handleMouseOut);
         }
-  
+
         nodeRef.current = node;
-  
+
         if (nodeRef.current) {
           nodeRef.current.addEventListener('mouseover', handleMouseOver);
           nodeRef.current.addEventListener('mouseout', handleMouseOut);
@@ -38,16 +38,16 @@ const useHover = () => {
       },
       [handleMouseOver, handleMouseOut]
     );
-  
+
     return [callbackRef, isHovering];
 };
-  
+
 
 const UserNav = () => {
     const [hoverRef, isHovering] = useHover();
-      
+
     return (
-        <div 
+        <div
             ref={hoverRef}
             className={` ${
             isHovering ? "w-1/4 3xl:w-1/5" : "w-20"
@@ -57,8 +57,8 @@ const UserNav = () => {
             <div className="bg-baybayin bg-repeat-y object-cover h-screen bg-contain lg:-ml-20 3xl:-ml-32"></div>
             <div className="absolute py-2.5 top-0 inset-x text-sm xl:text-lg 1.5xl:text-xl">
 
-                {/* App Name */}   
-                <div className={`${ isHovering? "place-content-center" : "px-28 duration-300 flex-shrink-0" } flex px-24 py-4 1.5xl:py-8 text-highlight`}>            
+                {/* App Name */}
+                <div className={`${ isHovering? "place-content-center" : "px-28 duration-300 flex-shrink-0" } flex px-24 py-4 1.5xl:py-8 text-highlight`}>
                     <div className="flex-shrink-0">
                         Kalatas: CAS GWA Verifier
                     </div>
@@ -79,7 +79,7 @@ const UserNav = () => {
                         <div>jvdelacruz</div>
                     </div>
                 </div>
-                
+
                 {/* Navigation Pages */}
                 <div className=" grid grid-cols-1 cursor-pointer">
 
