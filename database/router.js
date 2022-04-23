@@ -67,4 +67,12 @@ module.exports = (app) => {
   app.put('/course/update', controller.courseUpdateOne);
   app.delete('/course/delete', controller.courseDeleteOne);
 
+  // NOTE ROUTES
+  app.post('/note/add', controller.noteAdd);
+  app.get('/note/find', controller.noteFindOne);
+  app.get('/note/find-all', controller.noteFindAll);
+  app.get('/note/find-by-student', controller.noteFindAllByStudent);
+  app.put('/note/update', controller.noteUpdate);
+  app.delete('/note/delete', controller.noteDeleteOne);
+  app.delete('/note/delete-all', controller.noteDeleteAll);
 }
