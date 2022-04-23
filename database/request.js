@@ -36,14 +36,14 @@ newUser2 = {
     Password : "hatdog"
 }
 
-// add request
-request('http://localhost:3001/user/add',{method:"POST",form: user1},function(err,req,body) {
-    console.log(body);
-});
+// // add request
+// request('http://localhost:3001/user/add',{method:"POST",form: user1},function(err,req,body) {
+//     console.log(body);
+// });
 
-request('http://localhost:3001/user/add',{method:"POST",form: user2},function(err,req,body) {
-    console.log(body);
-});
+// request('http://localhost:3001/user/add',{method:"POST",form: user2},function(err,req,body) {
+//     console.log(body);
+// });
 
 // request('http://localhost:3001/user/add',{method:"POST",form: newUser2},function(err,req,body) {
 //     console.log("SENDING : " + body);
@@ -226,13 +226,13 @@ updatestudent2 = {
     OverallGWA: 2.25
 }
 
- request('http://localhost:3001/student/add',{method:"POST",form: student1},function(err,req,body) {
-    console.log(body);
-});
+// request('http://localhost:3001/student/add',{method:"POST",form: student1},function(err,req,body) {
+//     console.log(body);
+// });
 
-request('http://localhost:3001/student/add',{method:"POST",form: student3},function(err,req,body) {
-    console.log(body);
-});
+// request('http://localhost:3001/student/add',{method:"POST",form: student3},function(err,req,body) {
+//     console.log(body);
+// });
 
 // request('http://localhost:3001/student/update',{method:"PUT",form: updatestudent2},function(err,req,body) {
 //         console.log(err);
@@ -314,7 +314,7 @@ newGrade2 = {
 // HISTORY TEST
 
 history1 = {
-    User: "6261a622b1e9d4e16f7b2846",
+    User: "6263e3ba810d682dc3b4b7eb",
     Date: "11/21/20",
     Time: "11:00",
     Description: "delete",
@@ -322,7 +322,7 @@ history1 = {
 }
 
 history2 = {
-    User: "6261a622b1e9d4e16f7b2848",
+    User: "6263e3ba810d682dc3b4b7eb",
     Date: "2/05/21",
     Time: "23:00",
     Description: "create",
@@ -337,13 +337,13 @@ newhistory2 = {
     Details: "updated student record with id 43556457467",
 }
 
-// request('http://localhost:3001/history/add',{method:"POST",form: history1},function(err,req,body) {
-//     console.log(body);
-// });
+request('http://localhost:3001/history/add',{method:"POST",form: history1},function(err,req,body) {
+    console.log(body);
+});
 
-// request('http://localhost:3001/history/add',{method:"POST",form: history2},function(err,req,body) {
-//     console.log(body);
-// });
+request('http://localhost:3001/history/add',{method:"POST",form: history2},function(err,req,body) {
+    console.log(body);
+});
 
 // request('http://localhost:3001/history/update', {method:"PUT",form: newhistory2},function(err,res,body) {
 //     console.log(err);
@@ -408,7 +408,7 @@ newNote2 = {
 //     console.log(JSON.stringify(JSON.parse(body),null,2));
 // });
 
-request('http://localhost:3001/note/delete',{method:"DELETE",form:{id:"6263d618b7b0bf7535f1d3d6"}},function(err,res,body) {
-    // console.log(JSON.stringify(JSON.parse(body),null,2));
-    console.log(body);
-});
+// request('http://localhost:3001/note/delete',{method:"DELETE",form:{id:"6263d618b7b0bf7535f1d3d6"}},function(err,res,body) {
+//     // console.log(JSON.stringify(JSON.parse(body),null,2));
+//     console.log(body);
+// });

@@ -24,7 +24,8 @@ const userSchema = new Schema({
     MiddleName : {type: String, required : true},
     Position : {type: String, required : true},
     Role : {type: String, required : true, enum : ['user','admin']},
-    Password : {type: String, required : true}
+    Password : {type: String, required : true},
+    History:{type:Array, required:true}
   },{autoCreate:true});
 
 
@@ -74,7 +75,8 @@ exports.userAdd = async function(req, res, next) {
     LastName: req.body.LastName,
     Position: req.body.Position,
     Role: req.body.Role,
-    Password: hashedPassword
+    Password: hashedPassword,
+    History:[]
   });
   console.log(newUser);
 
@@ -549,6 +551,9 @@ exports.historyAdd = function(req, res, next) {
   console.log(newHistory);
 
   newHistory.save(function(err) {
+    User.updateOne({_id:newHistory.User},{$push:{History:newHistory._id}},function(err){
+      if(err) console.log("Unable to add history to user "+newHistory.User);
+    });
     if (!err) { res.send(newHistory)}
     else { res.send('Unable to save history') }
   });
