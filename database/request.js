@@ -6,8 +6,8 @@
 const request = require('request');
 
 // -----------------------------U S E R S   S E C T I O N----------------------------------------
-/* user1 = {
-    Username: "user2",
+ user1 = {
+    Username: "user1",
     FirstName : "First",
     MiddleName : "Middle",
     LastName : "Last",
@@ -34,16 +34,16 @@ newUser2 = {
     Position : "Test User for Database",
     Role : "user",
     Password : "hatdog"
-} */
+}
 
 // add request
-// request('http://localhost:3001/user/add',{method:"POST",form: user1},function(err,req,body) {
-//     console.log("SENDING : " + body);
-// });
+request('http://localhost:3001/user/add',{method:"POST",form: user1},function(err,req,body) {
+    console.log(body);
+});
 
-// request('http://localhost:3001/user/add',{method:"POST",form: user2},function(err,req,body) {
-//     console.log("SENDING : " + body);
-// });
+request('http://localhost:3001/user/add',{method:"POST",form: user2},function(err,req,body) {
+    console.log(body);
+});
 
 // request('http://localhost:3001/user/add',{method:"POST",form: newUser2},function(err,req,body) {
 //     console.log("SENDING : " + body);
@@ -167,13 +167,13 @@ updatedegree1 = {
     RequiredUnits: 145
 }
 
-/* request('http://localhost:3001/degree/add',{method:"POST",form: degree1},function(err,req,body) {
-    console.log(body);
-});
+// request('http://localhost:3001/degree/add',{method:"POST",form: degree1},function(err,req,body) {
+//     console.log(body);
+// });
 
-request('http://localhost:3001/degree/add',{method:"POST",form: degree2},function(err,req,body) {
-    console.log(body);
-}); */
+// request('http://localhost:3001/degree/add',{method:"POST",form: degree2},function(err,req,body) {
+//     console.log(body);
+// });
 
 // request('http://localhost:3001/degree/update',{method:"PUT",form: updatedegree1},function(err,req,body) {
 //         console.log(err);
@@ -226,7 +226,7 @@ updatestudent2 = {
     OverallGWA: 2.25
 }
 
-/* request('http://localhost:3001/student/add',{method:"POST",form: student1},function(err,req,body) {
+ request('http://localhost:3001/student/add',{method:"POST",form: student1},function(err,req,body) {
     console.log(body);
 });
 
@@ -234,15 +234,15 @@ request('http://localhost:3001/student/add',{method:"POST",form: student3},funct
     console.log(body);
 });
 
-request('http://localhost:3001/student/update',{method:"PUT",form: updatestudent2},function(err,req,body) {
-        console.log(err);
-        console.log(body);
-});
+// request('http://localhost:3001/student/update',{method:"PUT",form: updatestudent2},function(err,req,body) {
+//         console.log(err);
+//         console.log(body);
+// });
 
-request('http://localhost:3001/student/delete',{method:"DELETE",form: {StudentID: "201934908"}},function(err,req,body) {
-    console.log(body);
+// request('http://localhost:3001/student/delete',{method:"DELETE",form: {StudentID: "201934908"}},function(err,req,body) {
+//     console.log(body);
 
-}); */
+// });
 
 
 // GRADE TEST
@@ -306,9 +306,9 @@ newGrade2 = {
 
 
 //login request
-request('http://localhost:3001/user/login',{method:"GET",form: {Username: "user2", Password: "1234"}},function(err,req,body) {
-    console.log(body);
-});
+// request('http://localhost:3001/user/login',{method:"GET",form: {Username: "user2", Password: "1234"}},function(err,req,body) {
+//     console.log(body);
+// });
 
 
 // HISTORY TEST
@@ -350,10 +350,65 @@ newhistory2 = {
 //     console.log(body);
 // });
 
-request('http://localhost:3001/history/delete-all',{method:"DELETE"},function(err,res,body) {
-   console.log(body);
-});
+// request('http://localhost:3001/history/delete-all',{method:"DELETE"},function(err,res,body) {
+//    console.log(body);
+// });
 
 // request('http://localhost:3001/grade/delete-all',{method:"DELETE"},function(err,res,body) {
 //    console.log(body);
 // });
+
+/*  NOTE TEST   */
+
+note1 = {
+    User:"6263d5beb7b0bf7535f1d3cc",
+    Student:"6263d4c80791d8b67842ec86",
+    Semester:"1S",
+    Year:"2020-2021",
+    Details:"Hatdog ang sem na ito"
+}
+
+note2 = {
+    User:"6263d4c80791d8b67842ec86",
+    Student:"6263d5beb7b0bf7535f1d3cc",
+    Semester:"2S",
+    Year:"2020-2021",
+    Details:"Hatdog ang sem na ito"
+}
+
+newNote2 = {
+    id:"6263d618b7b0bf7535f1d3d6",
+    User:"6263d4c80791d8b67842ec86",
+    Student:"6263d5beb7b0bf7535f1d3cc",
+    Semester:"2S",
+    Year:"2020-2021",
+    Details:"Solid ang sem na ito"
+}
+
+// request('http://localhost:3001/note/add',{method:"POST",form: note1},function(err,req,body) {
+//     console.log(body);
+// });
+// request('http://localhost:3001/note/add',{method:"POST",form: note2},function(err,req,body) {
+//     console.log(body);
+// });
+
+// request('http://localhost:3001/note/find-all',function(err,res,body) {
+//     console.log(JSON.stringify(JSON.parse(body),null,2));
+// });
+
+// request('http://localhost:3001/note/find',{method:"GET",form:{id:"6263d618b7b0bf7535f1d3d4"}},function(err,res,body) {
+//     console.log(JSON.stringify(JSON.parse(body),null,2));
+// });
+
+// request('http://localhost:3001/note/find-by-student',{method:"GET",form:{Student:"6263d5beb7b0bf7535f1d3cc"}},function(err,res,body) {
+//     console.log(JSON.stringify(JSON.parse(body),null,2));
+// });
+
+// request('http://localhost:3001/note/update',{method:"PUT",form:newNote2},function(err,res,body) {
+//     console.log(JSON.stringify(JSON.parse(body),null,2));
+// });
+
+request('http://localhost:3001/note/delete',{method:"DELETE",form:{id:"6263d618b7b0bf7535f1d3d6"}},function(err,res,body) {
+    // console.log(JSON.stringify(JSON.parse(body),null,2));
+    console.log(body);
+});

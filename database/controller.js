@@ -2,8 +2,8 @@
  * CONTROLLER
  * controller file to hold the functions of the database
  */
-const mongoose = require('mongoose')
-// const bcrypt = require('bcrypt')
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema;
 
 saltRounds = 8; // number of rounds to hash the password
@@ -65,7 +65,7 @@ exports.userAdd = async function(req, res, next) {
   // UNCOMMENT TO SEE REQUEST CONTENTS AND MAPPING TO USER MODEL
   // console.log(req.body);
 
-  const hashedPassword = await bcrypt.hash(req.body.Password, saltRounds); //encrpyt password first -vov
+  var hashedPassword = await bcrypt.hash(req.body.Password, saltRounds); //encrpyt password first -vov
   
   var newUser = new User({
     Username: req.body.Username,
@@ -76,7 +76,7 @@ exports.userAdd = async function(req, res, next) {
     Role: req.body.Role,
     Password: hashedPassword
   });
-  // console.log(newUser);
+  console.log(newUser);
 
 
   newUser.save(function(err) {
@@ -580,5 +580,93 @@ exports.historyDeleteAll = function(req, res, next) {
     } else {
       res.send('Unable to delete history');
     }
+  });
+}
+
+// -----------------------------N O T E  S E C T I O N----------------------------------------
+/**
+ * Note section
+ * Contributors: Carlos Rayel
+ */
+
+// NOTE SCHEMA
+const noteSchema = new Schema({
+  User: {type:mongoose.Types.ObjectId, ref:'user', required:true},
+  Student: {type:mongoose.Types.ObjectId, ref:'student', required:true},
+  Semester:{type:String, required:true},
+  Year:{type:String, required:true},
+  Details: {type:String, required:true}
+});
+
+// NOTE SCHEMA
+const Note = db.model('note',noteSchema);
+
+// ADD NOTE
+exports.noteAdd = function(req,res,next){
+  var newNote = new Note({
+    User:mongoose.Types.ObjectId(req.body.User),
+    Student:mongoose.Types.ObjectId(req.body.Student),
+    Semester:req.body.Semester,
+    Year:req.body.Year,
+    Details:req.body.Details
+  });
+  console.log(newNote);
+
+  newNote.save(function(err){
+    if(!err) res.send(newNote);
+    else res.send('Unable to add note');
+  });
+}
+
+// FIND ONE NOTE BY ID
+exports.noteFindOne = function(req,res,next){
+  id = mongoose.Types.ObjectId(req.body.id);
+  Note.findOne({_id:id},function(err,note){
+    console.log(note);
+    if(!err) res.send(note)
+  });
+}
+
+// FIND ALL NOTES
+exports.noteFindAll = function(req,res,next){
+  Note.find(function(err,notes){
+    if(!err) {res.send(notes);}
+  });
+}
+
+// FIND NOTE BY STUDENT
+// returns an array of notes assigned to student
+exports.noteFindAllByStudent = function(req,res,next){
+  Note.find({$Student:mongoose.Types.ObjectId(req.body.Student)},function(err,notes){
+    console.log(notes);
+    if(!err) res.send(notes);
+  });
+}
+
+// UPDATE A NOTE
+exports.noteUpdate = function(req,res,next){
+  Note.updateOne({_id:mongoose.Types.ObjectId(req.body.id)},{"$set":{
+    "Semester":req.body.Semester,
+    "Year":req.body.Year,
+    "Details":req.body.Details
+  }},{new:true},function(err,result){
+    if(!err) res.send(result);
+    else res.send('Unable to update Note');
+  });
+}
+
+// DELETE NOTE BY ID
+exports.noteDeleteOne = function(req,res,next){
+  Note.deleteOne({_id:mongoose.Types.ObjectId(req.body.id)},function(err){
+    if (!err) res.send('Successfully deleted note');
+    else res.send('Unable to delete note');
+  });
+}
+
+// DELETE ALL NOTES
+exports.noteDeleteAll = function(req,res,next){
+  Note.deleteMany(function(err){
+    if (!err) res.send('Successfully deleted all notes');
+    else res.send('Unable to delete all notes');
   });
 }
