@@ -14,6 +14,9 @@ const db = mongoose.createConnection('mongodb://localhost:27017/KALATAS', {
   useUnifiedTopology: true
 })
 
+//NOTE: all responses must be in JSON form
+// err - error response; suc - success response;
+
 // -----------------------------U S E R S   S E C T I O N----------------------------------------
 // Primary contributer - Carlos Rayel
 // USER SCHEMA
@@ -57,7 +60,8 @@ exports.userFindAll = function(req, res, next) {
 
 exports.userFind = function(req, res, next) {
   User.findOne({Username:req.body.Username}, function(err, User){
-    if(!err) {res.send(User);}
+    if(!err) { res.send(User); }
+    else { res.send({err:'Unable to find user'}) }
   });
 }
 
@@ -83,7 +87,7 @@ exports.userAdd = async function(req, res, next) {
 
   newUser.save(function(err) {
     if (!err) { res.send(newUser)}
-    else { res.send('Unable to save user') }
+    else { res.send({err:'Unable to save user'}) }
   });
 }
 
@@ -94,9 +98,9 @@ exports.userDelete = function(req, res, next) {
   // console.log(req.body);
   User.findOneAndDelete({Username : req.body.Username},function(err, User){
     if(!err && User){
-      res.send('Successfully deleted ' + User.Username);
+      res.send({suc:'Successfully deleted ' + User.Username});
     } else {
-      res.send('Unable to delete user');
+      res.send({err:'Unable to delete user'});
     }
   });
 }
@@ -106,9 +110,9 @@ exports.userDeleteAll = function(req, res, next) {
   // console.log(req.body);
   User.deleteMany({},function(err){
     if(!err){
-      res.send('Successfully deleted users');
+      res.send({suc:'Successfully deleted users'});
     } else {
-      res.send('Unable to delete users');
+      res.send({err:'Unable to delete users'});
     }
   });
 }
@@ -128,7 +132,7 @@ exports.userUpdate = function(req, res, next) {
     if(!err && User){
       res.send(result);
     } else {
-      res.send('Unable to update user');
+      res.send({err:'Unable to update user'});
     }
   })
 }
@@ -185,7 +189,7 @@ exports.gradeFindAll = function(req, res, next) {
 exports.gradeFindOne = function(req, res, next) {
   Grade.findOne((err, grade) => {
     if (err) {
-      res.send('Unable to find grade')
+      res.send({err:'Unable to find grade'})
     } else {
       res.send(grade)
     }
@@ -209,7 +213,7 @@ exports.gradeAdd = function(req, res, next) {
 
   newGrade.save(function(err) {
     if (!err) { res.send(newGrade)}
-    else { res.send('Unable to save grade') }
+    else { res.send({err:'Unable to save grade'}) }
   });
 
 
@@ -229,7 +233,7 @@ exports.gradeUpdateOne = function(req, res, next) {
     if(!err && Grade){
       res.send(result);
     } else {
-      res.send('Unable to update grade');
+      res.send({err:'Unable to update grade'});
     }
   })
 } 
@@ -239,9 +243,9 @@ exports.gradeDeleteOne = function(req, res, next) {
   // console.log(req.body);
   Grade.findOneAndDelete({Student: req.body.Student, Course: req.body.Course},function(err, Grade){
     if(!err && Grade){
-      res.send('Successfully deleted ' + req.body.Student + " " + req.body.Course);
+      res.send({suc:'Successfully deleted ' + req.body.Student + " " + req.body.Course});
     } else {
-      res.send('Unable to delete grade');
+      res.send({err:'Unable to delete grade'});
     }
   });
 }
@@ -251,9 +255,9 @@ exports.gradeDeleteAll = function(req, res, next) {
   // console.log(req.body);
   Grade.deleteMany({},function(err){
     if(!err){
-      res.send('Successfully deleted grades');
+      res.send({suc:'Successfully deleted grades'});
     } else {
-      res.send('Unable to delete grades');
+      res.send({err:'Unable to delete grades'});
     }
   });
 }
@@ -292,7 +296,7 @@ exports.courseAdd = function(req, res, next) {
 
   newCourse.save(function(err) {
     if (err) {
-      res.send('Unable to save course')
+      res.send({err:'Unable to save course'})
     } else {
       res.send(newCourse)
     }
@@ -303,7 +307,7 @@ exports.courseAdd = function(req, res, next) {
 exports.courseFindOne = function(req, res, next) {
   Course.findOne((err, course) => {
     if (err) {
-      res.send('Unable to find course')
+      res.send({err:'Unable to find course'})
     } else {
       res.send(course)
     }
@@ -314,7 +318,7 @@ exports.courseFindOne = function(req, res, next) {
 exports.courseFindAll = function(req, res, next) {
   Course.find((err, courses) => {
     if (err) {
-      res.send('Unable to find all courses')
+      res.send({err:'Unable to find all courses'})
     } else {
       res.send(courses)
     }
@@ -330,7 +334,7 @@ exports.courseUpdateOne = function(req, res, next) {
     CourseType: req.body.CourseType
   }}, {new : true}, function(err, result){
     if (err) {
-      res.send('Unable to update course');
+      res.send({err:'Unable to update course'});
     } else {
       res.send(result);
     }
@@ -341,9 +345,9 @@ exports.courseUpdateOne = function(req, res, next) {
 exports.courseDeleteOne = function(req, res, next) {
   Course.findOneAndDelete({CourseAbbr: req.body.CourseAbbr}, function(err, Course){
     if(err) {
-      res.send('Unable to delete course');
+      res.send({err:'Unable to delete course'});
     } else {
-      res.send('Successfully deleted ' + Course.CourseAbbr);
+      res.send({suc:'Successfully deleted ' + Course.CourseAbbr});
     }
   });
 }
@@ -374,6 +378,7 @@ Degree.find(function(err, degree) {
 exports.degreeFindOne = function(req, res, next) {
 Degree.findOne({DegreeID:req.body.DegreeID}, function(err, Degree){
   if(!err) {res.send(Degree);}
+  else { res.send({err:'Unable to find degree'}) }
 });
 }
 
@@ -390,7 +395,7 @@ exports.degreeAdd = function(req, res, next) {
 
   newDegree.save(function(err) {
     if (!err) { res.send(newDegree)}
-    else { res.send('Unable to save degree') }
+    else { res.send({err:'Unable to save degree'}) }
   });
 }
 
@@ -405,7 +410,7 @@ Degree.updateOne({DegreeID:req.body.DegreeID},{"$set":{
   if(!err && Degree){
     res.send(result);
   } else {
-    res.send('Unable to update degree');
+    res.send({err:'Unable to update degree'});
   }
 })
 }
@@ -415,9 +420,9 @@ exports.degreeDeleteOne = function(req, res, next) {
   // console.log(req.body);
   Degree.findOneAndDelete({DegreeID:req.body.DegreeID},function(err, Degree){
     if(!err && Degree){
-      res.send('Successfully deleted');
+      res.send({suc:'Successfully deleted'});
     } else {
-      res.send('Unable to delete degree');
+      res.send({err:'Unable to delete degree'});
     }
   });
 }
@@ -452,6 +457,7 @@ Student.find(function(err, student) {
 exports.studentFindOne = function(req, res, next) {
 Student.findOne({StudentID:req.body.StudentID}, function(err, Student){
   if(!err) {res.send(Student);}
+  else { res.send({err:'Unable to find student'}) }
 });
 }
 
@@ -471,7 +477,7 @@ exports.studentAdd = function(req, res, next) {
 
   newStudent.save(function(err) {
     if (!err) { res.send(newStudent)}
-    else { res.send('Unable to save student') }
+    else { res.send({err:'Unable to save student'}) }
   });
 }
 
@@ -489,7 +495,7 @@ Student.updateOne({StudentID: req.body.StudentID},{"$set":{
   if(!err && Student){
     res.send(result);
   } else {
-    res.send('Unable to update student');
+    res.send({err:'Unable to update student'});
   }
 })
 }
@@ -499,9 +505,9 @@ exports.studentDeleteOne = function(req, res, next) {
   // console.log(req.body);
   Student.findOneAndDelete({StudentID: req.body.StudentID},function(err, Student){
     if(!err && Student){
-      res.send('Successfully deleted');
+      res.send({suc:'Successfully deleted'});
     } else {
-      res.send('Unable to delete student');
+      res.send({err:'Unable to delete student'});
     }
   });
 }
@@ -535,6 +541,7 @@ History.find(function(err, history) {
 exports.historyFindOne = function(req, res, next) {
 History.findOne(function(err, History){
   if(!err) {res.send(History);}
+  else { res.send({err:'Unable to find history'}) }
 });
 }
 
@@ -555,7 +562,7 @@ exports.historyAdd = function(req, res, next) {
       if(err) console.log("Unable to add history to user "+newHistory.User);
     });
     if (!err) { res.send(newHistory)}
-    else { res.send('Unable to save history') }
+    else { res.send({err:'Unable to save history'}) }
   });
 }
 
@@ -571,7 +578,7 @@ History.updateOne({User: req.body.User},{"$set":{
   if(!err && History){
     res.send(result);
   } else {
-    res.send('Unable to update history');
+    res.send({err:'Unable to update history'});
   }
 })
 }
@@ -584,9 +591,9 @@ exports.historyDeleteAll = function(req, res, next) {
   });
   History.deleteMany({},function(err){
     if(!err){
-      res.send('Successfully deleted history');
+      res.send({suc:'Successfully deleted history'});
     } else {
-      res.send('Unable to delete history');
+      res.send({err:'Unable to delete history'});
     }
   });
 }
@@ -625,7 +632,7 @@ exports.noteAdd = function(req,res,next){
 
   newNote.save(function(err){
     if(!err) res.send(newNote);
-    else res.send('Unable to add note');
+    else res.send({err:'Unable to add note'});
   });
 }
 
@@ -662,22 +669,22 @@ exports.noteUpdate = function(req,res,next){
     "Details":req.body.Details
   }},{new:true},function(err,result){
     if(!err) res.send(result);
-    else res.send('Unable to update Note');
+    else res.send({err:'Unable to update Note'});
   });
 }
 
 // DELETE NOTE BY ID
 exports.noteDeleteOne = function(req,res,next){
   Note.deleteOne({_id:mongoose.Types.ObjectId(req.body.id)},function(err){
-    if (!err) res.send('Successfully deleted note');
-    else res.send('Unable to delete note');
+    if (!err) res.send({suc:'Successfully deleted note'});
+    else res.send({err:'Unable to delete note'});
   });
 }
 
 // DELETE ALL NOTES
 exports.noteDeleteAll = function(req,res,next){
   Note.deleteMany(function(err){
-    if (!err) res.send('Successfully deleted all notes');
-    else res.send('Unable to delete all notes');
+    if (!err) res.send({suc:'Successfully deleted all notes'});
+    else res.send({err:'Unable to delete all notes'});
   });
 }
