@@ -2,6 +2,9 @@ module.exports = {
   content: ['./src/**/*.{ejs,js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      backgroundImage: {
+        'baybayin': "url('/assets/icons/baybayin.png')",
+      },
       colors: {
         'login-green': '#2A7146',
         'login-green-hover': '#35724df5',
@@ -21,17 +24,22 @@ module.exports = {
         montserrat: ['Montserrat'],
         inter: ['Inter'],
       },
-      backgroundImage: {
-        'baybayin': "url('/assets/icons/baybayin.png')",
+      gridTemplateColumns:{
+        '38/62': '38% 62%'
+      },
+      scale: {
+        '25':'0.25',
+        '60': '0.60',
       },
       screens: {
         '1.5xl': '1366px',
         '1.75xl': '1512px',
         '3xl': '1728px',
+        '4xl': '1920px',
         'qhd':'2560px'
-      },
-      gridTemplateColumns:{
-        '38/62': '38% 62%'
+      },      
+      spacing: {
+        '5.5': '1.35rem',
       }
     },
   },
