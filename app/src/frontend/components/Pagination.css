@@ -1,0 +1,35 @@
+.button-arrow-style {
+    height: 4.847645429362881vh;  /* 3 rem */
+    border-radius: 0.5rem; /* 8px */
+    padding: 0 1.0416666666666667vw;
+}
+
+.button-arrow-style:hover {
+    background-color: #562323;
+}
+
+.button-page-style {
+    height: 4.847645429362881vh;  /* 3 rem */
+    width: 2.2786458333333335vw;        /* 3 rem */             
+    border-radius: 0.5208333333333334vw; /* 8px */ /* 0.5 rem */
+    padding: 0 1.0416666666666667vw;
+
+    font-size: 1.1067708333333333vw;    /* 17px */
+}
+
+.current-page {
+    background-color: #562323;
+    color: white;
+}
+
+.arrow-style {
+    height: 2.770083102493075vh;
+    width: 1.3020833333333333vw;
+}
+
+
+
+
+/* Old Button Elements */
+/* className="h-12 border-2 border-r-0 border-indigo-600 px-4 rounded-l-lg hover:bg-indigo-600 hover:text-white" */
+/* className={`h-12 border-2 border-r-0 border-indigo-600 w-12 ${currentPage === pg.page && 'bg-indigo-600 text-white'}` */
