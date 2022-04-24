@@ -3,6 +3,7 @@ How to use:
 <Dropdown
     style =   // style options
     options = // options here
+    state =   // state functions
     /> 
 */
 
@@ -12,12 +13,12 @@ import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
     
-function dropdownInput(props) {
+function DropdownInput(props) {
 
     // dropdown select
-    const options = props.options                           // pass options here
-    const [selected, setSelected] = useState(options[0])    // set default option as 1
-
+    const options = props.options                  // pass options here
+    const [selected, setSelected] = props.state    // set default option as 1
+    console.log(selected)
     return(
         <>
             <div className={props.style}>
@@ -73,4 +74,4 @@ function dropdownInput(props) {
 }
 
 
-export default dropdownInput
+export default DropdownInput

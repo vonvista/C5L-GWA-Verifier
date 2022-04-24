@@ -12,6 +12,10 @@ module.exports = {
         'page-background': '#f5f6f8',
         'highlight': '#fff384',
         'table-hover-color': '#cfd6a9',
+        'sr-dark-gray': '#e5e5e5',
+        'sr-text-gray': '#969696',
+        'sr-tab-inactive': '#334D6E',
+        'sr-divider-light': '#f0f0f0',
       },
       fontFamily: {
         montserrat: ['Montserrat'],
