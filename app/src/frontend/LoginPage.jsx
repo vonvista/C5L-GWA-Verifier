@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 
 
 {/* Components */}
-import { LoginBtn } from '../frontend/components/buttons/LoginLogoutBtns';
+import { LoginBtn } from '../frontend/components/buttons/LoginBtn';
 import TextBtn from '../frontend/components/buttons/TextBtn';
 import AppIcon from '../../assets/icons/icon.png';
 import Input from '../frontend/components/inputs/Input';
