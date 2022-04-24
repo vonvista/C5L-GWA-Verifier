@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Inter');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
 .modal-content {
     background-color: #fefefe;
     border-radius: 10px;
@@ -29,4 +32,12 @@ hr{
     margin-right: auto;
     border-style: ridge;
     border-width: 1.5px;
+}
+
+.inter{
+    font-family: "Inter"
+}
+
+.montserrat{
+    font-family: "Montserrat", sans-serif
 }
