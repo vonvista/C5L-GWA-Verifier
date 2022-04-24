@@ -83,19 +83,6 @@ const AdminNav = () => {
                             <span>User System</span>
                         </div>
                     </div>
-
-                    {/* Curriculum Management */}
-                    <div className="inline-flex mt-2 items-center p-1 1.5xl:p-2 hover:bg-secondary-red hover:text-highlight">
-                        <div>
-                            <svg className={` ${isHovering? "ml-6":"ml-5 1.5xl:ml-4"} scale-90 1.5xl:scale-100 fill-current duration-300`} xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
-                                <path d="M8 5h13v2H8V5Zm-5-.5h3v3H3v-3Zm0 6h3v3H3v-3Zm0 6h3v3H3v-3ZM8 11h13v2H8v-2Zm0 6h13v2H8v-2Z"/>
-                            </svg>
-                        </div>
-                        <div className="pl-7 flex-shrink-0">
-                            <span>Curriculum Management</span>
-                        </div>
-
-                    </div>
                 </div>
             </div>
 
