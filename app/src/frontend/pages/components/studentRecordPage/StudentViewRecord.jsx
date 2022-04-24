@@ -1,8 +1,6 @@
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import ActionsBtn from '../../components/buttons/Dropdown';
-import SemSelect from '../../components/inputs/DropdownSelect';
-import Summary from './Summary';
+import ActionsBtn from '../../../components/buttons/Dropdown';
+import SemSelect from '../../../components/inputs/DropdownSelect';
 import { Tab } from '@headlessui/react';
 import 'tailwindcss/tailwind.css';
 
@@ -12,27 +10,14 @@ const detailStyle = {
     text: "table-cell text-left text-xl font-bold",
 }
 
-// sample values for dropdown select
-const semesters = [
-    {name : "1st Semester A.Y. 2019-2020"},
-    {name : "2nd Semester A.Y. 2019-2020"},
-    {name : "1st Semester A.Y. 2020-2021"},
-    {name : "2nd Semester A.Y. 2020-2021"},
-  ]
-
-// sample value for user record
-const user = {
-    stud_no: '2019-01234',
-    name: 'Stark, Anthony Edward',
-    degree_program: 'BS Computer Science',
-    status: 'Pending',
-}
-
 
 const RecordPage = (props) => {
 
     // pass details and other data through props to this component
     // 
+
+    const semesters = props.sem 
+    const user = props.user
     
     const [selectedSem, setSelectedSem] = useState(semesters[0])    // state controller for selecting semesters -> should change table contents
     const [selectedUser, setSelectedUser] = useState(user)
@@ -41,8 +26,8 @@ const RecordPage = (props) => {
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
         // uses components as values
-        Status: <div>Hello world</div>, // status component here
-        Notes: <div>Hello world</div>,  // notes component here
+        Status: <div>{/* Status Component Here */}</div>, // status component here
+        Notes: <div>{/* Notes Component Here */}</div>,  // notes component here
         History:[], // insert history component here
     }
 
@@ -118,7 +103,7 @@ const RecordPage = (props) => {
                                 )
                             )}
                         </Tab.List>
-                        <Tab.Panels className="">
+                        <Tab.Panels>
                                 {Object.values(selectedTab).map((component) =>(
                                     <Tab.Panel
                                         className="w-inherit"
@@ -138,12 +123,4 @@ const RecordPage = (props) => {
     );
 }
 
-export default function StudentRecordPage() { // this will probably transferred to another file but this stays here for now
-    return (
-      <Router>
-        <Routes>
-          <Route path="/" element={<RecordPage />} />
-        </Routes>
-      </Router>
-    );
-  }
+export default RecordPage;
