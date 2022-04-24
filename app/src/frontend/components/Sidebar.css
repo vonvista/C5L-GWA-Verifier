@@ -11,9 +11,10 @@
 }
 
 .baybayin-style{
-    background-repeat: repeat-y;
+    background-repeat: no-repeat;
     background-size: contain;
     margin-left: -15.25vh;
+    margin-top: 1vw;
     height:100vh;
 }
 
