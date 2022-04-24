@@ -1,7 +1,7 @@
 import 'tailwindcss/tailwind.css';
 import './AddUser.css';
 import { useEffect, useState } from 'react';
-import user from '../../../assets/icons/default-user-icon.jpg';
+import user from '../../../assets/icons/user-icon.jpg';
 import user1 from '../../../assets/icons/user1.svg';
 
 const AddUser = () => {
@@ -11,6 +11,22 @@ const AddUser = () => {
   const [lastName, setLastName] = useState('');
   const [un, setUN] = useState(''); // username
   const [pw, setPW] = useState(''); // password
+  const [status, setStatus] = useState('show');
+
+  // reference for password toggle: https://codepen.io/huphtur/pen/OKJJQY
+  const buttonHandler = () => {
+    const password = document.querySelector('.js-password');
+
+    if (password.type === 'password') {
+      password.type = 'text';
+      setStatus('hide');
+    } else {
+      password.type = 'password';
+      setStatus('show');
+    }
+
+    password.focus();
+  };
 
   // --test: to see if onchange handlers work; TODO: delete this block of code
   // useEffect(() => {
@@ -120,13 +136,25 @@ const AddUser = () => {
                 {/* password */}
                 <div className="w-full mt-5">
                   <section className="un-style">
-                    <input
-                      className="input-style"
-                      type="text"
-                      name="password"
-                      placeholder=""
-                      onChange={(e) => setPW(e.target.value)}
-                    />
+                    <div className="relative w-full">
+                      <div className="absolute inset-y-0 right-0 flex items-center px-2">
+                        <input className="hidden" id="toggle" type="checkbox" />
+                        <button
+                          className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-sm text-gray-600 font-mono cursor-pointer js-password-label"
+                          htmlFor="toggle"
+                          type="button"
+                          onClick={buttonHandler}
+                        >
+                          {status}
+                        </button>
+                      </div>
+                      <input
+                        className="input-style appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password"
+                        id="password"
+                        type="password"
+                        autoComplete="off"
+                      />
+                    </div>
                     <h4 className="mt-1 w-full text-center text-white">
                       Password
                     </h4>
