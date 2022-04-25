@@ -176,24 +176,30 @@ const UserDashboard = () => {
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return(
-        <>
-          <div>
-              <div><UserNav /></div>
-              <div className="absolute inset-0 flex ml-24 items-center justify-center">
-                <div className='flex-column'>
-                  <Header pageTitle={"USER DASHBOARD"}/>
-                  <UploadFileBtn />
-                  <div className='table-container'>
-                    <List table={1} data={currentRows}/>
-                  </div> 
-                  <div className='float-right'>
-                    <Pagination rowsPerPage={rowsPerPage} totalRows={rows.length} currentPage={currentPage} paginate={paginate} />
-                  </div>
+      <>
+        <div>
+            <div><UserNav /></div>
+            
+            {/* Right Section */}
+            <div className="absolute inset-0 flex ml-14 xl:ml-20 justify-center">
+              
+              <div><Header pageTitle={"USER DASHBOARD"}/></div>
+              
+              {/* Page Contents */}
+              <div className='pt-20 flex-column'>
+                <UploadFileBtn />
+                <div className='table-container'>
+                  <List table={1} data={currentRows}/>
+                </div> 
+                <div className='float-right'>
+                  <Pagination rowsPerPage={rowsPerPage} totalRows={rows.length} currentPage={currentPage} paginate={paginate} />
                 </div>
               </div>
-          </div>
 
-        </>
+            </div>
+        </div>
+
+      </>
     )
 }
 
