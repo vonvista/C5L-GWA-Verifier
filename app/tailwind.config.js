@@ -19,6 +19,7 @@ module.exports = {
         'sr-text-gray': '#969696',
         'sr-tab-inactive': '#334D6E',
         'sr-divider-light': '#f0f0f0',
+        'sr-disabled-green': '#80BE99',
       },
       fontFamily: {
         montserrat: ['Montserrat'],
