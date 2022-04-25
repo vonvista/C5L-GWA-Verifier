@@ -1,4 +1,5 @@
 import { isRequired, useForm } from './hooks/useForm';
+import { useNavigate } from 'react-router-dom';
 import 'tailwindcss/tailwind.css';
 import './LoginPage.css';
 import Swal from 'sweetalert2'
@@ -16,6 +17,8 @@ function isRequired(val) {
 }
 
 const Login = () => {
+
+    let navigate = useNavigate(); //navigator
 
     // Setup for input form
     const initialState = {
@@ -42,6 +45,7 @@ const Login = () => {
         //console.log(credentials)
         const ip = values.databaseIP
         
+        //fetch login credentials
         fetch(`http://${ip}:3001/user/login`,{
             method: "POST",
             headers: { "Content-Type":"application/json" },
@@ -50,7 +54,7 @@ const Login = () => {
         .then(response => response.json())
         .then(body => {
             console.log(body)
-            if(body.err){
+            if(body.err){ //if error response returned from DB
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
@@ -72,15 +76,18 @@ const Login = () => {
                 localStorage.setItem("Role", body.Role)
                 localStorage.setItem("Username", body.Username)
                 localStorage.setItem("ServerIP", ip)
+
+                navigate('/user-dashboard')
             }
            
         })
-        .catch(err => {
+        .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
             Swal.fire({
                 icon: 'error',
                 title: 'Server Error',
                 text: 'Check if the server is running or if database IP is correct',
             })
+            console.log(err)
         })
         
         
