@@ -77,7 +77,7 @@ const Login = () => {
                 localStorage.setItem("Username", body.Username)
                 localStorage.setItem("ServerIP", ip)
 
-                navigate('/user-dashboard')
+                navigate('/user-dashboard') //redirect to dashboard
             }
            
         })
