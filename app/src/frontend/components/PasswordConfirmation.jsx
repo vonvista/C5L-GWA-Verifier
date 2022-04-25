@@ -1,19 +1,16 @@
-import { useState } from 'react';
 import 'tailwindcss/tailwind.css';
 import './PasswordConfirmation.css';
 import Swal from 'sweetalert2';
 
 const ConfirmPassword = () => {
 
-
   // Sweet alert styling
   const swalStyle = Swal.mixin({
     customClass: {
-      inputLabel: 'font-inter',
-      validationMessage: '',
-      container: '',
-      confirmButton: 'font-inter bg-login-green rounded-lg hover:bg-login-green-hover',
-      cancelButton: 'font-inter bg-white rounded-lg hover:bg-slate-200',
+      text: 'inter',
+      inputLabel: 'inter',
+      confirmButton: 'montserrat',
+      cancelButton: 'montserrat',
     },
   })
 
@@ -23,6 +20,7 @@ const ConfirmPassword = () => {
       inputLabel: 'Please enter your password to confirm changes made.',
       inputPlaceholder: '******************',
       showCancelButton: true,
+      confirmButtonColor: '#2A7146',
       confirmButtonText: 'Confirm',
       cancelButtonText: 'Cancel',
       inputAttributes: {
@@ -44,16 +42,15 @@ const ConfirmPassword = () => {
       //     )
       //   })
       // }
-      
 
     // Password entered is correct
     }).then((result) => {
       if (result.isConfirmed) {
-        swalStyle.fire(
-          '',
-          'Changes successfully saved.',
-          'success'
-        )
+        swalStyle.fire({
+          text: 'Changes successfully saved.',
+          icon: 'success',
+          confirmButtonColor: '#2A7146',
+        })
       }
     })
   }
@@ -62,7 +59,8 @@ const ConfirmPassword = () => {
     <>
       {/* Save Changes Button */}
       <button
-        className="w-1/6 h-10 bg-login-green m-2 rounded-xl text-white font-montserrat font-bold hover:shadow-lg hover:bg-login-green-hover"
+        className="
+        w-1/6 h-10 bg-login-green m-2 rounded-xl text-white font-montserrat font-bold hover:shadow-lg hover:bg-login-green-hover"
         type="button"
         onClick={openSweetAlert}
       >
