@@ -1,3 +1,7 @@
+.pagination-box {
+    box-shadow: 0 0 2.770083102493075vh rgba(0, 0, 0, 0.15);      /*0 0 20px*/
+}
+
 .button-arrow-style {
     height: 4.847645429362881vh;  /* 3 rem */
     border-radius: 0.5rem; /* 8px */

@@ -74,7 +74,7 @@ const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
 
 
    return (
-      <div className="flex bg-white rounded-lg font-[Montserrat]">
+      <div className="pagination-box flex bg-white rounded-lg font-[Montserrat]">
          <button onClick={prev} className="button-arrow-style hover:text-white">
             <svg class="arrow-style fill-current" viewBox="0 0 20 20">
                <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path>
