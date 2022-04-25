@@ -181,7 +181,7 @@ const UserDashboard = () => {
               <div><UserNav /></div>
               <div className="absolute inset-0 flex ml-24 items-center justify-center">
                 <div className='flex-column'>
-                  <Header />
+                  <Header pageTitle={"USER DASHBOARD"}/>
                   <UploadFileBtn />
                   <div className='table-container'>
                     <List table={1} data={currentRows}/>
