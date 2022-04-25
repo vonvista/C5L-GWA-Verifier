@@ -181,7 +181,7 @@ const UserDashboard = () => {
             <div><UserNav /></div>
             
             {/* Right Section */}
-            <div className="absolute inset-0 flex ml-14 xl:ml-20 justify-center">
+            <div className="absolute inset-0 flex ml-8 xl:ml-12 justify-center">
               
               <div><Header pageTitle={"USER DASHBOARD"}/></div>
               
