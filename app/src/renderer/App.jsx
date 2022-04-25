@@ -12,8 +12,10 @@ export default function App() {
     <Router>
       <Routes>
         <Route exact path="/" element={<LoginPage />} />
-        <Route exact path="/user-dashboard" element={<StudentRecord />} />
+        <Route exact path="/user-dashboard" element={<UserDashboard />} />
         <Route exact path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route exact path="/user-management" element={<UserManagement />} />
+        <Route exact path="/student-record" element={<StudentRecord />} />
       </Routes>
     </Router>
   );
