@@ -28,20 +28,14 @@ const ConfirmPassword = () => {
         autocapitalize: 'off',
         autocorrect: 'off'
       },
-      inputValidator: (value) => {                // Checks if user entered a password
-        // console.log("Result: " + value);
-        if (!value) return 'Password required'
-        else return null
+      preConfirm: (value) => {
+        if (value == '') {            // Check if user did not enter a password
+          swalStyle.showValidationMessage(`Password required`)
+          
+        } else {                      // Print password
+          console.log(value)
+        }
       }
-      // preConfirm: () => {
-      //   return fetch(``)  // Verify password here
-      //   .then(response => response.json())
-      //   .catch(err => {
-      //     Swal.showValidationMessage(
-      //       `Password required`
-      //     )
-      //   })
-      // }
 
     // Password entered is correct
     }).then((result) => {
