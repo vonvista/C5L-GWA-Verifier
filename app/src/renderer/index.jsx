@@ -1,9 +1,9 @@
 import { render } from 'react-dom';
 import App from './App';
-import LoginPage from '../frontend/LoginPage';
+// import LoginPage from '../frontend/LoginPage';
 // render(<LoginPage />, document.getElementById('root'));
 
-render(<LoginPage />, document.getElementById('root'));
+render(<App />, document.getElementById('root'));
 // calling IPC exposed from preload script
 window.electron.ipcRenderer.once('ipc-example', (arg) => {
   // eslint-disable-next-line no-console
