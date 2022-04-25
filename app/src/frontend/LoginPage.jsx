@@ -93,7 +93,7 @@ const Login = () => {
             <section class="flex flex-col h-screen justify-center items-center bg-primary-red text-highlight">
                 
                 {/* App Icon */}
-                <div><img src={AppIcon} /></div>
+                <div><img class="app-icon" src={AppIcon} /></div>
 
                 {/* App Name */}
                 <div class="app-name">KALATAS:</div>
