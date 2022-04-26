@@ -11,7 +11,7 @@ import Verify from '../../../components/buttons/Verify'
 export default function Notes({eventHandler, notes}) { 
 
     return(
-        <div className="w-full h-[70vh] h-max-[70vh] mx-auto p-7 block overflow-auto">
+        <div className="w-full h-[70vh] h-max-[70vh] mx-auto p-5 block overflow-auto">
             {
                 notes.map( (data, idx) => {
                     return(

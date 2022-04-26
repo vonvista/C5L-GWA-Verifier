@@ -41,7 +41,7 @@ const Dropdown = () => {
       {isActive ? (
         // buttons after expanding
         <div
-          className="origin-top-right absolute right-0 mt-0.5 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
+          className="origin-top-right z-50 absolute right-0 mt-0.5 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
           tabIndex="-1"
         >
           <div className="pt-1 bg-login-green rounded-lg">

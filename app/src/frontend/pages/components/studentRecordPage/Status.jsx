@@ -8,7 +8,7 @@ import Verify from '../../../components/buttons/Verify'
 export default function Status(props) {
 
     return(
-        <div className="w-full mx-auto p-7 block overflow-auto">
+        <div className="w-full mx-auto h-[70vh] h-max-[70vh] p-5 block overflow-auto">
             {/* Academic Achievement Box */}
             <div className="border rounded-lg p-4 grid row-auto">
                 <h1 className="place-self-start inline">Academic Achievement</h1>
