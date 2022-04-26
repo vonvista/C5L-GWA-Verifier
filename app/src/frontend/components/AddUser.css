@@ -120,17 +120,3 @@ hr{
     right: 0px;
     font-size: 1.25vw;
 }
-
-.btn{
-    height: 5vh;
-}
-
-.img-btn{
-    width: 5vw;
-    height: 3vh;
-}
-
-.text-btn{
-    font-size: 1vw;
-    margin-right: 3vw;
-}
