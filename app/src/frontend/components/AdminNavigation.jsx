@@ -4,13 +4,19 @@ import 'tailwindcss/tailwind.css';
 import './Sidebar.css';
 
 
-/* Importing to Pages
-<div>
+/* Importing navigation bar and header to pages
+<>
     <div><AdminNav /></div>
-    <div className="absolute inset-0 flex ml-24 items-center">
-        // Insert other page components here    
+    <div className="absolute inset-0 flex ml-8 xl:ml-12 justify-center">
+
+        <div><Header pageTitle={""}/></div>
+        <div className='pt-20 flex-column'>
+            // Insert page contents here
+            // Adjust margins/padding/containers as needed
+        </div>
+
     </div>
-</div>
+</>
 */
 
 
