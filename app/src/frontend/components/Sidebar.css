@@ -2,8 +2,8 @@
     transition-duration: 300ms;
     min-width: min-content;
     overflow: hidden;
-    position: sticky;
-    height: 100vh;
+    position: fixed;
+    height: 100%;
     top: 0px;
     z-index: 1;
     background-color: rgb(55 16 16);
