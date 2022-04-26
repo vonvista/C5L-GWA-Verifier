@@ -4,6 +4,7 @@ import 'tailwindcss/tailwind.css';
 
 // This list component requires a (1) condition that indicates whgat table to display (2) data to be dispays. See return part at the end.
 const List = ({ table, data}) => {
+
     // George Gragas
     // This table is about degreeprogram
     const DegreeProgram = ({ data }) => {
@@ -65,12 +66,11 @@ const List = ({ table, data}) => {
         console.log(data);
         return (
           <>
-            <table className="user-table">
+            <table className="user-table table-sortable">
               <thead>
                   <tr>
                   <th className='user-uname'>Username</th>
                   <th className='user-name'>Name</th>
-                  <th className='user-position'>Position</th>
                   <th className='user-action'>Actions</th>
                   </tr>
               </thead>
@@ -79,9 +79,6 @@ const List = ({ table, data}) => {
                     <tr key = {index}>
                       <td data-label = "Username"  className='user-uname'>{user.uname}</td>
                       <td data-label = "Name" className='user-name'>{user.name}</td>
-                      <td data-label = "Position" className='user-position'>
-                        <td data-status={user.position} className='position'></td>
-                      </td>
                       <td data-label = "Actions" className='user-action'>
                         <Actions/>
                       </td>
