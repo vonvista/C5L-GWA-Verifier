@@ -1,6 +1,6 @@
 import 'tailwindcss/tailwind.css';
 import './AddUser.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import user from '../../../assets/icons/user-icon.jpg';
 
 // function which shows the add user modal; to be used in UserSystemPage
@@ -34,11 +34,6 @@ const AddUser = ({ handleClose }) => {
 
     password.focus();
   };
-
-  // --test: to see if onchange handlers work; TODO: delete this block of code
-  // useEffect(() => {
-  //   console.log(firstName, middleName, lastName, un, pw);
-  // }, [firstName, middleName, lastName, un, pw]);
 
   return (
     <>

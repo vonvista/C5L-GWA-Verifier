@@ -3,7 +3,7 @@ import user1 from '../../../../assets/icons/user1.svg';
 
 // function contains the Add User button used in User System Page
 // modal should appear once button is clicked
-// handleClick is a function which handles and sets showModal variable to show the modal
+// handleClick handles and sets showModal variable to show the modal
 
 const AddUserBtn = ({ handleClick }) => {
   // img button styling
