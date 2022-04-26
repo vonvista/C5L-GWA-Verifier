@@ -15,7 +15,7 @@ const RecordHistory = ({ main, user, time, details }) => {
     <div className="border-b-2 border-b-zinc-300">
       <div className="ml-6 flex justify-between">
         {/* main description */}
-        <h3 className="mb-0.5 m-1 font-inter font-semibold">{main}</h3>
+        <h3 className="inter mb-0.5 m-1 text-sm font-semibold">{main}</h3>
         <button
           className="bg-transparent outline-none relative ml-auto grow-0"
           type="button"
@@ -31,14 +31,12 @@ const RecordHistory = ({ main, user, time, details }) => {
       {isActive && (
         // list of details about the main description
         <div>
-          <ul className="ml-14 mb-0.5 font-inter list-disc">
-            {details.map((item, i) => (
-              <li key={i}>{item}</li>
-            ))}
+          <ul className="ml-14 mb-0.5 list-disc">
+            <li className="inter text-sm">{details}</li>
           </ul>
         </div>
       )}
-      <div className="mt-0.2 ml-6 mb-2 mr-3.8 font-inter italic">
+      <div className="inter mt-0.2 ml-6 mb-2 mr-3.8 italic text-sm">
         Modified by {user} at {time}
       </div>
     </div>

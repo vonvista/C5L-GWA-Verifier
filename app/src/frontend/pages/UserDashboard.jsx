@@ -1,9 +1,15 @@
 import { useEffect, useState } from 'react';
-import List from './List';
-import UploadFileBtn from './buttons/UploadFileBtn';
-import Pagination from './Pagination';
-import './UserList.css';
-import './List.css';
+import UploadFileBtn from '../components/buttons/UploadFileBtn';
+
+/* Components */
+import List from '../components/List';
+import Header from '../components/HeaderWithoutArrowbck';
+import UserNav from '../components/UserNavigation';
+import Pagination from '../components/Pagination';
+
+/* CSS */
+import '../components/List.css';
+import 'tailwindcss/tailwind.css';
 
 
 const UserDashboard = () => {
@@ -13,7 +19,7 @@ const UserDashboard = () => {
 
     const studentsData = [
         {
-          "name": "Ellison Maurice C. Paguagan",
+          "name": "1 Ellison Maurice C. Paguagan",
           "studno": "2019-05235",
           "degprog": "BS Computer Science",
           "gwa": "1.01234",
@@ -48,7 +54,7 @@ const UserDashboard = () => {
             "status": "Unchecked"
           },
           {
-            "name": "George Gragas",
+            "name": "2 George Gragas",
             "studno": "2019-05235",
             "degprog": "BS Computer Science",
             "gwa": "1.0",
@@ -81,7 +87,42 @@ const UserDashboard = () => {
             "degprog": "BS Computer Science",
             "gwa": "1.0",
             "status": "Checked"
-          }
+          },
+          {
+            "name": "3 George Gragas",
+            "studno": "2019-05235",
+            "degprog": "BS Computer Science",
+            "gwa": "1.0",
+            "status": "Pending"
+          },
+          {
+            "name": "Maurice Paguagan",
+            "studno": "2019-05235",
+            "degprog": "BS Computer Science",
+            "gwa": "1.0",
+            "status": "Checked"
+          },
+          {
+            "name": "Eyds Angeles",
+            "studno": "2019-05235",
+            "degprog": "BS Computer Science",
+            "gwa": "1.0",
+            "status": "Unchecked"
+          },
+          {
+            "name": "George Gragas",
+            "studno": "2019-05235",
+            "degprog": "BS Computer Science",
+            "gwa": "1.0",
+            "status": "Pending"
+          },
+           {
+            "name": "Maurice Paguagan",
+            "studno": "2019-05235",
+            "degprog": "BS Computer Science",
+            "gwa": "1.0",
+            "status": "Checked"
+          },
     ];
 
     const Program = [
@@ -108,71 +149,57 @@ const UserDashboard = () => {
       {
         "uname": "mau_23",
         "name": "Maurice Paguagan",
-        "position": "User"
+        "position": "Basic"
       },
       {
         "uname": "dyurj_45",
         "name": "George Gragas",
         "position": "Admin"
-      },
-      {
-        "uname": "erl_23",
-        "name": "Erl Lacuban",
-        "position": "User"
-      },
-      {
-        "uname": "tere_28",
-        "name": "Tere Ursolino",
-        "position": "User"
-      },
-      {
-        "uname": "qreentine",
-        "name": "Koreen Merida",
-        "position": "Admin"
-      },
-      {
-        "uname": "romel_klow",
-        "name": "Carl Romel Dimacali",
-        "position": "User"
-      },
-      {
-        "uname": "otin_g",
-        "name": "Ysab Parayno",
-        "position": "User"
-      },
-      {
-        "uname": "jepi_clown",
-        "name": "Jeffy Escartin",
-        "position": "User"
-      },
-      {
-        "uname": "reg_booth",
-        "name": "Reginald Recario",
-        "position": "Admin"
       }
     ]
 
     useEffect(() => {
-        setRows(studentsData);
-        // setRows(Program);
-        // setRows(Users);
+      const fetchData = async () => {
+        // Retrieve data from database
+        await setRows(studentsData);
+      }
+
+      fetchData();
     }, []);
-
+    
     // Get current rows
+    const indexOfLastRow = currentPage * rowsPerPage;
+    const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+    const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow)
 
+    //Change page
+    const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return(
-        <>
-            {/* <div><UploadFileBtn /></div> */}
-            {/* <div className='table-container'>
-                <List table={1} data={rows}/>
-            </div> */}
-            {/* <List table={2} data={Program}></List> */}
-            <div className='table-container'>
-                <List table={3} data={Users}></List>
+      <>
+        <div>
+            <div><UserNav /></div>
+            
+            {/* Right Section */}
+            <div className="absolute inset-0 flex ml-8 xl:ml-12 justify-center">
+              
+              <div><Header pageTitle={"USER DASHBOARD"}/></div>
+              
+              {/* Page Contents */}
+              <div className='pt-20 flex-column'>
+                <UploadFileBtn />
+                <div className='table-container'>
+                  <List table={1} data={currentRows}/>
+                </div> 
+                <div className='float-right'>
+                  <Pagination rowsPerPage={rowsPerPage} totalRows={rows.length} currentPage={currentPage} paginate={paginate} />
+                </div>
+              </div>
+
             </div>
-            {/* <div><Pagination /></div> */}
-        </>
+        </div>
+
+      </>
     )
 }
 

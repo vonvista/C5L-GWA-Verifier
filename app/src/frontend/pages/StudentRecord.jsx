@@ -1,4 +1,3 @@
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import RecordPage from './components/studentRecordPage/StudentViewRecord';
 
 // sample values for dropdown select
@@ -35,10 +34,6 @@ const notes = [
 
 export default function StudentRecord() { // this will probably transferred to another file but this stays here for now
     return (
-      <Router>
-        <Routes>
-          <Route path="/" element={<RecordPage sem={semesters} user={user} notes={notes} />} />
-        </Routes>
-      </Router>
+      <RecordPage sem={semesters} user={user} notes={notes} />
     );
-  }
+}
