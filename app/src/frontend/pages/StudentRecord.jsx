@@ -32,8 +32,118 @@ const notes = [
   },
 ]
 
+// sample values for change history;
+const history = [
+  {
+    date: 'MM-DD-YYYY',
+    info: [
+      // history entries
+      {
+        main: 'Main Description',
+        user: 'User',
+        time: 'HH:MM:SS',
+        details: 'Details about the changes\n',
+      },
+      {
+        main: 'Main Description',
+        user: 'User',
+        time: 'HH:MM:SS',
+        details: 'Details about the changes\n',
+      },
+    ],
+  },
+  {
+    date: 'MM-DD-YYYY',
+    info: [
+      {
+        main: 'Main Description',
+        user: 'User',
+        time: 'HH:MM:SS',
+        details: 'Details about the changes\n',
+      },
+    ],
+  },
+  {
+    date: 'MM-DD-YYYY',
+    info: [
+      {
+        main: 'Main Description',
+        user: 'User',
+        time: 'HH:MM:SS',
+        details: 'Details about the changes\n',
+      },
+    ],
+  },
+  {
+    date: 'MM-DD-YYYY',
+    info: [
+      {
+        main: 'Main Description',
+        user: 'User',
+        time: 'HH:MM:SS',
+        details: 'Details about the changes\n',
+      },
+    ],
+  },
+  {
+    date: 'MM-DD-YYYY',
+    info: [
+      {
+        main: 'Main Description',
+        user: 'User',
+        time: 'HH:MM:SS',
+        details: 'Details about the changes\n',
+      },
+    ],
+  },
+  {
+    date: 'MM-DD-YYYY',
+    info: [
+      {
+        main: 'Main Description',
+        user: 'User',
+        time: 'HH:MM:SS',
+        details: 'Details about the changes\n',
+      },
+    ],
+  },
+  {
+    date: 'MM-DD-YYYY',
+    info: [
+      {
+        main: 'Main Description',
+        user: 'User',
+        time: 'HH:MM:SS',
+        details: 'Details about the changes\n',
+      },
+    ],
+  },
+  {
+    date: 'MM-DD-YYYY',
+    info: [
+      {
+        main: 'Main Description',
+        user: 'User',
+        time: 'HH:MM:SS',
+        details: 'Details about the changes\n',
+      },
+    ],
+  },
+  {
+    date: 'MM-DD-YYYY',
+    info: [
+      {
+        main: 'Main Description',
+        user: 'User',
+        time: 'HH:MM:SS',
+        details: 'Details about the changes\n',
+      },
+    ],
+  },
+]
+
 export default function StudentRecord() { // this will probably transferred to another file but this stays here for now
     return (
-      <RecordPage sem={semesters} user={user} notes={notes} />
+      <RecordPage sem={semesters} user={user} notes={notes} history={history} />
     );
 }

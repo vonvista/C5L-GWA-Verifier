@@ -5,6 +5,7 @@ import { Tab } from '@headlessui/react';
 import 'tailwindcss/tailwind.css';
 import Status from './Status';
 import Notes from './Notes';
+import History from './StudentRecordHistory';
 
 
 
@@ -23,6 +24,7 @@ const RecordPage = (props) => {
     const semesters = props.sem 
     const user = props.user
     const notes = props.notes
+    const history = props.history
     
     const [selectedSem, setSelectedSem] = useState(semesters[0])    // state controller for selecting semesters -> should change table contents
     const [selectedUser, setSelectedUser] = useState(user)
@@ -33,7 +35,7 @@ const RecordPage = (props) => {
         // uses components as values
         Status: <Status />, // status component here
         Notes: <Notes notes={notes} />,  // notes component here
-        History:[], // insert history component here
+        History:<History historyData={history} />, // insert history component here
     }
 
     let [selectedTab] = useState(tabContents)                       // state controller for selecting tabs
