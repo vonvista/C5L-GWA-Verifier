@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 
+.table-container {
+  margin-top: 1.8005540166204985vh;       /*13px*/
+  margin-bottom: 2.21606648199446vh;    /* 16px */
+}
+
 /* Table Elements */
 .user-table {
-  max-width: 80.078125vw;      /*1230px*/
+  max-width: 50.0390625vw;      /*1230px*/
   max-height: 70.6371191135734vh;      /*510px*/
   table-layout: fixed;
   border-collapse: collapse;
@@ -39,22 +44,22 @@
 
 /* Scrollbar Elements */
 .user-table tbody::-webkit-scrollbar {
-  width: 10px;
+  width:  0.73206442166911vw; /* 10 px */
 }
 
 .user-table tbody::-webkit-scrollbar-track {
   background-color: #3d3d3d2a;
-  border-radius: 100px;
+  border-radius: 0px 0px 7.3206442166911vw 7.3206442166911; /* 100 px */
 }
 
 .user-table tbody::-webkit-scrollbar-thumb {
   background-color: #0f0f0f2d;;
-  border-radius: 100px;
+  border-radius: 0px 0px 7.3206442166911vw 7.3206442166911; /* 100 px */
 }
 
 .user-table tbody::-webkit-scrollbar-thumb:hover {
   background-color: #0f0f0f48;;
-  border-radius: 100px;
+  border-radius: 0px 0px 7.3206442166911vw 7.3206442166911; /* 100 px */
 }
 
 .user-table thead,
@@ -91,44 +96,38 @@ tr:hover td{
   width: 21.158854166666668vw;      /* 325px */
 }
 
-/* Position Elements */
-.user-position {
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 1.1067708333333333vw;    /* 17px */
-  width: 8.138020833333334vw;  /* 125 */
-  height: 4.293628808864266vh;   /* 31px */
-  padding: 0 !important;
-  text-align: center;
-}
-
-.position[data-status="Admin"]:after{
-  margin-left: 2vw;
-  content : "Admin";
-  background-color: #BBDABB;
-  color: black;
-  border-radius: 3.2552083333333335vw;    /* 50px */
-  display: block;
-  width: 5.5vw;
-}
-
-.position[data-status="User"]:after{
-  margin-left: 2vw;
-  content : "User";
-  background-color: #F29B9B;
-  color: black;
-  border-radius: 3.2552083333333335vw;
-  display: block;
-  width: 5.5vw;
-}
-
 /* Action Elements */
 .user-action {
   text-align: center;
+  align-items: center;
   width: 8.138020833333334vw !important;  /* 125px */
 }
 
+.user-action td{
+  width: 10vw;
+}
+
+.table-sortable th {
+  cursor: pointer;
+}
+
+.table-sortable .th-sort-asc::after {
+  content: "\25b4";
+}
+
+.table-sortable .th-sort-desc::after {
+  content: "\25be";
+}
+
+.table-sortable .th-sort-asc::after,
+.table-sortable .th-sort-desc::after {
+  margin-left: 5px;
+}
+
+.table-sortable .th-sort-asc,
+.table-sortable .th-sort-desc {
+  background: rgba(0, 0, 0, 0.1);
+}
 
 
 
