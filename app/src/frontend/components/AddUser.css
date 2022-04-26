@@ -22,28 +22,35 @@
     padding: 10px;
     border: 1px solid #888;
     flex-direction: column;
-    width: 70%;
+    width: 80%;
     height: 60%;
     position: relative;
 }
 
-.modal-body{
-    background-color: #562323;
-    margin: 2px;
-    padding: 0px;
-    display: inline-flex;
-    width: 100%;
-    margin: auto;
+.close-btn{
+    height: 13%;
+    font-size: 2.75vw;
+    margin-right: 2rem;
 }
 
-.close:hover, .close:focus {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-    padding: 0.375rem;
-    cursor: pointer;
-    padding: 4px;
-    background-color: #5a3535;
-    border-radius: 3px;
+.modal-body{
+    background-color: transparent;
+    position: relative;
+    margin: 2px;
+    padding-top: 0vh;
+    display: flex;
+    width: 100%;
+    height: 85%;
+    margin: auto;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.close{
+    font-size: 2.25vw;
+    margin-right: 1.75rem;
+    width: 100%;
+    height: 5vw;
 }
 
 hr{
@@ -56,18 +63,21 @@ hr{
     border-width: 1.5px;
 }
 
-
 .input-style{
     width: 100%;
-    height: 36px;
+    height: 5vh;
     border-radius: 8px ;
     text-align: center;
     /* w-full h-9 rounded-lg */
 }
 
+.user-btn{
+    height: 6vh;
+}
+
 .un-style{
     width: 90.5%;
-    margin: 20px auto auto 0px ;
+    margin: auto auto auto 0px ;
 }
 
 .dropdown-style{
@@ -84,4 +94,43 @@ hr{
 
 .montserrat{
     font-family: "Montserrat", sans-serif
+}
+
+.input-group{
+    justify-content: center;
+}
+
+.form{
+    border-radius: 0.5rem;
+    padding: 0rem 1.25rem 0rem;
+    background-color: transparent;
+}
+
+.input-content{
+    width: 100%;
+    font-size: 1.25vw;
+    overflow: auto;
+}
+
+.account-button{
+    display: flex;
+    justify-content: center;
+    bottom: 5rem;
+    left: 0px;
+    right: 0px;
+    font-size: 1.25vw;
+}
+
+.btn{
+    height: 5vh;
+}
+
+.img-btn{
+    width: 5vw;
+    height: 3vh;
+}
+
+.text-btn{
+    font-size: 1vw;
+    margin-right: 3vw;
 }
