@@ -21,15 +21,6 @@ module.exports = (app) => {
   app.get('/history/find-all', controller.historyFindAll);
   app.put('/history/update', controller.historyUpdateOne);
   app.delete('/history/delete-all', controller.historyDeleteAll);
-
-
-  // DEGREE ROUTES
-  // app.post('/degree/add', controller.degreeAdd);
-  // app.get('/degree/find', controller.degreeFindOne);
-  // app.get('/degree/find-all', controller.degreeFindAll);
-  // app.put('/degree/update', controller.degreeUpdateOne);
-  // app.delete('/degree/delete', controller.degreeDeleteOne);
-
   
   // STUDENT ROUTES
   app.post('/student/add', controller.studentAdd);
@@ -59,14 +50,6 @@ module.exports = (app) => {
   app.put('/grade/update', controller.gradeUpdateOne);
   app.delete('/grade/delete', controller.gradeDeleteOne);
 
-  
-  // COURSE ROUTES
-  // app.post('/course/add', controller.courseAdd);
-  // app.get('/course/find', controller.courseFindOne);
-  // app.get('/course/find-all', controller.courseFindAll);
-  // app.put('/course/update', controller.courseUpdateOne);
-  // app.delete('/course/delete', controller.courseDeleteOne);
-
   // NOTE ROUTES
   app.post('/note/add', controller.noteAdd);
   app.post('/note/find', controller.noteFindOne);
@@ -76,3 +59,17 @@ module.exports = (app) => {
   app.delete('/note/delete', controller.noteDeleteOne);
   app.delete('/note/delete-all', controller.noteDeleteAll);
 }
+  
+  // COURSE ROUTES
+  // app.post('/course/add', controller.courseAdd);
+  // app.get('/course/find', controller.courseFindOne);
+  // app.get('/course/find-all', controller.courseFindAll);
+  // app.put('/course/update', controller.courseUpdateOne);
+  // app.delete('/course/delete', controller.courseDeleteOne);
+
+  // DEGREE ROUTES
+  // app.post('/degree/add', controller.degreeAdd);
+  // app.get('/degree/find', controller.degreeFindOne);
+  // app.get('/degree/find-all', controller.degreeFindAll);
+  // app.put('/degree/update', controller.degreeUpdateOne);
+  // app.delete('/degree/delete', controller.degreeDeleteOne);

@@ -262,170 +262,7 @@ exports.gradeDeleteAll = function(req, res, next) {
   });
 }
 
-// -----------------------------C O U R S E   S E C T I O N----------------------------------------
 
-// COURSE SCHEMA
-// const courseSchema = new Schema({
-//   CourseName: {type: String, required: true, unique: true},
-//   CourseAbbr: {type: String, required: true, unique: true},
-//   Units: {type: Number, required: true},
-//   CourseType: {type: String, required: true, enum: ['required', 'non-academic', 'electives']}
-// },{autoCreate:true});
-
-// COURSE MODEL
-// const Course = db.model('course',courseSchema);
-
-/**
- * SECTION : COURSE
- * functions - create/add, read/find, update, delete
- * NOTE: need to change the functions to be specific to the collection (in this case, users)
- */
-
-// create/add course
-// exports.courseAdd = function(req, res, next) {
-  // UNCOMMENT TO SEE REQUEST CONTENTS AND MAPPING TO USER MODEL
-  // console.log(req.body);
-  
-//   var newCourse = new Course({
-//     CourseName: req.body.CourseName,
-//     CourseAbbr: req.body.CourseAbbr,
-//     Units: req.body.Units,
-//     CourseType: req.body.CourseType
-//   });
-//   console.log(newCourse);
-
-//   newCourse.save(function(err) {
-//     if (err) {
-//       res.send({err:'Unable to save course'})
-//     } else {
-//       res.send(newCourse)
-//     }
-//   });
-// }
-
-// find one course
-// exports.courseFindOne = function(req, res, next) {
-//   Course.findOne((err, course) => {
-//     if (err) {
-//       res.send({err:'Unable to find course'})
-//     } else {
-//       res.send(course)
-//     }
-//   });
-// }
-
-// find all course
-// exports.courseFindAll = function(req, res, next) {
-//   Course.find((err, courses) => {
-//     if (err) {
-//       res.send({err:'Unable to find all courses'})
-//     } else {
-//       res.send(courses)
-//     }
-//   });
-// }
-
-// update one course
-// exports.courseUpdateOne = function(req, res, next) {
-//   Course.updateOne({CourseAbbr: req.body.CourseAbbr}, {"$set":{
-//     CourseName: req.body.CourseName,
-//     CourseAbbr: req.body.CourseAbbr,
-//     Units: req.body.Units,
-//     CourseType: req.body.CourseType
-//   }}, {new : true}, function(err, result){
-//     if (err) {
-//       res.send({err:'Unable to update course'});
-//     } else {
-//       res.send(result);
-//     }
-//   });
-// }
-
-// delete one course
-// exports.courseDeleteOne = function(req, res, next) {
-//   Course.findOneAndDelete({CourseAbbr: req.body.CourseAbbr}, function(err, Course){
-//     if(err) {
-//       res.send({err:'Unable to delete course'});
-//     } else {
-//       res.send({suc:'Successfully deleted ' + Course.CourseAbbr});
-//     }
-//   });
-// }
-
-// -----------------------------D E G R E E  S E C T I O N----------------------------------------
-
-// DEGREE SCHEMA
-// const degreeSchema = new Schema({
-//   DegreeID: {type: String, required : true, enum : ['BSAMAT', 'BSMATH', 'BSMST', 'BSAPHY', 'BSCS',
-//   'BSCHEM', 'BSAGCHEM', 'BSSTAT', 'BSBIO', 'BSSOCIO', 'BAPHILO', 'BACA']},
-//   DegreeName: {type: String, required : true},
-//   Major: {type: String, required : false},
-//   RequiredUnits: {type: Number, required : true},
-// },{autoCreate:true});
-
-
-// DEGREE MODEL
-// const Degree = db.model('degree', degreeSchema);
-
-
-// find degree
-// exports.degreeFindAll = function(req, res, next) {
-// Degree.find(function(err, degree) {
-//   if (!err) { res.send(degree) }
-// });
-// }
-
-// exports.degreeFindOne = function(req, res, next) {
-// Degree.findOne({DegreeID:req.body.DegreeID}, function(err, Degree){
-//   if(!err) {res.send(Degree);}
-//   else { res.send({err:'Unable to find degree'}) }
-// });
-// }
-
-// add degree
-// exports.degreeAdd = function(req, res, next) {
-  
-//   var newDegree = new Degree({
-//     DegreeID: req.body.DegreeID,
-//     DegreeName: req.body.DegreeName,
-//     Major: req.body.Major,
-//     RequiredUnits: req.body.RequiredUnits
-//   });
-//   console.log(newDegree);
-
-//   newDegree.save(function(err) {
-//     if (!err) { res.send(newDegree)}
-//     else { res.send({err:'Unable to save degree'}) }
-//   });
-// }
-
-// update degree
-// exports.degreeUpdateOne = function(req, res, next) {
-// Degree.updateOne({DegreeID:req.body.DegreeID},{"$set":{
-//   "DegreeID": req.body._id,
-//   "DegreeName": req.body.DegreeName,
-//   "Major": req.body.Major,
-//   "RequiredUnits": req.body.RequiredUnits
-// }}, {new : true}, function(err,result){
-//   if(!err && Degree){
-//     res.send(result);
-//   } else {
-//     res.send({err:'Unable to update degree'});
-//   }
-// })
-// }
-
-// delete degree
-// exports.degreeDeleteOne = function(req, res, next) {
-//   // console.log(req.body);
-//   Degree.findOneAndDelete({DegreeID:req.body.DegreeID},function(err, Degree){
-//     if(!err && Degree){
-//       res.send({suc:'Successfully deleted'});
-//     } else {
-//       res.send({err:'Unable to delete degree'});
-//     }
-//   });
-// }
 
 
 // -----------------------------S T U D E N T  S E C T I O N----------------------------------------
@@ -697,3 +534,169 @@ exports.noteDeleteAll = function(req,res,next){
     else res.send({err:'Unable to delete all notes'});
   });
 }
+
+
+// -----------------------------C O U R S E   S E C T I O N----------------------------------------
+
+// COURSE SCHEMA
+// const courseSchema = new Schema({
+//   CourseName: {type: String, required: true, unique: true},
+//   CourseAbbr: {type: String, required: true, unique: true},
+//   Units: {type: Number, required: true},
+//   CourseType: {type: String, required: true, enum: ['required', 'non-academic', 'electives']}
+// },{autoCreate:true});
+
+// COURSE MODEL
+// const Course = db.model('course',courseSchema);
+
+/**
+ * SECTION : COURSE
+ * functions - create/add, read/find, update, delete
+ * NOTE: need to change the functions to be specific to the collection (in this case, users)
+ */
+
+// create/add course
+// exports.courseAdd = function(req, res, next) {
+  // UNCOMMENT TO SEE REQUEST CONTENTS AND MAPPING TO USER MODEL
+  // console.log(req.body);
+  
+//   var newCourse = new Course({
+//     CourseName: req.body.CourseName,
+//     CourseAbbr: req.body.CourseAbbr,
+//     Units: req.body.Units,
+//     CourseType: req.body.CourseType
+//   });
+//   console.log(newCourse);
+
+//   newCourse.save(function(err) {
+//     if (err) {
+//       res.send({err:'Unable to save course'})
+//     } else {
+//       res.send(newCourse)
+//     }
+//   });
+// }
+
+// find one course
+// exports.courseFindOne = function(req, res, next) {
+//   Course.findOne((err, course) => {
+//     if (err) {
+//       res.send({err:'Unable to find course'})
+//     } else {
+//       res.send(course)
+//     }
+//   });
+// }
+
+// find all course
+// exports.courseFindAll = function(req, res, next) {
+//   Course.find((err, courses) => {
+//     if (err) {
+//       res.send({err:'Unable to find all courses'})
+//     } else {
+//       res.send(courses)
+//     }
+//   });
+// }
+
+// update one course
+// exports.courseUpdateOne = function(req, res, next) {
+//   Course.updateOne({CourseAbbr: req.body.CourseAbbr}, {"$set":{
+//     CourseName: req.body.CourseName,
+//     CourseAbbr: req.body.CourseAbbr,
+//     Units: req.body.Units,
+//     CourseType: req.body.CourseType
+//   }}, {new : true}, function(err, result){
+//     if (err) {
+//       res.send({err:'Unable to update course'});
+//     } else {
+//       res.send(result);
+//     }
+//   });
+// }
+
+// delete one course
+// exports.courseDeleteOne = function(req, res, next) {
+//   Course.findOneAndDelete({CourseAbbr: req.body.CourseAbbr}, function(err, Course){
+//     if(err) {
+//       res.send({err:'Unable to delete course'});
+//     } else {
+//       res.send({suc:'Successfully deleted ' + Course.CourseAbbr});
+//     }
+//   });
+// }
+
+// -----------------------------D E G R E E  S E C T I O N----------------------------------------
+
+// DEGREE SCHEMA
+// const degreeSchema = new Schema({
+//   DegreeID: {type: String, required : true, enum : ['BSAMAT', 'BSMATH', 'BSMST', 'BSAPHY', 'BSCS',
+//   'BSCHEM', 'BSAGCHEM', 'BSSTAT', 'BSBIO', 'BSSOCIO', 'BAPHILO', 'BACA']},
+//   DegreeName: {type: String, required : true},
+//   Major: {type: String, required : false},
+//   RequiredUnits: {type: Number, required : true},
+// },{autoCreate:true});
+
+
+// DEGREE MODEL
+// const Degree = db.model('degree', degreeSchema);
+
+
+// find degree
+// exports.degreeFindAll = function(req, res, next) {
+// Degree.find(function(err, degree) {
+//   if (!err) { res.send(degree) }
+// });
+// }
+
+// exports.degreeFindOne = function(req, res, next) {
+// Degree.findOne({DegreeID:req.body.DegreeID}, function(err, Degree){
+//   if(!err) {res.send(Degree);}
+//   else { res.send({err:'Unable to find degree'}) }
+// });
+// }
+
+// add degree
+// exports.degreeAdd = function(req, res, next) {
+  
+//   var newDegree = new Degree({
+//     DegreeID: req.body.DegreeID,
+//     DegreeName: req.body.DegreeName,
+//     Major: req.body.Major,
+//     RequiredUnits: req.body.RequiredUnits
+//   });
+//   console.log(newDegree);
+
+//   newDegree.save(function(err) {
+//     if (!err) { res.send(newDegree)}
+//     else { res.send({err:'Unable to save degree'}) }
+//   });
+// }
+
+// update degree
+// exports.degreeUpdateOne = function(req, res, next) {
+// Degree.updateOne({DegreeID:req.body.DegreeID},{"$set":{
+//   "DegreeID": req.body._id,
+//   "DegreeName": req.body.DegreeName,
+//   "Major": req.body.Major,
+//   "RequiredUnits": req.body.RequiredUnits
+// }}, {new : true}, function(err,result){
+//   if(!err && Degree){
+//     res.send(result);
+//   } else {
+//     res.send({err:'Unable to update degree'});
+//   }
+// })
+// }
+
+// delete degree
+// exports.degreeDeleteOne = function(req, res, next) {
+//   // console.log(req.body);
+//   Degree.findOneAndDelete({DegreeID:req.body.DegreeID},function(err, Degree){
+//     if(!err && Degree){
+//       res.send({suc:'Successfully deleted'});
+//     } else {
+//       res.send({err:'Unable to delete degree'});
+//     }
+//   });
+// }
