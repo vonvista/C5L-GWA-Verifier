@@ -14,7 +14,7 @@ import Notes from './Notes';
 // styling for student detail header
 const detailStyle = {
     title: "table-cell text-left text-sm 2xl:text-xl",
-    text: "table-cell text-left text-xl 2xl:text-2xl font-extrabold",
+    text: "table-cell text-left text-xl 2xl:text-2xl font-bold",
 }
 
 
