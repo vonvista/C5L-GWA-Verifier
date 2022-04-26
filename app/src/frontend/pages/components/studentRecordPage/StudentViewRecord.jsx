@@ -3,6 +3,10 @@ import ActionsBtn from '../../../components/buttons/Dropdown';
 import SemSelect from '../../../components/inputs/DropdownSelect';
 import { Tab } from '@headlessui/react';
 import 'tailwindcss/tailwind.css';
+import Status from './Status';
+import Notes from './Notes';
+
+
 
 // styling for student detail header
 const detailStyle = {
@@ -18,6 +22,7 @@ const RecordPage = (props) => {
 
     const semesters = props.sem 
     const user = props.user
+    const notes = props.notes
     
     const [selectedSem, setSelectedSem] = useState(semesters[0])    // state controller for selecting semesters -> should change table contents
     const [selectedUser, setSelectedUser] = useState(user)
@@ -26,8 +31,8 @@ const RecordPage = (props) => {
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
         // uses components as values
-        Status: <div>{/* Status Component Here */}</div>, // status component here
-        Notes: <div>{/* Notes Component Here */}</div>,  // notes component here
+        Status: <Status />, // status component here
+        Notes: <Notes notes={notes} />,  // notes component here
         History:[], // insert history component here
     }
 
@@ -36,7 +41,7 @@ const RecordPage = (props) => {
     return(
         <div className="w-full p-6">
             {/* student details */}
-            <div className="w-[95%] flex px-7 py-5 rounded-md mx-auto bg-sr-dark-gray shadow-lg box-border">
+            <div className="w-[95%] flex px-7 py-5 rounded-lg mx-auto bg-sr-dark-gray shadow-lg box-border">
 
                 <div className="table w-4/5">
                     <div className="table-header-group">
@@ -69,7 +74,7 @@ const RecordPage = (props) => {
             {/* student grades */}
             <div className="w-[95%] grid grid-flow-col mx-auto my-5 gap-3">
 
-                <div className="col-span-6">
+                <div className="col-span-3">
                     {/*{/* dropdown select }
                     <div className="col-span-1 col-start-6">
                         <SemSelect
@@ -79,14 +84,14 @@ const RecordPage = (props) => {
                             />
                     </div>*/}
                     {/* grades table */}
-                    <div className="shadow-lg col-span-6 rounded-md mt-3 h-80">
+                    <div className="shadow-lg w-[60vw] col-span-3 rounded-lg mt-3 h-80">
                         {/* insert grades table component here */}
                     </div>
                 </div>
                                 
                 {/* tabbed information card */}
                 
-                <div className="col-span-2 shadow-lg rounded-md">
+                <div className="col-span-1 max-w-[30vw] shadow-lg rounded-lg">
                     <Tab.Group>
                         <Tab.List className="flex rounded-t-md">
                             {Object.keys(selectedTab).map((tab) => (
@@ -103,11 +108,9 @@ const RecordPage = (props) => {
                                 )
                             )}
                         </Tab.List>
-                        <Tab.Panels>
+                        <Tab.Panels className="w-[30vw] m-0 block">
                                 {Object.values(selectedTab).map((component) =>(
-                                    <Tab.Panel
-                                        className="w-inherit"
-                                    >                                
+                                    <Tab.Panel className="col-span-1 block">                                
                                         {component}
                                     </Tab.Panel>
                                 ))}

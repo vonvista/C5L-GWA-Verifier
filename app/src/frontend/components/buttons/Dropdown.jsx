@@ -46,7 +46,7 @@ const Dropdown = () => {
         >
           <div className="pt-1 bg-login-green rounded-lg">
             <button
-              className="text-gray-700 block px-4 py-2 text-sm z-1 w-full hover:bg-login-green-hover"
+              className="text-gray-700 block px-4 py-2 text-sm z-1 w-full hover:bg-login-green-hover hover:rounded-t-lg"
               type="button"
               onClick={() => {
                 setIsActive(!isActive);
@@ -66,7 +66,7 @@ const Dropdown = () => {
               <p className="text-white">Edit</p>
             </button>
             <button
-              className="text-gray-700 block px-4 py-2 text-sm z-1 w-full hover:bg-login-green-hover"
+              className="text-gray-700 block px-4 py-2 text-sm z-1 w-full hover:bg-login-green-hover hover:rounded-b-lg"
               type="button"
               onClick={() => {
                 setIsActive(!isActive);
