@@ -8,6 +8,8 @@ import Add from '../components/buttons/Add.jsx';
 import 'tailwindcss/tailwind.css';
 import './AddRow.css';
 
+/* Function for the "Add Row" feature in the Student View Record page */
+/* Initially shows an "Add" button and prompts the modal window after clicking it */
 const AddRow = () => {
     const [openModal, setOpenModal] = useState(false);
     const [courseName, setCourseName] = useState('');
