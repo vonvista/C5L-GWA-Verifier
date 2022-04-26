@@ -77,40 +77,40 @@ newUser2 = {
 
 /* COURSE TEST */
 
-course1 = {
-    CourseName: "Mga Pag-aaral sa Wika (?)",
-    CourseAbbr: "WIKA 1",
-    Units: 3,
-    CourseType: "required"
-}
+// course1 = {
+//     CourseName: "Mga Pag-aaral sa Wika (?)",
+//     CourseAbbr: "WIKA 1",
+//     Units: 3,
+//     CourseType: "required"
+// }
 
-course2 = {
-    CourseName: "Life and Works of Jose Rizal",
-    CourseAbbr: "PI 10",
-    Units: 3,
-    CourseType: "required"
-}
+// course2 = {
+//     CourseName: "Life and Works of Jose Rizal",
+//     CourseAbbr: "PI 10",
+//     Units: 3,
+//     CourseType: "required"
+// }
 
-course3 = {
-    CourseName: "Sining ...",
-    CourseAbbr: "ARTS 1",
-    Units: 3,
-    CourseType: "required"
-}
+// course3 = {
+//     CourseName: "Sining ...",
+//     CourseAbbr: "ARTS 1",
+//     Units: 3,
+//     CourseType: "required"
+// }
 
-course3update = {
-    CourseName: "... Sining",
-    CourseAbbr: "ARTS 1",
-    Units: 4,
-    CourseType: "non-academic"
-}
+// course3update = {
+//     CourseName: "... Sining",
+//     CourseAbbr: "ARTS 1",
+//     Units: 4,
+//     CourseType: "non-academic"
+// }
 
-course4 = {
-    CourseName: "Film (?)",
-    CourseAbbr: "HUM 3",
-    Units: 3,
-    CourseType: "electives"
-}
+// course4 = {
+//     CourseName: "Film (?)",
+//     CourseAbbr: "HUM 3",
+//     Units: 3,
+//     CourseType: "electives"
+// }
 
 // request('http://localhost:3001/course/add',{method:"POST",form: course1},function(err,req,body) {
 //     console.log(body);
@@ -146,26 +146,26 @@ course4 = {
 
 //DEGREE TEST
 
-degree1 = {
-    DegreeID: "BSCS",
-    DegreeName: "Bachelor of Science in Computer Science",
-    Major: "N/A",
-    RequiredUnits: 130
-}
+// degree1 = {
+//     DegreeID: "BSCS",
+//     DegreeName: "Bachelor of Science in Computer Science",
+//     Major: "N/A",
+//     RequiredUnits: 130
+// }
 
-degree2 = {
-    DegreeID: "BSAGCHEM",
-    DegreeName: "Bachelor of Science in Agricultural Chemistry",
-    Major: "Animal Science",
-    RequiredUnits: 190
-}
+// degree2 = {
+//     DegreeID: "BSAGCHEM",
+//     DegreeName: "Bachelor of Science in Agricultural Chemistry",
+//     Major: "Animal Science",
+//     RequiredUnits: 190
+// }
 
-updatedegree1 = {
-    DegreeID: "BSCS",
-    DegreeName: "Bachelor of Science in Computer Science",
-    Major: "N/A",
-    RequiredUnits: 145
-}
+// updatedegree1 = {
+//     DegreeID: "BSCS",
+//     DegreeName: "Bachelor of Science in Computer Science",
+//     Major: "N/A",
+//     RequiredUnits: 145
+// }
 
 // request('http://localhost:3001/degree/add',{method:"POST",form: degree1},function(err,req,body) {
 //     console.log(body);
@@ -191,8 +191,11 @@ student1 = {
     FirstName: "Leni",
     LastName: "Robredo",
     MiddleName: "Gerona",
-    Degree: "625ff4f790dd2d72f6bed962",
+    Degree: "BS Economics",
+    Course: "ECON 11",
     TotalUnits: 100,
+    TotalUnits2: 100,
+    TotalCumulative: 100,
     OverallGWA: 1.00
 }
 
@@ -201,8 +204,11 @@ student2 = {
     FirstName: "Isko",
     LastName: "Moreno",
     MiddleName: "Withdraw",
-    Degree: "625fffc4e920178dd47f1273",
-    TotalUnits: 79,
+    Degree: "BS Economics",
+    Course: "ECON 11",
+    TotalUnits: 75,
+    TotalUnits2: 75,
+    TotalCumulative: 75,
     OverallGWA: 2.75
 }
 
@@ -211,8 +217,11 @@ student3 = {
     FirstName: "Manny",
     LastName: "Pacquiao",
     MiddleName: "Praye",
-    Degree: "625fffc4e920178dd47f1155",
-    TotalUnits: 112,
+    Degree: "BS Economics",
+    Course: "ECON 11",
+    TotalUnits: 90,
+    TotalUnits2: 90,
+    TotalCumulative: 90,
     OverallGWA: 1.75
 }
 
@@ -221,12 +230,19 @@ updatestudent2 = {
     FirstName: "Isko",
     LastName: "Moreno",
     MiddleName: "Withdraw",
-    Degree: "625fffc4e920178dd47f1273",
-    TotalUnits: 82,
-    OverallGWA: 2.25
+    Degree: "BS Withdraw",
+    Course: "ECON 11",
+    TotalUnits: 80,
+    TotalUnits2: 80,
+    TotalCumulative: 80,
+    OverallGWA: 3.00
 }
 
 // request('http://localhost:3001/student/add',{method:"POST",form: student1},function(err,req,body) {
+//     console.log(body);
+// });
+
+// request('http://localhost:3001/student/add',{method:"POST",form: student2},function(err,req,body) {
 //     console.log(body);
 // });
 
@@ -242,6 +258,10 @@ updatestudent2 = {
 // request('http://localhost:3001/student/delete',{method:"DELETE",form: {StudentID: "201934908"}},function(err,req,body) {
 //     console.log(body);
 
+// });
+
+// request('http://localhost:3001/student/find',{method:"POST",form:{StudentID: "201912345"}},function(err,res,body) {
+//     console.log(body);
 // });
 
 
@@ -350,9 +370,9 @@ newhistory2 = {
 //     console.log(body);
 // });
 
-request('http://localhost:3001/history/delete-all',{method:"DELETE"},function(err,res,body) {
-   console.log(body);
-});
+// request('http://localhost:3001/history/delete-all',{method:"DELETE"},function(err,res,body) {
+//    console.log(body);
+// });
 
 // request('http://localhost:3001/grade/delete-all',{method:"DELETE"},function(err,res,body) {
 //    console.log(body);
