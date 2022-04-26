@@ -182,6 +182,7 @@ const Login = () => {
 
                 {/* Footer */}
                 <div class="flex footer absolute inset-x-0">
+                    <span><TextBtn text="Debug" handleClick={()=>{navigate('/user-dashboard')}}/></span>
                     <span><TextBtn text="Terms of Use"/></span>
                     <span><TextBtn text="Help"/></span>
                     <span><TextBtn text="Privacy Policy"/></span>
