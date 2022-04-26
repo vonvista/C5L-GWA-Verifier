@@ -1,14 +1,14 @@
 import 'tailwindcss/tailwind.css';
-import LoginBtn from './LoginBtn';
 import Swal from 'sweetalert2';
 
-// This 
+// Button for saving changes in Student Record View Page
 const SaveBtn = () => {
 
   // Sweet alert text styling
   const swalStyle = Swal.mixin({
     customClass: {
-      // inputLabel: 'font-inter',
+      text: 'font-inter',
+      inputLabel: 'font-inter',
       confirmButton: 'font-montserrat',
       cancelButton: 'font-montserrat',
     },
@@ -23,8 +23,6 @@ const SaveBtn = () => {
       confirmButtonColor: '#2A7146',
       confirmButtonText: 'Confirm',
       cancelButtonText: 'Cancel',
-      // color: '#fffded',
-      // background: '#562323',
       inputAttributes: {
         maxlength: 18,
         autocapitalize: 'off',
@@ -35,8 +33,8 @@ const SaveBtn = () => {
         if (value == '') {            // Check if user did not enter a password
           swalStyle.showValidationMessage(`Password required`)
 
-        } else {                      
-          console.log(value)          // Log password value to console
+        } else {                      // If user did enter a password,
+          console.log(value)          // log password value to console
         }
       }
 
@@ -46,8 +44,6 @@ const SaveBtn = () => {
         swalStyle.fire({
           text: 'Changes successfully saved.',
           icon: 'success',
-          // color: '#fffded',
-          // background: '#562323',
           confirmButtonColor: '#2A7146',
         })
       }
