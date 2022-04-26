@@ -49,25 +49,21 @@ const AddUser = () => {
         <p className="text-sm inline-block text-btn">Add User</p>
       </button>
       {showModal ? (
-        <div className="modal">
+        <div className="modal h-screen">
           {/* content */}
           <div className="modal-content">
             {/* exit button */}
-            <div className="p-2 rounded-lg flex items-center justify-items-center">
-              <button
-                className="bg-transparent outline-none relative ml-auto grow-0"
-                type="button"
-                onClick={() => setShowModal(false)}
-              >
-                <span className="close text-4xl text-white p-1 bg-transparent inline-flex">
-                  &times;
-                </span>
-              </button>
-            </div>
+            <button
+              className="close-btn bg-transparent text-white flex relative ml-auto grow-0"
+              type="button"
+              onClick={() => setShowModal(false)}
+            >
+              &times;
+            </button>
 
             {/* photo  */}
             <div className="modal-body">
-              <div className="w-1/6 ml-auto mt-5">
+              <div className="w-1/6 ml-auto mt-2">
                 <img
                   className="rounded-lg"
                   width="250px"
@@ -82,7 +78,7 @@ const AddUser = () => {
                     {/* Input form */}
                     <div className="input-content form">
                       {/* name */}
-                      <div className="w-full pb-4 mt-5">
+                      <div className="w-full pb-4 mt-2">
                         <section className="w-2/5 inline-block grow mr-2">
                           <input
                             className="input-style"
@@ -141,7 +137,7 @@ const AddUser = () => {
                           <div className="relative w-full">
                             <div className="absolute inset-y-0 right-0 flex items-center px-2">
                               <input
-                                className="hidden"
+                                className="hidden input-style"
                                 id="toggle"
                                 type="checkbox"
                                 onChange={(e) => setPW(e.target.value)}
@@ -162,7 +158,7 @@ const AddUser = () => {
                               onChange={(e) => setPW(e.target.value)}
                             />
                           </div>
-                          <h4 className="mt-1 w-full text-center text-white">
+                          <h4 className="mt-1 mb-2 w-full text-center text-white">
                             Password
                           </h4>
                         </section>
@@ -175,7 +171,7 @@ const AddUser = () => {
                     <div className="w-full flex">
                       <section className="un-style">
                         <button
-                          className="inter w-2/5 h-12 block ml-auto mr-auto bg-white rounded-lg hover:bg-slate-200"
+                          className="inter w-2/5 block ml-auto mr-auto bg-white rounded-lg hover:bg-slate-200 user-btn"
                           type="button"
                         >
                           Create Account
