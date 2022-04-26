@@ -1,20 +1,20 @@
 import 'tailwindcss/tailwind.css';
-import './PasswordConfirmation.css';
+import LoginBtn from './LoginBtn';
 import Swal from 'sweetalert2';
 
-const ConfirmPassword = () => {
+// This 
+const SaveBtn = () => {
 
-  // Sweet alert styling
+  // Sweet alert text styling
   const swalStyle = Swal.mixin({
     customClass: {
-      text: 'inter',
-      inputLabel: 'inter',
-      confirmButton: 'montserrat',
-      cancelButton: 'montserrat',
+      // inputLabel: 'font-inter',
+      confirmButton: 'font-montserrat',
+      cancelButton: 'font-montserrat',
     },
   })
 
-  const openSweetAlert = () => {
+  const ConfirmPassword = () => {
     swalStyle.fire({
       input: 'password',
       inputLabel: 'Please enter your password to confirm changes made.',
@@ -23,17 +23,20 @@ const ConfirmPassword = () => {
       confirmButtonColor: '#2A7146',
       confirmButtonText: 'Confirm',
       cancelButtonText: 'Cancel',
+      // color: '#fffded',
+      // background: '#562323',
       inputAttributes: {
         maxlength: 18,
         autocapitalize: 'off',
-        autocorrect: 'off'
+        autocorrect: 'off',
+        background: '#ffffff'
       },
       preConfirm: (value) => {
         if (value == '') {            // Check if user did not enter a password
           swalStyle.showValidationMessage(`Password required`)
-          
-        } else {                      // Print password
-          console.log(value)
+
+        } else {                      
+          console.log(value)          // Log password value to console
         }
       }
 
@@ -43,25 +46,27 @@ const ConfirmPassword = () => {
         swalStyle.fire({
           text: 'Changes successfully saved.',
           icon: 'success',
+          // color: '#fffded',
+          // background: '#562323',
           confirmButtonColor: '#2A7146',
         })
       }
-    })
+    });
   }
 
   return (
     <>
-      {/* Save Changes Button */}
+      {/* Save Button */}
       <button
         className="
         w-1/6 h-10 bg-login-green m-2 rounded-xl text-white font-montserrat font-bold hover:shadow-lg hover:bg-login-green-hover"
         type="button"
-        onClick={openSweetAlert}
+        onClick={ConfirmPassword}
       >
-        <p className="text-sm font-montserrat inline-block">Save Changes</p>
+        <p className="text-sm font-montserrat inline-block">Save</p>
       </button>
     </>
   );
 };
 
-export default ConfirmPassword;
+export default SaveBtn;
