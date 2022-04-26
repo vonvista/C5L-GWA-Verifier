@@ -265,15 +265,15 @@ exports.gradeDeleteAll = function(req, res, next) {
 // -----------------------------C O U R S E   S E C T I O N----------------------------------------
 
 // COURSE SCHEMA
-const courseSchema = new Schema({
-  CourseName: {type: String, required: true, unique: true},
-  CourseAbbr: {type: String, required: true, unique: true},
-  Units: {type: Number, required: true},
-  CourseType: {type: String, required: true, enum: ['required', 'non-academic', 'electives']}
-},{autoCreate:true});
+// const courseSchema = new Schema({
+//   CourseName: {type: String, required: true, unique: true},
+//   CourseAbbr: {type: String, required: true, unique: true},
+//   Units: {type: Number, required: true},
+//   CourseType: {type: String, required: true, enum: ['required', 'non-academic', 'electives']}
+// },{autoCreate:true});
 
 // COURSE MODEL
-const Course = db.model('course',courseSchema);
+// const Course = db.model('course',courseSchema);
 
 /**
  * SECTION : COURSE
@@ -282,150 +282,150 @@ const Course = db.model('course',courseSchema);
  */
 
 // create/add course
-exports.courseAdd = function(req, res, next) {
+// exports.courseAdd = function(req, res, next) {
   // UNCOMMENT TO SEE REQUEST CONTENTS AND MAPPING TO USER MODEL
   // console.log(req.body);
   
-  var newCourse = new Course({
-    CourseName: req.body.CourseName,
-    CourseAbbr: req.body.CourseAbbr,
-    Units: req.body.Units,
-    CourseType: req.body.CourseType
-  });
-  console.log(newCourse);
+//   var newCourse = new Course({
+//     CourseName: req.body.CourseName,
+//     CourseAbbr: req.body.CourseAbbr,
+//     Units: req.body.Units,
+//     CourseType: req.body.CourseType
+//   });
+//   console.log(newCourse);
 
-  newCourse.save(function(err) {
-    if (err) {
-      res.send({err:'Unable to save course'})
-    } else {
-      res.send(newCourse)
-    }
-  });
-}
+//   newCourse.save(function(err) {
+//     if (err) {
+//       res.send({err:'Unable to save course'})
+//     } else {
+//       res.send(newCourse)
+//     }
+//   });
+// }
 
 // find one course
-exports.courseFindOne = function(req, res, next) {
-  Course.findOne((err, course) => {
-    if (err) {
-      res.send({err:'Unable to find course'})
-    } else {
-      res.send(course)
-    }
-  });
-}
+// exports.courseFindOne = function(req, res, next) {
+//   Course.findOne((err, course) => {
+//     if (err) {
+//       res.send({err:'Unable to find course'})
+//     } else {
+//       res.send(course)
+//     }
+//   });
+// }
 
 // find all course
-exports.courseFindAll = function(req, res, next) {
-  Course.find((err, courses) => {
-    if (err) {
-      res.send({err:'Unable to find all courses'})
-    } else {
-      res.send(courses)
-    }
-  });
-}
+// exports.courseFindAll = function(req, res, next) {
+//   Course.find((err, courses) => {
+//     if (err) {
+//       res.send({err:'Unable to find all courses'})
+//     } else {
+//       res.send(courses)
+//     }
+//   });
+// }
 
 // update one course
-exports.courseUpdateOne = function(req, res, next) {
-  Course.updateOne({CourseAbbr: req.body.CourseAbbr}, {"$set":{
-    CourseName: req.body.CourseName,
-    CourseAbbr: req.body.CourseAbbr,
-    Units: req.body.Units,
-    CourseType: req.body.CourseType
-  }}, {new : true}, function(err, result){
-    if (err) {
-      res.send({err:'Unable to update course'});
-    } else {
-      res.send(result);
-    }
-  });
-}
+// exports.courseUpdateOne = function(req, res, next) {
+//   Course.updateOne({CourseAbbr: req.body.CourseAbbr}, {"$set":{
+//     CourseName: req.body.CourseName,
+//     CourseAbbr: req.body.CourseAbbr,
+//     Units: req.body.Units,
+//     CourseType: req.body.CourseType
+//   }}, {new : true}, function(err, result){
+//     if (err) {
+//       res.send({err:'Unable to update course'});
+//     } else {
+//       res.send(result);
+//     }
+//   });
+// }
 
 // delete one course
-exports.courseDeleteOne = function(req, res, next) {
-  Course.findOneAndDelete({CourseAbbr: req.body.CourseAbbr}, function(err, Course){
-    if(err) {
-      res.send({err:'Unable to delete course'});
-    } else {
-      res.send({suc:'Successfully deleted ' + Course.CourseAbbr});
-    }
-  });
-}
+// exports.courseDeleteOne = function(req, res, next) {
+//   Course.findOneAndDelete({CourseAbbr: req.body.CourseAbbr}, function(err, Course){
+//     if(err) {
+//       res.send({err:'Unable to delete course'});
+//     } else {
+//       res.send({suc:'Successfully deleted ' + Course.CourseAbbr});
+//     }
+//   });
+// }
 
 // -----------------------------D E G R E E  S E C T I O N----------------------------------------
 
 // DEGREE SCHEMA
-const degreeSchema = new Schema({
-  DegreeID: {type: String, required : true, enum : ['BSAMAT', 'BSMATH', 'BSMST', 'BSAPHY', 'BSCS',
-  'BSCHEM', 'BSAGCHEM', 'BSSTAT', 'BSBIO', 'BSSOCIO', 'BAPHILO', 'BACA']},
-  DegreeName: {type: String, required : true},
-  Major: {type: String, required : false},
-  RequiredUnits: {type: Number, required : true},
-},{autoCreate:true});
+// const degreeSchema = new Schema({
+//   DegreeID: {type: String, required : true, enum : ['BSAMAT', 'BSMATH', 'BSMST', 'BSAPHY', 'BSCS',
+//   'BSCHEM', 'BSAGCHEM', 'BSSTAT', 'BSBIO', 'BSSOCIO', 'BAPHILO', 'BACA']},
+//   DegreeName: {type: String, required : true},
+//   Major: {type: String, required : false},
+//   RequiredUnits: {type: Number, required : true},
+// },{autoCreate:true});
 
 
 // DEGREE MODEL
-const Degree = db.model('degree', degreeSchema);
+// const Degree = db.model('degree', degreeSchema);
 
 
 // find degree
-exports.degreeFindAll = function(req, res, next) {
-Degree.find(function(err, degree) {
-  if (!err) { res.send(degree) }
-});
-}
+// exports.degreeFindAll = function(req, res, next) {
+// Degree.find(function(err, degree) {
+//   if (!err) { res.send(degree) }
+// });
+// }
 
-exports.degreeFindOne = function(req, res, next) {
-Degree.findOne({DegreeID:req.body.DegreeID}, function(err, Degree){
-  if(!err) {res.send(Degree);}
-  else { res.send({err:'Unable to find degree'}) }
-});
-}
+// exports.degreeFindOne = function(req, res, next) {
+// Degree.findOne({DegreeID:req.body.DegreeID}, function(err, Degree){
+//   if(!err) {res.send(Degree);}
+//   else { res.send({err:'Unable to find degree'}) }
+// });
+// }
 
 // add degree
-exports.degreeAdd = function(req, res, next) {
+// exports.degreeAdd = function(req, res, next) {
   
-  var newDegree = new Degree({
-    DegreeID: req.body.DegreeID,
-    DegreeName: req.body.DegreeName,
-    Major: req.body.Major,
-    RequiredUnits: req.body.RequiredUnits
-  });
-  console.log(newDegree);
+//   var newDegree = new Degree({
+//     DegreeID: req.body.DegreeID,
+//     DegreeName: req.body.DegreeName,
+//     Major: req.body.Major,
+//     RequiredUnits: req.body.RequiredUnits
+//   });
+//   console.log(newDegree);
 
-  newDegree.save(function(err) {
-    if (!err) { res.send(newDegree)}
-    else { res.send({err:'Unable to save degree'}) }
-  });
-}
+//   newDegree.save(function(err) {
+//     if (!err) { res.send(newDegree)}
+//     else { res.send({err:'Unable to save degree'}) }
+//   });
+// }
 
 // update degree
-exports.degreeUpdateOne = function(req, res, next) {
-Degree.updateOne({DegreeID:req.body.DegreeID},{"$set":{
-  "DegreeID": req.body._id,
-  "DegreeName": req.body.DegreeName,
-  "Major": req.body.Major,
-  "RequiredUnits": req.body.RequiredUnits
-}}, {new : true}, function(err,result){
-  if(!err && Degree){
-    res.send(result);
-  } else {
-    res.send({err:'Unable to update degree'});
-  }
-})
-}
+// exports.degreeUpdateOne = function(req, res, next) {
+// Degree.updateOne({DegreeID:req.body.DegreeID},{"$set":{
+//   "DegreeID": req.body._id,
+//   "DegreeName": req.body.DegreeName,
+//   "Major": req.body.Major,
+//   "RequiredUnits": req.body.RequiredUnits
+// }}, {new : true}, function(err,result){
+//   if(!err && Degree){
+//     res.send(result);
+//   } else {
+//     res.send({err:'Unable to update degree'});
+//   }
+// })
+// }
 
 // delete degree
-exports.degreeDeleteOne = function(req, res, next) {
-  // console.log(req.body);
-  Degree.findOneAndDelete({DegreeID:req.body.DegreeID},function(err, Degree){
-    if(!err && Degree){
-      res.send({suc:'Successfully deleted'});
-    } else {
-      res.send({err:'Unable to delete degree'});
-    }
-  });
-}
+// exports.degreeDeleteOne = function(req, res, next) {
+//   // console.log(req.body);
+//   Degree.findOneAndDelete({DegreeID:req.body.DegreeID},function(err, Degree){
+//     if(!err && Degree){
+//       res.send({suc:'Successfully deleted'});
+//     } else {
+//       res.send({err:'Unable to delete degree'});
+//     }
+//   });
+// }
 
 
 // -----------------------------S T U D E N T  S E C T I O N----------------------------------------
@@ -436,8 +436,11 @@ const studentSchema = new Schema({
   FirstName : {type: String, required : true},
   LastName : {type: String, required : true},
   MiddleName : {type: String, required : true},
-  Degree: {type: Schema.Types.ObjectId, ref: 'degree'},
+  Degree: {type: String, required: true},
+  Course: {type: String, required: true},
   TotalUnits: {type: Number, required : true},
+  TotalUnits2: {type: Number, required: true},
+  TotalCumulative: {type: Number, requied: true},
   OverallGWA: {type: Number, required : true},
 },{autoCreate:true});
 
@@ -469,8 +472,11 @@ exports.studentAdd = function(req, res, next) {
     FirstName: req.body.FirstName,
     MiddleName: req.body.MiddleName,
     LastName: req.body.LastName,
-    Degree: mongoose.Types.ObjectId(req.body.Degree),
+    Degree: req.body.Degree,
+    Course: req.body.Course,
     TotalUnits: req.body.TotalUnits,
+    TotalUnits2: req.body.TotalUnits2,
+    TotalCumulative: req.body.TotalCumulative,
     OverallGWA: req.body.OverallGWA
   });
   console.log(newStudent);
@@ -489,7 +495,10 @@ Student.updateOne({StudentID: req.body.StudentID},{"$set":{
   "MiddleName": req.body.MiddleName,
   "LastName": req.body.LastName,
   "Degree": req.body.Degree,
+  "Course": req.body.Course,
   "TotalUnits": req.body.TotalUnits,
+  "TotalUnits2": req.body.TotalUnits2,
+  "TotalCumulative": req.body.TotalCumulative,
   "OverallGWA": req.body.OverallGWA  
 }}, {new : true}, function(err,result){
   if(!err && Student){
