@@ -508,7 +508,7 @@ exports.noteFindAll = function(req,res,next){
 // FIND NOTE BY STUDENT
 // returns an array of notes assigned to student
 exports.noteFindAllByStudent = function(req,res,next){
-  Note.find({$Student:mongoose.Types.ObjectId(req.body.Student)},function(err,notes){
+  Note.find({Student:mongoose.Types.ObjectId(req.body.Student)},function(err,notes){
     console.log(notes);
     if(!err) res.send(notes);
   });
