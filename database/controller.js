@@ -162,6 +162,9 @@ const gradeSchema = new Schema({
   Student: {type: Schema.Types.ObjectId, ref: 'student', required: true},
   Course: {type: Schema.Types.ObjectId, ref: 'course', required: true},
   Value: {type: String, required: true},
+  Unit: {type: Number, required: true},
+  Weight: {type: Number, required: true},
+  Cumulative: {type: Number, required: true},
   Year: {type: String, required: true},
   Semester: String
 },{autoCreate:true})
