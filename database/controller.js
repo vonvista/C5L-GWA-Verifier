@@ -205,10 +205,12 @@ exports.gradeAdd = function(req, res, next) {
   
   var newGrade = new Grade({
     Student: mongoose.Types.ObjectId(req.body.Student),
-    Course: mongoose.Types.ObjectId(req.body.Course),
-    Value: req.body.Value,
-    Year: req.body.Year,
-    Semester: req.body.Semester
+    Course: req.body.Course,
+    Grade: req.body.Grade,
+    Unit: req.body.Unit,
+    Weight: req.body.Weight,
+    Cumulative: req.body.Cumulative,
+    YearSemester: req.body.YearSemester
   });
   console.log(newGrade);
   
@@ -228,9 +230,11 @@ exports.gradeUpdateOne = function(req, res, next) {
   Grade.updateOne({Student: req.body.Student, Course: req.body.Course},{"$set":{
     "Student": req.body.Student,
     "Course": req.body.Course,
-    "Value": req.body.Value,
-    "Year": req.body.Year,
-    "Semester": req.body.Semester
+    "Grade": req.body.Grade,
+    "Unit": req.body.Unit,
+    "Weight": req.body.Weight,
+    "Cumulative": req.body.Cumulative,
+    "YearSemester": req.body.YearSemester
   }}, {new : true}, function(err,result){
     if(!err && Grade){
       res.send(result);
