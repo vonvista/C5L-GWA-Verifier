@@ -268,24 +268,31 @@ updatestudent2 = {
 // GRADE TEST
 grade1 = {
     Student: "626015cd10c6532872850a76",
-    Course: "626004cc0fe58c4537bbaa16",
-    Value: "INC",
-    Year: "2021-2022",
-    Semester: "1S"
+    Course: "CMSC 12",
+    Grade: "INC",
+    Unit: 3.0,
+    Cumulative: 12,
+    SemesterYear: "I/15/16"
 }
 
 grade2 = {
     Student: "626015cd10c6532872850a78",
-    Course: "626004cc0fe58c4537bbaa16",
-    Value: "1.0",
-    Year: "2021-2022",
+    Course: "CMSC 23",
+    Grade: "1.0",
+    Unit: 3.0,
+    Weight: 3.0,
+    Cumulative: 15,
+    SemesterYear: "II/21/22"
 }
 
 newGrade2 = {
     Student: "626015cd10c6532872850a78",
-    Course: "626004cc0fe58c4537bbaa16",
-    Value: "1.25",
-    Year: "2021-2022",
+    Course: "CMSC 23",
+    Grade: "1.25",
+    Unit: 3.0,
+    Weight: 3.75,
+    Cumulative: 15.75,
+    SemesterYear: "II/21/22"
 }
 
 // add grade1
@@ -305,7 +312,7 @@ newGrade2 = {
 // });
 
 // find one grade
-// request('http://localhost:3001/grade/find',{method:"GET",form:{Student: "626015cd10c6532872850a76", Course: "626004cc0fe58c4537bbaa16"}},function(err,res,body) {
+// request('http://localhost:3001/grade/find',{method:"POST",form:{Student: "626015cd10c6532872850a76", Course: "CMSC 12"}},function(err,res,body) {
 //     console.log(body);
 // });
 
@@ -320,7 +327,7 @@ newGrade2 = {
 // });
 
 // delete one grade
-// request('http://localhost:3001/grade/delete',{method:"DELETE",form: {Student: "626015cd10c6532872850a76", Course: "626004cc0fe58c4537bbaa16"}},function(err,req,body) {
+// request('http://localhost:3001/grade/delete',{method:"DELETE",form: {Student: "626015cd10c6532872850a76", Course: "CMSC 12"}},function(err,req,body) {
 //     console.log(body);
 // });
 
