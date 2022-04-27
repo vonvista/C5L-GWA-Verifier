@@ -4,7 +4,7 @@ import UploadFileBtn from '../components/buttons/UploadFileBtn';
 /* Components */
 import List from '../components/List';
 import Header from '../components/HeaderWithoutArrowbck';
-import UserNav from '../components/UserNavigation';
+import AdminNav from '../components/AdminNavigation';
 import Pagination from '../components/Pagination';
 
 /* CSS */
@@ -12,7 +12,7 @@ import '../components/List.css';
 import 'tailwindcss/tailwind.css';
 
 
-const UserDashboard = () => {
+const AdminDashboard = () => {
     const [rows, setRows] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -178,12 +178,12 @@ const UserDashboard = () => {
     return(
       <>
         <div>
-            <div><UserNav /></div>
+            <div><AdminNav /></div>
             
             {/* Right Section */}
             <div className="absolute inset-0 flex ml-8 xl:ml-12 justify-center">
               
-              <div><Header pageTitle={"USER DASHBOARD"}/></div>
+              <div><Header pageTitle={"ADMIN DASHBOARD"}/></div>
               
               {/* Page Contents */}
               <div className='pt-20 flex-column'>
@@ -206,4 +206,4 @@ const UserDashboard = () => {
     )
 }
 
-export default UserDashboard
+export default AdminDashboard

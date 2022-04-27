@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Actions from './buttons/Actions'
 import AddRow from './AddRow';
 import 'tailwindcss/tailwind.css';
+
 
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
@@ -100,12 +101,11 @@ const List = ({ table, data }) => {
         console.log(data);
         return (
           <>
-            <table className="user-table">
+            <table className="user-table table-sortable">
               <thead>
                   <tr>
                   <th className='user-uname'>Username</th>
                   <th className='user-name'>Name</th>
-                  <th className='user-position'>Position</th>
                   <th className='user-action'>Actions</th>
                   </tr>
               </thead>
@@ -114,9 +114,6 @@ const List = ({ table, data }) => {
                     <tr key = {index}>
                       <td data-label = "Username"  className='user-uname'>{user.uname}</td>
                       <td data-label = "Name" className='user-name'>{user.name}</td>
-                      <td data-label = "Position" className='user-position'>
-                        <td data-status={user.position} className='position'></td>
-                      </td>
                       <td data-label = "Actions" className='user-action'>
                         <Actions/>
                       </td>
@@ -170,7 +167,31 @@ const List = ({ table, data }) => {
     } */
 
     // Function for Displaying the Student List on the Dashboard
-    const StudentList = ({ data }) => {
+    const StudentList = ({ data, setRows }) => {
+        useEffect(() => {
+            /* Reference: https://www.youtube.com/watch?v=8SL_hM1a0yo */
+            function sortTableByColumn(table, column, asc = true) {
+                // Remember how the column is currently sorted
+                table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
+                table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-asc", asc);
+                table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-desc", !asc);
+            }
+            
+            /* Check all the sortable columns */
+            document.querySelectorAll(".students-table th").forEach(headerCell => {
+                if (!headerCell.classList.contains("student-number") && !headerCell.classList.contains("student-status") && !headerCell.classList.contains("student-action")){
+                    headerCell.addEventListener("click", () => {
+                        const tableElement = headerCell.parentElement.parentElement.parentElement;
+                        const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
+                        const currentIsAscending = headerCell.classList.contains("th-sort-asc");
+                
+                        sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
+                    });
+                }
+            });
+        })
+
+
         return (
             <>
                 <table className="students-table table">

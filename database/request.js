@@ -77,40 +77,40 @@ newUser2 = {
 
 /* COURSE TEST */
 
-course1 = {
-    CourseName: "Mga Pag-aaral sa Wika (?)",
-    CourseAbbr: "WIKA 1",
-    Units: 3,
-    CourseType: "required"
-}
+// course1 = {
+//     CourseName: "Mga Pag-aaral sa Wika (?)",
+//     CourseAbbr: "WIKA 1",
+//     Units: 3,
+//     CourseType: "required"
+// }
 
-course2 = {
-    CourseName: "Life and Works of Jose Rizal",
-    CourseAbbr: "PI 10",
-    Units: 3,
-    CourseType: "required"
-}
+// course2 = {
+//     CourseName: "Life and Works of Jose Rizal",
+//     CourseAbbr: "PI 10",
+//     Units: 3,
+//     CourseType: "required"
+// }
 
-course3 = {
-    CourseName: "Sining ...",
-    CourseAbbr: "ARTS 1",
-    Units: 3,
-    CourseType: "required"
-}
+// course3 = {
+//     CourseName: "Sining ...",
+//     CourseAbbr: "ARTS 1",
+//     Units: 3,
+//     CourseType: "required"
+// }
 
-course3update = {
-    CourseName: "... Sining",
-    CourseAbbr: "ARTS 1",
-    Units: 4,
-    CourseType: "non-academic"
-}
+// course3update = {
+//     CourseName: "... Sining",
+//     CourseAbbr: "ARTS 1",
+//     Units: 4,
+//     CourseType: "non-academic"
+// }
 
-course4 = {
-    CourseName: "Film (?)",
-    CourseAbbr: "HUM 3",
-    Units: 3,
-    CourseType: "electives"
-}
+// course4 = {
+//     CourseName: "Film (?)",
+//     CourseAbbr: "HUM 3",
+//     Units: 3,
+//     CourseType: "electives"
+// }
 
 // request('http://localhost:3001/course/add',{method:"POST",form: course1},function(err,req,body) {
 //     console.log(body);
@@ -146,26 +146,26 @@ course4 = {
 
 //DEGREE TEST
 
-degree1 = {
-    DegreeID: "BSCS",
-    DegreeName: "Bachelor of Science in Computer Science",
-    Major: "N/A",
-    RequiredUnits: 130
-}
+// degree1 = {
+//     DegreeID: "BSCS",
+//     DegreeName: "Bachelor of Science in Computer Science",
+//     Major: "N/A",
+//     RequiredUnits: 130
+// }
 
-degree2 = {
-    DegreeID: "BSAGCHEM",
-    DegreeName: "Bachelor of Science in Agricultural Chemistry",
-    Major: "Animal Science",
-    RequiredUnits: 190
-}
+// degree2 = {
+//     DegreeID: "BSAGCHEM",
+//     DegreeName: "Bachelor of Science in Agricultural Chemistry",
+//     Major: "Animal Science",
+//     RequiredUnits: 190
+// }
 
-updatedegree1 = {
-    DegreeID: "BSCS",
-    DegreeName: "Bachelor of Science in Computer Science",
-    Major: "N/A",
-    RequiredUnits: 145
-}
+// updatedegree1 = {
+//     DegreeID: "BSCS",
+//     DegreeName: "Bachelor of Science in Computer Science",
+//     Major: "N/A",
+//     RequiredUnits: 145
+// }
 
 // request('http://localhost:3001/degree/add',{method:"POST",form: degree1},function(err,req,body) {
 //     console.log(body);
@@ -191,9 +191,13 @@ student1 = {
     FirstName: "Leni",
     LastName: "Robredo",
     MiddleName: "Gerona",
-    Degree: "625ff4f790dd2d72f6bed962",
+    Degree: "BS Economics",
+    Course: "ECON 11",
     TotalUnits: 100,
-    OverallGWA: 1.00
+    TotalUnits2: 100,
+    TotalCumulative: 100,
+    OverallGWA: 1.00,
+    Status: "Pending"
 }
 
 student2 = {
@@ -201,9 +205,13 @@ student2 = {
     FirstName: "Isko",
     LastName: "Moreno",
     MiddleName: "Withdraw",
-    Degree: "625fffc4e920178dd47f1273",
-    TotalUnits: 79,
-    OverallGWA: 2.75
+    Degree: "BS Economics",
+    Course: "ECON 11",
+    TotalUnits: 75,
+    TotalUnits2: 75,
+    TotalCumulative: 75,
+    OverallGWA: 2.75,
+    Status: "Pending"
 }
 
 student3 = {
@@ -211,9 +219,13 @@ student3 = {
     FirstName: "Manny",
     LastName: "Pacquiao",
     MiddleName: "Praye",
-    Degree: "625fffc4e920178dd47f1155",
-    TotalUnits: 112,
-    OverallGWA: 1.75
+    Degree: "BS Economics",
+    Course: "ECON 11",
+    TotalUnits: 90,
+    TotalUnits2: 90,
+    TotalCumulative: 90,
+    OverallGWA: 1.75,
+    Status: "Pending"
 }
 
 updatestudent2 = {
@@ -221,12 +233,19 @@ updatestudent2 = {
     FirstName: "Isko",
     LastName: "Moreno",
     MiddleName: "Withdraw",
-    Degree: "625fffc4e920178dd47f1273",
-    TotalUnits: 82,
-    OverallGWA: 2.25
+    Degree: "BS Withdraw",
+    Course: "ECON 11",
+    TotalUnits: 80,
+    TotalUnits2: 80,
+    TotalCumulative: 80,
+    OverallGWA: 3.00
 }
 
 // request('http://localhost:3001/student/add',{method:"POST",form: student1},function(err,req,body) {
+//     console.log(body);
+// });
+
+// request('http://localhost:3001/student/add',{method:"POST",form: student2},function(err,req,body) {
 //     console.log(body);
 // });
 
@@ -244,28 +263,39 @@ updatestudent2 = {
 
 // });
 
+// request('http://localhost:3001/student/find',{method:"POST",form:{StudentID: "201912345"}},function(err,res,body) {
+//     console.log(body);
+// });
+
 
 // GRADE TEST
 grade1 = {
     Student: "626015cd10c6532872850a76",
-    Course: "626004cc0fe58c4537bbaa16",
-    Value: "INC",
-    Year: "2021-2022",
-    Semester: "1S"
+    Course: "CMSC 12",
+    Grade: "INC",
+    Unit: 3.0,
+    Cumulative: 12,
+    SemesterYear: "I/15/16"
 }
 
 grade2 = {
     Student: "626015cd10c6532872850a78",
-    Course: "626004cc0fe58c4537bbaa16",
-    Value: "1.0",
-    Year: "2021-2022",
+    Course: "CMSC 23",
+    Grade: "1.0",
+    Unit: 3.0,
+    Weight: 3.0,
+    Cumulative: 15,
+    SemesterYear: "II/21/22"
 }
 
 newGrade2 = {
     Student: "626015cd10c6532872850a78",
-    Course: "626004cc0fe58c4537bbaa16",
-    Value: "1.25",
-    Year: "2021-2022",
+    Course: "CMSC 23",
+    Grade: "1.25",
+    Unit: 3.0,
+    Weight: 3.75,
+    Cumulative: 15.75,
+    SemesterYear: "II/21/22"
 }
 
 // add grade1
@@ -285,7 +315,7 @@ newGrade2 = {
 // });
 
 // find one grade
-// request('http://localhost:3001/grade/find',{method:"GET",form:{Student: "626015cd10c6532872850a76", Course: "626004cc0fe58c4537bbaa16"}},function(err,res,body) {
+// request('http://localhost:3001/grade/find',{method:"POST",form:{Student: "626015cd10c6532872850a76", Course: "CMSC 12"}},function(err,res,body) {
 //     console.log(body);
 // });
 
@@ -300,7 +330,7 @@ newGrade2 = {
 // });
 
 // delete one grade
-// request('http://localhost:3001/grade/delete',{method:"DELETE",form: {Student: "626015cd10c6532872850a76", Course: "626004cc0fe58c4537bbaa16"}},function(err,req,body) {
+// request('http://localhost:3001/grade/delete',{method:"DELETE",form: {Student: "626015cd10c6532872850a76", Course: "CMSC 12"}},function(err,req,body) {
 //     console.log(body);
 // });
 
@@ -350,9 +380,9 @@ newhistory2 = {
 //     console.log(body);
 // });
 
-request('http://localhost:3001/history/delete-all',{method:"DELETE"},function(err,res,body) {
-   console.log(body);
-});
+// request('http://localhost:3001/history/delete-all',{method:"DELETE"},function(err,res,body) {
+//    console.log(body);
+// });
 
 // request('http://localhost:3001/grade/delete-all',{method:"DELETE"},function(err,res,body) {
 //    console.log(body);
@@ -361,18 +391,16 @@ request('http://localhost:3001/history/delete-all',{method:"DELETE"},function(er
 /*  NOTE TEST   */
 
 note1 = {
-    User:"6263d5beb7b0bf7535f1d3cc",
-    Student:"6263d4c80791d8b67842ec86",
-    Semester:"1S",
-    Year:"2020-2021",
+    User:"626917dc9356e3d73ba366ad",
+    Student:"626917aa9356e3d73ba366a5",
+    SemesterYear:"1S2020-2021",
     Details:"Hatdog ang sem na ito"
 }
 
 note2 = {
-    User:"6263d4c80791d8b67842ec86",
+    User:"626917aa9356e3d73ba366a7",
     Student:"6263d5beb7b0bf7535f1d3cc",
-    Semester:"2S",
-    Year:"2020-2021",
+    SemesterYear:"2S2020-2021",
     Details:"Hatdog ang sem na ito"
 }
 
@@ -380,8 +408,7 @@ newNote2 = {
     id:"6263d618b7b0bf7535f1d3d6",
     User:"6263d4c80791d8b67842ec86",
     Student:"6263d5beb7b0bf7535f1d3cc",
-    Semester:"2S",
-    Year:"2020-2021",
+    SemesterYear:"2S2020-2021",
     Details:"Solid ang sem na ito"
 }
 
@@ -400,9 +427,9 @@ newNote2 = {
 //     console.log(JSON.stringify(JSON.parse(body),null,2));
 // });
 
-// request('http://localhost:3001/note/find-by-student',{method:"GET",form:{Student:"6263d5beb7b0bf7535f1d3cc"}},function(err,res,body) {
-//     console.log(JSON.stringify(JSON.parse(body),null,2));
-// });
+request('http://localhost:3001/note/find-by-student',{method:"POST",form:{Student:"6263d5beb7b0bf7535f1d3cc"}},function(err,res,body) {
+    console.log(JSON.stringify(JSON.parse(body),null,2));
+});
 
 // request('http://localhost:3001/note/update',{method:"PUT",form:newNote2},function(err,res,body) {
 //     console.log(JSON.stringify(JSON.parse(body),null,2));
