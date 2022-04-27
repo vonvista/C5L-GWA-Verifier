@@ -1,58 +1,93 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import Actions from './buttons/Actions'
 import EditUser from './EditUser';
+import AddRow from './AddRow';
 import 'tailwindcss/tailwind.css';
 
-// This list component requires a (1) condition that indicates whgat table to display (2) data to be dispays. See return part at the end.
-const List = ({ table, data}) => {
 
+// This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
+
+const List = ({ table, data }) => {
     // George Gragas
     // This table is about degreeprogram
-    const DegreeProgram = ({ data }) => {
-        return (
-            <>
-                <table class="table-auto">
-                    <thead>
-                        <tr>
-                            <th>Program</th>
-                            <th>Department</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.map((program, index) => (
-                            <tr key = { index }>
-                                <td>{program.programName}</td>
-                                <td>{program.department}</td>
-                                <td><Actions/></td>
-                            </tr>)
-                        )}
-                    </tbody>
-                </table>
-            </>
-        );
-    }
+    // const DegreeProgram = ({ data }) => {
+    //     return (
+    //         <>
+    //             <table class="table-auto">
+    //                 <thead>
+    //                     <tr>
+    //                         <th>Program</th>
+    //                         <th>Department</th>
+    //                         <th>Actions</th>
+    //                     </tr>
+    //                 </thead>
+    //                 <tbody>
+    //                     {data.map((program, index) => (
+    //                         <tr key = { index }>
+    //                             <td>{program.programName}</td>
+    //                             <td>{program.department}</td>
+    //                             <td><Actions/></td>
+    //                         </tr>)
+    //                     )}
+    //                 </tbody>
+    //             </table>
+    //         </>
+    //     );
+    // }
 
-    // This table is about course subjects
-    const Course = ({ data }) => {
+    // // This table is about course subjects
+    // const Course = ({ data }) => {
+    //     return (
+    //         <>
+    //             <table class="table-auto">
+    //                 <thead>
+    //                     <tr>
+    //                         <th>Course Title</th>
+    //                         <th>Course Code</th>
+    //                         <th>Course Units</th>
+    //                         <th>Actions</th>
+    //                     </tr>
+    //                 </thead>
+    //                 <tbody>
+    //                     {data.map((course, index) => (
+    //                         <tr key = { index }>
+    //                             <td>{course.title}</td>
+    //                             <td>{course.courseCode}</td>
+    //                             <td>{course.units }</td>
+    //                             <td><Actions/></td>
+    //                         </tr>)
+    //                     )}
+    //                 </tbody>
+    //             </table>
+    //         </>
+    //     );
+    // }
+
+    // Table for displaying the student's summary of grades for a given semester 
+    // To be used for Student Record View Page
+    const SemRecord = ({ data }) => {
         return (
             <>
-                <table class="table-auto">
-                    <thead>
+                <table className="table-auto w-full m-0">
+                    <thead className="text-left">
                         <tr>
-                            <th>Course Title</th>
-                            <th>Course Code</th>
-                            <th>Course Units</th>
-                            <th>Actions</th>
+                            <th className="w-1/6">Course Name</th>
+                            <th className="w-1/6 text-center">Units</th>
+                            <th className="w-1/6 text-center">Grade</th>
+                            <th className="w-1/6 text-center">Enrolled</th>
+                            <th className="w-1/6 text-center"></th>
+                            <th className="w-1/6 text-center"><AddRow /></th>            {/* Add row button dapat dito */}
                         </tr>
                     </thead>
                     <tbody>
                         {data.map((course, index) => (
                             <tr key = { index }>
-                                <td>{course.title}</td>
-                                <td>{course.courseCode}</td>
-                                <td>{course.units }</td>
-                                <td><Actions/></td>
+                                <td>{course.courseName}</td>
+                                <td className="text-center">{course.units}</td>
+                                <td className="text-center">{course.grade}</td>
+                                <td className="text-center">{course.enrolled}</td>
+                                <td className="text-center">{course.runningSum}</td>
+                                <td className="text-center"><Actions/></td>
                             </tr>)
                         )}
                     </tbody>
@@ -143,7 +178,31 @@ const List = ({ table, data}) => {
     } */
 
     // Function for Displaying the Student List on the Dashboard
-    const StudentList = ({ data }) => {
+    const StudentList = ({ data, setRows }) => {
+        useEffect(() => {
+            /* Reference: https://www.youtube.com/watch?v=8SL_hM1a0yo */
+            function sortTableByColumn(table, column, asc = true) {
+                // Remember how the column is currently sorted
+                table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
+                table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-asc", asc);
+                table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-desc", !asc);
+            }
+            
+            /* Check all the sortable columns */
+            document.querySelectorAll(".students-table th").forEach(headerCell => {
+                if (!headerCell.classList.contains("student-number") && !headerCell.classList.contains("student-status") && !headerCell.classList.contains("student-action")){
+                    headerCell.addEventListener("click", () => {
+                        const tableElement = headerCell.parentElement.parentElement.parentElement;
+                        const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
+                        const currentIsAscending = headerCell.classList.contains("th-sort-asc");
+                
+                        sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
+                    });
+                }
+            });
+        })
+
+
         return (
             <>
                 <table className="students-table table">
@@ -186,7 +245,7 @@ const List = ({ table, data}) => {
         )
     } else if(table == 2) {
         return (
-            <DegreeProgram data={data}/>
+            <SemRecord data={data}/>
         )
     } else if(table == 3) {
         return (

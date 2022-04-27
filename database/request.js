@@ -196,7 +196,8 @@ student1 = {
     TotalUnits: 100,
     TotalUnits2: 100,
     TotalCumulative: 100,
-    OverallGWA: 1.00
+    OverallGWA: 1.00,
+    Status: "Pending"
 }
 
 student2 = {
@@ -209,7 +210,8 @@ student2 = {
     TotalUnits: 75,
     TotalUnits2: 75,
     TotalCumulative: 75,
-    OverallGWA: 2.75
+    OverallGWA: 2.75,
+    Status: "Pending"
 }
 
 student3 = {
@@ -222,7 +224,8 @@ student3 = {
     TotalUnits: 90,
     TotalUnits2: 90,
     TotalCumulative: 90,
-    OverallGWA: 1.75
+    OverallGWA: 1.75,
+    Status: "Pending"
 }
 
 updatestudent2 = {
@@ -388,18 +391,16 @@ newhistory2 = {
 /*  NOTE TEST   */
 
 note1 = {
-    User:"6263d5beb7b0bf7535f1d3cc",
-    Student:"6263d4c80791d8b67842ec86",
-    Semester:"1S",
-    Year:"2020-2021",
+    User:"626917dc9356e3d73ba366ad",
+    Student:"626917aa9356e3d73ba366a5",
+    SemesterYear:"1S2020-2021",
     Details:"Hatdog ang sem na ito"
 }
 
 note2 = {
-    User:"6263d4c80791d8b67842ec86",
+    User:"626917aa9356e3d73ba366a7",
     Student:"6263d5beb7b0bf7535f1d3cc",
-    Semester:"2S",
-    Year:"2020-2021",
+    SemesterYear:"2S2020-2021",
     Details:"Hatdog ang sem na ito"
 }
 
@@ -407,8 +408,7 @@ newNote2 = {
     id:"6263d618b7b0bf7535f1d3d6",
     User:"6263d4c80791d8b67842ec86",
     Student:"6263d5beb7b0bf7535f1d3cc",
-    Semester:"2S",
-    Year:"2020-2021",
+    SemesterYear:"2S2020-2021",
     Details:"Solid ang sem na ito"
 }
 
@@ -427,9 +427,9 @@ newNote2 = {
 //     console.log(JSON.stringify(JSON.parse(body),null,2));
 // });
 
-// request('http://localhost:3001/note/find-by-student',{method:"GET",form:{Student:"6263d5beb7b0bf7535f1d3cc"}},function(err,res,body) {
-//     console.log(JSON.stringify(JSON.parse(body),null,2));
-// });
+request('http://localhost:3001/note/find-by-student',{method:"POST",form:{Student:"6263d5beb7b0bf7535f1d3cc"}},function(err,res,body) {
+    console.log(JSON.stringify(JSON.parse(body),null,2));
+});
 
 // request('http://localhost:3001/note/update',{method:"PUT",form:newNote2},function(err,res,body) {
 //     console.log(JSON.stringify(JSON.parse(body),null,2));

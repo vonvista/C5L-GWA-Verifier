@@ -4,7 +4,7 @@ import UploadFileBtn from '../components/buttons/UploadFileBtn';
 /* Components */
 import List from '../components/List';
 import Header from '../components/HeaderWithoutArrowbck';
-import UserNav from '../components/UserNavigation';
+import AdminNav from '../components/AdminNavigation';
 import Pagination from '../components/Pagination';
 
 /* CSS */
@@ -12,7 +12,7 @@ import '../components/List.css';
 import 'tailwindcss/tailwind.css';
 
 
-const UserDashboard = () => {
+const AdminDashboard = () => {
     const [rows, setRows] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -25,34 +25,34 @@ const UserDashboard = () => {
           "gwa": "1.01234",
           "status": "Checked"
         },
-        // {
-        //   "name": "Eyds Angeles",
-        //   "studno": "2019-05235",
-        //   "degprog": "BS Computer Science",
-        //   "gwa": "1.0",
-        //   "status": "Unchecked"
-        // },
-        // {
-        //   "name": "George Gragas",
-        //   "studno": "2019-05235",
-        //   "degprog": "BS Computer Science",
-        //   "gwa": "1.0",
-        //   "status": "Pending"
-        // },
-        // {
-        //     "name": "Maurice Paguagan",
-        //     "studno": "2019-05235",
-        //     "degprog": "BS Computer Science",
-        //     "gwa": "1.0",
-        //     "status": "Checked"
-        //   },
-        //   {
-        //     "name": "Eyds Angeles",
-        //     "studno": "2019-05235",
-        //     "degprog": "BS Computer Science",
-        //     "gwa": "1.0",
-        //     "status": "Unchecked"
-        //   },
+        {
+          "name": "Eyds Angeles",
+          "studno": "2019-05235",
+          "degprog": "BS Computer Science",
+          "gwa": "1.0",
+          "status": "Unchecked"
+        },
+        {
+          "name": "George Gragas",
+          "studno": "2019-05235",
+          "degprog": "BS Computer Science",
+          "gwa": "1.0",
+          "status": "Pending"
+        },
+        {
+            "name": "Maurice Paguagan",
+            "studno": "2019-05235",
+            "degprog": "BS Computer Science",
+            "gwa": "1.0",
+            "status": "Checked"
+          },
+          {
+            "name": "Eyds Angeles",
+            "studno": "2019-05235",
+            "degprog": "BS Computer Science",
+            "gwa": "1.0",
+            "status": "Unchecked"
+          },
           {
             "name": "2 George Gragas",
             "studno": "2019-05235",
@@ -166,7 +166,7 @@ const UserDashboard = () => {
 
       fetchData();
     }, []);
-
+    
     // Get current rows
     const indexOfLastRow = currentPage * rowsPerPage;
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
@@ -178,13 +178,13 @@ const UserDashboard = () => {
     return(
       <>
         <div>
-            <div><UserNav /></div>
-
+            <div><AdminNav /></div>
+            
             {/* Right Section */}
             <div className="absolute inset-0 flex ml-8 xl:ml-12 justify-center">
-
-              <div><Header pageTitle={"USER DASHBOARD"}/></div>
-
+              
+              <div><Header pageTitle={"ADMIN DASHBOARD"}/></div>
+              
               {/* Page Contents */}
               <div className='pt-20 flex-column'>
                 {/* Upload button */}
@@ -193,7 +193,7 @@ const UserDashboard = () => {
                 </div>
                 <div className='table-container'>
                   <List table={1} data={currentRows}/>
-                </div>
+                </div> 
                 <div className='float-right'>
                   <Pagination rowsPerPage={rowsPerPage} totalRows={rows.length} currentPage={currentPage} paginate={paginate} />
                 </div>
@@ -206,4 +206,4 @@ const UserDashboard = () => {
     )
 }
 
-export default UserDashboard
+export default AdminDashboard
