@@ -160,13 +160,12 @@ exports.userLogin = async function(req, res, next) {
 // GRADE SCHEMA
 const gradeSchema = new Schema({
   Student: {type: Schema.Types.ObjectId, ref: 'student', required: true},
-  Course: {type: Schema.Types.ObjectId, ref: 'course', required: true},
-  Value: {type: String, required: true},
+  Course: {type: String, required: true},
+  Grade: {type: String, required: true},
   Unit: {type: Number, required: true},
   Weight: {type: Number, required: true},
   Cumulative: {type: Number, required: true},
-  Year: {type: String, required: true},
-  Semester: String
+  YearSemester: String
 },{autoCreate:true})
 
 // GRADE MODEL
