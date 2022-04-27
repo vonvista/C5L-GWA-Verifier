@@ -25,34 +25,34 @@ const UserDashboard = () => {
           "gwa": "1.01234",
           "status": "Checked"
         },
-        {
-          "name": "Eyds Angeles",
-          "studno": "2019-05235",
-          "degprog": "BS Computer Science",
-          "gwa": "1.0",
-          "status": "Unchecked"
-        },
-        {
-          "name": "George Gragas",
-          "studno": "2019-05235",
-          "degprog": "BS Computer Science",
-          "gwa": "1.0",
-          "status": "Pending"
-        },
-        {
-            "name": "Maurice Paguagan",
-            "studno": "2019-05235",
-            "degprog": "BS Computer Science",
-            "gwa": "1.0",
-            "status": "Checked"
-          },
-          {
-            "name": "Eyds Angeles",
-            "studno": "2019-05235",
-            "degprog": "BS Computer Science",
-            "gwa": "1.0",
-            "status": "Unchecked"
-          },
+        // {
+        //   "name": "Eyds Angeles",
+        //   "studno": "2019-05235",
+        //   "degprog": "BS Computer Science",
+        //   "gwa": "1.0",
+        //   "status": "Unchecked"
+        // },
+        // {
+        //   "name": "George Gragas",
+        //   "studno": "2019-05235",
+        //   "degprog": "BS Computer Science",
+        //   "gwa": "1.0",
+        //   "status": "Pending"
+        // },
+        // {
+        //     "name": "Maurice Paguagan",
+        //     "studno": "2019-05235",
+        //     "degprog": "BS Computer Science",
+        //     "gwa": "1.0",
+        //     "status": "Checked"
+        //   },
+        //   {
+        //     "name": "Eyds Angeles",
+        //     "studno": "2019-05235",
+        //     "degprog": "BS Computer Science",
+        //     "gwa": "1.0",
+        //     "status": "Unchecked"
+        //   },
           {
             "name": "2 George Gragas",
             "studno": "2019-05235",
@@ -166,7 +166,7 @@ const UserDashboard = () => {
 
       fetchData();
     }, []);
-    
+
     // Get current rows
     const indexOfLastRow = currentPage * rowsPerPage;
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
@@ -179,18 +179,18 @@ const UserDashboard = () => {
       <>
         <div>
             <div><UserNav /></div>
-            
+
             {/* Right Section */}
             <div className="absolute inset-0 flex ml-8 xl:ml-12 justify-center">
-              
+
               <div><Header pageTitle={"USER DASHBOARD"}/></div>
-              
+
               {/* Page Contents */}
               <div className='pt-20 flex-column'>
                 <UploadFileBtn />
                 <div className='table-container'>
                   <List table={1} data={currentRows}/>
-                </div> 
+                </div>
                 <div className='float-right'>
                   <Pagination rowsPerPage={rowsPerPage} totalRows={rows.length} currentPage={currentPage} paginate={paginate} />
                 </div>

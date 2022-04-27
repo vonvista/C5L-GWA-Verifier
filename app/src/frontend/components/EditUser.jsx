@@ -5,14 +5,14 @@ import user from '../../../assets/icons/user-icon.jpg';
 import Input from './inputs/Input';
 
 // function which shows the add user modal; to be used in UserSystemPage
-// to use AddUser and AddUserBtn, import needed files and declare and initialize showModal variable:
-// <AddUserBtn handleClick={() => setShowModal(true)}/>
+// to use EditUser and AddUserBtn, import needed files and declare and initialize showModal variable:
+// <Actions handleEdit={() => setShowModal(true)}/>
 // {showModal ?
-//   (<AddUser handleClose={() => setShowModal(false)}/>)
+//   (<EditUser handleClose={() => setShowModal(false)}/>)
 //   :(<></>)
 // }
 
-const AddUser = ({ handleClose }) => {
+const EditUser = ({ handleClose }) => {
   const [firstName, setFirstName] = useState('');
   const [middleName, setMiddleName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -20,6 +20,8 @@ const AddUser = ({ handleClose }) => {
   const [position, setPosition] = useState(''); // username
   const [pw, setPW] = useState(''); // password
   const [status, setStatus] = useState('show');
+
+  console.log("Editing");
 
   // reference for password toggle: https://codepen.io/huphtur/pen/OKJJQY
   const buttonHandler = () => {
@@ -36,12 +38,10 @@ const AddUser = ({ handleClose }) => {
     password.focus();
   };
 
-  console.log("Adding");
-
   return (
     <>
-      {/* add user button */}
-      <div className="modal-add h-screen">
+      {/* Edit user button */}
+      <div className="modal-edit h-screen">
         {/* content */}
         <div className="modal-content">
           {/* exit button */}
@@ -194,18 +194,33 @@ const AddUser = ({ handleClose }) => {
                   </div>
                 </div>
 
-                {/* create user button */}
-                <div className="account-button">
-                  <div className="w-full flex">
-                    <section className="un-style">
-                      <button
-                        className="inter w-2/5 block ml-auto mr-auto bg-white rounded-lg hover:bg-slate-200 user-btn"
-                        type="button"
-                      >
-                        Create Account
-                      </button>
-                    </section>
-                  </div>
+                <div>
+                    {/* Save Changes button */}
+                    <div className="save-button">
+                      <div className="w-full flex">
+                        <section className="un-style">
+                          <button
+                            className="inter bg-login-green text-white w-2/5 block ml-auto mr-auto bg-white rounded-lg hover:bg-emerald-600 user-btn"
+                            type="button"
+                          >
+                            Save Changes
+                          </button>
+                        </section>
+                      </div>
+                    </div>
+                    {/* Cancel button */}
+                    <div className="cancel-button ">
+                      <div className="w-full flex">
+                        <section className="un-style">
+                          <button
+                            className="inter  w-2/5 block mt-2 ml-auto mr-auto bg-white rounded-lg hover:bg-slate-200 user-btn"
+                            type="button"
+                          >
+                            Cancel
+                          </button>
+                        </section>
+                      </div>
+                    </div>
                 </div>
               </form>
             </section>
@@ -216,4 +231,4 @@ const AddUser = ({ handleClose }) => {
   );
 };
 
-export default AddUser;
+export default EditUser;
