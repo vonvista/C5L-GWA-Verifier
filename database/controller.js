@@ -163,7 +163,7 @@ const gradeSchema = new Schema({
   Course: {type: String, required: true},
   Grade: {type: String, required: true},
   Unit: {type: Number, required: true},
-  Weight: {type: Number, required: true},
+  Weight: Number,
   Cumulative: {type: Number, required: true},
   YearSemester: String
 },{autoCreate:true})
