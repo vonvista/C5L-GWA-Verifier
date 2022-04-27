@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Disclosure } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/solid'
 import 'tailwindcss/tailwind.css';
 
-import List from '../../../components/List';
-// import TableContents from './TableContents';
+import TableContents from './TableContents';
 
 const TableDivider = ({  }) => {
     const [rows, setRows] = useState([]);
@@ -137,72 +136,13 @@ const TableDivider = ({  }) => {
         },
     ];
 
-    useEffect(() => {
-        const fetchData = async () => {
-          // Retrieve data from database
-          await setRows(FirstSem);
-          await setRows(SecondSem);
-          await setRows(ThirdSem);
-        }
-  
-        fetchData();
-    }, []);
-
-    const nameStyle = "flex justify-between w-full px-4 py-2 text-sm font-medium text-left rounded-lg text-sr-table-text bg-sr-dark-gray hover:bg-table-hover-color hover:text-secondary-red";
+    const Semesters = [FirstSem, SecondSem, ThirdSem];
     
     return (
         <div className="w-full p-2 mx-auto bg-white rounded-2xl">
-            <Disclosure>
-            {({ open }) => (
-                <>
-                <Disclosure.Button className={`${open ? 'bg-table-hover-color text-secondary-red' : ''} ${nameStyle}`}>
-                    <span>First Sem A.Y. 2020-2021</span>
-                    <ChevronUpIcon
-                        className={`${
-                            open ? 'transform rotate-180' : ''
-                        } w-5 h-5`}
-                    />
-                </Disclosure.Button>
-                <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-                    <List table={2} data={FirstSem}/>
-                </Disclosure.Panel>
-                </>
-            )}
-            </Disclosure>
-            <Disclosure>
-            {({ open }) => (
-                <>
-                <Disclosure.Button className={`${open ? 'bg-table-hover-color text-secondary-red' : ''} ${nameStyle}`}>
-                    <span>Second Sem A.Y. 2020-2021</span>
-                    <ChevronUpIcon
-                        className={`${
-                            open ? 'transform rotate-180' : ''
-                        } w-5 h-5`}
-                    />
-                </Disclosure.Button>
-                <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-                    <List table={2} data={SecondSem}/>
-                </Disclosure.Panel>
-                </>
-            )}
-            </Disclosure>
-            <Disclosure>
-            {({ open }) => (
-                <>
-                <Disclosure.Button className={`${open ? 'bg-table-hover-color text-secondary-red' : ''} ${nameStyle}`}>
-                    <span>Third Sem A.Y. 2020-2021</span>
-                    <ChevronUpIcon
-                        className={`${
-                            open ? 'transform rotate-180' : ''
-                        } w-5 h-5`}
-                    />
-                </Disclosure.Button>
-                <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-                    <List table={2} data={ThirdSem}/>
-                </Disclosure.Panel>
-                </>
-            )}
-            </Disclosure>
+            <TableContents Name="First Sem A.Y.2019-2020" Semester={Semesters[0]} />
+            <TableContents Name="Second Sem A.Y.2019-2020" Semester={Semesters[1]} />
+            <TableContents Name="First Sem A.Y.2020-2021" Semester={Semesters[2]} />
         </div>
     )
 }

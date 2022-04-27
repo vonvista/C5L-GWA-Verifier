@@ -87,10 +87,12 @@ const RecordPage = (props) => {
                     <div className="w-[95%] grid grid-flow-col mx-auto my-5 gap-3">
 
                         <div className="col-span-3">
-                            {/* div container for grades */}
+
+                            {/* div container for the whole accordion component */}
                             <div className="shadow-lg w-[60vw] col-span-3 rounded-lg mt-3 h-80">
                                 <TableDivider />
                             </div>
+
                         </div>
                                     
                         {/* tabbed information card */}
