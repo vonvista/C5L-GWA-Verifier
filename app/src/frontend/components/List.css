@@ -7,7 +7,7 @@
 }
 
 .students-table {
-    max-width: 80.078125vw;      /*1230px*/
+    max-width: 82.078125vw;      /*1230px*/
     max-height: 70.6371191135734vh;      /*510px*/
 
     table-layout: fixed;
@@ -76,10 +76,12 @@
 .student-name {
     font-weight: bold;
     width: 21.158854166666668vw;      /* 325px */
+    cursor: pointer;
 }
 
 .student-number {
-    width: 13.020833333333334vw !important;    /* 200px */
+    width: 15.234375vw !important;    /* 234px */
+    cursor: pointer;
 }
 
 .student-degree {
@@ -88,6 +90,7 @@
 
 .student-gwa {
     width: 7.8125vw !important;    /* 120px */
+    cursor: pointer;
 }
 
 /* Status Elements */
@@ -137,6 +140,28 @@
 .student-action {
     text-align: center;
 }
+
+/* Sort Elements */
+.students-table .th-sort-asc::after {
+    content: "\25b4";
+    float: right;
+}
+
+.students-table .th-sort-desc::after {
+    content: "\25be";
+    float: right;
+}
+
+.students-table .th-sort-asc::after,
+.students-table .th-sort-desc::after {
+    margin-left: 0.3255208333333333vw; /* 5px */
+}
+
+.students-table .th-sort-asc,
+.students-table .th-sort-desc {
+    background: rgba(0, 0, 0, 0.1);
+}
+  
 
 
 
