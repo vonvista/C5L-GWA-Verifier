@@ -57,10 +57,12 @@ const AddRow = () => {
                                     duration: 0.2
                                 }
                             }}
-                            className='modal font-[Montserrat]'>
+
+                            className='modal'>
                             <motion.div className="modal-content">
                             {/* Baybayin Background Image */}
-                            <motion.div className="bg-baybayin baybayin-style"></motion.div>
+                            <motion.div className="bg-baybayin baybayin-styles"></motion.div>
+
                             {/* content */}
                                 <motion.div className='modal-body'>
                                     {/* title */}
@@ -70,8 +72,7 @@ const AddRow = () => {
                                         </button>
                                     </motion.div>
                                     <motion.div className='modal-title text-white text-center'>Please fill in the fields below to insert a new row</motion.div>
-                                    {/* <motion.div className='modal-header flex text-white justify-items-center'>
-                                    </motion.div> */}
+
                                     {/* input form */}
                                     <form className='modal-inputs flex'>
                                         {/* course name */}

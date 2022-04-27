@@ -1,57 +1,92 @@
 import React, { useEffect } from 'react';
 import Actions from './buttons/Actions'
+import AddRow from './AddRow';
 import 'tailwindcss/tailwind.css';
 
-// This list component requires a (1) condition that indicates whgat table to display (2) data to be dispays. See return part at the end.
-const List = ({ table, data}) => {
 
+// This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
+
+const List = ({ table, data }) => {
     // George Gragas
     // This table is about degreeprogram
-    const DegreeProgram = ({ data, setRows }) => {
-        return (
-            <>
-                <table class="table-auto">
-                    <thead>
-                        <tr>
-                            <th>Program</th>
-                            <th>Department</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.map((program, index) => (
-                            <tr key = { index }>
-                                <td>{program.programName}</td>
-                                <td>{program.department}</td>
-                                <td><Actions/></td>
-                            </tr>)
-                        )}
-                    </tbody>
-                </table>
-            </>
-        );
-    }
+    // const DegreeProgram = ({ data }) => {
+    //     return (
+    //         <>
+    //             <table class="table-auto">
+    //                 <thead>
+    //                     <tr>
+    //                         <th>Program</th>
+    //                         <th>Department</th>
+    //                         <th>Actions</th>
+    //                     </tr>
+    //                 </thead>
+    //                 <tbody>
+    //                     {data.map((program, index) => (
+    //                         <tr key = { index }>
+    //                             <td>{program.programName}</td>
+    //                             <td>{program.department}</td>
+    //                             <td><Actions/></td>
+    //                         </tr>)
+    //                     )}
+    //                 </tbody>
+    //             </table>
+    //         </>
+    //     );
+    // }
 
-    // This table is about course subjects
-    const Course = ({ data }) => {
+    // // This table is about course subjects
+    // const Course = ({ data }) => {
+    //     return (
+    //         <>
+    //             <table class="table-auto">
+    //                 <thead>
+    //                     <tr>
+    //                         <th>Course Title</th>
+    //                         <th>Course Code</th>
+    //                         <th>Course Units</th>
+    //                         <th>Actions</th>
+    //                     </tr>
+    //                 </thead>
+    //                 <tbody>
+    //                     {data.map((course, index) => (
+    //                         <tr key = { index }>
+    //                             <td>{course.title}</td>
+    //                             <td>{course.courseCode}</td>
+    //                             <td>{course.units }</td>
+    //                             <td><Actions/></td>
+    //                         </tr>)
+    //                     )}
+    //                 </tbody>
+    //             </table>
+    //         </>
+    //     );
+    // }
+
+    // Table for displaying the student's summary of grades for a given semester 
+    // To be used for Student Record View Page
+    const SemRecord = ({ data }) => {
         return (
             <>
-                <table class="table-auto">
-                    <thead>
+                <table className="table-auto w-full m-0">
+                    <thead className="text-left">
                         <tr>
-                            <th>Course Title</th>
-                            <th>Course Code</th>
-                            <th>Course Units</th>
-                            <th>Actions</th>
+                            <th className="w-1/6">Course Name</th>
+                            <th className="w-1/6 text-center">Units</th>
+                            <th className="w-1/6 text-center">Grade</th>
+                            <th className="w-1/6 text-center">Enrolled</th>
+                            <th className="w-1/6 text-center"></th>
+                            <th className="w-1/6 text-center"><AddRow /></th>            {/* Add row button dapat dito */}
                         </tr>
                     </thead>
                     <tbody>
                         {data.map((course, index) => (
                             <tr key = { index }>
-                                <td>{course.title}</td>
-                                <td>{course.courseCode}</td>
-                                <td>{course.units }</td>
-                                <td><Actions/></td>
+                                <td>{course.courseName}</td>
+                                <td className="text-center">{course.units}</td>
+                                <td className="text-center">{course.grade}</td>
+                                <td className="text-center">{course.enrolled}</td>
+                                <td className="text-center">{course.runningSum}</td>
+                                <td className="text-center"><Actions/></td>
                             </tr>)
                         )}
                     </tbody>
@@ -199,7 +234,7 @@ const List = ({ table, data}) => {
         )
     } else if(table == 2) {
         return (
-            <DegreeProgram data={data}/>
+            <SemRecord data={data}/>
         )
     } else if(table == 3) {
         return (

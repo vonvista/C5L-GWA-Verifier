@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');    /* Regular */
+
 .modal-backdrop {
     width: 100vw;
     height: 100vh;
@@ -27,9 +29,11 @@
     bottom: 0;
     left: 0;
     right: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
 }
 
-.baybayin-style{
+.baybayin-styles{
     background-repeat: repeat-y;
     background-size: contain;
     margin-left: -11.25vh;
@@ -39,11 +43,12 @@
 
 .modal-content {
     position: relative;
-}
+    top: 12%;
 
 .modal-body {
     position: absolute;
     top: 0;
+    background: #562323;
 }
 
 .modal-title {
@@ -106,7 +111,7 @@
 .modal-btn {
     height: 5.54016620498615vh; /* 40px */
     width: 9.765625vw;    /* 150px */
-    padding: 0.6510416666666666vw 2.770083102493075vh; /* 10px 20px */
+    padding: 0.6510416666666666vw 1.770083102493075vh; /* 10px 20px */
     border-radius: 0.6510416666666666vw; /* 10px */
     margin-right: 0.6510416666666666vw; /* 10px */
 }
