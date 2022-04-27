@@ -81,11 +81,11 @@
 
 .student-number {
     width: 15.234375vw !important;    /* 234px */
-    cursor: pointer;
 }
 
 .student-degree {
     width: 21.158854166666668vw;   /* 325px */
+    cursor: pointer;
 }
 
 .student-gwa {

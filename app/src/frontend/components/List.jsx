@@ -144,7 +144,7 @@ const List = ({ table, data}) => {
             
             /* Check all the sortable columns */
             document.querySelectorAll(".students-table th").forEach(headerCell => {
-                if (!headerCell.classList.contains("student-degree") && !headerCell.classList.contains("student-status") && !headerCell.classList.contains("student-action")){
+                if (!headerCell.classList.contains("student-number") && !headerCell.classList.contains("student-status") && !headerCell.classList.contains("student-action")){
                     headerCell.addEventListener("click", () => {
                         const tableElement = headerCell.parentElement.parentElement.parentElement;
                         const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
