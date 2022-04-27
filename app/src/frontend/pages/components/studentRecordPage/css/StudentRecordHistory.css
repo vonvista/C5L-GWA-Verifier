@@ -1,15 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Inter');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 
-.modal-content {
-    background-color: #fefefe;
+.modal-content-history {
     margin: 0 auto;
     flex-direction: column;
     position: relative;
 }
 
-.modal-body{
-    background-color: #fefefe;
+.modal-body-history{
     position: relative;
     margin: 0;
     padding: 0px;
@@ -17,16 +15,6 @@
     width: 100%;
     height: 100%;
     overflow-y: auto;
-}
-
-hr{
-    display: block;
-    margin-top: 8px;
-    margin-bottom: 5px;
-    margin-left: auto;
-    margin-right: auto;
-    border-style: ridge;
-    border-width: 1.5px;
 }
 
 .inter{

@@ -11,19 +11,19 @@ import Verify from '../../../components/buttons/Verify'
 export default function Notes({eventHandler, notes}) { 
 
     return(
-        <div className="w-full h-[70vh] h-max-[70vh] mx-auto p-5 block overflow-auto">
+        <div className="max-w-[25vw] max-h-[41rem] mx-auto p-5 block overflow-auto">
             {
                 notes.map( (data, idx) => {
                     return(
                         <div className="grid border rounded-lg p-5 mb-2" key={idx}>
-                            <h1 className="text-2xl font-bold">
+                            <h1 className="text-xl inter font-bold">
                                {data.sem}
 
                             </h1>
-                            <h2 className="font-light italic">
+                            {/* <h2 className="inter font-light italic">
                                 {data.author} {data.date}
-                            </h2>
-                            <p className="mt-3">
+                            </h2> */}
+                            <p className="inter text-sm mt-3">
                                 {data.content}
                             </p>
                         </div>

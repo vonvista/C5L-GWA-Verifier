@@ -17,7 +17,7 @@ const RecordHistory = ({ main, user, time, details }) => {
         {/* main description */}
         <h3 className="inter mb-0.5 m-1 text-sm font-semibold px-5">{main}</h3>
         <button
-          className="bg-transparent outline-none relative ml-auto mr-5 grow-0"
+          className="outline-none relative ml-auto mr-5 grow-0"
           type="button"
           onClick={() => setIsActive(!isActive)}
         >

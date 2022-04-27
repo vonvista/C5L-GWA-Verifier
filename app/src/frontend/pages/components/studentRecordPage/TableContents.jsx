@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Disclosure } from '@headlessui/react'
+import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/solid'
 import 'tailwindcss/tailwind.css';
 
 import List from '../../../components/List';
 
-const TableContents = ({ Name, Semester }) => {
+const TableContents = ({ Name, Semester, key }) => {
     const [rows, setRows] = useState([]);
 
     useEffect(() => {
@@ -17,33 +17,40 @@ const TableContents = ({ Name, Semester }) => {
         fetchData();
     }, []);
 
-    const nameStyle = "flex justify-between w-full px-4 py-2 text-sm font-medium text-left rounded-lg text-sr-table-text bg-sr-dark-gray hover:bg-table-hover-color hover:text-secondary-red";
+    const nameStyle = "flex inter font-bold justify-between z-25 w-full px-4 py-2 text-sm font-medium text-left text-sr-table-text bg-sr-dark-gray transition ease-in-out delay-250 hover:bg-table-hover-color hover:text-secondary-red";
 
     return (
         <>
             {/* Accordion for the table */}
-            <Disclosure>
-                {({ open }) => (
-                    <>
-                    {/* Accordion Header */}
-                    <Disclosure.Button className={`${open ? 'bg-table-hover-color text-secondary-red' : ''} ${nameStyle}`}>
-                        <span>{Name}</span>
+            <div className="row-span-1">
+                <Disclosure key={key}>
+                    {({ open }) => (
+                        <>
+                            {/* Accordion Header */}
+                            <Disclosure.Button className={`${open ? 'bg-table-hover-color text-secondary-red rounded-t-lg' : 'mb-2 rounded-lg shadow-lg'} ${nameStyle}`}>
+                                <span className="text-lg">{Name}</span>
 
-                        {/* Button */}
-                        <ChevronUpIcon
-                            className={`${
-                                open ? 'transform rotate-180' : ''
-                            } w-5 h-5`}
-                        />
-                    </Disclosure.Button>
-                    
-                    {/* Accordion Contents */}
-                    <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-                        <List table={2} data={Semester}/>
-                    </Disclosure.Panel>
-                    </>
-                )}
-            </Disclosure>
+                                {/* Button */}
+                                <ChevronUpIcon
+                                    className={`${
+                                        !open ? 'transform rotate-180' : ''
+                                    } w-5 h-5 self-center`}
+                                />
+                            </Disclosure.Button>
+                            
+                            {/* Accordion Contents */}
+                            <Disclosure.Panel className="inter z-0 pl-5 py-3 mb-2 text-sm text-gray-500 rounded-b-lg shadow-lg">
+                                <List table={2} data={Semester}/>
+                                <section className="mt-3">
+                                    <span className="font-black">Load Status</span>
+                                    <span className="ml-4 font-black text-login-green underline">Normal</span>
+                                </section>
+                            </Disclosure.Panel>       
+                        </>
+                    )}
+                </Disclosure>
+            </div>
+            
         </>
     )
 }

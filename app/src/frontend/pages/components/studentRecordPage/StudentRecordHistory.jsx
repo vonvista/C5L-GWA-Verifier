@@ -13,7 +13,7 @@ const StudentRecordHistory = ({historyData, ...rest}) => {
     return (
       <>
         <div className="p-5 h-[70vh] h-max-[70vh] modal-content">
-          <div className="modal-body">
+          <div className="modal-body-history">
             <h2 className="inter font-light text-[1.05vw] italic">
               No Student Record History found.
             </h2>
@@ -24,9 +24,9 @@ const StudentRecordHistory = ({historyData, ...rest}) => {
   }
   return (
     <>
-      <div className="p-5 h-[70vh] h-max-[70vh] modal-content overflow-auto">
+      <div className="min-w-[25vw] max-w-[25vw] p-5 max-h-[41rem] modal-content-history overflow-auto">
         {/* history body; Last modified and descriptions */}
-        <div className="modal-body">
+        <div className="modal-body-history">
           {historyData.map(({ date, info, i }) => (
             <section key={i} className="mb-3">
               {/* History per date */}

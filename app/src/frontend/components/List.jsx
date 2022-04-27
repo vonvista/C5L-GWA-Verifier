@@ -66,26 +66,26 @@ const List = ({ table, data }) => {
     const SemRecord = ({ data }) => {
         return (
             <>
-                <table className="sem-table">
-                    <thead>
+                <table className="table-auto w-full m-0">
+                    <thead className="text-left">
                         <tr>
-                            <th>Course Name</th>
-                            <th>Units</th>
-                            <th>Grade</th>
-                            <th>Enrolled</th>
-                            <th></th>
-                            <th><AddRow /></th>            {/* Add row button dapat dito */}
+                            <th className="w-1/6">Course Name</th>
+                            <th className="w-1/6 text-center">Units</th>
+                            <th className="w-1/6 text-center">Grade</th>
+                            <th className="w-1/6 text-center">Enrolled</th>
+                            <th className="w-1/6 text-center"></th>
+                            <th className="w-1/6 text-center"><AddRow /></th>            {/* Add row button dapat dito */}
                         </tr>
                     </thead>
                     <tbody>
                         {data.map((course, index) => (
                             <tr key = { index }>
                                 <td>{course.courseName}</td>
-                                <td>{course.units}</td>
-                                <td>{course.grade}</td>
-                                <td>{course.enrolled}</td>
-                                <td>{course.runningSum}</td>
-                                <td><Actions/></td>
+                                <td className="text-center">{course.units}</td>
+                                <td className="text-center">{course.grade}</td>
+                                <td className="text-center">{course.enrolled}</td>
+                                <td className="text-center">{course.runningSum}</td>
+                                <td className="text-center"><Actions/></td>
                             </tr>)
                         )}
                     </tbody>
