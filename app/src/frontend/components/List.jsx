@@ -1,5 +1,6 @@
 import React from 'react';
 import Actions from './buttons/Actions'
+import AddRow from './buttons/Add';
 import 'tailwindcss/tailwind.css';
 
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
@@ -60,6 +61,8 @@ const List = ({ table, data }) => {
     //     );
     // }
 
+    // Table for displaying the student's summary of grades for a given semester 
+    // To be used for Student Record View Page
     const SemRecord = ({ data }) => {
         return (
             <>
@@ -71,7 +74,7 @@ const List = ({ table, data }) => {
                             <th>Grade</th>
                             <th>Enrolled</th>
                             <th></th>
-                            <th>Actions</th>
+                            <th>Actions</th>            {/* Add row button dapat dito */}
                         </tr>
                     </thead>
                     <tbody>
