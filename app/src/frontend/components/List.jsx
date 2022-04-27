@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 import Actions from './buttons/Actions'
+import EditUser from './EditUser';
 import AddRow from './AddRow';
 import 'tailwindcss/tailwind.css';
 
@@ -97,25 +98,35 @@ const List = ({ table, data }) => {
 
     // Eyds Angeles
     // This table is about
-    const Eyds = ({data}) => {
+    const User = ({data}) => {
         console.log(data);
+        const [showModal, setShowModal] = useState(false)
+
         return (
           <>
-            <table className="user-table table-sortable">
+            <table className="user-table table">
               <thead>
                   <tr>
                   <th className='user-uname'>Username</th>
                   <th className='user-name'>Name</th>
+                  <th className='user-position'>Position</th>
                   <th className='user-action'>Actions</th>
                   </tr>
               </thead>
               <tbody>
                 {data.map((user, index) => (
                     <tr key = {index}>
-                      <td data-label = "Username"  className='user-uname'>{user.uname}</td>
-                      <td data-label = "Name" className='user-name'>{user.name}</td>
-                      <td data-label = "Actions" className='user-action'>
-                        <Actions/>
+                      <td className='user-uname'>{user.uname}</td>
+                      <td className='user-name'>{user.name}</td>
+                      <td className='user-position'>
+                          <div data-status={user.position} className='position'></div>
+                      </td>
+                      <td className='user-action'>
+                      <Actions handleEdit={() => setShowModal(true)}/>
+                      {showModal ?
+                        (<EditUser handleClose={() => setShowModal(false)}/>)
+                        :(<></>)
+                      }
                       </td>
                     </tr>
                   )
@@ -238,7 +249,7 @@ const List = ({ table, data }) => {
         )
     } else if(table == 3) {
         return (
-            <Eyds data={data}/>
+            <User data={data}/>
         )
     }
 }

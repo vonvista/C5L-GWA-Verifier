@@ -1,10 +1,11 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import icon from '../../assets/icon.svg';
 
-import UserDashboard from '../frontend/pages/UserDashboard';
+
 import LoginPage from '../frontend/LoginPage'
+import UserDashboard from '../frontend/pages/UserDashboard';
 import AdminDashboard from '../frontend/components/AdminNavigation';
-import UserManagement from '../frontend/components/UserSystemPage';
+import UserManagement from '../frontend/pages/UserManagementPage';
 import StudentRecord from '../frontend/pages/StudentRecord';
 
 export default function App() {

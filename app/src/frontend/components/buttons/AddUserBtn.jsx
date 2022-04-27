@@ -7,28 +7,30 @@ import user1 from '../../../../assets/icons/user1.svg';
 
 const AddUserBtn = ({ handleClick }) => {
   // img button styling
-  const btn = `.btn{
-        height: 5vh;
-    }`;
+  // const btn = `.btn{
+  //       width: 15vw;
+  //       height: 5vh;
+  //   }`;
 
   const imgBtn = `.img-btn{
-        width: 5vw;
-        height: 3vh;
+        width: 15vw;
+        height: 5vh;
+        padding-top: 1vh
     }`;
 
   const textBtn = `.text-btn{
         font-size: 1vw;
-        margin-right: 3vw;
+        text-align:center;
     }`;
 
   return (
     <>
       {/* img button styling */}
-      <style>{btn}</style>
+      {/* <style>{btn}</style> */}
       <style>{imgBtn}</style>
       <style>{textBtn}</style>
       <button
-        className="bg-login-green m-2 rounded-xl text-white font-montserrat font-bold hover:shadow-lg hover:bg-login-green-hover btn"
+        className=" bg-login-green m-2 rounded-xl text-white font-montserrat font-bold hover:shadow-lg hover:bg-login-green-hover"
         type="button"
         onClick={handleClick}
       >
