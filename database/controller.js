@@ -285,6 +285,7 @@ const studentSchema = new Schema({
   TotalUnits2: {type: Number, required: true},
   TotalCumulative: {type: Number, requied: true},
   OverallGWA: {type: Number, required : true},
+  Status: {type: String, required : true, enum:['Checked','Unchecked','Pending']}
 },{autoCreate:true});
 
 
@@ -320,7 +321,8 @@ exports.studentAdd = function(req, res, next) {
     TotalUnits: req.body.TotalUnits,
     TotalUnits2: req.body.TotalUnits2,
     TotalCumulative: req.body.TotalCumulative,
-    OverallGWA: req.body.OverallGWA
+    OverallGWA: req.body.OverallGWA,
+    Status: req.body.Status
   });
   console.log(newStudent);
 
@@ -342,7 +344,8 @@ Student.updateOne({StudentID: req.body.StudentID},{"$set":{
   "TotalUnits": req.body.TotalUnits,
   "TotalUnits2": req.body.TotalUnits2,
   "TotalCumulative": req.body.TotalCumulative,
-  "OverallGWA": req.body.OverallGWA  
+  "OverallGWA": req.body.OverallGWA,
+  "Status": req.body.Status
 }}, {new : true}, function(err,result){
   if(!err && Student){
     res.send(result);
@@ -463,10 +466,9 @@ exports.historyDeleteAll = function(req, res, next) {
 const noteSchema = new Schema({
   User: {type:mongoose.Types.ObjectId, ref:'user', required:true},
   Student: {type:mongoose.Types.ObjectId, ref:'student', required:true},
-  Semester:{type:String, required:true},
-  Year:{type:String, required:true},
-  Details: {type:String, required:true}
-});
+  SemesterYear:{type:String, required:true},
+  Details: {type:String, required:true},
+},{timestamps:true});
 
 // NOTE SCHEMA
 const Note = db.model('note',noteSchema);
@@ -476,8 +478,7 @@ exports.noteAdd = function(req,res,next){
   var newNote = new Note({
     User:mongoose.Types.ObjectId(req.body.User),
     Student:mongoose.Types.ObjectId(req.body.Student),
-    Semester:req.body.Semester,
-    Year:req.body.Year,
+    SemesterYear:req.body.SemesterYear,
     Details:req.body.Details
   });
   console.log(newNote);
@@ -516,8 +517,7 @@ exports.noteFindAllByStudent = function(req,res,next){
 // UPDATE A NOTE
 exports.noteUpdate = function(req,res,next){
   Note.updateOne({_id:mongoose.Types.ObjectId(req.body.id)},{"$set":{
-    "Semester":req.body.Semester,
-    "Year":req.body.Year,
+    "SemesterYear":req.body.SemesterYear,
     "Details":req.body.Details
   }},{new:true},function(err,result){
     if(!err) res.send(result);
@@ -543,6 +543,7 @@ exports.noteDeleteAll = function(req,res,next){
 
 
 // -----------------------------C O U R S E   S E C T I O N----------------------------------------
+// NOW DEPRICATED
 
 // COURSE SCHEMA
 // const courseSchema = new Schema({
@@ -633,6 +634,7 @@ exports.noteDeleteAll = function(req,res,next){
 // }
 
 // -----------------------------D E G R E E  S E C T I O N----------------------------------------
+// NOW DEPRICATED
 
 // DEGREE SCHEMA
 // const degreeSchema = new Schema({
