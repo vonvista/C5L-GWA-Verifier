@@ -9,6 +9,7 @@ import './StudentViewRecord.css';
 import Status from './Status';
 import Notes from './Notes';
 import History from './StudentRecordHistory';
+import TableDivider from './TableDivider';
 
 
 
@@ -86,17 +87,9 @@ const RecordPage = (props) => {
                     <div className="w-[95%] grid grid-flow-col mx-auto my-5 gap-3">
 
                         <div className="col-span-3">
-                            {/*{/* dropdown select }
-                            <div className="col-span-1 col-start-6">
-                                <SemSelect
-                                    style="w-72 ml-auto mr-0"
-                                    options={semesters}
-                                    state={[selectedSem, setSelectedSem]}     // so state can be accessed by parent component
-                                    />
-                            </div>*/}
-                            {/* grades table */}
+                            {/* div container for grades */}
                             <div className="shadow-lg w-[60vw] col-span-3 rounded-lg mt-3 h-80">
-                                {/* insert grades table component here */}
+                                <TableDivider />
                             </div>
                         </div>
                                     
