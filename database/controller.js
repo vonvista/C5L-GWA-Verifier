@@ -165,7 +165,7 @@ const gradeSchema = new Schema({
   Unit: {type: Number, required: true},
   Weight: Number,
   Cumulative: {type: Number, required: true},
-  YearSemester: String
+  SemesterYear: String
 },{autoCreate:true})
 
 // GRADE MODEL
@@ -210,7 +210,7 @@ exports.gradeAdd = function(req, res, next) {
     Unit: req.body.Unit,
     Weight: req.body.Weight,
     Cumulative: req.body.Cumulative,
-    YearSemester: req.body.YearSemester
+    SemesterYear: req.body.SemesterYear
   });
   console.log(newGrade);
   
@@ -234,7 +234,7 @@ exports.gradeUpdateOne = function(req, res, next) {
     "Unit": req.body.Unit,
     "Weight": req.body.Weight,
     "Cumulative": req.body.Cumulative,
-    "YearSemester": req.body.YearSemester
+    "SemesterYear": req.body.SemesterYear
   }}, {new : true}, function(err,result){
     if(!err && Grade){
       res.send(result);
