@@ -7,7 +7,7 @@ import 'tailwindcss/tailwind.css';
 
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
-const List = ({ table, data }) => {
+const List = ({ table, data, changeSort, sortState }) => {
     // George Gragas
     // This table is about degreeprogram
     // const DegreeProgram = ({ data }) => {
@@ -178,40 +178,48 @@ const List = ({ table, data }) => {
     } */
 
     // Function for Displaying the Student List on the Dashboard
-    const StudentList = ({ data, setRows }) => {
+    const StudentList = ({ data, setRows, changeSort, sortState }) => {
         useEffect(() => {
             /* Reference: https://www.youtube.com/watch?v=8SL_hM1a0yo */
-            function sortTableByColumn(table, column, asc = true) {
-                // Remember how the column is currently sorted
-                table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
-                table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-asc", asc);
-                table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-desc", !asc);
-            }
+            // function sortTableByColumn(table, column, asc = true) {
+            //     // Remember how the column is currently sorted
+            //     table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
+            //     table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-asc", asc);
+            //     table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-desc", !asc);
+            // }
             
-            /* Check all the sortable columns */
-            document.querySelectorAll(".students-table th").forEach(headerCell => {
-                if (!headerCell.classList.contains("student-number") && !headerCell.classList.contains("student-status") && !headerCell.classList.contains("student-action")){
-                    headerCell.addEventListener("click", () => {
-                        const tableElement = headerCell.parentElement.parentElement.parentElement;
-                        const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
-                        const currentIsAscending = headerCell.classList.contains("th-sort-asc");
+            // /* Check all the sortable columns */
+            // document.querySelectorAll(".students-table th").forEach(headerCell => {
+            //     if (!headerCell.classList.contains("student-number") && !headerCell.classList.contains("student-status") && !headerCell.classList.contains("student-action")){
+            //         headerCell.addEventListener("click", () => {
+            //             const tableElement = headerCell.parentElement.parentElement.parentElement;
+            //             const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
+            //             const currentIsAscending = headerCell.classList.contains("th-sort-asc");
                 
-                        sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
-                    });
-                }
-            });
+            //             sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
+            //         });
+            //     }
+            // });
+            console.log(sortState)
         })
-
 
         return (
             <>
                 <table className="students-table table">
                     <thead>
                         <tr>
-                            <th className='student-name'>Name</th>
-                            <th className='student-number'>Student Number</th>
-                            <th className='student-degree'>Degree Program</th>
-                            <th className='student-gwa'>GWA</th>
+                            <th className={`student-name ${
+                                sortState[0] === 0 ? "" : sortState[0] === 1 ? "th-sort-asc" : "th-sort-desc" 
+                            }`} onClick={() => changeSort(0)}>Name</th>
+                            <th className={`student-number ${
+                                sortState[1] === 0 ? "" : sortState[1] === 1 ? "th-sort-asc" : "th-sort-desc" 
+                            }`} onClick={() => changeSort(1)}>Student Num</th>
+                            <th className={`student-degree ${
+                                sortState[2] === 0 ? "" : sortState[2] === 1 ? "th-sort-asc" : "th-sort-desc" 
+                            }`} onClick={() => changeSort(2)}>Degree Program</th>
+                            <th className={`student-gwa ${
+                                sortState[3] === 0 ? "" : sortState[3] === 1 ? "th-sort-asc" : "th-sort-desc" 
+                            }`} onClick={() => changeSort(3)}>GWA</th>
                             <th className='student-status'>Status</th>
                             <th className='student-action'>Actions</th>
                         </tr>
@@ -241,7 +249,7 @@ const List = ({ table, data }) => {
     // Select what specific table to based on the table conditions (1,2,3)
     if (table == 1) {
         return(
-          <StudentList data={data}/>
+          <StudentList data={data} changeSort={changeSort} sortState={sortState}/>
         )
     } else if(table == 2) {
         return (
