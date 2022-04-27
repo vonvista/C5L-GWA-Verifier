@@ -160,10 +160,12 @@ exports.userLogin = async function(req, res, next) {
 // GRADE SCHEMA
 const gradeSchema = new Schema({
   Student: {type: Schema.Types.ObjectId, ref: 'student', required: true},
-  Course: {type: Schema.Types.ObjectId, ref: 'course', required: true},
-  Value: {type: String, required: true},
-  Year: {type: String, required: true},
-  Semester: String
+  Course: {type: String, required: true},
+  Grade: {type: String, required: true},
+  Unit: {type: Number, required: true},
+  Weight: Number,
+  Cumulative: {type: Number, required: true},
+  SemesterYear: String
 },{autoCreate:true})
 
 // GRADE MODEL
@@ -203,10 +205,12 @@ exports.gradeAdd = function(req, res, next) {
   
   var newGrade = new Grade({
     Student: mongoose.Types.ObjectId(req.body.Student),
-    Course: mongoose.Types.ObjectId(req.body.Course),
-    Value: req.body.Value,
-    Year: req.body.Year,
-    Semester: req.body.Semester
+    Course: req.body.Course,
+    Grade: req.body.Grade,
+    Unit: req.body.Unit,
+    Weight: req.body.Weight,
+    Cumulative: req.body.Cumulative,
+    SemesterYear: req.body.SemesterYear
   });
   console.log(newGrade);
   
@@ -226,9 +230,11 @@ exports.gradeUpdateOne = function(req, res, next) {
   Grade.updateOne({Student: req.body.Student, Course: req.body.Course},{"$set":{
     "Student": req.body.Student,
     "Course": req.body.Course,
-    "Value": req.body.Value,
-    "Year": req.body.Year,
-    "Semester": req.body.Semester
+    "Grade": req.body.Grade,
+    "Unit": req.body.Unit,
+    "Weight": req.body.Weight,
+    "Cumulative": req.body.Cumulative,
+    "SemesterYear": req.body.SemesterYear
   }}, {new : true}, function(err,result){
     if(!err && Grade){
       res.send(result);
