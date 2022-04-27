@@ -187,7 +187,10 @@ const AdminDashboard = () => {
               
               {/* Page Contents */}
               <div className='pt-20 flex-column'>
-                <UploadFileBtn />
+                {/* Upload button */}
+                <div className='float-right'>
+                  <UploadFileBtn />
+                </div>
                 <div className='table-container'>
                   <List table={1} data={currentRows}/>
                 </div> 
