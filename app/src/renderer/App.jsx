@@ -4,7 +4,7 @@ import icon from '../../assets/icon.svg';
 
 import LoginPage from '../frontend/LoginPage'
 import UserDashboard from '../frontend/pages/UserDashboard';
-import AdminDashboard from '../frontend/components/AdminNavigation';
+import AdminDashboard from '../frontend/pages/AdminDashboard';
 import UserManagement from '../frontend/pages/UserManagementPage';
 import StudentRecord from '../frontend/pages/StudentRecord';
 
