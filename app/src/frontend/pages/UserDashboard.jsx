@@ -11,6 +11,8 @@ import Pagination from '../components/Pagination';
 import '../components/List.css';
 import 'tailwindcss/tailwind.css';
 
+/* Backend */
+import readInputFile from 'backend/read-input';
 
 const UserDashboard = () => {
     const [rows, setRows] = useState([]);
@@ -21,151 +23,161 @@ const UserDashboard = () => {
     const [sortState, setSortState] = useState([0,0,0,0])
     const [latestSort, setLatestSort] = useState(-1);
 
-    const studentsData = [
-        {
-          "name": "1 Ellison Maurice C. Paguagan",
-          "studno": "2019-00000",
-          "degprog": "BS Computer Science",
-          "gwa": "1.01234",
-          "status": "Checked"
-        },
-        // {
-        //   "name": "Eyds Angeles",
-        //   "studno": "2019-05235",
-        //   "degprog": "BS Computer Science",
-        //   "gwa": "1.0",
-        //   "status": "Unchecked"
-        // },
-        // {
-        //   "name": "George Gragas",
-        //   "studno": "2019-05235",
-        //   "degprog": "BS Computer Science",
-        //   "gwa": "1.0",
-        //   "status": "Pending"
-        // },
-        // {
-        //     "name": "Maurice Paguagan",
-        //     "studno": "2019-05235",
-        //     "degprog": "BS Computer Science",
-        //     "gwa": "1.0",
-        //     "status": "Checked"
-        //   },
-        //   {
-        //     "name": "Eyds Angeles",
-        //     "studno": "2019-05235",
-        //     "degprog": "BS Computer Science",
-        //     "gwa": "1.0",
-        //     "status": "Unchecked"
-        //   },
-          {
-            "name": "2 George Gragas",
-            "studno": "2019-00001",
-            "degprog": "BS Computer Science",
-            "gwa": "1.0",
-            "status": "Pending"
-          },
-          {
-            "name": "Maurice Paguagan",
-            "studno": "2019-00002",
-            "degprog": "BS Mau",
-            "gwa": "1.0",
-            "status": "Checked"
-          },
-          {
-            "name": "Eyds Angeles",
-            "studno": "2019-00003",
-            "degprog": "BS Eyds",
-            "gwa": "1.0",
-            "status": "Unchecked"
-          },
-          {
-            "name": "George Gragas",
-            "studno": "2019-05235",
-            "degprog": "BS Computer Science",
-            "gwa": "1.0",
-            "status": "Pending"
-          },
-           {
-            "name": "Maurice Paguagan",
-            "studno": "2019-05235",
-            "degprog": "BS Computer Science",
-            "gwa": "1.0",
-            "status": "Checked"
-          },
-          {
-            "name": "3 George Gragas",
-            "studno": "2019-05235",
-            "degprog": "BS Computer Science",
-            "gwa": "1.0",
-            "status": "Pending"
-          },
-          {
-            "name": "Maurice Paguagan",
-            "studno": "2019-05235",
-            "degprog": "BS Computer Science",
-            "gwa": "1.0",
-            "status": "Checked"
-          },
-          {
-            "name": "Eyds Angeles",
-            "studno": "2019-05235",
-            "degprog": "BS Computer Science",
-            "gwa": "1.0",
-            "status": "Unchecked"
-          },
-          {
-            "name": "George Gragas",
-            "studno": "2019-05235",
-            "degprog": "BS Computer Science",
-            "gwa": "1.0",
-            "status": "Pending"
-          },
-           {
-            "name": "Maurice Paguagan",
-            "studno": "2019-05235",
-            "degprog": "BS Computer Science",
-            "gwa": "1.0",
-            "status": "Checked"
-          },
-    ];
+    // const studentsData = [
+    //     {
+    //       "name": "1 Ellison Maurice C. Paguagan",
+    //       "studno": "2019-00000",
+    //       "degprog": "BS Computer Science",
+    //       "gwa": "1.01234",
+    //       "status": "Checked"
+    //     },
+    //     // {
+    //     //   "name": "Eyds Angeles",
+    //     //   "studno": "2019-05235",
+    //     //   "degprog": "BS Computer Science",
+    //     //   "gwa": "1.0",
+    //     //   "status": "Unchecked"
+    //     // },
+    //     // {
+    //     //   "name": "George Gragas",
+    //     //   "studno": "2019-05235",
+    //     //   "degprog": "BS Computer Science",
+    //     //   "gwa": "1.0",
+    //     //   "status": "Pending"
+    //     // },
+    //     // {
+    //     //     "name": "Maurice Paguagan",
+    //     //     "studno": "2019-05235",
+    //     //     "degprog": "BS Computer Science",
+    //     //     "gwa": "1.0",
+    //     //     "status": "Checked"
+    //     //   },
+    //     //   {
+    //     //     "name": "Eyds Angeles",
+    //     //     "studno": "2019-05235",
+    //     //     "degprog": "BS Computer Science",
+    //     //     "gwa": "1.0",
+    //     //     "status": "Unchecked"
+    //     //   },
+    //       {
+    //         "name": "2 George Gragas",
+    //         "studno": "2019-00001",
+    //         "degprog": "BS Computer Science",
+    //         "gwa": "1.0",
+    //         "status": "Pending"
+    //       },
+    //       {
+    //         "name": "Maurice Paguagan",
+    //         "studno": "2019-00002",
+    //         "degprog": "BS Mau",
+    //         "gwa": "1.0",
+    //         "status": "Checked"
+    //       },
+    //       {
+    //         "name": "Eyds Angeles",
+    //         "studno": "2019-00003",
+    //         "degprog": "BS Eyds",
+    //         "gwa": "1.0",
+    //         "status": "Unchecked"
+    //       },
+    //       {
+    //         "name": "George Gragas",
+    //         "studno": "2019-05235",
+    //         "degprog": "BS Computer Science",
+    //         "gwa": "1.0",
+    //         "status": "Pending"
+    //       },
+    //        {
+    //         "name": "Maurice Paguagan",
+    //         "studno": "2019-05235",
+    //         "degprog": "BS Computer Science",
+    //         "gwa": "1.0",
+    //         "status": "Checked"
+    //       },
+    //       {
+    //         "name": "3 George Gragas",
+    //         "studno": "2019-05235",
+    //         "degprog": "BS Computer Science",
+    //         "gwa": "1.0",
+    //         "status": "Pending"
+    //       },
+    //       {
+    //         "name": "Maurice Paguagan",
+    //         "studno": "2019-05235",
+    //         "degprog": "BS Computer Science",
+    //         "gwa": "1.0",
+    //         "status": "Checked"
+    //       },
+    //       {
+    //         "name": "Eyds Angeles",
+    //         "studno": "2019-05235",
+    //         "degprog": "BS Computer Science",
+    //         "gwa": "1.0",
+    //         "status": "Unchecked"
+    //       },
+    //       {
+    //         "name": "George Gragas",
+    //         "studno": "2019-05235",
+    //         "degprog": "BS Computer Science",
+    //         "gwa": "1.0",
+    //         "status": "Pending"
+    //       },
+    //        {
+    //         "name": "Maurice Paguagan",
+    //         "studno": "2019-05235",
+    //         "degprog": "BS Computer Science",
+    //         "gwa": "1.0",
+    //         "status": "Checked"
+    //       },
+    // ];
 
-    const Program = [
-        {
-            "programName": "Bachelor of Science in Computer Science",
-            "department": "ICS"
-        },
-        {
-            "courseTitle": "Bachelor of Science in Computer Science",
-            "department": "ICS"
-        },
-        {
-            "courseTitle": "Bachelor of Science in Computer Science",
-            "department": "ICS"
-        },
-    ];
+    // const Program = [
+    //     {
+    //         "programName": "Bachelor of Science in Computer Science",
+    //         "department": "ICS"
+    //     },
+    //     {
+    //         "courseTitle": "Bachelor of Science in Computer Science",
+    //         "department": "ICS"
+    //     },
+    //     {
+    //         "courseTitle": "Bachelor of Science in Computer Science",
+    //         "department": "ICS"
+    //     },
+    // ];
 
-    const Users = [
-      {
-        "uname": "eyds_15",
-        "name": "Carl Adrian Angeles",
-        "position": "Admin"
-      },
-      {
-        "uname": "mau_23",
-        "name": "Maurice Paguagan",
-        "position": "Basic"
-      },
-      {
-        "uname": "dyurj_45",
-        "name": "George Gragas",
-        "position": "Admin"
-      }
-    ]
+    // const Users = [
+    //   {
+    //     "uname": "eyds_15",
+    //     "name": "Carl Adrian Angeles",
+    //     "position": "Admin"
+    //   },
+    //   {
+    //     "uname": "mau_23",
+    //     "name": "Maurice Paguagan",
+    //     "position": "Basic"
+    //   },
+    //   {
+    //     "uname": "dyurj_45",
+    //     "name": "George Gragas",
+    //     "position": "Admin"
+    //   }
+    // ]
 
     useEffect(() => {
       const fetchData = async () => {
         // Retrieve data from database
-        await setRows(studentsData);
+        fetch('http://localhost:3001/student/find-all')
+        .then(response => response.json())
+        .then(async (body) => {
+          let studentsData = []; // initiating array that will contain the information of students
+          // mapping out all the entries sent by the fetch
+          body.map((student, i) => {
+            studentsData.unshift({"name": student.FirstName + ' ' + student.LastName, "studno": student.StudentID, "degprog" : student.Degree, "gwa": student.OverallGWA, "status": student.Status});
+          });
+
+          await setRows(studentsData);
+        })
       }
 
       fetchData();
@@ -265,7 +277,7 @@ const UserDashboard = () => {
               <div className='pt-20 flex-column'>
                 {/* Upload button */}
                 <div className='float-right'>
-                  <UploadFileBtn />
+                  <UploadFileBtn handleClick={readInputFile}/>
                 </div>
                 <div className='table-container'>
                   <List table={1} data={currentRows} changeSort={changeSort} sortState={sortState}/>
