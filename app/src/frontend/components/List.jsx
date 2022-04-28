@@ -180,26 +180,6 @@ const List = ({ table, data, changeSort, sortState }) => {
     // Function for Displaying the Student List on the Dashboard
     const StudentList = ({ data, setRows, changeSort, sortState }) => {
         useEffect(() => {
-            /* Reference: https://www.youtube.com/watch?v=8SL_hM1a0yo */
-            // function sortTableByColumn(table, column, asc = true) {
-            //     // Remember how the column is currently sorted
-            //     table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
-            //     table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-asc", asc);
-            //     table.querySelector(`th:nth-child(${ column + 1})`).classList.toggle("th-sort-desc", !asc);
-            // }
-            
-            // /* Check all the sortable columns */
-            // document.querySelectorAll(".students-table th").forEach(headerCell => {
-            //     if (!headerCell.classList.contains("student-number") && !headerCell.classList.contains("student-status") && !headerCell.classList.contains("student-action")){
-            //         headerCell.addEventListener("click", () => {
-            //             const tableElement = headerCell.parentElement.parentElement.parentElement;
-            //             const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
-            //             const currentIsAscending = headerCell.classList.contains("th-sort-asc");
-                
-            //             sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
-            //         });
-            //     }
-            // });
             console.log(sortState)
         })
 
@@ -208,6 +188,8 @@ const List = ({ table, data, changeSort, sortState }) => {
                 <table className="students-table table">
                     <thead>
                         <tr>
+                            {/* sort UI asc or desc depends on the state of the parent (user-dashboard) */}
+                            {/* state 0: normal; 1: ascending icon; 2: descending icon */}
                             <th className={`student-name ${
                                 sortState[0] === 0 ? "" : sortState[0] === 1 ? "th-sort-asc" : "th-sort-desc" 
                             }`} onClick={() => changeSort(0)}>Name</th>
