@@ -9,14 +9,13 @@ export default ReadRow = ({data, clickHandler, delHandler}) => {
 
     return(
         <div className="table-row">
-            <div className="table-cell">{data.courseName}</div>
-            <div className="table-cell text-center">{data.units}</div>
-            <div className="table-cell text-center">{data.grade}</div>
-            <div className="table-cell text-center">{data.enrolled}</div>
-            <div className="table-cell text-center">{data.runningSum}</div>
-            <div className="table-cell text-center">
-                <button onClick={clickHandler}>Edit</button>
-                <button onClick={delRow}>Delete</button>
+            <div className="table-cell align-middle self-center">{data.courseName}</div>
+            <div className="table-cell align-middle self-center text-center">{data.units}</div>
+            <div className="table-cell align-middle self-center text-center">{data.grade}</div>
+            <div className="table-cell align-middle self-center text-center">{data.enrolled}</div>
+            <div className="table-cell align-middle self-center text-center">{data.runningSum}</div>
+            <div className="table-cell align-middle self-center text-center">
+                <Actions handleEdit={clickHandler} handleDelete={delRow}/>
             </div>
         </div>
     );
