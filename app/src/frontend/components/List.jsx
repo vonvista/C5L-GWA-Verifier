@@ -1,13 +1,16 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, Fragment } from 'react';
 import Actions from './buttons/Actions'
 import EditUser from './EditUser';
 import AddRow from './AddRow';
+import ReadRow from './ReadRow';
+import EditRow from './EditRow';
+import { useForm } from '../hooks/useForm';
 import 'tailwindcss/tailwind.css';
 
 
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
-const List = ({ table, data }) => {
+const List = ({ table, data, handler }) => {
     // George Gragas
     // This table is about degreeprogram
     // const DegreeProgram = ({ data }) => {
@@ -65,33 +68,42 @@ const List = ({ table, data }) => {
 
     // Table for displaying the student's summary of grades for a given semester 
     // To be used for Student Record View Page
-    const SemRecord = ({ data }) => {
+    const SemRecord = ({ data, handler }) => {
+
+        
         return (
-            <>
-                <table className="table-auto w-full m-0">
-                    <thead className="text-left">
-                        <tr>
-                            <th className="w-1/6">Course Name</th>
-                            <th className="w-1/6 text-center">Units</th>
-                            <th className="w-1/6 text-center">Grade</th>
-                            <th className="w-1/6 text-center">Enrolled</th>
-                            <th className="w-1/6 text-center"></th>
-                            <th className="w-1/6 text-center"><AddRow /></th>            {/* Add row button dapat dito */}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.map((course, index) => (
-                            <tr key = { index }>
-                                <td>{course.courseName}</td>
-                                <td className="text-center">{course.units}</td>
-                                <td className="text-center">{course.grade}</td>
-                                <td className="text-center">{course.enrolled}</td>
-                                <td className="text-center">{course.runningSum}</td>
-                                <td className="text-center"><Actions/></td>
-                            </tr>)
-                        )}
-                    </tbody>
-                </table>
+            <>  
+                <div className="table w-full m-0">
+                    <div className="table-header-group text-left">
+                        <div className="table-row">
+                            <div className="table-cell w-1/6">Course Name</div>
+                            <div className="table-cell w-1/6 text-center">Units</div>
+                            <div className="table-cell w-1/6 text-center">Grade</div>
+                            <div className="table-cell w-1/6 text-center">Enrolled</div>
+                            <div className="table-cell w-1/6 text-center"></div>
+                            <div className="table-cell w-1/6 text-center"><AddRow /></div>            {/* Add row button dapat dito */}
+                        </div>
+                    </div>
+                    <div className="table-row-group">
+                        {data.map((course, index) => {
+                            const {values, isValid, errors, touched, changeHandler, submitHandler} = useForm(course, [], handler);
+                            const [isEdit, setEdit] = useState(false)
+                            
+                            const toggle = () => {
+                                setEdit(!isEdit)
+                            }
+
+                            return(
+                                <Fragment key={index}>
+                                    {isEdit ?
+                                        <EditRow data={values} changeHandler={changeHandler} onSubmit={submitHandler} toggleHandler={toggle} /> :
+                                        <ReadRow data={course} clickHandler={toggle} />
+                                    }
+                                </Fragment>  
+                            )
+                        })}
+                    </div>
+                </div>
             </>
         );
     }
@@ -245,7 +257,7 @@ const List = ({ table, data }) => {
         )
     } else if(table == 2) {
         return (
-            <SemRecord data={data}/>
+            <SemRecord data={data} handler={handler} />
         )
     } else if(table == 3) {
         return (

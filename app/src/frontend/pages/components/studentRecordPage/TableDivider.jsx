@@ -7,11 +7,13 @@ import TableContents from './TableContents';
 
 const TableDivider = ({ grades }) => {
 
+    const [gradeState, gradeHandler] = useState(grades)
+
     return (
         <div className="w-full mx-auto bg-white">
             {
-                grades.map((semData, idx)=>(
-                    <TableContents key={idx} Name={semData.sem} Semester={semData.data} />
+                gradeState.map((semData, idx)=>(
+                    <TableContents key={idx} Name={semData.sem} Semester={semData.data} handler={gradeHandler} />
                 ))
             }
         </div>

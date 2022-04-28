@@ -5,9 +5,14 @@ import 'tailwindcss/tailwind.css';
 
 import List from '../../../components/List';
 
-const TableContents = ({ Name, Semester, key }) => {
-    const [rows, setRows] = useState([]);
+const TableContents = ({ Name, Semester, key, handler }) => {
 
+    // handler will handle pushing changes to parent
+    // semHandler will handle semData
+
+    const [rows, setRows] = useState([]);
+    const [semData, semHandler] = useState(Semester);
+  
     useEffect(() => {
         const fetchData = async () => {
           // Retrieve data from database
@@ -18,6 +23,16 @@ const TableContents = ({ Name, Semester, key }) => {
     }, []);
 
     const nameStyle = "flex inter font-bold justify-between z-25 w-full px-4 py-2 text-sm font-medium text-left text-sr-table-text bg-sr-dark-gray transition ease-in-out delay-250 hover:bg-table-hover-color hover:text-secondary-red";
+
+    const setData = (values) => {
+        
+        const targetId = semData.findIndex(obj => obj.idRow == values.idRow)
+        
+        let newSemData = [...semData]
+        newSemData[targetId] = values 
+
+        semHandler(newSemData)
+    }
 
     return (
         <>
@@ -40,7 +55,7 @@ const TableContents = ({ Name, Semester, key }) => {
                             
                             {/* Accordion Contents */}
                             <Disclosure.Panel className="inter z-0 pl-5 py-3 mb-2 text-sm text-gray-500 rounded-b-lg shadow-lg">
-                                <List table={2} data={Semester}/>
+                                <List table={2} data={semData} handler={setData}/>
                                 <section className="mt-3">
                                     <span className="font-black">Load Status</span>
                                     <span className="ml-4 font-black text-login-green underline">Normal</span>
