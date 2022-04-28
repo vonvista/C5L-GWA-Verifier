@@ -1,7 +1,10 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, Fragment } from 'react';
 import Actions from './buttons/Actions'
 import EditUser from './EditUser';
 import AddRow from './AddRow';
+import ReadRow from './ReadRow';
+import EditRow from './EditRow';
+import { useForm, isRequired } from '../hooks/useForm';
 import 'tailwindcss/tailwind.css';
 
 /* Backend */
@@ -68,38 +71,78 @@ const List = ({ table, data, changeSort, sortState }) => {
 
     // Table for displaying the student's summary of grades for a given semester 
     // To be used for Student Record View Page
-    const SemRecord = ({ data }) => {
+    const SemRecord = ({ data, dataHandler, delHandler }) => {
+
         return (
-            <>
-                <table className="table-auto w-full m-0">
-                    <thead className="text-left">
-                        <tr>
-                            <th className="w-1/6">Course Name</th>
-                            <th className="w-1/6 text-center">Units</th>
-                            <th className="w-1/6 text-center">Grade</th>
-                            <th className="w-1/6 text-center">Enrolled</th>
-                            <th className="w-1/6 text-center"></th>
-                            <th className="w-1/6 text-center"><AddRow /></th>            {/* Add row button dapat dito */}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.map((course, index) => (
-                            <tr key = { index }>
-                                <td>{course.courseName}</td>
-                                <td className="text-center">{course.units}</td>
-                                <td className="text-center">{course.grade}</td>
-                                <td className="text-center">{course.enrolled}</td>
-                                <td className="text-center">{course.runningSum}</td>
-                                <td className="text-center"><Actions/></td>
-                            </tr>)
-                        )}
-                    </tbody>
-                </table>
+            <>  
+                {/* Accordion contents */}
+                <div className="table w-full m-0">
+                    <div className="table-header-group text-left">
+                        <div className="table-row font-montserrat font-bold text-primary-red">
+                            <div className="table-cell w-1/6">Course Name</div>
+                            <div className="table-cell w-1/6 text-center">Units</div>
+                            <div className="table-cell w-1/6 text-center">Grade</div>
+                            <div className="table-cell w-1/6 text-center">Enrolled</div>
+                            <div className="table-cell w-1/6 text-center"></div>
+                            <div className="table-cell w-1/6 text-center"><AddRow /></div>
+                        </div>
+                    </div>
+                    <div className="table-row-group">
+                        {data.map((course, index) => {
+
+                            const validations = [
+                                ({courseName}) => isRequired(courseName) || {courseName: 'Please fill out'},
+                                ({units}) => isRequired(units) || {units: 'Please fill out'},
+                                ({units}) => !isNaN(units) || {units: 'Invalid value'},
+                                ({grade}) => isRequired(grade) || {grade: 'This is required'},
+                                ({grade}) => !isNaN(grade) || {grade: 'Invalid value'},
+                                ({enrolled}) => isRequired(enrolled) || {enrolled: 'This is required'},
+                                ({enrolled}) => !isNaN(enrolled) || {enrolled: 'Invalid value'},
+                                ({runningSum}) => isRequired(runningSum) || {runningSum: 'This is required'},
+                                ({runningSum}) => !isNaN(runningSum) || {runningSum: 'Invalid value'},   
+                            ]
+                            
+                            // State and hook to handle inline editing of data
+                            const {values, isValid, errors, touched, changeHandler, submitHandler, resetValues} = useForm(course, validations, dataHandler);
+                            const [isEdit, setEdit] = useState(false)
+                            
+                            const toggleEdit = () => {
+                                // function to toggle to edit
+                                setEdit(!isEdit)
+                            }
+
+                            const cancelEdit = () => {
+                                // function to cancel editing
+                                // resets form values to default
+                                setEdit(!isEdit)
+                                resetValues()
+                            }
+
+
+                            return(
+                                <Fragment key={index}>
+                                    {isEdit ?
+                                        <EditRow 
+                                            data={values} 
+                                            changeHandler={changeHandler} 
+                                            onSubmit={submitHandler} 
+                                            toggleHandler={cancelEdit} 
+                                            touched={touched} 
+                                            errors={errors}
+                                            valid={isValid} 
+                                            />
+                                         :
+                                        <ReadRow data={course} clickHandler={toggleEdit} delHandler={delHandler}/>
+                                    }
+                                </Fragment>  
+                            )
+                        })}
+                    </div>
+                </div>
             </>
         );
     }
 
-    // Eyds Angeles
     // This table is about
     const User = ({data}) => {
         console.log(data);
@@ -238,7 +281,7 @@ const List = ({ table, data, changeSort, sortState }) => {
         )
     } else if(table == 2) {
         return (
-            <SemRecord data={data}/>
+            <SemRecord data={data} dataHandler={dataHandler} delHandler={delHandler} />
         )
     } else if(table == 3) {
         return (

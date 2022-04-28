@@ -1,14 +1,15 @@
 /* 
 How to use:
 <userInput
-    labelClass=""       // styling for label
+    labelStyle=""       // styling for label
     labelVal=""         // label text
-    inputClass=""       // styling for input
+    inputStyle=""       // styling for input
     name=""             // name of label-input components
     inputType=""        // type of input password, email, text, etc.
     inputPlaceholder="" // placeholder text for input
     value=""            // value of the input
-    changeHandler=""    // change handling   
+    changeHandler=""    // change handling
+    required=""   
     /> 
 */
     
@@ -20,7 +21,7 @@ function userInput(props) {
         <>
             <label 
                 className={props.labelStyle}
-                for={props.name}
+                htmlFor={props.name}
                 >
                 {props.labelVal}
             </label>
@@ -32,6 +33,7 @@ function userInput(props) {
                 placeholder={props.inputPlaceholder}
                 value={props.value}
                 onChange={props.changeHandler}         // lifting state up
+                required={props.required}
                 />
         </>
     )

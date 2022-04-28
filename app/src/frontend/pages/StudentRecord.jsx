@@ -172,7 +172,8 @@ const grades = [
   {
     sem: "First Semester A.Y. 2019-2020",
     data: [
-        {
+        {   
+            "idRow": "1",
             "courseName": "CMSC 12",
             "units": "3.0",
             "grade": "1.00",
@@ -180,6 +181,7 @@ const grades = [
             "runningSum": "3.00"
         },
         {
+            "idRow": "2",
             "courseName": "CMSC 56",
             "units": "3.0",
             "grade": "1.50",
@@ -187,6 +189,7 @@ const grades = [
             "runningSum": "7.50"
         },
         {
+            "idRow": "3",
             "courseName": "MATH 27",
             "units": "3.0",
             "grade": "1.75",
@@ -194,6 +197,7 @@ const grades = [
             "runningSum": "12.75"
         },
         {
+            "idRow": "4",
             "courseName": "ETHICS 1",
             "units": "3.0",
             "grade": "1.50",
@@ -201,6 +205,7 @@ const grades = [
             "runningSum": "17.25"
         },
         {
+            "idRow": "5",
             "courseName": "STS 1",
             "units": "3.0",
             "grade": "1.75",
@@ -208,6 +213,7 @@ const grades = [
             "runningSum": "22.50"
         },
         {
+            "idRow": "6",
             "courseName": "HK 11",
             "units": "2.0",
             "grade": "1.00",
@@ -215,11 +221,12 @@ const grades = [
             "runningSum": "22.50"
         },
     ]
-},
-{
+  },
+  {
     sem: "Second Semester A.Y. 2019-2020",
     data: [
         {
+            "idRow": "1",
             "courseName": "CMSC 21",
             "units": "3.0",
             "grade": "1.00",
@@ -227,6 +234,7 @@ const grades = [
             "runningSum": "25.50"
         },
         {
+            "idRow": "2",
             "courseName": "CMSC 57",
             "units": "3.0",
             "grade": "1.50",
@@ -234,6 +242,7 @@ const grades = [
             "runningSum": "30.00"
         },
         {
+            "idRow": "3",
             "courseName": "MATH 28",
             "units": "3.0",
             "grade": "1.50",
@@ -241,6 +250,7 @@ const grades = [
             "runningSum": "34.50"
         },
         {
+            "idRow": "4",
             "courseName": "KAS 1",
             "units": "3.0",
             "grade": "1.75",
@@ -248,6 +258,7 @@ const grades = [
             "runningSum": "39.75"
         },
         {
+            "idRow": "5",
             "courseName": "ARTS 1",
             "units": "3.0",
             "grade": "1.00",
@@ -255,11 +266,12 @@ const grades = [
             "runningSum": "42.75"
         },
     ]
-},
-{
+  },
+  {
     sem: "First Semester A.Y. 2020-2021",
     data: [
         {
+            "idRow": "1",
             "courseName": "CMSC 22",
             "units": "3.0",
             "grade": "1.00",
@@ -267,6 +279,7 @@ const grades = [
             "runningSum": "45.75"
         },
         {
+            "idRow": "2",
             "courseName": "CMSC 123",
             "units": "3.0",
             "grade": "2.25",
@@ -274,6 +287,7 @@ const grades = [
             "runningSum": "52.50"
         },
         {
+            "idRow": "3",
             "courseName": "CMSC 130",
             "units": "3.0",
             "grade": "1.00",
@@ -281,6 +295,7 @@ const grades = [
             "runningSum": "55.50"
         },
         {
+            "idRow": "4",
             "courseName": "CMSC 150",
             "units": "3.0",
             "grade": "1.50",
@@ -288,6 +303,7 @@ const grades = [
             "runningSum": "60.00"
         },
         {
+            "idRow": "5",
             "courseName": "SCIENCE 11",
             "units": "3.0",
             "grade": "1.50",
@@ -295,6 +311,7 @@ const grades = [
             "runningSum": "64.50"
         },
         {
+            "idRow": "6",
             "courseName": "NSTP 1",
             "units": "2.0",
             "grade": "1.25",

@@ -20,7 +20,6 @@ const detailStyle = {
 const RecordPage = ({sem, user, notes, history, status, grades}) => {
 
     // pass details and other data through props to this component
-    // 
     
     const [selectedUser, setSelectedUser] = useState(user)
     const [statusState, setStatus] = useState(status)
@@ -29,19 +28,19 @@ const RecordPage = ({sem, user, notes, history, status, grades}) => {
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
         // uses components as values
-        Status: <Status state={statusState} />, // status component here
-        Notes: <Notes notes={notes} />,  // notes component here
-        History:<History historyData={history} />, // insert history component here
+        Status: <Status state={statusState} />,         // status component
+        Notes: <Notes notes={notes} />,                 // notes component
+        History:<History historyData={history} />,      // history component
     }
 
-    let [selectedTab] = useState(tabContents)                       // state controller for selecting tabs
+    let [selectedTab] = useState(tabContents)               // state controller for selecting tabs
 
     return(
         <main>
             <div className='w-100% pt-14 lg:pt-16 xl:pt-20 px-6 flex-column box-border'>
 
                 {/* student details */}
-                <div className="w-full sticky top-16 z-30 flex px-7 py-5 rounded-lg mx-auto bg-sr-dark-gray shadow-lg box-border">
+                <div className="w-full top-16 flex px-7 py-5 rounded-lg mx-auto bg-sr-dark-gray shadow-lg box-border">
 
                     <div className="table w-4/5">
                         <div className="title-styles">
@@ -101,7 +100,7 @@ const RecordPage = ({sem, user, notes, history, status, grades}) => {
                             </Tab.List>
                             <Tab.Panels className="m-0 block">
                                     {Object.values(selectedTab).map((component) =>(
-                                        <Tab.Panel className="col-span-1 block">                                
+                                        <Tab.Panel className="h-[42rem] col-span-1 block">                                
                                             {component}
                                         </Tab.Panel>
                                     ))}
