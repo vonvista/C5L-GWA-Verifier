@@ -100,7 +100,7 @@ const RecordPage = ({sem, user, notes, history, status, grades}) => {
                             </Tab.List>
                             <Tab.Panels className="m-0 block">
                                     {Object.values(selectedTab).map((component) =>(
-                                        <Tab.Panel className="col-span-1 block">                                
+                                        <Tab.Panel className="h-[42rem] col-span-1 block">                                
                                             {component}
                                         </Tab.Panel>
                                     ))}
