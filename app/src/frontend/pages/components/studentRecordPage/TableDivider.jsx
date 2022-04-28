@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Disclosure } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/solid'
+import TableContents from './TableContents';
 import 'tailwindcss/tailwind.css';
 
-import TableContents from './TableContents';
 
+// This component's main purpose is to pass the student's data for each semester to TableContents component
+// -- grades prop: receives the current student's summary of grades
 const TableDivider = ({ grades }) => {
 
     const [gradeState, gradeHandler] = useState(grades)
