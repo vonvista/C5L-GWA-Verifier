@@ -8,7 +8,8 @@ How to use:
     inputType=""        // type of input password, email, text, etc.
     inputPlaceholder="" // placeholder text for input
     value=""            // value of the input
-    changeHandler=""    // change handling   
+    changeHandler=""    // change handling
+    required=""   
     /> 
 */
     
@@ -32,6 +33,7 @@ function userInput(props) {
                 placeholder={props.inputPlaceholder}
                 value={props.value}
                 onChange={props.changeHandler}         // lifting state up
+                required={props.required}
                 />
         </>
     )
