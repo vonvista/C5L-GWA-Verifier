@@ -26,11 +26,22 @@ const TableContents = ({ Name, Semester, key, handler }) => {
     const nameStyle = "flex inter font-bold justify-between z-25 w-full px-4 py-2 text-sm font-medium text-left text-sr-table-text bg-sr-dark-gray transition ease-in-out delay-250 hover:bg-yellow-100 hover:text-secondary-red";
 
     // Handler for row changes
-    const setData = (values) => {
-        const targetId = semData.findIndex(obj => obj.idRow == values.idRow)
+    const setData = (values) => { // modifies values of a row
+        // get array index of object that was changed
+        const targetIndex = semData.findIndex(obj => obj.idRow == values.idRow) 
         
         let newSemData = [...semData]
-        newSemData[targetId] = values 
+        newSemData[targetIndex] = values 
+
+        semHandler(newSemData)
+    }
+
+    const delData = (values) => { // deletes row from table
+        // get array index of object that was changed
+        const targetIndex = semData.findIndex(obj => obj.idRow == values.idRow)
+        
+        let newSemData = [...semData]
+        newSemData.splice(targetIndex, 1)
 
         semHandler(newSemData)
     }
@@ -56,7 +67,7 @@ const TableContents = ({ Name, Semester, key, handler }) => {
                             
                             {/* Accordion Contents */}
                             <Disclosure.Panel className="inter z-0 pl-5 py-3 mb-2 text-sm text-gray-500 rounded-b-lg shadow-lg">
-                                <List table={2} data={semData} handler={setData}/>
+                                <List table={2} data={semData} dataHandler={setData} delHandler={delData}/>
                                 <section className="mt-3">
                                     <span className="font-black">Load Status</span>
                                     <span className="ml-4 font-black text-login-green underline">Normal</span>

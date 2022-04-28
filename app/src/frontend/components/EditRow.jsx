@@ -4,8 +4,9 @@ import 'tailwindcss/tailwind.css'
 
 export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched, errors, valid}) => {
 
-    const inputStyle = `w-full block box-border focus:outline-none border-b border-white focus:border-b focus:border-login-green`
+    const inputStyle = `block box-border focus:outline-none border-b border-white focus:border-b focus:border-login-green`
     const errorStyle= `block text-center text-sm inter text-secondary-red`
+    const centerInput= `w-1/3 text-center mx-auto`
 
     return(
         <form className="table-row inter" onSubmit={onSubmit}>
@@ -29,7 +30,7 @@ export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched
                 <Input
                     labelStyle="hidden"       // styling for label
                     labelVal=""         // label text
-                    inputStyle={`${`text-center`} ${inputStyle}`}       // styling for input
+                    inputStyle={`${centerInput} ${inputStyle}`}       // styling for input
                     name="units"             // name of label-input components
                     inputType="numeric"        // type of input password, email, text, etc.
                     inputPlaceholder={data.units} // placeholder text for input
@@ -45,7 +46,7 @@ export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched
                 <Input
                     labelStyle="hidden"       // styling for label
                     labelVal=""         // label text
-                    inputStyle={`${`text-center`} ${inputStyle}`}       // styling for input
+                    inputStyle={`${centerInput} ${inputStyle}`}       // styling for input
                     name="grade"             // name of label-input components
                     inputType="numeric"        // type of input password, email, text, etc.
                     inputPlaceholder={data.grade} // placeholder text for input
@@ -61,7 +62,7 @@ export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched
                 <Input
                     labelStyle="hidden"       // styling for label
                     labelVal=""         // label text
-                    inputStyle={`${`text-center`} ${inputStyle}`}       // styling for input
+                    inputStyle={`${centerInput} ${inputStyle}`}       // styling for input
                     name="enrolled"             // name of label-input components
                     inputType="numeric"        // type of input password, email, text, etc.
                     inputPlaceholder={data.enrolled} // placeholder text for input
@@ -77,7 +78,7 @@ export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched
                 <Input
                     labelStyle="hidden"       // styling for label
                     labelVal=""         // label text
-                    inputStyle={`${`text-center`} ${inputStyle}`}       // styling for input
+                    inputStyle={`${centerInput} ${inputStyle}`}       // styling for input
                     name="runningSum"             // name of label-input components
                     inputType="numeric"        // type of input password, email, text, etc.
                     inputPlaceholder={data.runningSum} // placeholder text for input

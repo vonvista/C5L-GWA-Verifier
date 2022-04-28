@@ -10,11 +10,11 @@ import 'tailwindcss/tailwind.css';
 
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
-const List = ({ table, data, handler }) => {
+const List = ({ table, data, dataHandler, delHandler }) => {
 
     // Table for displaying the student's summary of grades for a given semester 
     // To be used for Student Record View Page
-    const SemRecord = ({ data, handler }) => {
+    const SemRecord = ({ data, dataHandler, delHandler }) => {
 
         return (
             <>  
@@ -46,7 +46,7 @@ const List = ({ table, data, handler }) => {
                             ]
                             
                             // State and hook to handle inline editing of data
-                            const {values, isValid, errors, touched, changeHandler, submitHandler} = useForm(course, validations, handler);
+                            const {values, isValid, errors, touched, changeHandler, submitHandler} = useForm(course, validations, dataHandler);
                             const [isEdit, setEdit] = useState(false)
                             
                             const toggle = () => {
@@ -63,9 +63,10 @@ const List = ({ table, data, handler }) => {
                                             toggleHandler={toggle} 
                                             touched={touched} 
                                             errors={errors}
-                                            valid={isValid} />
+                                            valid={isValid} 
+                                            />
                                          :
-                                        <ReadRow data={course} clickHandler={toggle} />
+                                        <ReadRow data={course} clickHandler={toggle} delHandler={delHandler}/>
                                     }
                                 </Fragment>  
                             )
@@ -224,7 +225,7 @@ const List = ({ table, data, handler }) => {
         )
     } else if(table == 2) {
         return (
-            <SemRecord data={data} handler={handler} />
+            <SemRecord data={data} dataHandler={dataHandler} delHandler={delHandler} />
         )
     } else if(table == 3) {
         return (
