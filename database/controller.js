@@ -165,7 +165,8 @@ const gradeSchema = new Schema({
   Unit: {type: Number, required: true},
   Weight: Number,
   Cumulative: {type: Number, required: true},
-  SemesterYear: String
+  Semester : {type:String,required:true},
+  Year: {type:String,required:true}
 },{autoCreate:true})
 
 // GRADE MODEL
@@ -210,7 +211,8 @@ exports.gradeAdd = function(req, res, next) {
     Unit: req.body.Unit,
     Weight: req.body.Weight,
     Cumulative: req.body.Cumulative,
-    SemesterYear: req.body.SemesterYear
+    Semester: req.body.Semester,
+    Year: req.body.Year
   });
   console.log(newGrade);
   
@@ -234,7 +236,8 @@ exports.gradeUpdateOne = function(req, res, next) {
     "Unit": req.body.Unit,
     "Weight": req.body.Weight,
     "Cumulative": req.body.Cumulative,
-    "SemesterYear": req.body.SemesterYear
+    "Semester":req.body.Semester,
+    "Year": req.body.Year
   }}, {new : true}, function(err,result){
     if(!err && Grade){
       res.send(result);
@@ -280,7 +283,7 @@ const studentSchema = new Schema({
   LastName : {type: String, required : true},
   MiddleName : {type: String, required : true},
   Degree: {type: String, required: true},
-  Course: {type: String, required: true},
+  // Course: {type: String, required: true},    <- highly likely uneeded property
   TotalUnits: {type: Number, required : true},
   TotalUnits2: {type: Number, required: true},
   TotalCumulative: {type: Number, requied: true},
@@ -466,7 +469,8 @@ exports.historyDeleteAll = function(req, res, next) {
 const noteSchema = new Schema({
   User: {type:mongoose.Types.ObjectId, ref:'user', required:true},
   Student: {type:mongoose.Types.ObjectId, ref:'student', required:true},
-  SemesterYear:{type:String, required:true},
+  Semester: {type:String, required:true},
+  Year:{type:String, required:true},
   Details: {type:String, required:true},
 },{timestamps:true});
 
@@ -478,7 +482,8 @@ exports.noteAdd = function(req,res,next){
   var newNote = new Note({
     User:mongoose.Types.ObjectId(req.body.User),
     Student:mongoose.Types.ObjectId(req.body.Student),
-    SemesterYear:req.body.SemesterYear,
+    Semester:req.body.Semester,
+    Year:req.body.Year,
     Details:req.body.Details
   });
   console.log(newNote);
@@ -517,7 +522,8 @@ exports.noteFindAllByStudent = function(req,res,next){
 // UPDATE A NOTE
 exports.noteUpdate = function(req,res,next){
   Note.updateOne({_id:mongoose.Types.ObjectId(req.body.id)},{"$set":{
-    "SemesterYear":req.body.SemesterYear,
+    "Semester":req.body.Semester,
+    "Year":req.body.Year,
     "Details":req.body.Details
   }},{new:true},function(err,result){
     if(!err) res.send(result);

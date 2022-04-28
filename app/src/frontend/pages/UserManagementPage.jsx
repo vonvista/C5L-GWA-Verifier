@@ -16,68 +16,78 @@ const UserManagementPage = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
 
-  const Users = [
-    {
-      "uname": "eyds_15",
-      "name": "Carl Adrian Angeles",
-      "position" : "User"
-    },
-    {
-      "uname": "mau_23",
-      "name": "Maurice Paguagan",
-      "position" : "Admin"
-    },
-    {
-      "uname": "dyurj_45",
-      "name": "George Gragas",
-      "position" : "User"
-    },
-    {
-      "uname": "erl_23",
-      "name": "Erl Lacuban",
-      "position" : "User"
-    },
-    {
-      "uname": "tere_28",
-      "name": "Tere Ursolino",
-      "position" : "Admin"
-    },
-    {
-      "uname": "qreentine",
-      "name": "Koreen Merida",
-      "position" : "User"
-    },
-    {
-      "uname": "qreentine",
-      "name": "Koreen Merida",
-      "position" : "User"
-    },
-    {
-      "uname": "romel_klow",
-      "name": "Carl Romel Dimacali",
-      "position" : "User"
-    },
-    {
-      "uname": "otin_g",
-      "name": "Ysab Parayno",
-      "position" : "User"
-    },
-    {
-      "uname": "otin_g",
-      "name": "Ysab Parayno",
-      "position" : "User"
-    },
-    {
-      "uname": "jepi_clown",
-      "name": "Jeffy Escartin",
-      "position" : "User"
-    }
-  ]
+  // const Users = [
+  //   {
+  //     "uname": "eyds_15",
+  //     "name": "Carl Adrian Angeles",
+  //     "position" : "User"
+  //   },
+  //   {
+  //     "uname": "mau_23",
+  //     "name": "Maurice Paguagan",
+  //     "position" : "Admin"
+  //   },
+  //   {
+  //     "uname": "dyurj_45",
+  //     "name": "George Gragas",
+  //     "position" : "User"
+  //   },
+  //   {
+  //     "uname": "erl_23",
+  //     "name": "Erl Lacuban",
+  //     "position" : "User"
+  //   },
+  //   {
+  //     "uname": "tere_28",
+  //     "name": "Tere Ursolino",
+  //     "position" : "Admin"
+  //   },
+  //   {
+  //     "uname": "qreentine",
+  //     "name": "Koreen Merida",
+  //     "position" : "User"
+  //   },
+  //   {
+  //     "uname": "qreentine",
+  //     "name": "Koreen Merida",
+  //     "position" : "User"
+  //   },
+  //   {
+  //     "uname": "romel_klow",
+  //     "name": "Carl Romel Dimacali",
+  //     "position" : "User"
+  //   },
+  //   {
+  //     "uname": "otin_g",
+  //     "name": "Ysab Parayno",
+  //     "position" : "User"
+  //   },
+  //   {
+  //     "uname": "otin_g",
+  //     "name": "Ysab Parayno",
+  //     "position" : "User"
+  //   },
+  //   {
+  //     "uname": "jepi_clown",
+  //     "name": "Jeffy Escartin",
+  //     "position" : "User"
+  //   }
+  // ]
 
   useEffect(() => {
     const fetchData = async () => {
       // Retrieve data from database
-      await setRows(Users);
+      fetch('http://localhost:3001/user/find-all')
+      .then(response => response.json())
+      .then(async (body) => {
+        let Users = []; // initiating array that will contain the information of users
+        // mapping out all the entries sent by the fetch
+        body.map((user, i) => {
+          Users.unshift({"uname": user.Username, "name": user.FirstName + ' ' + user.LastName, "position": user.Role});
+        });
+
+        await setRows(Users);
+      })
     }
 
     fetchData();

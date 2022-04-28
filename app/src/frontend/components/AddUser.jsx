@@ -36,7 +36,27 @@ const AddUser = ({ handleClose }) => {
     password.focus();
   };
 
-  console.log("Adding");
+  const add_user = () => {
+    const credentials = {
+        FirstName: "firstName3",
+        MiddleName: "middleName3",
+        LastName: "lastName3",
+        Username: "un3",
+        Position: "position3",
+        Password: "Pwwwwwwwww883",
+        Role: "user"
+    }
+
+        fetch(`http://localhost:3001/user/add`,{
+            method: "POST",
+            headers: { "Content-Type":"application/json" },
+            body: JSON.stringify(credentials)
+            })
+        .then(response => response.json())
+        .then(body => {
+            console.log(body)
+          })       
+  }
 
   return (
     <>
@@ -80,7 +100,7 @@ const AddUser = ({ handleClose }) => {
                           name="firstName" // name of label-input components
                           inputType="text" // type of input password, email, text, etc.
                           inputPlaceholder="" // placeholder text for input
-                          value="" // value of the input
+                          value={firstName} // value of the input
                           changeHandler={(e) => setFirstName(e.target.value)} // change handling
                         />
                         <h4 className="mt-1 w-full text-center text-white">
@@ -95,7 +115,7 @@ const AddUser = ({ handleClose }) => {
                           name="middleName" // name of label-input components
                           inputType="text" // type of input password, email, text, etc.
                           inputPlaceholder="" // placeholder text for input
-                          value="" // value of the input
+                          value={middleName} // value of the input
                           changeHandler={(e) => setMiddleName(e.target.value)} // change handling
                         />
                         <h4 className="w-full text-center mt-1 text-white">
@@ -110,7 +130,7 @@ const AddUser = ({ handleClose }) => {
                           name="lastName" // name of label-input components
                           inputType="text" // type of input password, email, text, etc.
                           inputPlaceholder="" // placeholder text for input
-                          value="" // value of the input
+                          value={lastName} // value of the input
                           changeHandler={(e) => setLastName(e.target.value)} // change handling
                         />
                         <h4 className="w-full text-center mt-1 text-white">
@@ -128,7 +148,7 @@ const AddUser = ({ handleClose }) => {
                           name="username" // name of label-input components
                           inputType="text" // type of input password, email, text, etc.
                           inputPlaceholder="" // placeholder text for input
-                          value="" // value of the input
+                          value={un} // value of the input
                           changeHandler={(e) => setUN(e.target.value)} // change handling
                         />
                         <h4 className="mt-1 w-full text-center text-white">
@@ -143,7 +163,7 @@ const AddUser = ({ handleClose }) => {
                           name="position" // name of label-input components
                           inputType="text" // type of input password, email, text, etc.
                           inputPlaceholder="" // placeholder text for input
-                          value="" // value of the input
+                          value={position} // value of the input
                           changeHandler={(e) => setPosition(e.target.value)} // change handling
                         />
                         <h4 className="w-full text-center mt-1 text-white">
@@ -162,8 +182,8 @@ const AddUser = ({ handleClose }) => {
                               inputStyle="hidden input-style" // styling for input
                               name="password" // name of label-input components
                               inputType="checkbox" // type of input password, email, text, etc.
-                              inputPlaceholder="" // placeholder text for input
-                              value="" // value of the input
+                              inputPlaceholder="*****" // placeholder text for input
+                              value={pw} // value of the input
                               changeHandler={(e) => setPW(e.target.value)} // change handling
                             />
                             <button
@@ -181,8 +201,8 @@ const AddUser = ({ handleClose }) => {
                             inputStyle="input-style appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" // styling for input
                             name="password" // name of label-input components
                             inputType="password" // type of input password, email, text, etc.
-                            inputPlaceholder="" // placeholder text for input
-                            value="" // value of the input
+                            inputPlaceholder="*****" // placeholder text for input
+                            value={pw} // value of the input
                             changeHandler={(e) => setPW(e.target.value)} // change handling
                           />
                         </div>
@@ -201,6 +221,7 @@ const AddUser = ({ handleClose }) => {
                       <button
                         className="inter w-2/5 block ml-auto mr-auto bg-white rounded-lg hover:bg-slate-200 user-btn"
                         type="button"
+                        onClick={add_user}
                       >
                         Create Account
                       </button>

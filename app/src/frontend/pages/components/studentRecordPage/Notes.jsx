@@ -17,14 +17,14 @@ export default function Notes({eventHandler, notes}) {
                     return(
                         <div className="grid border rounded-lg p-5 mb-2" key={idx}>
                             <h1 className="text-xl inter font-bold">
-                               {data.sem}
+                                {data.SemesterYear}
 
                             </h1>
                             {/* <h2 className="inter font-light italic">
-                                {data.author} {data.date}
+                                {data.User} {data.createdAt}
                             </h2> */}
                             <p className="inter text-sm mt-3">
-                                {data.content}
+                                {data.Details}
                             </p>
                         </div>
                     )
