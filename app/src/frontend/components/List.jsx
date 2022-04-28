@@ -4,6 +4,9 @@ import EditUser from './EditUser';
 import AddRow from './AddRow';
 import 'tailwindcss/tailwind.css';
 
+/* Backend */
+import studentDelete from 'backend/studentDelete';
+import userDelete from 'backend/userDelete';
 
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
@@ -122,7 +125,7 @@ const List = ({ table, data, changeSort, sortState }) => {
                           <div data-status={user.position} className='position'></div>
                       </td>
                       <td className='user-action'>
-                      <Actions handleEdit={() => setShowModal(true)}/>
+                      <Actions handleEdit={() => setShowModal(true)} handleDelete={() => userDelete(user.uname)}/>
                       {showModal ?
                         (<EditUser handleClose={() => setShowModal(false)}/>)
                         :(<></>)
@@ -217,7 +220,7 @@ const List = ({ table, data, changeSort, sortState }) => {
                                 <td className='students-status'>
                                     <div data-status={student.status} className='status'></div>
                                 </td>
-                                <td className='student-action'><Actions/></td>
+                                <td className='student-action'><Actions handleDelete={() => studentDelete(student.studno)}/></td>
                             </tr>
                         )
                         )}

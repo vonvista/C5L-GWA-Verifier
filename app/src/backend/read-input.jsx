@@ -17,7 +17,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = pdfWorker;
 const fileBase = 'textFile';
 let fileNum = 0;
 
-const Test = () => {
+const readInputFile = (file) => {
   // simply checks if string has a number within it
   function hasNumber(string){
     return /\d/.test(string); // returns 1 if theres a number
@@ -202,7 +202,7 @@ const Test = () => {
     return studentData;
   }
 
-  function displayInputText() {
+  function displayInputText(file) {
 
     // read the pdf file
     const reader = new FileReader();
@@ -216,20 +216,11 @@ const Test = () => {
         var key = fileBase + '_' + fileNum.toString(); // modifying the key for storing in local storage
         localStorage.setItem(key, JSON.stringify(data)); // store the data to local storage
         fileNum++; // update file number
-
-        // optional displaying of text in paragraph
-        document.getElementById('displayText').innerHTML = JSON.stringify(data);
       });
     };
   }
 
-  return (
-    <div>
-      <input type="file" id="myfile" name="myfile"></input>
-      <button onClick={displayInputText}>Read File</button>
-      <p id="displayText">This is a Test</p>
-    </div>
-  );
+  return displayInputText(file);
 };
 
-export default Test;
+export default readInputFile;
