@@ -46,12 +46,21 @@ const List = ({ table, data, dataHandler, delHandler }) => {
                             ]
                             
                             // State and hook to handle inline editing of data
-                            const {values, isValid, errors, touched, changeHandler, submitHandler} = useForm(course, validations, dataHandler);
+                            const {values, isValid, errors, touched, changeHandler, submitHandler, resetValues} = useForm(course, validations, dataHandler);
                             const [isEdit, setEdit] = useState(false)
                             
-                            const toggle = () => {
+                            const toggleEdit = () => {
+                                // function to toggle to edit
                                 setEdit(!isEdit)
                             }
+
+                            const cancelEdit = () => {
+                                // function to cancel editing
+                                // resets form values to default
+                                setEdit(!isEdit)
+                                resetValues()
+                            }
+
 
                             return(
                                 <Fragment key={index}>
@@ -60,13 +69,13 @@ const List = ({ table, data, dataHandler, delHandler }) => {
                                             data={values} 
                                             changeHandler={changeHandler} 
                                             onSubmit={submitHandler} 
-                                            toggleHandler={toggle} 
+                                            toggleHandler={cancelEdit} 
                                             touched={touched} 
                                             errors={errors}
                                             valid={isValid} 
                                             />
                                          :
-                                        <ReadRow data={course} clickHandler={toggle} delHandler={delHandler}/>
+                                        <ReadRow data={course} clickHandler={toggleEdit} delHandler={delHandler}/>
                                     }
                                 </Fragment>  
                             )
