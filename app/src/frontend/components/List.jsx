@@ -122,7 +122,7 @@ const List = ({ table, data, changeSort, sortState }) => {
                       <td className='user-uname'>{user.uname}</td>
                       <td className='user-name'>{user.name}</td>
                       <td className='user-position'>
-                          <div data-status={user.position} className='position'></div>
+                          {user.position}
                       </td>
                       <td className='user-action'>
                       <Actions handleEdit={() => setShowModal(true)} handleDelete={() => userDelete(user.uname)}/>
