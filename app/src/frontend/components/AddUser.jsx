@@ -36,6 +36,28 @@ const AddUser = ({ handleClose }) => {
     password.focus();
   };
 
+  const add_user = () => {
+    const credentials = {
+        FirstName: "firstName3",
+        MiddleName: "middleName3",
+        LastName: "lastName3",
+        Username: "un3",
+        Position: "position3",
+        Password: "Pwwwwwwwww883",
+        Role: "user"
+    }
+
+        fetch(`http://localhost:3001/user/add`,{
+            method: "POST",
+            headers: { "Content-Type":"application/json" },
+            body: JSON.stringify(credentials)
+            })
+        .then(response => response.json())
+        .then(body => {
+            console.log(body)
+          })       
+  }
+
   console.log("Adding");
 
   return (
@@ -201,6 +223,7 @@ const AddUser = ({ handleClose }) => {
                       <button
                         className="inter w-2/5 block ml-auto mr-auto bg-white rounded-lg hover:bg-slate-200 user-btn"
                         type="button"
+                        onClick={add_user}
                       >
                         Create Account
                       </button>

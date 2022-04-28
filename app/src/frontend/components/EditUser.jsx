@@ -38,6 +38,28 @@ const EditUser = ({ handleClose }) => {
     password.focus();
   };
 
+  const edit_user = () => {
+    const credentials = {
+        FirstName: "firstName3",
+        MiddleName: "middleName3",
+        LastName: "lastName3",
+        Username: "un3",
+        Position: "possssssssss3333333333",
+        Password: "Pwwwwwwwww33333333333",
+        Role: "user"
+    }
+
+        fetch(`http://localhost:3001/user/update`,{
+            method: "POST",
+            headers: { "Content-Type":"application/json" },
+            body: JSON.stringify(credentials)
+            })
+        .then(response => response.json())
+        .then(body => {
+            console.log(body)
+          })       
+  }  
+
   return (
     <>
       {/* Edit user button */}
@@ -202,6 +224,7 @@ const EditUser = ({ handleClose }) => {
                           <button
                             className="inter bg-login-green text-white w-2/5 block ml-auto mr-auto bg-white rounded-lg hover:bg-emerald-600 user-btn"
                             type="button"
+                            onClick={edit_user}
                           >
                             Save Changes
                           </button>
