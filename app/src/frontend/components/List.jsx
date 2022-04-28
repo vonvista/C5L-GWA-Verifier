@@ -4,7 +4,7 @@ import EditUser from './EditUser';
 import AddRow from './AddRow';
 import ReadRow from './ReadRow';
 import EditRow from './EditRow';
-import { useForm } from '../hooks/useForm';
+import { useForm, isRequired } from '../hooks/useForm';
 import 'tailwindcss/tailwind.css';
 
 
@@ -32,9 +32,21 @@ const List = ({ table, data, handler }) => {
                     </div>
                     <div className="table-row-group">
                         {data.map((course, index) => {
+
+                            const validations = [
+                                ({courseName}) => isRequired(courseName) || {courseName: 'Please fill out'},
+                                ({units}) => isRequired(units) || {units: 'Please fill out'},
+                                ({units}) => !isNaN(units) || {units: 'Invalid value'},
+                                ({grade}) => isRequired(grade) || {grade: 'This is required'},
+                                ({grade}) => !isNaN(grade) || {grade: 'Invalid value'},
+                                ({enrolled}) => isRequired(enrolled) || {enrolled: 'This is required'},
+                                ({enrolled}) => !isNaN(enrolled) || {enrolled: 'Invalid value'},
+                                ({runningSum}) => isRequired(runningSum) || {runningSum: 'This is required'},
+                                ({runningSum}) => !isNaN(runningSum) || {runningSum: 'Invalid value'},   
+                            ]
                             
                             // State and hook to handle inline editing of data
-                            const {values, isValid, errors, touched, changeHandler, submitHandler} = useForm(course, [], handler);
+                            const {values, isValid, errors, touched, changeHandler, submitHandler} = useForm(course, validations, handler);
                             const [isEdit, setEdit] = useState(false)
                             
                             const toggle = () => {
@@ -44,7 +56,14 @@ const List = ({ table, data, handler }) => {
                             return(
                                 <Fragment key={index}>
                                     {isEdit ?
-                                        <EditRow data={values} changeHandler={changeHandler} onSubmit={submitHandler} toggleHandler={toggle} />
+                                        <EditRow 
+                                            data={values} 
+                                            changeHandler={changeHandler} 
+                                            onSubmit={submitHandler} 
+                                            toggleHandler={toggle} 
+                                            touched={touched} 
+                                            errors={errors}
+                                            valid={isValid} />
                                          :
                                         <ReadRow data={course} clickHandler={toggle} />
                                     }
