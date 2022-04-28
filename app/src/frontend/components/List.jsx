@@ -18,19 +18,22 @@ const List = ({ table, data, handler }) => {
 
         return (
             <>  
+                {/* Accordion contents */}
                 <div className="table w-full m-0">
                     <div className="table-header-group text-left">
-                        <div className="table-row">
+                        <div className="table-row font-montserrat font-bold text-primary-red">
                             <div className="table-cell w-1/6">Course Name</div>
                             <div className="table-cell w-1/6 text-center">Units</div>
                             <div className="table-cell w-1/6 text-center">Grade</div>
                             <div className="table-cell w-1/6 text-center">Enrolled</div>
                             <div className="table-cell w-1/6 text-center"></div>
-                            <div className="table-cell w-1/6 text-center"><AddRow /></div>            {/* Add row button dapat dito */}
+                            <div className="table-cell w-1/6 text-center"><AddRow /></div>
                         </div>
                     </div>
                     <div className="table-row-group">
                         {data.map((course, index) => {
+                            
+                            // State and hook to handle inline editing of data
                             const {values, isValid, errors, touched, changeHandler, submitHandler} = useForm(course, [], handler);
                             const [isEdit, setEdit] = useState(false)
                             
@@ -41,7 +44,8 @@ const List = ({ table, data, handler }) => {
                             return(
                                 <Fragment key={index}>
                                     {isEdit ?
-                                        <EditRow data={values} changeHandler={changeHandler} onSubmit={submitHandler} toggleHandler={toggle} /> :
+                                        <EditRow data={values} changeHandler={changeHandler} onSubmit={submitHandler} toggleHandler={toggle} />
+                                         :
                                         <ReadRow data={course} clickHandler={toggle} />
                                     }
                                 </Fragment>  
@@ -53,7 +57,6 @@ const List = ({ table, data, handler }) => {
         );
     }
 
-    // Eyds Angeles
     // This table is about
     const User = ({data}) => {
         console.log(data);
