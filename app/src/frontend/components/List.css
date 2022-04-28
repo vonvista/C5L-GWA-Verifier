@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-/* Table Elements */
-.table-container {
-    margin-top: 1.8005540166204985vh;       /*13px*/
-    margin-bottom: 2.21606648199446vh;    /* 16px */
-}
 
 .students-table {
     max-width: 82.078125vw;      /*1230px*/

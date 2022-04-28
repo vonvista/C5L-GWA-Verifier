@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/solid'
+import List from '../../../components/List';
 import 'tailwindcss/tailwind.css';
 
-import List from '../../../components/List';
 
+// This component handles the student's data for a specific semester
 const TableContents = ({ Name, Semester, key, handler }) => {
 
-    // handler will handle pushing changes to parent
+    // handler prop will handle pushing changes to parent
     // semHandler will handle semData
 
     const [rows, setRows] = useState([]);
@@ -22,10 +23,10 @@ const TableContents = ({ Name, Semester, key, handler }) => {
         fetchData();
     }, []);
 
-    const nameStyle = "flex inter font-bold justify-between z-25 w-full px-4 py-2 text-sm font-medium text-left text-sr-table-text bg-sr-dark-gray transition ease-in-out delay-250 hover:bg-table-hover-color hover:text-secondary-red";
+    const nameStyle = "flex inter font-bold justify-between z-25 w-full px-4 py-2 text-sm font-medium text-left text-sr-table-text bg-sr-dark-gray transition ease-in-out delay-250 hover:bg-yellow-100 hover:text-secondary-red";
 
+    // Handler for row changes
     const setData = (values) => {
-        
         const targetId = semData.findIndex(obj => obj.idRow == values.idRow)
         
         let newSemData = [...semData]
@@ -43,13 +44,13 @@ const TableContents = ({ Name, Semester, key, handler }) => {
                         <>
                             {/* Accordion Header */}
                             <Disclosure.Button className={`${open ? 'bg-table-hover-color text-secondary-red rounded-t-lg' : 'mb-2 rounded-lg shadow-lg'} ${nameStyle}`}>
-                                <span className="text-lg">{Name}</span>
+                                <span className="text-lg xl:text-xl">{Name}</span>
 
-                                {/* Button */}
+                                {/* Icon */}
                                 <ChevronUpIcon
                                     className={`${
                                         !open ? 'transform rotate-180' : ''
-                                    } w-5 h-5 self-center`}
+                                    } w-5 xl:w-7 self-center`}
                                 />
                             </Disclosure.Button>
                             
