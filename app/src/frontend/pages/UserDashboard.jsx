@@ -171,6 +171,7 @@ const UserDashboard = () => {
       fetchData();
     }, []);
 
+    //sort rows in ascending order based on the object property passed
     const sortRowsAsc = (object) => {
       let sortedRows = rows;
       sortedRows.sort((a, b) => {
@@ -185,6 +186,7 @@ const UserDashboard = () => {
       setRows([...sortedRows]);
     }
 
+    //sort rows in descending order based on the object property passed
     const sortRowsDsc = (object) => {
       let sortedRows = rows;
       sortedRows.sort((a, b) => {
@@ -199,22 +201,21 @@ const UserDashboard = () => {
       setRows([...sortedRows]);
     }
 
+    //mother function for changing sort state and row data
     const changeSort = (index) => {
 
-      let temp = sortState
+      let temp = sortState //store first in temp (NOTE: pass by reference si React)
 
-      // if(latestSort === -1){
-      //   setLatestSort(index)
-      // }
-      if(latestSort !== index){
+      if(latestSort !== index){ //if latest sort is not equal to index, reset sortState to initial state
         temp = [0,0,0,0]
       }
       
-      temp[index] = (temp[index] + 1) % 3
-      setSortState([...temp])
+      temp[index] = (temp[index] + 1) % 3 //cycle through values 0 - 2
+      setSortState([...temp]) //set sort state, trigger re-render
 
-      setLatestSort(index)
+      setLatestSort(index) //set latest sort to index
 
+      //get the object property to sort by
       let toSort = "";
       switch(index){
         case 0:
@@ -230,11 +231,13 @@ const UserDashboard = () => {
           toSort = "gwa";
           break;
       }
-
-      if(temp[index] === 1){
+      if(temp[index] === 0){ //if 0, return to original data from DB
+        setRows([...studentsData]);
+      }
+      if(temp[index] === 1){ //if 1, sort ascending
         sortRowsAsc(toSort)
       }
-      else if(temp[index] === 2){
+      else if(temp[index] === 2){ //if 2, sort descending
         sortRowsDsc(toSort)
       }
 
