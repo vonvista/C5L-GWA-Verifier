@@ -58,8 +58,6 @@ const AddUser = ({ handleClose }) => {
           })       
   }
 
-  console.log("Adding");
-
   return (
     <>
       {/* add user button */}
@@ -102,7 +100,7 @@ const AddUser = ({ handleClose }) => {
                           name="firstName" // name of label-input components
                           inputType="text" // type of input password, email, text, etc.
                           inputPlaceholder="" // placeholder text for input
-                          value="" // value of the input
+                          value={firstName} // value of the input
                           changeHandler={(e) => setFirstName(e.target.value)} // change handling
                         />
                         <h4 className="mt-1 w-full text-center text-white">
@@ -117,7 +115,7 @@ const AddUser = ({ handleClose }) => {
                           name="middleName" // name of label-input components
                           inputType="text" // type of input password, email, text, etc.
                           inputPlaceholder="" // placeholder text for input
-                          value="" // value of the input
+                          value={middleName} // value of the input
                           changeHandler={(e) => setMiddleName(e.target.value)} // change handling
                         />
                         <h4 className="w-full text-center mt-1 text-white">
@@ -132,7 +130,7 @@ const AddUser = ({ handleClose }) => {
                           name="lastName" // name of label-input components
                           inputType="text" // type of input password, email, text, etc.
                           inputPlaceholder="" // placeholder text for input
-                          value="" // value of the input
+                          value={lastName} // value of the input
                           changeHandler={(e) => setLastName(e.target.value)} // change handling
                         />
                         <h4 className="w-full text-center mt-1 text-white">
@@ -150,7 +148,7 @@ const AddUser = ({ handleClose }) => {
                           name="username" // name of label-input components
                           inputType="text" // type of input password, email, text, etc.
                           inputPlaceholder="" // placeholder text for input
-                          value="" // value of the input
+                          value={un} // value of the input
                           changeHandler={(e) => setUN(e.target.value)} // change handling
                         />
                         <h4 className="mt-1 w-full text-center text-white">
@@ -165,7 +163,7 @@ const AddUser = ({ handleClose }) => {
                           name="position" // name of label-input components
                           inputType="text" // type of input password, email, text, etc.
                           inputPlaceholder="" // placeholder text for input
-                          value="" // value of the input
+                          value={position} // value of the input
                           changeHandler={(e) => setPosition(e.target.value)} // change handling
                         />
                         <h4 className="w-full text-center mt-1 text-white">
@@ -184,8 +182,8 @@ const AddUser = ({ handleClose }) => {
                               inputStyle="hidden input-style" // styling for input
                               name="password" // name of label-input components
                               inputType="checkbox" // type of input password, email, text, etc.
-                              inputPlaceholder="" // placeholder text for input
-                              value="" // value of the input
+                              inputPlaceholder="*****" // placeholder text for input
+                              value={pw} // value of the input
                               changeHandler={(e) => setPW(e.target.value)} // change handling
                             />
                             <button
@@ -203,8 +201,8 @@ const AddUser = ({ handleClose }) => {
                             inputStyle="input-style appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" // styling for input
                             name="password" // name of label-input components
                             inputType="password" // type of input password, email, text, etc.
-                            inputPlaceholder="" // placeholder text for input
-                            value="" // value of the input
+                            inputPlaceholder="*****" // placeholder text for input
+                            value={pw} // value of the input
                             changeHandler={(e) => setPW(e.target.value)} // change handling
                           />
                         </div>
