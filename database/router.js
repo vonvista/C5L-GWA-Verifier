@@ -26,7 +26,7 @@ module.exports = (app) => {
   app.post('/student/add', controller.studentAdd);
   app.post('/student/find', controller.studentFindOne);
   app.get('/student/find-all', controller.studentFindAll);
-  app.put('/student/update', controller.studentUpdateOne);
+  app.post('/student/update', controller.studentUpdateOne);
   app.delete('/student/delete', controller.studentDeleteOne);
 
   
@@ -37,7 +37,7 @@ module.exports = (app) => {
 
   app.delete('/user/delete', controller.userDelete);
   app.delete('/user/delete-all', controller.userDeleteAll);
-  app.put('/user/update', controller.userUpdate);
+  app.post('/user/update', controller.userUpdate);
 
   app.post('/user/login', controller.userLogin);
 
