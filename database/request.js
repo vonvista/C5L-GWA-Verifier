@@ -187,16 +187,16 @@ newUser2 = {
 //STUDENT TEST
 
 student1 = {
-    StudentID: "201912345",
-    FirstName: "Leni",
-    LastName: "Robredo",
-    MiddleName: "Gerona",
-    Degree: "BS Economics",
-    Course: "ECON 11",
-    TotalUnits: 100,
-    TotalUnits2: 100,
-    TotalCumulative: 100,
-    OverallGWA: 1.00,
+    StudentID: 201909230,
+    FirstName: "Test",
+    MiddleName: "Middle",
+    LastName: "User",
+    Degree: "BS Computer Science",
+    Course: "?",
+    TotalUnits: 130,
+    TotalUnits2: 131,
+    TotalCumulative: 1.25,
+    OverallGWA: 1.25,
     Status: "Pending"
 }
 
@@ -241,9 +241,9 @@ updatestudent2 = {
     OverallGWA: 3.00
 }
 
-// request('http://localhost:3001/student/add',{method:"POST",form: student1},function(err,req,body) {
-//     console.log(body);
-// });
+request('http://localhost:3001/student/add',{method:"POST",form: student1},function(err,req,body) {
+    console.log(body);
+});
 
 // request('http://localhost:3001/student/add',{method:"POST",form: student2},function(err,req,body) {
 //     console.log(body);

@@ -280,7 +280,7 @@ const studentSchema = new Schema({
   LastName : {type: String, required : true},
   MiddleName : {type: String, required : true},
   Degree: {type: String, required: true},
-  Course: {type: String, required: true},
+  // Course: {type: String, required: true},    <- highly likely uneeded property
   TotalUnits: {type: Number, required : true},
   TotalUnits2: {type: Number, required: true},
   TotalCumulative: {type: Number, requied: true},
