@@ -52,7 +52,17 @@ export function useForm( initState = {}, validations = [], onSubmit = () => {}) 
         //console.log(values)       // for testing
     }
 
-    return {values, changeHandler, isValid, errors, touched, submitHandler};
+    const resetValues = () => {
+        // function to reset state of values to default
+        const newVals = initState 
+        const {isValid, errors} = validate(validations, newVals);
+        setValues(newVals)
+        setValid(isValid)
+        setErrors(errors)
+        setTouched({})  
+    }
+
+    return {values, changeHandler, isValid, errors, touched, submitHandler, resetValues};
 }
 
 function validate(validations, values) {
@@ -69,5 +79,6 @@ function validate(validations, values) {
 // error validation functions...
 
 export function isRequired(val) {
+    // check if this has value
     return val != null && val.trim().length > 0;
 }
