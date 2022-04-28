@@ -11,66 +11,11 @@ import 'tailwindcss/tailwind.css';
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
 const List = ({ table, data, handler }) => {
-    // George Gragas
-    // This table is about degreeprogram
-    // const DegreeProgram = ({ data }) => {
-    //     return (
-    //         <>
-    //             <table class="table-auto">
-    //                 <thead>
-    //                     <tr>
-    //                         <th>Program</th>
-    //                         <th>Department</th>
-    //                         <th>Actions</th>
-    //                     </tr>
-    //                 </thead>
-    //                 <tbody>
-    //                     {data.map((program, index) => (
-    //                         <tr key = { index }>
-    //                             <td>{program.programName}</td>
-    //                             <td>{program.department}</td>
-    //                             <td><Actions/></td>
-    //                         </tr>)
-    //                     )}
-    //                 </tbody>
-    //             </table>
-    //         </>
-    //     );
-    // }
-
-    // // This table is about course subjects
-    // const Course = ({ data }) => {
-    //     return (
-    //         <>
-    //             <table class="table-auto">
-    //                 <thead>
-    //                     <tr>
-    //                         <th>Course Title</th>
-    //                         <th>Course Code</th>
-    //                         <th>Course Units</th>
-    //                         <th>Actions</th>
-    //                     </tr>
-    //                 </thead>
-    //                 <tbody>
-    //                     {data.map((course, index) => (
-    //                         <tr key = { index }>
-    //                             <td>{course.title}</td>
-    //                             <td>{course.courseCode}</td>
-    //                             <td>{course.units }</td>
-    //                             <td><Actions/></td>
-    //                         </tr>)
-    //                     )}
-    //                 </tbody>
-    //             </table>
-    //         </>
-    //     );
-    // }
 
     // Table for displaying the student's summary of grades for a given semester 
     // To be used for Student Record View Page
     const SemRecord = ({ data, handler }) => {
 
-        
         return (
             <>  
                 <div className="table w-full m-0">
