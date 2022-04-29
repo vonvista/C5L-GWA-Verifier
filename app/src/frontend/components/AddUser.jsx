@@ -35,7 +35,8 @@ const AddUser = ({ handleClose }) => {
 
     password.focus();
   };
-
+  
+  //Please put this logic on parent component/main page -vov
   const add_user = () => {
     const credentials = {
       FirstName: 'firstName3',

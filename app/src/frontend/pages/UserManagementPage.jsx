@@ -10,6 +10,7 @@ import AddUserBtn from '../components/buttons/AddUserBtn';
 import AddUser from '../components/AddUser';
 import Search from 'frontend/components/Search';
 import SearchModal from 'frontend/components/SearchModal';
+import Swal from 'sweetalert2'
 
 const UserManagementPage = () => {
   const [rows, setRows] = useState([]);
@@ -107,23 +108,21 @@ const UserManagementPage = () => {
 
     //used in Search component
     const [searchUser, setSearchUser] = useState("");
-    const [isGenerated, setIsGenerated] = useState(false);
-    const [showModal1, setShowModal1] = useState(false)
-
 
     const handleSearch =()=>{
       // console.log(searchStudent);
-      //Add code here to search student; assign true to isGenerated if student exists; assign true to showModal if student does not exist
-      //sample code to test modal window
-      if(searchUser === "hello"){
-        setIsGenerated(true);
-        setSearchUser("");
-      }
-      else{
-        setShowModal1(true);
-        setSearchUser("");
+      //Add code here to search student, fetch sa database, if wala sa DB, display student cannot be found, 
+      //if nasa DB, go to record of student
 
-      }
+      //if di mahanap si student
+
+      // Swal.fire({
+      //   icon: 'error',
+      //   title: 'Error',
+      //   text: 'Student does not exist',
+      // })
+
+      //if nahanap si student, go straight to record
     }
 
     const handleEnterPress = (e) =>{
@@ -150,12 +149,7 @@ const UserManagementPage = () => {
                     (<AddUser handleClose={() => setShowModal(false)}/>)
                     :(<></>)
                   }
-                  <Search user={"user"} handleSearch={(e) => setSearchUser(e.target.value)} searchValue={searchUser} buttonHandler={handleSearch} handleEnter={handleEnterPress}/>
-                  {
-                    showModal1 ?
-                    (<SearchModal user={"USER"} handleClose={() => setShowModal1(false)}/>):
-                    <></>
-                  }
+                  {/* <Search user={"user"} handleSearch={(e) => setSearchUser(e.target.value)} searchValue={searchUser} buttonHandler={handleSearch} handleEnter={handleEnterPress}/> */}
                 </div>
                 <div>
                   <div className='table-container'>

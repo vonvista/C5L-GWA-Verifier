@@ -7,7 +7,7 @@ import Header from '../components/HeaderWithoutArrowbck';
 import UserNav from '../components/UserNavigation';
 import Pagination from '../components/Pagination';
 import Search from 'frontend/components/Search';
-import SearchModal from 'frontend/components/SearchModal';
+import Swal from 'sweetalert2'
 
 /* CSS */
 import '../components/List.css';
@@ -268,22 +268,21 @@ const UserDashboard = () => {
 
     //used in Search component
     const [searchStudent, setSearchStudent] = useState("");
-    const [isGenerated, setIsGenerated] = useState(false);
-    const [showModal, setShowModal] = useState(false)
-
 
     const handleSearch =()=>{
       // console.log(searchStudent);
-      //Add code here to search student; assign true to isGenerated if student exists; assign true to showModal if student does not exist
-      //sample code to test modal window
-      if(searchStudent === "hello"){
-        setIsGenerated(true);
-        setSearchStudent("");
-      }
-      else{
-        setShowModal(true);
-        setSearchStudent("");
-      }
+      //Add code here to search student, fetch sa database, if wala sa DB, display student cannot be found, 
+      //if nasa DB, go to record of student
+
+      //if di mahanap si student
+
+      // Swal.fire({
+      //   icon: 'error',
+      //   title: 'Error',
+      //   text: 'Student does not exist',
+      // })
+
+      //if nahanap si student, go straight to record
     }
 
     const handleEnterPress = (e) =>{
@@ -307,11 +306,6 @@ const UserDashboard = () => {
                 {/* Search input button */}
                 <div className='float-left w-[18vw] h-[1vw]'>
                   <Search user={"student"} handleSearch={(e) => setSearchStudent(e.target.value)} searchValue={searchStudent} buttonHandler={handleSearch} handleEnter={handleEnterPress}/>
-                  {
-                    showModal ?
-                    (<SearchModal user={"STUDENT"} handleClose={() => setShowModal(false)}/>):
-                    <></>
-                  }
                 </div>
                 {/* Upload button */}
                 <div className='float-right'>
