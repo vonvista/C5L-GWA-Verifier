@@ -8,7 +8,8 @@ import AdminNav from '../components/AdminNavigation';
 import HeaderWithoutArrowbck from '../components/HeaderWithoutArrowbck';
 import AddUserBtn from '../components/buttons/AddUserBtn';
 import AddUser from '../components/AddUser';
-
+import Search from 'frontend/components/Search';
+import SearchModal from 'frontend/components/SearchModal';
 
 const UserManagementPage = () => {
   const [rows, setRows] = useState([]);
@@ -104,6 +105,33 @@ const UserManagementPage = () => {
     //Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
+    //used in Search component
+    const [searchUser, setSearchUser] = useState("");
+    const [isGenerated, setIsGenerated] = useState(false);
+    const [showModal1, setShowModal1] = useState(false)
+
+
+    const handleSearch =()=>{
+      // console.log(searchStudent);
+      //Add code here to search student; assign true to isGenerated if student exists; assign true to showModal if student does not exist
+      //sample code to test modal window
+      if(searchUser === "hello"){
+        setIsGenerated(true);
+        setSearchUser("");
+      }
+      else{
+        setShowModal1(true);
+        setSearchUser("");
+
+      }
+    }
+
+    const handleEnterPress = (e) =>{
+      if (e.key === "Enter") {
+        handleSearch();
+      }
+    }
+
     return(
         <>
           <div>
@@ -121,6 +149,12 @@ const UserManagementPage = () => {
                   {showModal ?
                     (<AddUser handleClose={() => setShowModal(false)}/>)
                     :(<></>)
+                  }
+                  <Search user={"user"} handleSearch={(e) => setSearchUser(e.target.value)} searchValue={searchUser} buttonHandler={handleSearch} handleEnter={handleEnterPress}/>
+                  {
+                    showModal1 ?
+                    (<SearchModal user={"USER"} handleClose={() => setShowModal1(false)}/>):
+                    <></>
                   }
                 </div>
                 <div>
