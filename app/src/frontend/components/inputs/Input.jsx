@@ -12,31 +12,28 @@ How to use:
     required=""   
     /> 
 */
-    
+
 function userInput(props) {
+  // function component for input field boxes
 
-    // function component for input field boxes
+  return (
+    <>
+      <label className={props.labelStyle} htmlFor={props.name}>
+        {props.labelVal}
+      </label>
 
-    return(
-        <>
-            <label 
-                className={props.labelStyle}
-                htmlFor={props.name}
-                >
-                {props.labelVal}
-            </label>
-
-            <input 
-                className={props.inputStyle}
-                type={props.inputType} 
-                name={props.name} 
-                placeholder={props.inputPlaceholder}
-                value={props.value}
-                onChange={props.changeHandler}         // lifting state up
-                required={props.required}
-                />
-        </>
-    )
+      <input
+        className={props.inputStyle}
+        type={props.inputType}
+        name={props.name}
+        placeholder={props.inputPlaceholder}
+        value={props.value}
+        onChange={props.changeHandler} // lifting state up
+        onKeyPress={props.handleKeyPress}
+        required={props.required}
+      />
+    </>
+  );
 }
 
-export default userInput
+export default userInput;

@@ -38,35 +38,35 @@ const AddUser = ({ handleClose }) => {
 
   const add_user = () => {
     const credentials = {
-        FirstName: "firstName3",
-        MiddleName: "middleName3",
-        LastName: "lastName3",
-        Username: "un3",
-        Position: "position3",
-        Password: "Pwwwwwwwww883",
-        Role: "user"
-    }
+      FirstName: 'firstName3',
+      MiddleName: 'middleName3',
+      LastName: 'lastName3',
+      Username: 'un3',
+      Position: 'position3',
+      Password: 'Pwwwwwwwww883',
+      Role: 'user',
+    };
 
-        fetch(`http://localhost:3001/user/add`,{
-            method: "POST",
-            headers: { "Content-Type":"application/json" },
-            body: JSON.stringify(credentials)
-            })
-        .then(response => response.json())
-        .then(body => {
-            console.log(body)
-          })       
-  }
+    fetch(`http://localhost:3001/user/add`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(credentials),
+    })
+      .then((response) => response.json())
+      .then((body) => {
+        console.log(body);
+      });
+  };
 
   return (
     <>
       {/* add user button */}
       <div className="modal-add h-screen">
         {/* content */}
-        <div className="modal-content">
+        <div className="modal-content1">
           {/* exit button */}
           <button
-            className="close-btn bg-transparent text-white flex relative ml-auto grow-0"
+            className="close-btn1 bg-transparent text-white flex relative ml-auto grow-0"
             type="button"
             onClick={handleClose}
           >
@@ -74,7 +74,7 @@ const AddUser = ({ handleClose }) => {
           </button>
 
           {/* photo  */}
-          <div className="modal-body">
+          <div className="modal-body1">
             <div className="w-1/6 ml-auto mt-2">
               <img
                 className="rounded-lg"
@@ -86,10 +86,10 @@ const AddUser = ({ handleClose }) => {
             </div>
             {/* form */}
             <section className="flex-rows-4 relative w-9/12">
-              <form className="input-group">
+              <form className="input-group1">
                 <div className="flex justify-center">
                   {/* Input form */}
-                  <div className="input-content form">
+                  <div className="input-content1 form1">
                     {/* name */}
                     <div className="w-full pb-4 mt-2">
                       <section className="w-2/5 inline-block grow mr-2">

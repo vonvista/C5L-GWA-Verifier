@@ -6,6 +6,8 @@ import List from '../components/List';
 import Header from '../components/HeaderWithoutArrowbck';
 import AdminNav from '../components/AdminNavigation';
 import Pagination from '../components/Pagination';
+import Search from 'frontend/components/Search';
+import SearchModal from 'frontend/components/SearchModal';
 
 /* CSS */
 import '../components/List.css';
@@ -251,6 +253,31 @@ const AdminDashboard = () => {
     //Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
+    //used in Search component
+    const [searchStudent, setSearchStudent] = useState("");
+    const [isGenerated, setIsGenerated] = useState(false);
+    const [showModal, setShowModal] = useState(false)
+
+
+    const handleSearch =()=>{
+      // console.log(searchStudent);
+      //Add code here to search student; assign true to isGenerated if student exists; assign true to showModal if student does not exist
+      //sample code to test modal window
+      if(searchStudent === "hello"){
+        setIsGenerated(true);
+        setSearchStudent("");
+      }
+      else{
+        setShowModal(true);
+        setSearchStudent("");
+      }
+    }
+
+    const handleEnterPress = (e) =>{
+      if (e.key === "Enter") {
+        handleSearch();
+      }
+    }
     return(
       <>
         <div>
@@ -259,10 +286,19 @@ const AdminDashboard = () => {
             {/* Right Section */}
             <div className="absolute inset-0 flex ml-8 xl:ml-12 justify-center">
 
-              <div><Header pageTitle={"USER DASHBOARD"}/></div>
+              <div><Header pageTitle={"ADMIN DASHBOARD"}/></div>
 
               {/* Page Contents */}
               <div className='pt-20 flex-column'>
+                {/* Search input button */}
+                <div className='float-left w-[18vw] h-[1vw]'>
+                  <Search user={"student"} handleSearch={(e) => setSearchStudent(e.target.value)} searchValue={searchStudent} buttonHandler={handleSearch} handleEnter={handleEnterPress}/>
+                  {
+                    showModal ?
+                    (<SearchModal user={"STUDENT"} handleClose={() => setShowModal(false)}/>):
+                    <></>
+                  }
+                </div>
                 {/* Upload button */}
                 <div className='float-right'>
                   <UploadFileBtn />

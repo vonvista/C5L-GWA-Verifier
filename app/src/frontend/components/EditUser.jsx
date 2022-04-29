@@ -65,10 +65,10 @@ const EditUser = ({ handleClose }) => {
       {/* Edit user button */}
       <div className="modal-edit h-screen">
         {/* content */}
-        <div className="modal-content">
+        <div className="modal-content1">
           {/* exit button */}
           <button
-            className="close-btn bg-transparent text-white flex relative ml-auto grow-0"
+            className="close-btn1 bg-transparent text-white flex relative ml-auto grow-0"
             type="button"
             onClick={handleClose}
           >
@@ -76,7 +76,7 @@ const EditUser = ({ handleClose }) => {
           </button>
 
           {/* photo  */}
-          <div className="modal-body">
+          <div className="modal-body1">
             <div className="w-1/6 ml-auto mt-2">
               <img
                 className="rounded-lg"
