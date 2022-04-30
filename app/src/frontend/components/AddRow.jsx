@@ -40,7 +40,7 @@ const AddRow = () => {
                                 duration: 0.2
                             }
                         }}
-                        className='modal-backdrop'>
+                        className='add-row-modal-backdrop'>
                         <motion.div 
                             initial={{
                                 scale: 0
@@ -58,28 +58,28 @@ const AddRow = () => {
                                 }
                             }}
 
-                            className='modal'>
-                            <motion.div className="modal-content">
+                            className='add-row-modal'>
+                            <motion.div className="add-row-modal-content">
                             {/* Baybayin Background Image */}
-                            <motion.div className="bg-baybayin baybayin-styles"></motion.div>
+                            <motion.div className="bg-baybayin add-row-baybayin-style"></motion.div>
 
                             {/* content */}
-                                <motion.div className='modal-body'>
+                                <motion.div className='add-row-modal-body'>
                                     {/* title */}
-                                    <motion.div className='modal-close text-white float-right'>
+                                    <motion.div className='add-row-modal-close text-white float-right'>
                                         <button onClick={() => {setOpenModal(false)}}>
                                             <span>&times;</span>
                                         </button>
                                     </motion.div>
-                                    <motion.div className='modal-title text-white text-center'>Please fill in the fields below to insert a new row</motion.div>
+                                    <motion.div className='add-row-modal-title text-white text-center'>Please fill in the fields below to insert a new row</motion.div>
 
                                     {/* input form */}
-                                    <form className='modal-inputs flex'>
+                                    <form className='add-row-modal-inputs flex'>
                                         {/* course name */}
-                                        <motion.div className='input-container'>
-                                            <section className='inline-block section-coursename'>
+                                        <motion.div className='add-row-input-container'>
+                                            <section className='inline-block add-row-section-coursename'>
                                                 <input 
-                                                    className='input-style'
+                                                    className='add-row-input-style'
                                                     type="text"
                                                     name="courseName"
                                                     placeholder='Enter course name'
@@ -90,10 +90,10 @@ const AddRow = () => {
                                         </motion.div>
 
                                         {/* units */}
-                                        <motion.div className='input-container'>
-                                            <section className='inline-block section-units'>
+                                        <motion.div className='add-row-input-container'>
+                                            <section className='inline-block add-row-section-units'>
                                                 <input 
-                                                    className='input-style'
+                                                    className='add-row-input-style'
                                                     type="text"
                                                     name="units"
                                                     placeholder='0'
@@ -104,10 +104,10 @@ const AddRow = () => {
                                         </motion.div>
 
                                         {/* grade */}
-                                        <motion.div className='input-container'>
-                                            <section className='inline-block section-grade'>
+                                        <motion.div className='add-row-input-container'>
+                                            <section className='inline-block add-row-section-grade'>
                                                 <input 
-                                                    className='input-style'
+                                                    className='add-row-input-style'
                                                     type="text"
                                                     name="grade"
                                                     placeholder='0'
@@ -118,10 +118,10 @@ const AddRow = () => {
                                         </motion.div>
 
                                         {/* enrolled */}
-                                        <motion.div className='input-container'>
-                                            <section className='inline-block section-enrolled'>
+                                        <motion.div className='add-row-input-container'>
+                                            <section className='inline-block add-row-section-enrolled'>
                                                 <input 
-                                                    className='input-style'
+                                                    className='add-row-input-style'
                                                     type="text"
                                                     name="enrolled"
                                                     placeholder='0'
@@ -132,10 +132,10 @@ const AddRow = () => {
                                         </motion.div>
 
                                         {/* running gwa */}
-                                        <motion.div className='input-container'>
-                                            <section className='inline-block section-runningGWA'>
+                                        <motion.div className='add-row-input-container'>
+                                            <section className='inline-block add-row-section-runningGWA'>
                                                 <input 
-                                                    className='input-style'
+                                                    className='add-row-input-style'
                                                     type="text"
                                                     name="runningGWA"
                                                     placeholder='0'
@@ -146,9 +146,9 @@ const AddRow = () => {
                                         </motion.div>
                                     </form>
                                     {/* save and discard buttons */}
-                                    <motion.div className='modal-footer'>
-                                        <button className='modal-btn btn-discard text-center' onClick={() => {setOpenModal(false)}}>Discard</button>
-                                        <button className='modal-btn btn-save text-white'>Save changes</button>
+                                    <motion.div className='add-row-modal-footer'>
+                                        <button className='add-row-modal-btn add-row-btn-discard text-center' onClick={() => {setOpenModal(false)}}>Discard</button>
+                                        <button className='add-row-modal-btn add-row-btn-save text-white'>Save changes</button>
                                     </motion.div>
                                 </motion.div>
                             </motion.div>
