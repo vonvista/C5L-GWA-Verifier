@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
+
+/* Buttons */
 import UploadFileBtn from '../components/buttons/UploadFileBtn';
+import Refresh from '../components/buttons/Refresh';
 
 /* Components */
 import List from '../components/List';
@@ -12,12 +15,15 @@ import SearchModal from 'frontend/components/SearchModal';
 /* CSS */
 import '../components/List.css';
 import 'tailwindcss/tailwind.css';
+import { refresh } from 'electron-debug';
 
 
 const AdminDashboard = () => {
     const [rows, setRows] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
+
+    const [refreshData, setRefreshData] = useState(false);
 
     //index 0: name; 1: num; 2: degree; index 3: GWA;
     const [sortState, setSortState] = useState([0,0,0,0])
@@ -31,34 +37,34 @@ const AdminDashboard = () => {
           "gwa": "1.01234",
           "status": "Checked"
         },
-        // {
-        //   "name": "Eyds Angeles",
-        //   "studno": "2019-05235",
-        //   "degprog": "BS Computer Science",
-        //   "gwa": "1.0",
-        //   "status": "Unchecked"
-        // },
-        // {
-        //   "name": "George Gragas",
-        //   "studno": "2019-05235",
-        //   "degprog": "BS Computer Science",
-        //   "gwa": "1.0",
-        //   "status": "Pending"
-        // },
-        // {
-        //     "name": "Maurice Paguagan",
-        //     "studno": "2019-05235",
-        //     "degprog": "BS Computer Science",
-        //     "gwa": "1.0",
-        //     "status": "Checked"
-        //   },
-        //   {
-        //     "name": "Eyds Angeles",
-        //     "studno": "2019-05235",
-        //     "degprog": "BS Computer Science",
-        //     "gwa": "1.0",
-        //     "status": "Unchecked"
-        //   },
+        {
+          "name": "Eyds Angeles",
+          "studno": "2019-05235",
+          "degprog": "BS Computer Science",
+          "gwa": "1.0",
+          "status": "Unchecked"
+        },
+        {
+          "name": "George Gragas",
+          "studno": "2019-05235",
+          "degprog": "BS Computer Science",
+          "gwa": "1.0",
+          "status": "Pending"
+        },
+        {
+            "name": "Maurice Paguagan",
+            "studno": "2019-05235",
+            "degprog": "BS Computer Science",
+            "gwa": "1.0",
+            "status": "Checked"
+          },
+          {
+            "name": "Eyds Angeles",
+            "studno": "2019-05235",
+            "degprog": "BS Computer Science",
+            "gwa": "1.0",
+            "status": "Unchecked"
+          },
           {
             "name": "2 George Gragas",
             "studno": "2019-00001",
@@ -171,7 +177,7 @@ const AdminDashboard = () => {
       }
 
       fetchData();
-    }, []);
+    }, [refreshData]);
 
     //sort rows in ascending order based on the object property passed
     const sortRowsAsc = (object) => {
@@ -290,18 +296,24 @@ const AdminDashboard = () => {
 
               {/* Page Contents */}
               <div className='pt-20 flex-column'>
-                {/* Search input button */}
-                <div className='float-left w-[18vw] h-[1vw]'>
-                  <Search user={"student"} handleSearch={(e) => setSearchStudent(e.target.value)} searchValue={searchStudent} buttonHandler={handleSearch} handleEnter={handleEnterPress}/>
-                  {
-                    showModal ?
-                    (<SearchModal user={"STUDENT"} handleClose={() => setShowModal(false)}/>):
-                    <></>
-                  }
-                </div>
-                {/* Upload button */}
-                <div className='float-right'>
-                  <UploadFileBtn />
+                <div className='flex'>
+                  {/* Upload button */}
+                  <div className='flex ml-auto order-2'>
+                    <UploadFileBtn />
+                  </div>
+                  {/* Search input button */}
+                  <div className='float-left w-[18vw] h-[1vw]'>
+                    <Search user={"student"} handleSearch={(e) => setSearchStudent(e.target.value)} searchValue={searchStudent} buttonHandler={handleSearch} handleEnter={handleEnterPress}/>
+                    {
+                      showModal ?
+                      (<SearchModal user={"STUDENT"} handleClose={() => setShowModal(false)}/>):
+                      <></>
+                    }
+                  </div>
+                  {/* Refresh button */}
+                  <div className='flex items-center'>
+                    <Refresh refreshData={refreshData} setRefreshData={setRefreshData}/>
+                  </div>
                 </div>
                 <div className='table-container'>
                   <List table={1} data={currentRows} changeSort={changeSort} sortState={sortState}/>
