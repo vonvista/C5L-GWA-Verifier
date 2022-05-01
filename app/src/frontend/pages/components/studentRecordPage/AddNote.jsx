@@ -10,7 +10,8 @@ import { useState } from 'react';
 const AddNote = ({ handleAddNote, handleDeleteNote, semesters }) => {
     const [noteText, setNoteText] = useState('');
     const [showModal, setShowModal] = useState(false)
-    const [selectedSem, setSelectedSem] = useState('')    // state controller for selecting sem notes
+    const [selectedSem, setSelectedSem] = useState(semesters[0])    // state controller for selecting sem notes 
+                                                                    // use first object as default
 
     const handleClick = React.useCallback((e) => {
         setShowModal(true);
@@ -40,11 +41,11 @@ const AddNote = ({ handleAddNote, handleDeleteNote, semesters }) => {
 
                     <div className="add-note-title">
                         {/* Dropdown select  */}
-                        {/* <SemSelect
+                        <SemSelect
                             style="w-full ml-auto mr-0"
-                            options={semesters.map(( semData ) => (semData.sem))}
-                            state={[selectedSem, setSelectedSem]}
-                        /> */}
+                            options={semesters} // pass semester object
+                            state={[selectedSem, setSelectedSem]} 
+                        />
                         
                         {/* Exit button */}
                         <button
