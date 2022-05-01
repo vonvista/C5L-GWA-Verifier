@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import SemSelect from '../../../components/inputs/DropdownSelect';
 import AddNote from './AddNote';
+import Delete from '../../../../../assets/icons/delete.svg';
 
 // notes tab
 
@@ -10,48 +11,62 @@ import AddNote from './AddNote';
 
 export default function NotesTab({notes, semesters}) { 
     const [notesList, setNotesList] = useState(notes)
+    const [selectedSem, setSelectedSem] = useState(semesters[0])    // state controller for selecting sem notes 
+                                                                    // uses first object as default
 
     // Handler for adding/editing notes
     const handleAddNote = (text) => {
 		const newNote = {
-			sem: "1st Semester AY 2018-2019",
-            // sem: sem,
+            sem: selectedSem.sem,
             content: text,
 		};
         
 		const newNotesList = [...notesList, newNote];
-        console.log(newNote)
+        console.log(selectedSem.sem);
+
 		setNotesList(newNotesList);
 	};
 
     // Handler for deleting notes
-    const handleDeleteNote = (id) => {
-        const newNotes = notesList.filter((notesList) => notesList.sem !== id);
-		setNotesList(newNotes);
+    const handleDeleteNote = (values) => {
+        // Get array index of object that will be deleted
+        const targetIndex = notesList.findIndex(obj => obj.sem == values.sem)
+        
+        let newNotes = [...notesList]
+        newNotes.splice(targetIndex, 1)
+
+        setNotesList(newNotes)
     }
 
     return(
         <div className="max-w-[25vw] max-h-[41rem] mx-auto p-5 block overflow-auto">
             {/* Add note button */}
-            <AddNote handleAddNote={handleAddNote} handleDeleteNote={handleDeleteNote} semesters={semesters}/>
+            <AddNote
+                handleAddNote={handleAddNote}
+                selectedSem={selectedSem}
+                setSelectedSem={setSelectedSem}
+                semesters={semesters}
+            />
 
             {/* Notes */}
             { notesList.map( (data, idx) => {
                 return(
                     <div className="grid border rounded-lg p-5 mb-2" key={idx}>
                         <h1 className="text-xl inter font-bold">
-                        {data.sem}
+                            {data.sem}
                             {data.SemesterYear}
-
                         </h1>
-                        {/* <h2 className="inter font-light italic">
-                            {data.author} {data.date}
-                            {data.User} {data.createdAt}
-                        </h2> */}
                         <p className="inter text-sm mt-3">
                             {data.content}
                             {data.Details}
                         </p>
+                        <button className='delete-note-btn align-center hover:bg-gray-300' onClick={() => handleDeleteNote(data)}>
+                            <img
+                                width="25"
+                                src={Delete}
+                            />
+                            <span className="ml-2">Delete</span>
+                        </button>
                     </div>
                 )
             })}

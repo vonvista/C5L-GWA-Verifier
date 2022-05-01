@@ -13,10 +13,9 @@
 .add-note-title{
     display: flex;
     font-size: 2.5vh;
-    margin-top: 30px;
+    margin-top: 15px;
     margin-bottom: 10px;
     align-items: center;
-    padding-left: 0.75rem;
     justify-content: space-between;
 }
 
@@ -27,18 +26,22 @@
     border-style: none;
 }
 
-.delete-btn{
-    width: 20%;
+.close-note-btn{
+    height: 13%;
+    font-size: 2.75vw;
+}
+
+.delete-note-btn{
+    width: 5vw;
     float: right;
-    color: #ffffff;
+    display: flex;
     padding: 3px;
     margin-top: 10px;
     margin-bottom: 15px;
     border-radius: 0.5rem;
-    background-color: rgb(132, 141, 150);
 }
 
-.save-btn{
+.save-note-btn{
     width: 20%;
     float: right;
     color: #ffffff;

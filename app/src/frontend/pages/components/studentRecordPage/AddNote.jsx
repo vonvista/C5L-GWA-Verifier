@@ -7,31 +7,36 @@ import NotesTab from './Notes';
 import { useState } from 'react';
 
 
-const AddNote = ({ handleAddNote, handleDeleteNote, semesters }) => {
+const AddNote = ({ handleAddNote, selectedSem, setSelectedSem, semesters }) => {
     const [noteText, setNoteText] = useState('');
     const [showModal, setShowModal] = useState(false)
-    const [selectedSem, setSelectedSem] = useState(semesters[0])    // state controller for selecting sem notes 
-                                                                    // use first object as default
+    
 
+    // Handler for add note button
     const handleClick = React.useCallback((e) => {
         setShowModal(true);
-        // check if nakukuha ba yung sem na field sa array of objects
-        console.log(semesters);
-        console.log(semesters.map(( semData ) => (semData.sem)));
-        console.log('Add Note button click');
     });
 
-    //
+    // Handler for changes in text area
     const handleChange = (event) => {
         setNoteText(event.target.value);
     };
 
+    // Lifts state up
+    const handleSemChange = (newSelect) => {
+        setSelectedSem(newSelect);
+    }
+
+    // Handler for save button
     const handleSaveClick = () => {
+        handleSemChange(selectedSem)
+
         if (noteText.trim().length > 0){
             handleAddNote(noteText);
             setNoteText('');
         }
     };
+    
 
     return (
         <div>
@@ -40,16 +45,18 @@ const AddNote = ({ handleAddNote, handleDeleteNote, semesters }) => {
                 <div className='add-note-modal shadow-lg'>
 
                     <div className="add-note-title">
-                        {/* Dropdown select  */}
-                        <SemSelect
-                            style="w-full ml-auto mr-0"
-                            options={semesters} // pass semester object
-                            state={[selectedSem, setSelectedSem]} 
-                        />
+                        <div>
+                            {/* Dropdown select  */}
+                            <SemSelect
+                                style="w-full ml-auto mr-0"
+                                options={semesters} // pass semester object
+                                state={[selectedSem, setSelectedSem]} 
+                            />
+                        </div>
                         
                         {/* Exit button */}
                         <button
-                            className="close-btn"
+                            className="close-note-btn"
                             type="button"
                             onClick={() => setShowModal(false)}
                         >
@@ -65,12 +72,9 @@ const AddNote = ({ handleAddNote, handleDeleteNote, semesters }) => {
                         onChange={handleChange}
                     ></textarea>
                     
-                    {/* Save and Delete buttons */}
+                    {/* Save button */}
                     <div>
-                        <button className='delete-btn bg-gray-600 hover:bg-gray-400' onClick={handleDeleteNote}>
-                            Delete
-                        </button>
-                        <button className='save-btn mr-3 hover:bg-login-green-hover' onClick={handleSaveClick}>
+                        <button className='save-note-btn mr-3 hover:bg-login-green-hover' onClick={handleSaveClick}>
                             Save
                         </button>
                         
