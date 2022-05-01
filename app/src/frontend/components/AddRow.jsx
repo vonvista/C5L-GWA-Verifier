@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {AnimatePresence, motion} from 'framer-motion';
 
 /* Components */
-import Add from '../components/buttons/Add.jsx';
+import Add from './buttons/AddRowBtn.jsx';
 
 /* CSS */
 import 'tailwindcss/tailwind.css';
