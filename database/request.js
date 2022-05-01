@@ -241,9 +241,9 @@ updatestudent2 = {
     OverallGWA: 3.00
 }
 
-request('http://localhost:3001/student/add',{method:"POST",form: student1},function(err,req,body) {
-    console.log(body);
-});
+// request('http://localhost:3001/student/add',{method:"POST",form: student1},function(err,req,body) {
+//     console.log(body);
+// });
 
 // request('http://localhost:3001/student/add',{method:"POST",form: student2},function(err,req,body) {
 //     console.log(body);
