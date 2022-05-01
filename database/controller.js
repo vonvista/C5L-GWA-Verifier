@@ -84,7 +84,6 @@ exports.userAdd = async function(req, res, next) {
   });
   console.log(newUser);
 
-
   newUser.save(function(err) {
     if (!err) { res.send(newUser)}
     else { res.send({err:'Unable to save user'}) }
@@ -118,8 +117,10 @@ exports.userDeleteAll = function(req, res, next) {
 }
 
 // update a user
-exports.userUpdate = function(req, res, next) {
+exports.userUpdate = async function(req, res, next) {
   // console.log(req.body);
+
+  var hashedPassword = await bcrypt.hash(req.body.Password, saltRounds); //encrpyt password first -vov
   
   User.updateOne({Username : req.body.Username},{"$set":{
     "FirstName": req.body.FirstName,
@@ -127,7 +128,7 @@ exports.userUpdate = function(req, res, next) {
     "LastName": req.body.LastName,
     "Position": req.body.Position,
     "Role": req.body.Role,
-    "Password": req.body.Password
+    "Password": hashedPassword
   }}, {new : true}, function(err,result){
     if(!err && User){
       res.send(result);
