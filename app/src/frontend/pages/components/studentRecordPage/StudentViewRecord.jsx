@@ -23,6 +23,7 @@ const RecordPage = ({sem, user, notes, history, status, grades}) => {
     
     const [selectedUser, setSelectedUser] = useState(user)
     const [statusState, setStatus] = useState(status)
+    const [gradeState, setGradeState] = useState(grades)
 
     
     const tabContents = { 

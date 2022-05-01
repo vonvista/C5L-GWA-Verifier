@@ -12,7 +12,7 @@ export default function NotesTab({notes, semesters}) {
     const [notesList, setNotesList] = useState(notes)
 
     // Handler for adding/editing notes
-    const handleAddNote = (sem, text) => {
+    const handleAddNote = (text) => {
 		const newNote = {
 			sem: "1st Semester AY 2018-2019",
             // sem: sem,

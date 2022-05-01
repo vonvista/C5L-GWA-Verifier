@@ -40,11 +40,11 @@ const AddNote = ({ handleAddNote, handleDeleteNote, semesters }) => {
 
                     <div className="add-note-title">
                         {/* Dropdown select  */}
-                        <SemSelect
+                        {/* <SemSelect
                             style="w-full ml-auto mr-0"
                             options={semesters.map(( semData ) => (semData.sem))}
                             state={[selectedSem, setSelectedSem]}
-                        />
+                        /> */}
                         
                         {/* Exit button */}
                         <button
