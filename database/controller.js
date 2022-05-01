@@ -199,6 +199,13 @@ exports.gradeFindOne = function(req, res, next) {
   });
 }
 
+exports.gradeFindByStudent = function(req,res,next){
+  // requires student ObjectId
+  Grade.find({Student:mongoose.Types.ObjectId(req.body.Student)},function(err,grades){
+    if(!err) res.send(grades);
+  })
+}
+
 // Add grade
 exports.gradeAdd = function(req, res, next) {
   // UNCOMMENT TO SEE REQUEST CONTENTS AND MAPPING TO USER MODEL
@@ -377,7 +384,8 @@ exports.studentDeleteOne = function(req, res, next) {
 
 
 const historySchema = new Schema({
-  User: {type: Schema.Types.ObjectId, ref: 'user', required: true},
+  User: {type: String, required: true},
+  Student: {type: String, required: true},
   Date : {type: String, required : true},
   Time : {type: String, required : true},
   Description: {type: String, required : true, enum : ['create', 'read', 'update', 'delete']}, // short string ng change na nagyari
@@ -403,11 +411,18 @@ History.findOne(function(err, History){
 });
 }
 
+exports.historyFindByStudent = function(req, res, next){
+  History.find({Student:req.body.Student},function(err,histories){
+    if (!err) res.send(histories);
+  })
+}
+
 // add history
 exports.historyAdd = function(req, res, next) {
   
   var newHistory = new History({
-    User: mongoose.Types.ObjectId(req.body.User),
+    User: req.body.User,
+    Student: req.body.Student,
     Date: req.body.Date,
     Time: req.body.Time,
     Description: req.body.Description,
@@ -428,6 +443,7 @@ exports.historyAdd = function(req, res, next) {
 exports.historyUpdateOne = function(req, res, next) {
 History.updateOne({User: req.body.User},{"$set":{
   "User": req.body.User,
+  "Student": req.body.Student,
   "Date": req.body.Date,
   "Time": req.body.Time,
   "Description": req.body.Description,

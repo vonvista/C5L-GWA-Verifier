@@ -18,6 +18,7 @@ module.exports = (app) => {
   // HISTORY ROUTES
   app.post('/history/add', controller.historyAdd);
   app.post('/history/find', controller.historyFindOne);
+  app.post('/history/find-by-student', controller.historyFindByStudent);
   app.get('/history/find-all', controller.historyFindAll);
   app.put('/history/update', controller.historyUpdateOne);
   app.delete('/history/delete-all', controller.historyDeleteAll);
@@ -44,6 +45,7 @@ module.exports = (app) => {
   
   // GRADE ROUTES
   app.get('/grade/find-all', controller.gradeFindAll);
+  app.get('/grade/find-by-student', controller.gradeFindByStudent);
   app.post('/grade/add', controller.gradeAdd);
   app.post('/grade/find', controller.gradeFindOne);
   app.delete('/grade/delete-all', controller.gradeDeleteAll);
