@@ -329,74 +329,81 @@ const currStudentKey = "62694b253865d3f3586501ee"
 
 export default function StudentRecord() { // this will probably transferred to another file but this stays here for now
 
-  /// Backend Linking (Database to Frontend) -lal
-  const [studentProp, getStudentProp] = useState()
-  const [notesProp, getNotesProp] = useState()
+  // /// Backend Linking (Database to Frontend) -lal
+  // const [studentProp, getStudentProp] = useState()
+  // const [notesProp, getNotesProp] = useState()
 
-  useEffect(() => {
-    GetStudentInfo()
-    GetStudentNotes()
-  }, [])
+  // useEffect(() => {
+  //   GetStudentInfo()
+  //   GetStudentNotes()
+  // }, [])
 
-  // get student information from DB using studentID
-  const GetStudentInfo = () => {
+  // // get student information from DB using studentID
+  // const GetStudentInfo = () => {
 
-    var currUser = { // store student info here
-      stud_no: '',
-      name: '',
-      degree_program: '',
-    }
+  //   var currUser = { // store student info here
+  //     stud_no: '',
+  //     name: '',
+  //     degree_program: '',
+  //   }
     
-    fetch(`http://localhost:3001/student/find`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(currStudentID)// use studentID to find student info
-    })
-      .then(response => response.json())
-      .then(body => {
+  //   fetch(`http://localhost:3001/student/find`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(currStudentID)// use studentID to find student info
+  //   })
+  //     .then(response => response.json())
+  //     .then(body => {
 
-        // save the following info to currUser
-        currUser.stud_no = body.StudentID
-        currUser.name = `${body.LastName}, ${body.FirstName} ${body.MiddleName}`
-        currUser.degree_program = body.Degree
-        currUser.status = "Pending"
-        currUser.Student = body._id
+  //       // save the following info to currUser
+  //       currUser.stud_no = body.StudentID
+  //       currUser.name = `${body.LastName}, ${body.FirstName} ${body.MiddleName}`
+  //       currUser.degree_program = body.Degree
+  //       currUser.status = "Pending"
+  //       currUser.Student = body._id
         
-        getStudentProp(currUser) // return student info from db
-      })
-  }
+  //       getStudentProp(currUser) // return student info from db
+  //     })
+  // }
 
-  // get Student record notes using student _id (primary key)
-  const GetStudentNotes = () => {
+  // // get Student record notes using student _id (primary key)
+  // const GetStudentNotes = () => {
 
-    var studentNotes = [] // store notes here
+  //   var studentNotes = [] // store notes here
 
-    // fetch notes by studentkey from db
-    fetch(`http://localhost:3001/note/find-by-student`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({Student: currStudentKey}) // use student _id to find student notes
-    })
-      .then(response => response.json())
-      .then(body => {
+  //   // fetch notes by studentkey from db
+  //   fetch(`http://localhost:3001/note/find-by-student`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({Student: currStudentKey}) // use student _id to find student notes
+  //   })
+  //     .then(response => response.json())
+  //     .then(body => {
 
-        getNotesProp(body) // save notes from db to notesProp
+  //       getNotesProp(body) // save notes from db to notesProp
         
-      })
+  //     })
       
-  }
+  // }
 
     return (
-      (studentProp && notesProp) ? <>
-        <nav class="sticky z-10"><UserNav /></nav>
+      // (studentProp && notesProp) ? <>
+      //   <nav class="sticky z-10"><UserNav /></nav>
+      //       <div className="relative inset-0 flex ml-8 xl:ml-12 justify-center">
+      //           <header><Header pageTitle={"Student Record"}/></header>
+      //           <RecordPage user={studentProp} notes={notesProp} history={history} status={statusData} grades={grades} />
+      //       </div>
+      // </> : <div></div>
+      <>
+        <nav className="sticky z-10"><UserNav /></nav>
             <div className="relative inset-0 flex ml-8 xl:ml-12 justify-center">
                 <header><Header pageTitle={"Student Record"}/></header>
-                <RecordPage user={studentProp} notes={notesProp} history={history} status={statusData} grades={grades} />
+                <RecordPage user={user} notes={notes} history={history} status={statusData} grades={grades} />
             </div>
-      </> : <div></div>
+      </>
     );
 }

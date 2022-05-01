@@ -3,7 +3,6 @@ import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/solid'
 import List from '../../../components/List';
 import 'tailwindcss/tailwind.css';
-import AddNoteBtn from '../../../components/buttons/AddNoteBtn';
 
 
 // This component handles the student's data for a specific semester
@@ -54,18 +53,15 @@ const TableContents = ({ Name, Semester, key, handler }) => {
                 <Disclosure key={key}>
                     {({ open }) => (
                         <>
-                            {/* Accordion Header */}
-                            <Disclosure.Button className={`${open ? 'bg-table-hover-color text-secondary-red rounded-t-lg' : 'mb-2 rounded-lg shadow-lg'} ${nameStyle}`}>
+                             {/* Accordion Header */}
+                             <Disclosure.Button className={`${open ? 'bg-table-hover-color text-secondary-red rounded-t-lg' : 'mb-2 rounded-lg shadow-lg'} ${nameStyle}`}>
                                 <span className="text-lg xl:text-xl">{Name}</span>
-                                <div className="flex items-center justify-between">
-                                    <span className=""><AddNoteBtn /></span>
-                                    {/* Icon */}
-                                    <ChevronUpIcon
-                                        className={`${
-                                            !open ? 'transform rotate-180' : ''
-                                        } ml-1 w-5 xl:w-7 self-center`}
-                                    />
-                                </div>
+                                {/* Icon */}
+                                <ChevronUpIcon
+                                    className={`${
+                                        !open ? 'transform rotate-180' : ''
+                                    } ml-1 w-5 xl:w-7 self-center`}
+                                />
                             </Disclosure.Button>
                             
                             {/* Accordion Contents */}
