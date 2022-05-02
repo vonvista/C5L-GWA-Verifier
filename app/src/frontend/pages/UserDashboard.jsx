@@ -270,12 +270,14 @@ const UserDashboard = () => {
     const handleAddRecord = (student) => {
       let temp = rows; 
       temp.unshift({
+        "_id": student._id,
         "name": student.FirstName + ' ' + student.LastName, 
         "studno": student.StudentID, 
         "degprog" : student.Degree, 
         "gwa": student.OverallGWA,
         "status": student.Status});
       setRows([...temp]);
+      console.log(rows);
     }
 
     // handles page refresh on student delete
@@ -289,7 +291,7 @@ const UserDashboard = () => {
     const indexOfLastRow = currentPage * rowsPerPage;
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
     const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow)
-
+    console.log("REFRESH")
     //Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
 

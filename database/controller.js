@@ -408,12 +408,20 @@ Student.updateOne({StudentID: req.body.StudentID},{"$set":{
 
 // delete student
 exports.studentDeleteOne = function(req, res, next) {
-  // console.log(req.body);
+  console.log(req.body);
   Student.findOneAndDelete({StudentID: req.body.StudentID},function(err, Student){
+    if(!err && Student){
+      // res.send({suc:'Successfully deleted'});
+    } else {
+      res.send({err:'Unable to delete'});
+    }
+  });
+
+  Grade.deleteMany({Student: mongoose.Types.ObjectId(req.body.StudentKey)},function(err, Student){
     if(!err && Student){
       res.send({suc:'Successfully deleted'});
     } else {
-      res.send({err:'Unable to delete student'});
+      res.send({err:'Unable to delete'});
     }
   });
 }
