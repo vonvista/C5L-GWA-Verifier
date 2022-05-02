@@ -22,9 +22,8 @@ const UserDashboard = () => {
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
     //index 0: name; 1: num; 2: degree; index 3: GWA;
-    const [sortState, setSortState] = useState([0,0,0,0])
+    const [sortState, setSortState] = useState([0,0,0,0]);
     const [latestSort, setLatestSort] = useState(-1);
-
 
     // const studentsData = [
     //     {
@@ -34,34 +33,34 @@ const UserDashboard = () => {
     //       "gwa": "1.01234",
     //       "status": "Checked"
     //     },
-    //     // {
-    //     //   "name": "Eyds Angeles",
-    //     //   "studno": "2019-05235",
-    //     //   "degprog": "BS Computer Science",
-    //     //   "gwa": "1.0",
-    //     //   "status": "Unchecked"
-    //     // },
-    //     // {
-    //     //   "name": "George Gragas",
-    //     //   "studno": "2019-05235",
-    //     //   "degprog": "BS Computer Science",
-    //     //   "gwa": "1.0",
-    //     //   "status": "Pending"
-    //     // },
-    //     // {
-    //     //     "name": "Maurice Paguagan",
-    //     //     "studno": "2019-05235",
-    //     //     "degprog": "BS Computer Science",
-    //     //     "gwa": "1.0",
-    //     //     "status": "Checked"
-    //     //   },
-    //     //   {
-    //     //     "name": "Eyds Angeles",
-    //     //     "studno": "2019-05235",
-    //     //     "degprog": "BS Computer Science",
-    //     //     "gwa": "1.0",
-    //     //     "status": "Unchecked"
-    //     //   },
+    //     {
+    //       "name": "Eyds Angeles",
+    //       "studno": "2019-05235",
+    //       "degprog": "BS Computer Science",
+    //       "gwa": "1.0",
+    //       "status": "Unchecked"
+    //     },
+    //     {
+    //       "name": "George Gragas",
+    //       "studno": "2019-05235",
+    //       "degprog": "BS Computer Science",
+    //       "gwa": "1.0",
+    //       "status": "Pending"
+    //     },
+    //     {
+    //         "name": "Maurice Paguagan",
+    //         "studno": "2019-05235",
+    //         "degprog": "BS Computer Science",
+    //         "gwa": "1.0",
+    //         "status": "Checked"
+    //       },
+    //       {
+    //         "name": "Eyds Angeles",
+    //         "studno": "2019-05235",
+    //         "degprog": "BS Computer Science",
+    //         "gwa": "1.0",
+    //         "status": "Unchecked"
+    //       },
     //       {
     //         "name": "2 George Gragas",
     //         "studno": "2019-00001",
@@ -167,10 +166,11 @@ const UserDashboard = () => {
     //   }
     // ]
 
+    const ip = localStorage.getItem("ServerIP");
     useEffect(() => {
       const fetchData = async () => {
         // Retrieve data from database
-        fetch('http://localhost:3001/student/find-all')
+        fetch(`http://${ip}:3001/student/find-all`)
         .then(response => response.json())
         .then(async (body) => {
           let studentsData = []; // initiating array that will contain the information of students
@@ -180,6 +180,14 @@ const UserDashboard = () => {
           });
 
           await setRows(studentsData);
+        })
+        .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+          Swal.fire({
+            icon: 'error',
+            title: 'Server Error',
+            text: 'Check if the server is running or if database IP is correct',
+          })
+          console.log(err)
         })
       }
 

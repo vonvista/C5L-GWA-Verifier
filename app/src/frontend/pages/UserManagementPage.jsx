@@ -17,7 +17,6 @@ const UserManagementPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-
   // const Users = [
   //   {
   //     "uname": "eyds_15",
@@ -76,19 +75,28 @@ const UserManagementPage = () => {
   //   }
   // ]
 
+  const ip = localStorage.getItem("ServerIP")
   useEffect(() => {
     const fetchData = async () => {
       // Retrieve data from database
-      fetch('http://localhost:3001/user/find-all')
+      fetch(`http://${ip}:3001/user/find-all`)
       .then(response => response.json())
       .then(async (body) => {
         let Users = []; // initiating array that will contain the information of users
         // mapping out all the entries sent by the fetch
         body.map((user, i) => {
-          Users.unshift({"uname": user.Username, "name": user.FirstName + ' ' + user.LastName, "position": user.Role});
+          Users.unshift({"uname": user.Username, "name": user.FirstName + ' ' + user.LastName, "position": user.Position});
         });
 
         await setRows(Users);
+      })
+      .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+        Swal.fire({
+          icon: 'error',
+          title: 'Server Error',
+          text: 'Check if the server is running or if database IP is correct',
+        })
+        console.log(err)
       })
     }
 
