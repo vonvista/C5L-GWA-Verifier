@@ -1,6 +1,7 @@
 import Actions from './buttons/Actions'
 import Input from './inputs/Input'
 import 'tailwindcss/tailwind.css'
+import SaveCancel from '../../frontend/components/buttons/ActionsSaveCancel'
 
 export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched, errors, valid}) => {
 
@@ -94,9 +95,9 @@ export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched
             </div>
 
             <div className="table-cell w-1/6 text-center">
-                <button type="submit" disabled={!valid}>Save</button>
-                <button type="button" onClick={toggleHandler}>Cancel</button>
-                {/* <Actions/> */}
+                {/* <button type="submit" disabled={!valid}>Save</button>
+                <button type="button" onClick={toggleHandler}>Cancel</button> */}
+                <SaveCancel handleCancel={toggleHandler} isDisabled={!valid} />
             </div>
         </form>
     );
