@@ -16,6 +16,7 @@ import Swal from 'sweetalert2'
 
 const pdfjs = require('pdfjs-dist/legacy/build/pdf');
 const pdfWorker = require('pdfjs-dist/legacy/build/pdf.worker.entry');
+const ip = localStorage.getItem("ServerIP");
 
 pdfjs.GlobalWorkerOptions.workerSrc = pdfWorker;
 
@@ -79,6 +80,7 @@ const readInputFile = (file, handleAddRecord) => {
     const term = [];
     const sem = [];
     const year = [];
+    const notes = [];
 
     let lastY; // last Y value or Y coordinate of the item; aka last line
     let line = ''; // content of the file per line
@@ -94,6 +96,7 @@ const readInputFile = (file, handleAddRecord) => {
     let arrayIndex = 0; // index of the last entry with term and sem
     let lastIndexWithoutTermAndSem = 0; // indicates the how many lines after the subject part
     let numOfLineAfterSubjs = 0;
+    let numOfNotes = 0;
 
     // loops through each of the items in content
     const items = content.items.map((item) => {
@@ -228,6 +231,9 @@ const readInputFile = (file, handleAddRecord) => {
               studentData.OverallGWA = parseFloat(tempArray[1]);
             } else if (numOfLineAfterSubjs == 2) {
               studentData.TotalUnits2 = parseInt(tempArray[0]);
+            } else {
+              notes[numOfNotes] = line;
+              numOfNotes += 1;
             }
             numOfLineAfterSubjs += 1;
           }
@@ -249,6 +255,7 @@ const readInputFile = (file, handleAddRecord) => {
     studentData.term = term;
     studentData.sem = sem;
     studentData.year = year;
+    studentData.notes = notes;
     return studentData;
   }
 
@@ -280,13 +287,13 @@ const readInputFile = (file, handleAddRecord) => {
           }
 
           // posting to database
-          fetch("http://localhost:3001/student/add",{
+          fetch(`http://${ip}:3001/student/add`,{
             method: "POST",
             headers: { "Content-Type":"application/json" },
             body: JSON.stringify(student)
           })
           .then(response => response.json())
-          .then(body => {
+          .then(body =>  {
             if(body.err){
               Swal.fire({
                 icon: 'error',
@@ -294,26 +301,68 @@ const readInputFile = (file, handleAddRecord) => {
                 text: body.err,
               })
             } else {
+              let StudentKey = body._id;
               var key = fileBase + '_' + fileNum.toString(); // modifying the key for storing in local storage
               localStorage.setItem(key, JSON.stringify(data)); // store the data to local storage
               fileNum++; // update file number
-              Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: isSuccessful.message
+
+              // add grades data to database
+              let Grades = [];
+              // loops through each row of the columns
+              for (let i=0; i<data.courses.length; i++){
+                // pushes each row object to the array
+                Grades.push({
+                  "Student" : StudentKey,
+                  "Course" : data.courses[i],
+                  "Grade" : data.grades[i].toString(),
+                  "Unit" : data.units[i],
+                  "Weight" : data.weights[i],
+                  "Cumulative" : data.cumulative[i],
+                  "Semyear" : data.sem[i] + '/' + data.year[i]
+                });
+              }
+              let grades = {"Grades" : Grades};
+              // posting to database
+              fetch(`http://${ip}:3001/grade/add-many`,{
+                method: "POST",
+                headers: { "Content-Type":"application/json" },
+                body: JSON.stringify(grades)
               })
-              handleAddRecord(student)
+              .then(response => response.json())
+              .then(body =>  {
+                if(body.err){
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: body.err,
+                  })
+                } else {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: isSuccessful.message
+                  })
+                }
+              })
+              .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Server Error',
+                  text: 'Check if the server is running or if database IP is correct'
+                })
+                console.log(err);
+              })
             }
           })
           .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
             Swal.fire({
               icon: 'error',
               title: 'Server Error',
-              text: 'Check if the server is running or if database IP is correct',
+              text: 'Check if the server is running or if database IP is correct'
             })
             console.log(err)
           })
-
+          handleAddRecord(student);
         } else {
           Swal.fire({ // will activate if preliminary verification of read input sees an error
             icon: 'error',

@@ -7,7 +7,7 @@ import Header from '../components/HeaderWithoutArrowbck';
 import UserNav from '../components/UserNavigation';
 import Pagination from '../components/Pagination';
 import Search from 'frontend/components/Search';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 /* CSS */
 import '../components/List.css';
@@ -176,7 +176,7 @@ const UserDashboard = () => {
           let studentsData = []; // initiating array that will contain the information of students
           // mapping out all the entries sent by the fetch
           body.map((student, i) => {
-            studentsData.unshift({"name": student.FirstName + ' ' + student.LastName, "studno": student.StudentID, "degprog" : student.Degree, "gwa": student.OverallGWA, "status": student.Status});
+            studentsData.unshift({"name": student.FirstName + ' ' + student.LastName, "studno": student.StudentID, "degprog" : student.Degree, "gwa": student.OverallGWA, "status": student.Status, "_id": student._id});
           });
 
           await setRows(studentsData);
@@ -266,6 +266,7 @@ const UserDashboard = () => {
 
     }
 
+    // handles page refresh on file upload
     const handleAddRecord = (student) => {
       let temp = rows; 
       temp.unshift({
@@ -277,9 +278,10 @@ const UserDashboard = () => {
       setRows([...temp]);
     }
 
-    const handleDeleteRecord = (username) => {
+    // handles page refresh on student delete
+    const handleDeleteRecord = (student) => {
       let temp = rows;
-      temp.splice(temp.findIndex(row => row.studno === username.StudentID), 1);
+      temp.splice(temp.findIndex(row => row.studno === student.StudentID), 1);
       setRows([...temp]);
     }
 

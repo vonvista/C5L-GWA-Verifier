@@ -139,6 +139,13 @@ const UserManagementPage = () => {
       }
     }
 
+    // handles page refresh on user delete
+    const handleDeleteRecord = (user) => {
+      let temp = rows;
+      temp.splice(temp.findIndex(row => row.uname === user.Username), 1);
+      setRows([...temp]);
+    }
+
     return(
         <>
           <div>
@@ -161,7 +168,7 @@ const UserManagementPage = () => {
                 </div>
                 <div>
                   <div className='table-container'>
-                    <List table={3} data={currentRows}/>
+                    <List table={3} data={currentRows} handleDeleteRecord={handleDeleteRecord}/>
                   </div>
                   <div className='float-right'>
                     <Pagination rowsPerPage={rowsPerPage} totalRows={rows.length} currentPage={currentPage} paginate={paginate} />

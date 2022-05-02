@@ -16,7 +16,7 @@ const UploadFileBtn = ({handleClick, handleAddRecord}) => {
 
   return (
     <>
-      <input type="file" id="myfile" style={{"display":"none"}} onChange={() => handleClick(document.getElementById("myfile").files[0], handleAddRecord)}/>
+      <input type="file" id="myfile" accept="application/pdf" style={{"display":"none"}} onChange={() => handleClick(document.getElementById("myfile").files[0], handleAddRecord)}/>
       <button className={uploadbtn} type="button" onClick={openFileDialog}>
         <img
           className="p-0.25 ml-0.25 mr-1.5 inline-flex"
