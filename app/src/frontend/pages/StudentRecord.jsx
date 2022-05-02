@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import RecordPage from './components/studentRecordPage/StudentViewRecord';
 import Header from '../components/HeaderWithArrowbck';
 import UserNav from '../components/UserNavigation';
-
+import Swal from 'sweetalert2';
 
 // sample value for user record
 const user = {
@@ -322,23 +322,137 @@ const grades = [
   }
 ]
 
-// sample student id -lal
-const currStudentID = {StudentID: "201912345"}
-const currStudentKey = "62694b253865d3f3586501ee"
+// sample student id -lal 
+// get the following from localStorage on actual
+const currStudentID = {StudentID: "201912345"} // localStorage.getItem("currStudentID")
+const currStudentKey = "62694b253865d3f3586501ee" // localStorage.getItem("currStudentKey")
+const ip = localStorage.getItem("ServerIP")  // change all localhost to ip later on
 
+// organize grades from database for RecordPage props
+function organizeGrades(data){
+
+  // final variable to be return
+  const finalGrades = []
+
+  // gradeSet template
+  let gradeSet = {
+    sem: "",
+    data: [],
+  };
+
+  // loop for organizing data from db
+  for ( let i = 0 ; i < data.length ; i++ ){
+
+    // fill gradeSet.sem at the start
+    if( i == 0 ) gradeSet.sem = data[i].Semyear;
+    
+
+    // creates new gradeSet for a different Semyear after pushing previous
+    if (gradeSet.sem != data[i].Semyear){
+
+      // push previous gradeSet 
+      finalGrades.push(gradeSet)
+
+      // new gradeSet
+      gradeSet = {
+        sem: "",
+        data: [],
+      }
+
+      gradeSet.sem = data[i].Semyear
+    }
+
+    // store to gradeSet
+    gradeSet.data.push({})
+    gradeSet.data[ gradeSet.data.length - 1 ].idRow = (gradeSet.data.length + 1).toString()
+    gradeSet.data[ gradeSet.data.length - 1 ].courseName = data[i].Course.toString()
+    gradeSet.data[ gradeSet.data.length - 1 ].units = data[i].Unit.toString()
+    gradeSet.data[ gradeSet.data.length - 1 ].grade = data[i].Grade.toString()
+    gradeSet.data[ gradeSet.data.length - 1 ].enrolled = data[i].Weight.toString()
+    gradeSet.data[ gradeSet.data.length - 1 ].runningSum = data[i].Cumulative.toString()
+
+    // push the last gradeSet before ending loop
+    if(i == data.length - 1){
+      finalGrades.push(gradeSet)
+    }
+
+  }
+  
+  return finalGrades
+
+}
+
+// organize history from database for RecordPage props
+function organizeHistory(data){
+
+  // final var to be returned
+  const finalHistory = []
+
+  // historySet template
+  let historySet = {
+    date: "",
+    info: [],
+  }
+
+  // main loop for organizing history
+  for ( let i = 0 ; i < data.length ; i++ ){
+
+    // fill historySet date first
+    if( i == 0 ) historySet.date = data[0].Date;
+
+    // push prev Set and creates new Set for different date
+    if ( historySet.date != data[i].Date ){
+
+      // push previous set
+      finalHistory.push( historySet )
+
+      // reset historySet
+      historySet = {
+        date: "",
+        info: [],
+      }
+
+      // fill historySet.date
+      historySet.date = data[i].Date
+    }
+
+    // fill other data
+    historySet.info.push({})
+    historySet.info[ historySet.info.length - 1 ].main = data[i].Description
+    historySet.info[ historySet.info.length - 1 ].user = data[i].User
+    historySet.info[ historySet.info.length - 1 ].time = data[i].Time
+    historySet.info[ historySet.info.length - 1 ].details = data[i].Details
+
+    // push last Set
+    if(i == data.length - 1){
+      finalHistory.push( historySet )
+    }
+
+  }
+  
+  return finalHistory
+
+}
 
 export default function StudentRecord() { // this will probably transferred to another file but this stays here for now
 
-  /// Backend Linking (Database to Frontend) -lal
+  // Backend Linking (Database to Frontend) -lal
   const [studentProp, getStudentProp] = useState()
   const [notesProp, getNotesProp] = useState()
+  const [gradesProp, getGradesProp] = useState()
+  const [historyProp, getHistoryProp] = useState()
 
+  // get Grades, Student, Notes, History from database
   useEffect(() => {
+
+    GetStudentGrades()
+    GetStudentHistory()
     GetStudentInfo()
     GetStudentNotes()
+
   }, [])
 
-  // get student information from DB using studentID
+  // fetch Student from database using Student Number
   const GetStudentInfo = () => {
 
     var currUser = { // store student info here
@@ -357,6 +471,9 @@ export default function StudentRecord() { // this will probably transferred to a
       .then(response => response.json())
       .then(body => {
 
+        // save to localStorage for exporting
+        localStorage.setItem("currStudent", JSON.stringify(body))
+
         // save the following info to currUser
         currUser.stud_no = body.StudentID
         currUser.name = `${body.LastName}, ${body.FirstName} ${body.MiddleName}`
@@ -366,9 +483,84 @@ export default function StudentRecord() { // this will probably transferred to a
         
         getStudentProp(currUser) // return student info from db
       })
+      .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+        Swal.fire({
+            icon: 'error',
+            title: 'Server Error',
+            text: 'Check if the server is running or if database IP is correct',
+        })
+        console.log(err)
+      })
   }
 
-  // get Student record notes using student _id (primary key)
+  // fetch Grades from database using Student _id (PK)
+  const GetStudentGrades = () => {
+    
+    // fetch grade by student from database
+    fetch(`http://localhost:3001/grade/find-by-student`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({Student: currStudentKey})
+    })
+      .then(response => response.json())
+      .then(body => {
+        
+        // sort body ( sort by Year, Semester )
+        sortedGrades = body.sort( (x,y)=> (x.Semyear.localeCompare(y.Semyear)) )
+        
+        // save to localStorage for exporting grades
+        localStorage.setItem("currStudentGrades", JSON.stringify(sortedGrades) )
+        
+        //organize the data for table contents
+        const studentGrades = organizeGrades(sortedGrades)
+        console.log(studentGrades)
+        getGradesProp(studentGrades)
+
+      })
+      .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+        Swal.fire({
+            icon: 'error',
+            title: 'Server Error',
+            text: 'Check if the server is running or if database IP is correct',
+        })
+        console.log(err)
+      })
+  }
+
+  // fetch History from database using Student _id (PK)
+  const GetStudentHistory = () => {
+
+    // fetch history by Student _id
+    fetch(`http://localhost:3001/history/find-by-student`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({Student: currStudentKey})
+    })
+      .then(response => response.json())
+      .then(body => {
+
+        // sort body ( sort by Date)
+        // then organize the data for table contents
+        const studentHistory = organizeHistory(body.sort((x,y)=> ( y.Date.localeCompare(x.r) )))
+        // console.log(studentHistory)
+        getHistoryProp(studentHistory)
+
+      })
+      .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+        Swal.fire({
+            icon: 'error',
+            title: 'Server Error',
+            text: 'Check if the server is running or if database IP is correct',
+        })
+        console.log(err)
+      })
+  }
+
+  // fetch History from database using Student _id (PK)
   const GetStudentNotes = () => {
 
     var studentNotes = [] // store notes here
@@ -384,19 +576,32 @@ export default function StudentRecord() { // this will probably transferred to a
       .then(response => response.json())
       .then(body => {
 
-        getNotesProp(body) // save notes from db to notesProp
+        // save notes from db to notesProp
+        getNotesProp(body) 
         
+      }).catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+        Swal.fire({
+            icon: 'error',
+            title: 'Server Error',
+            text: 'Check if the server is running or if database IP is correct',
+        })
+        console.log(err)
       })
-      
   }
 
     return (
-      (studentProp && notesProp) ? <>
+
+      // checks if props are already fetched from the DB
+      (studentProp && notesProp && gradesProp && historyProp) ? 
+      <>
         <nav class="sticky z-10"><UserNav /></nav>
             <div className="relative inset-0 flex ml-8 xl:ml-12 justify-center">
                 <header><Header pageTitle={"Student Record"}/></header>
-                <RecordPage user={studentProp} notes={notesProp} history={history} status={statusData} grades={grades} />
+                <RecordPage user={studentProp} notes={notesProp} history={historyProp} status={statusData} grades={gradesProp} />
             </div>
-      </> : <div></div>
+      </> 
+      // empty div while data are not ready
+      : <div></div>
+      
     );
 }
