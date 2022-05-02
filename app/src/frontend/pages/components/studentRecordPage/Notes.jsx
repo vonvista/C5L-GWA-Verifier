@@ -40,7 +40,7 @@ export default function NotesTab({notes, semesters}) {
     }
 
     return(
-        <div className="max-w-[25vw] max-h-[41rem] mx-auto p-5 block overflow-auto">
+        <div className="min-w-[25vw] max-w-[25vw] h-[41rem] max-h-[41rem] mx-auto p-5 block overflow-auto">
             {/* Add note button */}
             <AddNote
                 notesList={notesList}
@@ -51,7 +51,11 @@ export default function NotesTab({notes, semesters}) {
             />
 
             {/* Notes */}
-            { notesList.map( (data, idx) => {
+            { notesList.length === 0
+            ? <h2 className="inter font-light text-[1.05vw] italic">
+                No notes found.
+              </h2>
+            : notesList.map( (data, idx) => {
                 return(
                     <div className="grid border rounded-lg p-5 mb-2" key={idx}>
                         <h1 className="text-xl inter font-bold">
