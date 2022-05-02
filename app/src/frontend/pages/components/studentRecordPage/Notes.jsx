@@ -17,7 +17,7 @@ export default function Notes({eventHandler, notes}) {
                     return(
                         <div className="grid border rounded-lg p-5 mb-2" key={idx}>
                             <h1 className="text-xl inter font-bold">
-                                {data.SemesterYear}
+                                {data.Semyear}
 
                             </h1>
                             {/* <h2 className="inter font-light italic">
