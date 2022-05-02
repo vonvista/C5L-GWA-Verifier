@@ -9,25 +9,16 @@ import 'tailwindcss/tailwind.css';
 
 const StudentRecordHistory = ({historyData, ...rest}) => {
 
-  if (historyData.length === 0) {
-    return (
-      <>
-        <div className="p-5 h-[70vh] h-max-[70vh] modal-content">
-          <div className="modal-body-history">
-            <h2 className="inter font-light text-[1.05vw] italic">
-              No Student Record History found.
-            </h2>
-          </div>
-        </div>
-      </>
-    );
-  }
   return (
     <>
       <div className="min-w-[25vw] max-w-[25vw] p-5 max-h-[41rem] modal-content-history overflow-auto">
         {/* history body; Last modified and descriptions */}
         <div className="modal-body-history">
-          {historyData.map(({ date, info, i }) => (
+          { historyData.length === 0 
+          ? <h2 className="inter font-light text-[1.05vw] italic">
+              No Student Record History found.
+            </h2>
+          : historyData.map(({ date, info, i }) => (
             <section key={i} className="mb-3">
               {/* History per date */}
               <div className="rounded-lg border border-solid border-t-zinc-200 border-b-zinc-200">
