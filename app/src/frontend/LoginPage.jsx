@@ -12,6 +12,7 @@ import AppIcon from '../../assets/icons/icon.png';
 import Input from '../frontend/components/inputs/Input';
 //import { electron } from 'process';
 
+
 function isRequired(val) {
     return val != null && val.trim().length > 0;
 }
@@ -105,31 +106,31 @@ const Login = () => {
             <section class="flex flex-col h-screen justify-center items-center bg-primary-red text-highlight">
                 
                 {/* App Icon */}
-                <div><img class="app-icon" src={AppIcon} /></div>
+                <div><img class="login-app-icon" src={AppIcon} /></div>
 
                 {/* App Name */}
-                <div class="app-name">KALATAS:</div>
-                <div class="second-name">CAS GWA Verifier</div>
+                <div class="login-app-name">KALATAS:</div>
+                <div class="login-second-name">CAS GWA Verifier</div>
             </section>
 
             {/* Right Section */}
             <section class="flex-rows-4 h-screen relative bg-secondary-red">
 
                 {/* Page Title */}
-                <span class="flex page-title text-sidebar-text">User Login</span>
+                <span class="flex login-page-title text-sidebar-text">User Login</span>
                 
-                <form class="input-group" onSubmit={submitHandler}>
+                <form class="login-input-group" onSubmit={submitHandler}>
 
                     {/* Div container for input form */}
                     <div class="flex justify-center">               
                         
                         {/* Input form */}
-                        <div class="input-content form">
+                        <div class="login-input-content login-form">
                             <div class="pb-4">
                                 <Input
-                                    labelStyle="input-label"                            // styling for label
+                                    labelStyle="login-input-label"                      // styling for label
                                     labelVal="Database IP"                              // label text
-                                    inputStyle="shadow input-style"                     // styling for input
+                                    inputStyle="shadow login-input-style"               // styling for input
                                     name="databaseIP"                                   // name of label-input components
                                     inputType="text"                                    // type of input password, email, text, etc.
                                     inputPlaceholder="Database IP"                      // placeholder text for input
@@ -144,9 +145,9 @@ const Login = () => {
                             </div>
                             <div class="pb-4">
                                 <Input
-                                    labelStyle="input-label"                            // styling for label
+                                    labelStyle="login-input-label"                      // styling for label
                                     labelVal="Username"                                 // label text
-                                    inputStyle="shadow input-style"                     // styling for input
+                                    inputStyle="shadow login-input-style"               // styling for input
                                     name="username"                                     // name of label-input components
                                     inputType="text"                                    // type of input password, email, text, etc.
                                     inputPlaceholder="Username"                         // placeholder text for input
@@ -161,9 +162,9 @@ const Login = () => {
                             </div>
                             <div class="pb-4">
                                 <Input
-                                    labelStyle="input-label"                            // styling for label
+                                    labelStyle="login-input-label"                      // styling for label
                                     labelVal="Password"                                 // label text
-                                    inputStyle="shadow input-style"                     // styling for input
+                                    inputStyle="shadow login-input-style"               // styling for input
                                     name="password"                                     // name of label-input components
                                     inputType="password"                                // type of input password, email, text, etc.
                                     inputPlaceholder="******************"               // placeholder text for input
@@ -186,7 +187,7 @@ const Login = () => {
                 </form>
 
                 {/* Footer */}
-                <div class="flex footer absolute inset-x-0">
+                <div class="flex login-footer absolute inset-x-0">
                     <span><TextBtn text="UserDash" handleClick={()=>{navigate('/user-dashboard')}}/></span>
                     <span><TextBtn text="AdminDash" handleClick={()=>{navigate('/admin-dashboard')}}/></span>
                     <span><TextBtn text="UserManage" handleClick={()=>{navigate('/user-management')}}/></span>
