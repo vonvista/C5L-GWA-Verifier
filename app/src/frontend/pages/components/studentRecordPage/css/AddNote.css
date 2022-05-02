@@ -18,12 +18,13 @@
     padding-left: 20px;
     padding-right: 20px;
     width: 35vw;
-    overflow: hidden;
+    /* overflow: hidden; */
     position: relative;
+    display:flex;
+    flex-direction: column;
     background-color: #ffffff;
     border: 0.25px solid rgb(176, 175, 175);
 }
-
 
 .add-note-title{
     display: flex;

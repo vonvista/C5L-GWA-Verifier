@@ -62,12 +62,12 @@ export default function NotesTab({notes, semesters}) {
                             {data.content}
                             {data.Details}
                         </p>
-                        <button className='delete-note-btn align-center hover:bg-gray-300' onClick={() => handleDeleteNote(data)}>
+                        <button className='w-max rounded-lg mt-4 p-2 flex content-center hover:bg-gray-300' onClick={() => handleDeleteNote(data)}>
                             <img
-                                width="25"
+                                width="18"
                                 src={Delete}
                             />
-                            <span className="ml-2">Delete</span>
+                            <span className="text-sm ml-2">Delete</span>
                         </button>
                     </div>
                 )
