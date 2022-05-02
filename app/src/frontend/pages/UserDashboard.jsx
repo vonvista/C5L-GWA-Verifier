@@ -20,6 +20,7 @@ const UserDashboard = () => {
     const [rows, setRows] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [unsortedRows, setUnsortedRows] = useState([]);
 
     //index 0: name; 1: num; 2: degree; index 3: GWA;
     const [sortState, setSortState] = useState([0,0,0,0]);
@@ -180,6 +181,7 @@ const UserDashboard = () => {
           });
 
           await setRows(studentsData);
+          await setUnsortedRows(studentsData);
         })
         .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
           Swal.fire({
@@ -255,7 +257,7 @@ const UserDashboard = () => {
           break;
       }
       if(temp[index] === 0){ //if 0, return to original data from DB
-        setRows([...studentsData]);
+        setRows([...unsortedRows]);
       }
       if(temp[index] === 1){ //if 1, sort ascending
         sortRowsAsc(toSort)
@@ -266,9 +268,9 @@ const UserDashboard = () => {
 
     }
 
-    // handles page refresh on file upload
+    // handles page refresh on file upload, magiging unsorted ulit yung data dapat
     const handleAddRecord = (student) => {
-      let temp = rows; 
+      let temp = unsortedRows; //let original data
       temp.unshift({
         "_id": student._id,
         "name": student.FirstName + ' ' + student.LastName, 
@@ -277,6 +279,8 @@ const UserDashboard = () => {
         "gwa": student.OverallGWA,
         "status": student.Status});
       setRows([...temp]);
+      setUnsortedRows([...temp]);
+      setSortState([0,0,0,0]) //reset sort state
       console.log(rows);
     }
 
