@@ -3,29 +3,30 @@ import SemSelect from '../../../components/inputs/DropdownSelect';
 import AddNote from './AddNote';
 import Delete from '../../../../../assets/icons/delete.svg';
 
-// notes tab
 
-// props will be for placing values into the status page
-
-// eventHandler in placed here for deletion or editing of notes
+// functional component for notes tab in student record view page
+// -- props will be for placing values into the page
 
 export default function NotesTab({notes, semesters}) { 
     const [notesList, setNotesList] = useState(notes)
     const [selectedSem, setSelectedSem] = useState(semesters[0])    // state controller for selecting sem notes 
                                                                     // uses first object as default
-
-    // Handler for adding/editing notes
+       
+    // Handler for adding notes
     const handleAddNote = (text) => {
-		const newNote = {
+        const newNote = {
             sem: selectedSem.sem,
             content: text,
-		};
-        
-		const newNotesList = [...notesList, newNote];
-        console.log(selectedSem.sem);
+        }
 
-		setNotesList(newNotesList);
-	};
+        const index = notesList.map(i => i.sem).indexOf(selectedSem.sem);
+        if (index != -1){                               // splice note from notesList if it already exists
+            notesList.splice(index, 1)
+        }
+
+        const newNotesList = [...notesList, newNote]    // add new note at the end of notesList
+		setNotesList(newNotesList)
+	}
 
     // Handler for deleting notes
     const handleDeleteNote = (values) => {
@@ -42,10 +43,11 @@ export default function NotesTab({notes, semesters}) {
         <div className="max-w-[25vw] max-h-[41rem] mx-auto p-5 block overflow-auto">
             {/* Add note button */}
             <AddNote
+                notesList={notesList}
+                semesters={semesters}
                 handleAddNote={handleAddNote}
                 selectedSem={selectedSem}
                 setSelectedSem={setSelectedSem}
-                semesters={semesters}
             />
 
             {/* Notes */}

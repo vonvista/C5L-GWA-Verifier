@@ -1,42 +1,48 @@
-import 'tailwindcss/tailwind.css';
-import './css/AddNote.css';
 import SemSelect from '../../../components/inputs/DropdownSelect';
 import AddNoteBtn from 'frontend/components/buttons/AddNoteBtn';
-import React from 'react';
 import NotesTab from './Notes';
 import { useState } from 'react';
 
+import 'tailwindcss/tailwind.css';
+import './css/AddNote.css';
 
-const AddNote = ({ handleAddNote, selectedSem, setSelectedSem, semesters }) => {
-    const [noteText, setNoteText] = useState('');
+
+// This function is used for adding/editing the notes for each semester
+
+const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semesters }) => {
+    // State that handles the content in the text area
+    const [noteText, setNoteText] = useState("");
+    // State that handles popup window
     const [showModal, setShowModal] = useState(false)
-    
 
     // Handler for add note button
-    const handleClick = React.useCallback((e) => {
-        setShowModal(true);
-    });
+    const handleClick = (event) => {
+        setShowModal(true)
+    }
 
     // Handler for changes in text area
     const handleChange = (event) => {
-        setNoteText(event.target.value);
-    };
-
-    // Lifts state up
-    const handleSemChange = (newSelect) => {
-        setSelectedSem(newSelect);
+        setNoteText(event.target.value)
     }
-
+   
     // Handler for save button
     const handleSaveClick = () => {
-        handleSemChange(selectedSem)
-
         if (noteText.trim().length > 0){
-            handleAddNote(noteText);
-            setNoteText('');
+            handleAddNote(noteText)
+            setNoteText('')
         }
-    };
-    
+    }
+
+    // Sets text area to existing object content if a note for the sem already exists
+    const setTextArea = (givenSem) => {
+        const index = notesList.map(i => i.sem).indexOf(givenSem.sem)
+
+        if(index != -1){
+            setNoteText(notesList[index].content)
+        } else {
+            setNoteText('Type to add a note...')
+        }
+    }
 
     return (
         <div>
@@ -49,8 +55,9 @@ const AddNote = ({ handleAddNote, selectedSem, setSelectedSem, semesters }) => {
                             {/* Dropdown select  */}
                             <SemSelect
                                 style="w-full ml-auto mr-0"
-                                options={semesters} // pass semester object
+                                options={semesters}
                                 state={[selectedSem, setSelectedSem]} 
+                                placeholderChange={setTextArea}
                             />
                         </div>
                         

@@ -19,7 +19,7 @@ const AddNoteBtn = ({ handleClick }) => {
           alt="icon"
           src={addNote}
         />
-        <p className="text-xs inline-block">Add Note</p>
+        <p className="text-xs inline-block">Add / Edit Note</p>
       </button>
     </>
   );
