@@ -174,7 +174,7 @@ const gradeSchema = new Schema({
 const Grade = db.model('grade', gradeSchema);
 
 // COMBINATION OF STUDENT AND COURSE ID IS UNIQUE
-gradeSchema.index({Student: 1, Course: 1} , {unique: true});
+//gradeSchema.index({Student: 1, Course: 1} , {unique: true});
 
 /**
  * SECTION : grades
