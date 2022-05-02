@@ -13,7 +13,7 @@ import userDelete from 'backend/userDelete';
 
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
-const List = ({ table, data, changeSort, sortState, dataHandler, delHandler }) => {
+const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, handleDeleteRecord}) => {
     // George Gragas
     // This table is about degreeprogram
     // const DegreeProgram = ({ data }) => {
@@ -224,10 +224,32 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler }) =
     } */
 
     // Function for Displaying the Student List on the Dashboard
-    const StudentList = ({ data, setRows, changeSort, sortState }) => {
+    const StudentList = ({ data, setRows, changeSort, sortState, handleDeleteRecord }) => {
         useEffect(() => {
             console.log(sortState)
         })
+
+        const studentDelete = (ID) => {
+
+            const student = {
+              StudentID: ID,
+            };
+          
+            // uncomment to test if proper student ID is being passed
+            // console.log("Delete " + student.StudentID);
+          
+            fetch("http://localhost:3001/student/delete",{
+                method: "DELETE",
+                headers: { "Content-Type":"application/json" },
+                body: JSON.stringify(student)
+              })
+              .then(response => response.json())
+              .then(body => {
+                console.log(body);
+                handleDeleteRecord(student);
+            })
+          
+          };
 
         return (
             <>
@@ -277,7 +299,7 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler }) =
     // Select what specific table to based on the table conditions (1,2,3)
     if (table == 1) {
         return(
-          <StudentList data={data} changeSort={changeSort} sortState={sortState}/>
+          <StudentList data={data} changeSort={changeSort} sortState={sortState} handleDeleteRecord={handleDeleteRecord}/>
         )
     } else if(table == 2) {
         return (

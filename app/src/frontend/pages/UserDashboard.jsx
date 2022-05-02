@@ -266,6 +266,23 @@ const UserDashboard = () => {
 
     }
 
+    const handleAddRecord = (student) => {
+      let temp = rows; 
+      temp.unshift({
+        "name": student.FirstName + ' ' + student.LastName, 
+        "studno": student.StudentID, 
+        "degprog" : student.Degree, 
+        "gwa": student.OverallGWA,
+        "status": student.Status});
+      setRows([...temp]);
+    }
+
+    const handleDeleteRecord = (username) => {
+      let temp = rows;
+      temp.splice(temp.findIndex(row => row.studno === username.StudentID), 1);
+      setRows([...temp]);
+    }
+
     // Get current rows
     const indexOfLastRow = currentPage * rowsPerPage;
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
@@ -317,10 +334,10 @@ const UserDashboard = () => {
                 </div>
                 {/* Upload button */}
                 <div className='float-right'>
-                  <UploadFileBtn handleClick={readInputFile}/>
+                  <UploadFileBtn handleClick={readInputFile} handleAddRecord={handleAddRecord}/>
                 </div>
                 <div className='table-container'>
-                  <List table={1} data={currentRows} changeSort={changeSort} sortState={sortState}/>
+                  <List table={1} data={currentRows} changeSort={changeSort} sortState={sortState} handleDeleteRecord={handleDeleteRecord}/>
                 </div>
                 <div className='float-right'>
                   <Pagination rowsPerPage={rowsPerPage} totalRows={rows.length} currentPage={currentPage} paginate={paginate} />

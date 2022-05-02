@@ -23,7 +23,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = pdfWorker;
 const fileBase = 'textFile';
 let fileNum = 0;
 
-const readInputFile = (file) => {
+const readInputFile = (file, handleAddRecord) => {
 
   // verifies the validity of input file
   function verifyInput(studentData){
@@ -302,6 +302,7 @@ const readInputFile = (file) => {
                 title: 'Success',
                 text: isSuccessful.message
               })
+              handleAddRecord(student)
             }
           })
           .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
