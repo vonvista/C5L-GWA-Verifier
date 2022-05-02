@@ -47,6 +47,7 @@ module.exports = (app) => {
   app.get('/grade/find-all', controller.gradeFindAll);
   app.get('/grade/find-by-student', controller.gradeFindByStudent);
   app.post('/grade/add', controller.gradeAdd);
+  app.post('/grade/add-many', controller.gradeAddMany);
   app.post('/grade/find', controller.gradeFindOne);
   app.delete('/grade/delete-all', controller.gradeDeleteAll);
   app.put('/grade/update', controller.gradeUpdateOne);

@@ -230,7 +230,51 @@ exports.gradeAdd = function(req, res, next) {
     else { res.send({err:'Unable to save grade'}) }
   });
 
+}
 
+// Add grade many -vov
+exports.gradeAddMany = function(req, res, next) {
+  // UNCOMMENT TO SEE REQUEST CONTENTS AND MAPPING TO USER MODEL
+  // console.log(req.body);
+  grades = req.body.Grades;
+  gradesArray = [];
+
+  //loop through grades and add each one
+  for(var i = 0; i < grades.length; i++){
+    var newGrade = new Grade({
+      Student: mongoose.Types.ObjectId(grades[i].Student),
+      Course: grades[i].Course,
+      Grade: grades[i].Grade, 
+      Unit: grades[i].Unit,
+      Weight: grades[i].Weight,
+      Cumulative: grades[i].Cumulative,
+      Semester: grades[i].Semester,
+      Year: grades[i].Year
+    });
+    gradesArray.push(newGrade);
+  }
+  console.log(gradesArray);
+
+  // var newGrade = new Grade({
+  //   Student: mongoose.Types.ObjectId(req.body.Student),
+  //   Course: req.body.Course,
+  //   Grade: req.body.Grade,
+  //   Unit: req.body.Unit,
+  //   Weight: req.body.Weight,
+  //   Cumulative: req.body.Cumulative,
+  //   Semester: req.body.Semester,
+  //   Year: req.body.Year
+  // });
+  // console.log(newGrade);
+  
+  Grade.insertMany(gradesArray, function(err,result){
+    if(!err){
+      res.send(result);
+    } else {
+      console.log(err);
+      res.send({err:'Unable to add grade'});
+    }
+  })
 }
 
 // Update a grade by using Student and Course
