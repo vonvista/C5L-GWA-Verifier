@@ -118,7 +118,6 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler }) =
                                 resetValues()
                             }
 
-
                             return(
                                 <Fragment key={index}>
                                     {isEdit ?
@@ -136,7 +135,18 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler }) =
                                     }
                                 </Fragment>  
                             )
+
+                            
                         })}
+
+                        <div className="table-row"> {/* row for total values */}
+                            <div className="table-cell font-black py-2">Total</div>
+                            <div className="table-cell text-center">3.0</div>       {/* row for total units */}
+                            <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
+                            <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
+                            <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
+                            <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
+                        </div>
                     </div>
                 </div>
             </>
