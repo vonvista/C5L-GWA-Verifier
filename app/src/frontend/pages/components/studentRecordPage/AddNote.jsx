@@ -2,6 +2,7 @@ import SemSelect from '../../../components/inputs/DropdownSelect';
 import AddNoteBtn from 'frontend/components/buttons/AddNoteBtn';
 import NotesTab from './Notes';
 import { useState } from 'react';
+import Input from '../../../components/inputs/Input';
 
 import 'tailwindcss/tailwind.css';
 import './css/AddNote.css';
@@ -15,8 +16,20 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
     // State that handles popup window
     const [showWindow, setShowWindow] = useState(false)
 
+
+    // Sets text area to existing object content if a note for the sem already exists
+    const setTextArea = (givenSem) => {
+        const index = notesList.map(i => i.sem).indexOf(givenSem.sem)
+        if(index != -1){
+            setNoteText(notesList[index].content)
+        } else {
+            setNoteText('Type to add a note...')
+        }
+    }
+
     // Handler for add note button
     const handleClick = (event) => {
+        setTextArea(givenSem=selectedSem)
         setShowWindow(true)
     }
 
@@ -28,23 +41,15 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
     // Handler for save button
     const handleSaveClick = () => {
         if (noteText.trim().length > 0){
-            handleAddNote(noteText)
-            setNoteText('')
+            if (noteText != 'Type to add a note...'){
+                handleAddNote(noteText)
+                setNoteText('')
+            }
         }
         setShowWindow(false)                 // Close window after saving
-        setSelectedSem(semesters[0])        // Reset selected option in dropdown to first object
+        setSelectedSem(semesters[0])         // Reset selected option in dropdown to first object
     }
 
-    // Sets text area to existing object content if a note for the sem already exists
-    const setTextArea = (givenSem) => {
-        const index = notesList.map(i => i.sem).indexOf(givenSem.sem)
-
-        if(index != -1){
-            setNoteText(notesList[index].content)
-        } else {
-            setNoteText('Type to add a note...')
-        }
-    }
 
     return (
         <>
@@ -75,6 +80,15 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
                         </div>
                         
                         {/* Text field */}
+                        {/* <Input
+                            inputStyle="add-note-textarea"
+                            name="note"
+                            inputType="text"
+                            inputPlaceholder={setTextArea}
+                            value={noteText}
+                            changeHandler={handleChange}
+                        /> */}
+
                         <textarea
                             className='add-textarea'
                             placeholder='Type to add a note...'
@@ -87,7 +101,6 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
                             <button className='save-note-btn mr-3 hover:bg-login-green-hover' onClick={handleSaveClick}>
                                 Save
                             </button>
-                            
                         </div>
                     </div>
                 </div>
