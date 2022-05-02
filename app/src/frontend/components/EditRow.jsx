@@ -2,7 +2,7 @@ import Actions from './buttons/Actions'
 import Input from './inputs/Input'
 import 'tailwindcss/tailwind.css'
 
-export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched, errors, valid}) => {
+const EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched, errors, valid}) => {
 
     const inputStyle = `block box-border focus:outline-none border-b border-white focus:border-b focus:border-login-green`
     const errorStyle= `block text-center text-sm inter text-secondary-red`
@@ -99,3 +99,5 @@ export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched
         </form>
     );
 }
+
+export default EditRow;
