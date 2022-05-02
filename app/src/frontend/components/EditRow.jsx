@@ -12,8 +12,8 @@ export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched
     const centerInput= `w-1/3 text-center mx-auto`
 
     return(
-        <form className="table-row inter" onSubmit={onSubmit}>
-            <div className="table-cell max-w-1/6">
+        <form className="table-row inter mt-2">
+            <div className="table-cell max-w-1/6 align-middle">
                 <Input
                     labelStyle="hidden"                                 // styling for label
                     labelVal="course"                                   // label text
@@ -29,7 +29,7 @@ export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched
                     <p className={errorStyle}>{errors.courseName}</p>    // errror message
                 }  
             </div>
-            <div className="table-cell w-1/6">
+            <div className="table-cell w-1/6 align-middle">
                 <Input
                     labelStyle="hidden"                                 // styling for label
                     labelVal=""                                         // label text
@@ -45,7 +45,7 @@ export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched
                     <p className={errorStyle}>{errors.units}</p>        // errror message
                 }   
             </div>
-            <div className="table-cell w-1/6">
+            <div className="table-cell w-1/6 align-middle">
                 <Input
                     labelStyle="hidden"                                 // styling for label
                     labelVal=""                                         // label text
@@ -61,7 +61,7 @@ export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched
                     <p className={errorStyle}>{errors.grade}</p>        // errror message
                 }   
             </div>
-            <div className="table-cell w-1/6">
+            <div className="table-cell w-1/6 align-middle">
                 <Input
                     labelStyle="hidden"                                 // styling for label
                     labelVal=""                                         // label text
@@ -77,7 +77,7 @@ export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched
                     <p className={errorStyle}>{errors.enrolled}</p>     // errror message
                 }   
             </div>
-            <div className="table-cell w-1/6">
+            <div className="table-cell w-1/6 align-middle">
                 <Input
                     labelStyle="hidden"                                 // styling for label
                     labelVal=""                                         // label text
@@ -94,10 +94,10 @@ export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched
                 }   
             </div>
 
-            <div className="table-cell w-1/6 text-center">
+            <div className="table-cell w-1/6 align-middle text-center">
                 {/* <button type="submit" disabled={!valid}>Save</button>
                 <button type="button" onClick={toggleHandler}>Cancel</button> */}
-                <SaveCancel handleCancel={toggleHandler} isDisabled={!valid} />
+                <SaveCancel handleSave={onSubmit} handleCancel={toggleHandler} isDisabled={!valid} />
             </div>
         </form>
     );
