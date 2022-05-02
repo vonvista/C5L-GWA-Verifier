@@ -1,49 +1,49 @@
-.app-icon {
+.login-app-icon {
     width: 30vw;
     height: auto;
 }
 
-.app-name{
+.login-app-name{
     font-weight: bold;
     font-size: 3.5vw;
 }
 
-.second-name{
+.login-second-name{
     margin-top: 3px;
     font-size: 2.5vw;
 }
 
-.page-title{
+.login-page-title{
     padding-top: 12vh;
     font-size: 2.25vw;
     justify-content: center;
 }
 
-.input-group{
+.login-input-group{
     padding-top: 8vh;
     justify-content: center;
 }
 
-.form{
+.login-form{
     border-radius: 0.5rem;
     padding: 1rem 1.25rem 0.5rem;
     background-color: rgb(255 255 255);
 }
 
-.input-content{
+.login-input-content{
     width: 50%;
     font-size: 1.25vw;
     overflow: hidden;
 }
 
-.input-label{
+.login-input-label{
     display: block;
     font-weight: bold;
     margin-bottom: 0.5rem;
     color: rgb(55 65 81);
 }
 
-.input-style{
+.login-input-style{
     border-width: 1px;
     border-radius: 0.25rem;
     width: 100%;
@@ -62,7 +62,7 @@
     font-size: 1.25vw;
 }
 
-.footer{
+.login-footer{
     bottom: 2vw;
     font-size: 1.25vw;
     align-items: center;
