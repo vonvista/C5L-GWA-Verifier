@@ -23,7 +23,7 @@ const TableContents = ({ Name, Semester, key, handler }) => {
         fetchData();
     }, []);
 
-    const nameStyle = "flex inter font-bold justify-between z-25 w-full px-4 py-2 text-sm font-medium text-left text-sr-table-text bg-sr-dark-gray transition ease-in-out delay-250 hover:bg-yellow-100 hover:text-secondary-red";
+    const nameStyle = "flex inter font-bold justify-between z-25 w-full px-4 py-2 text-sm font-medium text-left text-sr-table-text bg-sr-dark-gray hover:bg-yellow-100 hover:text-secondary-red";
 
     // Handler for row changes
     const setData = (values) => { // modifies values of a row
@@ -53,15 +53,14 @@ const TableContents = ({ Name, Semester, key, handler }) => {
                 <Disclosure key={key}>
                     {({ open }) => (
                         <>
-                            {/* Accordion Header */}
-                            <Disclosure.Button className={`${open ? 'bg-table-hover-color text-secondary-red rounded-t-lg' : 'mb-2 rounded-lg shadow-lg'} ${nameStyle}`}>
+                             {/* Accordion Header */}
+                             <Disclosure.Button className={`${open ? 'bg-table-hover-color text-secondary-red rounded-t-lg' : 'mb-2 rounded-lg shadow-lg'} ${nameStyle}`}>
                                 <span className="text-lg xl:text-xl">{Name}</span>
-
                                 {/* Icon */}
                                 <ChevronUpIcon
                                     className={`${
                                         !open ? 'transform rotate-180' : ''
-                                    } w-5 xl:w-7 self-center`}
+                                    } ml-1 w-5 xl:w-7 self-center`}
                                 />
                             </Disclosure.Button>
                             

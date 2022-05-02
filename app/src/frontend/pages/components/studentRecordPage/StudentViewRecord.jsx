@@ -23,14 +23,15 @@ const RecordPage = ({sem, user, notes, history, status, grades}) => {
     
     const [selectedUser, setSelectedUser] = useState(user)
     const [statusState, setStatus] = useState(status)
-     
+    const [gradeState, setGradeState] = useState(grades)
 
+    
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
         // uses components as values
-        Status: <Status state={statusState} />,         // status component
-        Notes: <Notes notes={notes} />,                 // notes component
-        History:<History historyData={history} />,      // history component
+        Status: <Status state={statusState} />,                 // status component
+        Notes: <Notes notes={notes} semesters={gradeState} />,  // notes component
+        History:<History historyData={history} />,              // history component
     }
 
     let [selectedTab] = useState(tabContents)               // state controller for selecting tabs
