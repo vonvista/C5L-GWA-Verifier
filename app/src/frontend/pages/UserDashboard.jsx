@@ -6,6 +6,8 @@ import List from '../components/List';
 import Header from '../components/HeaderWithoutArrowbck';
 import UserNav from '../components/UserNavigation';
 import Pagination from '../components/Pagination';
+import Search from 'frontend/components/Search';
+import Swal from 'sweetalert2'
 
 /* CSS */
 import '../components/List.css';
@@ -22,6 +24,7 @@ const UserDashboard = () => {
     //index 0: name; 1: num; 2: degree; index 3: GWA;
     const [sortState, setSortState] = useState([0,0,0,0])
     const [latestSort, setLatestSort] = useState(-1);
+
 
     // const studentsData = [
     //     {
@@ -263,6 +266,31 @@ const UserDashboard = () => {
     //Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
+    //used in Search component
+    const [searchStudent, setSearchStudent] = useState("");
+
+    const handleSearch =()=>{
+      // console.log(searchStudent);
+      //Add code here to search student, fetch sa database, if wala sa DB, display student cannot be found, 
+      //if nasa DB, go to record of student
+
+      //if di mahanap si student
+
+      // Swal.fire({
+      //   icon: 'error',
+      //   title: 'Error',
+      //   text: 'Student does not exist',
+      // })
+
+      //if nahanap si student, go straight to record
+    }
+
+    const handleEnterPress = (e) =>{
+      if (e.key === "Enter") {
+        handleSearch();
+      }
+    }
+    
     return(
       <>
         <div>
@@ -275,6 +303,10 @@ const UserDashboard = () => {
 
               {/* Page Contents */}
               <div className='pt-20 flex-column'>
+                {/* Search input button */}
+                <div className='float-left w-[18vw] h-[1vw]'>
+                  <Search user={"student"} handleSearch={(e) => setSearchStudent(e.target.value)} searchValue={searchStudent} buttonHandler={handleSearch} handleEnter={handleEnterPress}/>
+                </div>
                 {/* Upload button */}
                 <div className='float-right'>
                   <UploadFileBtn handleClick={readInputFile}/>

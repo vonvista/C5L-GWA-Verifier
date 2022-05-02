@@ -11,9 +11,11 @@ import 'tailwindcss/tailwind.css';
 import studentDelete from 'backend/studentDelete';
 import userDelete from 'backend/userDelete';
 
+
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
-const List = ({ table, data, dataHandler, delHandler, changeSort, sortState }) => {
+const List = ({ table, data, changeSort, sortState, dataHandler, delHandler }) => {
+
     // George Gragas
     // This table is about degreeprogram
     // const DegreeProgram = ({ data }) => {
@@ -118,7 +120,6 @@ const List = ({ table, data, dataHandler, delHandler, changeSort, sortState }) =
                                 resetValues()
                             }
 
-
                             return(
                                 <Fragment key={index}>
                                     {isEdit ?
@@ -136,7 +137,18 @@ const List = ({ table, data, dataHandler, delHandler, changeSort, sortState }) =
                                     }
                                 </Fragment>  
                             )
+
+                            
                         })}
+
+                        <div className="table-row"> {/* row for total values */}
+                            <div className="table-cell font-black py-2">Total</div>
+                            <div className="table-cell text-center">3.0</div>       {/* row for total units */}
+                            <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
+                            <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
+                            <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
+                            <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
+                        </div>
                     </div>
                 </div>
             </>

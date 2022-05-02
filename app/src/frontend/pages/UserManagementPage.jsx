@@ -8,7 +8,9 @@ import AdminNav from '../components/AdminNavigation';
 import HeaderWithoutArrowbck from '../components/HeaderWithoutArrowbck';
 import AddUserBtn from '../components/buttons/AddUserBtn';
 import AddUser from '../components/AddUser';
-
+import Search from 'frontend/components/Search';
+import SearchModal from 'frontend/components/SearchModal';
+import Swal from 'sweetalert2'
 
 const UserManagementPage = () => {
   const [rows, setRows] = useState([]);
@@ -104,6 +106,31 @@ const UserManagementPage = () => {
     //Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
+    //used in Search component
+    const [searchUser, setSearchUser] = useState("");
+
+    const handleSearch =()=>{
+      // console.log(searchStudent);
+      //Add code here to search student, fetch sa database, if wala sa DB, display student cannot be found, 
+      //if nasa DB, go to record of student
+
+      //if di mahanap si student
+
+      // Swal.fire({
+      //   icon: 'error',
+      //   title: 'Error',
+      //   text: 'Student does not exist',
+      // })
+
+      //if nahanap si student, go straight to record
+    }
+
+    const handleEnterPress = (e) =>{
+      if (e.key === "Enter") {
+        handleSearch();
+      }
+    }
+
     return(
         <>
           <div>
@@ -122,6 +149,7 @@ const UserManagementPage = () => {
                     (<AddUser handleClose={() => setShowModal(false)}/>)
                     :(<></>)
                   }
+                  {/* <Search user={"user"} handleSearch={(e) => setSearchUser(e.target.value)} searchValue={searchUser} buttonHandler={handleSearch} handleEnter={handleEnterPress}/> */}
                 </div>
                 <div>
                   <div className='table-container'>

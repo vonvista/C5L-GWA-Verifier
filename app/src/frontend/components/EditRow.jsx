@@ -4,7 +4,7 @@ import 'tailwindcss/tailwind.css'
 
 export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched, errors, valid}) => {
 
-    const inputStyle = `block box-border focus:outline-none border-b border-white focus:border-b focus:border-login-green`
+    const inputStyle = `block box-border focus:outline-none border-b border-sr-disabled-green focus:transition focus:ease-in-out focus:delay-100 focus:border-b focus:border-login-green`
     const errorStyle= `block text-center text-sm inter text-secondary-red`
     const centerInput= `w-1/3 text-center mx-auto`
 
@@ -12,14 +12,14 @@ export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched
         <form className="table-row inter" onSubmit={onSubmit}>
             <div className="table-cell max-w-1/6">
                 <Input
-                    labelStyle="hidden"       // styling for label
-                    labelVal="course"         // label text
-                    inputStyle={` ${inputStyle}`}       // styling for input
-                    name="courseName"             // name of label-input components
-                    inputType="text"        // type of input password, email, text, etc.
-                    inputPlaceholder={data.courseName} // placeholder text for input
-                    value={data.courseName}            // value of the input
-                    changeHandler={changeHandler}    // change handling
+                    labelStyle="hidden"                     // styling for label
+                    labelVal="course"                       // label text
+                    inputStyle={`w-2/3 ${inputStyle}`}           // styling for input
+                    name="courseName"                       // name of label-input components
+                    inputType="text"                        // type of input password, email, text, etc.
+                    inputPlaceholder={data.courseName}      // placeholder text for input
+                    value={data.courseName}                 // value of the input
+                    changeHandler={changeHandler}           // change handling
                     //required={true}   
                     />
                 {touched.courseName && errors.courseName && 

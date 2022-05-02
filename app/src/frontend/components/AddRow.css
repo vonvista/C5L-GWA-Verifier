@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');    /* Regular */
 
-.modal-backdrop {
+.add-row-modal-backdrop {
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -13,7 +13,7 @@
     z-index: 1;
 }
 
-.modal {
+.add-row-modal {
     background: #562323;
     height: 36.70360110803324vh; /* 265 px */
     width: 49.479166666666664vw; /* 760 px */
@@ -33,7 +33,7 @@
     font-weight: 400;
 }
 
-.baybayin-styles{
+.add-row-baybayin-style{
     background-repeat: repeat-y;
     background-size: contain;
     margin-left: -11.25vh;
@@ -41,18 +41,18 @@
     height: 36.70360110803324vh; /* 265 px */
 }
 
-.modal-content {
+.add-row-modal-content {
     position: relative;
     top: 12%;
 }
 
-.modal-body {
+.add-row-modal-body {
     position: absolute;
     top: 0;
     background: #562323;
 }
 
-.modal-title {
+.add-row-modal-title {
     font-size: 1.3020833333333333vw; /* 20px */
     font-weight: 700; 
     font-style: italic;
@@ -61,55 +61,52 @@
     margin-bottom: 4.847645429362881vh; /* 35px */
 }
 
-.modal-close {
+.add-row-modal-close {
     font-size: 4.847645429362881vh; /* 35px */
 }
 
-.modal-inputs {
+.add-row-modal-inputs {
     font-size: 1.1067708333333333vw;    /* 17px */
 }
 
-.modal-footer {
-    font-size: 1.1067708333333333vw;    /* 17px */
-}
-
-.input-container {
+.add-row-input-container {
     margin-right: 1.953125vw; /* 30px */;
 }
 
-.input-style{
+.add-row-input-style{
     width: 100%;
     height: 4.847645429362881vh; /* 35px */
     border-radius: 0.6510416666666666vw; /* 10px */
     text-align: center;
 }
 
-.section-coursename {
+.add-row-section-coursename {
     width: 11.71875vw; /* 180px */
 }
 
-.section-units {
+.add-row-section-units {
     width: 3.90625vw; /* 60px */
 }
 
-.section-grade {
+.add-row-section-grade {
     width: 4.8828125vw; /* 75px */
 }
 
-.section-enrolled {
+.add-row-section-enrolled {
     width: 4.8828125vw; /* 75px */
 }
 
-.section-runningGWA {
+.add-row-section-runningGWA {
     width: 8.138020833333334vw; /* 125px */
 }
 
-.modal-footer {
+.add-row-modal-footer {
     float: right;
     margin-top: 4.847645429362881vh; /* 35px */
+    font-size: 1.1067708333333333vw;    /* 17px */
 }
 
-.modal-btn {
+.add-row-modal-btn {
     height: 5.54016620498615vh; /* 40px */
     width: 9.765625vw;    /* 150px */
     padding: 0.6510416666666666vw 1.770083102493075vh; /* 10px 20px */
@@ -117,22 +114,22 @@
     margin-right: 0.6510416666666666vw; /* 10px */
 }
 
-.btn-discard {
+.add-row-btn-discard {
     background-color: aliceblue;
 }
 
-.btn-save {
+.add-row-btn-save {
     background-color: #35724df5;
 }
 
-.btn-save:hover {
+.add-row-btn-save:hover {
     background-color: #3D7D57;
 }
 
-.btn-discard {
+.add-row-btn-discard {
     background-color: #E7E7E7;
 }
 
-.btn-discard:hover {
+.add-row-btn-discard:hover {
     background-color: white;
 }
