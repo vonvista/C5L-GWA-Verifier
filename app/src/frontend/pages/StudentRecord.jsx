@@ -172,7 +172,7 @@ const grades = [
   {
     sem: "First Semester A.Y. 2019-2020",
     data: [
-        {   
+        {
             "idRow": "1",
             "courseName": "CMSC 12",
             "units": "3.0",
@@ -346,7 +346,7 @@ export default function StudentRecord() { // this will probably transferred to a
       name: '',
       degree_program: '',
     }
-    
+
     fetch(`http://localhost:3001/student/find`, {
       method: "POST",
       headers: {
@@ -363,7 +363,7 @@ export default function StudentRecord() { // this will probably transferred to a
         currUser.degree_program = body.Degree
         currUser.status = "Pending"
         currUser.Student = body._id
-        
+
         getStudentProp(currUser) // return student info from db
       })
   }
@@ -385,18 +385,19 @@ export default function StudentRecord() { // this will probably transferred to a
       .then(body => {
 
         getNotesProp(body) // save notes from db to notesProp
-        
+
       })
-      
+
   }
 
     return (
-      (studentProp && notesProp) ? <>
+      // (studentProp && notesProp) ?
+      <>
         <nav class="sticky z-10"><UserNav /></nav>
             <div className="relative inset-0 flex ml-8 xl:ml-12 justify-center">
                 <header><Header pageTitle={"Student Record"}/></header>
-                <RecordPage user={studentProp} notes={notesProp} history={history} status={statusData} grades={grades} />
+                <RecordPage user={user} notes={notes} history={history} status={statusData} grades={grades} />
             </div>
-      </> : <div></div>
+      </>// : <div></div>
     );
 }

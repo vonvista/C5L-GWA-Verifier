@@ -1,6 +1,7 @@
 import 'tailwindcss/tailwind.css';
 import { useState } from 'react';
 import expand from '../../../../assets/icons/collapse(1).svg';
+import EditStudent from '../../components/EditStudent';
 
 // Function contains the buttons in Actions Dropdown seen in Student Record View/Edit Page
 // Additional references: https://tailwindui.com/components/application-ui/elements/dropdowns
@@ -55,16 +56,12 @@ const Dropdown = () => {
             >
               <p className="text-white">Export</p>
             </button>
-            <button
-              className="text-gray-700 block px-4 py-2 text-sm z-1 w-full hover:bg-login-green-hover"
-              type="button"
+            <EditStudent
               onClick={() => {
                 setIsActive(!isActive);
                 setValueClicked('Edit');
               }}
-            >
-              <p className="text-white">Edit</p>
-            </button>
+            />
             <button
               className="text-gray-700 block px-4 py-2 text-sm z-1 w-full hover:bg-login-green-hover hover:rounded-b-lg"
               type="button"
