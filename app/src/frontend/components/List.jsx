@@ -6,14 +6,16 @@ import ReadRow from './ReadRow';
 import EditRow from './EditRow';
 import { useForm, isRequired } from '../hooks/useForm';
 import 'tailwindcss/tailwind.css';
+import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
 
 /* Backend */
-import studentDelete from 'backend/studentDelete';
-import userDelete from 'backend/userDelete';
+// import studentDelete from 'backend/studentDelete';
+// import userDelete from 'backend/userDelete';
 
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
-const List = ({ table, data, changeSort, sortState, dataHandler, delHandler }) => {
+const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, handleDeleteRecord }) => {
     // George Gragas
     // This table is about degreeprogram
     // const DegreeProgram = ({ data }) => {
@@ -68,6 +70,9 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler }) =
     //         </>
     //     );
     // }
+
+    const ip = localStorage.getItem("ServerIP");
+    let navigate = useNavigate();
 
     // Table for displaying the student's summary of grades for a given semester 
     // To be used for Student Record View Page
@@ -144,9 +149,45 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler }) =
     }
 
     // This table is about
-    const User = ({data}) => {
+    const User = ({data, handleDeleteRecord}) => {
         console.log(data);
         const [showModal, setShowModal] = useState(false)
+
+        // function to delete a user based on their username
+        const userDelete = (username) => {
+
+            const user = {
+                Username: username,
+            };
+            
+            // uncomment to test if proper student ID is being passed
+            // console.log("Delete " + user.Username);
+            
+            fetch(`http://${ip}:3001/user/delete`,{
+                method: "DELETE",
+                headers: { "Content-Type":"application/json" },
+                body: JSON.stringify(user)
+                })
+                .then(response => response.json())
+                .then(body => {
+                    console.log(body);
+                    handleDeleteRecord(user);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text:'User successfully deleted'
+                    })
+            })
+            .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Server Error',
+                  text: 'Check if the server is running or if database IP is correct',
+                })
+                console.log(err)
+            })
+        
+        };
 
         return (
           <>
@@ -223,11 +264,49 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler }) =
         }
     } */
 
+    
+    
     // Function for Displaying the Student List on the Dashboard
-    const StudentList = ({ data, setRows, changeSort, sortState }) => {
+    const StudentList = ({ data, setRows, changeSort, sortState, handleDeleteRecord }) => {
         useEffect(() => {
             console.log(sortState)
         })
+
+        const studentEdit = (StudentID, StudentKey) => {
+            localStorage.setItem("currStudentID", StudentID);
+            localStorage.setItem("currStudentKey", StudentKey);
+            navigate('/student-record');
+        }
+
+        // function to delete a student based on their student ID
+        const studentDelete = (ID) => {
+            const student = {
+              StudentID: ID,
+            };
+            fetch(`http://${ip}:3001/student/delete`,{
+                method: "DELETE",
+                headers: { "Content-Type":"application/json" },
+                body: JSON.stringify(student)
+              })
+              .then(response => response.json())
+              .then(body => {
+                console.log(body);
+                handleDeleteRecord(student);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text:'Student successfully deleted'
+                })
+            })
+            .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Server Error',
+                  text: 'Check if the server is running or if database IP is correct',
+                })
+                console.log(err)
+            })
+          };
 
         return (
             <>
@@ -263,7 +342,7 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler }) =
                                 <td className='students-status'>
                                     <div data-status={student.status} className='status'></div>
                                 </td>
-                                <td className='student-action'><Actions handleDelete={() => studentDelete(student.studno)}/></td>
+                                <td className='student-action'><Actions handleEdit={() => studentEdit(student._id, student.studno)} handleDelete={() => studentDelete(student.studno)}/></td>
                             </tr>
                         )
                         )}
@@ -277,7 +356,7 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler }) =
     // Select what specific table to based on the table conditions (1,2,3)
     if (table == 1) {
         return(
-          <StudentList data={data} changeSort={changeSort} sortState={sortState}/>
+          <StudentList data={data} changeSort={changeSort} sortState={sortState} handleDeleteRecord={handleDeleteRecord}/>
         )
     } else if(table == 2) {
         return (
@@ -285,7 +364,7 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler }) =
         )
     } else if(table == 3) {
         return (
-            <User data={data}/>
+            <User data={data} handleDeleteRecord={handleDeleteRecord}/>
         )
     }
 }
