@@ -13,11 +13,11 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
     // State that handles the content in the text area
     const [noteText, setNoteText] = useState("");
     // State that handles popup window
-    const [showModal, setShowModal] = useState(false)
+    const [showWindow, setShowWindow] = useState(false)
 
     // Handler for add note button
     const handleClick = (event) => {
-        setShowModal(true)
+        setShowWindow(true)
     }
 
     // Handler for changes in text area
@@ -31,6 +31,8 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
             handleAddNote(noteText)
             setNoteText('')
         }
+        setShowWindow(false)                 // Close window after saving
+        setSelectedSem(semesters[0])        // Reset selected option in dropdown to first object
     }
 
     // Sets text area to existing object content if a note for the sem already exists
@@ -45,50 +47,52 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
     }
 
     return (
-        <div>
+        <>
             <AddNoteBtn handleClick={handleClick}/>
-            { showModal ? (
-                <div className='add-note-modal shadow-lg'>
+            { showWindow ? (
+                <div className='add-note-overlay'>
+                    <div className='add-note-popup-window shadow-lg'>
 
-                    <div className="add-note-title">
-                        <div>
-                            {/* Dropdown select  */}
-                            <SemSelect
-                                style="w-full ml-auto mr-0"
-                                options={semesters}
-                                state={[selectedSem, setSelectedSem]} 
-                                placeholderChange={setTextArea}
-                            />
+                        <div className="add-note-title">
+                            <div>
+                                {/* Dropdown select  */}
+                                <SemSelect
+                                    style="w-full ml-auto mr-0"
+                                    options={semesters}
+                                    state={[selectedSem, setSelectedSem]} 
+                                    placeholderChange={setTextArea}
+                                />
+                            </div>
+                            
+                            {/* Exit button */}
+                            <button
+                                className="close-note-btn"
+                                type="button"
+                                onClick={() => setShowWindow(false)}
+                            >
+                                &times;
+                            </button>
                         </div>
                         
-                        {/* Exit button */}
-                        <button
-                            className="close-note-btn"
-                            type="button"
-                            onClick={() => setShowModal(false)}
-                        >
-                            &times;
-                        </button>
-                    </div>
-                    
-                    {/* Text field */}
-                    <textarea
-                        className='add-textarea'
-                        placeholder='Type to add a note...'
-                        value={noteText}
-                        onChange={handleChange}
-                    ></textarea>
-                    
-                    {/* Save button */}
-                    <div>
-                        <button className='save-note-btn mr-3 hover:bg-login-green-hover' onClick={handleSaveClick}>
-                            Save
-                        </button>
+                        {/* Text field */}
+                        <textarea
+                            className='add-textarea'
+                            placeholder='Type to add a note...'
+                            value={noteText}
+                            onChange={handleChange}
+                        ></textarea>
                         
+                        {/* Save button */}
+                        <div>
+                            <button className='save-note-btn mr-3 hover:bg-login-green-hover' onClick={handleSaveClick}>
+                                Save
+                            </button>
+                            
+                        </div>
                     </div>
                 </div>
             ) : ( <></> )}
-        </div>
+        </>
     )
 }
 

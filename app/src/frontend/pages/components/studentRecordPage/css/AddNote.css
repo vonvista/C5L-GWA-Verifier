@@ -1,21 +1,34 @@
-.add-note-modal {
-    z-index: 5;
-    width: 35vw;
-    overflow: hidden;
-    margin-left: -38vw;
-    margin-top: -5vh;
-    position: absolute;
+.add-note-overlay {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* background-color: rgba(0,0,0,0.4); */
+}
+
+.add-note-popup-window {
+    margin-left: 32vw;;
+    margin-top: 25vh;
     border-radius: 30px;
     padding-left: 20px;
     padding-right: 20px;
+    width: 35vw;
+    overflow: hidden;
+    position: relative;
     background-color: #ffffff;
     border: 0.25px solid rgb(176, 175, 175);
 }
 
+
 .add-note-title{
     display: flex;
     font-size: 2.5vh;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-bottom: 10px;
     align-items: center;
     justify-content: space-between;
