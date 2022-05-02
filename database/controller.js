@@ -166,8 +166,7 @@ const gradeSchema = new Schema({
   Unit: {type: Number, required: true},
   Weight: Number,
   Cumulative: {type: Number, required: true},
-  Semester : {type:String,required:true},
-  Year: {type:String,required:true}
+  Semyear : {type:String,required:true},
 },{autoCreate:true})
 
 // GRADE MODEL
@@ -219,8 +218,7 @@ exports.gradeAdd = function(req, res, next) {
     Unit: req.body.Unit,
     Weight: req.body.Weight,
     Cumulative: req.body.Cumulative,
-    Semester: req.body.Semester,
-    Year: req.body.Year
+    Semyear : req.body.Semyear,
   });
   console.log(newGrade);
   
@@ -248,8 +246,7 @@ exports.gradeAddMany = function(req, res, next) {
       Unit: grades[i].Unit,
       Weight: grades[i].Weight,
       Cumulative: grades[i].Cumulative,
-      Semester: grades[i].Semester,
-      Year: grades[i].Year
+      Semyear : grades[i].Semyear,
     });
     gradesArray.push(newGrade);
   }
@@ -279,17 +276,16 @@ exports.gradeAddMany = function(req, res, next) {
 
 // Update a grade by using Student and Course
 exports.gradeUpdateOne = function(req, res, next) {
-  // console.log(req.body);
+  console.log(req.body);
 
-  Grade.updateOne({Student: req.body.Student, Course: req.body.Course},{"$set":{
+  Grade.updateOne({_id: mongoose.Types.ObjectId(req.body._id)},{"$set":{
     "Student": req.body.Student,
     "Course": req.body.Course,
     "Grade": req.body.Grade,
     "Unit": req.body.Unit,
     "Weight": req.body.Weight,
     "Cumulative": req.body.Cumulative,
-    "Semester":req.body.Semester,
-    "Year": req.body.Year
+    "Semyear" : req.body.Semyear
   }}, {new : true}, function(err,result){
     if(!err && Grade){
       res.send(result);
