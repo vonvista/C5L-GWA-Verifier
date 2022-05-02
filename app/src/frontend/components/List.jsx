@@ -11,9 +11,11 @@ import 'tailwindcss/tailwind.css';
 import studentDelete from 'backend/studentDelete';
 import userDelete from 'backend/userDelete';
 
+
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
 const List = ({ table, data, changeSort, sortState, dataHandler, delHandler }) => {
+
     // George Gragas
     // This table is about degreeprogram
     // const DegreeProgram = ({ data }) => {
