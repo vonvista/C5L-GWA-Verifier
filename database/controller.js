@@ -482,10 +482,16 @@ exports.historyAdd = function(req, res, next) {
   });
   console.log(newHistory);
 
+  // newHistory.save(function(err) {
+  //   User.updateOne({_id:newHistory.User},{$push:{History:newHistory._id}},function(err){
+  //     if(err) console.log("Unable to add history to user "+newHistory.User);
+  //   });
+  //   if (!err) { res.send(newHistory)}
+  //   else { res.send({err:'Unable to save history'}) }
+  // });
+
+  // just saves normally to history collections -lal
   newHistory.save(function(err) {
-    User.updateOne({_id:newHistory.User},{$push:{History:newHistory._id}},function(err){
-      if(err) console.log("Unable to add history to user "+newHistory.User);
-    });
     if (!err) { res.send(newHistory)}
     else { res.send({err:'Unable to save history'}) }
   });
@@ -537,8 +543,9 @@ exports.historyDeleteAll = function(req, res, next) {
 const noteSchema = new Schema({
   User: {type:mongoose.Types.ObjectId, ref:'user', required:true},
   Student: {type:mongoose.Types.ObjectId, ref:'student', required:true},
-  Semester: {type:String, required:true},
-  Year:{type:String, required:true},
+  // Semester: {type:String, required:true},
+  // Year:{type:String, required:true},
+  Semyear: {type:String, required:true},
   Details: {type:String, required:true},
 },{timestamps:true});
 
@@ -550,8 +557,9 @@ exports.noteAdd = function(req,res,next){
   var newNote = new Note({
     User:mongoose.Types.ObjectId(req.body.User),
     Student:mongoose.Types.ObjectId(req.body.Student),
-    Semester:req.body.Semester,
-    Year:req.body.Year,
+    // Semester:req.body.Semester,
+    // Year:req.body.Year,
+    Semyear:req.body.Semyear,
     Details:req.body.Details
   });
   console.log(newNote);
@@ -589,9 +597,9 @@ exports.noteFindAllByStudent = function(req,res,next){
 
 // UPDATE A NOTE
 exports.noteUpdate = function(req,res,next){
-  Note.updateOne({_id:mongoose.Types.ObjectId(req.body.id)},{"$set":{
-    "Semester":req.body.Semester,
-    "Year":req.body.Year,
+  Note.updateOne({_id:mongoose.Types.ObjectId(req.body.id), Semyear:req.body.Semyear},{"$set":{
+    // "Semyear":req.body.Semester,
+    // "Year":req.body.Year,
     "Details":req.body.Details
   }},{new:true},function(err,result){
     if(!err) res.send(result);
