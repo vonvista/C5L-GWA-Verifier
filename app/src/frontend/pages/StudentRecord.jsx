@@ -391,13 +391,12 @@ export default function StudentRecord() { // this will probably transferred to a
   }
 
     return (
-      // (studentProp && notesProp) ?
-      <>
+      (studentProp && notesProp) ? <>
         <nav class="sticky z-10"><UserNav /></nav>
             <div className="relative inset-0 flex ml-8 xl:ml-12 justify-center">
                 <header><Header pageTitle={"Student Record"}/></header>
-                <RecordPage user={user} notes={notes} history={history} status={statusData} grades={grades} />
+                <RecordPage user={studentProp} notes={notesProp} history={history} status={statusData} grades={grades} />
             </div>
-      </>// : <div></div>
+      </> : <div></div>
     );
 }
