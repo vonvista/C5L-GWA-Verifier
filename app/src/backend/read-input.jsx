@@ -306,6 +306,9 @@ const readInputFile = (file, handleAddRecord) => {
               localStorage.setItem(key, JSON.stringify(data)); // store the data to local storage
               fileNum++; // update file number
 
+              handleAddRecord(body);
+
+              // console.log(student);
               // add grades data to database
               let Grades = [];
               // loops through each row of the columns
@@ -362,7 +365,6 @@ const readInputFile = (file, handleAddRecord) => {
             })
             console.log(err)
           })
-          handleAddRecord(student);
         } else {
           Swal.fire({ // will activate if preliminary verification of read input sees an error
             icon: 'error',

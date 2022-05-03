@@ -13,9 +13,11 @@ import { useNavigate } from 'react-router-dom';
 // import studentDelete from 'backend/studentDelete';
 // import userDelete from 'backend/userDelete';
 
+
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
 const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, handleDeleteRecord }) => {
+
     // George Gragas
     // This table is about degreeprogram
     // const DegreeProgram = ({ data }) => {
@@ -123,7 +125,6 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
                                 resetValues()
                             }
 
-
                             return(
                                 <Fragment key={index}>
                                     {isEdit ?
@@ -141,7 +142,18 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
                                     }
                                 </Fragment>  
                             )
+
+                            
                         })}
+
+                        <div className="table-row"> {/* row for total values */}
+                            <div className="table-cell font-black py-2">Total</div>
+                            <div className="table-cell text-center">3.0</div>       {/* row for total units */}
+                            <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
+                            <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
+                            <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
+                            <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
+                        </div>
                     </div>
                 </div>
             </>
@@ -272,17 +284,20 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
             console.log(sortState)
         })
 
-        const studentEdit = (StudentID, StudentKey) => {
-            localStorage.setItem("currStudentID", StudentID);
-            localStorage.setItem("currStudentKey", StudentKey);
+        const studentEdit = async (StudentID, StudentKey) => {
+            await localStorage.setItem("currStudentID", StudentID);
+            await localStorage.setItem("currStudentKey", StudentKey);
+            console.log(localStorage.getItem("currStudentKey"), localStorage.getItem("currStudentID"))
             navigate('/student-record');
         }
 
         // function to delete a student based on their student ID
-        const studentDelete = (ID) => {
+        const studentDelete = (ID, Key) => {
             const student = {
               StudentID: ID,
+              StudentKey: Key
             };
+            console.log(student)
             fetch(`http://${ip}:3001/student/delete`,{
                 method: "DELETE",
                 headers: { "Content-Type":"application/json" },
@@ -342,7 +357,7 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
                                 <td className='students-status'>
                                     <div data-status={student.status} className='status'></div>
                                 </td>
-                                <td className='student-action'><Actions handleEdit={() => studentEdit(student._id, student.studno)} handleDelete={() => studentDelete(student.studno)}/></td>
+                                <td className='student-action'><Actions handleEdit={() => studentEdit(student._id, student.studno)} handleDelete={() => studentDelete(student.studno, student._id)}/></td>
                             </tr>
                         )
                         )}
