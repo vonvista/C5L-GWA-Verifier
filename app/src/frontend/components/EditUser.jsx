@@ -44,6 +44,7 @@ const EditUser = ({ handleClose, editUser, handleEditRecordSave }) => {
       middleName === "" || 
       lastName === "" || 
       un === "" || 
+      position === "" || 
       pw === ""
     ) {
       Swal.fire({

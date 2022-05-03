@@ -41,6 +41,23 @@ const AddUser = ({ handleClose, handleAddRecord }) => {
   
   //Please put this logic on parent component/main page -vov
   const add_user = () => {
+
+    if(
+      firstName === "" || 
+      middleName === "" || 
+      lastName === "" || 
+      un === "" || 
+      position === "" || 
+      pw === ""
+    ) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Fill out all fields',
+      })
+      return
+    }
+
     const credentials = {
       FirstName: firstName,
       MiddleName: middleName,
