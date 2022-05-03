@@ -11,6 +11,7 @@ import AddUserBtn from '../components/buttons/AddUserBtn';
 import AddUser from '../components/AddUser';
 import Search from 'frontend/components/Search';
 import SearchModal from 'frontend/components/SearchModal';
+import EditUser from '../components/EditUser';
 import Swal from 'sweetalert2'
 
 const UserManagementPage = () => {
@@ -88,7 +89,18 @@ const UserManagementPage = () => {
         let Users = []; // initiating array that will contain the information of users
         // mapping out all the entries sent by the fetch
         body.map((user, i) => {
-          Users.unshift({"uname": user.Username, "name": user.FirstName + ' ' + user.LastName, "position": user.Position});
+          Users.unshift({
+            "uname": user.Username, 
+            "name": user.FirstName + ' ' + user.LastName, 
+            "position": user.Position,
+            "FirstName": user.FirstName,
+            "MiddleName": user.MiddleName,
+            "LastName": user.LastName,
+            "Username": user.Username,
+            "Position": user.Position,
+            "Password": user.Password,
+            "_id": user._id,
+          });
         });
 
         await setRows(Users);
@@ -111,6 +123,8 @@ const UserManagementPage = () => {
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
     const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow)
     const [showModal, setShowModal] = useState(false)
+    const [showModalEdit, setShowEditModal] = useState(false)
+    const [editUser, setEditUser] = useState({})
 
     console.log(currentRows);
 
@@ -142,6 +156,47 @@ const UserManagementPage = () => {
       }
     }
 
+    const handleAddRecord = (user) => {
+      let temp = rows;
+      temp.unshift({
+        "uname": user.Username, 
+        "name": user.FirstName + ' ' + user.LastName, 
+        "position": user.Position,
+        "FirstName": user.FirstName,
+        "MiddleName": user.MiddleName,
+        "LastName": user.LastName,
+        "Username": user.Username,
+        "Position": user.Position,
+        "Password": user.Password,
+        "_id": user._id,
+      });
+      setRows([...temp]);
+      setShowModal(false);
+    }
+
+    const handleEditRecord = (user) => {
+      setShowEditModal(true);
+      setEditUser(user);
+    }
+
+    const handleEditRecordSave = (user) => {
+      let temp = rows;
+      editIndex = temp.findIndex(x => x._id === user._id);
+      temp[editIndex] = {
+        "uname": user.Username, 
+        "name": user.FirstName + ' ' + user.LastName, 
+        "position": user.Position,
+        "FirstName": user.FirstName,
+        "MiddleName": user.MiddleName,
+        "LastName": user.LastName,
+        "Username": user.Username,
+        "Position": user.Position,
+        "_id": user._id,
+      }
+      setRows([...temp]);
+      setShowEditModal(false);
+    }
+
     // handles page refresh on user delete
     const handleDeleteRecord = (user) => {
       let temp = rows;
@@ -165,14 +220,18 @@ const UserManagementPage = () => {
                 <div className='grid content-center w-1/6'>
                   <AddUserBtn handleClick={() => setShowModal(true)}/>
                   {showModal ?
-                    (<AddUser handleClose={() => setShowModal(false)}/>)
+                    (<AddUser handleClose={() => setShowModal(false)} handleAddRecord={handleAddRecord}/>)
+                    :(<></>)
+                  }
+                  {showModalEdit ?
+                    (<EditUser handleClose={() => setShowEditModal(false)} editUser={editUser} handleEditRecordSave={handleEditRecordSave}/>)
                     :(<></>)
                   }
                   {/* <Search user={"user"} handleSearch={(e) => setSearchUser(e.target.value)} searchValue={searchUser} buttonHandler={handleSearch} handleEnter={handleEnterPress}/> */}
                 </div>
                 <div>
                   <div className='table-container'>
-                    <List table={3} data={currentRows} handleDeleteRecord={handleDeleteRecord}/>
+                    <List table={3} data={currentRows} handleDeleteRecord={handleDeleteRecord} handleEditRecord={handleEditRecord}/>
                   </div>
                   <div className='float-right'>
                     <Pagination rowsPerPage={rowsPerPage} totalRows={rows.length} currentPage={currentPage} paginate={paginate} />

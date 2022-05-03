@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UploadFileBtn from '../components/buttons/UploadFileBtn';
+import { refresh } from 'electron-debug';
 
 /* Components */
 import List from '../components/List';
@@ -9,6 +11,7 @@ import AdminNav from '../components/AdminNavigation';
 import Pagination from '../components/Pagination';
 import Search from 'frontend/components/Search';
 import Swal from 'sweetalert2';
+import Refresh from '../components/buttons/Refresh';
 
 /* CSS */
 import '../components/List.css';
@@ -28,6 +31,8 @@ const UserDashboard = () => {
     //index 0: name; 1: num; 2: degree; index 3: GWA;
     const [sortState, setSortState] = useState([0,0,0,0]);
     const [latestSort, setLatestSort] = useState(-1);
+
+    const navigate = useNavigate();
 
     // const studentsData = [
     //     {
@@ -345,6 +350,10 @@ const UserDashboard = () => {
                 <div className='float-left w-[18vw] h-[1vw]'>
                   <Search user={"student"} handleSearch={(e) => setSearchStudent(e.target.value)} searchValue={searchStudent} buttonHandler={handleSearch} handleEnter={handleEnterPress}/>
                 </div>
+                {/* Refresh button */}
+                <div className='flex items-center'>
+                  <Refresh handleClick={() => navigate("/user-dashboard")}/>
+                </div>
                 {/* Upload button */}
                 <div className='float-right'>
                   <UploadFileBtn handleClick={readInputFile} handleAddRecord={handleAddRecord}/>
@@ -355,8 +364,9 @@ const UserDashboard = () => {
                 <div className='float-right'>
                   <Pagination rowsPerPage={rowsPerPage} totalRows={rows.length} currentPage={currentPage} paginate={paginate} />
                 </div>
+                
               </div>
-
+              
             </div>
         </div>
 
