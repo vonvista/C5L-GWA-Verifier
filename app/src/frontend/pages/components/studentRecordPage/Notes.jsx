@@ -42,7 +42,7 @@ export default function NotesTab({notes, semesters}) {
             Semyear: values.Semyear,
         }
 
-        console.log(deleteNote)
+        // console.log(deleteNote)
 
         // fetch post request to delete a note on button click
         fetch(`http://localhost:3001/note/delete`, {
