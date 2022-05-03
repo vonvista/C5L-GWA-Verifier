@@ -5,6 +5,7 @@ import UploadFileBtn from '../components/buttons/UploadFileBtn';
 import List from '../components/List';
 import Header from '../components/HeaderWithoutArrowbck';
 import UserNav from '../components/UserNavigation';
+import AdminNav from '../components/AdminNavigation';
 import Pagination from '../components/Pagination';
 import Search from 'frontend/components/Search';
 import Swal from 'sweetalert2';
@@ -21,6 +22,8 @@ const UserDashboard = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [unsortedRows, setUnsortedRows] = useState([]);
+
+    const [userRole, setUserRole] = useState(localStorage.getItem("Role"))
 
     //index 0: name; 1: num; 2: degree; index 3: GWA;
     const [sortState, setSortState] = useState([0,0,0,0]);
@@ -327,12 +330,14 @@ const UserDashboard = () => {
     return(
       <>
         <div>
-            <div><UserNav /></div>
+            <div>
+              {userRole == "user" ? <UserNav /> : <AdminNav />}
+            </div>
 
             {/* Right Section */}
             <div className="absolute inset-0 flex ml-8 xl:ml-12 justify-center">
 
-              <div><Header pageTitle={"USER DASHBOARD"}/></div>
+              <div><Header pageTitle={userRole == "user" ? "USER DASHBOARD" : "ADMIN DASHBOARD"}/></div>
 
               {/* Page Contents */}
               <div className='pt-20 flex-column'>

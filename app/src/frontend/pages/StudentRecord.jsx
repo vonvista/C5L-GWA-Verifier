@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import RecordPage from './components/studentRecordPage/StudentViewRecord';
 import Header from '../components/HeaderWithArrowbck';
 import UserNav from '../components/UserNavigation';
+import AdminNav from '../components/AdminNavigation';
 import Swal from 'sweetalert2';
 
 // sample value for user record
@@ -331,8 +332,6 @@ const grades = [
 // console.log(localStorage.getItem("currStudentKey"), localStorage.getItem("currStudentID"))
 // console.log(currStudentID, currStudentKey)
 
-
-
 // organize grades from database for RecordPage props
 function organizeGrades(data){
 
@@ -449,6 +448,7 @@ export default function StudentRecord() { // this will probably transferred to a
   //Move currStudentID and key to useEffect (localstorage access is slow)
   const [currStudentID, setCurrStudentID] = useState({StudentID: localStorage.getItem("currStudentKey")})
   const [currStudentKey, setCurrStudentKey] = useState(localStorage.getItem("currStudentID"))
+  const [userRole, setUserRole] = useState(localStorage.getItem("Role"))
 
   // get Grades, Student, Notes, History from database
   useEffect(() => {
@@ -609,7 +609,9 @@ export default function StudentRecord() { // this will probably transferred to a
       // checks if props are already fetched from the DB
       (studentProp && notesProp && gradesProp && historyProp) ? 
       <>
-        <nav class="sticky z-10"><UserNav /></nav>
+        <nav class="sticky z-10">
+          {userRole == "user" ? <UserNav /> : <AdminNav />}
+        </nav>
             <div className="relative inset-0 flex ml-8 xl:ml-12 justify-center">
                 <header><Header pageTitle={"Student Record"}/></header>
                 <RecordPage user={studentProp} notes={notesProp} history={historyProp} status={statusData} grades={gradesProp} />

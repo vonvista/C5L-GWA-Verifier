@@ -4,6 +4,7 @@ import '../components/UserList.css';
 /* Components */
 import List from '../components/List';
 import Pagination from '../components/Pagination';
+import UserNav from '../components/UserNavigation';
 import AdminNav from '../components/AdminNavigation';
 import HeaderWithoutArrowbck from '../components/HeaderWithoutArrowbck';
 import AddUserBtn from '../components/buttons/AddUserBtn';
@@ -16,6 +17,8 @@ const UserManagementPage = () => {
   const [rows, setRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const [userRole, setUserRole] = useState(localStorage.getItem("Role"))
 
   // const Users = [
   //   {
@@ -149,8 +152,9 @@ const UserManagementPage = () => {
     return(
         <>
           <div>
-            <div><AdminNav /></div>
-
+            <div>
+              {userRole == "user" ? <UserNav /> : <AdminNav />}
+            </div>
             {/* Right Section */}
             <div className="absolute inset-0 flex wrap ml-8 xl:ml-12 justify-center ">
 

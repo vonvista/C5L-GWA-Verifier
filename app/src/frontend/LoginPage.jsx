@@ -78,12 +78,8 @@ const Login = () => {
                 localStorage.setItem("Username", body.Username)
                 localStorage.setItem("ServerIP", ip)
 
-                if(body.Role === "user"){
-                    navigate('/user-dashboard') //redirect to user
-                }
-                else {
-                    navigate('/admin-dashboard') //redirect to admin
-                }
+
+                navigate('/user-dashboard') //redirect to user
             }
            
         })
@@ -97,6 +93,16 @@ const Login = () => {
         })
         
         
+    }
+
+    const debugUser = () => {
+        localStorage.setItem("FirstName", "Debug")
+        localStorage.setItem("LastName", "User")
+        localStorage.setItem("MiddleName", "_")
+        localStorage.setItem("Password", "debug")
+        localStorage.setItem("Position", "Tester")
+        localStorage.setItem("Username", "test")
+        localStorage.setItem("ServerIP", "127.0.0.1")
     }
 
     return (
@@ -188,8 +194,8 @@ const Login = () => {
 
                 {/* Footer */}
                 <div class="flex login-footer absolute inset-x-0">
-                    <span><TextBtn text="UserDash" handleClick={()=>{navigate('/user-dashboard')}}/></span>
-                    <span><TextBtn text="AdminDash" handleClick={()=>{navigate('/admin-dashboard')}}/></span>
+                    <span><TextBtn text="UserDash" handleClick={()=>{debugUser(); localStorage.setItem("Role", "user"); navigate('/user-dashboard')}}/></span>
+                    <span><TextBtn text="AdminDash" handleClick={()=>{debugUser(); localStorage.setItem("Role", "admin"); navigate('/user-dashboard')}}/></span>
                     <span><TextBtn text="UserManage" handleClick={()=>{navigate('/user-management')}}/></span>
                     <span><TextBtn text="UserRecord" handleClick={()=>{navigate('/student-record')}}/></span>
                 </div>
