@@ -58,8 +58,8 @@ module.exports = (app) => {
   app.post('/note/find', controller.noteFindOne);
   app.get('/note/find-all', controller.noteFindAll);
   app.post('/note/find-by-student', controller.noteFindAllByStudent);
-  app.put('/note/update', controller.noteUpdate);
-  app.delete('/note/delete', controller.noteDeleteOne);
+  app.post('/note/update', controller.noteUpdate);
+  app.post('/note/delete', controller.noteDeleteOne);
   app.delete('/note/delete-all', controller.noteDeleteAll);
 }
   

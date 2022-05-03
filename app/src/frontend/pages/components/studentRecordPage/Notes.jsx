@@ -16,6 +16,7 @@ export default function NotesTab({notes, semesters}) {
     const handleAddNote = (text) => {
         const newNote = {
             sem: selectedSem.sem,
+            Semyear: selectedSem.sem,
             content: text,
         }
 
@@ -35,6 +36,29 @@ export default function NotesTab({notes, semesters}) {
         
         let newNotes = [...notesList]
         newNotes.splice(targetIndex, 1)
+
+        deleteNote = {
+            Student: localStorage.getItem("currStudentID"),
+            Semyear: values.Semyear,
+        }
+
+        // console.log(deleteNote)
+
+        // fetch post request to delete a note on button click
+        fetch(`http://localhost:3001/note/delete`, {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(deleteNote)
+        })
+            .then(response => response.json())
+            .then(body => console.log(body))
+            .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+
+                console.log(err)
+
+            })
 
         setNotesList(newNotes)
     }
@@ -60,7 +84,6 @@ export default function NotesTab({notes, semesters}) {
                     <div className="grid border rounded-lg p-5 mb-2" key={idx}>
                         <h1 className="text-xl inter font-bold">
                             {data.Semyear}
-                            {data.Semester} {data.Year}
                         </h1>
                         <p className="inter text-sm mt-3">
                             {data.content}
