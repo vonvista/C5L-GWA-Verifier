@@ -53,8 +53,6 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
                     Semyear: selectedSem.sem,
                 }
 
-                console.log(selectedSem.sem)
-
                 // fetch post request to add/update note
                 fetch(`http://localhost:3001/note/update`, {
                     method: "POST",
