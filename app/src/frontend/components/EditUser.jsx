@@ -38,6 +38,23 @@ const EditUser = ({ handleClose, editUser, handleEditRecordSave }) => {
   };
 
   const edit_user = () => {
+
+    if(
+      firstName === "" || 
+      middleName === "" || 
+      lastName === "" || 
+      un === "" || 
+      pw === ""
+    ) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Fill out all fields',
+      })
+      return
+    }
+
+
     const credentials = {
         _id: editUser._id,
         FirstName: firstName,
