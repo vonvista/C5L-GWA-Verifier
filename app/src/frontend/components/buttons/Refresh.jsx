@@ -23,7 +23,7 @@ useEffect(() => {
 */
 
 /* Function that contains a functioning Refresh button */
-const Refresh = ({ refreshData, setRefreshData }) => {
+const Refresh = ({ handleClick }) => {
   const btn = `
     .btn{
       width: 2.2786458333333335vw;
@@ -37,7 +37,7 @@ const Refresh = ({ refreshData, setRefreshData }) => {
       <style>{btn}</style>
       {/* refresh */}
       {/* Reference: https://stackoverflow.com/questions/70069619/refresh-data-on-button-click-react */}
-      <button className={buttons} type="button" onClick={() => setRefreshData(!refreshData)}>
+      <button className={buttons} type="button" onClick={handleClick}>
         <img className="btn" alt="icon" src={refresh} />
       </button>
     </div>
