@@ -324,9 +324,14 @@ const grades = [
 
 // sample student id -lal 
 // get the following from localStorage on actual
-const currStudentID = {StudentID: "201912345"} // localStorage.getItem("currStudentID")
-const currStudentKey = "62694b253865d3f3586501ee" // localStorage.getItem("currStudentKey")
-const ip = localStorage.getItem("ServerIP")  // change all localhost to ip later on
+// const currStudentID = {StudentID: localStorage.getItem("currStudentKey")} // localStorage.getItem("currStudentID")
+// const currStudentKey = localStorage.getItem("currStudentID") // localStorage.getItem("currStudentKey")
+// const ip = localStorage.getItem("ServerIP")  // change all localhost to ip later on
+
+// console.log(localStorage.getItem("currStudentKey"), localStorage.getItem("currStudentID"))
+// console.log(currStudentID, currStudentKey)
+
+
 
 // organize grades from database for RecordPage props
 function organizeGrades(data){
@@ -441,14 +446,24 @@ export default function StudentRecord() { // this will probably transferred to a
   const [notesProp, getNotesProp] = useState()
   const [gradesProp, getGradesProp] = useState()
   const [historyProp, getHistoryProp] = useState()
+  //Move currStudentID and key to useEffect (localstorage access is slow)
+  const [currStudentID, setCurrStudentID] = useState({StudentID: localStorage.getItem("currStudentKey")})
+  const [currStudentKey, setCurrStudentKey] = useState(localStorage.getItem("currStudentID"))
 
   // get Grades, Student, Notes, History from database
   useEffect(() => {
+    const fetchData = async () => {
+      // await setCurrStudentID({StudentID: localStorage.getItem("currStudentKey")})
+      // await setCurrStudentKey(localStorage.getItem("currStudentID"))
 
-    GetStudentGrades()
-    GetStudentHistory()
-    GetStudentInfo()
-    GetStudentNotes()
+      GetStudentGrades()
+      GetStudentHistory()
+      GetStudentInfo()
+      GetStudentNotes()
+    }
+  
+    // call the function
+    fetchData()
 
   }, [])
 

@@ -272,9 +272,9 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
             console.log(sortState)
         })
 
-        const studentEdit = (StudentID, StudentKey) => {
-            localStorage.setItem("currStudentID", StudentID);
-            localStorage.setItem("currStudentKey", StudentKey);
+        const studentEdit = async (StudentID, StudentKey) => {
+            await localStorage.setItem("currStudentID", StudentID);
+            await localStorage.setItem("currStudentKey", StudentKey);
             console.log(localStorage.getItem("currStudentKey"), localStorage.getItem("currStudentID"))
             navigate('/student-record');
         }
