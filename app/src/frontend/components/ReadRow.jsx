@@ -1,6 +1,6 @@
 import Actions from './buttons/Actions'
 
-export default ReadRow = ({data, clickHandler, delHandler}) => {
+const ReadRow = ({data, clickHandler, delHandler}) => {
 
     const delRow = () => { 
         // function for deletingRow
@@ -20,3 +20,5 @@ export default ReadRow = ({data, clickHandler, delHandler}) => {
         </div>
     );
 }
+
+export default ReadRow;

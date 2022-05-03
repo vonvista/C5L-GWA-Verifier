@@ -4,6 +4,7 @@ import '../components/UserList.css';
 /* Components */
 import List from '../components/List';
 import Pagination from '../components/Pagination';
+import UserNav from '../components/UserNavigation';
 import AdminNav from '../components/AdminNavigation';
 import HeaderWithoutArrowbck from '../components/HeaderWithoutArrowbck';
 import AddUserBtn from '../components/buttons/AddUserBtn';
@@ -17,6 +18,7 @@ const UserManagementPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
+  const [userRole, setUserRole] = useState(localStorage.getItem("Role"))
 
   // const Users = [
   //   {
@@ -76,19 +78,28 @@ const UserManagementPage = () => {
   //   }
   // ]
 
+  const ip = localStorage.getItem("ServerIP")
   useEffect(() => {
     const fetchData = async () => {
       // Retrieve data from database
-      fetch('http://localhost:3001/user/find-all')
+      fetch(`http://${ip}:3001/user/find-all`)
       .then(response => response.json())
       .then(async (body) => {
         let Users = []; // initiating array that will contain the information of users
         // mapping out all the entries sent by the fetch
         body.map((user, i) => {
-          Users.unshift({"uname": user.Username, "name": user.FirstName + ' ' + user.LastName, "position": user.Role});
+          Users.unshift({"uname": user.Username, "name": user.FirstName + ' ' + user.LastName, "position": user.Position});
         });
 
         await setRows(Users);
+      })
+      .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+        Swal.fire({
+          icon: 'error',
+          title: 'Server Error',
+          text: 'Check if the server is running or if database IP is correct',
+        })
+        console.log(err)
       })
     }
 
@@ -131,11 +142,19 @@ const UserManagementPage = () => {
       }
     }
 
+    // handles page refresh on user delete
+    const handleDeleteRecord = (user) => {
+      let temp = rows;
+      temp.splice(temp.findIndex(row => row.uname === user.Username), 1);
+      setRows([...temp]);
+    }
+
     return(
         <>
           <div>
-            <div><AdminNav /></div>
-
+            <div>
+              {userRole == "user" ? <UserNav /> : <AdminNav />}
+            </div>
             {/* Right Section */}
             <div className="absolute inset-0 flex wrap ml-8 xl:ml-12 justify-center ">
 
@@ -153,7 +172,7 @@ const UserManagementPage = () => {
                 </div>
                 <div>
                   <div className='table-container'>
-                    <List table={3} data={currentRows}/>
+                    <List table={3} data={currentRows} handleDeleteRecord={handleDeleteRecord}/>
                   </div>
                   <div className='float-right'>
                     <Pagination rowsPerPage={rowsPerPage} totalRows={rows.length} currentPage={currentPage} paginate={paginate} />

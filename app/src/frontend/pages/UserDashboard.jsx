@@ -5,9 +5,10 @@ import UploadFileBtn from '../components/buttons/UploadFileBtn';
 import List from '../components/List';
 import Header from '../components/HeaderWithoutArrowbck';
 import UserNav from '../components/UserNavigation';
+import AdminNav from '../components/AdminNavigation';
 import Pagination from '../components/Pagination';
 import Search from 'frontend/components/Search';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 /* CSS */
 import '../components/List.css';
@@ -20,11 +21,13 @@ const UserDashboard = () => {
     const [rows, setRows] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [unsortedRows, setUnsortedRows] = useState([]);
+
+    const [userRole, setUserRole] = useState(localStorage.getItem("Role"))
 
     //index 0: name; 1: num; 2: degree; index 3: GWA;
-    const [sortState, setSortState] = useState([0,0,0,0])
+    const [sortState, setSortState] = useState([0,0,0,0]);
     const [latestSort, setLatestSort] = useState(-1);
-
 
     // const studentsData = [
     //     {
@@ -34,34 +37,34 @@ const UserDashboard = () => {
     //       "gwa": "1.01234",
     //       "status": "Checked"
     //     },
-    //     // {
-    //     //   "name": "Eyds Angeles",
-    //     //   "studno": "2019-05235",
-    //     //   "degprog": "BS Computer Science",
-    //     //   "gwa": "1.0",
-    //     //   "status": "Unchecked"
-    //     // },
-    //     // {
-    //     //   "name": "George Gragas",
-    //     //   "studno": "2019-05235",
-    //     //   "degprog": "BS Computer Science",
-    //     //   "gwa": "1.0",
-    //     //   "status": "Pending"
-    //     // },
-    //     // {
-    //     //     "name": "Maurice Paguagan",
-    //     //     "studno": "2019-05235",
-    //     //     "degprog": "BS Computer Science",
-    //     //     "gwa": "1.0",
-    //     //     "status": "Checked"
-    //     //   },
-    //     //   {
-    //     //     "name": "Eyds Angeles",
-    //     //     "studno": "2019-05235",
-    //     //     "degprog": "BS Computer Science",
-    //     //     "gwa": "1.0",
-    //     //     "status": "Unchecked"
-    //     //   },
+    //     {
+    //       "name": "Eyds Angeles",
+    //       "studno": "2019-05235",
+    //       "degprog": "BS Computer Science",
+    //       "gwa": "1.0",
+    //       "status": "Unchecked"
+    //     },
+    //     {
+    //       "name": "George Gragas",
+    //       "studno": "2019-05235",
+    //       "degprog": "BS Computer Science",
+    //       "gwa": "1.0",
+    //       "status": "Pending"
+    //     },
+    //     {
+    //         "name": "Maurice Paguagan",
+    //         "studno": "2019-05235",
+    //         "degprog": "BS Computer Science",
+    //         "gwa": "1.0",
+    //         "status": "Checked"
+    //       },
+    //       {
+    //         "name": "Eyds Angeles",
+    //         "studno": "2019-05235",
+    //         "degprog": "BS Computer Science",
+    //         "gwa": "1.0",
+    //         "status": "Unchecked"
+    //       },
     //       {
     //         "name": "2 George Gragas",
     //         "studno": "2019-00001",
@@ -167,19 +170,29 @@ const UserDashboard = () => {
     //   }
     // ]
 
+    const ip = localStorage.getItem("ServerIP");
     useEffect(() => {
       const fetchData = async () => {
         // Retrieve data from database
-        fetch('http://localhost:3001/student/find-all')
+        fetch(`http://${ip}:3001/student/find-all`)
         .then(response => response.json())
         .then(async (body) => {
           let studentsData = []; // initiating array that will contain the information of students
           // mapping out all the entries sent by the fetch
           body.map((student, i) => {
-            studentsData.unshift({"name": student.FirstName + ' ' + student.LastName, "studno": student.StudentID, "degprog" : student.Degree, "gwa": student.OverallGWA, "status": student.Status});
+            studentsData.unshift({"name": student.FirstName + ' ' + student.LastName, "studno": student.StudentID, "degprog" : student.Degree, "gwa": student.OverallGWA, "status": student.Status, "_id": student._id});
           });
 
           await setRows(studentsData);
+          await setUnsortedRows(studentsData);
+        })
+        .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+          Swal.fire({
+            icon: 'error',
+            title: 'Server Error',
+            text: 'Check if the server is running or if database IP is correct',
+          })
+          console.log(err)
         })
       }
 
@@ -247,7 +260,7 @@ const UserDashboard = () => {
           break;
       }
       if(temp[index] === 0){ //if 0, return to original data from DB
-        setRows([...studentsData]);
+        setRows([...unsortedRows]);
       }
       if(temp[index] === 1){ //if 1, sort ascending
         sortRowsAsc(toSort)
@@ -258,11 +271,34 @@ const UserDashboard = () => {
 
     }
 
+    // handles page refresh on file upload, magiging unsorted ulit yung data dapat
+    const handleAddRecord = (student) => {
+      let temp = unsortedRows; //let original data
+      temp.unshift({
+        "_id": student._id,
+        "name": student.FirstName + ' ' + student.LastName, 
+        "studno": student.StudentID, 
+        "degprog" : student.Degree, 
+        "gwa": student.OverallGWA,
+        "status": student.Status});
+      setRows([...temp]);
+      setUnsortedRows([...temp]);
+      setSortState([0,0,0,0]) //reset sort state
+      console.log(rows);
+    }
+
+    // handles page refresh on student delete
+    const handleDeleteRecord = (student) => {
+      let temp = rows;
+      temp.splice(temp.findIndex(row => row.studno === student.StudentID), 1);
+      setRows([...temp]);
+    }
+
     // Get current rows
     const indexOfLastRow = currentPage * rowsPerPage;
     const indexOfFirstRow = indexOfLastRow - rowsPerPage;
     const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow)
-
+    console.log("REFRESH")
     //Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
@@ -294,12 +330,14 @@ const UserDashboard = () => {
     return(
       <>
         <div>
-            <div><UserNav /></div>
+            <div>
+              {userRole == "user" ? <UserNav /> : <AdminNav />}
+            </div>
 
             {/* Right Section */}
             <div className="absolute inset-0 flex ml-8 xl:ml-12 justify-center">
 
-              <div><Header pageTitle={"USER DASHBOARD"}/></div>
+              <div><Header pageTitle={userRole == "user" ? "USER DASHBOARD" : "ADMIN DASHBOARD"}/></div>
 
               {/* Page Contents */}
               <div className='pt-20 flex-column'>
@@ -309,10 +347,10 @@ const UserDashboard = () => {
                 </div>
                 {/* Upload button */}
                 <div className='float-right'>
-                  <UploadFileBtn handleClick={readInputFile}/>
+                  <UploadFileBtn handleClick={readInputFile} handleAddRecord={handleAddRecord}/>
                 </div>
                 <div className='table-container'>
-                  <List table={1} data={currentRows} changeSort={changeSort} sortState={sortState}/>
+                  <List table={1} data={currentRows} changeSort={changeSort} sortState={sortState} handleDeleteRecord={handleDeleteRecord}/>
                 </div>
                 <div className='float-right'>
                   <Pagination rowsPerPage={rowsPerPage} totalRows={rows.length} currentPage={currentPage} paginate={paginate} />

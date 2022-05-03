@@ -3,7 +3,7 @@ import Input from './inputs/Input'
 import 'tailwindcss/tailwind.css'
 import SaveCancel from '../../frontend/components/buttons/ActionsSaveCancel'
 
-export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched, errors, valid}) => {
+const EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched, errors, valid}) => {
 
     //
 
@@ -102,3 +102,5 @@ export default EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched
         </form>
     );
 }
+
+export default EditRow;

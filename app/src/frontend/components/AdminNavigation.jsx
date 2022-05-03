@@ -1,8 +1,9 @@
+import { useEffect, useState } from 'react';
 import { useHover } from '../hooks/useHover';
 import UserIcon from '../../../assets/icons/default-user-icon.png';
 import 'tailwindcss/tailwind.css';
 import './Sidebar.css';
-
+import { useNavigate } from 'react-router-dom';
 
 /* Importing navigation bar and header to pages
 <>
@@ -22,7 +23,37 @@ import './Sidebar.css';
 
 // This component is used to aid admin navigation and is implemented as a sidebar that expands on hover.
 const AdminNav = () => {
+    let navigate = useNavigate();
+
     const [hoverRef, isHovering] = useHover();
+    const [name, setName] = useState('');
+    const [userName, setUserName] = useState('');
+
+    // removes local storage data and redirects to log in page
+    function handleLogOut (){
+        localStorage.removeItem("FirstName")
+        localStorage.removeItem("LastName")
+        localStorage.removeItem("MiddleName")
+        localStorage.removeItem("Password")
+        localStorage.removeItem("Position")
+        localStorage.removeItem("Role")
+        localStorage.removeItem("Username")
+        localStorage.removeItem("ServerIP")
+
+        navigate('/');
+    }
+
+    useEffect(() => {
+        // gets name and username from local storage
+        const tempName = localStorage.getItem("FirstName") + " " + localStorage.getItem("MiddleName") + " " + localStorage.getItem("LastName");
+        const tempUserName = localStorage.getItem("Username");
+        // updates name and username 
+        setName(tempName);
+        setUserName(tempUserName);
+        // displays the name and username to the sidebar
+        document.getElementById("name").innerHTML = name; 
+        document.getElementById("userName").innerHTML = tempUserName; 
+    }, [name,userName]);
     
     return (
         <nav 
@@ -55,8 +86,8 @@ const AdminNav = () => {
 
                     {/* User Information */}
                     <div className="flex-shrink-0">
-                        <div><strong>Juan Dela Cruz</strong></div>
-                        <div>jvdelacruz</div>
+                        <div><strong id="name"></strong></div>
+                        <div id="userName"></div>
                     </div>
                 </div>
                 
@@ -64,7 +95,7 @@ const AdminNav = () => {
                 <div className={` ${isHovering? "xl:mt-3 1.5xl:mt-4 1.75xl:mt-6 3xl:mt-7 4xl:mt-8" : "mt-1" } navpages-style`}>
                     
                     {/* Admin Dashboard */}
-                    <div className="dashboard-style hover:bg-secondary-red hover:text-highlight">
+                    <div className="dashboard-style hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/user-dashboard')}}>
                         <div>
                             <svg className={` ${isHovering? "ml-7 1.5xl:ml-8 1.75xl:ml-8": "ml-3.5 xl:ml-5.5"} w-7 xl:w-8 duration-300 fill-current`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" >
                                 <path d="M33 19a1 1 0 0 1-.71-.29L18 4.41 3.71 18.71A1 1 0 0 1 2.3 17.3l15-15a1 1 0 0 1 1.41 0l15 15A1 1 0 0 1 33 19Z"/>
@@ -78,7 +109,7 @@ const AdminNav = () => {
                     </div>
 
                     {/* User Management */}
-                    <div className="usersys-style my-10 hover:bg-secondary-red hover:text-highlight">
+                    <div className="usersys-style my-10 hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/user-management')}}>
                         <div>
                             <svg className={` ${isHovering? "ml-6 1.5xl:ml-7":"ml-2.5 xl:ml-4"} w-7 xl:w-9 duration-300 fill-current`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
                                 <path d="M319.9 320c57.41 0 103.1-46.56 103.1-104s-46.54-104-103.1-104c-57.41 0-103.1 46.56-103.1 104-.9 57.4 45.7 104 103.1 104zm50 32h-99.8C191.6 352 128 411.7
@@ -97,7 +128,7 @@ const AdminNav = () => {
             </div>
             
             {/* Logout button*/}
-            <div className="logout-style hover:text-highlight">
+            <div className="logout-style hover:text-highlight" onClick={() => handleLogOut()}>
                 <div>
                     <svg className={` ${isHovering? "ml-5 1.5xl:ml-6 1.75xl:ml-7" : "ml-2 xl:ml-4" } w-7 xl:w-8 duration-300 fill-current`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M4 18h2v2h12V4H6v2H4V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3zm2-7h7v2H6v3l-5-4 5-4v3z"/>

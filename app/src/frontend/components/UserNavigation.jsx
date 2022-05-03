@@ -1,8 +1,9 @@
+import { useEffect, useState } from 'react';
 import { useHover } from '../hooks/useHover';
 import UserIcon from '../../../assets/icons/default-user-icon.png';
 import 'tailwindcss/tailwind.css';
 import './Sidebar.css';
-
+import { useNavigate } from 'react-router-dom';
 
 /* Importing navigation bar and header to pages
 <>
@@ -22,8 +23,40 @@ import './Sidebar.css';
 
 // This component is used to aid user navigation and is implemented as a sidebar that expands on hover.
 const UserNav = () => {
+    let navigate = useNavigate();
+
     const [hoverRef, isHovering] = useHover();
+    const [name, setName] = useState('');
+    const [userName, setUserName] = useState('');
+
+    useEffect(() => {
+        // gets name and username from local storage
+        const tempName = localStorage.getItem("FirstName") + " " + localStorage.getItem("MiddleName") + " " + localStorage.getItem("LastName");
+        const tempUserName = localStorage.getItem("Username");
+        // updates name and username 
+        setName(tempName);
+        setUserName(tempUserName);
+        // displays the name and username to the sidebar
+        document.getElementById("name").innerHTML = name; 
+        document.getElementById("userName").innerHTML = tempUserName; 
+    }, [name,userName]);
     
+    // removes local storage data and redirects to log in page
+    function handleLogOut (){
+        localStorage.clear();
+        navigate('/');
+    }
+    
+    // remove some items from local storage and redirects to User Dashboard
+    function handleUserDashboard (){
+
+        // clear the following on the localStorage
+        localStorage.removeItem('currStudent')
+        localStorage.removeItem('currStudentGrades')
+
+        navigate('/user-dashboard') // navigate to user dashboard
+    }
+
     return (
         <nav 
             ref={hoverRef}
@@ -55,8 +88,8 @@ const UserNav = () => {
 
                     {/* User Information */}
                     <div className="flex-shrink-0">
-                        <div><strong>Juan Dela Cruz</strong></div>
-                        <div>jvdelacruz</div>
+                        <div><strong id="name"></strong></div>
+                        <div id="userName"></div>
                     </div>
                 </div>
                 
@@ -64,7 +97,7 @@ const UserNav = () => {
                 <div className={` ${isHovering? "xl:mt-3 1.5xl:mt-4 1.75xl:mt-6 3xl:mt-7 4xl:mt-8" : "mt-1" } navpages-style`}>
                     
                     {/* User Dashboard */}
-                    <div className="dashboard-style hover:bg-secondary-red hover:text-highlight">
+                    <div className="dashboard-style hover:bg-secondary-red hover:text-highlight" onClick={() => handleUserDashboard()}>
                         <div>
                             <svg className={` ${isHovering? "ml-7 1.5xl:ml-8 1.75xl:ml-8": "ml-3.5 xl:ml-5.5"} w-7 xl:w-8 duration-300 fill-current`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" >
                                 <path d="M33 19a1 1 0 0 1-.71-.29L18 4.41 3.71 18.71A1 1 0 0 1 2.3 17.3l15-15a1 1 0 0 1 1.41 0l15 15A1 1 0 0 1 33 19Z"/>
@@ -80,7 +113,7 @@ const UserNav = () => {
             </div>
             
             {/* Logout button*/}
-            <div className="logout-style hover:text-highlight">
+            <div className="logout-style hover:text-highlight" onClick={() => handleLogOut()}>
                 <div>
                     <svg className={` ${isHovering? "ml-5 1.5xl:ml-6 1.75xl:ml-7" : "ml-2 xl:ml-4" } w-7 xl:w-8 duration-300 fill-current`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M4 18h2v2h12V4H6v2H4V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3zm2-7h7v2H6v3l-5-4 5-4v3z"/>

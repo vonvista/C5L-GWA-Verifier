@@ -84,7 +84,6 @@ exports.userAdd = async function(req, res, next) {
   });
   console.log(newUser);
 
-
   newUser.save(function(err) {
     if (!err) { res.send(newUser)}
     else { res.send({err:'Unable to save user'}) }
@@ -118,8 +117,10 @@ exports.userDeleteAll = function(req, res, next) {
 }
 
 // update a user
-exports.userUpdate = function(req, res, next) {
+exports.userUpdate = async function(req, res, next) {
   // console.log(req.body);
+
+  var hashedPassword = await bcrypt.hash(req.body.Password, saltRounds); //encrpyt password first -vov
   
   User.updateOne({Username : req.body.Username},{"$set":{
     "FirstName": req.body.FirstName,
@@ -127,7 +128,7 @@ exports.userUpdate = function(req, res, next) {
     "LastName": req.body.LastName,
     "Position": req.body.Position,
     "Role": req.body.Role,
-    "Password": req.body.Password
+    "Password": hashedPassword
   }}, {new : true}, function(err,result){
     if(!err && User){
       res.send(result);
@@ -165,15 +166,14 @@ const gradeSchema = new Schema({
   Unit: {type: Number, required: true},
   Weight: Number,
   Cumulative: {type: Number, required: true},
-  Semester : {type:String,required:true},
-  Year: {type:String,required:true}
+  Semyear : {type:String,required:true},
 },{autoCreate:true})
 
 // GRADE MODEL
 const Grade = db.model('grade', gradeSchema);
 
 // COMBINATION OF STUDENT AND COURSE ID IS UNIQUE
-gradeSchema.index({Student: 1, Course: 1} , {unique: true});
+//gradeSchema.index({Student: 1, Course: 1} , {unique: true});
 
 /**
  * SECTION : grades
@@ -218,8 +218,7 @@ exports.gradeAdd = function(req, res, next) {
     Unit: req.body.Unit,
     Weight: req.body.Weight,
     Cumulative: req.body.Cumulative,
-    Semester: req.body.Semester,
-    Year: req.body.Year
+    Semyear : req.body.Semyear,
   });
   console.log(newGrade);
   
@@ -229,22 +228,64 @@ exports.gradeAdd = function(req, res, next) {
     else { res.send({err:'Unable to save grade'}) }
   });
 
+}
 
+// Add grade many -vov
+exports.gradeAddMany = function(req, res, next) {
+  // UNCOMMENT TO SEE REQUEST CONTENTS AND MAPPING TO USER MODEL
+  // console.log(req.body);
+  grades = req.body.Grades;
+  gradesArray = [];
+
+  //loop through grades and add each one
+  for(var i = 0; i < grades.length; i++){
+    var newGrade = new Grade({
+      Student: mongoose.Types.ObjectId(grades[i].Student),
+      Course: grades[i].Course,
+      Grade: grades[i].Grade, 
+      Unit: grades[i].Unit,
+      Weight: grades[i].Weight,
+      Cumulative: grades[i].Cumulative,
+      Semyear : grades[i].Semyear,
+    });
+    gradesArray.push(newGrade);
+  }
+  console.log(gradesArray);
+
+  // var newGrade = new Grade({
+  //   Student: mongoose.Types.ObjectId(req.body.Student),
+  //   Course: req.body.Course,
+  //   Grade: req.body.Grade,
+  //   Unit: req.body.Unit,
+  //   Weight: req.body.Weight,
+  //   Cumulative: req.body.Cumulative,
+  //   Semester: req.body.Semester,
+  //   Year: req.body.Year
+  // });
+  // console.log(newGrade);
+  
+  Grade.insertMany(gradesArray, function(err,result){
+    if(!err){
+      res.send(result);
+    } else {
+      console.log(err);
+      res.send({err:'Unable to add grade'});
+    }
+  })
 }
 
 // Update a grade by using Student and Course
 exports.gradeUpdateOne = function(req, res, next) {
-  // console.log(req.body);
+  console.log(req.body);
 
-  Grade.updateOne({Student: req.body.Student, Course: req.body.Course},{"$set":{
+  Grade.updateOne({_id: mongoose.Types.ObjectId(req.body._id)},{"$set":{
     "Student": req.body.Student,
     "Course": req.body.Course,
     "Grade": req.body.Grade,
     "Unit": req.body.Unit,
     "Weight": req.body.Weight,
     "Cumulative": req.body.Cumulative,
-    "Semester":req.body.Semester,
-    "Year": req.body.Year
+    "Semyear" : req.body.Semyear
   }}, {new : true}, function(err,result){
     if(!err && Grade){
       res.send(result);
@@ -367,12 +408,20 @@ Student.updateOne({StudentID: req.body.StudentID},{"$set":{
 
 // delete student
 exports.studentDeleteOne = function(req, res, next) {
-  // console.log(req.body);
+  console.log(req.body);
   Student.findOneAndDelete({StudentID: req.body.StudentID},function(err, Student){
+    if(!err && Student){
+      // res.send({suc:'Successfully deleted'});
+    } else {
+      res.send({err:'Unable to delete'});
+    }
+  });
+
+  Grade.deleteMany({Student: mongoose.Types.ObjectId(req.body.StudentKey)},function(err, Student){
     if(!err && Student){
       res.send({suc:'Successfully deleted'});
     } else {
-      res.send({err:'Unable to delete student'});
+      res.send({err:'Unable to delete'});
     }
   });
 }
