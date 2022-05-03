@@ -31,14 +31,15 @@ const AdminNav = () => {
 
     // removes local storage data and redirects to log in page
     function handleLogOut (){
-        localStorage.removeItem("FirstName")
-        localStorage.removeItem("LastName")
-        localStorage.removeItem("MiddleName")
-        localStorage.removeItem("Password")
-        localStorage.removeItem("Position")
-        localStorage.removeItem("Role")
-        localStorage.removeItem("Username")
-        localStorage.removeItem("ServerIP")
+        // localStorage.removeItem("FirstName")
+        // localStorage.removeItem("LastName")
+        // localStorage.removeItem("MiddleName")
+        // localStorage.removeItem("Password")
+        // localStorage.removeItem("Position")
+        // localStorage.removeItem("Role")
+        // localStorage.removeItem("Username")
+        // localStorage.removeItem("ServerIP")
+        localStorage.clear()
 
         navigate('/');
     }
