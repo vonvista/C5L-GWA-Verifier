@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
-const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, handleDeleteRecord }) => {
+const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, handleDeleteRecord, handleEditRecord }) => {
 
     // George Gragas
     // This table is about degreeprogram
@@ -161,9 +161,10 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
     }
 
     // This table is about
-    const User = ({data, handleDeleteRecord}) => {
+    const User = ({data, handleDeleteRecord, handleEditRecord}) => {
         console.log(data);
         const [showModal, setShowModal] = useState(false)
+        const [editUser, setEditUser] = useState();
 
         // function to delete a user based on their username
         const userDelete = (username) => {
@@ -221,11 +222,7 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
                           {user.position}
                       </td>
                       <td className='user-action'>
-                      <Actions handleEdit={() => setShowModal(true)} handleDelete={() => userDelete(user.uname)}/>
-                      {showModal ?
-                        (<EditUser handleClose={() => setShowModal(false)}/>)
-                        :(<></>)
-                      }
+                      <Actions handleEdit={() => handleEditRecord(user)} handleDelete={() => userDelete(user.uname)}/>
                       </td>
                     </tr>
                   )
@@ -379,7 +376,7 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
         )
     } else if(table == 3) {
         return (
-            <User data={data} handleDeleteRecord={handleDeleteRecord}/>
+            <User data={data} handleDeleteRecord={handleDeleteRecord} handleEditRecord={handleEditRecord}/>
         )
     }
 }

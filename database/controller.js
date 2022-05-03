@@ -122,7 +122,8 @@ exports.userUpdate = async function(req, res, next) {
 
   var hashedPassword = await bcrypt.hash(req.body.Password, saltRounds); //encrpyt password first -vov
   
-  User.updateOne({Username : req.body.Username},{"$set":{
+  User.updateOne({_id: mongoose.Types.ObjectId(req.body._id)},{"$set":{
+    "Username" : req.body.Username,
     "FirstName": req.body.FirstName,
     "MiddleName": req.body.MiddleName,
     "LastName": req.body.LastName,
@@ -132,11 +133,13 @@ exports.userUpdate = async function(req, res, next) {
   }}, {new : true}, function(err,result){
     if(!err && User){
       res.send(result);
+      console.log(result);
     } else {
       res.send({err:'Unable to update user'});
     }
   })
 }
+
 
 //user login -vov
 exports.userLogin = async function(req, res, next) {

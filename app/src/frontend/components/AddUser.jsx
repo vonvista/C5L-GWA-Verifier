@@ -3,6 +3,7 @@ import './AddEditUser.css';
 import { useState } from 'react';
 import user from '../../../assets/icons/user-icon.jpg';
 import Input from './inputs/Input';
+import Swal from 'sweetalert2'
 
 // function which shows the add user modal; to be used in UserSystemPage
 // to use AddUser and AddUserBtn, import needed files and declare and initialize showModal variable:
@@ -12,7 +13,7 @@ import Input from './inputs/Input';
 //   :(<></>)
 // }
 
-const AddUser = ({ handleClose }) => {
+const AddUser = ({ handleClose, handleAddRecord }) => {
   const [firstName, setFirstName] = useState('');
   const [middleName, setMiddleName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -20,6 +21,8 @@ const AddUser = ({ handleClose }) => {
   const [position, setPosition] = useState(''); // username
   const [pw, setPW] = useState(''); // password
   const [status, setStatus] = useState('show');
+
+  const ip = localStorage.getItem('ServerIP');
 
   // reference for password toggle: https://codepen.io/huphtur/pen/OKJJQY
   const buttonHandler = () => {
@@ -39,24 +42,48 @@ const AddUser = ({ handleClose }) => {
   //Please put this logic on parent component/main page -vov
   const add_user = () => {
     const credentials = {
-      FirstName: 'firstName3',
-      MiddleName: 'middleName3',
-      LastName: 'lastName3',
-      Username: 'un3',
-      Position: 'position3',
-      Password: 'Pwwwwwwwww883',
+      FirstName: firstName,
+      MiddleName: middleName,
+      LastName: lastName,
+      Username: un,
+      Position: position,
+      Password: pw,
       Role: 'user',
     };
 
-    fetch(`http://localhost:3001/user/add`, {
+    fetch(`http://${ip}:3001/user/add`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(credentials),
     })
-      .then((response) => response.json())
-      .then((body) => {
-        console.log(body);
-      });
+    .then((response) => response.json())
+    .then(body => {
+      console.log(body)
+      if(body.err){ //if error response returned from DB
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: body.err,
+        })
+      }
+      else { //success state
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Successfully add user!',
+        })
+        handleAddRecord(body)
+
+      }
+    })
+    .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+      Swal.fire({
+        icon: 'error',
+        title: 'Server Error',
+        text: 'Check if the server is running or if database IP is correct',
+      })
+      console.log(err)
+    })
   };
 
   return (
