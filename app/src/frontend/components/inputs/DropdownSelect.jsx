@@ -16,16 +16,23 @@ import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 function DropdownInput(props) {
 
     // dropdown select
-    const options = props.options                  // pass options here
-    const [selected, setSelected] = props.state    // set default option as 1
-    console.log(selected)
+    const options = props.options                   // pass options here
+    const [selected, setSelected] = props.state     // set default option as 1
+
+    
+    // Lifting up state
+    const handleChange = (newSelect) => {
+        setSelected(newSelect)
+        props.placeholderChange(newSelect)          // Setting placeholder text
+    }
+
     return(
         <>
             <div className={props.style}>
-                <Listbox value={selected} onChange={setSelected}>
+                <Listbox value={selected} onChange={(setSelected) => {handleChange(setSelected)}}>
                     <div className="relative mt-1">
                     <Listbox.Button className="relative w-full py-2 pl-4 pr-10 text-left bg-white rounded-md shadow-lg cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
-                        <span className="block truncate">{selected.name}</span>
+                        <span className="block truncate">{selected.sem}</span>
                         <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                         <SelectorIcon
                             className="w-5 h-5 text-gray-400"
@@ -57,7 +64,7 @@ function DropdownInput(props) {
                                     selected ? 'font-medium' : 'font-normal'
                                     }`}
                                 >
-                                    {person.name}
+                                    {person.sem}
                                 </span>
                                 
                                 </>

@@ -33,29 +33,17 @@ const statusData = {
 // sample value for notes in user records grades
 const notes = [
   {
-      sem: "1st Semester AY 2019-2020",
-      author: "John Doe",
-      date: "03/03/2022",
+      sem: "First Semester AY 2019-2020",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lobortis, nisl ut convallis vulputate, elit neque ultrices nulla, et elementum felis dui eget purus. Donec massa nunc, aliquet ut vestibulum a, cursus quis lacus. Suspendisse et volutpat leo, a lacinia neque. Nam sagittis lectus nibh, a pretium leo tincidunt et"
   },
   {
-      sem: "2nd Semester AY 2019-2020",
-      author: "Jane Doe",
-      date: "03/04/2022",
+      sem: "Second Semester AY 2019-2020",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lobortis"
   },
   {
-    sem: "2nd Semester AY 2019-2020",
-    author: "Jane Doe",
-    date: "03/04/2022",
+    sem: "First Semester AY 2020-2021",
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lobortis"
-  },
-  {
-    sem: "2nd Semester AY 2019-2020",
-    author: "Jane Doe",
-    date: "03/04/2022",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lobortis"
-  },
+  }
 ]
 
 // sample values for change history;
@@ -171,7 +159,7 @@ const history = [
 // sample value for grades
 const grades = [
   {
-    sem: "First Semester A.Y. 2019-2020",
+    sem: "First Semester AY 2019-2020",
     data: [
         {   
             "idRow": "1",
@@ -224,7 +212,7 @@ const grades = [
     ]
   },
   {
-    sem: "Second Semester A.Y. 2019-2020",
+    sem: "Second Semester AY 2019-2020",
     data: [
         {
             "idRow": "1",
@@ -269,7 +257,7 @@ const grades = [
     ]
   },
   {
-    sem: "First Semester A.Y. 2020-2021",
+    sem: "First Semester AY 2020-2021",
     data: [
         {
             "idRow": "1",
