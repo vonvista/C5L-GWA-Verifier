@@ -161,7 +161,7 @@ const grades = [
   {
     sem: "First Semester AY 2019-2020",
     data: [
-        {   
+        {
             "idRow": "1",
             "courseName": "CMSC 12",
             "units": "3.0",
@@ -463,7 +463,7 @@ export default function StudentRecord() { // this will probably transferred to a
       name: '',
       degree_program: '',
     }
-    
+
     fetch(`http://localhost:3001/student/find`, {
       method: "POST",
       headers: {
@@ -483,7 +483,7 @@ export default function StudentRecord() { // this will probably transferred to a
         currUser.degree_program = body.Degree
         currUser.status = "Pending"
         currUser.Student = body._id
-        
+
         getStudentProp(currUser) // return student info from db
       })
       .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
