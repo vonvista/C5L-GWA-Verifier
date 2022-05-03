@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
-const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, handleDeleteRecord, handleEditRecord }) => {
+const List = ({ table, sem, data, changeSort, sortState, dataHandler, delHandler, handleDeleteRecord, handleEditRecord }) => {
 
     // George Gragas
     // This table is about degreeprogram
@@ -78,7 +78,7 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
 
     // Table for displaying the student's summary of grades for a given semester 
     // To be used for Student Record View Page
-    const SemRecord = ({ data, dataHandler, delHandler }) => {
+    const SemRecord = ({ sem, data, dataHandler, delHandler }) => {
 
         return (
             <>  
@@ -91,7 +91,7 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
                             <div className="table-cell w-1/6 text-center">Grade</div>
                             <div className="table-cell w-1/6 text-center">Enrolled</div>
                             <div className="table-cell w-1/6 text-center"></div>
-                            <div className="table-cell w-1/6 text-center"><AddRow /></div>
+                            <div className="table-cell w-1/6 text-center"><AddRow sem={sem}/></div>
                         </div>
                     </div>
                     <div className="table-row-group">
@@ -372,7 +372,7 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
         )
     } else if(table == 2) {
         return (
-            <SemRecord data={data} dataHandler={dataHandler} delHandler={delHandler} />
+            <SemRecord sem={sem} data={data} dataHandler={dataHandler} delHandler={delHandler} />
         )
     } else if(table == 3) {
         return (
