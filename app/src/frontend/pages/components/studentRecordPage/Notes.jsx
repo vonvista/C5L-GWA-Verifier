@@ -59,8 +59,7 @@ export default function NotesTab({notes, semesters}) {
                 return(
                     <div className="grid border rounded-lg p-5 mb-2" key={idx}>
                         <h1 className="text-xl inter font-bold">
-                            {data.Semyear}
-                            {data.Semester} {data.Year}
+                            {data.sem}
                         </h1>
                         <p className="inter text-sm mt-3">
                             {data.content}

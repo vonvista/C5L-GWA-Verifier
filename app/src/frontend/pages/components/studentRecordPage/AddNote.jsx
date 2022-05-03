@@ -11,6 +11,7 @@ import './css/AddNote.css';
 // This function is used for adding/editing the notes for each semester
 
 const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semesters }) => {
+    
     // State that handles the content in the text area
     const [noteText, setNoteText] = useState("");
     // State that handles popup window
@@ -44,8 +45,34 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
             if (noteText != 'Type to add a note...'){
                 handleAddNote(noteText)
                 setNoteText('')
+
+                reNote = {
+                    User: localStorage.getItem("Username"),
+                    Student: localStorage.getItem("currStudentID"),
+                    Details: noteText,
+                    Semyear: selectedSem.sem,
+                }
+
+                console.log(selectedSem.sem)
+
+                // fetch post request to add/update note
+                fetch(`http://localhost:3001/note/update`, {
+                    method: "POST",
+                    headers: {
+                    "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(reNote)
+                })
+                    .then(response => response.json())
+                    .then(body => console.log(body))
+                    .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+
+                        console.log(err)
+
+                    })
             }
         }
+
         setShowWindow(false)                 // Close window after saving
         setSelectedSem(semesters[0])         // Reset selected option in dropdown to first object
     }
