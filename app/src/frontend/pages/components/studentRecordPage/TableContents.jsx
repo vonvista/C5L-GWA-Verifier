@@ -66,7 +66,7 @@ const TableContents = ({ Name, Semester, key, handler }) => {
                             
                             {/* Accordion Contents */}
                             <Disclosure.Panel className="inter z-0 pl-5 py-3 mb-2 text-sm text-gray-500 rounded-b-lg shadow-lg">
-                                <List table={2} data={semData} dataHandler={setData} delHandler={delData}/>
+                                <List table={2} sem={Name} data={semData} dataHandler={setData} delHandler={delData}/>
                                 <section className="mt-3">
                                     <span className="font-black">Load Status</span>
                                     <span className="ml-4 font-black text-login-green underline">Normal</span>
