@@ -324,7 +324,7 @@ const grades = [
 function organizeGrades(data){
 
   // final variable to be return
-  const finalGrades = []
+  let finalGrades = []
 
   // gradeSet template
   let gradeSet = {
@@ -332,44 +332,73 @@ function organizeGrades(data){
     data: [],
   };
 
+  let weight = 0
+  let cumulative = 0
+  let total = 0
+
   // loop for organizing data from db
   for ( let i = 0 ; i < data.length ; i++ ){
 
-    // fill gradeSet.sem at the start
-    if( i == 0 ) gradeSet.sem = data[i].Semyear;
-    
+    if (i==0){
 
-    // creates new gradeSet for a different Semyear after pushing previous
-    if (gradeSet.sem != data[i].Semyear){
+      finalGrades.push({sem: "", data: [],})
+      finalGrades[i].sem = data[i].Semyear
+      finalGrades[i].data.push({})
+      finalGrades[i].data[i]._id = data[i]._id
+      finalGrades[i].data[i].idRow = (finalGrades[i].data.length + 1).toString()
+      finalGrades[i].data[i].courseName = data[i].Course
+      finalGrades[i].data[i].units = data[i].Unit.toString()
+      finalGrades[i].data[i].grade = data[i].Grade
+      
+    } else {
 
-      // push previous gradeSet 
-      finalGrades.push(gradeSet)
+      let index = null
 
-      // new gradeSet
-      gradeSet = {
-        sem: "",
-        data: [],
+      // find where to insert the current data
+      for (let j = 0; j < finalGrades.length; j++){
+        if (data[i].Semyear == finalGrades[j].sem){
+          index = j
+          break
+        }
+        index = finalGrades.length
       }
 
-      gradeSet.sem = data[i].Semyear
+      if(index == finalGrades.length){
+        finalGrades.push({sem: "", data: [],})
+        finalGrades[index].sem = data[i].Semyear
+      }
+
+      finalGrades[index].data.push({})
+      finalGrades[index].data[ finalGrades[index].data.length - 1 ]._id = data[i]._id
+      finalGrades[index].data[ finalGrades[index].data.length - 1 ].idRow = (finalGrades[index].data.length + 1).toString()
+      finalGrades[index].data[ finalGrades[index].data.length - 1 ].courseName = data[i].Course
+      finalGrades[index].data[ finalGrades[index].data.length - 1 ].units = data[i].Unit.toString()
+      finalGrades[index].data[ finalGrades[index].data.length - 1 ].grade = data[i].Grade.toString()
+
     }
-
-    // store to gradeSet
-    gradeSet.data.push({})
-    gradeSet.data[ gradeSet.data.length - 1 ].idRow = (gradeSet.data.length + 1).toString()
-    gradeSet.data[ gradeSet.data.length - 1 ].courseName = data[i].Course.toString()
-    gradeSet.data[ gradeSet.data.length - 1 ].units = data[i].Unit.toString()
-    gradeSet.data[ gradeSet.data.length - 1 ].grade = data[i].Grade.toString()
-    gradeSet.data[ gradeSet.data.length - 1 ].enrolled = data[i].Weight.toString()
-    gradeSet.data[ gradeSet.data.length - 1 ].runningSum = data[i].Cumulative.toString()
-
-    // push the last gradeSet before ending loop
-    if(i == data.length - 1){
-      finalGrades.push(gradeSet)
-    }
-
   }
-  
+
+  for (let i = 0; i < finalGrades.length; i++){
+
+    for (let j = 0; j < finalGrades[i].data.length; j++){
+
+      // compute total unit per sem, weight, and cumulative
+      weight = parseFloat(finalGrades[i].data[j].units) * parseFloat(finalGrades[i].data[j].grade)
+      if(isNaN(weight)){
+        weight = 0;
+      }
+      cumulative += weight
+      total += parseFloat(finalGrades[i].data[j].units)
+
+      finalGrades[i].data[ j ].enrolled = weight.toString()
+      finalGrades[i].data[ j ].runningSum = cumulative.toString()
+    }
+
+    finalGrades[i].total = total
+    total = 0
+  }
+
+  //console.log(finalGrades)
   return finalGrades
 
 }
@@ -509,16 +538,16 @@ export default function StudentRecord() { // this will probably transferred to a
     })
       .then(response => response.json())
       .then(body => {
-        
+        //console.log(body)
         // sort body ( sort by Year, Semester )
-        sortedGrades = body.sort( (x,y)=> (x.Semyear.localeCompare(y.Semyear)) )
+        // const sortedGrades = body.sort( (x,y)=> (x.Semyear.localeCompare(y.Semyear)) )
         
         // save to localStorage for exporting grades
-        localStorage.setItem("currStudentGrades", JSON.stringify(sortedGrades) )
+        // localStorage.setItem("currStudentGrades", JSON.stringify(sortedGrades) )
         
         //organize the data for table contents
-        const studentGrades = organizeGrades(sortedGrades)
-        console.log(studentGrades)
+        const studentGrades = organizeGrades(body)
+        // console.log(studentGrades)
         getGradesProp(studentGrades)
 
       })

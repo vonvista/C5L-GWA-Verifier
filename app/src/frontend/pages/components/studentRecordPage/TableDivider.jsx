@@ -15,7 +15,7 @@ const TableDivider = ({ grades }) => {
         <div className="w-full mx-auto bg-white">
             {
                 gradeState.map((semData, idx)=>(
-                    <TableContents key={idx} Name={semData.sem} Semester={semData.data} handler={gradeHandler} />
+                    <TableContents key={idx} Name={semData.sem} Semester={semData.data} Total={semData.total} handler={gradeHandler} />
                 ))
             }
         </div>
