@@ -20,6 +20,7 @@ import 'tailwindcss/tailwind.css';
 /* Backend */
 import readInputFile from 'backend/read-input';
 
+
 const UserDashboard = () => {
     const [rows, setRows] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -324,6 +325,28 @@ const UserDashboard = () => {
       // })
 
       //if nahanap si student, go straight to record
+      
+      fetch(`http://${ip}:3001/student/find`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({StudentID:searchStudent}),
+      })
+      .then((response) => response.json())
+      .then(body => {
+          console.log(body)
+          localStorage.setItem("currStudentID", body._id)
+          localStorage.setItem("currStudentKey", body.StudentID)
+          navigate('/student-record')
+      })
+      .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+        Swal.fire({
+          icon: 'error',
+          title: 'Server Error',
+          text: 'Check if the server is running or if database IP is correct',
+        })
+        console.log(err)
+      })
+
     }
 
     const handleEnterPress = (e) =>{
