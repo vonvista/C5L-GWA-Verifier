@@ -7,7 +7,7 @@ import deleteSVG from '../../../../assets/icons/delete.svg';
 // PROPS:
 // handleEdit, handleDelete: function to handle click event
 
-const Actions = ({ handleEdit, handleDelete }) => {
+const Actions = ({ handleEdit, handleDelete, data }) => {
   const btn = `
     .btn{
       width: 2vw;
@@ -18,15 +18,20 @@ const Actions = ({ handleEdit, handleDelete }) => {
 
   return (
     <div className="mx-auto w-auto items-center justify-items-center inline-block">
+      
       <style>{btn}</style>
       {/* edit */}
       <button className={buttons} type="button" onClick={handleEdit}>
         <img className="btn" alt="icon" src={edit} />
       </button>
       {/* delete */}
+      {/*This is for user management page lang -vov*/}
+      {data && data.Role === "admin" ? (<></>) : (
+
       <button className={buttons} type="button" onClick={handleDelete}>
         <img className="btn" alt="icon" src={deleteSVG} />
       </button>
+      )}
     </div>
   );
 };

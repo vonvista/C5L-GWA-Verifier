@@ -98,6 +98,7 @@ const UserManagementPage = () => {
             "LastName": user.LastName,
             "Username": user.Username,
             "Position": user.Position,
+            "Role": user.Role,
             "Password": user.Password,
             "_id": user._id,
           });

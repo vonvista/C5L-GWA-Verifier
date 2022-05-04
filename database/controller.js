@@ -204,7 +204,7 @@ exports.gradeFindOne = function(req, res, next) {
 
 exports.gradeFindByStudent = function(req,res,next){
   // requires student ObjectId
-  Grade.find({Student:mongoose.Types.ObjectId(req.body.Student)}, null, {sort: {'_id': -1}},function(err,grades){
+  Grade.find({Student:mongoose.Types.ObjectId(req.body.Student)}, null, {sort: {'_id': 1}},function(err,grades){
     if(!err) res.send(grades);
   })
 }
