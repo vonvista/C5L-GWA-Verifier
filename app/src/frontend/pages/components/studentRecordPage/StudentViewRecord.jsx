@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import ActionsBtn from '../../../components/buttons/Dropdown';
 import SemSelect from '../../../components/inputs/DropdownSelect';
-import { Tab, Transition } from '@headlessui/react';
+import { Tab, Transition, Disclosure } from '@headlessui/react';
+import { ChevronUpIcon } from '@heroicons/react/solid'
 import 'tailwindcss/tailwind.css';
 import './StudentViewRecord.css';
 import Status from './Status';
 import Notes from './Notes';
 import History from './StudentRecordHistory';
-import TableDivider from './TableDivider';
+import Table from './TableContents';
 
 
 
@@ -30,8 +31,8 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
         // uses components as values
-        Status: <Status state={statusState} />,                 // status component
-        Notes: <Notes notes={notes} semesters={gradeState} />,  // notes component
+        Status: <Status state={statusState} />,                      // status component
+        Notes: <Notes notes={notes} semesters={gradeState} />,       // notes component
         History:<History historyData={historyState} />,              // history component
     }
 
@@ -76,8 +77,12 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                 <div className="w-full flex mx-auto my-5 gap-3">
 
                     {/* div container for the whole accordion component */}
-                    <div className="w-[60vw] flex-1 overflow-auto">
-                        <TableDivider grades={grades} history={history}/>
+                    <div className="w-[60vw] flex-1 overflow-auto mx-auto bg-white">
+                        {   // map grades per semester
+                            gradeState.map((semData, idx)=>(
+                                <Table key={idx} Name={semData.sem} Semester={semData.data} Total={semData.total} handler={setGradeState} />
+                            ))
+                        }
                     </div>
 
                                 
