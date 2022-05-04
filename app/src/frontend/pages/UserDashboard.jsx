@@ -346,14 +346,16 @@ const UserDashboard = () => {
 
               {/* Page Contents */}
               <div className='pt-20 flex-column'>
-                {/* Search input button */}
-                <div className='float-left w-[18vw] h-[1vw]'>
-                  <Search user={"student"} handleSearch={(e) => setSearchStudent(e.target.value)} searchValue={searchStudent} buttonHandler={handleSearch} handleEnter={handleEnterPress}/>
-                </div>
-                {/* Refresh button */}
-                <div className='flex items-center'>
-                  <Refresh handleClick={() => navigate("/user-dashboard")}/>
-                </div>
+                <div className='flex'>
+                  {/* Search input button */}
+                  <div className='float-left w-[18vw] h-[1vw]'>
+                    <Search user={"student"} handleSearch={(e) => setSearchStudent(e.target.value)} searchValue={searchStudent} buttonHandler={handleSearch} handleEnter={handleEnterPress}/>
+                  </div>
+                  {/* Refresh button */}
+                  <div className='flex items-center'>
+                    <Refresh handleClick={() => navigate("/user-dashboard")}/>
+                  </div>
+                </div>  
                 {/* Upload button */}
                 <div className='float-right'>
                   <UploadFileBtn handleClick={readInputFile} handleAddRecord={handleAddRecord}/>

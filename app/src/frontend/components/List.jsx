@@ -222,7 +222,7 @@ const List = ({ table, sem, data, changeSort, sortState, dataHandler, delHandler
                           {user.position}
                       </td>
                       <td className='user-action'>
-                      <Actions handleEdit={() => handleEditRecord(user)} handleDelete={() => userDelete(user.uname)}/>
+                      <Actions handleEdit={() => handleEditRecord(user)} handleDelete={() => userDelete(user.uname)} data={user}/>
                       </td>
                     </tr>
                   )
