@@ -6,7 +6,7 @@ import 'tailwindcss/tailwind.css';
 
 
 // This component handles the student's data for a specific semester
-const TableContents = ({ Name, Semester, key, handler }) => {
+const TableContents = ({ Name, Total, Semester, key, handler }) => {
 
     // handler prop will handle pushing changes to parent
     // semHandler will handle semData
@@ -128,10 +128,15 @@ const TableContents = ({ Name, Semester, key, handler }) => {
                             
                             {/* Accordion Contents */}
                             <Disclosure.Panel className="inter z-0 pl-5 py-3 mb-2 text-sm text-gray-500 rounded-b-lg shadow-lg">
-                                <List table={2} sem={Name} data={semData} dataHandler={setData} delHandler={delData}/>
+                                <List table={2} total={Total} sem={Name} data={semData} dataHandler={setData} delHandler={delData}/>
                                 <section className="mt-3">
                                     <span className="font-black">Load Status</span>
-                                    <span className="ml-4 font-black text-login-green underline">Normal</span>
+                                    {( Total <= 20 )
+                                        ? ( Total >= 15 )
+                                            ? <span className="ml-4 font-black text-login-green underline">Normal</span>
+                                            : <span className="ml-4 font-black text-login-green underline">Underload</span>
+                                        : <span className="ml-4 font-black text-login-green underline">Overload</span>
+                                    }
                                 </section>
                             </Disclosure.Panel>       
                         </>
