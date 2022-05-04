@@ -10,7 +10,7 @@ import { useState } from 'react';
 // PROPS:
 // handleSave, handleCancel: function to handle click event
 
-const ActionsSaveCancel = ({ handleSave, handleCancel, isDisabled }) => {
+const ActionsSaveCancel = ({ handleSave, handleCancel, isDisabled, histHandler }) => {
   const btn = `
     .btn{
       width: 2vw;
@@ -33,7 +33,7 @@ const ActionsSaveCancel = ({ handleSave, handleCancel, isDisabled }) => {
 
   return (
     <>
-      <Justification modalState={isOpen} modalHandler={closeModal} submitHandler={handleSave}/>
+      <Justification modalState={isOpen} modalHandler={closeModal} submitHandler={handleSave} histHandler={histHandler} />
 
       <div className="mx-auto w-auto items-center justify-items-center inline-block">
         <style>{btn}</style>

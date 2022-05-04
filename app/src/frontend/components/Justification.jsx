@@ -4,7 +4,17 @@ import Input from './inputs/Input';
 
 // component from: https://headlessui.dev/react/dialog
 
-const Justification = ({ modalState, modalHandler, submitHandler, historyHandler }) => {
+const Justification = ({ modalState, modalHandler, submitHandler, histHandler }) => {
+    /* how to use
+    
+        parent will provide modalState and modalHandler
+        modalState is 'true' or 'false'
+        modalHandler is a function that will set modalState to false
+
+        submitHandler takes in a function that deals with submitting the values from the edited row
+        historyHandler is for giving the justification to the history and recording the changes
+    
+    */
         
     // state+handler for text area
     const [textArea, textAreaHandler] = useState('')
@@ -32,6 +42,7 @@ const Justification = ({ modalState, modalHandler, submitHandler, historyHandler
         // function that'll save changes
         // -- insert function for handling changes to history here --
         e.preventDefault()  // prevents refreshing of page
+        histHandler(textArea) // update history log
         submitHandler(e)    // submit contents of the form
     }
 

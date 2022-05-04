@@ -26,7 +26,6 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const [statusState, setStatus] = useState(status)
     const [gradeState, setGradeState] = useState(grades)
     const [historyState, setHistoryState] = useState(history)
-
     
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
@@ -80,7 +79,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                     <div className="w-[60vw] flex-1 overflow-auto mx-auto bg-white">
                         {   // map grades per semester
                             gradeState.map((semData, idx)=>(
-                                <Table key={idx} Name={semData.sem} Semester={semData.data} Total={semData.total} handler={setGradeState} />
+                                <Table key={idx} Name={semData.sem} Semester={semData.data} Total={semData.total} handler={setGradeState} history={historyState} historyHandler={setHistoryState}/>
                             ))
                         }
                     </div>
