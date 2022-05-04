@@ -15,6 +15,70 @@ const AddRow = () => {
     const [studNum, setStudNum] = useState('');
     const [studName, setStudName] = useState('');
     const [degree, setDegree] = useState('');
+    const [currStudentID, setcurrStudentID] = useState(localStorage.getItem('currStudentID'));
+
+    //function which updates Student input fields
+    const updateStudent = () => {
+        const credentials = {
+            StudentID: studNum,
+            FirstName: studName, //put first name variable
+            LastName: "LName", //put last name variable
+            MiddleName: "MName", //put middle name variable
+            Degree: degree,
+            TotalUnits: 0,
+            TotalUnits2: 0,
+            TotalCumulative: 0,
+            OverallGWA: 0,
+            _id: currStudentID
+        }
+
+        fetch(`http://localhost:3001/student/update` ,{
+            method: "POST",
+            headers: { "Content-Type":"application/json"},
+            body: JSON.stringify(credentials)
+        })
+        .then(response => response.json())
+        .then(body => {
+            console.log(body)
+        })
+        
+    }
+   
+ 
+    //function which records changes in student record 
+    const addHistory = () => {
+        const current = new Date(); //variable which will get current date and time
+        const currentTime = `${current.getHours()}:${current.getMinutes()}`; //variable containing current time
+        const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`; //variable containing current date
+        
+        const credentials = {
+            User: "User",
+            Student: "Student",
+            Date: currentDate,
+            Time: currentTime,
+            Description: 'update',
+            Details: "Sample Details"
+        };
+        
+        //fetch to add history to database
+        fetch(`http://localhost:3001/history/add`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify(credentials),
+        })
+        .then((response) => response.json())
+        .then((body) => {
+            console.log(body);
+        })
+        
+    }
+
+    //main function for student update and add history
+    const submitStudentEdit = () =>{
+        updateStudent();
+        addHistory();
+    }
+
 
     return (
         <>
@@ -118,7 +182,7 @@ const AddRow = () => {
                                     {/* save and discard buttons */}
                                     <motion.div className='edit-students-modal-footer'>
                                         <button className='edit-students-modal-btn edit-students-modal-btn-discard text-center' onClick={() => {setOpenModal(false)}}>Discard</button>
-                                        <button className='edit-students-modal-btn edit-students-modal-btn-save text-white'>Save changes</button>
+                                        <button className='edit-students-modal-btn edit-students-modal-btn-save text-white' onClick={submitStudentEdit}>Save changes</button>
                                     </motion.div>
                                 </motion.div>
                             </motion.div>

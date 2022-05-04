@@ -13,7 +13,11 @@ const TableContents = ({ Name, Semester, key, handler }) => {
 
     const [rows, setRows] = useState([]);
     const [semData, semHandler] = useState(Semester);
-  
+    const [currStudentID, setcurrStudentID] = useState(localStorage.getItem('currStudentID'));
+    const current = new Date(); //variable which will get current date and time
+    const currentTime = `${current.getHours()}:${current.getMinutes()}`; //variable containing current time
+    const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`; //variable containing current date
+
     useEffect(() => {
         const fetchData = async () => {
           // Retrieve data from database
@@ -30,8 +34,50 @@ const TableContents = ({ Name, Semester, key, handler }) => {
         // get array index of object that was changed
         const targetIndex = semData.findIndex(obj => obj.idRow == values.idRow) 
         
+
         let newSemData = [...semData]
-        newSemData[targetIndex] = values 
+        newSemData[targetIndex] = values
+        
+        gradeCredentials = {
+            Student: currStudentID,
+            Course: values.courseName,
+            Grade: values.grade,
+            Unit: values.units,
+            Weight: values.enrolled,
+            Cumulative: values.runningSum,
+            Semyear: Name,
+            _id: values._id
+        }
+
+        const historyCredentials = {
+            User: "User",
+            Student: "Student",
+            Date: currentDate,
+            Time: currentTime,
+            Description: 'update',
+            Details: "Sample Details"
+        };
+
+        fetch(`http://localhost:3001/grade/update` ,{
+            method: "POST",
+            headers: { "Content-Type":"application/json"},
+            body: JSON.stringify(gradeCredentials)
+        })
+        .then(response => response.json())
+        .then(body => {
+            console.log(body)
+        })
+
+        
+        fetch(`http://localhost:3001/history/add`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify(historyCredentials),
+        })
+        .then((response) => response.json())
+        .then((body) => {
+            console.log(body);
+        })
 
         semHandler(newSemData)
     }
@@ -42,6 +88,22 @@ const TableContents = ({ Name, Semester, key, handler }) => {
         
         let newSemData = [...semData]
         newSemData.splice(targetIndex, 1)
+
+
+        const deleteGradeCredentials = {
+            _id: values._id
+        }
+
+        fetch(`http://localhost:3001/grade/delete`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify(deleteGradeCredentials),
+        })
+        .then((response) => response.json())
+        .then((body) => {
+            console.log(body);
+        })
+
 
         semHandler(newSemData)
     }

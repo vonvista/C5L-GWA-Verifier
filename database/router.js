@@ -50,8 +50,8 @@ module.exports = (app) => {
   app.post('/grade/add-many', controller.gradeAddMany);
   app.post('/grade/find', controller.gradeFindOne);
   app.delete('/grade/delete-all', controller.gradeDeleteAll);
-  app.put('/grade/update', controller.gradeUpdateOne);
-  app.delete('/grade/delete', controller.gradeDeleteOne);
+  app.post('/grade/update', controller.gradeUpdateOne);
+  app.post('/grade/delete', controller.gradeDeleteOne);
 
   // NOTE ROUTES
   app.post('/note/add', controller.noteAdd);
