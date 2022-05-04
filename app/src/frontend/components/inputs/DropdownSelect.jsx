@@ -15,12 +15,11 @@ import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
     
 function DropdownInput(props) {
 
-    // dropdown select
-    const options = props.options                   // pass options here
-    const [selected, setSelected] = props.state     // set default option as 1
+    // Dropdown select
+    const options = props.options                   // Pass options here
+    const [selected, setSelected] = props.state     // Set default option as 1
 
-    
-    // Lifting up state
+    // Lifting up state for notes component
     const handleChange = (newSelect) => {
         setSelected(newSelect)
         props.placeholderChange(newSelect)          // Setting placeholder text
