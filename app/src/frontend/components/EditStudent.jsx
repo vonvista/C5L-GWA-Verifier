@@ -77,6 +77,7 @@ const AddRow = () => {
     const submitStudentEdit = () =>{
         updateStudent();
         addHistory();
+        setOpenModal(false);
     }
 
 
