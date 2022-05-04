@@ -29,7 +29,7 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
     }
 
     // Handler for add note button
-    const handleClick = (event) => {
+    const handleClick = () => {
         setTextArea(givenSem=selectedSem)
         setShowWindow(true)
     }
@@ -123,7 +123,7 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
                         
                         {/* Save button */}
                         <div>
-                            <button className='save-note-btn mr-3 hover:bg-login-green-hover' onClick={handleSaveClick}>
+                            <button className='save-note-btn hover:bg-login-green-hover' onClick={handleSaveClick}>
                                 Save
                             </button>
                         </div>
