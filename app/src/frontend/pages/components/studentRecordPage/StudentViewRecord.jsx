@@ -24,6 +24,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const [selectedStudent, setSelectedStudent] = useState(student)
     const [statusState, setStatus] = useState(status)
     const [gradeState, setGradeState] = useState(grades)
+    const [historyState, setHistoryState] = useState(history)
 
     
     const tabContents = { 
@@ -31,7 +32,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         // uses components as values
         Status: <Status state={statusState} />,                 // status component
         Notes: <Notes notes={notes} semesters={gradeState} />,  // notes component
-        History:<History historyData={history} />,              // history component
+        History:<History historyData={historyState} />,              // history component
     }
 
     let [selectedTab] = useState(tabContents)               // state controller for selecting tabs
@@ -76,7 +77,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
 
                     {/* div container for the whole accordion component */}
                     <div className="w-[60vw] flex-1 overflow-auto">
-                        <TableDivider grades={grades} />
+                        <TableDivider grades={grades} history={history}/>
                     </div>
 
                                 
