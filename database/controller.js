@@ -170,7 +170,7 @@ const gradeSchema = new Schema({
   Weight: Number,
   Cumulative: {type: Number, required: true},
   Semyear : {type:String,required:true},
-},{autoCreate:true})
+},{autoCreate:true, timestamps:true})
 
 // GRADE MODEL
 const Grade = db.model('grade', gradeSchema);
@@ -204,7 +204,7 @@ exports.gradeFindOne = function(req, res, next) {
 
 exports.gradeFindByStudent = function(req,res,next){
   // requires student ObjectId
-  Grade.find({Student:mongoose.Types.ObjectId(req.body.Student)},function(err,grades){
+  Grade.find({Student:mongoose.Types.ObjectId(req.body.Student)}, null, {sort: {'_id': -1}},function(err,grades){
     if(!err) res.send(grades);
   })
 }
