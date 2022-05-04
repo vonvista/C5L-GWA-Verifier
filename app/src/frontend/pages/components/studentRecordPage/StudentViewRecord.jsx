@@ -17,11 +17,11 @@ const detailStyle = {
     text: "table-cell text-left text-xl 2xl:text-2xl font-bold",
 }
 
-const RecordPage = ({sem, user, notes, history, status, grades}) => {
+const RecordPage = ({sem, user, student, notes, history, status, grades, checklist}) => {
 
     // pass details and other data through props to this component
     
-    const [selectedUser, setSelectedUser] = useState(user)
+    const [selectedStudent, setSelectedStudent] = useState(student)
     const [statusState, setStatus] = useState(status)
     const [gradeState, setGradeState] = useState(grades)
 
@@ -55,10 +55,10 @@ const RecordPage = ({sem, user, notes, history, status, grades}) => {
 
                         <div className="value-styles">
                             <div className="table-row">
-                                <div className={detailStyle.text}>{selectedUser.stud_no}</div>
-                                <div className={detailStyle.text}>{selectedUser.name}</div>
-                                <div className={detailStyle.text}>{selectedUser.degree_program}</div>
-                                <div className={detailStyle.text}>{selectedUser.status}</div>
+                                <div className={detailStyle.text}>{selectedStudent.stud_no}</div>
+                                <div className={detailStyle.text}>{selectedStudent.name}</div>
+                                <div className={detailStyle.text}>{selectedStudent.degree_program}</div>
+                                <div className={detailStyle.text}>{selectedStudent.status}</div>
                             </div>
 
                         </div>

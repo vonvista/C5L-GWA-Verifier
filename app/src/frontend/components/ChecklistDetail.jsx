@@ -2,16 +2,16 @@ import 'tailwindcss/tailwind.css';
 
 /* 
     props:
-    • icon - 'true' if checkmark; else cross
+    • icon - 0 for default, 1 for checkmark, else crossmark
     • detail - what ever the statement or details to be put (c/o backend)
 */
 
-// This Checklist component is used for displaying necessary data/details with its corresponding icons (check/cross)
-const Checklist = ({ icon, detail }) => {
+// This component is used for displaying necessary data/details with its corresponding icons (check/cross)
+const checklistDetail = ({ icon, detail }) => {
     return (
-        <header className="flex w-full items-center">
-            {/* Icon */}
-            { icon == 1 ? (
+        <div className="flex w-full items-center">
+            {/* Icon to be displayed */}
+            { icon == true ? (
                 <div>
                     <svg width="1.6276041666666667vw" height="3.4626038781163433vh" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8.33325 13.0209L11.4583 16.1459L16.6666 9.89587" stroke="#BBDABB" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/>
@@ -30,9 +30,9 @@ const Checklist = ({ icon, detail }) => {
             <span className="ml-2 text-md font-inter">
                 {detail}
             </span>
-        </header>
+        </div>
     );
 };
 
 
-export default Checklist;
+export default checklistDetail;

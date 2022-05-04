@@ -5,12 +5,12 @@ import UserNav from '../components/UserNavigation';
 import AdminNav from '../components/AdminNavigation';
 import Swal from 'sweetalert2';
 
-// sample value for user record
-const user = {
-    stud_no: '2019-01234',
-    name: 'Stark, Anthony Edward',
-    degree_program: 'BS Computer Science',
-    status: 'Pending',
+// sample value for student record
+const student = {
+  stud_no: '2019-01234',
+  name: 'Stark, Anthony Edward',
+  degree_program: 'BS Computer Science',
+  status: 'Pending',
 }
 
 // sample values for status tab
@@ -45,6 +45,14 @@ const notes = [
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lobortis"
   }
 ]
+
+// sample value for user details
+const user = {
+  username: "",
+  firstName: "",
+  middleInitial: "",
+  lastName: "",
+}
 
 // sample values for change history;
 const history = [
@@ -308,6 +316,25 @@ const grades = [
             "runningSum": "64.50"
         },
     ]
+  }
+]
+
+// sample value for checklist details
+const checklistDetails = [
+  {
+    id: 1,
+    status: true,
+    detail: "Correct computed GWA"
+  },
+  {
+    id: 2,
+    status: false,
+    detail: "No underloaded/overloaded sem"
+  },
+  {
+    id: 3,
+    status: false,
+    detail: "At least 1.75 GWA"
   }
 ]
 
@@ -631,11 +658,19 @@ export default function StudentRecord() { // this will probably transferred to a
         </nav>
             <div className="relative inset-0 flex ml-8 xl:ml-12 justify-center">
                 <header><Header pageTitle={"Student Record"}/></header>
-                <RecordPage user={studentProp} notes={notesProp} history={historyProp} status={statusData} grades={gradesProp} />
+                <RecordPage
+                  user={user}                   // dummy data
+                  student={studentProp}
+                  notes={notesProp}
+                  history={historyProp}
+                  status={statusData}
+                  grades={gradesProp} 
+                  checklist={checklistDetails}  // dummy data
+                />
             </div>
       </> 
       // empty div while data are not ready
-      : <div></div>
+      : <div></div>      
       
     );
 }
