@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
-const List = ({ table, sem, data, changeSort, sortState, dataHandler, delHandler, handleDeleteRecord, handleEditRecord }) => {
+const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, delHandler, handleDeleteRecord, handleEditRecord }) => {
 
     // George Gragas
     // This table is about degreeprogram
@@ -78,7 +78,7 @@ const List = ({ table, sem, data, changeSort, sortState, dataHandler, delHandler
 
     // Table for displaying the student's summary of grades for a given semester 
     // To be used for Student Record View Page
-    const SemRecord = ({ sem, data, dataHandler, delHandler }) => {
+    const SemRecord = ({ total, sem, data, dataHandler, delHandler }) => {
 
         return (
             <>  
@@ -148,7 +148,7 @@ const List = ({ table, sem, data, changeSort, sortState, dataHandler, delHandler
 
                         <div className="table-row"> {/* row for total values */}
                             <div className="table-cell font-black py-2">Total</div>
-                            <div className="table-cell text-center">3.0</div>       {/* row for total units */}
+                            <div className="table-cell text-center">{total}</div>       {/* row for total units */}
                             <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
                             <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
                             <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
@@ -222,7 +222,7 @@ const List = ({ table, sem, data, changeSort, sortState, dataHandler, delHandler
                           {user.position}
                       </td>
                       <td className='user-action'>
-                      <Actions handleEdit={() => handleEditRecord(user)} handleDelete={() => userDelete(user.uname)}/>
+                      <Actions handleEdit={() => handleEditRecord(user)} handleDelete={() => userDelete(user.uname)} data={user}/>
                       </td>
                     </tr>
                   )
@@ -372,7 +372,7 @@ const List = ({ table, sem, data, changeSort, sortState, dataHandler, delHandler
         )
     } else if(table == 2) {
         return (
-            <SemRecord sem={sem} data={data} dataHandler={dataHandler} delHandler={delHandler} />
+            <SemRecord total={total} sem={sem} data={data} dataHandler={dataHandler} delHandler={delHandler} />
         )
     } else if(table == 3) {
         return (

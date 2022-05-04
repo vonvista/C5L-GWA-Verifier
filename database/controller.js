@@ -204,7 +204,7 @@ exports.gradeFindOne = function(req, res, next) {
 
 exports.gradeFindByStudent = function(req,res,next){
   // requires student ObjectId
-  Grade.find({Student:mongoose.Types.ObjectId(req.body.Student)}, null, {sort: {'_id': -1}},function(err,grades){
+  Grade.find({Student:mongoose.Types.ObjectId(req.body.Student)}, null, {sort: {'_id': 1}},function(err,grades){
     if(!err) res.send(grades);
   })
 }
@@ -301,9 +301,9 @@ exports.gradeUpdateOne = function(req, res, next) {
 // Delete a grade by using Student and Course
 exports.gradeDeleteOne = function(req, res, next) {
   // console.log(req.body);
-  Grade.findOneAndDelete({Student: req.body.Student, Course: req.body.Course},function(err, Grade){
+  Grade.findOneAndDelete({_id: mongoose.Types.ObjectId(req.body._id)},function(err, Grade){
     if(!err && Grade){
-      res.send({suc:'Successfully deleted ' + req.body.Student + " " + req.body.Course});
+      res.send({suc:'Successfully deleted '});
     } else {
       res.send({err:'Unable to delete grade'});
     }
@@ -388,7 +388,7 @@ exports.studentAdd = function(req, res, next) {
 
 // update student
 exports.studentUpdateOne = function(req, res, next) {
-Student.updateOne({StudentID: req.body.StudentID},{"$set":{
+Student.updateOne({_id:mongoose.Types.ObjectId(req.body._id)},{"$set":{
   "StudentNo.": req.body.StudentID,
   "FirstName": req.body.FirstName,
   "MiddleName": req.body.MiddleName,

@@ -194,6 +194,7 @@ const EditUser = ({ handleClose, editUser, handleEditRecordSave }) => {
                           inputPlaceholder="" // placeholder text for input
                           value={un} // value of the input
                           changeHandler={(e) => setUN(e.target.value)} // change handling
+                          disabled={editUser.Role === 'admin' ? true : false}
                         />
                         <h4 className="mt-1 w-full text-center text-white">
                           Username

@@ -427,9 +427,9 @@ newNote2 = {
 //     console.log(JSON.stringify(JSON.parse(body),null,2));
 // });
 
-request('http://localhost:3001/note/find-by-student',{method:"POST",form:{Student:"6263d5beb7b0bf7535f1d3cc"}},function(err,res,body) {
-    console.log(JSON.stringify(JSON.parse(body),null,2));
-});
+// request('http://localhost:3001/note/find-by-student',{method:"POST",form:{Student:"6263d5beb7b0bf7535f1d3cc"}},function(err,res,body) {
+//     console.log(JSON.stringify(JSON.parse(body),null,2));
+// });
 
 // request('http://localhost:3001/note/update',{method:"PUT",form:newNote2},function(err,res,body) {
 //     console.log(JSON.stringify(JSON.parse(body),null,2));

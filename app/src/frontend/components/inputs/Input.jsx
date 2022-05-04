@@ -31,6 +31,7 @@ function userInput(props) {
         onChange={props.changeHandler} // lifting state up
         onKeyPress={props.handleKeyPress}
         required={props.required}
+        disabled={props.disabled}
       />
     </>
   );
