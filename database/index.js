@@ -51,8 +51,11 @@ app.use(express.static('static'))
 // const ip = results[choice];
 rl.question("Choose IP address name:",function(name){
     let ip = results[name];
-    if(ip!='') console.log(`IP address at ${ip}`);
-    else console.log('Empty choice: IP address at localhost')
+    if(name in results) console.log(`IP address at ${ip}`);
+    else {
+        console.log('DEFAULT: IP address at localhost');
+        ip = '';
+    }
     app.listen(3001,ip, function() {  //<- 'wifi' can be replaced by the ip variables obtained from results
         // For the host computer, the database commands are still accessible using the localhost in the url
         // (remove the 'wifi' parameter to return to localhost)
@@ -74,11 +77,10 @@ rl.question("Choose IP address name:",function(name){
         // // add request
         request('http://'+ip+':3001/user/add',{method:"POST",form: admin},function(err,req,body) {
             // console.log(body);
-        });
-    
-    }); 
-})
-n
+        });    
+    });
+    rl.close();
+});
 
 // app.listen(3001,wifi, function() {  //<- 'wifi' can be replaced by the ip variables obtained from results
 //     // For the host computer, the database commands are still accessible using the localhost in the url
