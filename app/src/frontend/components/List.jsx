@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
-const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, delHandler, handleDeleteRecord, handleEditRecord }) => {
+const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, delHandler, handleHistory, handleDeleteRecord, handleEditRecord }) => {
 
     // George Gragas
     // This table is about degreeprogram
@@ -78,7 +78,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
 
     // Table for displaying the student's summary of grades for a given semester 
     // To be used for Student Record View Page
-    const SemRecord = ({ total, sem, data, dataHandler, delHandler }) => {
+    const SemRecord = ({ total, sem, data, dataHandler, delHandler, histHandler }) => {
 
         return (
             <>  
@@ -135,7 +135,8 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                             toggleHandler={cancelEdit} 
                                             touched={touched} 
                                             errors={errors}
-                                            valid={isValid} 
+                                            valid={isValid}
+                                            histHandler={histHandler}
                                             />
                                          :
                                         <ReadRow data={course} clickHandler={toggleEdit} delHandler={delHandler}/>
@@ -372,7 +373,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         )
     } else if(table == 2) {
         return (
-            <SemRecord total={total} sem={sem} data={data} dataHandler={dataHandler} delHandler={delHandler} />
+            <SemRecord total={total} sem={sem} data={data} dataHandler={dataHandler} delHandler={delHandler} histHandler={handleHistory}/>
         )
     } else if(table == 3) {
         return (

@@ -3,7 +3,7 @@ import Input from './inputs/Input'
 import 'tailwindcss/tailwind.css'
 import SaveCancel from '../../frontend/components/buttons/ActionsSaveCancel'
 
-const EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched, errors, valid}) => {
+const EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched, errors, valid, histHandler}) => {
 
     //
 
@@ -97,7 +97,7 @@ const EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched, errors,
             <div className="table-cell w-1/6 align-middle text-center">
                 {/* <button type="submit" disabled={!valid}>Save</button>
                 <button type="button" onClick={toggleHandler}>Cancel</button> */}
-                <SaveCancel handleSave={onSubmit} handleCancel={toggleHandler} isDisabled={!valid} />
+                <SaveCancel handleSave={onSubmit} handleCancel={toggleHandler} isDisabled={!valid} histHandler={histHandler}/>
             </div>
         </form>
     );
