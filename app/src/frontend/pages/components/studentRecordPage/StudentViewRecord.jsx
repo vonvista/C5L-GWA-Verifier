@@ -25,7 +25,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const [selectedStudent, setSelectedStudent] = useState(student)
     const [statusState, setStatus] = useState(status)
     const [gradeState, setGradeState] = useState(grades)
-    const [historyState, setHistoryState] = useState([])
+    const [historyState, setHistoryState] = useState(history)
 
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
