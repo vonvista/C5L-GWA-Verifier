@@ -13,9 +13,11 @@ import { useNavigate } from 'react-router-dom';
 // import studentDelete from 'backend/studentDelete';
 // import userDelete from 'backend/userDelete';
 
+
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
-const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, handleDeleteRecord }) => {
+const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, delHandler, handleHistory, handleDeleteRecord, handleEditRecord }) => {
+
     // George Gragas
     // This table is about degreeprogram
     // const DegreeProgram = ({ data }) => {
@@ -76,7 +78,7 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
 
     // Table for displaying the student's summary of grades for a given semester 
     // To be used for Student Record View Page
-    const SemRecord = ({ data, dataHandler, delHandler }) => {
+    const SemRecord = ({ total, sem, data, dataHandler, delHandler, histHandler }) => {
 
         return (
             <>  
@@ -89,7 +91,7 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
                             <div className="table-cell w-1/6 text-center">Grade</div>
                             <div className="table-cell w-1/6 text-center">Enrolled</div>
                             <div className="table-cell w-1/6 text-center"></div>
-                            <div className="table-cell w-1/6 text-center"><AddRow /></div>
+                            <div className="table-cell w-1/6 text-center"><AddRow sem={sem}/></div>
                         </div>
                     </div>
                     <div className="table-row-group">
@@ -123,7 +125,6 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
                                 resetValues()
                             }
 
-
                             return(
                                 <Fragment key={index}>
                                     {isEdit ?
@@ -134,14 +135,26 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
                                             toggleHandler={cancelEdit} 
                                             touched={touched} 
                                             errors={errors}
-                                            valid={isValid} 
+                                            valid={isValid}
+                                            histHandler={histHandler}
                                             />
                                          :
                                         <ReadRow data={course} clickHandler={toggleEdit} delHandler={delHandler}/>
                                     }
                                 </Fragment>  
                             )
+
+                            
                         })}
+
+                        <div className="table-row"> {/* row for total values */}
+                            <div className="table-cell font-black py-2">Total</div>
+                            <div className="table-cell text-center">{total}</div>       {/* row for total units */}
+                            <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
+                            <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
+                            <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
+                            <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
+                        </div>
                     </div>
                 </div>
             </>
@@ -149,9 +162,10 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
     }
 
     // This table is about
-    const User = ({data, handleDeleteRecord}) => {
+    const User = ({data, handleDeleteRecord, handleEditRecord}) => {
         console.log(data);
         const [showModal, setShowModal] = useState(false)
+        const [editUser, setEditUser] = useState();
 
         // function to delete a user based on their username
         const userDelete = (username) => {
@@ -209,11 +223,7 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
                           {user.position}
                       </td>
                       <td className='user-action'>
-                      <Actions handleEdit={() => setShowModal(true)} handleDelete={() => userDelete(user.uname)}/>
-                      {showModal ?
-                        (<EditUser handleClose={() => setShowModal(false)}/>)
-                        :(<></>)
-                      }
+                      <Actions handleEdit={() => handleEditRecord(user)} handleDelete={() => userDelete(user.uname)} data={user}/>
                       </td>
                     </tr>
                   )
@@ -272,17 +282,20 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
             console.log(sortState)
         })
 
-        const studentEdit = (StudentID, StudentKey) => {
-            localStorage.setItem("currStudentID", StudentID);
-            localStorage.setItem("currStudentKey", StudentKey);
+        const studentEdit = async (StudentID, StudentKey) => {
+            await localStorage.setItem("currStudentID", StudentID);
+            await localStorage.setItem("currStudentKey", StudentKey);
+            console.log(localStorage.getItem("currStudentKey"), localStorage.getItem("currStudentID"))
             navigate('/student-record');
         }
 
         // function to delete a student based on their student ID
-        const studentDelete = (ID) => {
+        const studentDelete = (ID, Key) => {
             const student = {
               StudentID: ID,
+              StudentKey: Key
             };
+            console.log(student)
             fetch(`http://${ip}:3001/student/delete`,{
                 method: "DELETE",
                 headers: { "Content-Type":"application/json" },
@@ -342,7 +355,7 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
                                 <td className='students-status'>
                                     <div data-status={student.status} className='status'></div>
                                 </td>
-                                <td className='student-action'><Actions handleEdit={() => studentEdit(student._id, student.studno)} handleDelete={() => studentDelete(student.studno)}/></td>
+                                <td className='student-action'><Actions handleEdit={() => studentEdit(student._id, student.studno)} handleDelete={() => studentDelete(student.studno, student._id)}/></td>
                             </tr>
                         )
                         )}
@@ -360,11 +373,11 @@ const List = ({ table, data, changeSort, sortState, dataHandler, delHandler, han
         )
     } else if(table == 2) {
         return (
-            <SemRecord data={data} dataHandler={dataHandler} delHandler={delHandler} />
+            <SemRecord total={total} sem={sem} data={data} dataHandler={dataHandler} delHandler={delHandler} histHandler={handleHistory}/>
         )
     } else if(table == 3) {
         return (
-            <User data={data} handleDeleteRecord={handleDeleteRecord}/>
+            <User data={data} handleDeleteRecord={handleDeleteRecord} handleEditRecord={handleEditRecord}/>
         )
     }
 }

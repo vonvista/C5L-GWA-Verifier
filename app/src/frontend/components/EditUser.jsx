@@ -1,8 +1,9 @@
 import 'tailwindcss/tailwind.css';
 import './AddEditUser.css';
 import { useState } from 'react';
-import user from '../../../assets/icons/user-icon.jpg';
+import userIcon from '../../../assets/icons/user-icon.jpg';
 import Input from './inputs/Input';
+import Swal from 'sweetalert2'
 
 // function which shows the add user modal; to be used in UserSystemPage
 // to use EditUser and AddUserBtn, import needed files and declare and initialize showModal variable:
@@ -12,16 +13,14 @@ import Input from './inputs/Input';
 //   :(<></>)
 // }
 
-const EditUser = ({ handleClose }) => {
-  const [firstName, setFirstName] = useState('');
-  const [middleName, setMiddleName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [un, setUN] = useState(''); // username
-  const [position, setPosition] = useState(''); // username
+const EditUser = ({ handleClose, editUser, handleEditRecordSave }) => {
+  const [firstName, setFirstName] = useState(editUser.FirstName);
+  const [middleName, setMiddleName] = useState(editUser.MiddleName);
+  const [lastName, setLastName] = useState(editUser.LastName);
+  const [un, setUN] = useState(editUser.Username); // username
+  const [position, setPosition] = useState(editUser.Position); // username
   const [pw, setPW] = useState(''); // password
   const [status, setStatus] = useState('show');
-
-  console.log("Editing");
 
   // reference for password toggle: https://codepen.io/huphtur/pen/OKJJQY
   const buttonHandler = () => {
@@ -39,26 +38,69 @@ const EditUser = ({ handleClose }) => {
   };
 
   const edit_user = () => {
-    const credentials = {
-        FirstName: "firstName3",
-        MiddleName: "middleName3",
-        LastName: "lastName3",
-        Username: "un3",
-        Position: "possssssssss3333333333",
-        Password: "Pwwwwwwwww33333333333",
-        Role: "user"
+
+    if(
+      firstName === "" || 
+      middleName === "" || 
+      lastName === "" || 
+      un === "" || 
+      position === "" || 
+      pw === ""
+    ) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Fill out all fields',
+      })
+      return
     }
 
-        fetch(`http://localhost:3001/user/update`,{
-            method: "POST",
-            headers: { "Content-Type":"application/json" },
-            body: JSON.stringify(credentials)
-            })
-        .then(response => response.json())
-        .then(body => {
-            console.log(body)
-          })       
-  }  
+
+    const credentials = {
+        _id: editUser._id,
+        FirstName: firstName,
+        MiddleName: middleName,
+        LastName: lastName,
+        Username: un,
+        Position: position,
+        Password: pw,
+        Role: 'user',
+    };
+    console.log("here")
+    fetch(`http://localhost:3001/user/update`,{
+        method: "POST",
+        headers: { "Content-Type":"application/json" },
+        body: JSON.stringify(credentials)
+        })
+    .then((response) => response.json())
+    .then(body => {
+      console.log(body)
+      if(body.err){ //if error response returned from DB
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: body.err,
+        })
+      }
+      else { //success state
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Successfully updated user!',
+        })
+        handleEditRecordSave(credentials)
+
+      }
+    })
+    .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+      Swal.fire({
+        icon: 'error',
+        title: 'Server Error',
+        text: 'Check if the server is running or if database IP is correct',
+      })
+      console.log(err)
+    })
+  };
 
   return (
     <>
@@ -83,7 +125,7 @@ const EditUser = ({ handleClose }) => {
                 width="250px"
                 height="250px"
                 alt="usericon"
-                src={user}
+                src={userIcon}
               />
             </div>
             {/* form */}
@@ -102,7 +144,7 @@ const EditUser = ({ handleClose }) => {
                           name="firstName" // name of label-input components
                           inputType="text" // type of input password, email, text, etc.
                           inputPlaceholder="" // placeholder text for input
-                          value="" // value of the input
+                          value={firstName} // value of the input
                           changeHandler={(e) => setFirstName(e.target.value)} // change handling
                         />
                         <h4 className="mt-1 w-full text-center text-white">
@@ -117,7 +159,7 @@ const EditUser = ({ handleClose }) => {
                           name="middleName" // name of label-input components
                           inputType="text" // type of input password, email, text, etc.
                           inputPlaceholder="" // placeholder text for input
-                          value="" // value of the input
+                          value={middleName} // value of the input
                           changeHandler={(e) => setMiddleName(e.target.value)} // change handling
                         />
                         <h4 className="w-full text-center mt-1 text-white">
@@ -132,7 +174,7 @@ const EditUser = ({ handleClose }) => {
                           name="lastName" // name of label-input components
                           inputType="text" // type of input password, email, text, etc.
                           inputPlaceholder="" // placeholder text for input
-                          value="" // value of the input
+                          value={lastName} // value of the input
                           changeHandler={(e) => setLastName(e.target.value)} // change handling
                         />
                         <h4 className="w-full text-center mt-1 text-white">
@@ -150,8 +192,9 @@ const EditUser = ({ handleClose }) => {
                           name="username" // name of label-input components
                           inputType="text" // type of input password, email, text, etc.
                           inputPlaceholder="" // placeholder text for input
-                          value="" // value of the input
+                          value={un} // value of the input
                           changeHandler={(e) => setUN(e.target.value)} // change handling
+                          disabled={editUser.Role === 'admin' ? true : false}
                         />
                         <h4 className="mt-1 w-full text-center text-white">
                           Username
@@ -165,7 +208,7 @@ const EditUser = ({ handleClose }) => {
                           name="position" // name of label-input components
                           inputType="text" // type of input password, email, text, etc.
                           inputPlaceholder="" // placeholder text for input
-                          value="" // value of the input
+                          value={position} // value of the input
                           changeHandler={(e) => setPosition(e.target.value)} // change handling
                         />
                         <h4 className="w-full text-center mt-1 text-white">
@@ -185,7 +228,7 @@ const EditUser = ({ handleClose }) => {
                               name="password" // name of label-input components
                               inputType="checkbox" // type of input password, email, text, etc.
                               inputPlaceholder="" // placeholder text for input
-                              value="" // value of the input
+                              value={pw} // value of the input
                               changeHandler={(e) => setPW(e.target.value)} // change handling
                             />
                             <button
@@ -204,7 +247,7 @@ const EditUser = ({ handleClose }) => {
                             name="password" // name of label-input components
                             inputType="password" // type of input password, email, text, etc.
                             inputPlaceholder="" // placeholder text for input
-                            value="" // value of the input
+                            value={pw} // value of the input
                             changeHandler={(e) => setPW(e.target.value)} // change handling
                           />
                         </div>
@@ -231,7 +274,8 @@ const EditUser = ({ handleClose }) => {
                         </section>
                       </div>
                     </div>
-                    {/* Cancel button */}
+                    {/* Deprecated, may X button nanaman in the first place -vov*/}
+                    {/* Cancel button
                     <div className="cancel-button ">
                       <div className="w-full flex">
                         <section className="un-style">
@@ -243,7 +287,7 @@ const EditUser = ({ handleClose }) => {
                           </button>
                         </section>
                       </div>
-                    </div>
+                    </div> */}
                 </div>
               </form>
             </section>

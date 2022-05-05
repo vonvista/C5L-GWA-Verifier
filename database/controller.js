@@ -122,7 +122,8 @@ exports.userUpdate = async function(req, res, next) {
 
   var hashedPassword = await bcrypt.hash(req.body.Password, saltRounds); //encrpyt password first -vov
   
-  User.updateOne({Username : req.body.Username},{"$set":{
+  User.updateOne({_id: mongoose.Types.ObjectId(req.body._id)},{"$set":{
+    "Username" : req.body.Username,
     "FirstName": req.body.FirstName,
     "MiddleName": req.body.MiddleName,
     "LastName": req.body.LastName,
@@ -132,11 +133,13 @@ exports.userUpdate = async function(req, res, next) {
   }}, {new : true}, function(err,result){
     if(!err && User){
       res.send(result);
+      console.log(result);
     } else {
       res.send({err:'Unable to update user'});
     }
   })
 }
+
 
 //user login -vov
 exports.userLogin = async function(req, res, next) {
@@ -167,7 +170,7 @@ const gradeSchema = new Schema({
   Weight: Number,
   Cumulative: {type: Number, required: true},
   Semyear : {type:String,required:true},
-},{autoCreate:true})
+},{autoCreate:true, timestamps:true})
 
 // GRADE MODEL
 const Grade = db.model('grade', gradeSchema);
@@ -201,7 +204,7 @@ exports.gradeFindOne = function(req, res, next) {
 
 exports.gradeFindByStudent = function(req,res,next){
   // requires student ObjectId
-  Grade.find({Student:mongoose.Types.ObjectId(req.body.Student)},function(err,grades){
+  Grade.find({Student:mongoose.Types.ObjectId(req.body.Student)}, null, {sort: {'_id': 1}},function(err,grades){
     if(!err) res.send(grades);
   })
 }
@@ -298,9 +301,9 @@ exports.gradeUpdateOne = function(req, res, next) {
 // Delete a grade by using Student and Course
 exports.gradeDeleteOne = function(req, res, next) {
   // console.log(req.body);
-  Grade.findOneAndDelete({Student: req.body.Student, Course: req.body.Course},function(err, Grade){
+  Grade.findOneAndDelete({_id: mongoose.Types.ObjectId(req.body._id)},function(err, Grade){
     if(!err && Grade){
-      res.send({suc:'Successfully deleted ' + req.body.Student + " " + req.body.Course});
+      res.send({suc:'Successfully deleted '});
     } else {
       res.send({err:'Unable to delete grade'});
     }
@@ -385,7 +388,7 @@ exports.studentAdd = function(req, res, next) {
 
 // update student
 exports.studentUpdateOne = function(req, res, next) {
-Student.updateOne({StudentID: req.body.StudentID},{"$set":{
+Student.updateOne({_id:mongoose.Types.ObjectId(req.body._id)},{"$set":{
   "StudentNo.": req.body.StudentID,
   "FirstName": req.body.FirstName,
   "MiddleName": req.body.MiddleName,
@@ -408,12 +411,20 @@ Student.updateOne({StudentID: req.body.StudentID},{"$set":{
 
 // delete student
 exports.studentDeleteOne = function(req, res, next) {
-  // console.log(req.body);
+  console.log(req.body);
   Student.findOneAndDelete({StudentID: req.body.StudentID},function(err, Student){
+    if(!err && Student){
+      // res.send({suc:'Successfully deleted'});
+    } else {
+      res.send({err:'Unable to delete'});
+    }
+  });
+
+  Grade.deleteMany({Student: mongoose.Types.ObjectId(req.body.StudentKey)},function(err, Student){
     if(!err && Student){
       res.send({suc:'Successfully deleted'});
     } else {
-      res.send({err:'Unable to delete student'});
+      res.send({err:'Unable to delete'});
     }
   });
 }
@@ -471,10 +482,16 @@ exports.historyAdd = function(req, res, next) {
   });
   console.log(newHistory);
 
+  // newHistory.save(function(err) {
+  //   User.updateOne({_id:newHistory.User},{$push:{History:newHistory._id}},function(err){
+  //     if(err) console.log("Unable to add history to user "+newHistory.User);
+  //   });
+  //   if (!err) { res.send(newHistory)}
+  //   else { res.send({err:'Unable to save history'}) }
+  // });
+
+  // just saves normally to history collections -lal
   newHistory.save(function(err) {
-    User.updateOne({_id:newHistory.User},{$push:{History:newHistory._id}},function(err){
-      if(err) console.log("Unable to add history to user "+newHistory.User);
-    });
     if (!err) { res.send(newHistory)}
     else { res.send({err:'Unable to save history'}) }
   });
@@ -524,10 +541,11 @@ exports.historyDeleteAll = function(req, res, next) {
 
 // NOTE SCHEMA
 const noteSchema = new Schema({
-  User: {type:mongoose.Types.ObjectId, ref:'user', required:true},
+  User: {type:String, required:true},
   Student: {type:mongoose.Types.ObjectId, ref:'student', required:true},
-  Semester: {type:String, required:true},
-  Year:{type:String, required:true},
+  // Semester: {type:String, required:true},
+  // Year:{type:String, required:true},
+  Semyear: {type:String, required:true},
   Details: {type:String, required:true},
 },{timestamps:true});
 
@@ -537,10 +555,11 @@ const Note = db.model('note',noteSchema);
 // ADD NOTE
 exports.noteAdd = function(req,res,next){
   var newNote = new Note({
-    User:mongoose.Types.ObjectId(req.body.User),
+    User:req.body.User,
     Student:mongoose.Types.ObjectId(req.body.Student),
-    Semester:req.body.Semester,
-    Year:req.body.Year,
+    // Semester:req.body.Semester,
+    // Year:req.body.Year,
+    Semyear:req.body.Semyear,
     Details:req.body.Details
   });
   console.log(newNote);
@@ -578,11 +597,14 @@ exports.noteFindAllByStudent = function(req,res,next){
 
 // UPDATE A NOTE
 exports.noteUpdate = function(req,res,next){
-  Note.updateOne({_id:mongoose.Types.ObjectId(req.body.id)},{"$set":{
-    "Semester":req.body.Semester,
-    "Year":req.body.Year,
-    "Details":req.body.Details
-  }},{new:true},function(err,result){
+  Note.updateOne({Student:mongoose.Types.ObjectId(req.body.Student), Semyear:req.body.Semyear},{"$set":{
+    // "Semyear":req.body.Semester,
+    // "Year":req.body.Year,
+    "User":req.body.User,
+    "Student":req.body.Student,
+    "Semyear":req.body.Semyear,
+    "Details":req.body.Details,
+  }},{upsert:true},function(err,result){
     if(!err) res.send(result);
     else res.send({err:'Unable to update Note'});
   });
@@ -590,9 +612,8 @@ exports.noteUpdate = function(req,res,next){
 
 // DELETE NOTE BY ID
 exports.noteDeleteOne = function(req,res,next){
-  Note.deleteOne({_id:mongoose.Types.ObjectId(req.body.id)},function(err){
-    if (!err) res.send({suc:'Successfully deleted note'});
-    else res.send({err:'Unable to delete note'});
+  Note.remove({Student:mongoose.Types.ObjectId(req.body.Student), Semyear:req.body.Semyear}, {justOne:true}, function(err,result){
+    if (!err) res.send(result);
   });
 }
 

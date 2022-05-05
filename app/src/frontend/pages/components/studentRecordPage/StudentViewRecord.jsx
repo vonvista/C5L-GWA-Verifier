@@ -1,14 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import ActionsBtn from '../../../components/buttons/Dropdown';
 import SemSelect from '../../../components/inputs/DropdownSelect';
-import { Tab, Transition } from '@headlessui/react';
+import { Tab, Transition, Disclosure } from '@headlessui/react';
+import { ChevronUpIcon } from '@heroicons/react/solid'
 import 'tailwindcss/tailwind.css';
 import './StudentViewRecord.css';
 import Status from './Status';
 import Notes from './Notes';
 import History from './StudentRecordHistory';
-import TableDivider from './TableDivider';
-
+import Table from './TableContents';
+import CheckListTab from './ChecklistTab';
 
 
 // styling for student detail header
@@ -17,23 +18,31 @@ const detailStyle = {
     text: "table-cell text-left text-xl 2xl:text-2xl font-bold",
 }
 
-const RecordPage = ({sem, user, notes, history, status, grades}) => {
+const RecordPage = ({sem, user, student, notes, history, status, grades, checklist}) => {
 
     // pass details and other data through props to this component
     
-    const [selectedUser, setSelectedUser] = useState(user)
+    const [selectedStudent, setSelectedStudent] = useState(student)
     const [statusState, setStatus] = useState(status)
-     
+    const [gradeState, setGradeState] = useState(grades)
+    const [historyState, setHistoryState] = useState(history)
 
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
         // uses components as values
-        Status: <Status state={statusState} />,         // status component
-        Notes: <Notes notes={notes} />,                 // notes component
-        History:<History historyData={history} />,      // history component
+        Status: <Status state={statusState} />,                   // status component
+        Validations: <CheckListTab checklistData={checklist} />,   //checklist component
+        Notes: <Notes notes={notes} semesters={gradeState} />,    // notes component
+        History: <History historyData={historyState} />,          // history component
     }
 
-    let [selectedTab] = useState(tabContents)               // state controller for selecting tabs
+    const histAdd = (histObj) => {
+        // function for adding to history
+        // function to be passed to other child components that will update the state
+        // this function has to be in the parent component so that history tab will update
+        let newHist = [...historyState, histObj]
+        setHistoryState(newHist)
+    }
 
     return(
         <main>
@@ -54,10 +63,10 @@ const RecordPage = ({sem, user, notes, history, status, grades}) => {
 
                         <div className="value-styles">
                             <div className="table-row">
-                                <div className={detailStyle.text}>{selectedUser.stud_no}</div>
-                                <div className={detailStyle.text}>{selectedUser.name}</div>
-                                <div className={detailStyle.text}>{selectedUser.degree_program}</div>
-                                <div className={detailStyle.text}>{selectedUser.status}</div>
+                                <div className={detailStyle.text}>{selectedStudent.stud_no}</div>
+                                <div className={detailStyle.text}>{selectedStudent.name}</div>
+                                <div className={detailStyle.text}>{selectedStudent.degree_program}</div>
+                                <div className={detailStyle.text}>{selectedStudent.status}</div>
                             </div>
 
                         </div>
@@ -74,8 +83,12 @@ const RecordPage = ({sem, user, notes, history, status, grades}) => {
                 <div className="w-full flex mx-auto my-5 gap-3">
 
                     {/* div container for the whole accordion component */}
-                    <div className="w-[60vw] flex-1 overflow-auto">
-                        <TableDivider grades={grades} />
+                    <div className="w-[60vw] flex-1 overflow-auto mx-auto bg-white">
+                        {   // map grades per semester
+                            gradeState.map((semData, idx)=>(
+                                <Table key={idx} Name={semData.sem} Semester={semData.data} Total={semData.total} handler={setGradeState} history={historyState} historyHandler={histAdd}/>
+                            ))
+                        }
                     </div>
 
                                 
@@ -84,7 +97,7 @@ const RecordPage = ({sem, user, notes, history, status, grades}) => {
                     <div className="flex-none max-w-[100%] h-[45rem] sticky top-[11.5rem] shadow-lg rounded-lg">
                         <Tab.Group>
                             <Tab.List className="flex rounded-t-md">
-                                {Object.keys(selectedTab).map((tab) => (
+                                {Object.keys(tabContents).map((tab) => (
                                         <Tab key={tab}
                                             className={({selected}) => (
                                                 selected ? 
@@ -99,7 +112,7 @@ const RecordPage = ({sem, user, notes, history, status, grades}) => {
                                 )}
                             </Tab.List>
                             <Tab.Panels className="m-0 block">
-                                    {Object.values(selectedTab).map((component) =>(
+                                    {Object.values(tabContents).map((component) =>(
                                         <Tab.Panel className="h-[42rem] col-span-1 block">                                
                                             {component}
                                         </Tab.Panel>

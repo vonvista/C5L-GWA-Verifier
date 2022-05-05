@@ -45,21 +45,21 @@ module.exports = (app) => {
   
   // GRADE ROUTES
   app.get('/grade/find-all', controller.gradeFindAll);
-  app.get('/grade/find-by-student', controller.gradeFindByStudent);
+  app.post('/grade/find-by-student', controller.gradeFindByStudent);
   app.post('/grade/add', controller.gradeAdd);
   app.post('/grade/add-many', controller.gradeAddMany);
   app.post('/grade/find', controller.gradeFindOne);
   app.delete('/grade/delete-all', controller.gradeDeleteAll);
-  app.put('/grade/update', controller.gradeUpdateOne);
-  app.delete('/grade/delete', controller.gradeDeleteOne);
+  app.post('/grade/update', controller.gradeUpdateOne);
+  app.post('/grade/delete', controller.gradeDeleteOne);
 
   // NOTE ROUTES
   app.post('/note/add', controller.noteAdd);
   app.post('/note/find', controller.noteFindOne);
   app.get('/note/find-all', controller.noteFindAll);
   app.post('/note/find-by-student', controller.noteFindAllByStudent);
-  app.put('/note/update', controller.noteUpdate);
-  app.delete('/note/delete', controller.noteDeleteOne);
+  app.post('/note/update', controller.noteUpdate);
+  app.post('/note/delete', controller.noteDeleteOne);
   app.delete('/note/delete-all', controller.noteDeleteAll);
 }
   

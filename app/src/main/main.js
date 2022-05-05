@@ -83,6 +83,8 @@ const createWindow = async () => {
   mainWindow.maximize();
   mainWindow.loadURL(resolveHtmlPath('index.html'));
 
+  
+
   mainWindow.on('ready-to-show', () => {
     if (!mainWindow) {
       throw new Error('"mainWindow" is not defined');
@@ -98,6 +100,7 @@ const createWindow = async () => {
     mainWindow = null;
   });
 
+  mainWindow.webContents.toggleDevTools();
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();
 

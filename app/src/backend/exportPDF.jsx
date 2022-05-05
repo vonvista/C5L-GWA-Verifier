@@ -45,76 +45,118 @@ const styles = {
     head: tableHeader,
     };
 
-// this function arranges the structure of the data for export
-function arrangeForExport(data){
+function organizeRecord(info, grades){
+
     // storage of data to be exported
     let finalExportData = {
-        studentNo: data.studnno,
-        name: data.name,
-        program: "BACA",
-        subjects: [],
-        cumulative: data.cumulative[data.cumulative.length - 1],
-        gwa: 1.74486, 
-        totalunits: data.totalunits,
-        totalunits2: data.totalunits,
+        studentNo: info.StudentID,
+        name: `${info.FirstName} ${info.MiddleName} ${info.LastName}`,
+        program: info.Degree,
+        grades: [],
+        cumulative: info.TotalCumulative,
+        gwa: info.OverallGWA, 
+        totalunits: info.TotalUnits,
+        totalunits2: info.TotalUnits2,
     };
 
-    // if student number is not specified
-    if (data.studnno == null){
-        finalExportData.studentNo = '' 
-    }
-
-    // restructures the subjects
-    for (let i = 0; i < data.courses.length; i++){
-        let temp = []
-        temp.push(data.courses[i])
-        temp.push(data.grades[i])
-        temp.push(data.units[i])
-        temp.push(data.weights[i])
-        temp.push(data.cumulative[i])
-        temp.push(data.term[i])
-        temp.push(data.sem[i])
-        finalExportData.subjects.push(temp)
+    // reformat grades to be jspdf-autotable ready
+    let reGrades = [];
+    //console.log(grades)
+    for ( let i = 0 ; i < grades.length ; i++ ){
+        
+        reGrades.push([grades[i].Course, grades[i].Grade, grades[i].Unit, grades[i].Weight, grades[i].Cumulative, '', grades[i].Semyear]);
     }
 
     // removes the duplicates on the last 2 columns
-    for (let i = 0; i < finalExportData.subjects.length; i++){
-        if (i + 1 != finalExportData.subjects.length){
-            if (finalExportData.subjects[i][6] == finalExportData.subjects[i+1][6]){
-                finalExportData.subjects[i][5] = ''
-                finalExportData.subjects[i][6] = ''
+    for ( let i = 0 ; i < finalExportData.grades.length ; i++ ){
+        if (i + 1 != finalExportData.grades.length){
+            if (finalExportData.grades[i][6] == finalExportData.grades[i+1][6]){
+                finalExportData.grades[i][5] = ''
+                finalExportData.grades[i][6] = ''
             }
         }
     }
 
-    // adds another row at the end of subject containg the totalunits and final cumulative
-    finalExportData.subjects.push(['', finalExportData.totalunits, '', '', finalExportData.cumulative, '', ''])
+    // store grades
+    finalExportData.grades = reGrades
+    finalExportData.grades.push(['', finalExportData.totalunits, '', '', finalExportData.cumulative, '', ''])
 
     return finalExportData
-}
+} 
+
+// // this function arranges the structure of the data for export
+// function arrangeForExport(data){
+
+//     // storage of data to be exported
+//     let finalExportData = {
+//         studentNo: data.studnno,
+//         name: data.name,
+//         program: "BACA",
+//         subjects: [],
+//         cumulative: data.cumulative[data.cumulative.length - 1],
+//         gwa: 1.74486, 
+//         totalunits: data.totalunits,
+//         totalunits2: data.totalunits,
+//     };
+
+//     // if student number is not specified
+//     if (data.studnno == null){
+//         finalExportData.studentNo = '' 
+//     }
+
+//     // restructures the subjects
+//     for (let i = 0; i < data.courses.length; i++){
+//         let temp = []
+//         temp.push(data.courses[i])
+//         temp.push(data.grades[i])
+//         temp.push(data.units[i])
+//         temp.push(data.weights[i])
+//         temp.push(data.cumulative[i])
+//         temp.push(data.term[i])
+//         temp.push(data.sem[i])
+//         finalExportData.subjects.push(temp)
+//     }
+
+//     // removes the duplicates on the last 2 columns
+//     for (let i = 0; i < finalExportData.subjects.length; i++){
+//         if (i + 1 != finalExportData.subjects.length){
+//             if (finalExportData.subjects[i][6] == finalExportData.subjects[i+1][6]){
+//                 finalExportData.subjects[i][5] = ''
+//                 finalExportData.subjects[i][6] = ''
+//             }
+//         }
+//     }
+
+//     // adds another row at the end of subject containg the totalunits and final cumulative
+//     finalExportData.subjects.push(['', finalExportData.totalunits, '', '', finalExportData.cumulative, '', ''])
+
+//     console.log(finalExportData)
+//     return finalExportData
+// }
 
 // function to add user watermark to document
-function addWaterMark(doc) {
+function addWaterMark(doc, user) {
+
     // gets the total number of page
     var totalPages = doc.internal.getNumberOfPages();
+
     doc.setTextColor(150); // shade of grey
     doc.setFontSize(72);   // font size
 
     // loop for all page
     for (i = 1; i <= totalPages; i++) {
-        
-        doc.setPage(i);        // set current page
 
-        doc.saveGraphicsState();
-        doc.setGState(new doc.GState({opacity: 0.25})); // sets the opacity of the watermark
-        
-        // get the current user logged in to the app (to be implemented)
-        // const user = getCurrentUser();
+        // set current page
+        doc.setPage(i)
+
+        // sets the opacity of the watermark
+        doc.saveGraphicsState()
+        doc.setGState(new doc.GState({opacity: 0.25})); 
         
         // insert the 6 water mark
         for (let i = 0; i < 5; i++) {
-            doc.text(doc.internal.pageSize.width * 11 / 32, doc.internal.pageSize.height * (i*2+1) / 8, 'user1234', {align: 'center', angle: 45});
-            doc.text(doc.internal.pageSize.width * 27 / 32, doc.internal.pageSize.height * (i*2+1) / 8, 'user1234', {align: 'center', angle: 45});
+            doc.text(doc.internal.pageSize.width * 11 / 32, doc.internal.pageSize.height * (i*2+1) / 8, user, {align: 'center', angle: 45});
+            doc.text(doc.internal.pageSize.width * 27 / 32, doc.internal.pageSize.height * (i*2+1) / 8, user, {align: 'center', angle: 45});
         }
 
         doc.restoreGraphicsState();
@@ -123,46 +165,64 @@ function addWaterMark(doc) {
     return doc;
 }
 
-function exportStudentData(data){
-    exportData = arrangeForExport(data)
+function exportStudentData(info, grades, user){
+
+    // format data for export
+    exportData = organizeRecord(info, grades)
+
+    // initialize pdf document
     doc = new jsPDF({
         unit: 'px',
         format: 'letter',
-    });
-    
-    doc.setFontSize(10);    //set font size
+    })
 
-    doc.text(`Name: ${exportData.name}                              Student No.: ${exportData.studentNo}`, LeftMargin, YMargin); // add text
-    doc.text(`Program: ${exportData.program}`, LeftMargin, YMargin + 15); // add text
+    //set font size
+    doc.setFontSize(10)    
 
-    styles.body = exportData.subjects;  // add the data for body on styles
+    // add text
+    doc.text(`Name: ${exportData.name}                              Student No.: ${exportData.studentNo}`, LeftMargin, YMargin)
+    doc.text(`Program: ${exportData.program}`, LeftMargin, YMargin + 15)
 
-    doc.autoTable(styles);  // create table
+    // add the data for body on styles
+    styles.body = exportData.grades
 
-    doc.setPage(doc.internal.getNumberOfPages()); // goes to the current last page
+    // create table
+    doc.autoTable(styles)
+
+    // goes to the current last page
+    doc.setPage(doc.internal.getNumberOfPages())
 
     // y-axis value where the table ended
     let finalY = doc.previousAutoTable.finalY;
 
-    finalY += 15;   // increment for next line
+    // increment for next line
+    finalY += 15
+
     // checks if new finalY is on the bottom margin
     if (finalY >= doc.internal.pageSize.height - YMargin){
         doc.addPage();
         finalY = YMargin
     }
 
-    doc.text(`GWA: ${exportData.gwa}`, LeftMargin, finalY);       // add text
+    // add text
+    doc.text(`GWA: ${exportData.gwa}`, LeftMargin, finalY)     
 
-    finalY += 15;   // increment for next line
+    // increment for next line
+    finalY += 15
+
     if (finalY >= doc.internal.pageSize.height - YMargin){
         doc.addPage();
         finalY = YMargin
     }
     
-    doc.text(`${exportData.totalunits2}`, LeftMargin, finalY);     // add text
+    // add text
+    doc.text(`${exportData.totalunits2}`, LeftMargin, finalY)
 
-    doc = addWaterMark(doc);    // addwatermark
-    doc.save(`${exportData.name}_${exportData.program}_summary`);     // download pdf
+    // addwatermark
+    doc = addWaterMark(doc, user)
+    
+    // download pdf
+    doc.save(`${exportData.name}_${exportData.program}_summary`)
 }
 
 export default exportStudentData;

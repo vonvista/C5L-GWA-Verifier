@@ -2,12 +2,57 @@ import 'tailwindcss/tailwind.css';
 import { useState } from 'react';
 import expand from '../../../../assets/icons/collapse(1).svg';
 import EditStudent from '../../components/EditStudent';
+import studentDelete from 'backend/studentDelete';
+import { useNavigate } from 'react-router-dom';
+import exportStudentData from 'backend/exportPDF';
 
 // Function contains the buttons in Actions Dropdown seen in Student Record View/Edit Page
 // Additional references: https://tailwindui.com/components/application-ui/elements/dropdowns
 const Dropdown = () => {
+
   const [valueClicked, setValueClicked] = useState('Actions');
   const [isActive, setIsActive] = useState(false);
+
+  let navigate = useNavigate()
+
+  
+  // event handle for Delete button on dropdown
+  const handleDelete = () => {
+
+    // remove student from DB
+    // studentDelete(localStorage.getItem('currStudentID'))  // uncomment to delete student (also remove this comment)
+
+    // remove student infos on localStorage
+    localStorage.removeItem("currStudent")
+    localStorage.removeItem("currStudentID")
+    localStorage.removeItem("currStudentKey")
+    localStorage.removeItem("currStudentGrades")
+
+    // navigate to user dashboard
+    navigate('/user-dashboard')
+
+  }
+
+
+  // event handle for Export on dropdown
+  const handleExport = () => {
+
+    // get student info and grades from localStorage then parse them
+    const studentInfo = JSON.parse(localStorage.getItem('currStudent'))
+    const studentGrades = JSON.parse(localStorage.getItem('currStudentGrades'))
+
+    // get current user's full name from localStorage
+    const fName = localStorage.getItem("FirstName")
+    const lName = localStorage.getItem("LastName")
+    const mName = localStorage.getItem("MiddleName")
+
+    const fullName = `${fName} ${mName} ${lName}`
+
+    exportStudentData(studentInfo, studentGrades, fullName);
+
+  }
+
+
   return (
     <div className="w-40 relative ml-auto grow-0">
       {/* Actions and arrow down */}
@@ -16,6 +61,15 @@ const Dropdown = () => {
           type="button"
           className="pl-1.75 m-0 inline-block grow hover:bg-login-green-hover rounded-l-lg"
           // add onclick
+          
+          onClick={() =>
+            (!(valueClicked == "Delete")) 
+              ? (!(valueClicked == "Export")) 
+                ? null
+                : handleExport()
+              : studentDelete(localStorage.getItem('currStudentID'))
+          }
+
         >
           <p className="pl-1.5 m-0 inline-block grow text-center text-white">
             {valueClicked}

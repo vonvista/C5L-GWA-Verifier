@@ -12,7 +12,15 @@ export default function Status({state, ...rest}) {
             {/* Academic Achievement Box */}
             <div className="border rounded-lg p-4 grid row-auto">
                 <h1 className="place-self-start inline inter">Academic Achievement</h1>
-                <p className="text-4xl text-center text-login-green font-bold my-4 mx-0 inline-block inter">Summa Cum Laude</p> 
+                {/* change the academic achievement Box depending on the Final GWA of the Student -lal */ 
+                    (state.GPACalc.totalGWA.toFixed(3) > 1.20) 
+                    ? (state.GPACalc.totalGWA.toFixed(3) > 1.45) 
+                        ? (state.GPACalc.totalGWA.toFixed(3) > 1.75) 
+                            ? <p className="text-4xl text-center text-login-green font-bold my-4 mx-0 inline-block inter">N/A</p> 
+                            : <p className="text-4xl text-center text-login-green font-bold my-4 mx-0 inline-block inter">Cum Laude</p> 
+                        : <p className="text-4xl text-center text-login-green font-bold my-4 mx-0 inline-block inter">Magna Cum Laude</p> 
+                    : <p className="text-4xl text-center text-login-green font-bold my-4 mx-0 inline-block inter">Summa Cum Laude</p> 
+                }
             </div>
             {/* Table for Grades */}
             <div className="inter text-sm">
