@@ -3,6 +3,7 @@ import {AnimatePresence, motion} from 'framer-motion';
 
 /* Components */
 import Edit from './buttons/Edit.jsx';
+import ModalStatus from './buttons/DropdownStatus';
 
 /* CSS */
 import 'tailwindcss/tailwind.css';
@@ -13,8 +14,11 @@ import './EditStudent.css';
 const AddRow = () => {
     const [openModal, setOpenModal] = useState(false);
     const [studNum, setStudNum] = useState('');
-    const [studName, setStudName] = useState('');
+    const [studFName, setStudFName] = useState('');
+    const [studMName, setStudMName] = useState('');
+    const [studLName, setStudLName] = useState('');
     const [degree, setDegree] = useState('');
+    const [status, setStatus] = useState('');
 
     return (
         <>
@@ -56,13 +60,13 @@ const AddRow = () => {
                                 }
                             }}
 
-                            className='edit-students-modal'>
+                            className='edit-students-modal '>
                             <motion.div className="edit-students-modal-content">
                             {/* Baybayin Background Image */}
                             <motion.div className="bg-baybayin edit-students-modal-baybayin-style"></motion.div>
 
                             {/* content */}
-                                <motion.div className='edit-students-modal-body'>
+                                <motion.div className='edit-students-modal-body '>
                                     {/* title */}
                                     <motion.div className='edit-students-modal-close text-white float-right'>
                                         <button onClick={() => {setOpenModal(false)}}>
@@ -72,51 +76,89 @@ const AddRow = () => {
                                     <motion.div className='edit-students-modal-title text-white text-center'>Fill in the fields below to edit student's details successfully</motion.div>
 
                                     {/* input form */}
-                                    <form className='edit-students-modal-inputs flex'>
-                                        {/* Student Number */}
-                                        <motion.div className='edit-students-modal-input-container'>
-                                            <section className='inline-block edit-students-modal-section-studnum'>
-                                                <input
-                                                    className='edit-students-modal-input-style'
-                                                    type="text"
-                                                    name="studNum"
-                                                    placeholder='20XX-XXXX'
-                                                    onChange={(e) => setStudNum(e.target.value)}
-                                                />
-                                                <motion.div className='w-full text-white text-center'>Student Number</motion.div>
-                                            </section>
+                                    <form className='edit-students-modal-inputs'>
+
+                                        <motion.div className='edit-students-modal-name flex flex-row'>
+                                          {/* Student Name */}
+                                          <motion.div className='edit-students-modal-input-container'>
+                                              <section className='inline-block edit-students-modal-section-studname'>
+                                                    <input
+                                                        className='edit-students-modal-input-style h-fit'
+                                                        type="text"
+                                                        name="studFName"
+                                                        placeholder='First Name'
+                                                        onChange={(e) => setStudFName(e.target.value)}
+                                                    />
+
+                                                  <motion.div className='w-full text-white text-center'>First Name</motion.div>
+                                              </section>
+                                          </motion.div>
+                                          <motion.div className='edit-students-modal-input-container'>
+                                              <section className='inline-block edit-students-modal-section-studname'>
+                                                  <input
+                                                      className='edit-students-modal-input-style'
+                                                      type="text"
+                                                      name="studMName"
+                                                      placeholder='Middle Name'
+                                                      onChange={(e) => setStudMName(e.target.value)}
+                                                  />
+                                                  <motion.div className='w-full text-white text-center'>Middle Name</motion.div>
+                                              </section>
+                                          </motion.div>
+                                          <motion.div className='edit-students-modal-input-container'>
+                                              <section className='inline-block edit-students-modal-section-studname'>
+                                                  <input
+                                                      className='edit-students-modal-input-style'
+                                                      type="text"
+                                                      name="studLName"
+                                                      placeholder='Surname'
+                                                      onChange={(e) => setStudLName(e.target.value)}
+                                                  />
+                                                  <motion.div className='w-full text-white text-center'>Surname</motion.div>
+                                              </section>
+                                          </motion.div>
                                         </motion.div>
 
-                                        {/* Student Name */}
-                                        <motion.div className='edit-students-modal-input-container'>
-                                            <section className='inline-block edit-students-modal-section-studname'>
-                                                <input
-                                                    className='edit-students-modal-input-style'
-                                                    type="text"
-                                                    name="studName"
-                                                    placeholder='Enter student name'
-                                                    onChange={(e) => setStudName(e.target.value)}
-                                                />
-                                                <motion.div className='w-full text-white text-center'>Student Name</motion.div>
-                                            </section>
-                                        </motion.div>
+                                        <motion.div className='edit-students-modal-deets flex flex-row justify-center'>
+                                          {/* Student Number */}
+                                          <motion.div className='edit-students-modal-input-container'>
+                                              <section className='inline-block edit-students-modal-section-studnum'>
+                                                  <input
+                                                      className='edit-students-modal-input-style'
+                                                      type="text"
+                                                      name="studNum"
+                                                      placeholder='20XX-XXXX'
+                                                      onChange={(e) => setStudNum(e.target.value)}
+                                                  />
+                                                  <motion.div className='w-full text-white text-center'>Student Number</motion.div>
+                                              </section>
+                                          </motion.div>
 
-                                        {/* Degree Program */}
-                                        <motion.div className='edit-students-modal-input-container'>
-                                            <section className='inline-block edit-students-modal-section-degree'>
-                                                <input
-                                                    className='edit-students-modal-input-style'
-                                                    type="text"
-                                                    name="degree"
-                                                    placeholder='Degree Program'
-                                                    onChange={(e) => setDegree(e.target.value)}
-                                                />
-                                                <motion.div className='w-full text-white text-center'>Degree Program</motion.div>
-                                            </section>
+                                          {/* Degree Program */}
+                                          <motion.div className='edit-students-modal-input-container'>
+                                              <section className='inline-block edit-students-modal-section-degree'>
+                                                  <input
+                                                      className='edit-students-modal-input-style'
+                                                      type="text"
+                                                      name="degree"
+                                                      placeholder='Degree Program'
+                                                      onChange={(e) => setDegree(e.target.value)}
+                                                  />
+                                                  <motion.div className='w-full text-white text-center'>Degree Program</motion.div>
+                                              </section>
+                                          </motion.div>
+
+                                          {/* Status */}
+                                          <motion.div className='edit-students-modal-input-container'>
+                                                <section className='inline-block edit-students-modal-section-degree'>
+                                                    <ModalStatus />
+                                                    <motion.div className='w-full text-white text-center'>Status</motion.div>
+                                                </section>
+                                          </motion.div>
                                         </motion.div>
                                     </form>
                                     {/* save and discard buttons */}
-                                    <motion.div className='edit-students-modal-footer'>
+                                    <motion.div className='edit-students-modal-footer flex justify-center'>
                                         <button className='edit-students-modal-btn edit-students-modal-btn-discard text-center' onClick={() => {setOpenModal(false)}}>Discard</button>
                                         <button className='edit-students-modal-btn edit-students-modal-btn-save text-white'>Save changes</button>
                                     </motion.div>
