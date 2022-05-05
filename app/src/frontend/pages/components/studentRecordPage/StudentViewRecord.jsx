@@ -9,7 +9,7 @@ import Status from './Status';
 import Notes from './Notes';
 import History from './StudentRecordHistory';
 import Table from './TableContents';
-
+import CheckListTab from './ChecklistTab';
 
 
 // styling for student detail header
@@ -30,9 +30,10 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
         // uses components as values
-        Status: <Status state={statusState} />,                      // status component
-        Notes: <Notes notes={notes} semesters={gradeState} />,       // notes component
-        History: <History historyData={historyState} />,              // history component
+        Status: <Status state={statusState} />,                   // status component
+        Validations: <CheckListTab checklistData={checklist} />   //checklist component
+        Notes: <Notes notes={notes} semesters={gradeState} />,    // notes component
+        History: <History historyData={historyState} />,          // history component
     }
 
     const histAdd = (histObj) => {

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import SemSelect from '../../../components/inputs/DropdownSelect';
 import AddNote from './AddNote';
 import Delete from '../../../../../assets/icons/delete.svg';
 
@@ -12,21 +11,25 @@ export default function NotesTab({notes, semesters}) {
     const [selectedSem, setSelectedSem] = useState(semesters[0])    // state controller for selecting sem notes 
                                                                     // uses first object as default
        
-    // Handler for adding notes
+    // Handler for adding/editing notes
     const handleAddNote = (text) => {
         const newNote = {
             sem: selectedSem.sem,
             Semyear: selectedSem.sem,
             content: text,
         }
-
+        
+        // check if note for the sem already exists
         const index = notesList.map(i => i.sem).indexOf(selectedSem.sem);
-        if (index != -1){                               // splice note from notesList if it already exists
-            notesList.splice(index, 1)
-        }
+        let newNotesList = [...notesList]
 
-        const newNotesList = [...notesList, newNote]    // add new note at the end of notesList
-		setNotesList(newNotesList)
+        if (index != -1){
+            newNotesList[index] = newNote               // replace note from notesList if it already exists
+        } else {
+            newNotesList = [...notesList, newNote]      // add new note at the end of notesList
+        }
+        
+        setNotesList(newNotesList)
 	}
 
     // Handler for deleting notes
