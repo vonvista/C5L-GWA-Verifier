@@ -38,7 +38,7 @@ const Search = ({
   const inputText = text.concat(user);
   return (
     <>
-      <div className="relative mt-3 mb-1">
+      <div className="relative">
         <div className="absolute inset-y-0 right-0 flex items-center px-2">
           <Input
             labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
