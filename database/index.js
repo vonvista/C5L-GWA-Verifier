@@ -51,12 +51,12 @@ async function startServer() {
             console.log('DEFAULT: IP address at localhost');
             ip = 'localhost';
         }
-        app.listen(3001,ip, function() {  //<- 'wifi' can be replaced by the ip variables obtained from results
+
+        app.listen(3001, function() {  
             // For the host computer, the database commands are still accessible using the localhost in the url
             // (remove the 'wifi' parameter to return to localhost)
             console.log(`Server started at port 3001`)
         
-
             //create admin account if admin doesn't exist. There will always be exactly one admin
             admin = {
                 Username: "admin",
@@ -70,7 +70,7 @@ async function startServer() {
             }
             
             // // add request
-            request('http://'+ip+':3001/user/add',{method:"POST",form: admin},function(err,req,body) {
+            request('http://127.0.0.1:3001/user/add',{method:"POST",form: admin},function(err,req,body) {
                 // console.log(body);
             });    
         });

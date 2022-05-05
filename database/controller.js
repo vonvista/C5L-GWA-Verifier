@@ -8,8 +8,10 @@ const Schema = mongoose.Schema;
 
 saltRounds = 8; // number of rounds to hash the password
 
+console.log();
+
 // name of the database will be KALATAS
-const db = mongoose.createConnection('mongodb://localhost:27017/KALATAS', {
+const db = mongoose.createConnection(`mongodb://127.0.0.1:27017/KALATAS`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
