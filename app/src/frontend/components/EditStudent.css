@@ -15,8 +15,8 @@
 
 .edit-students-modal {
     background: #562323;
-    height: 36.70360110803324vh; /* 265 px */
-    width: 49.479166666666664vw; /* 760 px */
+    height: 50.70360110803324vh; /* 265 px */
+    width: 61.479166666666664vw; /* 760 px */
     border-radius: 3.2552083333333335vw; /* 50px */
     padding: 3.2552083333333335vw;  /* 50px */
     overflow: hidden;
@@ -71,6 +71,7 @@
 
 .edit-students-modal-input-container {
     margin-right: 1.953125vw; /* 30px */;
+    max-height:max-content;
 }
 
 .edit-students-modal-input-style{
@@ -80,24 +81,30 @@
     text-align: center;
 }
 
+
 .edit-students-modal-section-studnum {
     width: 8.71875vw; /* 180px */
 }
 
 .edit-students-modal-section-studname {
-  width: 20.71875vw; /* 60px */
+  width: 19.71875vw; /* 60px */
+}
+
+.edit-students-modal-section-studMname {
+  width: 5.71875vw; /* 60px */
 }
 
 .edit-students-modal-section-degree {
-    width: 10.8828125vw; /* 75px */
+    width: 20.8828125vw; /* 75px */
+}
+
+.edit-students-modal-deets {
+  margin-top: 1.5vh;
 }
 
 .edit-students-modal-footer {
     margin-top: 1.847645429362881vh; /* 35px */
     font-size: 1.1067708333333333vw;    /* 17px */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .edit-students-modal-btn {
