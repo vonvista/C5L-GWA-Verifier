@@ -78,7 +78,7 @@ const AddRow = () => {
                                     {/* input form */}
                                     <form className='edit-students-modal-inputs'>
 
-                                        <motion.div className='edit-students-modal-name flex flex-row'>
+                                        <motion.div className='edit-students-modal-name flex flex-row justify-center'>
                                           {/* Student Name */}
                                           <motion.div className='edit-students-modal-input-container'>
                                               <section className='inline-block edit-students-modal-section-studname'>
@@ -94,15 +94,15 @@ const AddRow = () => {
                                               </section>
                                           </motion.div>
                                           <motion.div className='edit-students-modal-input-container'>
-                                              <section className='inline-block edit-students-modal-section-studname'>
+                                              <section className='inline-block edit-students-modal-section-studMname'>
                                                   <input
                                                       className='edit-students-modal-input-style'
                                                       type="text"
                                                       name="studMName"
-                                                      placeholder='Middle Name'
+                                                      placeholder='M.I.'
                                                       onChange={(e) => setStudMName(e.target.value)}
                                                   />
-                                                  <motion.div className='w-full text-white text-center'>Middle Name</motion.div>
+                                                  <motion.div className='w-full text-white text-center'>Middle Initial</motion.div>
                                               </section>
                                           </motion.div>
                                           <motion.div className='edit-students-modal-input-container'>
