@@ -371,8 +371,12 @@ const UserDashboard = () => {
               {/* Page Contents */}
               <div className='pt-20 flex-column'>
                 <div className='flex'>
+                  {/* Upload button */}
+                  <div className='flex ml-auto order-2'>
+                    <UploadFileBtn handleClick={readInputFile} handleAddRecord={handleAddRecord}/>
+                  </div>
                   {/* Search input button */}
-                  <div className='float-left w-[18vw] h-[1vw]'>
+                  <div className='float-left w-[18vw] h-[1vw] justify-content-center'>
                     <Search user={"student"} handleSearch={(e) => setSearchStudent(e.target.value)} searchValue={searchStudent} buttonHandler={handleSearch} handleEnter={handleEnterPress}/>
                   </div>
                   {/* Refresh button */}
@@ -380,10 +384,6 @@ const UserDashboard = () => {
                     <Refresh handleClick={() => navigate("/user-dashboard")}/>
                   </div>
                 </div>  
-                {/* Upload button */}
-                <div className='float-right'>
-                  <UploadFileBtn handleClick={readInputFile} handleAddRecord={handleAddRecord}/>
-                </div>
                 <div className='table-container'>
                   <List table={1} data={currentRows} changeSort={changeSort} sortState={sortState} handleDeleteRecord={handleDeleteRecord}/>
                 </div>
