@@ -4,7 +4,7 @@ import expand from '../../../../assets/icons/collapse(2).svg';
 
 // Function contains the buttons in Actions Dropdown seen in Student Record View/Edit Page
 // Additional references: https://tailwindui.com/components/application-ui/elements/dropdowns
-const Dropdown = () => {
+const DropdownStatus = () => {
   const [valueClicked, setValueClicked] = useState('Status');
   const [isActive, setIsActive] = useState(false);
   return (
@@ -84,4 +84,4 @@ const Dropdown = () => {
   );
 };
 
-export default Dropdown;
+export default DropdownStatus;
