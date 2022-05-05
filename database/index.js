@@ -58,6 +58,7 @@ rl.question("Choose IP address name:",function(name){
         // (remove the 'wifi' parameter to return to localhost)
         console.log(`Server started at port 3001`)
     
+
         //create admin account if admin doesn't exist. There will always be exactly one admin
         admin = {
             Username: "admin",
@@ -77,6 +78,7 @@ rl.question("Choose IP address name:",function(name){
     
     }); 
 })
+n
 
 // app.listen(3001,wifi, function() {  //<- 'wifi' can be replaced by the ip variables obtained from results
 //     // For the host computer, the database commands are still accessible using the localhost in the url

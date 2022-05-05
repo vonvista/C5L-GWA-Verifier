@@ -6,7 +6,7 @@ import 'tailwindcss/tailwind.css';
 
 
 // This component handles the student's data for a specific semester
-const TableContents = ({ Name, Total, Semester, key, handler }) => {
+const TableContents = ({ Name, Total, Semester, key, handler, history, historyHandler }) => {
 
     // handler prop will handle pushing changes to parent
     // semHandler will handle semData
@@ -82,6 +82,23 @@ const TableContents = ({ Name, Total, Semester, key, handler }) => {
         semHandler(newSemData)
     }
 
+    const setHistory = (justification) => { // logs action of editing a row to history
+        let currHistory = [...history] // make copy of current array of history logs
+        const newHistObj = {
+            date: currentDate,
+            info: [
+                {
+                main: 'Modified Grades Row',    // to implement: detecting of what changes were made
+                user: 'insert username here',
+                time: currentTime,
+                details: justification,         // place justificiation into details
+                },
+            ],
+        }
+
+        historyHandler(newHistObj)  //set changes
+    } 
+
     const delData = (values) => { // deletes row from table
         // get array index of object that was changed
         const targetIndex = semData.findIndex(obj => obj.idRow == values.idRow)
@@ -128,7 +145,7 @@ const TableContents = ({ Name, Total, Semester, key, handler }) => {
                             
                             {/* Accordion Contents */}
                             <Disclosure.Panel className="inter z-0 pl-5 py-3 mb-2 text-sm text-gray-500 rounded-b-lg shadow-lg">
-                                <List table={2} total={Total} sem={Name} data={semData} dataHandler={setData} delHandler={delData}/>
+                                <List table={2} total={Total} sem={Name} data={semData} dataHandler={setData} delHandler={delData} handleHistory={setHistory}/>
                                 <section className="mt-3">
                                     <span className="font-black">Load Status</span>
                                     {( Total <= 20 )
