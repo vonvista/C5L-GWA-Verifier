@@ -31,7 +31,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         // status tab contents (dynamic) so easier to add or remove tabs
         // uses components as values
         Status: <Status state={statusState} />,                   // status component
-        Validations: <CheckListTab checklistData={checklist} />   //checklist component
+        Validations: <CheckListTab checklistData={checklist} />,   //checklist component
         Notes: <Notes notes={notes} semesters={gradeState} />,    // notes component
         History: <History historyData={historyState} />,          // history component
     }
