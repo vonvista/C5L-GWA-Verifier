@@ -25,17 +25,23 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const [selectedStudent, setSelectedStudent] = useState(student)
     const [statusState, setStatus] = useState(status)
     const [gradeState, setGradeState] = useState(grades)
-    const [historyState, setHistoryState] = useState(history)
-    
+    const [historyState, setHistoryState] = useState([])
+
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
         // uses components as values
         Status: <Status state={statusState} />,                      // status component
         Notes: <Notes notes={notes} semesters={gradeState} />,       // notes component
-        History:<History historyData={historyState} />,              // history component
+        History: <History historyData={historyState} />,              // history component
     }
 
-    let [selectedTab] = useState(tabContents)               // state controller for selecting tabs
+    const histAdd = (histObj) => {
+        // function for adding to history
+        // function to be passed to other child components that will update the state
+        // this function has to be in the parent component so that history tab will update
+        let newHist = [...historyState, histObj]
+        setHistoryState(newHist)
+    }
 
     return(
         <main>
@@ -79,7 +85,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                     <div className="w-[60vw] flex-1 overflow-auto mx-auto bg-white">
                         {   // map grades per semester
                             gradeState.map((semData, idx)=>(
-                                <Table key={idx} Name={semData.sem} Semester={semData.data} Total={semData.total} handler={setGradeState} history={historyState} historyHandler={setHistoryState}/>
+                                <Table key={idx} Name={semData.sem} Semester={semData.data} Total={semData.total} handler={setGradeState} history={historyState} historyHandler={histAdd}/>
                             ))
                         }
                     </div>
@@ -90,7 +96,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                     <div className="flex-none max-w-[100%] h-[45rem] sticky top-[11.5rem] shadow-lg rounded-lg">
                         <Tab.Group>
                             <Tab.List className="flex rounded-t-md">
-                                {Object.keys(selectedTab).map((tab) => (
+                                {Object.keys(tabContents).map((tab) => (
                                         <Tab key={tab}
                                             className={({selected}) => (
                                                 selected ? 
@@ -105,7 +111,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                                 )}
                             </Tab.List>
                             <Tab.Panels className="m-0 block">
-                                    {Object.values(selectedTab).map((component) =>(
+                                    {Object.values(tabContents).map((component) =>(
                                         <Tab.Panel className="h-[42rem] col-span-1 block">                                
                                             {component}
                                         </Tab.Panel>

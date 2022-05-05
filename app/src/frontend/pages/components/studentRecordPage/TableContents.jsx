@@ -96,7 +96,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
             ],
         }
 
-        historyHandler([...history, newHistObj])  //set changes
+        historyHandler(newHistObj)  //set changes
     } 
 
     const delData = (values) => { // deletes row from table
