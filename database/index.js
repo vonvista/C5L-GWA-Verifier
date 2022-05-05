@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 require('./router')(app);
 
 app.use(express.static('static'))
-app.listen(3001,wifi, function() {  //<- 'wifi' can be replaced by the ip variables obtained from results
+app.listen(3001, function() {  //<- 'wifi' can be replaced by the ip variables obtained from results
     // For the host computer, the database commands are still accessible using the localhost in the url
     // (remove the 'wifi' parameter to return to localhost)
     console.log(`In
@@ -53,7 +53,7 @@ Server started at port 3001`)
     }
     
     // // add request
-    request('http://'+wifi+':3001/user/add',{method:"POST",form: admin},function(err,req,body) {
+    request('http://localhost:3001/user/add',{method:"POST",form: admin},function(err,req,body) {
         // console.log(body);
     });
 
