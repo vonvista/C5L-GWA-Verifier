@@ -8,7 +8,7 @@ import Status from './Status';
 import Notes from './Notes';
 import History from './StudentRecordHistory';
 import TableDivider from './TableDivider';
-
+import CheckListTab from './ChecklistTab';
 
 
 // styling for student detail header
@@ -32,6 +32,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         Status: <Status state={statusState} />,                 // status component
         Notes: <Notes notes={notes} semesters={gradeState} />,  // notes component
         History:<History historyData={history} />,              // history component
+        Validations: <CheckListTab checklistData={checklist} />   //checklist component
     }
 
     let [selectedTab] = useState(tabContents)               // state controller for selecting tabs
