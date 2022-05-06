@@ -109,7 +109,6 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
             ],
         }
 
-        autoSet({sem:Name, data:newSemData})
         historyHandler(newHistObj)  //set changes
     } 
 
@@ -135,7 +134,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
             console.log(body);
         })
 
-
+        autoSet({sem:Name, data:newSemData})
         semHandler(newSemData)
     }
 
