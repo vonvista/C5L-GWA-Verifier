@@ -42,7 +42,7 @@ async function startServer() {
 
     rl.question("Choose IP address name (case insensitive):",function(name){
         let ip;
-        console.log(interfaces)
+        //console.log(interfaces)
         if(interfaces.has(name.toLowerCase())) {
             ip = interfaces.get(name.toLowerCase());
             console.log(`IP address at ${ip}`);
