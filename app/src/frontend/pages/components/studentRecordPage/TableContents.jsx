@@ -37,7 +37,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         values.idRow = (parseFloat(newSemData[targetIndex-1].idRow) + 1).toString()
         newSemData[targetIndex] = values
         autoSet({sem:Name, data:newSemData})
-        semHandler(newSemData)
+        //semHandler(newSemData)
     }
 
 
@@ -79,6 +79,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         .then(body => {
             console.log(body)
         })
+        
 
         
         fetch(`http://localhost:3001/history/add`, {
@@ -109,7 +110,6 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
             ],
         }
 
-        autoSet({sem:Name, data:newSemData})
         historyHandler(newHistObj)  //set changes
     } 
 
@@ -135,7 +135,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
             console.log(body);
         })
 
-
+        autoSet({sem:Name, data:newSemData})
         semHandler(newSemData)
     }
 
