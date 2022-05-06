@@ -648,6 +648,49 @@ export default function StudentRecord() { // this will probably transferred to a
       })
   }
 
+  // update grade table on addrow, editrow, deleterow changes
+  const setGrades = (values) => {
+
+    let grades = [...gradesProp]
+    let total = 0
+    let cumulative = 0
+    let weight = 0
+
+    // insert new values to grades
+    for (let i = 0; i < grades.length; i++){
+      if(grades[i].sem == values.sem){
+        //console.log(values)
+        grades[i] = values
+        break
+      }
+    }
+    
+
+    for (let i = 0; i < grades.length; i++){
+
+      for (let j = 0; j < grades[i].data.length; j++){
+
+        // compute total unit per sem, weight, and cumulative
+        weight = parseFloat(grades[i].data[j].units) * parseFloat(grades[i].data[j].grade)
+        if(isNaN(weight)){
+          weight = 0;
+        }
+        cumulative += weight
+        total += parseFloat(grades[i].data[j].units)
+
+        grades[i].data[j].enrolled = weight.toString()
+        grades[i].data[j].runningSum = cumulative.toString()
+      }
+
+      grades[i].total = total
+      total = 0
+    }
+    //console.log(grades)
+    // set new value of props
+    getGradesProp(grades)
+  }
+
+
     return (
 
       // checks if props are already fetched from the DB
@@ -666,6 +709,7 @@ export default function StudentRecord() { // this will probably transferred to a
                   status={statusData}
                   grades={gradesProp} 
                   checklist={checklistDetails}  // dummy data
+                  autoSet={setGrades}
                 />
             </div>
       </> 

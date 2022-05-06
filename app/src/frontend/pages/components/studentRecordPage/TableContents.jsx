@@ -6,7 +6,7 @@ import 'tailwindcss/tailwind.css';
 
 
 // This component handles the student's data for a specific semester
-const TableContents = ({ Name, Total, Semester, key, handler, history, historyHandler }) => {
+const TableContents = ({ Name, Total, Semester, key, handler, history, historyHandler, autoSet }) => {
 
     // handler prop will handle pushing changes to parent
     // semHandler will handle semData
@@ -17,6 +17,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
     const current = new Date(); //variable which will get current date and time
     const currentTime = `${current.getHours()}:${current.getMinutes()}`; //variable containing current time
     const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`; //variable containing current date
+    const [totalUnits, setTotal] = useState(Total)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,6 +29,17 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
     }, []);
 
     const nameStyle = "flex inter font-bold justify-between z-25 w-full px-4 py-2 text-sm font-medium text-left text-sr-table-text bg-sr-dark-gray hover:bg-yellow-100 hover:text-secondary-red";
+
+    // set new values for addrow
+    const addData = (values) => {
+        const targetIndex = semData.length 
+        let newSemData = [...semData]
+        values.idRow = (parseFloat(newSemData[targetIndex-1].idRow) + 1).toString()
+        newSemData[targetIndex] = values
+        autoSet({sem:Name, data:newSemData})
+        semHandler(newSemData)
+    }
+
 
     // Handler for row changes
     const setData = (values) => { // modifies values of a row
@@ -79,6 +91,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
             console.log(body);
         })
 
+        autoSet({sem:Name, data:newSemData})
         semHandler(newSemData)
     }
 
@@ -96,6 +109,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
             ],
         }
 
+        autoSet({sem:Name, data:newSemData})
         historyHandler(newHistObj)  //set changes
     } 
 
@@ -145,7 +159,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
                             
                             {/* Accordion Contents */}
                             <Disclosure.Panel className="inter z-0 pl-5 py-3 mb-2 text-sm text-gray-500 rounded-b-lg shadow-lg">
-                                <List table={2} total={Total} sem={Name} data={semData} dataHandler={setData} delHandler={delData} handleHistory={setHistory}/>
+                                <List table={2} total={Total} sem={Name} data={semData} dataHandler={setData} delHandler={delData} handleHistory={setHistory} addHandler={addData}/>
                                 <section className="mt-3">
                                     <span className="font-black">Load Status</span>
                                     {( Total <= 20 )
