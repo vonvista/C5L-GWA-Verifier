@@ -18,7 +18,7 @@ const detailStyle = {
     text: "table-cell text-left text-xl 2xl:text-2xl font-bold",
 }
 
-const RecordPage = ({sem, user, student, notes, history, status, grades, checklist}) => {
+const RecordPage = ({sem, user, student, notes, history, status, grades, checklist, autoSet}) => {
 
     // pass details and other data through props to this component
     
@@ -86,7 +86,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                     <div className="w-[60vw] flex-1 overflow-auto mx-auto bg-white">
                         {   // map grades per semester
                             gradeState.map((semData, idx)=>(
-                                <Table key={idx} Name={semData.sem} Semester={semData.data} Total={semData.total} handler={setGradeState} history={historyState} historyHandler={histAdd}/>
+                                <Table key={idx} Name={semData.sem} Semester={semData.data} Total={semData.total} handler={setGradeState} history={historyState} historyHandler={histAdd} autoSet={autoSet}/>
                             ))
                         }
                     </div>

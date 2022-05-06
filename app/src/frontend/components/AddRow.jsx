@@ -10,7 +10,7 @@ import './AddRow.css';
 
 /* Function for the "Add Row" feature in the Student View Record page */
 /* Initially shows an "Add" button and prompts the modal window after clicking it */
-const AddRow = ({sem}) => {
+const AddRow = ({ sem, addHandler }) => {
     const [openModal, setOpenModal] = useState(false);
     const [courseName, setCourseName] = useState('');
     const [units, setUnits] = useState('');
@@ -34,6 +34,17 @@ const AddRow = ({sem}) => {
             Description: "create",
             Details: `create student grade with Course: ${data.Course} on Sem: ${data.Semyear}`,
         }
+
+        // adds new row to the list
+        addHandler({
+            _id : data._id,
+            courseName: courseName,
+            units: units,
+            grade: grade,
+            //enrolled: (parseFloat(units) * parseFloat(grade)).toString(),
+            //runningSum: runningGWA,
+        })
+
 
         // fetch post request to add new history
         fetch(`http://localhost:3001/history/add`, {
