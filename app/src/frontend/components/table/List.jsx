@@ -3,11 +3,11 @@ import { useForm, isRequired } from '../../hooks/useForm';
 import { useNavigate } from 'react-router-dom';
 
 import Actions from '../buttons/Actions'
-import EditUser from '../EditUser';
-import AddRow from '../AddRow';
-import ReadRow from '../ReadRow';
-import EditRow from '../EditRow';
-import Swal from 'sweetalert2'
+import EditUser from 'frontend/pages/user-management/EditUser';
+import AddRow from 'frontend/pages/student-record/grades-table/AddRow';
+import ReadRow from 'frontend/pages/student-record/grades-table/ReadRow';
+import EditRow from 'frontend/pages/student-record/grades-table/EditRow';
+import Swal from 'sweetalert2';
 
 import 'tailwindcss/tailwind.css';
 

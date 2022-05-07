@@ -8,8 +8,8 @@ import SemSelect from 'frontend/components/inputs/DropdownSelect';
 import Status from '../components/studentRecordPage/Status';
 import Notes from '../components/studentRecordPage/Notes';
 import History from '../components/studentRecordPage/StudentRecordHistory';
-import Table from '../components/studentRecordPage/TableContents';
-import CheckListTab from '../components/studentRecordPage/ChecklistTab';
+import CheckList from '../components/studentRecordPage/ChecklistTab';
+import Table from './grades-table/TableContents';
 
 /* CSS */
 import 'tailwindcss/tailwind.css';
@@ -35,7 +35,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         // status tab contents (dynamic) so easier to add or remove tabs
         // uses components as values
         Status: <Status state={statusState} />,                   // status component
-        Validations: <CheckListTab checklistData={checklist} />,   //checklist component
+        Validations: <CheckList checklistData={checklist} />,   //checklist component
         Notes: <Notes notes={notes} semesters={gradeState} />,    // notes component
         History: <History historyData={historyState} />,          // history component
     }
