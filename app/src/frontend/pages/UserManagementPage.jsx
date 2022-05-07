@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import '../components/UserList.css';
+import '../components/table/UserList.css';
 
 /* Components */
-import List from '../components/List';
-import Pagination from '../components/Pagination';
+import List from '../components/table/List';
+import Pagination from '../components/table/Pagination';
 import UserNav from '../components/UserNavigation';
 import AdminNav from '../components/AdminNavigation';
 import HeaderWithoutArrowbck from '../components/HeaderWithoutArrowbck';

@@ -4,17 +4,17 @@ import UploadFileBtn from '../components/buttons/UploadFileBtn';
 import { refresh } from 'electron-debug';
 
 /* Components */
-import List from '../components/List';
+import List from '../components/table/List';
 import Header from '../components/HeaderWithoutArrowbck';
 import UserNav from '../components/UserNavigation';
 import AdminNav from '../components/AdminNavigation';
-import Pagination from '../components/Pagination';
+import Pagination from '../components/table/Pagination';
 import Search from '../components/search/Search';
 import Swal from 'sweetalert2';
 import Refresh from '../components/buttons/Refresh';
 
 /* CSS */
-import '../components/List.css';
+import '../components/table/List.css';
 import 'tailwindcss/tailwind.css';
 
 /* Backend */
