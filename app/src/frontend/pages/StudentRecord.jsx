@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import RecordPage from './components/studentRecordPage/StudentViewRecord';
-import Header from '../components/HeaderWithArrowbck';
-import UserNav from '../components/UserNavigation';
-import AdminNav from '../components/AdminNavigation';
+import Header from '../components/common/HeaderWithArrowbck';
+import UserNav from '../components/common/UserNavigation';
+import AdminNav from '../components/common/AdminNavigation';
 import Swal from 'sweetalert2';
 
 // sample value for student record

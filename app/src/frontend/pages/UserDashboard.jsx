@@ -5,9 +5,9 @@ import { refresh } from 'electron-debug';
 
 /* Components */
 import List from '../components/table/List';
-import Header from '../components/HeaderWithoutArrowbck';
-import UserNav from '../components/UserNavigation';
-import AdminNav from '../components/AdminNavigation';
+import Header from '../components/common/HeaderWithoutArrowbck';
+import UserNav from '../components/common/UserNavigation';
+import AdminNav from '../components/common/AdminNavigation';
 import Pagination from '../components/table/Pagination';
 import Search from '../components/search/Search';
 import Swal from 'sweetalert2';

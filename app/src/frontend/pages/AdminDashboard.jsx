@@ -6,8 +6,8 @@ import Refresh from '../components/buttons/Refresh';
 
 /* Components */
 import List from '../components/List';
-import Header from '../components/HeaderWithoutArrowbck';
-// import AdminNav from '../components/AdminNavigation';
+import Header from '../components/common/HeaderWithoutArrowbck';
+// import AdminNav from '../components/common/AdminNavigation';
 import Pagination from '../components/Pagination';
 import Search from '../components/search/Search';
 import SearchModal from '../components/search/SearchModal';

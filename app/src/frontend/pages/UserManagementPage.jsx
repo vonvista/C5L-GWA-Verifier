@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
 import '../components/table/UserList.css';
+import Swal from 'sweetalert2';
 
 /* Components */
 import List from '../components/table/List';
 import Pagination from '../components/table/Pagination';
-import UserNav from '../components/UserNavigation';
-import AdminNav from '../components/AdminNavigation';
-import HeaderWithoutArrowbck from '../components/HeaderWithoutArrowbck';
+import UserNav from '../components/common/UserNavigation';
+import AdminNav from '../components/common/AdminNavigation';
+import HeaderWithoutArrowbck from '../components/common/HeaderWithoutArrowbck';
 import AddUserBtn from '../components/buttons/AddUserBtn';
 import AddUser from '../components/AddUser';
 import Search from '../components/search/Search';
 import SearchModal from '../components/search/SearchModal';
 import EditUser from '../components/EditUser';
-import Swal from 'sweetalert2'
+
 
 const UserManagementPage = () => {
   const [rows, setRows] = useState([]);
