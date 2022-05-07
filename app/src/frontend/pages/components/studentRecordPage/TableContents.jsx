@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/solid'
-import List from '../../../components/List';
+import List from '../../../components/table/List';
 import 'tailwindcss/tailwind.css';
 
 
