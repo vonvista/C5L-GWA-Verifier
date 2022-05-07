@@ -1,21 +1,20 @@
 import { useEffect, useState } from 'react';
-
-/* Buttons */
-import UploadFileBtn from '../components/buttons/UploadFileBtn';
-import Refresh from '../components/buttons/Refresh';
+import { refresh } from 'electron-debug';
 
 /* Components */
-import List from '../components/List';
-import Header from '../components/common/HeaderWithoutArrowbck';
-// import AdminNav from '../components/common/AdminNavigation';
-import Pagination from '../components/Pagination';
-import Search from '../components/search/Search';
-import SearchModal from '../components/search/SearchModal';
+import Header from 'frontend/components/common/HeaderWithoutArrowbck';
+import UploadFileBtn from 'frontend/components/buttons/UploadFileBtn';
+import AdminNav from 'frontend/components/common/AdminNavigation';
+import UserNav from 'frontend/components/common/UserNavigation';
+import Pagination from 'frontend/components/table/Pagination';
+import Refresh from 'frontend/components/buttons/Refresh';
+import Search from 'frontend/components/search/Search';
+import SearchModal from 'frontend/components/search/SearchModal';
+import List from 'frontend/components/table/List';
 
 /* CSS */
-import '../components/List.css';
+import 'frontend/components/List.css';
 import 'tailwindcss/tailwind.css';
-import { refresh } from 'electron-debug';
 
 
 const AdminDashboard = () => {

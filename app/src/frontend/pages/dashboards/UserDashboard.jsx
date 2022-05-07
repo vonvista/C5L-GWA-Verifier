@@ -1,24 +1,25 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import UploadFileBtn from '../components/buttons/UploadFileBtn';
 import { refresh } from 'electron-debug';
 
 /* Components */
-import List from '../components/table/List';
-import Header from '../components/common/HeaderWithoutArrowbck';
-import UserNav from '../components/common/UserNavigation';
-import AdminNav from '../components/common/AdminNavigation';
-import Pagination from '../components/table/Pagination';
-import Search from '../components/search/Search';
-import Swal from 'sweetalert2';
-import Refresh from '../components/buttons/Refresh';
+import Header from 'frontend/components/common/HeaderWithoutArrowbck';
+import UploadFileBtn from 'frontend/components/buttons/UploadFileBtn';
+import AdminNav from 'frontend/components/common/AdminNavigation';
+import UserNav from 'frontend/components/common/UserNavigation';
+import Pagination from 'frontend/components/table/Pagination';
+import Refresh from 'frontend/components/buttons/Refresh';
+import Search from 'frontend/components/search/Search';
+import List from 'frontend/components/table/List';
 
 /* CSS */
-import '../components/table/List.css';
+import 'frontend/components/table/List.css';
 import 'tailwindcss/tailwind.css';
 
 /* Backend */
 import readInputFile from 'backend/read-input';
+import Swal from 'sweetalert2';
+
 
 
 const UserDashboard = () => {
