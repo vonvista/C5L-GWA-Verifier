@@ -9,7 +9,7 @@ import Header from '../components/HeaderWithoutArrowbck';
 import UserNav from '../components/UserNavigation';
 import AdminNav from '../components/AdminNavigation';
 import Pagination from '../components/Pagination';
-import Search from 'frontend/components/Search';
+import Search from '../components/search/Search';
 import Swal from 'sweetalert2';
 import Refresh from '../components/buttons/Refresh';
 

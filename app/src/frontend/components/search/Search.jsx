@@ -1,6 +1,6 @@
 import 'tailwindcss/tailwind.css';
-import Input from './inputs/Input';
-import search from '../../../assets/icons/search.svg';
+import Input from '../inputs/Input';
+import search from '../../../../assets/icons/search.svg';
 import './Search.css';
 
 /*
