@@ -2,7 +2,7 @@ import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import icon from '../../assets/icon.svg';
 
 
-import LoginPage from '../frontend/LoginPage'
+import LoginPage from '../frontend/pages/login-page/LoginPage'
 import UserDashboard from '../frontend/pages/UserDashboard';
 // import AdminDashboard from '../frontend/pages/AdminDashboard'; // depracated -vov
 import UserManagement from '../frontend/pages/UserManagementPage';
