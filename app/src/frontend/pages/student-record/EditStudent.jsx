@@ -1,9 +1,9 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import {AnimatePresence, motion} from 'framer-motion';
 
 /* Components */
-import Edit from './buttons/Edit.jsx';
-import ModalStatus from './buttons/DropdownStatus';
+import Edit from 'frontend/components/buttons/Edit.jsx';
+import ModalStatus from 'frontend/components/buttons/DropdownStatus';
 
 /* CSS */
 import 'tailwindcss/tailwind.css';
