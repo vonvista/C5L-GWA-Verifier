@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 /* Components */
-import Edit from 'frontend/components/buttons/Edit.jsx';
+import EditBtn from 'frontend/components/buttons/EditBtn.jsx';
 import ModalStatus from 'frontend/components/buttons/DropdownStatus';
 
 /* CSS */
@@ -84,7 +84,7 @@ const AddRow = () => {
 
     return (
         <>
-            <Edit handleClick={setOpenModal}/>
+            <EditBtn handleClick={setOpenModal}/>
             { openModal && (
                 <AnimatePresence>
                     {/* Modal animations */}
