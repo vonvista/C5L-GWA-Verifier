@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Verify from '../../../components/buttons/Verify'
+import Verify from 'frontend/components/buttons/Verify'
 
 // status page
 
@@ -8,7 +8,7 @@ import Verify from '../../../components/buttons/Verify'
 export default function Status({state, ...rest}) {
 
     return(
-        <div className="min-w-[25vw] max-w-[25vw] h-full mx-auto p-5 grid box-border block overflow-auto">
+        <div className="min-w-[25vw] max-w-[25vw] h-full mx-auto p-5 grid box-border overflow-auto">
             {/* Academic Achievement Box */}
             <div className="border rounded-lg p-4 grid row-auto">
                 <h1 className="place-self-start inline inter">Academic Achievement</h1>
