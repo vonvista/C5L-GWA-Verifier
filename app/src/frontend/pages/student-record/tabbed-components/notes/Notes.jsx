@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import AddNote from './AddNote';
-import Delete from '../../../../../assets/icons/delete.svg';
+import Delete from '../../../../../../assets/icons/delete.svg';
 
 
 // functional component for notes tab in student record view page

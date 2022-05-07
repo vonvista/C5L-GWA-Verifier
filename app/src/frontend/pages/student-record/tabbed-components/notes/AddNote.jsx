@@ -1,11 +1,11 @@
-import SemSelect from '../../../components/inputs/DropdownSelect';
-import AddNoteBtn from 'frontend/components/buttons/AddNoteBtn';
-import NotesTab from './Notes';
 import { useState } from 'react';
-import Input from '../../../components/inputs/Input';
+import SemSelect from 'frontend/components/inputs/DropdownSelect';
+import AddNoteBtn from 'frontend/components/buttons/AddNoteBtn';
+import Input from 'frontend/components/inputs/Input';
+import NotesTab from './Notes';
 
 import 'tailwindcss/tailwind.css';
-import './css/AddNote.css';
+import './AddNote.css';
 
 
 // This function is used for adding/editing the notes for each semester
