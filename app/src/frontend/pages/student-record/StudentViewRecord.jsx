@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 /* Components */
 import ActionsBtn from 'frontend/components/buttons/Dropdown';
 import SemSelect from 'frontend/components/inputs/DropdownSelect';
-import Status from '../components/studentRecordPage/Status';
+import Status from './tabbed-components/status/Status';
 import Notes from '../components/studentRecordPage/Notes';
 import History from '../components/studentRecordPage/StudentRecordHistory';
 import CheckList from './tabbed-components/checklist/ChecklistTab';
