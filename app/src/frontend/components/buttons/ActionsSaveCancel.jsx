@@ -1,8 +1,10 @@
-import 'tailwindcss/tailwind.css';
-import edit from '../../../../assets/icons/edit.svg';
-import deleteSVG from '../../../../assets/icons/delete.svg';
-import Justification from '../Justification';
 import { useState } from 'react';
+
+import Justification from 'frontend/pages/student-record/grades-table/Justification';
+import deleteSVG from '../../../../assets/icons/delete.svg';
+import edit from '../../../../assets/icons/edit.svg';
+import 'tailwindcss/tailwind.css';
+
 
 // Function contains the Actions buttons (save and cancel)
 // Used actions.jsx as base to keep consistency

@@ -1,10 +1,12 @@
-import 'tailwindcss/tailwind.css';
-import { useState } from 'react';
-import expand from '../../../../assets/icons/collapse(1).svg';
-import EditStudent from '../../components/EditStudent';
-import studentDelete from 'backend/studentDelete';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+import expand from '../../../../assets/icons/collapse(1).svg';
+import EditStudentDetails from 'frontend/pages/student-record/StudentDetailEditModal';
+import studentDelete from 'backend/studentDelete';
 import exportStudentData from 'backend/exportPDF';
+import 'tailwindcss/tailwind.css';
+
 
 // Function contains the buttons in Actions Dropdown seen in Student Record View/Edit Page
 // Additional references: https://tailwindui.com/components/application-ui/elements/dropdowns
@@ -56,7 +58,7 @@ const Dropdown = () => {
   return (
     <div className="w-40 relative ml-auto grow-0">
       {/* Actions and arrow down */}
-      <div className="grid-cols-2 divide-x w-40 p-2 bg-login-green mr-0 rounded-lg flex inline-flex items-center justify-items-center rounded-lg border border-slate-300">
+      <div className="grid-cols-2 divide-x w-40 p-2 bg-login-green flex mr-0 items-center justify-items-center rounded-lg border border-slate-300">
         <button
           type="button"
           className="pl-1.75 m-0 inline-block grow hover:bg-login-green-hover rounded-l-lg"
@@ -110,7 +112,7 @@ const Dropdown = () => {
             >
               <p className="text-white">Export</p>
             </button>
-            <EditStudent
+            <EditStudentDetails
               onClick={() => {
                 setIsActive(!isActive);
                 setValueClicked('Edit');

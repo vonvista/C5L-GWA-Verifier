@@ -10,7 +10,7 @@ const DropdownStatus = () => {
   return (
     <div className="w-40 relative m-auto grow-0">
       {/* Actions and arrow down */}
-      <div className="grid-cols-2 divide-x w-40 p-2 bg-white mr-0 rounded-lg flex inline-flex items-center justify-items-center rounded-lg">
+      <div className="grid-cols-2 divide-x w-40 p-2 bg-white mr-0 inline-flex items-center justify-items-center rounded-lg">
         <button
           type="button"
           className="pl-1.75 m-0 inline-block grow hover:bg-yellow-100  rounded-l-lg"
