@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 import expand from '../../../../assets/icons/collapse(1).svg';
-import EditStudent from 'frontend/pages/student-record/EditStudent';
+import EditStudentDetails from 'frontend/pages/student-record/StudentDetailEditModal';
 import studentDelete from 'backend/studentDelete';
 import exportStudentData from 'backend/exportPDF';
 import 'tailwindcss/tailwind.css';
@@ -112,7 +112,7 @@ const Dropdown = () => {
             >
               <p className="text-white">Export</p>
             </button>
-            <EditStudent
+            <EditStudentDetails
               onClick={() => {
                 setIsActive(!isActive);
                 setValueClicked('Edit');
