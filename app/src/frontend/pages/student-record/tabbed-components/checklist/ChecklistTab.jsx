@@ -1,4 +1,4 @@
-import ChecklistDetail from '../../../components/ChecklistDetail';
+import ChecklistDetail from './ChecklistDetail';
 
 export default function CheckListTab({ checklistData }) {
   return (
