@@ -8,7 +8,7 @@ import SemSelect from 'frontend/components/inputs/DropdownSelect';
 import Status from '../components/studentRecordPage/Status';
 import Notes from '../components/studentRecordPage/Notes';
 import History from '../components/studentRecordPage/StudentRecordHistory';
-import CheckList from '../components/studentRecordPage/ChecklistTab';
+import CheckList from './tabbed-components/checklist/ChecklistTab';
 import Table from './grades-table/TableContents';
 
 /* CSS */
