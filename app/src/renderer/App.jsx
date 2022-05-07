@@ -5,7 +5,7 @@ import icon from '../../assets/icon.svg';
 import LoginPage from 'frontend/pages/login-page/LoginPage'
 import UserDashboard from 'frontend/pages/dashboards/UserDashboard';
 // import AdminDashboard from 'frontend/pages/dashboards/AdminDashboard'; // depracated -vov
-import UserManagement from '../frontend/pages/UserManagementPage';
+import UserManagement from 'frontend/pages/user-management/UserManagementPage';
 import StudentRecord from '../frontend/pages/StudentRecord';
 
 export default function App() {
