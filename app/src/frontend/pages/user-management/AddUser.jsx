@@ -1,9 +1,11 @@
+import { useState } from 'react';
+import Swal from 'sweetalert2'
+
+import user from '../../../../assets/icons/user-icon.jpg';
+import Input from 'frontend/components/inputs/Input';
 import 'tailwindcss/tailwind.css';
 import './AddEditUser.css';
-import { useState } from 'react';
-import user from '../../../assets/icons/user-icon.jpg';
-import Input from './inputs/Input';
-import Swal from 'sweetalert2'
+
 
 // function which shows the add user modal; to be used in UserSystemPage
 // to use AddUser and AddUserBtn, import needed files and declare and initialize showModal variable:
@@ -12,6 +14,7 @@ import Swal from 'sweetalert2'
 //   (<AddUser handleClose={() => setShowModal(false)}/>)
 //   :(<></>)
 // }
+
 
 const AddUser = ({ handleClose, handleAddRecord }) => {
   const [firstName, setFirstName] = useState('');

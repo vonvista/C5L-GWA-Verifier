@@ -1,9 +1,11 @@
+import { useState } from 'react';
+import Swal from 'sweetalert2'
+
+import userIcon from '../../../../assets/icons/user-icon.jpg';
+import Input from 'frontend/components/inputs/Input';
 import 'tailwindcss/tailwind.css';
 import './AddEditUser.css';
-import { useState } from 'react';
-import userIcon from '../../../assets/icons/user-icon.jpg';
-import Input from './inputs/Input';
-import Swal from 'sweetalert2'
+
 
 // function which shows the add user modal; to be used in UserSystemPage
 // to use EditUser and AddUserBtn, import needed files and declare and initialize showModal variable:
@@ -265,7 +267,7 @@ const EditUser = ({ handleClose, editUser, handleEditRecordSave }) => {
                       <div className="w-full flex">
                         <section className="un-style">
                           <button
-                            className="inter bg-login-green text-white w-2/5 block ml-auto mr-auto bg-white rounded-lg hover:bg-emerald-600 user-btn"
+                            className="inter bg-login-green text-white w-2/5 block ml-auto mr-auto rounded-lg hover:bg-emerald-600 user-btn"
                             type="button"
                             onClick={edit_user}
                           >
