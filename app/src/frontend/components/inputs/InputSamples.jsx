@@ -1,9 +1,9 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
+import { isRequired, useForm } from '../../hooks/useForm';
 import { useState } from 'react';
-import Input from './inputs/Input';
-import DropSel from './inputs/DropdownSelect';
-import { isRequired, useForm } from '../hooks/useForm';
 import 'tailwindcss/tailwind.css';
+import DropSel from './DropdownSelect';
+import Input from './Input';
 
 
 function isRequired(val) {
