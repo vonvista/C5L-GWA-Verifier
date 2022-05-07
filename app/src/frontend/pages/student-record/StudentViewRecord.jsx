@@ -7,7 +7,7 @@ import ActionsBtn from 'frontend/components/buttons/Dropdown';
 import SemSelect from 'frontend/components/inputs/DropdownSelect';
 import Status from './tabbed-components/status/Status';
 import Notes from './tabbed-components/notes/Notes';
-import History from '../components/studentRecordPage/StudentRecordHistory';
+import History from './tabbed-components/history/StudentRecordHistory';
 import CheckList from './tabbed-components/checklist/ChecklistTab';
 import Table from './grades-table/TableContents';
 
