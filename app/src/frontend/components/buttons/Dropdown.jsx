@@ -1,10 +1,12 @@
-import 'tailwindcss/tailwind.css';
-import { useState } from 'react';
-import expand from '../../../../assets/icons/collapse(1).svg';
-import EditStudent from '../../components/EditStudent';
-import studentDelete from 'backend/studentDelete';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+import expand from '../../../../assets/icons/collapse(1).svg';
+import EditStudent from 'frontend/pages/student-record/EditStudent';
+import studentDelete from 'backend/studentDelete';
 import exportStudentData from 'backend/exportPDF';
+import 'tailwindcss/tailwind.css';
+
 
 // Function contains the buttons in Actions Dropdown seen in Student Record View/Edit Page
 // Additional references: https://tailwindui.com/components/application-ui/elements/dropdowns
