@@ -3,8 +3,8 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-import collapse from '../../../../../assets/icons/collapse.svg';
-import expand from '../../../../../assets/icons/expand.svg';
+import collapse from '../../../../../../assets/icons/collapse.svg';
+import expand from '../../../../../../assets/icons/expand.svg';
 
 // Function for every description having the same date
 // Reference used in accordion component: https://www.freecodecamp.org/news/build-accordion-menu-in-react-without-external-libraries/

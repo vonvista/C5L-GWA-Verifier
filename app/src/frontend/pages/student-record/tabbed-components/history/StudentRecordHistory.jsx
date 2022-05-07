@@ -2,10 +2,10 @@
 // StudentRecordHistory contains the tab component of the student record history.
 // ----- new changes: modal to tab
 
-// import { useState } from 'react';
 import RecordHistory from './StudentHistory';
-import './css/StudentRecordHistory.css';
+import './StudentRecordHistory.css';
 import 'tailwindcss/tailwind.css';
+
 
 const StudentRecordHistory = ({historyData, ...rest}) => {
 
