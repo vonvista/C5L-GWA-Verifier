@@ -10,7 +10,7 @@ import Header from '../components/HeaderWithoutArrowbck';
 // import AdminNav from '../components/AdminNavigation';
 import Pagination from '../components/Pagination';
 import Search from '../components/search/Search';
-import SearchModal from 'frontend/components/SearchModal';
+import SearchModal from '../components/search/SearchModal';
 
 /* CSS */
 import '../components/List.css';

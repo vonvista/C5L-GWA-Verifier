@@ -10,7 +10,7 @@ import HeaderWithoutArrowbck from '../components/HeaderWithoutArrowbck';
 import AddUserBtn from '../components/buttons/AddUserBtn';
 import AddUser from '../components/AddUser';
 import Search from '../components/search/Search';
-import SearchModal from 'frontend/components/SearchModal';
+import SearchModal from '../components/search/SearchModal';
 import EditUser from '../components/EditUser';
 import Swal from 'sweetalert2'
 
