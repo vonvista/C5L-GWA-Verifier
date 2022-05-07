@@ -1,16 +1,17 @@
-import { isRequired, useForm } from './hooks/useForm';
+import { isRequired, useForm } from '../../hooks/useForm';
 import { useNavigate } from 'react-router-dom';
-import 'tailwindcss/tailwind.css';
-import './LoginPage.css';
 import Swal from 'sweetalert2'
 
-
 {/* Components */}
-import { LoginBtn } from '../frontend/components/buttons/LoginBtn';
-import TextBtn from '../frontend/components/buttons/TextBtn';
-import AppIcon from '../../assets/icons/icon.png';
-import Input from '../frontend/components/inputs/Input';
+import { LoginBtn } from '../../components/buttons/LoginBtn';
+import TextBtn from '../../components/buttons/TextBtn';
+import AppIcon from '../../../../assets/icons/icon.png';
+import Input from '../../components/inputs/Input';
 //import { electron } from 'process';
+
+{/* CSS files */}
+import 'tailwindcss/tailwind.css';
+import './LoginPage.css';
 
 
 function isRequired(val) {
