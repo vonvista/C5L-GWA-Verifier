@@ -58,7 +58,7 @@ const Dropdown = () => {
   return (
     <div className="w-40 relative ml-auto grow-0">
       {/* Actions and arrow down */}
-      <div className="grid-cols-2 divide-x w-40 p-2 bg-login-green mr-0 rounded-lg flex inline-flex items-center justify-items-center rounded-lg border border-slate-300">
+      <div className="grid-cols-2 divide-x w-40 p-2 bg-login-green mr-0 items-center justify-items-center rounded-lg border border-slate-300">
         <button
           type="button"
           className="pl-1.75 m-0 inline-block grow hover:bg-login-green-hover rounded-l-lg"
