@@ -1,5 +1,5 @@
 import 'tailwindcss/tailwind.css';
-import arrowbck from '../../../assets/icons/previous.svg';
+import arrowbck from '../../../../assets/icons/previous.svg';
 
 // pageTitle prop: current page title
 

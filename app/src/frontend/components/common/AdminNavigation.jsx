@@ -1,9 +1,10 @@
+import { useNavigate } from 'react-router-dom';
+import { useHover } from '../../hooks/useHover';
 import { useEffect, useState } from 'react';
-import { useHover } from '../hooks/useHover';
-import UserIcon from '../../../assets/icons/default-user-icon.png';
+import UserIcon from '../../../../assets/icons/default-user-icon.png';
 import 'tailwindcss/tailwind.css';
 import './Sidebar.css';
-import { useNavigate } from 'react-router-dom';
+
 
 /* Importing navigation bar and header to pages
 <>
