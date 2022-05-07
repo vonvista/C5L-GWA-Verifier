@@ -1,11 +1,10 @@
-import Actions from './buttons/Actions'
-import Input from './inputs/Input'
+import SaveCancel from 'frontend/components/buttons/ActionsSaveCancel'
+import Actions from 'frontend/components/buttons/Actions'
+import Input from 'frontend/components/inputs/Input'
 import 'tailwindcss/tailwind.css'
-import SaveCancel from '../../frontend/components/buttons/ActionsSaveCancel'
+
 
 const EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched, errors, valid, histHandler}) => {
-
-    //
 
     const inputStyle = `block box-border focus:outline-none border-b border-sr-disabled-green transition ease-out delay-100 focus:transition focus:ease-in-out focus:delay-100 focus:border-b focus:border-login-green`
     const errorStyle= `block text-center text-sm inter text-secondary-red`

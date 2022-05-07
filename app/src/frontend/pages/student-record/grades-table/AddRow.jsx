@@ -1,8 +1,8 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import {AnimatePresence, motion} from 'framer-motion';
 
 /* Components */
-import Add from './buttons/AddRowBtn.jsx';
+import Add from 'frontend/components/buttons/AddRowBtn.jsx';
 
 /* CSS */
 import 'tailwindcss/tailwind.css';

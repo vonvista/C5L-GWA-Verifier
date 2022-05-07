@@ -1,6 +1,6 @@
 import { Dialog, Transition} from '@headlessui/react';
 import { Fragment, useState, useEffect } from 'react';
-import Input from './inputs/Input';
+import Input from 'frontend/components/inputs/Input';
 
 // component from: https://headlessui.dev/react/dialog
 

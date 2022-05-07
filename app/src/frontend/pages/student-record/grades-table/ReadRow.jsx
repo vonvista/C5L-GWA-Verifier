@@ -1,4 +1,4 @@
-import Actions from './buttons/Actions'
+import Actions from 'frontend/components/buttons/Actions'
 
 const ReadRow = ({data, clickHandler, delHandler}) => {
 
