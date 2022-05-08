@@ -29,7 +29,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         fetchData();
     }, []);
 
-    const nameStyle = "flex inter font-bold justify-between z-25 w-full px-4 py-2 text-sm font-medium text-left text-sr-table-text bg-sr-dark-gray hover:bg-yellow-100 hover:text-secondary-red";
+    const nameStyle = "transition-colors ease-in-out delay-150 flex inter font-bold justify-between z-10 w-full px-4 py-2 text-sm font-medium text-left text-sr-table-text bg-sr-dark-gray hover:transition-colors hover:ease-in hover:delay-150 hover:bg-yellow-100 hover:text-secondary-red";
 
     // set new values for addrow
     const addData = (values) => {
@@ -147,7 +147,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
                     {({ open }) => (
                         <>
                              {/* Accordion Header */}
-                             <Disclosure.Button className={`${open ? 'bg-table-hover-color text-secondary-red rounded-t-lg' : 'mb-2 rounded-lg shadow-lg'} ${nameStyle}`}>
+                             <Disclosure.Button className={`${open ? 'bg-sr-dark-gray rounded-t-lg' : 'mb-2 rounded-lg shadow-lg'} ${nameStyle}`}>
                                 <span className="text-lg xl:text-xl">{Name}</span>
                                 {/* Icon */}
                                 <ChevronUpIcon
