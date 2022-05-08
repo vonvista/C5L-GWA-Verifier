@@ -60,38 +60,10 @@ const EditRow = ({data, changeHandler, onSubmit, toggleHandler, touched, errors,
                     <p className={errorStyle}>{errors.grade}</p>        // errror message
                 }   
             </div>
-            <div className="table-cell w-1/6 align-middle">
-                <Input
-                    labelStyle="hidden"                                 // styling for label
-                    labelVal=""                                         // label text
-                    inputStyle={`${centerInput} ${inputStyle}`}         // styling for input
-                    name="enrolled"                                     // name of label-input components
-                    inputType="numeric"                                 // type of input password, email, text, etc.
-                    inputPlaceholder={data.enrolled}                    // placeholder text for input
-                    value={data.enrolled}                               // value of the input
-                    changeHandler={changeHandler}                       // change handling
-                    //required={true}    
-                    />
-                {touched.enrolled && errors.enrolled && 
-                    <p className={errorStyle}>{errors.enrolled}</p>     // errror message
-                }   
-            </div>
-            <div className="table-cell w-1/6 align-middle">
-                <Input
-                    labelStyle="hidden"                                 // styling for label
-                    labelVal=""                                         // label text
-                    inputStyle={`${centerInput} ${inputStyle}`}         // styling for input
-                    name="runningSum"                                   // name of label-input components
-                    inputType="numeric"                                 // type of input password, email, text, etc.
-                    inputPlaceholder={data.runningSum}                  // placeholder text for input
-                    value={data.runningSum}                             // value of the input
-                    changeHandler={changeHandler}                       // change handling
-                    //required={true}    
-                    />
-                {touched.runningSum && errors.runningSum && 
-                    <p className={errorStyle}>{errors.runningSum}</p>    // errror message
-                }   
-            </div>
+            
+            {/* non-editable row items */}
+            <div className="table-cell w-1/6 align-middle text-center">{data.enrolled} </div>
+            <div className="table-cell w-1/6 align-middle text-center">{data.runningSum}</div>
 
             <div className="table-cell w-1/6 align-middle text-center">
                 {/* <button type="submit" disabled={!valid}>Save</button>
