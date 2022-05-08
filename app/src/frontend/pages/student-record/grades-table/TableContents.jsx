@@ -161,7 +161,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
                             <Disclosure.Panel className="inter z-0 pl-5 py-3 mb-2 text-sm text-gray-500 rounded-b-lg shadow-lg">
                                 <List table={2} total={Total} sem={Name} data={semData} dataHandler={setData} delHandler={delData} handleHistory={setHistory} addHandler={addData}/>
                                 <section className="mt-3">
-                                    <span className="font-black">Load Status</span>
+                                    <span className="font-montserrat font-bold text-primary-red">Load Status</span>
                                     {( Total <= 20 )
                                         ? ( Total >= 15 )
                                             ? <span className="ml-4 font-black text-login-green underline">Normal</span>
