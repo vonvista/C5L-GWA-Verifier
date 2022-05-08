@@ -1,7 +1,6 @@
 import 'tailwindcss/tailwind.css';
 import Input from '../inputs/Input';
 import search from '../../../../assets/icons/search.svg';
-import './Search.css';
 
 /*
 Function contains the Search component.
@@ -34,8 +33,9 @@ const Search = ({
   buttonHandler,
   handleEnter,
 }) => {
-  const text = 'Search for a ';
+  const text = 'Search by ';
   const inputText = text.concat(user);
+  // const finalText = inputText.concat(" to search");
   return (
     <>
       <div className="relative">
@@ -43,7 +43,7 @@ const Search = ({
           <Input
             labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
             labelVal="Password" // label text
-            inputStyle="hidden input-style1" // styling for input
+            inputStyle="hidden rounded-lg m-2 text-center w-full h-[3vw] text-[0.9vw]" // styling for input
             name="password" // name of label-input components
             inputType="checkbox" // type of input password, email, text, etc.
             inputPlaceholder={inputText} // placeholder text for input
@@ -52,7 +52,7 @@ const Search = ({
             handleKeyPress={handleEnter}
           />
           <button
-            className="bg-gray-200 hover:bg-gray-300 rounded px-2 py-1 cursor-pointer"
+            className="bg-gray-200 hover:bg-gray-300 rounded px-2 py-1 cursor-pointer w-[2.5vw] h-11/12"
             type="button"
             onClick={buttonHandler}
           >
@@ -62,7 +62,7 @@ const Search = ({
         <Input
           labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
           labelVal="Search" // label text
-          inputStyle="input-style1 appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" // styling for input
+          inputStyle="rounded-lg m-2 text-center w-full h-[3vw] text-[0.9vw] appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" // styling for input
           name="search" // name of label-input components
           inputType="text" // type of input password, email, text, etc.
           inputPlaceholder={inputText} // placeholder text for input
