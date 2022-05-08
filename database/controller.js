@@ -130,7 +130,7 @@ exports.userUpdate = async function(req, res, next) {
     "MiddleName": req.body.MiddleName,
     "LastName": req.body.LastName,
     "Position": req.body.Position,
-    "Role": req.body.Role,
+    // "Role": req.body.Role,    <- removed - vov
     "Password": hashedPassword
   }}, {new : true}, function(err,result){
     if(!err && User){
