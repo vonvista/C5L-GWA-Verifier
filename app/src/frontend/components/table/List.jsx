@@ -94,8 +94,8 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             <div className="table-cell w-1/6">Course Name</div>
                             <div className="table-cell w-1/6 text-center">Units</div>
                             <div className="table-cell w-1/6 text-center">Grade</div>
-                            <div className="table-cell w-1/6 text-center">Enrolled</div>
-                            <div className="table-cell w-1/6 text-center"></div>
+                            <div className="table-cell w-1/6 text-center">Cumulative</div>
+                            <div className="table-cell w-1/6 text-center">Weight</div>
                             <div className="table-cell w-1/6 text-center"><AddRow sem={sem} addHandler={addHandler}/></div>
                         </div>
                     </div>
