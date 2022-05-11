@@ -14,7 +14,7 @@ const AddRowBtn = ({ handleClick }) => {
     <>
       <button className={addRowStyle} type="button" onClick={handleClick}>
         <img
-          className="p-0.25 my-1.5 ml-0.25 mr-1.5 inline-flex"
+          className="p-0.25 my-1.5 inline-flex"
           width="18px"
           height="18px"
           alt="icon"
