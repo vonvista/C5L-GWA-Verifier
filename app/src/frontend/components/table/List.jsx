@@ -284,6 +284,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
     // Function for Displaying the Student List on the Dashboard
     const StudentList = ({ data, setRows, changeSort, sortState, handleDeleteRecord }) => {
         useEffect(() => {
+            console.log(data)
             console.log(sortState)
         })
 
@@ -338,7 +339,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             }`} onClick={() => changeSort(0)}>Name</th>
                             <th className={`student-number ${
                                 sortState[1] === 0 ? "" : sortState[1] === 1 ? "th-sort-asc" : "th-sort-desc" 
-                            }`} onClick={() => changeSort(1)}>Student Num</th>
+                            }`} onClick={() => changeSort(1)}>Student No.</th>
                             <th className={`student-degree ${
                                 sortState[2] === 0 ? "" : sortState[2] === 1 ? "th-sort-asc" : "th-sort-desc" 
                             }`} onClick={() => changeSort(2)}>Degree Program</th>
@@ -349,22 +350,31 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             <th className='student-action'>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {data.map((student, index) => (
-                            <tr key = { index }>
-                                <td className='student-name'>{student.name}</td>
-                                <td className='student-number'>{student.studno}</td>
-                                <td className='student-degree'>{student.degprog}</td>
-                                <td className='student-gwa'>{student.gwa}</td>
-                                {/* <td className='student-status'><Status status={student.status}/></td> */}
-                                <td className='students-status'>
-                                    <div data-status={student.status} className='status'></div>
-                                </td>
-                                <td className='student-action'><Actions handleEdit={() => studentEdit(student._id, student.studno)} handleDelete={() => studentDelete(student.studno, student._id)}/></td>
-                            </tr>
-                        )
-                        )}
-                    </tbody>
+                    {/* Check if there are data available to display */}
+                    {data.length > 0 ? (
+                        <tbody>
+                            {data.map((student, index) => (
+                                <tr key = { index }>
+                                    <td className='student-name'>{student.name}</td>
+                                    <td className='student-number'>{student.studno}</td>
+                                    <td className='student-degree'>{student.degprog}</td>
+                                    <td className='student-gwa'>{student.gwa}</td>
+                                    {/* <td className='student-status'><Status status={student.status}/></td> */}
+                                    <td className='students-status'>
+                                        <div data-status={student.status} className='status'></div>
+                                    </td>
+                                    <td className='student-action'><Actions handleEdit={() => studentEdit(student._id, student.studno)} handleDelete={() => studentDelete(student.studno, student._id)}/></td>
+                                </tr>
+                            )
+                            )}
+                        </tbody>
+                    ) : (
+                        <div className='flex items-center justify-center h-[65.73130193905817vh]'>
+                            <div className='text-lg xl:text-xl font-bold font-bold font-montserrat'>
+                                No available data to display.
+                            </div>
+                        </div>
+                    )}
                 </table>
             </>
         )
