@@ -40,6 +40,30 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         History: <History historyData={historyState} />,          // history component
     }
 
+    // update HistoryState by adding new history to its date
+    const setHistory = (histObj) => {
+
+        let history = [...historyState]
+        let newDateFlag = false
+
+        // insert new values to grades
+        for (let i = 0; i < history.length; i++){
+            if(history[i].date == histObj.date){
+                //console.log(values)
+                history[i].info.unshift(histObj.info[0])
+                break
+            }
+
+            if(i == history.length - 1){
+                history.push(histObj)
+            }
+        }
+        
+        console.log(history)
+        // set new value of history
+        setHistoryState(history)
+    }
+
     const histAdd = (histObj) => {
         // function for adding to history
         // function to be passed to other child components that will update the state
@@ -90,7 +114,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                     <div className="w-[60vw] flex-1 overflow-auto mx-auto bg-white">
                         {   // map grades per semester
                             gradeState.map((semData, idx)=>(
-                                <Table key={idx} Name={semData.sem} Semester={semData.data} Total={semData.total} handler={setGradeState} history={historyState} historyHandler={histAdd} autoSet={autoSet}/>
+                                <Table key={idx} Name={semData.sem} Semester={semData.data} Total={semData.total} handler={setGradeState} history={historyState} historyHandler={setHistory} autoSet={autoSet}/>
                             ))
                         }
                     </div>
