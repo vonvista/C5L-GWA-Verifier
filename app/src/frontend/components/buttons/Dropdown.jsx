@@ -72,7 +72,7 @@ const Dropdown = ({ studentInfo, grades }) => {
 
         >
           <p className="pl-1.5 m-0 inline-block grow text-center text-white">
-            {valueClicked}
+            Actions
           </p>
         </button>
         <button

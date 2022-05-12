@@ -39,7 +39,7 @@ const Search = ({
   return (
     <>
       <div className="relative">
-        <div className="absolute inset-y-0 right-0 flex items-center px-2">
+        <div className="absolute inset-y-0 left-[83%] flex items-center px-2">
           <Input
             labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
             labelVal="Password" // label text
