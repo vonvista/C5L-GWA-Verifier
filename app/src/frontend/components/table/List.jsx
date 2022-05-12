@@ -108,10 +108,6 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                 ({units}) => !isNaN(units) || {units: 'Invalid value'},
                                 ({grade}) => isRequired(grade) || {grade: 'This is required'},
                                 ({grade}) => !isNaN(grade) || {grade: 'Invalid value'},
-                                ({enrolled}) => isRequired(enrolled) || {enrolled: 'This is required'},
-                                ({enrolled}) => !isNaN(enrolled) || {enrolled: 'Invalid value'},
-                                ({runningSum}) => isRequired(runningSum) || {runningSum: 'This is required'},
-                                ({runningSum}) => !isNaN(runningSum) || {runningSum: 'Invalid value'},   
                             ]
                             
                             // State and hook to handle inline editing of data
@@ -134,7 +130,8 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                 <Fragment key={index}>
                                     {isEdit ?
                                         <EditRow 
-                                            data={values} 
+                                            dataDynamic={values}
+                                            dataStatic={course} 
                                             changeHandler={changeHandler} 
                                             onSubmit={submitHandler} 
                                             toggleHandler={cancelEdit} 

@@ -96,16 +96,16 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         semHandler(newSemData)
     }
 
-    const setHistory = (justification) => { // logs action of editing a row to history
+    const setHistory = (detailsObj) => { // logs action of editing a row to history
         let currHistory = [...history] // make copy of current array of history logs
         const newHistObj = {
             date: currentDate,
             info: [
                 {
-                main: 'Modified Grades Row',    // to implement: detecting of what changes were made
-                user: 'insert username here',
-                time: currentTime,
-                details: justification,         // place justificiation into details
+                    main: detailsObj.title,            
+                    user: 'insert username here',       // TODO: username 
+                    time: currentTime,
+                    details: detailsObj.desc,         
                 },
             ],
         }
