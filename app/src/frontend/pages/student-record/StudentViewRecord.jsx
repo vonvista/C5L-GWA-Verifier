@@ -22,7 +22,7 @@ const detailStyle = {
     text: "table-cell text-left text-xl 2xl:text-2xl font-bold",
 }
 
-const RecordPage = ({sem, user, student, notes, history, status, grades, checklist, autoSet}) => {
+const RecordPage = ({sem, user, student, notes, history, status, grades, checklist}) => {
 
     // pass details and other data through props to this component
     
@@ -39,7 +39,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         setNotesState(newNotes)
     }
 
-    
+
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
         // uses components as values
@@ -74,6 +74,48 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         setHistoryState(history)
     }
 
+    // update grade table on addrow, editrow, deleterow changes
+    const setGrades = (values) => {
+
+        let grades = [...gradeState]
+        let total = 0
+        let cumulative = 0
+        let weight = 0
+
+        // insert new values to grades
+        for (let i = 0; i < grades.length; i++){
+            if(grades[i].sem == values.sem){
+            //console.log(values)
+            grades[i] = values
+            break
+            }
+        }
+
+
+        for (let i = 0; i < grades.length; i++){
+
+            for (let j = 0; j < grades[i].data.length; j++){
+
+            // compute total unit per sem, weight, and cumulative
+            weight = parseFloat(grades[i].data[j].units) * parseFloat(grades[i].data[j].grade)
+            if(isNaN(weight)){
+                weight = 0;
+            }
+            cumulative += weight
+            total += parseFloat(grades[i].data[j].units)
+
+            grades[i].data[j].enrolled = weight.toString()
+            grades[i].data[j].runningSum = cumulative.toString()
+            }
+
+            grades[i].total = total
+            total = 0
+        }
+        //console.log(grades)
+        // set new value of props
+        setGradeState(grades)
+    }
+    
     // const histAdd = (histObj) => {
     //     // function for adding to history
     //     // function to be passed to other child components that will update the state
@@ -111,7 +153,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                     </div>
 
                     <div className="w-1/5 flex items-center">
-                        <ActionsBtn />
+                        <ActionsBtn studentInfo={selectedStudent} grades={gradeState}/>
                     </div>
 
 
@@ -124,7 +166,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                     <div className="w-[60vw] flex-1 overflow-auto mx-auto bg-white">
                         {   // map grades per semester
                             gradeState.map((semData, idx)=>(
-                                <Table key={idx} Name={semData.sem} Semester={semData.data} Total={semData.total} handler={setGradeState} history={historyState} historyHandler={setHistory} autoSet={autoSet}/>
+                                <Table key={idx} Name={semData.sem} Semester={semData.data} Total={semData.total} handler={setGradeState} history={historyState} historyHandler={setHistory} autoSet={setGrades}/>
                             ))
                         }
                     </div>
