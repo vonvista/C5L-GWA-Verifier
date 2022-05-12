@@ -6,7 +6,7 @@ import 'tailwindcss/tailwind.css'
 
 const EditRow = ({dataDynamic, dataStatic, changeHandler, onSubmit, toggleHandler, touched, errors, valid, histHandler}) => {
 
-    const inputStyle = `block box-border focus:outline-none border-b border-sr-disabled-green transition ease-out delay-100 focus:transition focus:ease-in-out focus:delay-100 focus:border-b focus:border-login-green`
+    const inputStyle = `block box-border focus:outline-none text-sr-dark-text border-b border-sr-disabled-green transition ease-out delay-100 focus:transition focus:ease-in-out focus:delay-100 focus:border-b focus:border-login-green`
     const errorStyle= `block text-sm inter text-secondary-red`
     const centerInput= `w-1/3 text-center mx-auto`
 
@@ -62,8 +62,8 @@ const EditRow = ({dataDynamic, dataStatic, changeHandler, onSubmit, toggleHandle
             </div>
             
             {/* non-editable row items */}
-            <div className="table-cell w-1/6 align-middle text-center">{dataStatic.enrolled} </div>
-            <div className="table-cell w-1/6 align-middle text-center">{dataStatic.runningSum}</div>
+            <div className="table-cell w-1/6 align-middle text-center text-sr-dark-text">{dataStatic.enrolled} </div>
+            <div className="table-cell w-1/6 align-middle text-center text-sr-dark-text">{dataStatic.runningSum}</div>
 
             <div className="table-cell w-1/6 align-middle text-center">
                 {/* <button type="submit" disabled={!valid}>Save</button>

@@ -9,12 +9,12 @@ const ReadRow = ({data, clickHandler, delHandler}) => {
 
     return(
         <div className="table-row">
-            <div className="table-cell align-middle self-center">{data.courseName}</div>
-            <div className="table-cell align-middle self-center text-center">{data.units}</div>
-            <div className="table-cell align-middle self-center text-center">{data.grade}</div>
-            <div className="table-cell align-middle self-center text-center">{data.enrolled}</div>
-            <div className="table-cell align-middle self-center text-center">{data.runningSum}</div>
-            <div className="table-cell align-middle self-center text-center">
+            <div className="table-cell align-middle self-center text-sr-dark-text">{data.courseName}</div>
+            <div className="table-cell align-middle self-center text-sr-dark-text text-center">{data.units}</div>
+            <div className="table-cell align-middle self-center text-sr-dark-text text-center">{data.grade}</div>
+            <div className="table-cell align-middle self-center text-sr-dark-text text-center">{data.enrolled}</div>
+            <div className="table-cell align-middle self-center text-sr-dark-text text-center">{data.runningSum}</div>
+            <div className="table-cell align-middle self-center text-sr-dark-text text-center">
                 <Actions handleEdit={clickHandler} handleDelete={delRow}/>
             </div>
         </div>

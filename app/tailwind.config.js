@@ -21,6 +21,7 @@ module.exports = {
         'sr-divider-light': '#f0f0f0',
         'sr-disabled-green': '#80BE99',
         'sr-table-name': '#424242',
+        'sr-dark-text': '#2f2f2f'
       },
       fontFamily: {
         montserrat: ['Montserrat'],
