@@ -58,7 +58,7 @@ const ChecklistDetail = ({ icon, detail }) => {
         </div>
       )}
       {/* Detail */}
-      <span className="ml-2 text-[1.05vw] font-inter">{detail}</span>
+      <span className="ml-2 text-lg font-inter">{detail}</span>
     </div>
   );
 };
