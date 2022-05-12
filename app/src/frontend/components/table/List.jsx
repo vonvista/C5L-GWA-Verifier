@@ -19,7 +19,7 @@ import 'tailwindcss/tailwind.css';
 
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
-const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, delHandler, handleHistory, handleDeleteRecord, handleEditRecord, addHandler }) => {
+const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, delHandler, handleHistory, handleDeleteRecord, handleEditRecord, addHandler, histHandler }) => {
 
 
     const [totalUnits, setTotal] = useState(total)
@@ -83,7 +83,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
 
     // Table for displaying the student's summary of grades for a given semester 
     // To be used for Student Record View Page
-    const SemRecord = ({ total, sem, data, dataHandler, delHandler, histHandler, addHandler }) => {
+    const SemRecord = ({ total, sem, data, dataHandler, delHandler, histHandler, addHandler, historyHandler}) => {
 
         return (
             <>  
@@ -96,7 +96,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             <div className="table-cell w-1/6 text-center">Grade</div>
                             <div className="table-cell w-1/6 text-center">Enrolled</div>
                             <div className="table-cell w-1/6 text-center"></div>
-                            <div className="table-cell w-1/6 text-center"><AddRow sem={sem} addHandler={addHandler}/></div>
+                            <div className="table-cell w-1/6 text-center"><AddRow sem={sem} addHandler={addHandler} histHandler={historyHandler}/></div>
                         </div>
                     </div>
                     <div className="table-row-group">
@@ -284,6 +284,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
     // Function for Displaying the Student List on the Dashboard
     const StudentList = ({ data, setRows, changeSort, sortState, handleDeleteRecord }) => {
         useEffect(() => {
+            console.log(data)
             console.log(sortState)
         })
 
@@ -338,7 +339,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             }`} onClick={() => changeSort(0)}>Name</th>
                             <th className={`student-number ${
                                 sortState[1] === 0 ? "" : sortState[1] === 1 ? "th-sort-asc" : "th-sort-desc" 
-                            }`} onClick={() => changeSort(1)}>Student Num</th>
+                            }`} onClick={() => changeSort(1)}>Student No.</th>
                             <th className={`student-degree ${
                                 sortState[2] === 0 ? "" : sortState[2] === 1 ? "th-sort-asc" : "th-sort-desc" 
                             }`} onClick={() => changeSort(2)}>Degree Program</th>
@@ -349,22 +350,31 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             <th className='student-action'>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {data.map((student, index) => (
-                            <tr key = { index }>
-                                <td className='student-name'>{student.name}</td>
-                                <td className='student-number'>{student.studno}</td>
-                                <td className='student-degree'>{student.degprog}</td>
-                                <td className='student-gwa'>{student.gwa}</td>
-                                {/* <td className='student-status'><Status status={student.status}/></td> */}
-                                <td className='students-status'>
-                                    <div data-status={student.status} className='status'></div>
-                                </td>
-                                <td className='student-action'><Actions handleEdit={() => studentEdit(student._id, student.studno)} handleDelete={() => studentDelete(student.studno, student._id)}/></td>
-                            </tr>
-                        )
-                        )}
-                    </tbody>
+                    {/* Check if there are data available to display */}
+                    {data.length > 0 ? (
+                        <tbody>
+                            {data.map((student, index) => (
+                                <tr key = { index }>
+                                    <td className='student-name'>{student.name}</td>
+                                    <td className='student-number'>{student.studno}</td>
+                                    <td className='student-degree'>{student.degprog}</td>
+                                    <td className='student-gwa'>{student.gwa}</td>
+                                    {/* <td className='student-status'><Status status={student.status}/></td> */}
+                                    <td className='students-status'>
+                                        <div data-status={student.status} className='status'></div>
+                                    </td>
+                                    <td className='student-action'><Actions handleEdit={() => studentEdit(student._id, student.studno)} handleDelete={() => studentDelete(student.studno, student._id)}/></td>
+                                </tr>
+                            )
+                            )}
+                        </tbody>
+                    ) : (
+                        <div className='flex items-center justify-center h-[65.73130193905817vh]'>
+                            <div className='text-lg xl:text-xl font-bold font-bold font-montserrat'>
+                                No available data to display.
+                            </div>
+                        </div>
+                    )}
                 </table>
             </>
         )
@@ -378,7 +388,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         )
     } else if(table == 2) {
         return (
-            <SemRecord total={totalUnits} sem={sem} data={data} dataHandler={dataHandler} delHandler={delHandler} histHandler={handleHistory} addHandler={addHandler}/>
+            <SemRecord total={totalUnits} sem={sem} data={data} dataHandler={dataHandler} delHandler={delHandler} histHandler={handleHistory} addHandler={addHandler} historyHandler={histHandler}/>
         )
     } else if(table == 3) {
         return (

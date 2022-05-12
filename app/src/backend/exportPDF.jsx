@@ -49,37 +49,59 @@ function organizeRecord(info, grades){
 
     // storage of data to be exported
     let finalExportData = {
-        studentNo: info.StudentID,
-        name: `${info.FirstName} ${info.MiddleName} ${info.LastName}`,
-        program: info.Degree,
+        studentNo: info.stud_no,
+        name: info.name,
+        program: info.degree_program,
         grades: [],
-        cumulative: info.TotalCumulative,
-        gwa: info.OverallGWA, 
-        totalunits: info.TotalUnits,
-        totalunits2: info.TotalUnits2,
+        gwa: 0, 
     };
 
     // reformat grades to be jspdf-autotable ready
     let reGrades = [];
+    let totalUnits = 0;
     //console.log(grades)
-    for ( let i = 0 ; i < grades.length ; i++ ){
-        
-        reGrades.push([grades[i].Course, grades[i].Grade, grades[i].Unit, grades[i].Weight, grades[i].Cumulative, '', grades[i].Semyear]);
-    }
+    for (let i = 0; i < grades.length; i++){
+        for (let j = 0; j < grades[i].data.length; j++){
+            reGrades.push([
+                grades[i].data[j].courseName,
+                grades[i].data[j].grade,
+                grades[i].data[j].units,
+                grades[i].data[j].enrolled,
+                grades[i].data[j].runningSum,
+                // grades[i].data.Course, 
+                // grades[i].data.Grade, 
+                // grades[i].Unit, 
+                // grades[i].Weight, 
+                // grades[i].Cumulative, 
+                // '', 
+                // grades[i].Semyear
+            ]);
 
-    // removes the duplicates on the last 2 columns
-    for ( let i = 0 ; i < finalExportData.grades.length ; i++ ){
-        if (i + 1 != finalExportData.grades.length){
-            if (finalExportData.grades[i][6] == finalExportData.grades[i+1][6]){
-                finalExportData.grades[i][5] = ''
-                finalExportData.grades[i][6] = ''
+            if (grades[i].data[j].units != '0'){
+                totalUnits += parseFloat(grades[i].data[j].units)
             }
         }
+
+        // add total units per sem and semester 
+        reGrades[ reGrades.length - 1 ].push(grades[i].total)
+        reGrades[ reGrades.length - 1 ].push(grades[i].sem)
     }
+
+    let cumulative = parseFloat(reGrades[ reGrades.length - 1 ][4])
+    // // removes the duplicates on the last 2 columns
+    // for ( let i = 0 ; i < finalExportData.grades.length ; i++ ){
+    //     if (i + 1 != finalExportData.grades.length){
+    //         if (finalExportData.grades[i][6] == finalExportData.grades[i+1][6]){
+    //             finalExportData.grades[i][5] = ''
+    //             finalExportData.grades[i][6] = ''
+    //         }
+    //     }
+    // }
 
     // store grades
     finalExportData.grades = reGrades
-    finalExportData.grades.push(['', finalExportData.totalunits, '', '', finalExportData.cumulative, '', ''])
+    finalExportData.grades.push(['', totalUnits, '', '', cumulative, '', ''])
+    finalExportData.gwa = cumulative / totalUnits
 
     return finalExportData
 } 
@@ -222,7 +244,7 @@ function exportStudentData(info, grades, user){
     doc = addWaterMark(doc, user)
     
     // download pdf
-    doc.save(`${exportData.name}_${exportData.program}_summary`)
+    doc.save(`${exportData.name.replaceAll(".", "").replaceAll(",", "").replaceAll(" ", "_")}_${exportData.program}_summary`)
 }
 
 export default exportStudentData;

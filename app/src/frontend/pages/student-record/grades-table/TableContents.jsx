@@ -15,10 +15,13 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
     const [rows, setRows] = useState([]);
     const [semData, semHandler] = useState(Semester);
     const [currStudentID, setcurrStudentID] = useState(localStorage.getItem('currStudentID'));
-    const current = new Date(); //variable which will get current date and time
-    const currentTime = `${current.getHours()}:${current.getMinutes()}`; //variable containing current time
-    const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`; //variable containing current date
+    // const current = new Date(); //variable which will get current date and time
+    // const currentTime = `${current.getHours()}:${current.getMinutes()}`; //variable containing current time
+    // const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`; //variable containing current date
+    // const [currDate, setDate] = useState('')
+    // const [currTime, setTime] = useState('')
     const [totalUnits, setTotal] = useState(Total)
+    const [userName, setUserName] = useState(localStorage.getItem("Username"));
 
     useEffect(() => {
         const fetchData = async () => {
@@ -51,7 +54,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         let newSemData = [...semData]
         newSemData[targetIndex] = values
         
-        gradeCredentials = {
+        const gradeCredentials = {
             Student: currStudentID,
             Course: values.courseName,
             Grade: values.grade,
@@ -63,10 +66,16 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         }
 
         const historyCredentials = {
-            User: "User",
-            Student: "Student",
-            Date: currentDate,
-            Time: currentTime,
+            User: userName,
+            Student: currStudentID,
+            // Date: currentDate,
+            // Time: currentTime,
+            Date: new Date().toLocaleDateString(),
+            Time: new Date().toLocaleTimeString('en-US', { 
+                hour12: false, 
+                hour: "numeric", 
+                minute: "numeric"
+            }),
             Description: 'update',
             Details: "Sample Details"
         };
@@ -98,14 +107,19 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
 
     const setHistory = (justification) => { // logs action of editing a row to history
         let currHistory = [...history] // make copy of current array of history logs
+
         const newHistObj = {
-            date: currentDate,
+            date: new Date().toLocaleDateString(),
             info: [
                 {
-                main: 'Modified Grades Row',    // to implement: detecting of what changes were made
-                user: 'insert username here',
-                time: currentTime,
-                details: justification,         // place justificiation into details
+                    main: 'Modified Grades Row',    // to implement: detecting of what changes were made
+                    user: 'insert username here',
+                    time: new Date().toLocaleTimeString('en-US', { 
+                        hour12: false, 
+                        hour: "numeric", 
+                        minute: "numeric"
+                    }),
+                    details: justification,         // place justificiation into details
                 },
             ],
         }
@@ -159,7 +173,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
                             
                             {/* Accordion Contents */}
                             <Disclosure.Panel className="inter z-0 pl-5 py-3 mb-2 text-sm text-gray-500 rounded-b-lg shadow-lg">
-                                <List table={2} total={Total} sem={Name} data={semData} dataHandler={setData} delHandler={delData} handleHistory={setHistory} addHandler={addData}/>
+                                <List table={2} total={Total} sem={Name} data={semData} dataHandler={setData} delHandler={delData} handleHistory={setHistory} addHandler={addData} histHandler={historyHandler}/>
                                 <section className="mt-3">
                                     <span className="font-black">Load Status</span>
                                     {( Total <= 20 )

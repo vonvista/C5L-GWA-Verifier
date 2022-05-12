@@ -1,8 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import Swal from 'sweetalert2'
 
 /* Components */
 import Add from 'frontend/components/buttons/AddRowBtn.jsx';
+import Justification from './Justification';
 
 /* CSS */
 import 'tailwindcss/tailwind.css';
@@ -10,21 +12,32 @@ import './AddRow.css';
 
 /* Function for the "Add Row" feature in the Student View Record page */
 /* Initially shows an "Add" button and prompts the modal window after clicking it */
-const AddRow = ({ sem, addHandler }) => {
+const AddRow = ({ sem, addHandler, histHandler }) => {
     const [openModal, setOpenModal] = useState(false);
     const [courseName, setCourseName] = useState('');
     const [units, setUnits] = useState('');
     const [grade, setGrade] = useState('');
-    const [enrolled, setEnrolled] = useState('');
-    const [runningGWA, setRunningGWA] = useState('');
-    
+    // const [currDate, setDate] = useState('');
+    // const [currTime, setTime] = useState('');
+    const [userName, setUserName] = useState(localStorage.getItem("Username"));
+    const [studentID, setStudentID] = useState(localStorage.getItem("currStudentID"));
+    /* const [enrolled, setEnrolled] = useState('');
+    const [runningGWA, setRunningGWA] = useState(''); */
+
+    const resetInputFields = () => {
+        setOpenModal(false);
+        setCourseName('');
+        setUnits('');
+        setGrade('');
+    }
 
     // function for adding new history after adding new row
     function handleHistory(data){
+
         // new history
-        newHistory = {
-            User: localStorage.getItem("Username"),
-            Student: localStorage.getItem("currStudentID"),
+        let newHistory = {
+            User: userName,
+            Student: studentID,
             Date: new Date().toLocaleDateString(),
             Time: new Date().toLocaleTimeString('en-US', { 
                 hour12: false, 
@@ -35,6 +48,19 @@ const AddRow = ({ sem, addHandler }) => {
             Details: `create student grade with Course: ${data.Course} on Sem: ${data.Semyear}`,
         }
 
+        let updateHistory = {
+            date: newHistory.Date,
+            info: [
+                {
+                main: 'create',
+                user: userName,
+                time: newHistory.Time,
+                details: newHistory.Details,
+                },
+            ],
+        }
+
+        histHandler(updateHistory);
         // adds new row to the list
         addHandler({
             _id : data._id,
@@ -65,6 +91,19 @@ const AddRow = ({ sem, addHandler }) => {
 
     // handles adding grade to DB
     const handleAddGrade = () => {
+        // Check if user has filled out all fields
+        if(
+            courseName === "" || 
+            units === "" || 
+            grade === ""
+          ) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Fill out all fields',
+            })
+            return
+          }
 
         // new grade from the AddRow modal
         newGrade = {
@@ -72,8 +111,8 @@ const AddRow = ({ sem, addHandler }) => {
             Course: courseName,
             Unit: parseFloat(units),
             Grade: grade,
-            Weight: parseFloat(enrolled),
-            Cumulative: parseFloat(runningGWA),
+            Weight: 0,
+            Cumulative: 0,
             Semyear: sem
         }
 
@@ -139,22 +178,22 @@ const AddRow = ({ sem, addHandler }) => {
                             }}
 
                             className='add-row-modal'>
-                            <motion.div className="add-row-modal-content">
-                            {/* Baybayin Background Image */}
-                            <motion.div className="bg-baybayin add-row-baybayin-style"></motion.div>
+                                <motion.div className="add-row-modal-content">
+                                {/* Baybayin Background Image */}
+                                <motion.div className="bg-baybayin add-row-baybayin-style"></motion.div>
 
-                            {/* content */}
+                                {/* content */}
                                 <motion.div className='add-row-modal-body'>
                                     {/* title */}
                                     <motion.div className='add-row-modal-close text-white float-right'>
-                                        <button onClick={() => {setOpenModal(false)}}>
+                                        <button onClick={resetInputFields}>
                                             <span>&times;</span>
                                         </button>
                                     </motion.div>
                                     <motion.div className='add-row-modal-title text-white text-center'>Please fill in the fields below to insert a new row</motion.div>
 
                                     {/* input form */}
-                                    <form className='add-row-modal-inputs flex'>
+                                    <form className='add-row-modal-inputs flex items-center justify-center'>
                                         {/* course name */}
                                         <motion.div className='add-row-input-container'>
                                             <section className='inline-block add-row-section-coursename'>
@@ -174,7 +213,7 @@ const AddRow = ({ sem, addHandler }) => {
                                             <section className='inline-block add-row-section-units'>
                                                 <input 
                                                     className='add-row-input-style'
-                                                    type="text"
+                                                    type="number"
                                                     name="units"
                                                     placeholder='0'
                                                     onChange={(e) => setUnits(e.target.value)}
@@ -188,7 +227,7 @@ const AddRow = ({ sem, addHandler }) => {
                                             <section className='inline-block add-row-section-grade'>
                                                 <input 
                                                     className='add-row-input-style'
-                                                    type="text"
+                                                    type="number"
                                                     name="grade"
                                                     placeholder='0'
                                                     onChange={(e) => setGrade(e.target.value)}
@@ -197,12 +236,12 @@ const AddRow = ({ sem, addHandler }) => {
                                             </section>
                                         </motion.div>
 
-                                        {/* enrolled */}
-                                        <motion.div className='add-row-input-container'>
+                                        
+                                        {/* <motion.div className='add-row-input-container'>
                                             <section className='inline-block add-row-section-enrolled'>
                                                 <input 
                                                     className='add-row-input-style'
-                                                    type="text"
+                                                    type="number"
                                                     name="enrolled"
                                                     placeholder='0'
                                                     onChange={(e) => setEnrolled(e.target.value)}
@@ -211,7 +250,7 @@ const AddRow = ({ sem, addHandler }) => {
                                             </section>
                                         </motion.div>
 
-                                        {/* running gwa */}
+                                        
                                         <motion.div className='add-row-input-container'>
                                             <section className='inline-block add-row-section-runningGWA'>
                                                 <input 
@@ -223,12 +262,13 @@ const AddRow = ({ sem, addHandler }) => {
                                                 />
                                                 <motion.div className='w-full text-white text-center'>Running GWA</motion.div>
                                             </section>
-                                        </motion.div>
+                                        </motion.div> */}
+
                                     </form>
                                     {/* save and discard buttons */}
-                                    <motion.div className='add-row-modal-footer'>
-                                        <button className='add-row-modal-btn add-row-btn-discard text-center' onClick={() => {setOpenModal(false)}}>Discard</button>
-                                        <button className='add-row-modal-btn add-row-btn-save text-white' onClick={handleAddGrade}>Save changes</button>
+                                    <motion.div className='add-row-modal-footer flex items-end justify-end'>                                        
+                                        <button className='add-row-modal-btn add-row-btn-discard text-center' onClick={resetInputFields}>Discard</button>
+                                        <button className='add-row-modal-btn add-row-btn-save text-center text-white' onClick={handleAddGrade}>Save</button>
                                     </motion.div>
                                 </motion.div>
                             </motion.div>
