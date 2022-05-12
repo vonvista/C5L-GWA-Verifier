@@ -6,7 +6,7 @@ import Delete from '../../../../../../assets/icons/delete.svg';
 // functional component for notes tab in student record view page
 // -- props will be for placing values into the page
 
-export default function NotesTab({notes, semesters}) { 
+export default function NotesTab({notes, semesters, notesHandler}) { 
     const [notesList, setNotesList] = useState(notes)
     const [selectedSem, setSelectedSem] = useState(semesters[0])    // state controller for selecting sem notes 
                                                                     // uses first object as default
@@ -29,6 +29,7 @@ export default function NotesTab({notes, semesters}) {
             newNotesList = [...notesList, newNote]      // add new note at the end of notesList
         }
         
+        notesHandler(newNote)
         setNotesList(newNotesList)
 	}
 

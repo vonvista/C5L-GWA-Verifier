@@ -17,6 +17,10 @@ const AddRow = ({ sem, addHandler, histHandler }) => {
     const [courseName, setCourseName] = useState('');
     const [units, setUnits] = useState('');
     const [grade, setGrade] = useState('');
+    // const [currDate, setDate] = useState('');
+    // const [currTime, setTime] = useState('');
+    const [userName, setUserName] = useState(localStorage.getItem("Username"));
+    const [studentID, setStudentID] = useState(localStorage.getItem("currStudentID"));
     /* const [enrolled, setEnrolled] = useState('');
     const [runningGWA, setRunningGWA] = useState(''); */
 
@@ -29,10 +33,11 @@ const AddRow = ({ sem, addHandler, histHandler }) => {
 
     // function for adding new history after adding new row
     function handleHistory(data){
+
         // new history
-        newHistory = {
-            User: localStorage.getItem("Username"),
-            Student: localStorage.getItem("currStudentID"),
+        let newHistory = {
+            User: userName,
+            Student: studentID,
             Date: new Date().toLocaleDateString(),
             Time: new Date().toLocaleTimeString('en-US', { 
                 hour12: false, 
@@ -43,6 +48,19 @@ const AddRow = ({ sem, addHandler, histHandler }) => {
             Details: `create student grade with Course: ${data.Course} on Sem: ${data.Semyear}`,
         }
 
+        let updateHistory = {
+            date: newHistory.Date,
+            info: [
+                {
+                main: 'create',
+                user: userName,
+                time: newHistory.Time,
+                details: newHistory.Details,
+                },
+            ],
+        }
+
+        histHandler(updateHistory);
         // adds new row to the list
         addHandler({
             _id : data._id,
@@ -93,8 +111,8 @@ const AddRow = ({ sem, addHandler, histHandler }) => {
             Course: courseName,
             Unit: parseFloat(units),
             Grade: grade,
-            // Weight: parseFloat(enrolled),
-            // Cumulative: parseFloat(runningGWA),
+            Weight: 0,
+            Cumulative: 0,
             Semyear: sem
         }
 
