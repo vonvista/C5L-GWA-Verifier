@@ -29,17 +29,27 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const [selectedStudent, setSelectedStudent] = useState(student)
     const [statusState, setStatus] = useState(status)
     const [gradeState, setGradeState] = useState(grades)
+    const [notesState, setNotesState] = useState(notes)
     const [historyState, setHistoryState] = useState(history)
 
+
+    // handles changes for notes
+    const setNotes = (notesObj) => {
+        let newNotes = [...notesState, notesObj]
+        setNotesState(newNotes)
+    }
+
+    
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
         // uses components as values
         Status: <Status state={statusState} />,                   // status component
         Validations: <CheckList checklistData={checklist} />,   //checklist component
-        Notes: <Notes notes={notes} semesters={gradeState} />,    // notes component
+        Notes: <Notes notes={notesState} semesters={gradeState} notesHandler={setNotes} />,    // notes component
         History: <History historyData={historyState} />,          // history component
     }
 
+    
     // update HistoryState by adding new history to its date
     const setHistory = (histObj) => {
 
@@ -64,13 +74,13 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         setHistoryState(history)
     }
 
-    const histAdd = (histObj) => {
-        // function for adding to history
-        // function to be passed to other child components that will update the state
-        // this function has to be in the parent component so that history tab will update
-        let newHist = [...historyState, histObj]
-        setHistoryState(newHist)
-    }
+    // const histAdd = (histObj) => {
+    //     // function for adding to history
+    //     // function to be passed to other child components that will update the state
+    //     // this function has to be in the parent component so that history tab will update
+    //     let newHist = [...historyState, histObj]
+    //     setHistoryState(newHist)
+    // }
 
     return(
         <main>
