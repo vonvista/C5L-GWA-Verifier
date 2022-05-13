@@ -5,7 +5,7 @@ import 'tailwindcss/tailwind.css';
 // handleClick prop: function to handle click event
 // used for buttons like Terms of Service in the login page
 const TextBtn = ({ text, handleClick }) => {
-  const textClass = `w-30 h-10 hover:text-stone-100 rounded-lg`;
+  const textClass = `w-30 h-10 hover:text-stone-100 font-poppins rounded-lg`;
   return (
     <>
       <button className={textClass} type="button" onClick={handleClick}>
