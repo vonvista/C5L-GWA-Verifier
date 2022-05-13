@@ -1,5 +1,9 @@
 import Actions from 'frontend/components/buttons/Actions'
 
+// component that displays a static view of the data in the row the grades table
+// -- data : contains data to be displayed
+// -- clickHandler : handles toggle for editing the row
+// -- delRow : handles toggle for deleting the row
 const ReadRow = ({data, clickHandler, delHandler}) => {
 
     const delRow = () => { 

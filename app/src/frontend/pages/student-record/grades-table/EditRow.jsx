@@ -3,6 +3,15 @@ import Actions from 'frontend/components/buttons/Actions'
 import Input from 'frontend/components/inputs/Input'
 import 'tailwindcss/tailwind.css'
 
+// Component that is active when the row of the grades table is being edited
+// -- dataDynamic : values that are being edited in real time
+// -- dataStatic : values that will only updated when values in the row are saved
+// -- changeHandler : holds the changeHandler for the inpouts
+// -- toggleHandler : holds the toggling of whether to show the editRow component or not
+// -- touched : holds object that tells whether an input has been touched
+// -- errors : holds errors when invalid inputs are given
+// -- valid : checks if given data is valid or not
+// -- histHandler : handles the recording of an action to the history log
 
 const EditRow = ({dataDynamic, dataStatic, changeHandler, onSubmit, toggleHandler, touched, errors, valid, histHandler}) => {
 

@@ -5,7 +5,6 @@ import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 
 /* Components */
 import ActionsBtn from 'frontend/components/buttons/Dropdown';
-import SemSelect from 'frontend/components/inputs/DropdownSelect';
 import Status from './tabbed-components/status/Status';
 import Notes from './tabbed-components/notes/Notes';
 import History from './tabbed-components/history/StudentRecordHistory';
@@ -17,13 +16,18 @@ import 'tailwindcss/tailwind.css';
 import './StudentViewRecord.css';
 
 
-// styling for student detail header
-const detailStyle = {
-    title: "table-cell text-left text-sm 2xl:text-xl",
-    text: "table-cell text-left text-xl 2xl:text-2xl font-bold",
-}
+// This component contains all the elements of the student record page
+// such as the student details header, the grades table, and the status tab
+// -- user : details about who is editing the document
+// -- student : contains details of the student (studnumber, name, degree program, status)
+// -- notes : data of per semester notes that can be edited or deleted
+// -- history : data of changes done on given record
+// -- status : whether verified or not
+// -- grades : object containing grades of students divided per semester
+// -- checklist : list of requirements the student needs to accomplish before being verified
+// -- autoSet:
 
-const RecordPage = ({sem, user, student, notes, history, status, grades, checklist, autoSet}) => {
+const RecordPage = ({user, student, notes, history, status, grades, checklist, autoSet}) => {
 
     // pass details and other data through props to this component
     
@@ -73,6 +77,11 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         // this function has to be in the parent component so that history tab will update
         let newHist = [...historyState, histObj]
         setHistoryState(newHist)
+    }
+
+    const detailStyle = { // styling for student detail header
+        title: "table-cell text-left text-sm 2xl:text-xl",
+        text: "table-cell text-left text-xl 2xl:text-2xl font-bold",
     }
 
     return(

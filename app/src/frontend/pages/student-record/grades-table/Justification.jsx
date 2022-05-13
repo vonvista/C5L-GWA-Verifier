@@ -3,7 +3,7 @@ import { Fragment, useState, useEffect } from 'react';
 import { useForm, isRequired } from '../../../hooks/useForm';
 import Input from 'frontend/components/inputs/Input';
 
-// component from: https://headlessui.dev/react/dialog
+// component that creates a modal window for justification from: https://headlessui.dev/react/dialog
 
 const Justification = ({ modalState, modalHandler, parentSubmitHandler, histHandler }) => {
     /* how to use
@@ -12,19 +12,8 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, histHand
         modalState is 'true' or 'false'
         modalHandler is a function that will set modalState to false
 
-        submitHandler takes in a function that deals with submitting the values from the edited row
-        historyHandler is for giving the justification to the history and recording the changes
-    
-    */
-
-    /* 
-
-    TO DO:
-
-    Add input field for main description
-    When none of the inputs are touched justify cannot be saved
-    Link delete to append to history
-    
+        parentSubmitHandler takes in a function that deals with submitting the values from the edited row
+        histHandler is for giving the justification to the history and recording the changes
     
     */
 

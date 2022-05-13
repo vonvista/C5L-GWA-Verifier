@@ -7,6 +7,7 @@ import 'tailwindcss/tailwind.css';
 
 
 // This component handles the student's data for a specific semester
+
 const TableContents = ({ Name, Total, Semester, key, handler, history, historyHandler, autoSet }) => {
 
     // handler prop will handle pushing changes to parent

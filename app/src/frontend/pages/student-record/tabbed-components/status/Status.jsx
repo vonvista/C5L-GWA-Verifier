@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Verify from 'frontend/components/buttons/Verify'
 
-// status page
-
-// props will be for placing values into the status page
+// Component for status tab
+// -- state : data for the status tab will be passed here
+// -- ...rest : additional prop for backend expansion 
 
 export default function Status({state, ...rest}) {
 
