@@ -26,8 +26,8 @@ const AdminNav = () => {
     let navigate = useNavigate();
 
     const [hoverRef, isHovering] = useHover();
-    const [name, setName] = useState('');
     const [userName, setUserName] = useState('');
+    const [position, setPosition] = useState('');
 
     // removes local storage data and redirects to log in page
     function handleLogOut (){
@@ -45,16 +45,19 @@ const AdminNav = () => {
     }
 
     useEffect(() => {
-        // gets name and username from local storage
-        const tempName = localStorage.getItem("FirstName") + " " + localStorage.getItem("MiddleName") + " " + localStorage.getItem("LastName");
+        // gets username and position from local storage
         const tempUserName = localStorage.getItem("Username");
-        // updates name and username 
-        setName(tempName);
+        const tempPosition = localStorage.getItem("Position");
+
+        // updates username and position 
         setUserName(tempUserName);
-        // displays the name and username to the sidebar
-        document.getElementById("name").innerHTML = name; 
+        setPosition(tempPosition);
+
+        // displays the username and position to the sidebar
         document.getElementById("userName").innerHTML = tempUserName; 
-    }, [name,userName]);
+        document.getElementById("position").innerHTML = tempPosition;
+
+    }, [userName, position]);
     
 
     return (
@@ -76,7 +79,7 @@ const AdminNav = () => {
                 </div>
 
                 {/* User Account Details */}
-                <div className="flex xl:gap-x-2 1.75xl:gap-x-5 items-center">
+                <div className="flex xl:gap-x-2 1.75xl:gap-x-1 items-center">
                     
                     {/* User Icon */}
                     <img
@@ -89,8 +92,8 @@ const AdminNav = () => {
 
                     {/* User Information */}
                     <div className="flex-shrink-0">
-                        <div className="font-poppins"><strong id="name"></strong></div>
-                        <div id="userName" className="font-poppins"></div>
+                        <div className="font-poppins font-medium" id="userName"></div>
+                        <div id="position" className="font-poppins"></div>
                     </div>
                 </div>
                 
@@ -99,7 +102,7 @@ const AdminNav = () => {
                                 cursor-pointer grid grid-cols-1 duration-300 gap-[0.25vw] font-poppins font-medium`}>
                     
                     {/* Admin Dashboard */}
-                    <div className="inline-flex items-center py-1.5 gap-x-4 hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/user-dashboard')}}>
+                    <div className="inline-flex items-center py-2 gap-x-4 hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/user-dashboard')}}>
                         <div>
                             <svg className={` ${isHovering? "ml-7 1.5xl:ml-8 1.75xl:ml-8": "ml-3.5 xl:ml-5.5"} w-7 xl:w-8 duration-300 fill-current`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" >
                                 <path d="M33 19a1 1 0 0 1-.71-.29L18 4.41 3.71 18.71A1 1 0 0 1 2.3 17.3l15-15a1 1 0 0 1 1.41 0l15 15A1 1 0 0 1 33 19Z"/>
@@ -113,7 +116,7 @@ const AdminNav = () => {
                     </div>
 
                     {/* User Management */}
-                    <div className="inline-flex items-center mt-2 px-1 py-1.5 my-10 hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/user-management')}}>
+                    <div className="inline-flex items-center mt-2 px-1 py-2 my-10 hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/user-management')}}>
                         <div>
                             <svg className={` ${isHovering? "ml-6 1.5xl:ml-7":"ml-2.5 xl:ml-4"} w-7 xl:w-9 duration-300 fill-current`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
                                 <path d="M319.9 320c57.41 0 103.1-46.56 103.1-104s-46.54-104-103.1-104c-57.41 0-103.1 46.56-103.1 104-.9 57.4 45.7 104 103.1 104zm50 32h-99.8C191.6 352 128 411.7
