@@ -113,15 +113,15 @@ const Login = () => {
                 <div><img className="h-auto w-[30vw]" src={AppIcon} /></div>
 
                 {/* App Name */}
-                <div className="font-bold text-[3.5vw]">KALATAS:</div>
-                <div className="mt-1 text-[2.5vw]">CAS GWA Verifier</div>
+                <div className="font-poppins font-bold tracking-widest text-[3.5vw]">KALATAS:</div>
+                <div className="font-poppins tracking-wider mt-1 text-[2.5vw]">CAS GWA Verifier</div>
             </section>
 
             {/* Right Section */}
             <section className="flex-rows-4 h-screen relative bg-secondary-red">
 
                 {/* Page Title */}
-                <span className="flex justify-center pt-[12vh] text-[2.25vw] text-sidebar-text">User Login</span>
+                <span className="flex justify-center pt-[12vh] font-montserrat font-semibold text-[2.25vw] text-sidebar-text">User Login</span>
                 
                 <form className="justify-center pt-[8vh]" onSubmit={submitHandler}>
 
@@ -129,12 +129,12 @@ const Login = () => {
                     <div className="flex justify-center">               
                         
                         {/* Input form */}
-                        <div className="overflow-hidden w-1/2 text-[1.25vw] rounded-lg px-5 pb-2 pt-4 bg-white">
+                        <div className="overflow-hidden w-1/2 text-[1.25vw] font-montserrat rounded-lg px-5 pb-2 pt-4 bg-white">
                             <div className="pb-4">
                                 <Input
-                                    labelStyle="block mb-2 font-bold"                   // styling for label
+                                    labelStyle="block mb-2 font-semibold"               // styling for label
                                     labelVal="Database IP"                              // label text
-                                    inputStyle="shadow rounded border leading-tight py-2 px-3 w-full"               // styling for input
+                                    inputStyle="shadow rounded border font-medium leading-tight py-2 px-3 w-full"       // styling for input
                                     name="databaseIP"                                   // name of label-input components
                                     inputType="text"                                    // type of input password, email, text, etc.
                                     inputPlaceholder="Database IP"                      // placeholder text for input
@@ -149,9 +149,9 @@ const Login = () => {
                             </div>
                             <div className="pb-4">
                                 <Input
-                                    labelStyle="block mb-2 font-bold"                   // styling for label
+                                    labelStyle="block mb-2 font-semibold"               // styling for label
                                     labelVal="Username"                                 // label text
-                                    inputStyle="shadow rounded border leading-tight py-2 px-3 w-full"               // styling for input
+                                    inputStyle="shadow rounded border font-medium leading-tight py-2 px-3 w-full"       // styling for input
                                     name="username"                                     // name of label-input components
                                     inputType="text"                                    // type of input password, email, text, etc.
                                     inputPlaceholder="Username"                         // placeholder text for input
@@ -166,9 +166,9 @@ const Login = () => {
                             </div>
                             <div className="pb-4">
                                 <Input
-                                    labelStyle="block mb-2 font-bold"                   // styling for label
+                                    labelStyle="block mb-2 font-semibold"               // styling for label
                                     labelVal="Password"                                 // label text
-                                    inputStyle="shadow rounded border leading-tight py-2 px-3 w-full"               // styling for input
+                                    inputStyle="shadow rounded border font-medium leading-tight py-2 px-3 w-full"       // styling for input
                                     name="password"                                     // name of label-input components
                                     inputType="password"                                // type of input password, email, text, etc.
                                     inputPlaceholder="******************"               // placeholder text for input
