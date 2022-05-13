@@ -1,3 +1,5 @@
+// const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   content: ['./src/**/*.{ejs,js,jsx,ts,tsx}'],
   theme: {
@@ -26,6 +28,7 @@ module.exports = {
       fontFamily: {
         montserrat: ['Montserrat'],
         inter: ['Inter'],
+        poppins: ['Poppins'],
       },
       gridTemplateColumns:{
         '38/62': '38% 62%'
