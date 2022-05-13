@@ -1,6 +1,7 @@
 import { Tab, Transition, Disclosure } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/solid';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Fragment } from 'react';
+import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 
 /* Components */
 import ActionsBtn from 'frontend/components/buttons/Dropdown';
@@ -30,6 +31,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const [statusState, setStatus] = useState(status)
     const [gradeState, setGradeState] = useState(grades)
     const [historyState, setHistoryState] = useState(history)
+    const [tabId, setTabId] = useState(0)
 
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
@@ -38,6 +40,31 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         Validations: <CheckList checklistData={checklist} />,   //checklist component
         Notes: <Notes notes={notes} semesters={gradeState} />,    // notes component
         History: <History historyData={historyState} />,          // history component
+    }
+
+    const tabAnim = {
+        hide: {
+            opacity: 0,
+            x: 75,
+            transition: {
+                duration: 0.4,
+                ease: 'easeOut',
+                when: 'beforeChildren',
+            },
+        },
+        show : {
+            opacity: 0,
+            x: -75,
+            transition: {
+                duration: 0.2,
+                ease: 'easeIn',
+                when: 'beforeChildren',
+            },
+        },
+        animate: {
+            opacity: 1,
+            x: 0,
+        }
     }
 
     const histAdd = (histObj) => {
@@ -99,29 +126,48 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                     {/* tabbed information card */}
 
                     <div className="flex-none max-w-[100%] h-[45rem] sticky top-[11.5rem] shadow-lg rounded-lg">
-                        <Tab.Group>
+                        <Tab.Group
+                            selectedIndex={tabId}
+                            onChange={(id) => {
+                                console.log(id)
+                                setTabId(id)
+                            }}
+                            manual
+                        >
                             <Tab.List className="flex rounded-t-md">
                                 {Object.keys(tabContents).map((tab) => (
-                                        <Tab key={tab}
-                                            className={({selected}) => (
-                                                selected ? 
-                                                    'transition-all ease-in delay-200 text-login-green pb-2 pt-4 w-1/3 border-b border-login-green' : 
-                                                    'transition-all ease-in delay-200 text-sr-tab-inactive pb-2 pt-4 w-1/3 border-b border-sr-divider-light hover:text-login-green-hover hover:transition-all hover:ease-in hover:delay-300'
-                                                )
-                                            }
-                                        >
-                                            {tab}
+                                        <Tab key={tab} as={Fragment}>
+                                            {({selected}) => (
+                                                <button
+                                                    className={
+                                                        selected 
+                                                            ? 'transition-all ease-in delay-100 text-login-green pb-2 pt-4 w-1/3 border-b border-login-green focus:outline-none'  
+                                                            : 'transition-all ease-in delay-100 text-sr-tab-inactive pb-2 pt-4 w-1/3 border-b border-sr-divider-light focus:outline-none hover:text-login-green-hover hover:transition hover:ease-in hover:delay-300'
+                                                    }
+                                                >
+                                                    {tab}
+                                                </button>
+                                            )}
                                         </Tab>
                                     )
                                 )}
                             </Tab.List>
                             <Tab.Panels className="m-0 block">
-                                    {Object.values(tabContents).map((component) =>(
-                                        <Tab.Panel className="h-[42rem] col-span-1 block">                                
+                                <AnimatePresence exitBeforeEnter>
+                                    {Object.values(tabContents).map((component) =>( // ref used https://github.com/tailwindlabs/headlessui/discussions/1237
+                                        <Tab.Panel 
+                                            className="h-[42rem] col-span-1 block"
+                                            key={tabId}
+                                            as={motion.div}
+                                            initial="show"
+                                            animate="animate"
+                                            exit="hide"
+                                            variants={tabAnim}
+                                        >                                
                                             {component}
                                         </Tab.Panel>
                                     ))}
-
+                                </AnimatePresence>
                             </Tab.Panels>
                         </Tab.Group>
 
