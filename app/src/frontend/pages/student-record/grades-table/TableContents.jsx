@@ -7,6 +7,7 @@ import 'tailwindcss/tailwind.css';
 
 
 // This component handles the student's data for a specific semester
+
 const TableContents = ({ Name, Total, Semester, key, handler, history, historyHandler, autoSet }) => {
 
     // handler prop will handle pushing changes to parent
@@ -32,7 +33,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         fetchData();
     }, []);
 
-    const nameStyle = "flex inter font-bold justify-between z-25 w-full px-4 py-2 text-sm font-medium text-left text-sr-table-text bg-sr-dark-gray hover:bg-yellow-100 hover:text-secondary-red";
+    const nameStyle = "transition-colors ease-in-out delay-150 flex inter font-bold justify-between z-10 w-full px-4 py-2 text-sm font-medium text-left text-sr-table-text bg-sr-dark-gray hover:transition-colors hover:ease-in hover:delay-150 hover:bg-yellow-100 hover:text-secondary-red";
 
     // set new values for addrow
     const addData = (values) => {
@@ -105,21 +106,21 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         semHandler(newSemData)
     }
 
-    const setHistory = (justification) => { // logs action of editing a row to history
+    const setHistory = (detailsObj) => { // logs action of editing a row to history
         let currHistory = [...history] // make copy of current array of history logs
 
         const newHistObj = {
             date: new Date().toLocaleDateString(),
             info: [
                 {
-                    main: 'Modified Grades Row',    // to implement: detecting of what changes were made
+                    main: detailsObj.title,
                     user: 'insert username here',
                     time: new Date().toLocaleTimeString('en-US', { 
                         hour12: false, 
                         hour: "numeric", 
                         minute: "numeric"
                     }),
-                    details: justification,         // place justificiation into details
+                    details: detailsObj.desc,         // place justification into details
                 },
             ],
         }
@@ -161,7 +162,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
                     {({ open }) => (
                         <>
                              {/* Accordion Header */}
-                             <Disclosure.Button className={`${open ? 'bg-table-hover-color text-secondary-red rounded-t-lg' : 'mb-2 rounded-lg shadow-lg'} ${nameStyle}`}>
+                             <Disclosure.Button className={`${open ? 'bg-sr-dark-gray rounded-t-lg' : 'mb-2 rounded-lg shadow-lg'} ${nameStyle}`}>
                                 <span className="text-lg xl:text-xl">{Name}</span>
                                 {/* Icon */}
                                 <ChevronUpIcon
@@ -175,7 +176,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
                             <Disclosure.Panel className="inter z-0 pl-5 py-3 mb-2 text-sm text-gray-500 rounded-b-lg shadow-lg">
                                 <List table={2} total={Total} sem={Name} data={semData} dataHandler={setData} delHandler={delData} handleHistory={setHistory} addHandler={addData} histHandler={historyHandler}/>
                                 <section className="mt-3">
-                                    <span className="font-black">Load Status</span>
+                                    <span className="font-montserrat font-bold text-primary-red">Load Status</span>
                                     {( Total <= 20 )
                                         ? ( Total >= 15 )
                                             ? <span className="ml-4 font-black text-login-green underline">Normal</span>

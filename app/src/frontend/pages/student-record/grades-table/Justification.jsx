@@ -1,40 +1,36 @@
 import { Dialog, Transition} from '@headlessui/react';
 import { Fragment, useState, useEffect } from 'react';
+import { useForm, isRequired } from '../../../hooks/useForm';
 import Input from 'frontend/components/inputs/Input';
 
-// component from: https://headlessui.dev/react/dialog
+// component that creates a modal window for justification from: https://headlessui.dev/react/dialog
 
-const Justification = ({ modalState, modalHandler, submitHandler, histHandler }) => {
+const Justification = ({ modalState, modalHandler, parentSubmitHandler, histHandler }) => {
     /* how to use
     
         parent will provide modalState and modalHandler
         modalState is 'true' or 'false'
         modalHandler is a function that will set modalState to false
 
-        submitHandler takes in a function that deals with submitting the values from the edited row
-        historyHandler is for giving the justification to the history and recording the changes
+        parentSubmitHandler takes in a function that deals with submitting the values from the edited row
+        histHandler is for giving the justification to the history and recording the changes
     
     */
-        
-    // state+handler for text area
-    const [textArea, textAreaHandler] = useState('')
-    const [isDisabled, setIsDisabled] = useState(true)
 
-    useEffect(() => { 
-        // check if justification has any text data
-        // user should not be able to save grade unless they have inputted a justification
-        textArea.length != 0
-        ? setIsDisabled(false)
-        : setIsDisabled(true)
-    })
-
-    const handleTextArea = (e) => {
-        textAreaHandler(e.target.value)
+    const initialState = {
+        title: '',
+        desc: '',
     }
+    const validations = [
+        ({title}) => isRequired(title) || {title: 'Please provide a title'},
+        ({desc}) => isRequired(desc) || {desc: 'Please give a justification for editing the grades'}
+    ]
+
+    const {values, isValid, errors, touched, changeHandler, submitHandler, resetValues} = useForm(initialState, validations, histHandler);
 
     const resetModalValues = () => {
         // function that will clear text area when exiting modal
-        textAreaHandler('')
+        resetValues()
         modalHandler()
     }
 
@@ -42,8 +38,8 @@ const Justification = ({ modalState, modalHandler, submitHandler, histHandler })
         // function that'll save changes
         // -- insert function for handling changes to history here --
         e.preventDefault()  // prevents refreshing of page
-        histHandler(textArea) // update history log
-        submitHandler(e)    // submit contents of the form
+        submitHandler(e) // update history log
+        parentSubmitHandler(e)    // submit contents of the form
     }
 
     return (
@@ -73,7 +69,7 @@ const Justification = ({ modalState, modalHandler, submitHandler, histHandler })
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                <Dialog.Panel className="w-full max-w-md h-[30vh] transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                                     <Dialog.Title
                                         as="h3"
                                         className="font-montserrat ml-3 mt-2 text-2xl font-black leading-6 text-gray-900 flex"
@@ -84,25 +80,32 @@ const Justification = ({ modalState, modalHandler, submitHandler, histHandler })
                                         </svg>
                                     </Dialog.Title>
 
-                                    <div className="mt-3 h-[15vh]">
-                                        <textarea
-                                            className="inter mx-auto p-3 w-full h-full block resize-none focus:outline-none"
-                                            placeholder='Enter justification here...'
-                                            value={textArea}
-                                            onChange={handleTextArea}
+                                    <div className="mt-2 grid h-[85%]">
+                                        <input
+                                            className="inter font-bold text-md mx-auto px-3 py-1 w-full block resize-none focus:outline-none"
+                                            name="title"
+                                            placeholder="Enter title here."
+                                            value={values.title}
+                                            onChange={changeHandler}
                                         />
-                                    </div>
-
-                                    <div className="mt-4">
+                                        <textarea
+                                            className="inter mx-auto text-sm px-3 py-1 w-full h-full block resize-none focus:outline-none"
+                                            name="desc"
+                                            placeholder="Enter description here."
+                                            value={values.desc}
+                                            onChange={changeHandler}
+                                            
+                                        />
                                         <button
                                             type="submit"
-                                            className="inter inline-flex justify-center rounded-md border border-transparent bg-login-green px-4 py-2 text-sm font-medium text-white transition-all ease-out delay-200 hover:transition-all hover:ease-in hover:delay-200 hover:bg-login-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
+                                            className="inter mt-4 w-[20%] self-end inline-flex justify-center rounded-md border border-transparent bg-login-green px-4 py-2 text-sm font-medium text-white transition-all ease-out delay-200 hover:transition-all hover:ease-in hover:delay-200 hover:bg-login-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
                                             onClick={saveChanges}
-                                            disabled={isDisabled}
+                                            disabled={!isValid}
                                         >
                                             Save
                                         </button>
                                     </div>
+
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>
