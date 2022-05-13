@@ -3,9 +3,7 @@ import SemSelect from 'frontend/components/inputs/DropdownSelect';
 import AddNoteBtn from 'frontend/components/buttons/AddNoteBtn';
 import Input from 'frontend/components/inputs/Input';
 import NotesTab from './Notes';
-
 import 'tailwindcss/tailwind.css';
-import './AddNote.css';
 
 
 // This function is used for adding/editing the notes for each semester
@@ -80,14 +78,17 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
         <>
             <AddNoteBtn handleClick={handleClick}/>
             { showWindow ? (
-                <div className='add-note-overlay'>
-                    <div className='add-note-popup-window shadow-lg'>
+                // Container for everything behind the window           
+                <div className='block h-full overflow-y-auto overflow-x-hidden fixed top-0 left-0 w-full z-10'>
 
-                        <div className="add-note-title">
+                    {/* Add Note Window */}
+                    <div className='flex flex-col px-5 relative shadow-lg ml-[32vw] mt-[25vh] w-[35vw] rounded-2xl border-solid  bg-white '>
+
+                        <div className="flex items-center mb-2 text-[2.5vh]">
                             <div>
                                 {/* Dropdown select  */}
                                 <SemSelect
-                                    style="w-full ml-auto mr-0"
+                                    style="w-full ml-auto mr-0 "
                                     options={semesters}
                                     state={[selectedSem, setSelectedSem]} 
                                     placeholderChange={setTextArea}
@@ -96,7 +97,7 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
                             
                             {/* Exit button */}
                             <button
-                                className="close-note-btn"
+                                className="text-[2vw] ml-auto mr-0 hover:text-gray-500"
                                 type="button"
                                 onClick={() => setShowWindow(false)}
                             >
@@ -115,7 +116,7 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
                         /> */}
 
                         <textarea
-                            className='add-textarea'
+                            className='border-none p-3 w-full h-[25vh]'
                             placeholder='Type to add a note...'
                             value={noteText}
                             onChange={handleChange}
@@ -123,7 +124,7 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
                         
                         {/* Save button */}
                         <div>
-                            <button className='save-note-btn hover:bg-login-green-hover' onClick={handleSaveClick}>
+                            <button className='rounded-lg float-left w-1/5 mb-4 mt-5 p-1 text-white bg-login-green hover:bg-login-green-hover' onClick={handleSaveClick}>
                                 Save
                             </button>
                         </div>
