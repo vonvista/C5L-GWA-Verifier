@@ -7,6 +7,7 @@ import UserManagement from 'frontend/pages/user-management/UserManagementPage';
 import StudentRecord from 'frontend/pages/student-record/StudentRecord';
 import 'frontend/fonts.css';
 
+
 export default function App() {
   return (
     <Router>
