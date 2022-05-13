@@ -44,6 +44,7 @@ const AdminNav = () => {
         navigate('/');
     }
 
+    // for user information
     useEffect(() => {
         // gets username and position from local storage
         const tempUserName = localStorage.getItem("Username");
