@@ -3,7 +3,6 @@ import { useHover } from '../../hooks/useHover';
 import { useEffect, useState } from 'react';
 import UserIcon from '../../../../assets/icons/default-user-icon.png';
 import 'tailwindcss/tailwind.css';
-import './Sidebar.css';
 
 
 /* Importing navigation bar and header to pages
@@ -27,60 +26,67 @@ const UserNav = () => {
     let navigate = useNavigate();
 
     const [hoverRef, isHovering] = useHover();
-    const [name, setName] = useState('');
     const [userName, setUserName] = useState('');
+    const [position, setPosition] = useState('');
 
-    useEffect(() => {
-        // gets name and username from local storage
-        const tempName = localStorage.getItem("FirstName") + " " + localStorage.getItem("MiddleName") + " " + localStorage.getItem("LastName");
-        const tempUserName = localStorage.getItem("Username");
-        // updates name and username 
-        setName(tempName);
-        setUserName(tempUserName);
-        // displays the name and username to the sidebar
-        document.getElementById("name").innerHTML = name; 
-        document.getElementById("userName").innerHTML = tempUserName; 
-    }, [name,userName]);
-    
     // removes local storage data and redirects to log in page
     function handleLogOut (){
-        localStorage.clear();
+        // localStorage.removeItem("FirstName")
+        // localStorage.removeItem("LastName")
+        // localStorage.removeItem("MiddleName")
+        // localStorage.removeItem("Password")
+        // localStorage.removeItem("Position")
+        // localStorage.removeItem("Role")
+        // localStorage.removeItem("Username")
+        // localStorage.removeItem("ServerIP")
+        localStorage.clear()
+
         navigate('/');
     }
+
+    // for user information
+    useEffect(() => {
+        // gets username and position from local storage
+        const tempUserName = localStorage.getItem("Username");
+        const tempPosition = localStorage.getItem("Position");
+
+        // updates username and position 
+        setUserName(tempUserName);
+        setPosition(tempPosition);
+
+        // displays the username and position to the sidebar
+        document.getElementById("userName").innerHTML = tempUserName; 
+        document.getElementById("position").innerHTML = tempPosition;
+
+    }, [userName, position]);
     
-    // remove some items from local storage and redirects to User Dashboard
-    function handleUserDashboard (){
-
-        // clear the following on the localStorage
-        localStorage.removeItem('currStudent')
-        localStorage.removeItem('currStudentGrades')
-
-        navigate('/user-dashboard') // navigate to user dashboard
-    }
 
     return (
         <nav 
             ref={hoverRef}
-            className={` ${isHovering ? "w-1/4 3xl:w-1/5" : "w-14 xl:w-20"} navbar-style `}
+            className={` ${isHovering ? "w-1/4 3xl:w-1/5" : "w-14 xl:w-20"}
+                        h-full overflow-hidden fixed top-0 duration-300 min-w-min z-1 bg-primary-red text-sidebar-text`}
         >
             {/* Baybayin Background Image */}
-            <div className="bg-baybayin baybayin-style"></div>
+            <div className="bg-baybayin bg-repeat-y bg-contain h-screen mt-[1vw] ml-[-15.25vh]"></div>
             
-            <div className="content-style ">
+            <div className="py-2 absolute inset-x-0 top-0 text-[1.15vw]">
                 
                 {/* App Name */}   
-                <div className={`${ isHovering? "pl-12 xl:pl-20 3xl:pl-14 duration-500" : "appname-style-non" } flex py-4 1.5xl:py-8 text-highlight`}>            
-                    <div className="flex-shrink-0">
+                <div className={`${ isHovering? "pl-12 xl:pl-14 1.5xl:pl-16 3xl:pl-12 duration-500" : "duration-300 pl-[8vw]" }
+                                flex py-4 1.5xl:py-8 text-highlight`}>            
+                    <div className="flex-shrink-0 font-medium italic tracking-wider">
                         Kalatas: CAS GWA Verifier
                     </div>
                 </div>
 
                 {/* User Account Details */}
-                <div className="flex xl:gap-x-2 1.75xl:gap-x-5 items-center">
+                <div className="flex xl:gap-x-2 1.75xl:gap-x-1 items-center">
                     
                     {/* User Icon */}
                     <img
-                        className={` ${isHovering ? "scale-25 sm:scale-50 xl:scale-60 1.5xl:scale-60 1.75xl:scale-75 ml-1.5 xl:ml-2 1.5xl:ml-3 1.75xl:ml-5" : "scale-50" } rounded-full duration-500`}
+                        className={` ${isHovering ? "scale-25 sm:scale-50 xl:scale-60 1.5xl:scale-60 1.75xl:scale-75 ml-1.5 xl:ml-2 1.5xl:ml-3 1.75xl:ml-5" : "scale-50" }
+                                    rounded-full duration-500`}
                         width="90px"
                         height="90px"
                         alt="user-icon"
@@ -89,16 +95,17 @@ const UserNav = () => {
 
                     {/* User Information */}
                     <div className="flex-shrink-0">
-                        <div><strong id="name"></strong></div>
-                        <div id="userName"></div>
+                        <div className="font-poppins font-medium" id="userName"></div>
+                        <div id="position" className="font-poppins"></div>
                     </div>
                 </div>
                 
                 {/* Navigation Pages */}
-                <div className={` ${isHovering? "xl:mt-3 1.5xl:mt-4 1.75xl:mt-6 3xl:mt-7 4xl:mt-8" : "mt-1" } navpages-style`}>
+                <div className={` ${isHovering? "xl:mt-3 1.5xl:mt-4 1.75xl:mt-6 3xl:mt-7 4xl:mt-8" : "mt-1" } 
+                                cursor-pointer grid grid-cols-1 duration-300 gap-[0.25vw] font-poppins font-medium`}>
                     
                     {/* User Dashboard */}
-                    <div className="dashboard-style hover:bg-secondary-red hover:text-highlight" onClick={() => handleUserDashboard()}>
+                    <div className="inline-flex items-center py-2 gap-x-4 hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/user-dashboard')}}>
                         <div>
                             <svg className={` ${isHovering? "ml-7 1.5xl:ml-8 1.75xl:ml-8": "ml-3.5 xl:ml-5.5"} w-7 xl:w-8 duration-300 fill-current`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" >
                                 <path d="M33 19a1 1 0 0 1-.71-.29L18 4.41 3.71 18.71A1 1 0 0 1 2.3 17.3l15-15a1 1 0 0 1 1.41 0l15 15A1 1 0 0 1 33 19Z"/>
@@ -111,10 +118,11 @@ const UserNav = () => {
                         </div>
                     </div>
                 </div>
+                
             </div>
             
             {/* Logout button*/}
-            <div className="logout-style hover:text-highlight" onClick={() => handleLogOut()}>
+            <div className="cursor-pointer flex items-center p-2 absolute bottom-8 gap-x-4 font-poppins font-medium text-[1.15vw] hover:text-highlight" onClick={() => handleLogOut()}>
                 <div>
                     <svg className={` ${isHovering? "ml-5 1.5xl:ml-6 1.75xl:ml-7" : "ml-2 xl:ml-4" } w-7 xl:w-8 duration-300 fill-current`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M4 18h2v2h12V4H6v2H4V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3zm2-7h7v2H6v3l-5-4 5-4v3z"/>

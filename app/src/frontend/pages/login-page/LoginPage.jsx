@@ -129,12 +129,12 @@ const Login = () => {
                     <div className="flex justify-center">               
                         
                         {/* Input form */}
-                        <div className="overflow-hidden w-1/2 text-[1.25vw] font-montserrat rounded-lg px-5 pb-2 pt-4 bg-white">
+                        <div className="overflow-hidden w-1/2 text-[1.25vw] font-montserrat rounded-lg px-5 pb-2 pt-4 bg-white text-gray-800">
                             <div className="pb-4">
                                 <Input
                                     labelStyle="block mb-2 font-semibold"               // styling for label
                                     labelVal="Database IP"                              // label text
-                                    inputStyle="shadow rounded border font-medium leading-tight py-2 px-3 w-full"       // styling for input
+                                    inputStyle="shadow rounded border font-inter font-medium leading-tight py-2 px-3 w-full text-neutral-700"       // styling for input
                                     name="databaseIP"                                   // name of label-input components
                                     inputType="text"                                    // type of input password, email, text, etc.
                                     inputPlaceholder="Database IP"                      // placeholder text for input
@@ -151,7 +151,7 @@ const Login = () => {
                                 <Input
                                     labelStyle="block mb-2 font-semibold"               // styling for label
                                     labelVal="Username"                                 // label text
-                                    inputStyle="shadow rounded border font-medium leading-tight py-2 px-3 w-full"       // styling for input
+                                    inputStyle="shadow rounded border font-medium leading-tight py-2 px-3 w-full text-neutral-700"       // styling for input
                                     name="username"                                     // name of label-input components
                                     inputType="text"                                    // type of input password, email, text, etc.
                                     inputPlaceholder="Username"                         // placeholder text for input
@@ -168,7 +168,7 @@ const Login = () => {
                                 <Input
                                     labelStyle="block mb-2 font-semibold"               // styling for label
                                     labelVal="Password"                                 // label text
-                                    inputStyle="shadow rounded border font-medium leading-tight py-2 px-3 w-full"       // styling for input
+                                    inputStyle="shadow rounded border font-medium leading-tight py-2 px-3 w-full text-neutral-700"       // styling for input
                                     name="password"                                     // name of label-input components
                                     inputType="password"                                // type of input password, email, text, etc.
                                     inputPlaceholder="******************"               // placeholder text for input
