@@ -222,7 +222,7 @@ const UserManagementPage = () => {
                 <div className='grid content-center w-1/6'>
                   <AddUserBtn handleClick={() => setShowModal(true)}/>
                   {showModal ?
-                    (<AddUser handleClose={() => setShowModal(false)} handleAddRecord={handleAddRecord}/>)
+                    (<AddUser modalState={true} handleClose={() => setShowModal(false)} handleAddRecord={handleAddRecord}/>)
                     :(<></>)
                   }
                   {showModalEdit ?

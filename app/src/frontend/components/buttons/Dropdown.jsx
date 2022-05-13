@@ -10,7 +10,7 @@ import 'tailwindcss/tailwind.css';
 
 // Function contains the buttons in Actions Dropdown seen in Student Record View/Edit Page
 // Additional references: https://tailwindui.com/components/application-ui/elements/dropdowns
-const Dropdown = () => {
+const Dropdown = ({ studentInfo, grades }) => {
 
   const [valueClicked, setValueClicked] = useState('Actions');
   const [isActive, setIsActive] = useState(false);
@@ -39,9 +39,11 @@ const Dropdown = () => {
   // event handle for Export on dropdown
   const handleExport = () => {
 
-    // get student info and grades from localStorage then parse them
-    const studentInfo = JSON.parse(localStorage.getItem('currStudent'))
-    const studentGrades = JSON.parse(localStorage.getItem('currStudentGrades'))
+    // get student info and grades from props
+    console.log(studentInfo)
+    console.log(grades)
+    const student = studentInfo
+    const studentGrades = grades
 
     // get current user's full name from localStorage
     const fName = localStorage.getItem("FirstName")
@@ -50,7 +52,7 @@ const Dropdown = () => {
 
     const fullName = `${fName} ${mName} ${lName}`
 
-    exportStudentData(studentInfo, studentGrades, fullName);
+    exportStudentData(student, studentGrades, fullName);
 
   }
 
@@ -65,16 +67,12 @@ const Dropdown = () => {
           // add onclick
           
           onClick={() =>
-            (!(valueClicked == "Delete")) 
-              ? (!(valueClicked == "Export")) 
-                ? null
-                : handleExport()
-              : studentDelete(localStorage.getItem('currStudentID'))
+            (!(valueClicked == "Export")) ? null : handleExport()
           }
 
         >
           <p className="pl-1.5 m-0 inline-block grow text-center text-white">
-            {valueClicked}
+            Actions
           </p>
         </button>
         <button
