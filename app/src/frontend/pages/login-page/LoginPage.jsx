@@ -1,5 +1,6 @@
 import { isRequired, useForm } from '../../hooks/useForm';
 import { useNavigate } from 'react-router-dom';
+import 'tailwindcss/tailwind.css';
 import Swal from 'sweetalert2'
 
 {/* Components */}
@@ -8,10 +9,6 @@ import TextBtn from '../../components/buttons/TextBtn';
 import AppIcon from '../../../../assets/icons/icon.png';
 import Input from '../../components/inputs/Input';
 //import { electron } from 'process';
-
-{/* CSS files */}
-import 'tailwindcss/tailwind.css';
-import './LoginPage.css';
 
 
 function isRequired(val) {
@@ -107,37 +104,37 @@ const Login = () => {
     }
 
     return (
-        <main class="grid grid-cols-38/62">
+        <main className="grid grid-cols-38/62">
 
             {/* Left Section */}
-            <section class="flex flex-col h-screen justify-center items-center bg-primary-red text-highlight">
+            <section className="flex flex-col h-screen justify-center items-center bg-primary-red text-highlight">
                 
                 {/* App Icon */}
-                <div><img class="login-app-icon" src={AppIcon} /></div>
+                <div><img className="h-auto w-[30vw]" src={AppIcon} /></div>
 
                 {/* App Name */}
-                <div class="login-app-name">KALATAS:</div>
-                <div class="login-second-name">CAS GWA Verifier</div>
+                <div className="font-bold text-[3.5vw]">KALATAS:</div>
+                <div className="mt-1 text-[2.5vw]">CAS GWA Verifier</div>
             </section>
 
             {/* Right Section */}
-            <section class="flex-rows-4 h-screen relative bg-secondary-red">
+            <section className="flex-rows-4 h-screen relative bg-secondary-red">
 
                 {/* Page Title */}
-                <span class="flex login-page-title text-sidebar-text">User Login</span>
+                <span className="flex justify-center pt-[12vh] text-[2.25vw] text-sidebar-text">User Login</span>
                 
-                <form class="login-input-group" onSubmit={submitHandler}>
+                <form className="justify-center pt-[8vh]" onSubmit={submitHandler}>
 
                     {/* Div container for input form */}
-                    <div class="flex justify-center">               
+                    <div className="flex justify-center">               
                         
                         {/* Input form */}
-                        <div class="login-input-content login-form">
-                            <div class="pb-4">
+                        <div className="overflow-hidden w-1/2 text-[1.25vw] rounded-lg px-5 pb-2 pt-4 bg-white">
+                            <div className="pb-4">
                                 <Input
-                                    labelStyle="login-input-label"                      // styling for label
+                                    labelStyle="block mb-2 font-bold"                   // styling for label
                                     labelVal="Database IP"                              // label text
-                                    inputStyle="shadow login-input-style"               // styling for input
+                                    inputStyle="shadow rounded border leading-tight py-2 px-3 w-full"               // styling for input
                                     name="databaseIP"                                   // name of label-input components
                                     inputType="text"                                    // type of input password, email, text, etc.
                                     inputPlaceholder="Database IP"                      // placeholder text for input
@@ -146,15 +143,15 @@ const Login = () => {
                                     />
 
                                 {touched.databaseIP && errors.databaseIP && 
-                                    <p class={errorStyle}>{errors.databaseIP}</p>   // error message
+                                    <p className={errorStyle}>{errors.databaseIP}</p>   // error message
                                 }
 
                             </div>
-                            <div class="pb-4">
+                            <div className="pb-4">
                                 <Input
-                                    labelStyle="login-input-label"                      // styling for label
+                                    labelStyle="block mb-2 font-bold"                   // styling for label
                                     labelVal="Username"                                 // label text
-                                    inputStyle="shadow login-input-style"               // styling for input
+                                    inputStyle="shadow rounded border leading-tight py-2 px-3 w-full"               // styling for input
                                     name="username"                                     // name of label-input components
                                     inputType="text"                                    // type of input password, email, text, etc.
                                     inputPlaceholder="Username"                         // placeholder text for input
@@ -163,15 +160,15 @@ const Login = () => {
                                     />
 
                                 {touched.username && errors.username && 
-                                    <p class={errorStyle}>{errors.username}</p>     // error message
+                                    <p className={errorStyle}>{errors.username}</p>     // error message
                                 }
 
                             </div>
-                            <div class="pb-4">
+                            <div className="pb-4">
                                 <Input
-                                    labelStyle="login-input-label"                      // styling for label
+                                    labelStyle="block mb-2 font-bold"                   // styling for label
                                     labelVal="Password"                                 // label text
-                                    inputStyle="shadow login-input-style"               // styling for input
+                                    inputStyle="shadow rounded border leading-tight py-2 px-3 w-full"               // styling for input
                                     name="password"                                     // name of label-input components
                                     inputType="password"                                // type of input password, email, text, etc.
                                     inputPlaceholder="******************"               // placeholder text for input
@@ -180,7 +177,7 @@ const Login = () => {
                                     />
 
                                 {touched.password && errors.password && 
-                                    <p class={errorStyle}>{errors.password}</p>     // error message
+                                    <p className={errorStyle}>{errors.password}</p>     // error message
                                 }
 
                             </div>
@@ -188,13 +185,13 @@ const Login = () => {
                     </div>
 
                     {/* Login Button */}
-                    <div class="login-button text-sidebar-text">
+                    <div className="flex justify-center mt-[4vh] text-[1.25vw]  text-sidebar-text">
                         <LoginBtn handleClick={handleLogIn}/>
                     </div>                    
                 </form>
 
                 {/* Footer */}
-                <div class="flex login-footer absolute inset-x-0">
+                <div className="flex justify-center opacity-50 text-[1.25vw] gap-[5vw] absolute bottom-[2vw] inset-x-0 text-login-footer">
                     <span><TextBtn text="UserDash" handleClick={()=>{debugUser(); localStorage.setItem("Role", "user"); navigate('/user-dashboard')}}/></span>
                     <span><TextBtn text="AdminDash" handleClick={()=>{debugUser(); localStorage.setItem("Role", "admin"); navigate('/user-dashboard')}}/></span>
                     <span><TextBtn text="UserManage" handleClick={()=>{navigate('/user-management')}}/></span>
