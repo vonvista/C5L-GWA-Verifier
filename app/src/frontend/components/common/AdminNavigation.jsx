@@ -66,11 +66,11 @@ const AdminNav = () => {
             {/* Baybayin Background Image */}
             <div className="bg-baybayin bg-repeat-y bg-contain h-screen mt-[1vw] ml-[-15.25vh]"></div>
             
-            <div className="py-2 absolute inset-x-0 top-0 text-[1.25vw]">
+            <div className="py-2 absolute inset-x-0 top-0 text-[1.15vw]">
                 
                 {/* App Name */}   
-                <div className={`${ isHovering? "pl-12 xl:pl-20 3xl:pl-14 duration-500" : "duration-300 pl-[8vw]" } flex py-4 1.5xl:py-8 text-highlight`}>            
-                    <div className="flex-shrink-0">
+                <div className={`${ isHovering? "pl-12 xl:pl-14 1.5xl:pl-16 3xl:pl-12 duration-500" : "duration-300 pl-[8vw]" } flex py-4 1.5xl:py-8 text-highlight`}>            
+                    <div className="flex-shrink-0 font-medium italic tracking-wider">
                         Kalatas: CAS GWA Verifier
                     </div>
                 </div>
@@ -89,17 +89,17 @@ const AdminNav = () => {
 
                     {/* User Information */}
                     <div className="flex-shrink-0">
-                        <div><strong id="name"></strong></div>
-                        <div id="userName"></div>
+                        <div className="font-poppins"><strong id="name"></strong></div>
+                        <div id="userName" className="font-poppins"></div>
                     </div>
                 </div>
                 
                 {/* Navigation Pages */}
                 <div className={` ${isHovering? "xl:mt-3 1.5xl:mt-4 1.75xl:mt-6 3xl:mt-7 4xl:mt-8" : "mt-1" } 
-                                cursor-pointer grid grid-cols-1 duration-300 gap-[0.25vw]`}>
+                                cursor-pointer grid grid-cols-1 duration-300 gap-[0.25vw] font-poppins font-medium`}>
                     
                     {/* Admin Dashboard */}
-                    <div className="inline-flex items-center py-1 gap-x-4 hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/user-dashboard')}}>
+                    <div className="inline-flex items-center py-1.5 gap-x-4 hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/user-dashboard')}}>
                         <div>
                             <svg className={` ${isHovering? "ml-7 1.5xl:ml-8 1.75xl:ml-8": "ml-3.5 xl:ml-5.5"} w-7 xl:w-8 duration-300 fill-current`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" >
                                 <path d="M33 19a1 1 0 0 1-.71-.29L18 4.41 3.71 18.71A1 1 0 0 1 2.3 17.3l15-15a1 1 0 0 1 1.41 0l15 15A1 1 0 0 1 33 19Z"/>
@@ -113,7 +113,7 @@ const AdminNav = () => {
                     </div>
 
                     {/* User Management */}
-                    <div className="inline-flex items-center mt-2 p-1 my-10 hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/user-management')}}>
+                    <div className="inline-flex items-center mt-2 px-1 py-1.5 my-10 hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/user-management')}}>
                         <div>
                             <svg className={` ${isHovering? "ml-6 1.5xl:ml-7":"ml-2.5 xl:ml-4"} w-7 xl:w-9 duration-300 fill-current`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
                                 <path d="M319.9 320c57.41 0 103.1-46.56 103.1-104s-46.54-104-103.1-104c-57.41 0-103.1 46.56-103.1 104-.9 57.4 45.7 104 103.1 104zm50 32h-99.8C191.6 352 128 411.7
@@ -132,7 +132,7 @@ const AdminNav = () => {
             </div>
             
             {/* Logout button*/}
-            <div className="cursor-pointer flex items-center p-2 absolute bottom-8 gap-x-4 text-[1.25vw] hover:text-highlight" onClick={() => handleLogOut()}>
+            <div className="cursor-pointer flex items-center p-2 absolute bottom-8 gap-x-4 font-poppins font-medium text-[1.15vw] hover:text-highlight" onClick={() => handleLogOut()}>
                 <div>
                     <svg className={` ${isHovering? "ml-5 1.5xl:ml-6 1.75xl:ml-7" : "ml-2 xl:ml-4" } w-7 xl:w-8 duration-300 fill-current`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M4 18h2v2h12V4H6v2H4V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3zm2-7h7v2H6v3l-5-4 5-4v3z"/>
