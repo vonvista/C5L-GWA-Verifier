@@ -2,6 +2,7 @@ import { useState } from 'react';
 import SemSelect from 'frontend/components/inputs/DropdownSelect';
 import AddNoteBtn from 'frontend/components/buttons/AddNoteBtn';
 import Input from 'frontend/components/inputs/Input';
+import SaveBtn from 'frontend/components/buttons/SaveBtn';
 import NotesTab from './Notes';
 import 'tailwindcss/tailwind.css';
 
@@ -22,7 +23,7 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
         if(index != -1){
             setNoteText(notesList[index].content)
         } else {
-            setNoteText('Type to add a note...')
+            setNoteText('Type to add a new note...')
         }
     }
 
@@ -88,7 +89,7 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
                             <div>
                                 {/* Dropdown select  */}
                                 <SemSelect
-                                    style="w-full ml-auto mr-0 "
+                                    style="w-full ml-auto mr-0 font-inter"
                                     options={semesters}
                                     state={[selectedSem, setSelectedSem]} 
                                     placeholderChange={setTextArea}
@@ -116,17 +117,15 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
                         /> */}
 
                         <textarea
-                            className='border-none p-3 w-full h-[25vh]'
-                            placeholder='Type to add a note...'
+                            className='border-none p-3 w-full h-[25vh] font-inter font-gray-800'
+                            placeholder='Type to add a new note...'
                             value={noteText}
                             onChange={handleChange}
                         ></textarea>
                         
                         {/* Save button */}
-                        <div>
-                            <button className='rounded-lg float-left w-1/5 mb-4 mt-5 p-1 text-white bg-login-green hover:bg-login-green-hover' onClick={handleSaveClick}>
-                                Save
-                            </button>
+                        <div className="mb-4">
+                            <SaveBtn />
                         </div>
                     </div>
                 </div>
