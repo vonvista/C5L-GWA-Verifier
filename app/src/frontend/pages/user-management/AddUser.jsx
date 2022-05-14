@@ -20,7 +20,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
   const [middleName, setMiddleName] = useState('');
   const [lastName, setLastName] = useState('');
   const [un, setUN] = useState(''); // username
-  const [position, setPosition] = useState(''); // username
+  const [position, setPosition] = useState(''); // position
   const [pw, setPW] = useState(''); // password
   const [status, setStatus] = useState('show');
 
@@ -159,7 +159,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                     </svg>
                   </Dialog.Title>
 
-                  <div className="mt-3 h-full">
+                  <div className="m-0 absolute top-[50%] translate-y-[-50%] w-full">
                     <div className={modalBody1}>
                       {/* photo  */}
                       <div className="w-1/6 ml-auto mt-2">
@@ -237,6 +237,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                     labelVal="Username" // label text
                                     inputStyle={inputStyle} // styling for input
                                     name="username" // name of label-input components
+                                    max={17} // character limit - max no of char is 17
                                     inputType="text" // type of input password, email, text, etc.
                                     inputPlaceholder="" // placeholder text for input
                                     value={un} // value of the input
@@ -252,6 +253,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                     labelVal="Position" // label text
                                     inputStyle={inputStyle} // styling for input
                                     name="position" // name of label-input components
+                                    max={17} // character limit - max no of char is 17
                                     inputType="text" // type of input password, email, text, etc.
                                     inputPlaceholder="" // placeholder text for input
                                     value={position} // value of the input
