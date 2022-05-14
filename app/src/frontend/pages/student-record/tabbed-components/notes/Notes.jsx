@@ -86,17 +86,17 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
             {/* Notes tab */}
             {/* Checks first if the array of notes is currently empty. */}
             { notesData.length === 0
-                ? <h2 className="inter font-light text-[1.05vw] italic">
+                ? <h2 className="font-inter font-light text-[1.05vw] italic">
                     No notes found.
                 </h2>
                 : notesData.map( (data, idx) => {
                     return (
                         <div className="grid border rounded-lg p-5 mb-2" key={idx}>
                             {/* Note details */}
-                            <h1 className="text-xl inter font-bold">
+                            <h1 className="text-xl font-inter font-semibold">
                                 {data.Semyear}
                             </h1>
-                            <p className="inter text-sm mt-3">
+                            <p className="font-inter text-md mt-3">
                                 {data.content}
                                 {data.Details}
                             </p>
@@ -107,7 +107,7 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
                                     width="18"
                                     src={Delete}
                                 />
-                                <span className="text-sm ml-2">Delete</span>
+                                <span className="text-sm font-inter ml-2">Delete</span>
                             </button>
                         </div>
                     )
