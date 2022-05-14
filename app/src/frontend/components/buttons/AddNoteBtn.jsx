@@ -1,28 +1,59 @@
 import 'tailwindcss/tailwind.css';
-import addNote from '../../../../assets/icons/addRow.svg';
+import { useState } from 'react';
+import addIcon from '../../../../assets/icons/addRow.svg';
+import AddNote from 'frontend/pages/student-record/tabbed-components/notes/AddNote';
 
-// Function contains the Add Note button from Student Record View/Edit Page
+    
+// This component contains the Add Note button from the Student Record Page
+// -- notesList prop    : gets the current state of array of notes from parent component
+// -- semesters         : gets the list of semesters that the student has enrolled in; to be used for dropdown select
+// -- handleAddNote     : gets the handler for adding notes from parent component
+// -- selectedSem       : gets the state of selectedSem from parent component
+// -- setSelectedSem    : used to update the state for selectedSem in parent component
 
-// PROPS:
-// handleClick: function to handle click event
+const AddNoteBtn = ({ notesList, semesters, handleAddNote, selectedSem, setSelectedSem }) => {
 
-const AddNoteBtn = ({ handleClick }) => {
-  const addNoteStyle = `h-8 px-3.5 flex items-center mb-2 rounded-xl bg-login-green text-white font-montserrat font-bold hover:shadow-lg hover:bg-login-green-hover`;
+    // state handler for modal button
+    const [isOpen, setIsOpen] = useState(false)
+  
+    // styling for the button
+    const addNoteStyle = `h-8 px-3.5 flex items-center mb-2 rounded-xl bg-login-green text-white font-montserrat font-bold hover:shadow-lg hover:bg-login-green-hover`;
+    
+    // functions to open/close the modal window
+    const openModal = () => {
+        setIsOpen(true)
+    }
 
-  return (
-    <>
-      <button className={addNoteStyle} type="button" onClick={handleClick}>
-        <img
-          className="p-0.25 my-1.5 ml-0.25 mr-1.5 inline-flex"
-          width="18px"
-          height="18px"
-          alt="icon"
-          src={addNote}
+    const closeModal = () => {
+        setIsOpen(false)
+    }
+
+    return (
+      <>
+        {/* Modal Window */}
+        <AddNote
+            modalState={isOpen}
+            modalHandler={closeModal}
+            notesList={notesList}
+            semesters={semesters}
+            handleAddNote={handleAddNote}
+            setSelectedSem={setSelectedSem}
+            selectedSem={selectedSem}
         />
-        <p className="text-xs inline-block">Add / Edit Note</p>
-      </button>
-    </>
-  );
+
+        {/* Add/Edit Note Button */}
+        <button className={addNoteStyle} type="button" onClick={openModal}>
+          <img
+            className="p-0.25 my-1.5 ml-0.25 mr-1.5 inline-flex"
+            width="18px"
+            height="18px"
+            alt="icon"
+            src={addIcon}
+          />
+          <p className="text-xs inline-block">Add / Edit Note</p>
+        </button>
+      </>
+    );
 };
 
 export default AddNoteBtn;
