@@ -2,12 +2,16 @@ import { useState } from 'react';
 import SemSelect from 'frontend/components/inputs/DropdownSelect';
 import AddNoteBtn from 'frontend/components/buttons/AddNoteBtn';
 import Input from 'frontend/components/inputs/Input';
-import SaveBtn from 'frontend/components/buttons/SaveBtn';
 import NotesTab from './Notes';
 import 'tailwindcss/tailwind.css';
 
 
-// This function is used for adding/editing the notes for each semester
+// This functional component is used for adding/editing the notes for each semester
+// -- notesList prop    : gets the current state of array of notes from parent component
+// -- handleAddNote     : gets the handler for adding notes from parent component
+// -- selectedSem       : gets the state of selectedSem from parent component
+// -- setSelectedSem    : used to update the state for selectedSem in parent component
+// -- semesters         : gets the list of semesters that the student has enrolled in; to be used for dropdown select
 
 const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semesters }) => {
     
@@ -15,15 +19,16 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
     const [noteText, setNoteText] = useState("");
     // State that handles popup window
     const [showWindow, setShowWindow] = useState(false)
-
+    
 
     // Sets text area to existing object content if a note for the sem already exists
     const setTextArea = (givenSem) => {
-        const index = notesList.map(i => i.sem).indexOf(givenSem.sem)
+        const index = notesList.map(i => i.Semyear).indexOf(givenSem.sem)
+        
         if(index != -1){
-            setNoteText(notesList[index].content)
+            setNoteText(notesList[index].Details)
         } else {
-            setNoteText('Type to add a new note...')
+            setNoteText('Type to add a note...')
         }
     }
 
@@ -36,6 +41,12 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
     // Handler for changes in text area
     const handleChange = (event) => {
         setNoteText(event.target.value)
+    }
+
+    // Handle for closing add note window
+    const handleClose = () => {
+        setShowWindow(false)
+        setSelectedSem(semesters[0])         // reset selected option in dropdown select to first object
     }
    
     // Handler for save button
@@ -89,7 +100,7 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
                             <div>
                                 {/* Dropdown select  */}
                                 <SemSelect
-                                    style="w-full ml-auto mr-0 font-inter"
+                                    style="w-full ml-auto mr-0 "
                                     options={semesters}
                                     state={[selectedSem, setSelectedSem]} 
                                     placeholderChange={setTextArea}
@@ -100,7 +111,7 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
                             <button
                                 className="text-[2vw] ml-auto mr-0 hover:text-gray-500"
                                 type="button"
-                                onClick={() => setShowWindow(false)}
+                                onClick={handleClose}
                             >
                                 &times;
                             </button>
@@ -117,15 +128,17 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
                         /> */}
 
                         <textarea
-                            className='border-none p-3 w-full h-[25vh] font-inter font-gray-800'
-                            placeholder='Type to add a new note...'
+                            className='border-none p-3 w-full h-[25vh]'
+                            placeholder='Type to add a note...'
                             value={noteText}
                             onChange={handleChange}
                         ></textarea>
                         
                         {/* Save button */}
-                        <div className="mb-4">
-                            <SaveBtn />
+                        <div>
+                            <button className='rounded-lg float-left w-1/5 mb-4 mt-5 p-1 text-white bg-login-green hover:bg-login-green-hover' onClick={handleSaveClick}>
+                                Save
+                            </button>
                         </div>
                     </div>
                 </div>
