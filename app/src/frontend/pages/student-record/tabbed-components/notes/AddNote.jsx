@@ -1,46 +1,23 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition} from '@headlessui/react';
-
 import SemSelect from 'frontend/components/inputs/DropdownSelect';
-import AddNoteBtn from 'frontend/components/buttons/AddNoteBtn';
-import Input from 'frontend/components/inputs/Input';
-import NotesTab from './Notes';
 import 'tailwindcss/tailwind.css';
 
 
-// This functional component is used for adding/editing the notes for each semester
+// Parent component >> AddNoteBtn.jsx
+
+// This functional component is used for adding/editing of notes for each semester
 // -- modalState prop   : holds a boolean value
 // -- modalHandler      : handler for setting modalState to false
 // -- notesList         : gets the current state of array of notes from parent component
 // -- handleAddNote     : gets the handler for adding notes from parent component
 // -- selectedSem       : gets the state of selectedSem from parent component
 // -- setSelectedSem    : used to update the state for selectedSem in parent component
+// -- setTextArea       : used to update the state of the textarea
+// -- noteText          : gets the state to be displayed for the textarea
 // -- semesters         : gets the list of semesters that the student has enrolled in; to be used for dropdown select
 
-const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedSem, setSelectedSem, semesters }) => {
-    
-    // State that handles the content in the text area
-    const [noteText, setNoteText] = useState("");
-    // State that handles popup window
-    // const [showWindow, setShowWindow] = useState(false)
-    
-
-    // Sets text area to existing object content if a note for the sem already exists
-    const setTextArea = (givenSem) => {
-        const index = notesList.map(i => i.Semyear).indexOf(givenSem.sem)
-        
-        if(index != -1){
-            setNoteText(notesList[index].Details)
-        } else {
-            setNoteText('Type to add a note...')
-        }
-    }
-
-    // Handler for add note button
-    const handleClick = () => {
-        setTextArea(givenSem=selectedSem)
-        setShowWindow(true)
-    }
+const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedSem, setSelectedSem, setTextArea, noteText, semesters }) => {
 
     // Handler for changes in text area
     const handleChange = (event) => {
@@ -49,9 +26,8 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
 
     // Handle for closing add note window
     const handleClose = () => {
-        // setShowWindow(false)
         setSelectedSem(semesters[0])        // reset selected option in dropdown select to first object
-        modalHandler()                      // closes window
+        modalHandler()                      // close window
     }
    
     // Handler for save button
@@ -86,17 +62,17 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
             }
         }
 
-        setShowWindow(false)                 // Close window after saving
-        setSelectedSem(semesters[0])         // Reset selected option in dropdown to first object
+        modalHandler                    // close window after saving
+        setSelectedSem(semesters[0])    // reset selected option in dropdown to first object
     }
 
 
     return (
         <>
-            {/* Enable transition effects for the viewport */}
+            {/* Wrapping everything with transition component to use transition effects from @headlessui/react */}
             <Transition appear show={modalState} as={Fragment}>
                 
-                {/* Wrapping the viewport */}
+                {/* Wrapping everything with dialog component */}
                 <Dialog as="div" classname="relative z-10" onClose={handleClose}>
                     
                     {/* Transition effect for the element inside this Transition.Child tag*/}
@@ -137,7 +113,7 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
                                     <div>
                                         {/* Dropdown select  */}
                                         <SemSelect
-                                            style="w-full ml-auto mr-0 "
+                                            style="font-inter w-full ml-auto mr-0 "
                                             options={semesters}
                                             state={[selectedSem, setSelectedSem]} 
                                             placeholderChange={setTextArea}
@@ -155,8 +131,10 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
                                 </Dialog.Title>
 
                                 {/* Window body */}
+
+                                {/* Textarea */}
                                 <textarea
-                                    className='border-none p-3 w-full h-[25vh]'
+                                    className='font-inter text-sm lg:text-lg border-none p-3 w-full h-[25vh]'
                                     placeholder='Type to add a note...'
                                     value={noteText}
                                     onChange={handleChange}
