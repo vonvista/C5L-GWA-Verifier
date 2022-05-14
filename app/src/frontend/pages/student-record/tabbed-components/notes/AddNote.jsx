@@ -1,42 +1,33 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
+import { Dialog, Transition} from '@headlessui/react';
 import SemSelect from 'frontend/components/inputs/DropdownSelect';
-import AddNoteBtn from 'frontend/components/buttons/AddNoteBtn';
-import Input from 'frontend/components/inputs/Input';
-import NotesTab from './Notes';
-
 import 'tailwindcss/tailwind.css';
-import './AddNote.css';
 
 
-// This function is used for adding/editing the notes for each semester
+// Parent component >> AddNoteBtn.jsx
 
-const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semesters }) => {
-    
-    // State that handles the content in the text area
-    const [noteText, setNoteText] = useState("");
-    // State that handles popup window
-    const [showWindow, setShowWindow] = useState(false)
+// This functional component is used for adding/editing of notes for each semester
+// -- modalState prop   : holds a boolean value
+// -- modalHandler      : handler for setting modalState to false
+// -- notesList         : gets the current state of array of notes from parent component
+// -- handleAddNote     : gets the handler for adding notes from parent component
+// -- selectedSem       : gets the state of selectedSem from parent component
+// -- setSelectedSem    : used to update the state for selectedSem in parent component
+// -- setTextArea       : used to update the state of the textarea
+// -- noteText          : gets the state to be displayed for the textarea
+// -- semesters         : gets the list of semesters that the student has enrolled in; to be used for dropdown select
 
-
-    // Sets text area to existing object content if a note for the sem already exists
-    const setTextArea = (givenSem) => {
-        const index = notesList.map(i => i.sem).indexOf(givenSem.sem)
-        if(index != -1){
-            setNoteText(notesList[index].content)
-        } else {
-            setNoteText('Type to add a note...')
-        }
-    }
-
-    // Handler for add note button
-    const handleClick = () => {
-        setTextArea(givenSem=selectedSem)
-        setShowWindow(true)
-    }
+const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedSem, setSelectedSem, setTextArea, noteText, semesters }) => {
 
     // Handler for changes in text area
     const handleChange = (event) => {
         setNoteText(event.target.value)
+    }
+
+    // Handle for closing add note window
+    const handleClose = () => {
+        setSelectedSem(semesters[0])        // reset selected option in dropdown select to first object
+        modalHandler()                      // close window
     }
    
     // Handler for save button
@@ -71,65 +62,95 @@ const AddNote = ({ notesList, handleAddNote, selectedSem, setSelectedSem, semest
             }
         }
 
-        setShowWindow(false)                 // Close window after saving
-        setSelectedSem(semesters[0])         // Reset selected option in dropdown to first object
+        modalHandler                    // close window after saving
+        setSelectedSem(semesters[0])    // reset selected option in dropdown to first object
     }
 
 
     return (
         <>
-            <AddNoteBtn handleClick={handleClick}/>
-            { showWindow ? (
-                <div className='add-note-overlay'>
-                    <div className='add-note-popup-window shadow-lg'>
+            {/* Wrapping everything with transition component to use transition effects from @headlessui/react */}
+            <Transition appear show={modalState} as={Fragment}>
+                
+                {/* Wrapping everything with dialog component */}
+                <Dialog as="div" classname="relative z-10" onClose={handleClose}>
+                    
+                    {/* Transition effect for the element inside this Transition.Child tag*/}
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        {/* Container for the layer behind the modal window */}
+                        <div className="fixed inset-0 bg-black bg-opacity-25" />
+                    </Transition.Child>
 
-                        <div className="add-note-title">
-                            <div>
-                                {/* Dropdown select  */}
-                                <SemSelect
-                                    style="w-full ml-auto mr-0"
-                                    options={semesters}
-                                    state={[selectedSem, setSelectedSem]} 
-                                    placeholderChange={setTextArea}
-                                />
-                            </div>
-                            
-                            {/* Exit button */}
-                            <button
-                                className="close-note-btn"
-                                type="button"
-                                onClick={() => setShowWindow(false)}
-                            >
-                                &times;
-                            </button>
-                        </div>
+                    {/* Container for the layer containing the modal window */}
+                    <div className="fixed inset-0 overflow-y-auto flex min-h-full items-center justify-center p-4 text-center">
                         
-                        {/* Text field */}
-                        {/* <Input
-                            inputStyle="add-note-textarea"
-                            name="note"
-                            inputType="text"
-                            inputPlaceholder={setTextArea}
-                            value={noteText}
-                            changeHandler={handleChange}
-                        /> */}
+                        {/* Transition effect for the element inside this Transition.Child tag*/}
+                        <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0 scale-95"
+                            enterTo="opacity-100 scale-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100 scale-100"
+                            leaveTo="opacity-0 scale-95"
+                        >
+                            {/* Add/Edit note modal window */}
+                            <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white px-6 text-left align-middle shadow-xl transition-all">
+                                
+                                {/* Window Title */}
+                                <Dialog.Title
+                                    as="div"
+                                    className="flex items-center mb-2 text-[2.5vh]"
+                                >
+                                    <div>
+                                        {/* Dropdown select  */}
+                                        <SemSelect
+                                            style="font-inter w-full ml-auto mr-0 "
+                                            options={semesters}
+                                            state={[selectedSem, setSelectedSem]} 
+                                            placeholderChange={setTextArea}
+                                        />
+                                    </div>
+                        
+                                    {/* Exit button */}
+                                    <button
+                                        className="text-[2vw] ml-auto mr-0 hover:text-gray-500"
+                                        type="button"
+                                        onClick={handleClose}
+                                    >
+                                        &times;
+                                    </button>
+                                </Dialog.Title>
 
-                        <textarea
-                            className='add-textarea'
-                            placeholder='Type to add a note...'
-                            value={noteText}
-                            onChange={handleChange}
-                        ></textarea>
-                        
-                        {/* Save button */}
-                        <div>
-                            <button className='save-note-btn hover:bg-login-green-hover' onClick={handleSaveClick}>
-                                Save
-                            </button>
-                        </div>
+                                {/* Window body */}
+
+                                {/* Textarea */}
+                                <textarea
+                                    className='font-inter text-sm lg:text-lg border-none p-3 w-full h-[25vh]'
+                                    placeholder='Type to add a note...'
+                                    value={noteText}
+                                    onChange={handleChange}
+                                ></textarea>
+                                
+                                {/* Save button */}
+                                <div>
+                                    <button className='rounded-lg float-left w-1/5 mt-3 mb-3 p-1 text-white bg-login-green hover:bg-login-green-hover' onClick={handleSaveClick}>
+                                        Save
+                                    </button>
+                                </div>
+                            </Dialog.Panel>
+                        </Transition.Child>
                     </div>
-                </div>
-            ) : ( <></> )}
+                </Dialog>
+            </Transition>
         </>
     )
 }

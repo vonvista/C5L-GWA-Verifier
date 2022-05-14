@@ -38,20 +38,13 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const [historyState, setHistoryState] = useState(history)
     const [tabId, setTabId] = useState(0)
 
-
-    // handles changes for notes
-    const setNotes = (notesObj) => {
-        let newNotes = [...notesState, notesObj]
-        setNotesState(newNotes)
-    }
-
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
         // uses components as values
-        Status: <Status state={statusState} />,                   // status component
-        Validations: <CheckList checklistData={checklist} />,   //checklist component
-        Notes: <Notes notes={notesState} semesters={gradeState} notesHandler={setNotes} />,    // notes component
-        History: <History historyData={historyState} />,          // history component
+        Status: <Status state={statusState} />,                     // status component
+        Validations: <CheckList checklistData={checklist} />,       //checklist component
+        Notes: <Notes notesData={notesState} semesters={gradeState} setNotesData={setNotesState} />,    // notes component
+        History: <History historyData={historyState} />,            // history component
     }
 
     const tabAnim = {
@@ -200,7 +193,15 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                     <div className="w-[60vw] flex-1 overflow-auto mx-auto bg-white">
                         {   // map grades per semester
                             gradeState.map((semData, idx)=>(
-                                <Table key={idx} Name={semData.sem} Semester={semData.data} Total={semData.total} handler={setGradeState} history={historyState} historyHandler={setHistory} autoSet={setGrades}/>
+                                <Table
+                                    key={idx}
+                                    Name={semData.sem}
+                                    Semester={semData.data}
+                                    Total={semData.total}
+                                    handler={setGradeState}
+                                    history={historyState}
+                                    historyHandler={setHistory}
+                                    autoSet={setGrades}/>
                             ))
                         }
                     </div>
