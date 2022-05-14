@@ -3,7 +3,9 @@ import AddNoteBtn from 'frontend/components/buttons/AddNoteBtn';
 import Delete from '../../../../../../assets/icons/delete.svg';
 
 
-// Functional component for notes tab in student record view page
+// Parent component >> Tab component found in StudentViewRecord.jsx
+
+// This is a functional component for the notes tab in student record view page
 // -- notesData prop : gets the current state of array of notes from parent component
 // -- semesters      : gets the list of semesters that the student has enrolled in; to be used for dropdown select
 // -- setNotesData:  : used to update the state for the notesData in parent component
