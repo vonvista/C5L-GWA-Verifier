@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Verify from 'frontend/components/buttons/Verify'
 
-// status page
-
-// props will be for placing values into the status page
+// Component for status tab
+// -- state : data for the status tab will be passed here
+// -- ...rest : additional prop for backend expansion 
 
 export default function Status({state, ...rest}) {
 
@@ -11,7 +11,7 @@ export default function Status({state, ...rest}) {
         <div className="min-w-[25vw] max-w-[25vw] h-full mx-auto p-5 grid box-border overflow-auto">
             {/* Academic Achievement Box */}
             <div className="border rounded-lg p-4 grid row-auto">
-                <h1 className="place-self-start inline inter">Academic Achievement</h1>
+                <h1 className="place-self-start inline text-lg inter">Academic Achievement</h1>
                 {/* change the academic achievement Box depending on the Final GWA of the Student -lal */ 
                     (state.GPACalc.totalGWA.toFixed(3) > 1.20) 
                     ? (state.GPACalc.totalGWA.toFixed(3) > 1.45) 
@@ -23,7 +23,7 @@ export default function Status({state, ...rest}) {
                 }
             </div>
             {/* Table for Grades */}
-            <div className="inter text-sm">
+            <div className="inter text-md">
                 <table className="table-auto w-full my-5">
                     <thead className="text-left">
                         <tr>

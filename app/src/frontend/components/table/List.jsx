@@ -94,8 +94,8 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             <div className="table-cell w-1/6">Course Name</div>
                             <div className="table-cell w-1/6 text-center">Units</div>
                             <div className="table-cell w-1/6 text-center">Grade</div>
-                            <div className="table-cell w-1/6 text-center">Enrolled</div>
-                            <div className="table-cell w-1/6 text-center"></div>
+                            <div className="table-cell w-1/6 text-center">Cumulative</div>
+                            <div className="table-cell w-1/6 text-center">Weight</div>
                             <div className="table-cell w-1/6 text-center"><AddRow sem={sem} addHandler={addHandler} histHandler={historyHandler}/></div>
                         </div>
                     </div>
@@ -108,10 +108,6 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                 ({units}) => !isNaN(units) || {units: 'Invalid value'},
                                 ({grade}) => isRequired(grade) || {grade: 'This is required'},
                                 ({grade}) => !isNaN(grade) || {grade: 'Invalid value'},
-                                ({enrolled}) => isRequired(enrolled) || {enrolled: 'This is required'},
-                                ({enrolled}) => !isNaN(enrolled) || {enrolled: 'Invalid value'},
-                                ({runningSum}) => isRequired(runningSum) || {runningSum: 'This is required'},
-                                ({runningSum}) => !isNaN(runningSum) || {runningSum: 'Invalid value'},   
                             ]
                             
                             // State and hook to handle inline editing of data
@@ -134,7 +130,8 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                 <Fragment key={index}>
                                     {isEdit ?
                                         <EditRow 
-                                            data={values} 
+                                            dataDynamic={values}
+                                            dataStatic={course} 
                                             changeHandler={changeHandler} 
                                             onSubmit={submitHandler} 
                                             toggleHandler={cancelEdit} 
@@ -152,8 +149,8 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             
                         })}
 
-                        <div className="table-row"> {/* row for total values */}
-                            <div className="table-cell font-black py-2">Total</div>
+                        <div className="table-row "> {/* row for total values */}
+                            <div className="table-cell font-montserrat font-bold text-primary-red py-2">Total</div>
                             <div className="table-cell text-center">{total}</div>       {/* row for total units */}
                             <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
                             <div className="table-cell"></div>                      {/* empty row to not ruin styling */}

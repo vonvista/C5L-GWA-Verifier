@@ -12,7 +12,7 @@ import 'tailwindcss/tailwind.css';
 // PROPS:
 // handleSave, handleCancel: function to handle click event
 
-const ActionsSaveCancel = ({ handleSave, handleCancel, isDisabled, histHandler }) => {
+const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, histHandler }) => {
   const btn = `
     .btn{
       width: 2vw;
@@ -24,7 +24,10 @@ const ActionsSaveCancel = ({ handleSave, handleCancel, isDisabled, histHandler }
 
   // state handler for modal button
   const [isOpen, setIsOpen] = useState(false)
-  
+
+  if (isTouched==null) // if null, assume that inputs haven't been touched
+    isTouched = false;
+
   function openModal() {
     setIsOpen(true)
   }
@@ -35,12 +38,12 @@ const ActionsSaveCancel = ({ handleSave, handleCancel, isDisabled, histHandler }
 
   return (
     <>
-      <Justification modalState={isOpen} modalHandler={closeModal} submitHandler={handleSave} histHandler={histHandler} />
+      <Justification modalState={isOpen} modalHandler={closeModal} parentSubmitHandler={handleSave} histHandler={histHandler} />
 
       <div className="mx-auto w-auto items-center justify-items-center inline-block">
         <style>{btn}</style>
         {/* edit */}
-        <button className={`${buttons}${disabled}`} type="button" onClick={openModal} disabled={isDisabled}>
+        <button className={`${buttons}${disabled}`} type="button" onClick={openModal} disabled={!(isValid && isTouched)}>
           <svg xmlns="http://www.w3.org/2000/svg" className="btn" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
           </svg>
