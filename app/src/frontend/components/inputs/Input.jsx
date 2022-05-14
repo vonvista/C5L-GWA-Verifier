@@ -5,10 +5,12 @@ How to use:
     labelVal=""         // label text
     inputStyle=""       // styling for input
     name=""             // name of label-input components
+    max=""              // max char limit
     inputType=""        // type of input password, email, text, etc.
     inputPlaceholder="" // placeholder text for input
     value=""            // value of the input
     changeHandler=""    // change handling
+    handleKeyPress=""   //key press handler
     required=""   
     /> 
 */
@@ -26,6 +28,7 @@ function userInput(props) {
         className={props.inputStyle}
         type={props.inputType}
         name={props.name}
+        maxLength={props.max}
         placeholder={props.inputPlaceholder}
         value={props.value}
         onChange={props.changeHandler} // lifting state up
