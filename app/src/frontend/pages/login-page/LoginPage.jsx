@@ -125,7 +125,7 @@ const Login = () => {
                 
                 <form className="justify-center pt-[8vh]" onSubmit={submitHandler}>
 
-                    {/* Div container for input form */}
+                    {/* Div container for input form and login button*/}
                     <div className="flex justify-center">               
                         
                         {/* Input form */}
