@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import AddNote from './AddNote';
+import AddNoteBtn from 'frontend/components/buttons/AddNoteBtn';
 import Delete from '../../../../../../assets/icons/delete.svg';
 
 
@@ -73,12 +73,12 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
 
         <div className="min-w-[25vw] max-w-[25vw] h-[41rem] max-h-[41rem] mx-auto p-5 block overflow-auto">
             {/* Add note button */}
-            <AddNote
+            <AddNoteBtn
                 notesList={notesData}
                 semesters={semesters}
                 handleAddNote={handleAddNote}
-                setSelectedSem={setSelectedSem}
                 selectedSem={selectedSem}
+                setSelectedSem={setSelectedSem}
             />
 
             {/* Notes tab */}
