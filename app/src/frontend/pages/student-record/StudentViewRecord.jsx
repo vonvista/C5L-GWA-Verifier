@@ -13,7 +13,6 @@ import Table from './grades-table/TableContents';
 
 /* CSS */
 import 'tailwindcss/tailwind.css';
-import './StudentViewRecord.css';
 
 
 // This component contains all the elements of the student record page
@@ -147,8 +146,8 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     // }
 
     const detailStyle = { // styling for student detail header
-        title: "table-cell text-left text-sm 2xl:text-xl",
-        text: "table-cell text-left text-xl 2xl:text-2xl font-bold",
+        title: "font-inter table-cell text-left text-sm 2xl:text-xl",
+        text: "font-inter table-cell text-left text-xl 2xl:text-2xl font-bold",
     }
 
     return(
@@ -159,7 +158,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                 <div className="w-full top-16 flex px-7 py-5 rounded-lg mx-auto bg-sr-dark-gray shadow-lg box-border">
 
                     <div className="table w-4/5">
-                        <div className="title-styles">
+                        <div className={`table-header-group`}>
                             <div className="table-row">
                                 <div className={detailStyle.title}>Student Number</div>
                                 <div className={detailStyle.title}>Name</div>
@@ -168,7 +167,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                             </div>
                         </div>
 
-                        <div className="value-styles">
+                        <div className={`table-row-group`}>
                             <div className="table-row">
                                 <div className={detailStyle.text}>{selectedStudent.stud_no}</div>
                                 <div className={detailStyle.text}>{selectedStudent.name}</div>
@@ -213,7 +212,6 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                         <Tab.Group
                             selectedIndex={tabId}
                             onChange={(id) => {
-                                console.log(id)
                                 setTabId(id)
                             }}
                             manual
