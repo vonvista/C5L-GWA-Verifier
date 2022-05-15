@@ -48,10 +48,10 @@ function organizeList(data, opt){
     // format data to 2D studentListay
     for (let i = 0; i < data.length; i++){
 
-        // // only students checked and with <1.75 gwa will be included
-        // if (data[i].status != 'Checked' || parseFloat(data[i].gwa) > 1.75){
-        //     continue
-        // }
+        // only students checked and with <1.75 gwa will be included
+        if (data[i].status != 'Checked' || parseFloat(data[i].gwa) > 1.75){
+            continue
+        }
 
         let temp = []
 
@@ -151,20 +151,31 @@ function exportStudentList(sortOpt, list, user){
 
     let wantedTableWidth = 300;
     let pageWidth = doc.internal.pageSize.width;
+    let pageHeight = doc.internal.pageSize.height;
     let margin = (pageWidth - wantedTableWidth) / 2;
+
+    //set font size
+    doc.setFontSize(20)    
+
+    // add text
+    doc.text('Student List Summary', (pageWidth/2), YMargin, 'center');
 
     //set font size
     doc.setFontSize(10)    
 
-    // add text
-    doc.text('Student List Summary', LeftMargin, YMargin,)
-
     // add the data for body on styles
-    //styles.margin = {right: margin,  left: margin, top: 50, bottom: 50}
+    styles.margin = {right: margin,  left: margin, top: 50, bottom: 50}
     styles.body = exportData
 
-    // create table
-    doc.autoTable(styles)
+    if (exportData === undefined || exportData == 0) {
+        // array empty or does not exist
+        doc.setFontSize(15)    
+        doc.setTextColor('#d43535')
+        doc.text('No student in the summary list', (pageWidth/2), (pageHeight/2), 'center');
+    } else {
+        // create table
+        doc.autoTable(styles)
+    }
 
     // addwatermark
     doc = addWaterMark(doc, user)
