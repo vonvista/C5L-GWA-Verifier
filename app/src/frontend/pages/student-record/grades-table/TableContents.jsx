@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import List from 'frontend/components/table/List';
 import 'tailwindcss/tailwind.css';
+import UserManagementPage from 'frontend/pages/user-management/UserManagementPage';
 
 
 // This component handles the student's data for a specific semester
@@ -114,7 +115,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
             info: [
                 {
                     main: detailsObj.title,
-                    user: 'insert username here',
+                    user: userName,
                     time: new Date().toLocaleTimeString('en-US', { 
                         hour12: false, 
                         hour: "numeric", 
@@ -162,7 +163,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
                     {({ open }) => (
                         <>
                              {/* Accordion Header */}
-                             <Disclosure.Button className={`${open ? 'bg-sr-dark-gray rounded-t-lg' : 'mb-2 rounded-lg shadow-lg'} ${nameStyle}`}>
+                             <Disclosure.Button className={`${open ? 'bg-sr-dark-gray rounded-t-lg' : 'mb-3 rounded-lg shadow-lg'} ${nameStyle}`}>
                                 <span className="text-lg xl:text-xl">{Name}</span>
                                 {/* Icon */}
                                 <ChevronUpIcon
@@ -172,19 +173,32 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
                                 />
                             </Disclosure.Button>
                             
-                            {/* Accordion Contents */}
-                            <Disclosure.Panel className="inter z-0 pl-5 py-3 mb-2 text-sm text-gray-500 rounded-b-lg shadow-lg">
-                                <List table={2} total={Total} sem={Name} data={semData} dataHandler={setData} delHandler={delData} handleHistory={setHistory} addHandler={addData} histHandler={historyHandler}/>
-                                <section className="mt-3">
-                                    <span className="font-montserrat font-bold text-primary-red">Load Status</span>
-                                    {( Total <= 20 )
-                                        ? ( Total >= 15 )
-                                            ? <span className="ml-4 font-black text-login-green underline">Normal</span>
-                                            : <span className="ml-4 font-black text-login-green underline">Underload</span>
-                                        : <span className="ml-4 font-black text-login-green underline">Overload</span>
-                                    }
-                                </section>
-                            </Disclosure.Panel>       
+                            <Transition
+                                show={open}
+                                enter="transition duration-300 ease-out"
+                                enterFrom="transform -translate-y-6 opacity-0"
+                                enterTo="transform translate-y-0 opacity-100"
+                                leave="transition duration-200 ease-in"
+                                leaveFrom="transform translate-y-0 opacity-100"
+                                leaveTo="transform -translate-y-6 opacity-0"
+                            >
+                                {/* Accordion Contents */}
+                                <Disclosure.Panel className="inter z-0 pl-5 py-3 mb-2 text-sm text-gray-500 rounded-b-lg shadow-lg">
+                                    <List table={2} total={Total} sem={Name} data={semData} dataHandler={setData} delHandler={delData} handleHistory={setHistory} addHandler={addData} histHandler={historyHandler}/>
+                                    <section className="mt-3">
+                                        <span className="font-montserrat font-bold text-primary-red">Load Status</span>
+                                        {( Total <= 20 )
+                                            ? ( Total >= 15 )
+                                                ? <span className="ml-4 font-black text-login-green underline">Normal</span>
+                                                : <span className="ml-4 font-black text-login-green underline">Underload</span>
+                                            : <span className="ml-4 font-black text-login-green underline">Overload</span>
+                                        }
+                                    </section>
+
+                                </Disclosure.Panel>    
+                            </Transition>
+                            
+                               
                         </>
                     )}
                 </Disclosure>
