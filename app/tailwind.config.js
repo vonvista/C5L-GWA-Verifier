@@ -11,6 +11,8 @@ module.exports = {
         'login-green': '#2A7146',
         'login-green-hover': '#35724df5',
         'login-footer': '#fecaca',
+        'export-yellow': '#ffc270',
+        'export-yellow-hover': '#ffc87f',
         'primary-red': '#371010',
         'secondary-red': '#562323',
         'red-hover': '#5a3535',
