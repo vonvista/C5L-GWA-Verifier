@@ -1,13 +1,42 @@
 import 'tailwindcss/tailwind.css';
 import exportIcon from '../../../../assets/icons/export.svg';
+import exportStudentList from 'backend/ExportStudentList';
+import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 //Button for export file 
-const ExportFileBtn = () => {
+const ExportFileBtn = ({ list }) => {
   const exportbtn = `w-[11vw] h-[3vw] bg-export-yellow m-2 rounded-xl text-white text-base font-montserrat font-bold hover:shadow-lg hover:bg-export-yellow-hover`;
+  const [currUser, setUser] = useState(`${localStorage.getItem("FirstName")} ${localStorage.getItem("LastName")} ${localStorage.getItem("MiddleName")}`);
 
+  const handleExport = async () => {
+
+    const { value: sortOption } = await Swal.fire({
+      title: 'Select sort option of summary',
+      input: 'select',
+      inputOptions: {
+        'nameAsc': 'Name (A to Z)',
+        'nameDsc': 'Name (Z to A)',
+        'studNoAsc': 'Student Number (Ascending)',
+        'studNoDsc': 'Student Number (Descending)',
+        'programAsc': 'Degree Program (A to Z)',
+        'programDsc': 'Degree Program (Z to A)',
+        'gwaAsc': 'GWA (Ascending)',
+        'gwaDsc': 'GWA (Descending)',
+      },
+      inputPlaceholder: 'Select sort option',
+      showCancelButton: true,
+    })
+    
+    if (sortOption) {
+      exportStudentList(sortOption, list, currUser);
+      //Swal.fire(`You selected: ${sortOption}`)
+    }
+  }
+  
   return (
     <>
-      <button className={exportbtn} type="button">
+      <button className={exportbtn} type="button" onClick={handleExport}>
         <img
           className="p-0.25 ml-0.25 mr-1.5 inline-flex w-[2vw] h-[2vw]"
           alt="icon"

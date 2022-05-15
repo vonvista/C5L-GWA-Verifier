@@ -4,7 +4,7 @@ import { useState } from 'react';
 import expand from '../../../../assets/icons/collapse(1).svg';
 import EditStudentDetails from 'frontend/pages/student-record/StudentDetailEditModal';
 import studentDelete from 'backend/studentDelete';
-import exportStudentData from 'backend/exportPDF';
+import exportStudentData from 'backend/exportStudentData';
 import 'tailwindcss/tailwind.css';
 
 

@@ -389,7 +389,7 @@ const UserDashboard = () => {
             <div className="flex">
               {/* Upload button */}
               <div className="flex ml-auto order-2">
-                <ExportFileBtn />
+                <ExportFileBtn list={rows}/>
                 <UploadFileBtn
                   handleClick={readInputFile}
                   handleAddRecord={handleAddRecord}
