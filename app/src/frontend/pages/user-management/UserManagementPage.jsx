@@ -226,7 +226,7 @@ const UserManagementPage = () => {
                     :(<></>)
                   }
                   {showModalEdit ?
-                    (<EditUser handleClose={() => setShowEditModal(false)} editUser={editUser} handleEditRecordSave={handleEditRecordSave}/>)
+                    (<EditUser modalState={true} handleClose={() => setShowEditModal(false)} editUser={editUser} handleEditRecordSave={handleEditRecordSave}/>)
                     :(<></>)
                   }
                   {/* <Search user={"user"} handleSearch={(e) => setSearchUser(e.target.value)} searchValue={searchUser} buttonHandler={handleSearch} handleEnter={handleEnterPress}/> */}
