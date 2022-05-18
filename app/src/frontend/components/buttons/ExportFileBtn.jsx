@@ -11,6 +11,7 @@ const ExportFileBtn = ({ list }) => {
 
   const handleExport = async () => {
 
+    // allows user to select the sort option using sweet alerts
     const { value: sortOption } = await Swal.fire({
       title: 'Select sort option of summary',
       input: 'select',
@@ -30,7 +31,6 @@ const ExportFileBtn = ({ list }) => {
     
     if (sortOption) {
       exportStudentList(sortOption, list, currUser);
-      //Swal.fire(`You selected: ${sortOption}`)
     }
   }
   

@@ -65,6 +65,7 @@ function organizeList(data, opt){
 
     let finalList = []
     
+    // sort according to the sortOption selected
     if (opt === 'nameAsc'){
         console.log(opt)
         finalList = studentList.sort((a, b) => a[0].localeCompare(b[0]));
@@ -99,6 +100,7 @@ function organizeList(data, opt){
         });
     }
 
+    // add a first column for indexing
     for (let i = 0; i < finalList.length; i++){
         finalList[i] = [i+1, ...finalList[i]]
     }
