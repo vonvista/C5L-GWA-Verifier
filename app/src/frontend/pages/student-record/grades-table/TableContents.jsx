@@ -16,12 +16,6 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
     const [rows, setRows] = useState([]);
     const [semData, semHandler] = useState(Semester);
     const [currStudentID, setcurrStudentID] = useState(localStorage.getItem('currStudentID'));
-    // const current = new Date(); //variable which will get current date and time
-    // const currentTime = `${current.getHours()}:${current.getMinutes()}`; //variable containing current time
-    // const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`; //variable containing current date
-    // const [currDate, setDate] = useState('')
-    // const [currTime, setTime] = useState('')
-    const [totalUnits, setTotal] = useState(Total)
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
 
     useEffect(() => {
