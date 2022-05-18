@@ -5,26 +5,37 @@ import AdminNav from 'frontend/components/common/AdminNavigation';
 import RecordPage from './StudentViewRecord';
 import Swal from 'sweetalert2';
 
+const statusData = {
+  GPAUnits: {
+      taken: 33.000,
+      passed: 33.000
+  },
+  NotGPAUnits: {
+      taken: 33.000,
+      passed: 33.000
+  },
+  GPACalc: {
+      totalGradePoints: 33.000,
+      totalUnitsGPA: 33.000,
+      totalGWA: 1.000
+  }
+}
 
 // values for checklist details
 const checklistDetails = [
   {
-    id: 1,
     status: false,
     detail: "Complete units for the course"
   },
   {
-    id: 2,
     status: false,
     detail: "Complete electives"
   },
   {
-    id: 3,
     status: false,
     detail: "Correct number of units and grades"
   },
   {
-    id: 4,
     status: false,
     detail: "No underload or overload"
   },
@@ -226,7 +237,10 @@ export default function StudentRecord() { // this will probably transferred to a
 
         getStudentProp(currUser) // return student info from db
 
-        //handle validations
+         //handle validations
+        for(let i = 0; i < body.Validations.length; i++){
+          validationsProp[i].status = body.Validations[i]
+        }
       })
       .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
         Swal.fire({
@@ -388,13 +402,13 @@ export default function StudentRecord() { // this will probably transferred to a
             <div className="relative inset-0 flex ml-8 xl:ml-12 justify-center">
                 <header><Header pageTitle={"Student Record"}/></header>
                 <RecordPage
-                  user={user}                   // dummy data
+                  // user={user}                   // dummy data
                   student={studentProp}
                   notes={notesProp}
                   history={historyProp}
                   status={statusData}
                   grades={gradesProp} 
-                  checklist={validationsProp}  // dummy data
+                  checklist={validationsProp} 
                   // autoSet={setGrades}
                 />
             </div>

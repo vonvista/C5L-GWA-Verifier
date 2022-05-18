@@ -275,6 +275,7 @@ const readInputFile = (file, handleAddRecord) => {
       for (let i = 0; i < numOfValidations; i++) {
         validations.push(false);
       }
+      console.log(validations)
      
       getItems(fileURL).then(function (data) {  // process the contents to simple text
         const isSuccessful = verifyInput(data); // verifies inputs not catched by the database

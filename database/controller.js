@@ -342,7 +342,7 @@ const studentSchema = new Schema({
   TotalCumulative: {type: Number, requied: true},
   OverallGWA: {type: Number, required : true},
   Status: {type: String, required : true, enum:['Checked','Unchecked','Pending']},
-  Validations: {type: Array, required : true},
+  Validations: [{type: Boolean, required : true}],
 },{autoCreate:true});
 
 
@@ -379,7 +379,8 @@ exports.studentAdd = function(req, res, next) {
     TotalUnits2: req.body.TotalUnits2,
     TotalCumulative: req.body.TotalCumulative,
     OverallGWA: req.body.OverallGWA,
-    Status: req.body.Status
+    Status: req.body.Status,
+    Validations: req.body.Validations
   });
   console.log(newStudent);
 
@@ -430,6 +431,20 @@ exports.studentDeleteOne = function(req, res, next) {
       res.send({err:'Unable to delete'});
     }
   });
+}
+
+//update validations
+exports.studentUpdateValidations = function(req, res, next) {
+  console.log(req.body);
+  Student.updateOne({_id: mongoose.Types.ObjectId(req.body._id)},{"$set":{
+    "Validations": req.body.Validations
+  }}, {new : true}, function(err,result){
+    if(!err && Student){
+      res.send(result);
+    } else {
+      res.send({err:'Unable to update student'});
+    }
+  })
 }
 
 
