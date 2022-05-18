@@ -1,7 +1,8 @@
 import 'tailwindcss/tailwind.css';
 import Swal from 'sweetalert2';
 
-// Button for saving changes in Student Record View Page
+
+// This button component is used for saving changes in Student Record Page
 const SaveBtn = ({ handleSave, isDisabled }) => {
 
   // // Sweet alert text styling

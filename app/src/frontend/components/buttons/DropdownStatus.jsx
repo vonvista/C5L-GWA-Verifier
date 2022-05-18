@@ -2,8 +2,10 @@ import 'tailwindcss/tailwind.css';
 import { useState } from 'react';
 import expand from '../../../../assets/icons/collapse(2).svg';
 
-// Function contains the buttons in Actions Dropdown seen in Student Record View/Edit Page
+
+// This function contains the buttons in Actions Dropdown seen in Student Record View/Edit Page
 // Additional references: https://tailwindui.com/components/application-ui/elements/dropdowns
+
 const DropdownStatus = () => {
   const [valueClicked, setValueClicked] = useState('Status');
   const [isActive, setIsActive] = useState(false);

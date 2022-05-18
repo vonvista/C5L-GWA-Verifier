@@ -1,17 +1,13 @@
 import 'tailwindcss/tailwind.css';
 import user1 from '../../../../assets/icons/user1.svg';
 
-// function contains the Add User button used in User System Page
-// modal should appear once button is clicked
-// handleClick handles and sets showModal variable to show the modal
+// This function contains the Add User button used in User System Page.
+// The modal window should appear once button is clicked.
+// -- handleClick prop: handles and sets showModal variable to show the modal
 
 const AddUserBtn = ({ handleClick }) => {
-  // img button styling
-  // const btn = `.btn{
-  //       width: 15vw;
-  //       height: 5vh;
-  //   }`;
 
+  // styling
   const imgBtn = `.img-btn{
         width: 15vw;
         height: 5vh;
@@ -25,8 +21,6 @@ const AddUserBtn = ({ handleClick }) => {
 
   return (
     <>
-      {/* img button styling */}
-      {/* <style>{btn}</style> */}
       <style>{imgBtn}</style>
       <style>{textBtn}</style>
       <button
