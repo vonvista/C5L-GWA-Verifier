@@ -22,63 +22,6 @@ const UserManagementPage = () => {
 
   const [userRole, setUserRole] = useState(localStorage.getItem("Role"))
 
-  // const Users = [
-  //   {
-  //     "uname": "eyds_15",
-  //     "name": "Carl Adrian Angeles",
-  //     "position" : "User"
-  //   },
-  //   {
-  //     "uname": "mau_23",
-  //     "name": "Maurice Paguagan",
-  //     "position" : "Admin"
-  //   },
-  //   {
-  //     "uname": "dyurj_45",
-  //     "name": "George Gragas",
-  //     "position" : "User"
-  //   },
-  //   {
-  //     "uname": "erl_23",
-  //     "name": "Erl Lacuban",
-  //     "position" : "User"
-  //   },
-  //   {
-  //     "uname": "tere_28",
-  //     "name": "Tere Ursolino",
-  //     "position" : "Admin"
-  //   },
-  //   {
-  //     "uname": "qreentine",
-  //     "name": "Koreen Merida",
-  //     "position" : "User"
-  //   },
-  //   {
-  //     "uname": "qreentine",
-  //     "name": "Koreen Merida",
-  //     "position" : "User"
-  //   },
-  //   {
-  //     "uname": "romel_klow",
-  //     "name": "Carl Romel Dimacali",
-  //     "position" : "User"
-  //   },
-  //   {
-  //     "uname": "otin_g",
-  //     "name": "Ysab Parayno",
-  //     "position" : "User"
-  //   },
-  //   {
-  //     "uname": "otin_g",
-  //     "name": "Ysab Parayno",
-  //     "position" : "User"
-  //   },
-  //   {
-  //     "uname": "jepi_clown",
-  //     "name": "Jeffy Escartin",
-  //     "position" : "User"
-  //   }
-  // ]
 
   const ip = localStorage.getItem("ServerIP")
   useEffect(() => {
@@ -193,6 +136,7 @@ const UserManagementPage = () => {
         "LastName": user.LastName,
         "Username": user.Username,
         "Position": user.Position,
+        "Role": user.Role,   // <-  ampotek 
         "_id": user._id,
       }
       setRows([...temp]);
