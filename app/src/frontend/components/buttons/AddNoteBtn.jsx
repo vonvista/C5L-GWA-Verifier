@@ -36,7 +36,7 @@ const AddNoteBtn = ({ notesList, semesters, handleAddNote, selectedSem, setSelec
     // Functions to open/close the modal window
     const openModal = () => {
         setIsOpen(true)
-        setTextArea(givenSem=selectedSem)   // set contents for textarea
+        setTextArea(selectedSem)   // set contents for textarea
     }
 
     const closeModal = () => {
@@ -58,6 +58,7 @@ const AddNoteBtn = ({ notesList, semesters, handleAddNote, selectedSem, setSelec
             setSelectedSem={setSelectedSem}
             setTextArea={setTextArea}
             noteText={noteText}
+            setNoteText={setNoteText}
             selectedSem={selectedSem}
         />
 
