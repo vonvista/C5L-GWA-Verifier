@@ -1,5 +1,5 @@
 // AUTHOR: Elroy Cabalda
-// DESCRIPTION: Takes a pdf input file and extracts the text using pdf-parse npm package
+// DESCRIPTION: Takes a pdf input file and extracts the text using pdfjs-dist npm package
 // NOTES: made use of npm package pdfjs-dist
 
 // Assumptions:
@@ -16,7 +16,6 @@ import Swal from 'sweetalert2'
 
 const pdfjs = require('pdfjs-dist/legacy/build/pdf');
 const pdfWorker = require('pdfjs-dist/legacy/build/pdf.worker.entry');
-const ip = localStorage.getItem("ServerIP");
 
 pdfjs.GlobalWorkerOptions.workerSrc = pdfWorker;
 
@@ -268,77 +267,47 @@ const readInputFile = (file, handleAddRecord) => {
     // once the pdf file read is done execute the function
     reader.onload = function () {
       const fileURL = reader.result;  // get the contents of the pdf file as an array buffer
-
-      //set validations
-      numOfValidations = 4
-      validations = []
-      for (let i = 0; i < numOfValidations; i++) {
-        validations.push(false);
-      }
-      console.log(validations)
      
       getItems(fileURL).then(function (data) {  // process the contents to simple text
         const isSuccessful = verifyInput(data); // verifies inputs not catched by the database
         if (isSuccessful.success) {
-          // adding student data to database 
+          
+          const ip = localStorage.getItem("ServerIP");
           student = {
-              StudentID: data.StudentID,
-              FirstName: data.FirstName,
-              LastName: data.LastName,
-              MiddleName: data.MiddleName,
-              Degree: data.Degree,
-              TotalUnits: data.TotalUnits,
-              TotalUnits2: data.TotalUnits2,
-              TotalCumulative: data.TotalCumulative,
-              OverallGWA: data.OverallGWA,
-              Status: "Unchecked",
-              Validations: validations,
-          }
+            StudentID: data.StudentID,
+            FirstName: data.FirstName,
+            LastName: data.LastName,
+            MiddleName: data.MiddleName,
+            Degree: data.Degree,
+            TotalUnits: data.TotalUnits,
+            TotalUnits2: data.TotalUnits2,
+            TotalCumulative: data.TotalCumulative,
+            OverallGWA: data.OverallGWA,
+            Status: "Unchecked"
+          };
 
-          // posting to database
-          fetch(`http://${ip}:3001/student/add`,{
+          // checks if the student already exists in the database
+          fetch(`http://${ip}:3001/student/find`,{
             method: "POST",
             headers: { "Content-Type":"application/json" },
             body: JSON.stringify(student)
           })
           .then(response => response.json())
           .then(body =>  {
-            if(body.err){
+            // an error occured during finding
+            if (body.err == 'An error occured'){
               Swal.fire({
                 icon: 'error',
                 title: 'Error',
                 text: body.err,
               })
-            } else {
-              let StudentKey = body._id;
-              var key = fileBase + '_' + fileNum.toString(); // modifying the key for storing in local storage
-              localStorage.setItem(key, JSON.stringify(data)); // store the data to local storage
-              fileNum++; // update file number
-
-              handleAddRecord(body);
-
-              // console.log(student);
-              // add grades data to database
-              let Grades = [];
-              // loops through each row of the columns
-              for (let i=0; i<data.courses.length; i++){
-                // pushes each row object to the array
-                Grades.push({
-                  "Student" : StudentKey,
-                  "Course" : data.courses[i],
-                  "Grade" : data.grades[i].toString(),
-                  "Unit" : data.units[i],
-                  "Weight" : data.weights[i],
-                  "Cumulative" : data.cumulative[i],
-                  "Semyear" : data.sem[i] + '/' + data.year[i]
-                });
-              }
-              let grades = {"Grades" : Grades};
+            } else if (body.err == 'Unable to find student') { // no student found in the database, hence proceed
+              
               // posting to database
-              fetch(`http://${ip}:3001/grade/add-many`,{
+              fetch(`http://${ip}:3001/student/add`,{
                 method: "POST",
                 headers: { "Content-Type":"application/json" },
-                body: JSON.stringify(grades)
+                body: JSON.stringify(student)
               })
               .then(response => response.json())
               .then(body =>  {
@@ -349,10 +318,57 @@ const readInputFile = (file, handleAddRecord) => {
                     text: body.err,
                   })
                 } else {
-                  Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: isSuccessful.message
+                  let StudentKey = body._id;
+                  var key = fileBase + '_' + fileNum.toString(); // modifying the key for storing in local storage
+                  localStorage.setItem(key, JSON.stringify(data)); // store the data to local storage
+                  fileNum++; // update file number
+                  
+                  handleAddRecord(body);
+
+                  // add grades data to database
+                  let Grades = [];
+                  // loops through each row of the columns
+                  for (let i=0; i<data.courses.length; i++){
+                    // pushes each row object to the array
+                    Grades.push({
+                      "Student" : StudentKey,
+                      "Course" : data.courses[i],
+                      "Grade" : data.grades[i].toString(),
+                      "Unit" : data.units[i],
+                      "Weight" : data.weights[i],
+                      "Cumulative" : data.cumulative[i],
+                      "Semyear" : data.sem[i] + '/' + data.year[i]
+                    });
+                  }
+                  let grades = {"Grades" : Grades};
+                  // posting to database
+                  fetch(`http://${ip}:3001/grade/add-many`,{
+                    method: "POST",
+                    headers: { "Content-Type":"application/json" },
+                    body: JSON.stringify(grades)
+                  })
+                  .then(response => response.json())
+                  .then(body =>  {
+                    if(body.err){
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: body.err,
+                      })
+                    } else {
+                      Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: isSuccessful.message
+                      })
+                    }
+                  })
+                  .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Server Error',
+                      text: 'Check if the server is running or if database IP is correct'
+                    })
                   })
                 }
               })
@@ -362,17 +378,21 @@ const readInputFile = (file, handleAddRecord) => {
                   title: 'Server Error',
                   text: 'Check if the server is running or if database IP is correct'
                 })
-                console.log(err);
+              })
+            } else { // student already exists, prompt user to delete student first
+              Swal.fire({
+                icon: 'error',
+                title: 'Student already exists',
+                text: `Delete previous record of ${body.StudentID} before adding it again`,
               })
             }
           })
-          .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+          .catch(err => {
             Swal.fire({
               icon: 'error',
-              title: 'Server Error',
-              text: 'Check if the server is running or if database IP is correct'
+              title: 'Error',
+              text: 'Check if the server is running or if database IP is correct',
             })
-            console.log(err)
           })
         } else {
           Swal.fire({ // will activate if preliminary verification of read input sees an error
