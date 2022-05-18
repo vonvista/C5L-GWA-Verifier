@@ -8,6 +8,7 @@ const request = require('request');
 const cors = require('cors');
 const readline = require('readline');
 const si = require('systeminformation');
+const {authRole} = require('./middleware')
 
 const app = express()
 app.use(cors())
