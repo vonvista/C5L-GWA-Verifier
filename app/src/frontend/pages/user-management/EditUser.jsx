@@ -321,7 +321,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
                                 type="button"
                                 onClick={edit_user}
                               >
-                                Save Changes
+                                Save
                               </button>
                             </section>
                           </div>
