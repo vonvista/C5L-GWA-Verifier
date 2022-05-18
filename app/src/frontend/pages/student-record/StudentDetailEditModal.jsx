@@ -19,6 +19,7 @@ const AddRow = () => {
     const [studLName, setStudLName] = useState('');
     const [degree, setDegree] = useState('');
     const [currStudentID, setcurrStudentID] = useState(localStorage.getItem('currStudentID'));
+    const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
 
     //function which updates Student input fields
     const updateStudent = () => {
@@ -35,7 +36,7 @@ const AddRow = () => {
             _id: currStudentID
         }
 
-        fetch(`http://localhost:3001/student/update` ,{
+        fetch(`http://${ip}:3001/student/update` ,{
             method: "POST",
             headers: { "Content-Type":"application/json"},
             body: JSON.stringify(credentials)
@@ -63,7 +64,7 @@ const AddRow = () => {
         };
         
         //fetch to add history to database
-        fetch(`http://localhost:3001/history/add`, {
+        fetch(`http://${ip}:3001/history/add`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(credentials),

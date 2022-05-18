@@ -23,6 +23,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
     // const [currTime, setTime] = useState('')
     const [totalUnits, setTotal] = useState(Total)
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
+    const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
 
     useEffect(() => {
         const fetchData = async () => {
@@ -81,7 +82,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
             Details: "Sample Details"
         };
 
-        fetch(`http://localhost:3001/grade/update` ,{
+        fetch(`http://${ip}:3001/grade/update` ,{
             method: "POST",
             headers: { "Content-Type":"application/json"},
             body: JSON.stringify(gradeCredentials)
@@ -92,7 +93,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         })
 
         
-        fetch(`http://localhost:3001/history/add`, {
+        fetch(`http://${ip}:3001/history/add`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(historyCredentials),
@@ -140,7 +141,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
             _id: values._id
         }
 
-        fetch(`http://localhost:3001/grade/delete`, {
+        fetch(`http://${ip}:3001/grade/delete`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(deleteGradeCredentials),

@@ -23,8 +23,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
   const [position, setPosition] = useState(''); // position
   const [pw, setPW] = useState(''); // password
   const [status, setStatus] = useState('show');
-
-  const ip = localStorage.getItem('ServerIP');
+  const [ip, setIp] = useState(localStorage.getItem('ServerIP'))
 
   // reference for password toggle: https://codepen.io/huphtur/pen/OKJJQY
   const buttonHandler = () => {

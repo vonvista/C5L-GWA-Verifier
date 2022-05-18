@@ -28,6 +28,7 @@ const UserDashboard = () => {
   const [unsortedRows, setUnsortedRows] = useState([]);
 
   const [userRole, setUserRole] = useState(localStorage.getItem('Role'));
+  const [ip, setIp] = useState(localStorage.getItem('ServerIP'))
 
   // index 0: name; 1: num; 2: degree; index 3: GWA;
   const [sortState, setSortState] = useState([0, 0, 0, 0]);
@@ -35,148 +36,8 @@ const UserDashboard = () => {
 
   const navigate = useNavigate();
 
-  // const studentsData = [
-  //     {
-  //       "name": "1 Ellison Maurice C. Paguagan",
-  //       "studno": "2019-00000",
-  //       "degprog": "BS Computer Science",
-  //       "gwa": "1.01234",
-  //       "status": "Checked"
-  //     },
-  //     {
-  //       "name": "Eyds Angeles",
-  //       "studno": "2019-05235",
-  //       "degprog": "BS Computer Science",
-  //       "gwa": "1.0",
-  //       "status": "Unchecked"
-  //     },
-  //     {
-  //       "name": "George Gragas",
-  //       "studno": "2019-05235",
-  //       "degprog": "BS Computer Science",
-  //       "gwa": "1.0",
-  //       "status": "Pending"
-  //     },
-  //     {
-  //         "name": "Maurice Paguagan",
-  //         "studno": "2019-05235",
-  //         "degprog": "BS Computer Science",
-  //         "gwa": "1.0",
-  //         "status": "Checked"
-  //       },
-  //       {
-  //         "name": "Eyds Angeles",
-  //         "studno": "2019-05235",
-  //         "degprog": "BS Computer Science",
-  //         "gwa": "1.0",
-  //         "status": "Unchecked"
-  //       },
-  //       {
-  //         "name": "2 George Gragas",
-  //         "studno": "2019-00001",
-  //         "degprog": "BS Computer Science",
-  //         "gwa": "1.0",
-  //         "status": "Pending"
-  //       },
-  //       {
-  //         "name": "Maurice Paguagan",
-  //         "studno": "2019-00002",
-  //         "degprog": "BS Mau",
-  //         "gwa": "1.0",
-  //         "status": "Checked"
-  //       },
-  //       {
-  //         "name": "Eyds Angeles",
-  //         "studno": "2019-00003",
-  //         "degprog": "BS Eyds",
-  //         "gwa": "1.0",
-  //         "status": "Unchecked"
-  //       },
-  //       {
-  //         "name": "George Gragas",
-  //         "studno": "2019-05235",
-  //         "degprog": "BS Computer Science",
-  //         "gwa": "1.0",
-  //         "status": "Pending"
-  //       },
-  //        {
-  //         "name": "Maurice Paguagan",
-  //         "studno": "2019-05235",
-  //         "degprog": "BS Computer Science",
-  //         "gwa": "1.0",
-  //         "status": "Checked"
-  //       },
-  //       {
-  //         "name": "3 George Gragas",
-  //         "studno": "2019-05235",
-  //         "degprog": "BS Computer Science",
-  //         "gwa": "1.0",
-  //         "status": "Pending"
-  //       },
-  //       {
-  //         "name": "Maurice Paguagan",
-  //         "studno": "2019-05235",
-  //         "degprog": "BS Computer Science",
-  //         "gwa": "1.0",
-  //         "status": "Checked"
-  //       },
-  //       {
-  //         "name": "Eyds Angeles",
-  //         "studno": "2019-05235",
-  //         "degprog": "BS Computer Science",
-  //         "gwa": "1.0",
-  //         "status": "Unchecked"
-  //       },
-  //       {
-  //         "name": "George Gragas",
-  //         "studno": "2019-05235",
-  //         "degprog": "BS Computer Science",
-  //         "gwa": "1.0",
-  //         "status": "Pending"
-  //       },
-  //        {
-  //         "name": "Maurice Paguagan",
-  //         "studno": "2019-05235",
-  //         "degprog": "BS Computer Science",
-  //         "gwa": "1.0",
-  //         "status": "Checked"
-  //       },
-  // ];
 
-  // const Program = [
-  //     {
-  //         "programName": "Bachelor of Science in Computer Science",
-  //         "department": "ICS"
-  //     },
-  //     {
-  //         "courseTitle": "Bachelor of Science in Computer Science",
-  //         "department": "ICS"
-  //     },
-  //     {
-  //         "courseTitle": "Bachelor of Science in Computer Science",
-  //         "department": "ICS"
-  //     },
-  // ];
-
-  // const Users = [
-  //   {
-  //     "uname": "eyds_15",
-  //     "name": "Carl Adrian Angeles",
-  //     "position": "Admin"
-  //   },
-  //   {
-  //     "uname": "mau_23",
-  //     "name": "Maurice Paguagan",
-  //     "position": "Basic"
-  //   },
-  //   {
-  //     "uname": "dyurj_45",
-  //     "name": "George Gragas",
-  //     "position": "Admin"
-  //   }
-  // ]
-
-  const ip = localStorage.getItem('ServerIP');
+  
   useEffect(() => {
     const fetchData = async () => {
       // Retrieve data from database

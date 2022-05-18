@@ -14,7 +14,7 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
 
     // State that handles selection of sem notes; uses first object as default
     const [selectedSem, setSelectedSem] = useState(semesters[0])
-    
+    const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
 
     // Handler for adding/editing notes
     const handleAddNote = (text) => {
@@ -52,7 +52,7 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
         }
 
         // fetch post request to delete a note on button click
-        fetch(`http://localhost:3001/note/delete`, {
+        fetch(`http://${ip}:3001/note/delete`, {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
