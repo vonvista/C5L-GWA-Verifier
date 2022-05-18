@@ -21,9 +21,8 @@ import 'tailwindcss/tailwind.css';
 
 const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, delHandler, handleHistory, handleDeleteRecord, handleEditRecord, addHandler, histHandler }) => {
 
-    // State handler for a student's total number of units in a semester
-    const [totalUnits, setTotal] = useState(total)
-    const ip = localStorage.getItem("ServerIP");
+    const [ip, setIp] = useState(localStorage.getItem("ServerIP"));
+    
     let navigate = useNavigate();
 
     // Table for displaying the student's summary of grades for a given semester 
@@ -418,7 +417,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         )
     } else if(table == 2) {
         return (
-            <SemRecord total={totalUnits} sem={sem} data={data} dataHandler={dataHandler} delHandler={delHandler} histHandler={handleHistory} addHandler={addHandler} historyHandler={histHandler}/>
+            <SemRecord total={total} sem={sem} data={data} dataHandler={dataHandler} delHandler={delHandler} histHandler={handleHistory} addHandler={addHandler} historyHandler={histHandler}/>
         )
     } else if(table == 3) {
         return (
