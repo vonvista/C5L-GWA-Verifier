@@ -21,6 +21,7 @@ const AddRow = ({ sem, grades, addHandler, histHandler }) => {
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
     const [studentID, setStudentID] = useState(localStorage.getItem("currStudentID"));
     const [histTitle, setHistTitle] = useState('');             // value of history title
+    const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
 
     // checks if the course is already in the grade list
     function isGradeDuplicate(course){
@@ -81,7 +82,7 @@ const AddRow = ({ sem, grades, addHandler, histHandler }) => {
 
 
         // fetch post request to add new history
-        fetch(`http://localhost:3001/history/add`, {
+        fetch(`http://${ip}:3001/history/add`, {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
@@ -140,7 +141,7 @@ const AddRow = ({ sem, grades, addHandler, histHandler }) => {
         console.log(newGrade)
 
         // add new grade to DB
-        fetch(`http://localhost:3001/grade/add`, {
+        fetch(`http://${ip}:3001/grade/add`, {
             method: "POST",
             headers: {
             "Content-Type": "application/json",

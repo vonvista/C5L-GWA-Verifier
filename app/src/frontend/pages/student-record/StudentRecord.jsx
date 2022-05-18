@@ -188,6 +188,7 @@ export default function StudentRecord() { // this will probably transferred to a
   const [currStudentID, setCurrStudentID] = useState({StudentID: localStorage.getItem("currStudentKey")})
   const [currStudentKey, setCurrStudentKey] = useState(localStorage.getItem("currStudentID"))
   const [userRole, setUserRole] = useState(localStorage.getItem("Role"))
+  const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
 
   // get Grades, Student, Notes, History from database
   useEffect(() => {
@@ -215,7 +216,7 @@ export default function StudentRecord() { // this will probably transferred to a
       degree_program: '',
     }
 
-    fetch(`http://localhost:3001/student/find`, {
+    fetch(`http://${ip}:3001/student/find`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -256,7 +257,7 @@ export default function StudentRecord() { // this will probably transferred to a
   const GetStudentGrades = () => {
     
     // fetch grade by student from database
-    fetch(`http://localhost:3001/grade/find-by-student`, {
+    fetch(`http://${ip}:3001/grade/find-by-student`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -292,7 +293,7 @@ export default function StudentRecord() { // this will probably transferred to a
   const GetStudentHistory = () => {
 
     // fetch history by Student _id
-    fetch(`http://localhost:3001/history/find-by-student`, {
+    fetch(`http://${ip}:3001/history/find-by-student`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -325,7 +326,7 @@ export default function StudentRecord() { // this will probably transferred to a
     var studentNotes = [] // store notes here
 
     // fetch notes by studentkey from db
-    fetch(`http://localhost:3001/note/find-by-student`, {
+    fetch(`http://${ip}:3001/note/find-by-student`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
