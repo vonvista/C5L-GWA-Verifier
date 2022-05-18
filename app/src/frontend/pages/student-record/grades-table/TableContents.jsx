@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 
 import List from 'frontend/components/table/List';
 import 'tailwindcss/tailwind.css';
-import UserManagementPage from 'frontend/pages/user-management/UserManagementPage';
 
 
 // This component handles the student's data for a specific semester
