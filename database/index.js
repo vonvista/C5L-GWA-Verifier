@@ -6,23 +6,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 const cors = require('cors');
-const {networkInterfaces} = require('os');
-
-// This section extracts the ethernet and wifi ip addresses
-const nets = networkInterfaces();
-const results = Object.create(null);
-for (const name of Object.keys(nets)){
-    for(const net of nets[name]){
-        // check if ipv4 address is not an internal address ie the ip is accessible thru LAN
-        if(net.family=='IPv4' && !net.internal){
-            if(!results[name]) results[name]=[]
-            results[name].push(net.address);
-        }
-    }
-}
-// console.log(results) //<- uncomment to see ip addresses in results
-const eth = results['Ethernet 6'];
-const wifi = results['Wi-Fi'];
+const readline = require('readline');
+const si = require('systeminformation');
 
 const app = express()
 app.use(cors())
@@ -31,34 +16,66 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 require('./router')(app);
 
-app.use(express.static('static'))
-app.listen(3001,wifi, function() {  //<- 'wifi' can be replaced by the ip variables obtained from results
-    // For the host computer, the database commands are still accessible using the localhost in the url
-    // (remove the 'wifi' parameter to return to localhost)
-    console.log(`In
-    wifi ip ${wifi}
-    ethernet ip ${eth}
-Server started at port 3001`)
-
-    //create admin account if admin doesn't exist. There will always be exactly one admin
-    admin = {
-        Username: "admin",
-        FirstName: "Admin",
-        MiddleName: "_",
-        LastName: "User",
-        Position: "Chairman",
-        Role: "admin",
-        Password: "admin",
-        History:[]
-    }
-    
-    // // add request
-    request('http://'+wifi+':3001/user/add',{method:"POST",form: admin},function(err,req,body) {
-        // console.log(body);
-    });
-
-});    //can custom set the localhost
-
-app.on('listening', function() {
-    
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
 });
+
+// This section extracts the network interfaces
+let interfaces = new Map();
+
+async function startServer() {
+    await si.networkInterfaces(function(data) {
+        // console.log(data);
+        for (let i of data) {
+            if(i.ip4 != '') interfaces.set(i.iface.toLowerCase(), i.ip4);
+        }
+        console.log("Available IP interfaces")
+        //console log keys and values of interfaces
+        for (let [key, value] of interfaces.entries()) {
+            console.log(`${key}: ${value}`);
+        }
+        console.log('')
+    })
+
+    app.use(express.static('static'))
+
+    rl.question("Choose IP address name (case insensitive):",function(name){
+        let ip;
+        //console.log(interfaces)
+        if(interfaces.has(name.toLowerCase())) {
+            ip = interfaces.get(name.toLowerCase());
+            console.log(`IP address at ${ip}`);
+        }
+        else {
+            console.log('DEFAULT: IP address at localhost');
+            ip = 'localhost';
+        }
+
+        app.listen(3001, function() {  
+            // For the host computer, the database commands are still accessible using the localhost in the url
+            // (remove the 'wifi' parameter to return to localhost)
+            console.log(`Server started at port 3001`)
+        
+            //create admin account if admin doesn't exist. There will always be exactly one admin
+            admin = {
+                Username: "admin",
+                FirstName: "Admin",
+                MiddleName: "_",
+                LastName: "User",
+                Position: "Chairman",
+                Role: "admin",
+                Password: "admin",
+                History:[]
+            }
+            
+            // // add request
+            request('http://127.0.0.1:3001/user/add',{method:"POST",form: admin},function(err,req,body) {
+                // console.log(body);
+            });    
+        });
+        rl.close();
+    });
+}
+
+startServer();

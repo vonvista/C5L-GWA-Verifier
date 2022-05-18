@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');    /* Regular */
+
+.edit-students-modal-backdrop {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.edit-students-modal {
+    background: #562323;
+    height: 50.70360110803324vh; /* 265 px */
+    width: 61.479166666666664vw; /* 760 px */
+    border-radius: 3.2552083333333335vw; /* 50px */
+    padding: 3.2552083333333335vw;  /* 50px */
+    overflow: hidden;
+    box-shadow: 0 5px 30px rgba(0,0,0,.30);
+
+    position: fixed;
+    margin: auto;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+.edit-students-modal-baybayin-style{
+    background-repeat: repeat-y;
+    background-size: contain;
+    margin-left: -11.25vh;
+    margin-top: -6vh;
+    height: 36.70360110803324vh; /* 265 px */
+}
+
+.edit-students-modal-content {
+    position: relative;
+    top: 12%;
+}
+
+.edit-students-modal-body {
+    position: absolute;
+    top: 0;
+    background: #562323;
+}
+
+.edit-students-modal-title {
+    font-size: 1.3020833333333333vw; /* 20px */
+    font-weight: 700;
+    font-style: italic;
+
+    margin-top: 4.1551246537396125vh; /* 30px */
+    margin-bottom: 4.847645429362881vh; /* 35px */
+}
+
+.edit-students-modal-close {
+    font-size: 4.847645429362881vh; /* 35px */
+}
+
+.edit-students-modal-inputs {
+    font-size: 1.1067708333333333vw;    /* 17px */
+}
+
+.edit-students-modal-input-container {
+    margin-right: 1.953125vw; /* 30px */;
+    max-height:max-content;
+}
+
+.edit-students-modal-input-style{
+    width: 100%;
+    height: 4.847645429362881vh; /* 35px */
+    border-radius: 0.6510416666666666vw; /* 10px */
+    text-align: center;
+}
+
+
+.edit-students-modal-section-studnum {
+    width: 8.71875vw; /* 180px */
+}
+
+.edit-students-modal-section-studname {
+  width: 19.71875vw; /* 60px */
+}
+
+.edit-students-modal-section-studMname {
+  width: 5.71875vw; /* 60px */
+}
+
+.edit-students-modal-section-degree {
+    width: 20.8828125vw; /* 75px */
+}
+
+.edit-students-modal-deets {
+  margin-top: 1.5vh;
+}
+
+.edit-students-modal-footer {
+    margin-top: 1.847645429362881vh; /* 35px */
+    font-size: 1.1067708333333333vw;    /* 17px */
+}
+
+.edit-students-modal-btn {
+    height: 5.54016620498615vh; /* 40px */
+    width: 9.765625vw;    /* 150px */
+    padding: 0.6510416666666666vw 1.770083102493075vh; /* 10px 20px */
+    border-radius: 0.6510416666666666vw; /* 10px */
+    margin-right: 0.6510416666666666vw; /* 10px */
+}
+
+.edit-students-modal-btn-discard {
+    background-color: aliceblue;
+}
+
+.edit-students-modal-btn-save {
+    background-color: #35724df5;
+}
+
+.edit-students-modal-btn-save:hover {
+    background-color: #3D7D57;
+}
+
+.edit-students-modal-btn-discard:hover {
+    background-color: #E7E7E7;
+}
+
+.edit-students-modal-btn-discard:hover {
+    background-color: white;
+}

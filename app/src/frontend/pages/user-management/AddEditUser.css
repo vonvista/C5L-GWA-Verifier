@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css?family=Inter');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
+.modal-add {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-edit {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.modal-content1 {
+    background-color: #562323;
+    border-radius: 30px;
+    margin: 10% auto;
+    padding: 10px;
+    border: 1px solid #888;
+    flex-direction: column;
+    width: 70%;
+    height: 60%;
+    position: relative;
+}
+
+.close-btn1{
+    height: 13%;
+    font-size: 2.75vw;
+    margin-right: 2rem;
+}
+
+.modal-body1{
+    background-color: transparent;
+    position: relative;
+    margin: 2px;
+    padding-top: 0vh;
+    display: flex;
+    width: 100%;
+    height: 85%;
+    margin: auto;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.close{
+    font-size: 2.25vw;
+    margin-right: 1.75rem;
+    width: 100%;
+    height: 5vw;
+}
+
+hr{
+    display: block;
+    margin-top: 8px;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: ridge;
+    border-width: 1.5px;
+}
+
+.input-style{
+    width: 100%;
+    height: 5vh;
+    border-radius: 8px ;
+    text-align: center;
+    /* w-full h-9 rounded-lg */
+}
+
+.user-btn{
+    height: 6vh;
+}
+
+.un-style{
+    width: 90.5%;
+    margin: auto auto auto 0px ;
+}
+
+.dropdown-style{
+    width: 40%;
+    display: inline-block;
+    flex-grow: 1;
+    margin-right: 8px;
+    /* style="w-2/5 inline-block grow mr-2" // style options */
+}
+
+.inter{
+    font-family: "Inter"
+}
+
+.montserrat{
+    font-family: "Montserrat", sans-serif
+}
+
+.input-group{
+    justify-content: center;
+}
+
+.form{
+    border-radius: 0.5rem;
+    padding: 0rem 1.25rem 0rem;
+    background-color: transparent;
+}
+
+.input-content{
+    width: 100%;
+    font-size: 1.25vw;
+    overflow: auto;
+}
+
+.cancel-button{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    bottom: 5rem;
+    left: 0px;
+    right: 0px;
+    font-size: 1.25vw;
+}

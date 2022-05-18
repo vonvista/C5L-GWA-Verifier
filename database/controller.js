@@ -8,8 +8,10 @@ const Schema = mongoose.Schema;
 
 saltRounds = 8; // number of rounds to hash the password
 
+console.log();
+
 // name of the database will be KALATAS
-const db = mongoose.createConnection('mongodb://localhost:27017/KALATAS', {
+const db = mongoose.createConnection(`mongodb://127.0.0.1:27017/KALATAS`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -128,7 +130,7 @@ exports.userUpdate = async function(req, res, next) {
     "MiddleName": req.body.MiddleName,
     "LastName": req.body.LastName,
     "Position": req.body.Position,
-    "Role": req.body.Role,
+    // "Role": req.body.Role,    <- removed - vov
     "Password": hashedPassword
   }}, {new : true}, function(err,result){
     if(!err && User){
@@ -357,8 +359,9 @@ Student.find(function(err, student) {
 
 exports.studentFindOne = function(req, res, next) {
 Student.findOne({StudentID:req.body.StudentID}, function(err, Student){
-  if(!err) {res.send(Student);}
-  else { res.send({err:'Unable to find student'}) }
+  if(Student) {res.send(Student);}
+  else if (err) { res.send({err: 'An error occured'}); }
+  else { res.send({err:'Unable to find student'}); }
 });
 }
 
@@ -440,7 +443,7 @@ const historySchema = new Schema({
   Student: {type: String, required: true},
   Date : {type: String, required : true},
   Time : {type: String, required : true},
-  Description: {type: String, required : true, enum : ['create', 'read', 'update', 'delete']}, // short string ng change na nagyari
+  Description: {type: String, required : true},
   Details: {type: String, required : true}, // long string
 }, {autoCreate:true});
 

@@ -1,3 +1,5 @@
+// const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   content: ['./src/**/*.{ejs,js,jsx,ts,tsx}'],
   theme: {
@@ -8,6 +10,9 @@ module.exports = {
       colors: {
         'login-green': '#2A7146',
         'login-green-hover': '#35724df5',
+        'login-footer': '#fecaca',
+        'export-yellow': '#ffc270',
+        'export-yellow-hover': '#ffc87f',
         'primary-red': '#371010',
         'secondary-red': '#562323',
         'red-hover': '#5a3535',
@@ -21,10 +26,12 @@ module.exports = {
         'sr-divider-light': '#f0f0f0',
         'sr-disabled-green': '#80BE99',
         'sr-table-name': '#424242',
+        'sr-dark-text': '#2f2f2f'
       },
       fontFamily: {
         montserrat: ['Montserrat'],
         inter: ['Inter'],
+        poppins: ['Poppins'],
       },
       gridTemplateColumns:{
         '38/62': '38% 62%'
@@ -38,11 +45,13 @@ module.exports = {
         '1.75xl': '1512px',
         '3xl': '1728px',
         '4xl': '1920px',
-        'qhd':'2560px'
       },      
       spacing: {
         '5.5': '1.35rem',
-      }
+      },
+      zIndex: {
+        '1': '1',
+      },
     },
   },
   plugins: [],
