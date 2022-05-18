@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react';
 import { Dialog, Transition} from '@headlessui/react';
 import SemSelect from 'frontend/components/inputs/DropdownSelect';
 import 'tailwindcss/tailwind.css';
-
+import Swal from 'sweetalert2'
 
 // Parent component >> AddNoteBtn.jsx
 
@@ -17,7 +17,7 @@ import 'tailwindcss/tailwind.css';
 // -- noteText          : gets the state to be displayed for the textarea
 // -- semesters         : gets the list of semesters that the student has enrolled in; to be used for dropdown select
 
-const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedSem, setSelectedSem, setTextArea, noteText, semesters }) => {
+const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedSem, setSelectedSem, setTextArea, noteText, setNoteText, semesters }) => {
 
     // Handler for changes in text area
     const handleChange = (event) => {
@@ -55,14 +55,17 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
                     .then(response => response.json())
                     .then(body => console.log(body))
                     .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
-
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Server Error',
+                            text: 'Check if the server is running or if database IP is correct',
+                        })
                         console.log(err)
-
                     })
             }
         }
 
-        modalHandler                    // close window after saving
+        modalHandler()                  // close window after saving
         setSelectedSem(semesters[0])    // reset selected option in dropdown to first object
     }
 

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import expand from '../../../../assets/icons/collapse(1).svg';
 import EditStudentDetails from 'frontend/pages/student-record/StudentDetailEditModal';
 import studentDelete from 'backend/studentDelete';
-import exportStudentData from 'backend/exportPDF';
+import exportStudentData from 'backend/exportStudentData';
 import 'tailwindcss/tailwind.css';
 
 
@@ -14,26 +14,27 @@ const Dropdown = ({ studentInfo, grades }) => {
 
   const [valueClicked, setValueClicked] = useState('Actions');
   const [isActive, setIsActive] = useState(false);
+  const [currUser, setUser] = useState(`${localStorage.getItem("FirstName")} ${localStorage.getItem("LastName")} ${localStorage.getItem("MiddleName")}`);
 
   let navigate = useNavigate()
 
   
-  // event handle for Delete button on dropdown
-  const handleDelete = () => {
+  // // event handle for Delete button on dropdown
+  // const handleDelete = () => {
 
-    // remove student from DB
-    // studentDelete(localStorage.getItem('currStudentID'))  // uncomment to delete student (also remove this comment)
+  //   // remove student from DB
+  //   // studentDelete(localStorage.getItem('currStudentID'))  // uncomment to delete student (also remove this comment)
 
-    // remove student infos on localStorage
-    localStorage.removeItem("currStudent")
-    localStorage.removeItem("currStudentID")
-    localStorage.removeItem("currStudentKey")
-    localStorage.removeItem("currStudentGrades")
+  //   // remove student infos on localStorage
+  //   localStorage.removeItem("currStudent")
+  //   localStorage.removeItem("currStudentID")
+  //   localStorage.removeItem("currStudentKey")
+  //   localStorage.removeItem("currStudentGrades")
 
-    // navigate to user dashboard
-    navigate('/user-dashboard')
+  //   // navigate to user dashboard
+  //   navigate('/user-dashboard')
 
-  }
+  // }
 
 
   // event handle for Export on dropdown
@@ -45,14 +46,14 @@ const Dropdown = ({ studentInfo, grades }) => {
     const student = studentInfo
     const studentGrades = grades
 
-    // get current user's full name from localStorage
-    const fName = localStorage.getItem("FirstName")
-    const lName = localStorage.getItem("LastName")
-    const mName = localStorage.getItem("MiddleName")
+    // // get current user's full name from localStorage
+    // const fName = localStorage.getItem("FirstName")
+    // const lName = localStorage.getItem("LastName")
+    // const mName = localStorage.getItem("MiddleName")
 
-    const fullName = `${fName} ${mName} ${lName}`
+    // const fullName = `${fName} ${mName} ${lName}`
 
-    exportStudentData(student, studentGrades, fullName);
+    exportStudentData(student, studentGrades, currUser);
 
   }
 
@@ -66,13 +67,15 @@ const Dropdown = ({ studentInfo, grades }) => {
           className="pl-1.75 m-0 inline-block grow hover:bg-login-green-hover rounded-l-lg"
           // add onclick
           
-          onClick={() =>
-            (!(valueClicked == "Export")) ? null : handleExport()
+          onClick={() =>{
+              if (valueClicked === 'Export') handleExport();
+            }
+            // (!(valueClicked == "Export")) ? null : handleExport()
           }
 
         >
           <p className="pl-1.5 m-0 inline-block grow text-center text-white">
-            Actions
+            {valueClicked}
           </p>
         </button>
         <button

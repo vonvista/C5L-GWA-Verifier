@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useState } from 'react';
 import Swal from 'sweetalert2'
 
-import userIcon from '../../../../assets/icons/user-icon.jpg';
 import Input from 'frontend/components/inputs/Input';
+import user from '../../../../assets/icons/user-icon.jpg';
 import 'tailwindcss/tailwind.css';
 import './AddEditUser.css';
 
@@ -15,7 +16,7 @@ import './AddEditUser.css';
 //   :(<></>)
 // }
 
-const EditUser = ({ handleClose, editUser, handleEditRecordSave }) => {
+const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) => {
   const [firstName, setFirstName] = useState(editUser.FirstName);
   const [middleName, setMiddleName] = useState(editUser.MiddleName);
   const [lastName, setLastName] = useState(editUser.LastName);
@@ -104,198 +105,236 @@ const EditUser = ({ handleClose, editUser, handleEditRecordSave }) => {
     })
   };
 
+  // styling
+  const modalContent1 = `h-[60%] w-[70%] flex-col mx-auto p-2 rounded-[30px] relative bg-secondary-red transform overflow-hidden p-6 text-left align-middle shadow-xl transition-all`;
+  const modalBody1 = `h-full bg-transparent flex m-auto overflow-hidden overflow-y-auto relative w-full`;
+  const inputContent = `overflow-auto w-full text-[1.25vw]`;
+  const form = `bg-transparent rounded-lg py-0 px-5`;
+  const inputStyle = `rounded-lg text-center w-full h-[2.5vw]`;
+
   return (
     <>
-      {/* Edit user button */}
-      <div className="modal-edit h-screen">
-        {/* content */}
-        <div className="modal-content1">
-          {/* exit button */}
-          <button
-            className="close-btn1 bg-transparent text-white flex relative ml-auto grow-0"
-            type="button"
-            onClick={handleClose}
+      <Transition appear show={modalState} as={Fragment}>
+        <Dialog as="div" className="relative z-10 inter" onClose={handleClose}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
           >
-            &times;
-          </button>
+            <div className="fixed inset-0 bg-black bg-opacity-25 text-montserrat" />
+          </Transition.Child>
 
-          {/* photo  */}
-          <div className="modal-body1">
-            <div className="w-1/6 ml-auto mt-2">
-              <img
-                className="rounded-lg"
-                width="250px"
-                height="250px"
-                alt="usericon"
-                src={userIcon}
-              />
-            </div>
-            {/* form */}
-            <section className="flex-rows-4 relative w-9/12">
-              <form className="input-group">
-                <div className="flex justify-center">
-                  {/* Input form */}
-                  <div className="input-content form">
-                    {/* name */}
-                    <div className="w-full pb-4 mt-2">
-                      <section className="w-2/5 inline-block grow mr-2">
-                        <Input
-                          labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-                          labelVal="First Name" // label text
-                          inputStyle="input-style" // styling for input
-                          name="firstName" // name of label-input components
-                          inputType="text" // type of input password, email, text, etc.
-                          inputPlaceholder="" // placeholder text for input
-                          value={firstName} // value of the input
-                          changeHandler={(e) => setFirstName(e.target.value)} // change handling
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex m-auto w-full h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-500"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className={modalContent1}>
+                  <Dialog.Title
+                    as="h3"
+                    className="ml-3 text-2xl leading-6 text-gray-900 flex"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="ml-auto mr-0 transition-all ease-out delay-200 hover:text-gray-500 hover:transition-all hover:ease-in hover:delay-200 h-6 w-6"
+                      viewBox="0 0 20 20"
+                      fill="white"
+                      onClick={handleClose}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </Dialog.Title>
+
+                  <div className="m-0 absolute top-[50%] translate-y-[-50%] w-full">
+                    <div className={modalBody1}>
+                      {/* photo  */}
+                      <div className="w-1/6 ml-auto mt-2">
+                        <img
+                          className="rounded-lg w-[10vw] h-[10vw]"
+                          alt="usericon"
+                          src={user}
                         />
-                        <h4 className="mt-1 w-full text-center text-white">
-                          First Name
-                        </h4>
-                      </section>
-                      <section className="w-1/12 inline-block grow mr-2">
-                        <Input
-                          labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-                          labelVal="M.I." // label text
-                          inputStyle="input-style" // styling for input
-                          name="middleName" // name of label-input components
-                          inputType="text" // type of input password, email, text, etc.
-                          inputPlaceholder="" // placeholder text for input
-                          value={middleName} // value of the input
-                          changeHandler={(e) => setMiddleName(e.target.value)} // change handling
-                        />
-                        <h4 className="w-full text-center mt-1 text-white">
-                          M.I.
-                        </h4>
-                      </section>
-                      <section className="w-2/5 inline-block grow mr-2">
-                        <Input
-                          labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-                          labelVal="Last Name" // label text
-                          inputStyle="input-style" // styling for input
-                          name="lastName" // name of label-input components
-                          inputType="text" // type of input password, email, text, etc.
-                          inputPlaceholder="" // placeholder text for input
-                          value={lastName} // value of the input
-                          changeHandler={(e) => setLastName(e.target.value)} // change handling
-                        />
-                        <h4 className="w-full text-center mt-1 text-white">
-                          Last Name
-                        </h4>
-                      </section>
-                    </div>
-                    {/* username and position */}
-                    <div className="w-full pb-4 mt-2">
-                      <section className="w-2/5 inline-block grow mr-2">
-                        <Input
-                          labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-                          labelVal="Username" // label text
-                          inputStyle="input-style" // styling for input
-                          name="username" // name of label-input components
-                          inputType="text" // type of input password, email, text, etc.
-                          inputPlaceholder="" // placeholder text for input
-                          value={un} // value of the input
-                          changeHandler={(e) => setUN(e.target.value)} // change handling
-                          disabled={editUser.Role === 'admin' ? true : false}
-                        />
-                        <h4 className="mt-1 w-full text-center text-white">
-                          Username
-                        </h4>
-                      </section>
-                      <section className="w-1/2 inline-block grow mr-2">
-                        <Input
-                          labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-                          labelVal="Position" // label text
-                          inputStyle="input-style" // styling for input
-                          name="position" // name of label-input components
-                          inputType="text" // type of input password, email, text, etc.
-                          inputPlaceholder="" // placeholder text for input
-                          value={position} // value of the input
-                          changeHandler={(e) => setPosition(e.target.value)} // change handling
-                        />
-                        <h4 className="w-full text-center mt-1 text-white">
-                          Position
-                        </h4>
-                      </section>
-                    </div>
-                    {/* password */}
-                    <div className="w-full pb-4 mt-2">
-                      <section className="un-style">
-                        <div className="relative w-full">
-                          <div className="absolute inset-y-0 right-0 flex items-center px-2">
-                            <Input
-                              labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-                              labelVal="Password" // label text
-                              inputStyle="hidden input-style" // styling for input
-                              name="password" // name of label-input components
-                              inputType="checkbox" // type of input password, email, text, etc.
-                              inputPlaceholder="" // placeholder text for input
-                              value={pw} // value of the input
-                              changeHandler={(e) => setPW(e.target.value)} // change handling
-                            />
-                            <button
-                              className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-sm text-gray-600 font-mono cursor-pointer account-button js-password-label"
-                              htmlFor="toggle"
-                              type="button"
-                              onClick={buttonHandler}
-                            >
-                              {status}
-                            </button>
+                      </div>
+                      {/* form */}
+                      <section className="flex-rows-4 relative w-9/12">
+                        <form className="justify-center">
+                          <div className="flex justify-center">
+                            {/* Input form */}
+                            <div className={[inputContent, form]}>
+                              {/* name */}
+                              <div className="w-full pb-4 mt-2">
+                                <section className="w-2/5 inline-block grow mr-2">
+                                  <Input
+                                    labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
+                                    labelVal="First Name" // label text
+                                    inputStyle={inputStyle} // styling for input
+                                    name="firstName" // name of label-input components
+                                    inputType="text" // type of input password, email, text, etc.
+                                    inputPlaceholder="" // placeholder text for input
+                                    value={firstName} // value of the input
+                                    changeHandler={(e) =>
+                                      setFirstName(e.target.value)
+                                    } // change handling
+                                  />
+                                  <h4 className="mt-1 w-full text-center text-white">
+                                    First Name
+                                  </h4>
+                                </section>
+                                <section className="w-1/12 inline-block grow mr-2">
+                                  <Input
+                                    labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
+                                    labelVal="M.I." // label text
+                                    inputStyle={inputStyle} // styling for input
+                                    name="middleName" // name of label-input components
+                                    inputType="text" // type of input password, email, text, etc.
+                                    inputPlaceholder="" // placeholder text for input
+                                    value={middleName} // value of the input
+                                    changeHandler={(e) =>
+                                      setMiddleName(e.target.value)
+                                    } // change handling
+                                  />
+                                  <h4 className="w-full text-center mt-1 text-white">
+                                    M.I.
+                                  </h4>
+                                </section>
+                                <section className="w-2/5 inline-block grow mr-2">
+                                  <Input
+                                    labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
+                                    labelVal="Last Name" // label text
+                                    inputStyle={inputStyle} // styling for input
+                                    name="lastName" // name of label-input components
+                                    inputType="text" // type of input password, email, text, etc.
+                                    inputPlaceholder="" // placeholder text for input
+                                    value={lastName} // value of the input
+                                    changeHandler={(e) =>
+                                      setLastName(e.target.value)
+                                    } // change handling
+                                  />
+                                  <h4 className="w-full text-center mt-1 text-white">
+                                    Last Name
+                                  </h4>
+                                </section>
+                              </div>
+                              {/* username and position */}
+                              <div className="w-full pb-4 mt-2">
+                                <section className="w-2/5 inline-block grow mr-2">
+                                  <Input
+                                    labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
+                                    labelVal="Username" // label text
+                                    inputStyle={inputStyle} // styling for input
+                                    name="username" // name of label-input components
+                                    max={17} // character limit - max no of char is 17
+                                    inputType="text" // type of input password, email, text, etc.
+                                    inputPlaceholder="" // placeholder text for input
+                                    value={un} // value of the input
+                                    changeHandler={(e) => setUN(e.target.value)} // change handling
+                                  />
+                                  <h4 className="mt-1 w-full text-center text-white">
+                                    Username
+                                  </h4>
+                                </section>
+                                <section className="w-1/2 inline-block grow mr-2">
+                                  <Input
+                                    labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
+                                    labelVal="Position" // label text
+                                    inputStyle={inputStyle} // styling for input
+                                    name="position" // name of label-input components
+                                    max={17} // character limit - max no of char is 17
+                                    inputType="text" // type of input password, email, text, etc.
+                                    inputPlaceholder="" // placeholder text for input
+                                    value={position} // value of the input
+                                    changeHandler={(e) =>
+                                      setPosition(e.target.value)
+                                    } // change handling
+                                  />
+                                  <h4 className="w-full text-center mt-1 text-white">
+                                    Position
+                                  </h4>
+                                </section>
+                              </div>
+                              {/* password */}
+                              <div className="w-full pb-4 mt-2">
+                                <section className="un-style">
+                                  <div className="relative w-full">
+                                    <div className="absolute inset-y-0 right-0 flex items-center px-2">
+                                      <Input
+                                        labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
+                                        labelVal="Password" // label text
+                                        inputStyle={[inputStyle, 'hidden']} // styling for input
+                                        name="password" // name of label-input components
+                                        inputType="checkbox" // type of input password, email, text, etc.
+                                        inputPlaceholder="*****" // placeholder text for input
+                                        value={pw} // value of the input
+                                        changeHandler={(e) =>
+                                          setPW(e.target.value)
+                                        } // change handling
+                                      />
+                                      <button
+                                        className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-[0.9vw] text-gray-600  cursor-pointer account-button js-password-label w-[3vw] h-11/12"
+                                        htmlFor="toggle"
+                                        type="button"
+                                        onClick={buttonHandler}
+                                      >
+                                        {status}
+                                      </button>
+                                    </div>
+                                    <Input
+                                      labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
+                                      labelVal="Password" // label text
+                                      inputStyle="rounded-lg text-center w-full h-[2.5vw] appearance-none border-2 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 js-password" // styling for input
+                                      name="password" // name of label-input components
+                                      inputType="password" // type of input password, email, text, etc.
+                                      inputPlaceholder="*****" // placeholder text for input
+                                      value={pw} // value of the input
+                                      changeHandler={(e) =>
+                                        setPW(e.target.value)
+                                      } // change handling
+                                    />
+                                  </div>
+                                  <h4 className="mt-1 mb-2 w-full text-center text-white">
+                                    Password
+                                  </h4>
+                                </section>
+                              </div>
+                            </div>
                           </div>
-                          <Input
-                            labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-                            labelVal="Password" // label text
-                            inputStyle="input-style appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" // styling for input
-                            name="password" // name of label-input components
-                            inputType="password" // type of input password, email, text, etc.
-                            inputPlaceholder="" // placeholder text for input
-                            value={pw} // value of the input
-                            changeHandler={(e) => setPW(e.target.value)} // change handling
-                          />
-                        </div>
-                        <h4 className="mt-1 mb-2 w-full text-center text-white">
-                          Password
-                        </h4>
+
+                          {/* create user button */}
+                          <div className="w-full flex">
+                            <section className="my-auto ml-0 mr-auto w-[90.5%]">
+                              <button
+                                className="inter w-2/5 h-[5vh] block ml-auto mr-auto bg-login-green text-white font-bold rounded-lg hover:bg-slate-200 user-btn text-[1vw]"
+                                type="button"
+                                onClick={edit_user}
+                              >
+                                Save
+                              </button>
+                            </section>
+                          </div>
+                        </form>
                       </section>
                     </div>
                   </div>
-                </div>
-
-                <div>
-                    {/* Save Changes button */}
-                    <div className="save-button">
-                      <div className="w-full flex">
-                        <section className="un-style">
-                          <button
-                            className="inter bg-login-green text-white w-2/5 block ml-auto mr-auto rounded-lg hover:bg-emerald-600 user-btn"
-                            type="button"
-                            onClick={edit_user}
-                          >
-                            Save Changes
-                          </button>
-                        </section>
-                      </div>
-                    </div>
-                    {/* Deprecated, may X button nanaman in the first place -vov*/}
-                    {/* Cancel button
-                    <div className="cancel-button ">
-                      <div className="w-full flex">
-                        <section className="un-style">
-                          <button
-                            className="inter  w-2/5 block mt-2 ml-auto mr-auto bg-white rounded-lg hover:bg-slate-200 user-btn"
-                            type="button"
-                          >
-                            Cancel
-                          </button>
-                        </section>
-                      </div>
-                    </div> */}
-                </div>
-              </form>
-            </section>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
           </div>
-        </div>
-      </div>
+        </Dialog>
+      </Transition>
     </>
   );
 };

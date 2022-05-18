@@ -12,17 +12,25 @@ import './AddRow.css';
 
 /* Function for the "Add Row" feature in the Student View Record page */
 /* Initially shows an "Add" button and prompts the modal window after clicking it */
-const AddRow = ({ sem, addHandler, histHandler }) => {
-    const [openModal, setOpenModal] = useState(false);
+const AddRow = ({ sem, grades, addHandler, histHandler }) => {
+    const [openModal, setOpenModal] = useState(false);          // add row modal
+    const [gradesData, setGradesData] = useState(grades);
     const [courseName, setCourseName] = useState('');
     const [units, setUnits] = useState('');
     const [grade, setGrade] = useState('');
-    // const [currDate, setDate] = useState('');
-    // const [currTime, setTime] = useState('');
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
     const [studentID, setStudentID] = useState(localStorage.getItem("currStudentID"));
-    /* const [enrolled, setEnrolled] = useState('');
-    const [runningGWA, setRunningGWA] = useState(''); */
+    const [histTitle, setHistTitle] = useState('');             // value of history title
+
+    // checks if the course is already in the grade list
+    function isGradeDuplicate(course){
+        for(let i = 0; i < gradesData.length; i++){
+            if(course == gradesData[i].courseName){
+                return true
+            }
+        }
+        return false
+    }
 
     const resetInputFields = () => {
         setOpenModal(false);
@@ -83,7 +91,11 @@ const AddRow = ({ sem, addHandler, histHandler }) => {
             .then(response => response.json())
             .then(body => console.log(body))
             .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
-
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Server Error',
+                    text: 'Check if the server is running or if database IP is correct',
+                })
                 console.log(err)
             })
     }
@@ -104,6 +116,15 @@ const AddRow = ({ sem, addHandler, histHandler }) => {
             })
             return
           }
+        
+        if(isGradeDuplicate(courseName)){
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Course is already in the list. Try editing the row instead.',
+            })
+            return
+        }
 
         // new grade from the AddRow modal
         newGrade = {
@@ -129,7 +150,11 @@ const AddRow = ({ sem, addHandler, histHandler }) => {
             .then(response => response.json())
             .then(body => handleHistory(body))
             .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
-
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Server Error',
+                    text: 'Check if the server is running or if database IP is correct',
+                })
                 console.log(err)
             })
 

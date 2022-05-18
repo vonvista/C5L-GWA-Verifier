@@ -96,7 +96,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             <div className="table-cell w-1/6 text-center">Grade</div>
                             <div className="table-cell w-1/6 text-center">Cumulative</div>
                             <div className="table-cell w-1/6 text-center">Weight</div>
-                            <div className="table-cell w-1/6 text-center"><AddRow sem={sem} addHandler={addHandler} histHandler={historyHandler}/></div>
+                            <div className="table-cell w-1/6 text-center"><AddRow sem={sem} grades={data} addHandler={addHandler} histHandler={historyHandler}/></div>
                         </div>
                     </div>
                     <div className="table-row-group">
@@ -171,38 +171,82 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
 
         // function to delete a user based on their username
         const userDelete = (username) => {
-
-            const user = {
-                Username: username,
-            };
-            
-            // uncomment to test if proper student ID is being passed
-            // console.log("Delete " + user.Username);
-            
-            fetch(`http://${ip}:3001/user/delete`,{
-                method: "DELETE",
-                headers: { "Content-Type":"application/json" },
-                body: JSON.stringify(user)
-                })
-                .then(response => response.json())
-                .then(body => {
-                    console.log(body);
-                    handleDeleteRecord(user);
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text:'User successfully deleted'
+            Swal.fire({   // prompts for user to input password
+                title: "Confirm User Delete",
+                text: "Enter your password to proceed",
+                input: 'password',
+                inputPlaceholder: '*****',
+                icon: 'warning',
+                showCancelButton: true        
+            }).then((result) => {
+                if (result.isConfirmed && result.value !== '') {
+                    const credentials = {
+                        Username: localStorage.getItem("Username"),
+                        Password: result.value
+                    }
+                    fetch(`http://${ip}:3001/user/login`,{
+                        method: "POST",
+                        headers: { "Content-Type":"application/json" },
+                        body: JSON.stringify(credentials)
+                        })
+                    .then(response => response.json())
+                    .then(body => {
+                        if(body.err){ //if error response returned from DB
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: body.err,
+                            })
+                        }
+                        else { //success state
+                            const user = {
+                                Username: username,
+                            };
+                            
+                            // uncomment to test if proper student ID is being passed
+                            // console.log("Delete " + user.Username);
+                            
+                            fetch(`http://${ip}:3001/user/delete`,{
+                                method: "DELETE",
+                                headers: { "Content-Type":"application/json" },
+                                body: JSON.stringify(user)
+                                })
+                                .then(response => response.json())
+                                .then(body => {
+                                    console.log(body);
+                                    handleDeleteRecord(user);
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Success',
+                                        text:'User successfully deleted'
+                                    })
+                            })
+                            .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+                                Swal.fire({
+                                  icon: 'error',
+                                  title: 'Server Error',
+                                  text: 'Check if the server is running or if database IP is correct',
+                                })
+                                console.log(err)
+                            })
+                        }   
                     })
-            })
-            .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Server Error',
-                  text: 'Check if the server is running or if database IP is correct',
-                })
-                console.log(err)
-            })
-        
+                    .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Server Error',
+                        text: 'Check if the server is running or if database IP is correct',
+                        })
+                        console.log(err)
+                    })
+                } else if (result.value === '') { // if no password input
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'The password you entered is empty',
+                    })
+                }
+            });
         };
 
         return (
@@ -220,7 +264,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                 {data.map((user, index) => (
                     <tr key = {index}>
                       <td className='user-uname'>{user.uname}</td>
-                      <td className='user-name'>{user.name}</td>
+                      <td className='user-name uppercase'>{user.name}</td>
                       <td className='user-position'>
                           {user.position}
                       </td>
@@ -294,34 +338,78 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
 
         // function to delete a student based on their student ID
         const studentDelete = (ID, Key) => {
-            const student = {
-              StudentID: ID,
-              StudentKey: Key
-            };
-            console.log(student)
-            fetch(`http://${ip}:3001/student/delete`,{
-                method: "DELETE",
-                headers: { "Content-Type":"application/json" },
-                body: JSON.stringify(student)
-              })
-              .then(response => response.json())
-              .then(body => {
-                console.log(body);
-                handleDeleteRecord(student);
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text:'Student successfully deleted'
-                })
-            })
-            .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Server Error',
-                  text: 'Check if the server is running or if database IP is correct',
-                })
-                console.log(err)
-            })
+            Swal.fire({   // prompts for user to input password
+                title: 'Confirm Student Delete',
+                text: 'Enter your password to proceed',
+                input: 'password',
+                inputPlaceholder: '*****',
+                icon: 'warning',
+                showCancelButton: true        
+            }).then((result) => {
+                if (result.isConfirmed && result.value !== '') {
+                    const credentials = {
+                        Username: localStorage.getItem("Username"),
+                        Password: result.value
+                    }
+                    fetch(`http://${ip}:3001/user/login`,{
+                        method: "POST",
+                        headers: { "Content-Type":"application/json" },
+                        body: JSON.stringify(credentials)
+                        })
+                    .then(response => response.json())
+                    .then(body => {
+                        if(body.err){ //if error response returned from DB
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: body.err,
+                            })
+                        }
+                        else { //success state
+                            const student = {
+                                StudentID: ID,
+                                StudentKey: Key
+                            };
+                            fetch(`http://${ip}:3001/student/delete`,{
+                                method: "DELETE",
+                                headers: { "Content-Type":"application/json" },
+                                body: JSON.stringify(student)
+                            })
+                            .then(response => response.json())
+                            .then(body => {
+                                handleDeleteRecord(student);
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text:'Student successfully deleted'
+                                })
+                            })
+                            .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+                                Swal.fire({
+                                icon: 'error',
+                                title: 'Server Error',
+                                text: 'Check if the server is running or if database IP is correct',
+                                })
+                                console.log(err)
+                            })
+                        }   
+                    })
+                    .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Server Error',
+                        text: 'Check if the server is running or if database IP is correct',
+                        })
+                        console.log(err)
+                    })
+                } else if (result.value === '') { // if no password input
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Invalid Password',
+                        text: 'The password you entered is empty',
+                    })
+                }
+            });
           };
 
         return (

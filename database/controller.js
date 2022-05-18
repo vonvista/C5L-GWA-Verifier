@@ -341,7 +341,8 @@ const studentSchema = new Schema({
   TotalUnits2: {type: Number, required: true},
   TotalCumulative: {type: Number, requied: true},
   OverallGWA: {type: Number, required : true},
-  Status: {type: String, required : true, enum:['Checked','Unchecked','Pending']}
+  Status: {type: String, required : true, enum:['Checked','Unchecked','Pending']},
+  Validations: [{type: Boolean, required : true}],
 },{autoCreate:true});
 
 
@@ -359,8 +360,9 @@ Student.find(function(err, student) {
 
 exports.studentFindOne = function(req, res, next) {
 Student.findOne({StudentID:req.body.StudentID}, function(err, Student){
-  if(!err) {res.send(Student);}
-  else { res.send({err:'Unable to find student'}) }
+  if(Student) {res.send(Student);}
+  else if (err) { res.send({err: 'An error occured'}); }
+  else { res.send({err:'Unable to find student'}); }
 });
 }
 
@@ -378,7 +380,8 @@ exports.studentAdd = function(req, res, next) {
     TotalUnits2: req.body.TotalUnits2,
     TotalCumulative: req.body.TotalCumulative,
     OverallGWA: req.body.OverallGWA,
-    Status: req.body.Status
+    Status: req.body.Status,
+    Validations: req.body.Validations
   });
   console.log(newStudent);
 
@@ -431,6 +434,20 @@ exports.studentDeleteOne = function(req, res, next) {
   });
 }
 
+//update validations
+exports.studentUpdateValidations = function(req, res, next) {
+  console.log(req.body);
+  Student.updateOne({_id: mongoose.Types.ObjectId(req.body._id)},{"$set":{
+    "Validations": req.body.Validations
+  }}, {new : true}, function(err,result){
+    if(!err && Student){
+      res.send(result);
+    } else {
+      res.send({err:'Unable to update student'});
+    }
+  })
+}
+
 
 // -----------------------------H I S T O R Y  S E C T I O N----------------------------------------
 
@@ -442,7 +459,7 @@ const historySchema = new Schema({
   Student: {type: String, required: true},
   Date : {type: String, required : true},
   Time : {type: String, required : true},
-  Description: {type: String, required : true, enum : ['create', 'read', 'update', 'delete']}, // short string ng change na nagyari
+  Description: {type: String, required : true},
   Details: {type: String, required : true}, // long string
 }, {autoCreate:true});
 

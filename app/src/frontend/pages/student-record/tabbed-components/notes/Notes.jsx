@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import AddNoteBtn from 'frontend/components/buttons/AddNoteBtn';
 import Delete from '../../../../../../assets/icons/delete.svg';
-
+import Swal from 'sweetalert2'
 
 // Parent component >> Tab component found in StudentViewRecord.jsx
 
@@ -23,11 +23,11 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
         const newNote = {                       // object for new note to be added
             sem: selectedSem.sem,
             Semyear: selectedSem.sem,
-            content: text,
+            Details: text,
         }
         
         // check if note for the sem already exists
-        const index = notesData.map(i => i.sem).indexOf(selectedSem.sem);
+        const index = currNotesList.map(i => i.Semyear).indexOf(selectedSem.sem);
 
         if (index != -1){
             currNotesList[index] = newNote              // replace note from currNotesList if it already exists
@@ -62,9 +62,12 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
             .then(response => response.json())
             .then(body => console.log(body))
             .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
-
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Server Error',
+                    text: 'Check if the server is running or if database IP is correct',
+                })
                 console.log(err)
-
             })
 
         setNotesData(newNotes)

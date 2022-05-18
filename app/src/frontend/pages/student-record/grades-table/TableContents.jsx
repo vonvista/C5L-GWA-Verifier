@@ -36,7 +36,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
     const nameStyle = "transition-colors ease-in-out delay-150 flex inter font-bold justify-between z-10 w-full px-4 py-2 text-sm font-medium text-left text-sr-table-text bg-sr-dark-gray hover:transition-colors hover:ease-in hover:delay-150 hover:bg-yellow-100 hover:text-secondary-red";
 
     // set new values for addrow
-    const addData = (values) => {
+    const addRowData = (values) => {
         const targetIndex = semData.length 
         let newSemData = [...semData]
         values.idRow = (parseFloat(newSemData[targetIndex-1].idRow) + 1).toString()
@@ -196,8 +196,6 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
 
                                 </Disclosure.Panel>    
                             </Transition>
-                            
-                               
                         </>
                     )}
                 </Disclosure>
