@@ -12,9 +12,11 @@ import Swal from 'sweetalert2'
 
 export default function NotesTab({notesData, semesters, setNotesData}) { 
 
+    
     // State that handles selection of sem notes; uses first object as default
     const [selectedSem, setSelectedSem] = useState(semesters[0])
-    
+    const [currStudentID, setStudentID] = useState(localStorage.getItem("currStudentID"));
+
 
     // Handler for adding/editing notes
     const handleAddNote = (text) => {
@@ -38,20 +40,25 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
         setNotesData(currNotesList)
 	}
 
+
     // Handler for deleting notes
     const handleDeleteNote = (values) => {
+
         // get array index of object that will be deleted
         const targetIndex = notesData.findIndex(obj => obj.sem == values.sem)
         
+        // removes Note from list/prop
         let newNotes = [...notesData]
         newNotes.splice(targetIndex, 1)
 
+        // note to be deleted
+        // deletes note using: Student key and Semyear
         deleteNote = {
-            Student: localStorage.getItem("currStudentID"),
+            Student: currStudentID,
             Semyear: values.Semyear,
         }
 
-        // fetch post request to delete a note on button click
+        // fetch post request to delete note
         fetch(`http://localhost:3001/note/delete`, {
             method: "POST",
             headers: {
@@ -69,7 +76,8 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
                 })
                 console.log(err)
             })
-
+        
+        // changeHandler to update Notes
         setNotesData(newNotes)
     }
 

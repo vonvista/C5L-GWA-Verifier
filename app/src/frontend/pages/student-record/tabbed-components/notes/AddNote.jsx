@@ -19,10 +19,17 @@ import Swal from 'sweetalert2'
 
 const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedSem, setSelectedSem, setTextArea, noteText, setNoteText, semesters }) => {
 
+    
+    // local storage using use state
+    const [userName, setUserName] = useState(localStorage.getItem("Username"));
+    const [currStudentID, setStudentID] = useState(localStorage.getItem("currStudentID"));
+
+
     // Handler for changes in text area
     const handleChange = (event) => {
         setNoteText(event.target.value)
     }
+
 
     // Handle for closing add note window
     const handleClose = () => {
@@ -30,27 +37,33 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
         modalHandler()                      // close window
     }
    
+
     // Handler for save button
     const handleSaveClick = () => {
+
         if (noteText.trim().length > 0){
+
             if (noteText != 'Type to add a note...'){
+
                 handleAddNote(noteText)
                 setNoteText('')
 
-                reNote = {
-                    User: localStorage.getItem("Username"),
-                    Student: localStorage.getItem("currStudentID"),
+                // new note to be stored in DB
+                newNote = {
+                    User: userName,
+                    Student: currStudentID,
                     Details: noteText,
                     Semyear: selectedSem.sem,
                 }
 
-                // fetch post request to add/update note
+                // fetch post request to update note
+                // also includes adding new notes
                 fetch(`http://localhost:3001/note/update`, {
                     method: "POST",
                     headers: {
                     "Content-Type": "application/json",
                     },
-                    body: JSON.stringify(reNote)
+                    body: JSON.stringify(newNote)
                 })
                     .then(response => response.json())
                     .then(body => console.log(body))
@@ -65,8 +78,11 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
             }
         }
 
-        modalHandler()                  // close window after saving
-        setSelectedSem(semesters[0])    // reset selected option in dropdown to first object
+        // close window after saving
+        modalHandler()
+
+        // reset selected option in dropdown to first object
+        setSelectedSem(semesters[0])
     }
 
 
