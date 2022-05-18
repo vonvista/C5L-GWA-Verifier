@@ -30,7 +30,17 @@ const ExportFileBtn = ({ list }) => {
     })
     
     if (sortOption) {
+
+      // creates the pdf export file
       exportStudentList(sortOption, list, currUser);
+
+      // swal success message
+      Swal.fire(
+        'Successfully imported student summary!',
+        'Wait for your download to finish',
+        'success'
+      )
+      
     }
   }
   
