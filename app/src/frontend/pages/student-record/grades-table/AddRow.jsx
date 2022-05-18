@@ -121,7 +121,7 @@ const AddRow = ({ sem, grades, addHandler, histHandler }) => {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Course is already in the list. Try editing the row instead.',
+                text: 'Course is already in the list. Change course name or edit the available course',
             })
             return
         }
