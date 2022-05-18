@@ -262,6 +262,18 @@ const readInputFile = (file, handleAddRecord) => {
 
     // read the pdf file
     const reader = new FileReader();
+
+    // check if parameter is of type Blob
+    const myBlob = document.getElementById('myfile').files[0];
+    if (!(myBlob instanceof Blob)){
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'An error occured. Please try again.',
+      })
+      return false;
+    }
+
     reader.readAsArrayBuffer(document.getElementById('myfile').files[0]);
 
     // once the pdf file read is done execute the function
@@ -272,6 +284,14 @@ const readInputFile = (file, handleAddRecord) => {
         const isSuccessful = verifyInput(data); // verifies inputs not catched by the database
         if (isSuccessful.success) {
           
+          //set validations
+          numOfValidations = 4
+          validations = []
+          for (let i = 0; i < numOfValidations; i++) {
+            validations.push(false);
+          }
+          console.log(validations)
+
           const ip = localStorage.getItem("ServerIP");
           student = {
             StudentID: data.StudentID,
@@ -283,7 +303,8 @@ const readInputFile = (file, handleAddRecord) => {
             TotalUnits2: data.TotalUnits2,
             TotalCumulative: data.TotalCumulative,
             OverallGWA: data.OverallGWA,
-            Status: "Unchecked"
+            Status: "Unchecked",
+            Validations: validations,
           };
 
           // checks if the student already exists in the database
