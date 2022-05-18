@@ -1,9 +1,10 @@
-/* eslint-disable react/prop-types */
 import 'tailwindcss/tailwind.css';
 
-// text prop: text label of button
-// handleClick prop: function to handle click event
-// used for buttons like Terms of Service in the login page
+
+// This button component is used for text that acts like buttons
+// -- text prop     : text label of button
+// -- handleClick   : function to handle click event
+
 const TextBtn = ({ text, handleClick }) => {
   const textClass = `w-30 h-10 hover:text-stone-100 font-poppins rounded-lg`;
   return (

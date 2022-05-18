@@ -22,7 +22,12 @@ useEffect(() => {
 ----------------------------------------------------------
 */
 
-/* Function that contains a functioning Refresh button */
+
+// Parent Component >> UserDashboard.jsx
+
+// Function that contains a functioning Refresh button
+// --handleClick prop: function to handle click event
+
 const Refresh = ({ handleClick }) => {
   const btn = `
     .btn{
@@ -35,7 +40,8 @@ const Refresh = ({ handleClick }) => {
   return (
     <div className="pr-1.5 mr-0 items-center justify-items-center inline-block grow">
       <style>{btn}</style>
-      {/* refresh */}
+      
+      {/* Refresh Button */}
       {/* Reference: https://stackoverflow.com/questions/70069619/refresh-data-on-button-click-react */}
       <button className={buttons} type="button" onClick={handleClick}>
         <img className="btn" alt="icon" src={refresh} />

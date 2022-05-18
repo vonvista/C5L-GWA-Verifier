@@ -1,10 +1,9 @@
 import 'tailwindcss/tailwind.css';
 
+
 // Function contains the Edit button from Student Record View/Edit Page's Dropdown Menu
-//
-// PROPS:
-// handleClick: function to handle click event
-//
+// -- handleClick prop: function to handle click event
+
 const Edit = ({ handleClick }) => {
   const editbtn = `w-20 h-8 bg-login-green m-2 rounded-xl text-white font-montserrat font-bold hover:shadow-lg hover:bg-login-green-hover`;
 

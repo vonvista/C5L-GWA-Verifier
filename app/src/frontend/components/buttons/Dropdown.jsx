@@ -8,8 +8,11 @@ import exportStudentData from 'backend/exportStudentData';
 import 'tailwindcss/tailwind.css';
 
 
-// Function contains the buttons in Actions Dropdown seen in Student Record View/Edit Page
+// This function contains the buttons in the dropdown seen in the student record page
 // Additional references: https://tailwindui.com/components/application-ui/elements/dropdowns
+// -- studentInfo prop  : contains student information which will be used for exporting student record file
+// -- grades            : contains student gradesheet which will be used for exporting student record file
+
 const Dropdown = ({ studentInfo, grades }) => {
 
   const [valueClicked, setValueClicked] = useState('Actions');
@@ -60,8 +63,10 @@ const Dropdown = ({ studentInfo, grades }) => {
 
   return (
     <div className="w-40 relative ml-auto grow-0">
+
       {/* Actions and arrow down */}
       <div className="grid-cols-2 divide-x w-40 p-2 bg-login-green flex mr-0 items-center justify-items-center rounded-lg border border-slate-300">
+        
         <button
           type="button"
           className="pl-1.75 m-0 inline-block grow hover:bg-login-green-hover rounded-l-lg"
@@ -78,6 +83,7 @@ const Dropdown = ({ studentInfo, grades }) => {
             {valueClicked}
           </p>
         </button>
+
         <button
           type="button"
           className="pl-1.5 m-0 inline-block bg-login-green grow hover:bg-login-green-hover rounded-r-lg"
@@ -96,6 +102,7 @@ const Dropdown = ({ studentInfo, grades }) => {
           </section>
         </button>
       </div>
+
       {isActive ? (
         // buttons after expanding
         <div
