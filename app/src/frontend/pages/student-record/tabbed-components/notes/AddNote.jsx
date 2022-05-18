@@ -17,7 +17,7 @@ import Swal from 'sweetalert2'
 // -- noteText          : gets the state to be displayed for the textarea
 // -- semesters         : gets the list of semesters that the student has enrolled in; to be used for dropdown select
 
-const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedSem, setSelectedSem, setTextArea, noteText, semesters }) => {
+const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedSem, setSelectedSem, setTextArea, noteText, setNoteText, semesters }) => {
 
     // Handler for changes in text area
     const handleChange = (event) => {
@@ -65,7 +65,7 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
             }
         }
 
-        modalHandler                    // close window after saving
+        modalHandler()                  // close window after saving
         setSelectedSem(semesters[0])    // reset selected option in dropdown to first object
     }
 

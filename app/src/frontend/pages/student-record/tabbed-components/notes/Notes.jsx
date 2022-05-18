@@ -23,11 +23,11 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
         const newNote = {                       // object for new note to be added
             sem: selectedSem.sem,
             Semyear: selectedSem.sem,
-            content: text,
+            Details: text,
         }
         
         // check if note for the sem already exists
-        const index = notesData.map(i => i.sem).indexOf(selectedSem.sem);
+        const index = currNotesList.map(i => i.Semyear).indexOf(selectedSem.sem);
 
         if (index != -1){
             currNotesList[index] = newNote              // replace note from currNotesList if it already exists
