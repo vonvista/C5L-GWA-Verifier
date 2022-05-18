@@ -16,68 +16,13 @@ import 'tailwindcss/tailwind.css';
 // import studentDelete from 'backend/studentDelete';
 // import userDelete from 'backend/userDelete';
 
-
+// Parent components >> UserDashboard.jsx, UserManagementPage.jsx, TableContents.jsx
 // This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
 const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, delHandler, handleHistory, handleDeleteRecord, handleEditRecord, addHandler, histHandler }) => {
 
-
+    // State handler for a student's total number of units in a semester
     const [totalUnits, setTotal] = useState(total)
-    // George Gragas
-    // This table is about degreeprogram
-    // const DegreeProgram = ({ data }) => {
-    //     return (
-    //         <>
-    //             <table class="table-auto">
-    //                 <thead>
-    //                     <tr>
-    //                         <th>Program</th>
-    //                         <th>Department</th>
-    //                         <th>Actions</th>
-    //                     </tr>
-    //                 </thead>
-    //                 <tbody>
-    //                     {data.map((program, index) => (
-    //                         <tr key = { index }>
-    //                             <td>{program.programName}</td>
-    //                             <td>{program.department}</td>
-    //                             <td><Actions/></td>
-    //                         </tr>)
-    //                     )}
-    //                 </tbody>
-    //             </table>
-    //         </>
-    //     );
-    // }
-
-    // // This table is about course subjects
-    // const Course = ({ data }) => {
-    //     return (
-    //         <>
-    //             <table class="table-auto">
-    //                 <thead>
-    //                     <tr>
-    //                         <th>Course Title</th>
-    //                         <th>Course Code</th>
-    //                         <th>Course Units</th>
-    //                         <th>Actions</th>
-    //                     </tr>
-    //                 </thead>
-    //                 <tbody>
-    //                     {data.map((course, index) => (
-    //                         <tr key = { index }>
-    //                             <td>{course.title}</td>
-    //                             <td>{course.courseCode}</td>
-    //                             <td>{course.units }</td>
-    //                             <td><Actions/></td>
-    //                         </tr>)
-    //                     )}
-    //                 </tbody>
-    //             </table>
-    //         </>
-    //     );
-    // }
-
     const ip = localStorage.getItem("ServerIP");
     let navigate = useNavigate();
 
@@ -455,7 +400,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                         </tbody>
                     ) : (
                         <div className='flex items-center justify-center h-[65.73130193905817vh]'>
-                            <div className='text-lg xl:text-xl font-bold font-bold font-montserrat'>
+                            <div className='text-lg xl:text-xl font-bold font-montserrat'>
                                 No available data to display.
                             </div>
                         </div>
