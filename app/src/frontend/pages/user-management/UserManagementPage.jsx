@@ -213,13 +213,12 @@ const UserManagementPage = () => {
               {userRole == "user" ? <UserNav /> : <AdminNav />}
             </div>
             {/* Right Section */}
-            <div className="absolute inset-0 flex wrap ml-8 xl:ml-12 justify-center ">
-
+            <div className="absolute inset-0 flex ml-8 xl:ml-12">
               <div><HeaderWithoutArrowbck pageTitle={"USER MANAGEMENT"}/></div>
-
+              
               {/* Page Contents */}
-              <div className='pt-20 md:flex flex-row space-x-10 '>
-                <div className='grid content-center w-1/6'>
+              <div className='flex ml-10 mt-6 xl:ml-24 justify-center items-center h-screen space-x-14'>
+                <div className='flex items-center w-1/6'>
                   <AddUserBtn handleClick={() => setShowModal(true)}/>
                   {showModal ?
                     (<AddUser modalState={true} handleClose={() => setShowModal(false)} handleAddRecord={handleAddRecord}/>)
