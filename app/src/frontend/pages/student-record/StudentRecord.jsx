@@ -6,347 +6,29 @@ import RecordPage from './StudentViewRecord';
 import Swal from 'sweetalert2';
 
 
-// sample value for student record
-const student = {
-  stud_no: '2019-01234',
-  name: 'Stark, Anthony Edward',
-  degree_program: 'BS Computer Science',
-  status: 'Pending',
-}
-
-// sample values for status tab
-const statusData = {
-  GPAUnits: {
-      taken: 33.000,
-      passed: 33.000
-  },
-  NotGPAUnits: {
-      taken: 33.000,
-      passed: 33.000
-  },
-  GPACalc: {
-      totalGradePoints: 33.000,
-      totalUnitsGPA: 33.000,
-      totalGWA: 1.000
-  }
-}
-
-// sample value for notes in user records grades
-const notes = [
-  {
-      sem: "First Semester AY 2019-2020",
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lobortis, nisl ut convallis vulputate, elit neque ultrices nulla, et elementum felis dui eget purus. Donec massa nunc, aliquet ut vestibulum a, cursus quis lacus. Suspendisse et volutpat leo, a lacinia neque. Nam sagittis lectus nibh, a pretium leo tincidunt et"
-  },
-  {
-      sem: "Second Semester AY 2019-2020",
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lobortis"
-  },
-  {
-    sem: "First Semester AY 2020-2021",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lobortis"
-  }
-]
-
-// sample value for user details
-const user = {
-  username: "",
-  firstName: "",
-  middleInitial: "",
-  lastName: "",
-}
-
-// sample values for change history;
-const history = [
-  {
-    date: 'MM-DD-YYYY',
-    info: [
-      // history entries
-      {
-        main: 'Main Description',
-        user: 'User',
-        time: 'HH:MM:SS',
-        details: 'Details about the changes\n',
-      },
-      {
-        main: 'Main Description',
-        user: 'User',
-        time: 'HH:MM:SS',
-        details: 'Details about the changes\n',
-      },
-    ],
-  },
-  {
-    date: 'MM-DD-YYYY',
-    info: [
-      {
-        main: 'Main Description',
-        user: 'User',
-        time: 'HH:MM:SS',
-        details: 'Details about the changes\n',
-      },
-    ],
-  },
-  {
-    date: 'MM-DD-YYYY',
-    info: [
-      {
-        main: 'Main Description',
-        user: 'User',
-        time: 'HH:MM:SS',
-        details: 'Details about the changes\n',
-      },
-    ],
-  },
-  {
-    date: 'MM-DD-YYYY',
-    info: [
-      {
-        main: 'Main Description',
-        user: 'User',
-        time: 'HH:MM:SS',
-        details: 'Details about the changes\n',
-      },
-    ],
-  },
-  {
-    date: 'MM-DD-YYYY',
-    info: [
-      {
-        main: 'Main Description',
-        user: 'User',
-        time: 'HH:MM:SS',
-        details: 'Details about the changes\n',
-      },
-    ],
-  },
-  {
-    date: 'MM-DD-YYYY',
-    info: [
-      {
-        main: 'Main Description',
-        user: 'User',
-        time: 'HH:MM:SS',
-        details: 'Details about the changes\n',
-      },
-    ],
-  },
-  {
-    date: 'MM-DD-YYYY',
-    info: [
-      {
-        main: 'Main Description',
-        user: 'User',
-        time: 'HH:MM:SS',
-        details: 'Details about the changes\n',
-      },
-    ],
-  },
-  {
-    date: 'MM-DD-YYYY',
-    info: [
-      {
-        main: 'Main Description',
-        user: 'User',
-        time: 'HH:MM:SS',
-        details: 'Details about the changes\n',
-      },
-    ],
-  },
-  {
-    date: 'MM-DD-YYYY',
-    info: [
-      {
-        main: 'Main Description',
-        user: 'User',
-        time: 'HH:MM:SS',
-        details: 'Details about the changes\n',
-      },
-    ],
-  },
-]
-
-// sample value for grades
-const grades = [
-  {
-    sem: "First Semester AY 2019-2020",
-    data: [
-        {
-            "idRow": "1",
-            "courseName": "CMSC 12",
-            "units": "3.0",
-            "grade": "1.00",
-            "enrolled": "3.00",
-            "runningSum": "3.00"
-        },
-        {
-            "idRow": "2",
-            "courseName": "CMSC 56",
-            "units": "3.0",
-            "grade": "1.50",
-            "enrolled": "4.50",
-            "runningSum": "7.50"
-        },
-        {
-            "idRow": "3",
-            "courseName": "MATH 27",
-            "units": "3.0",
-            "grade": "1.75",
-            "enrolled": "5.25",
-            "runningSum": "12.75"
-        },
-        {
-            "idRow": "4",
-            "courseName": "ETHICS 1",
-            "units": "3.0",
-            "grade": "1.50",
-            "enrolled": "4.50",
-            "runningSum": "17.25"
-        },
-        {
-            "idRow": "5",
-            "courseName": "STS 1",
-            "units": "3.0",
-            "grade": "1.75",
-            "enrolled": "5.25",
-            "runningSum": "22.50"
-        },
-        {
-            "idRow": "6",
-            "courseName": "HK 11",
-            "units": "2.0",
-            "grade": "1.00",
-            "enrolled": "2.00",
-            "runningSum": "22.50"
-        },
-    ]
-  },
-  {
-    sem: "Second Semester AY 2019-2020",
-    data: [
-        {
-            "idRow": "1",
-            "courseName": "CMSC 21",
-            "units": "3.0",
-            "grade": "1.00",
-            "enrolled": "3.00",
-            "runningSum": "25.50"
-        },
-        {
-            "idRow": "2",
-            "courseName": "CMSC 57",
-            "units": "3.0",
-            "grade": "1.50",
-            "enrolled": "4.50",
-            "runningSum": "30.00"
-        },
-        {
-            "idRow": "3",
-            "courseName": "MATH 28",
-            "units": "3.0",
-            "grade": "1.50",
-            "enrolled": "4.50",
-            "runningSum": "34.50"
-        },
-        {
-            "idRow": "4",
-            "courseName": "KAS 1",
-            "units": "3.0",
-            "grade": "1.75",
-            "enrolled": "5.25",
-            "runningSum": "39.75"
-        },
-        {
-            "idRow": "5",
-            "courseName": "ARTS 1",
-            "units": "3.0",
-            "grade": "1.00",
-            "enrolled": "3.00",
-            "runningSum": "42.75"
-        },
-    ]
-  },
-  {
-    sem: "First Semester AY 2020-2021",
-    data: [
-        {
-            "idRow": "1",
-            "courseName": "CMSC 22",
-            "units": "3.0",
-            "grade": "1.00",
-            "enrolled": "3.00",
-            "runningSum": "45.75"
-        },
-        {
-            "idRow": "2",
-            "courseName": "CMSC 123",
-            "units": "3.0",
-            "grade": "2.25",
-            "enrolled": "6.75",
-            "runningSum": "52.50"
-        },
-        {
-            "idRow": "3",
-            "courseName": "CMSC 130",
-            "units": "3.0",
-            "grade": "1.00",
-            "enrolled": "3.00",
-            "runningSum": "55.50"
-        },
-        {
-            "idRow": "4",
-            "courseName": "CMSC 150",
-            "units": "3.0",
-            "grade": "1.50",
-            "enrolled": "4.50",
-            "runningSum": "60.00"
-        },
-        {
-            "idRow": "5",
-            "courseName": "SCIENCE 11",
-            "units": "3.0",
-            "grade": "1.50",
-            "enrolled": "4.50",
-            "runningSum": "64.50"
-        },
-        {
-            "idRow": "6",
-            "courseName": "NSTP 1",
-            "units": "2.0",
-            "grade": "1.25",
-            "enrolled": "2.50",
-            "runningSum": "64.50"
-        },
-    ]
-  }
-]
-
-// sample value for checklist details
+// values for checklist details
 const checklistDetails = [
   {
     id: 1,
-    status: true,
-    detail: "Correct computed GWA"
+    status: false,
+    detail: "Complete units for the course"
   },
   {
     id: 2,
     status: false,
-    detail: "No underloaded/overloaded sem"
+    detail: "Complete electives"
   },
   {
     id: 3,
     status: false,
-    detail: "At least 1.75 GWA"
-  }
+    detail: "Correct number of units and grades"
+  },
+  {
+    id: 4,
+    status: false,
+    detail: "No underload or overload"
+  },
 ]
-
-// sample student id -lal 
-// get the following from localStorage on actual
-// const currStudentID = {StudentID: localStorage.getItem("currStudentKey")} // localStorage.getItem("currStudentID")
-// const currStudentKey = localStorage.getItem("currStudentID") // localStorage.getItem("currStudentKey")
-// const ip = localStorage.getItem("ServerIP")  // change all localhost to ip later on
-
-// console.log(localStorage.getItem("currStudentKey"), localStorage.getItem("currStudentID"))
-// console.log(currStudentID, currStudentKey)
 
 // organize grades from database for RecordPage props
 function organizeGrades(data){
@@ -490,6 +172,7 @@ export default function StudentRecord() { // this will probably transferred to a
   const [notesProp, getNotesProp] = useState()
   const [gradesProp, getGradesProp] = useState()
   const [historyProp, getHistoryProp] = useState()
+  const [validationsProp, getvalidationsProp] = useState(checklistDetails)
   //Move currStudentID and key to useEffect (localstorage access is slow)
   const [currStudentID, setCurrStudentID] = useState({StudentID: localStorage.getItem("currStudentKey")})
   const [currStudentKey, setCurrStudentKey] = useState(localStorage.getItem("currStudentID"))
@@ -542,6 +225,8 @@ export default function StudentRecord() { // this will probably transferred to a
         currUser.Student = body._id
 
         getStudentProp(currUser) // return student info from db
+
+        //handle validations
       })
       .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
         Swal.fire({
@@ -709,7 +394,7 @@ export default function StudentRecord() { // this will probably transferred to a
                   history={historyProp}
                   status={statusData}
                   grades={gradesProp} 
-                  checklist={checklistDetails}  // dummy data
+                  checklist={validationsProp}  // dummy data
                   // autoSet={setGrades}
                 />
             </div>

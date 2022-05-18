@@ -341,7 +341,8 @@ const studentSchema = new Schema({
   TotalUnits2: {type: Number, required: true},
   TotalCumulative: {type: Number, requied: true},
   OverallGWA: {type: Number, required : true},
-  Status: {type: String, required : true, enum:['Checked','Unchecked','Pending']}
+  Status: {type: String, required : true, enum:['Checked','Unchecked','Pending']},
+  Validations: {type: Array, required : true},
 },{autoCreate:true});
 
 

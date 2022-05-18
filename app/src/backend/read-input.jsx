@@ -268,6 +268,13 @@ const readInputFile = (file, handleAddRecord) => {
     // once the pdf file read is done execute the function
     reader.onload = function () {
       const fileURL = reader.result;  // get the contents of the pdf file as an array buffer
+
+      //set validations
+      numOfValidations = 4
+      validations = []
+      for (let i = 0; i < numOfValidations; i++) {
+        validations.push(false);
+      }
      
       getItems(fileURL).then(function (data) {  // process the contents to simple text
         const isSuccessful = verifyInput(data); // verifies inputs not catched by the database
@@ -283,7 +290,8 @@ const readInputFile = (file, handleAddRecord) => {
               TotalUnits2: data.TotalUnits2,
               TotalCumulative: data.TotalCumulative,
               OverallGWA: data.OverallGWA,
-              Status: "Unchecked"
+              Status: "Unchecked",
+              Validations: validations,
           }
 
           // posting to database

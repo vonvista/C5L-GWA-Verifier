@@ -9,7 +9,14 @@ import 'tailwindcss/tailwind.css';
 // This component is used for displaying necessary data/details with its corresponding icons (check/cross)
 const ChecklistDetail = ({ icon, detail }) => {
   return (
-    <div className="flex w-full items-center">
+    <div className="flex w-full items-center"
+    
+    onClick={() => {
+      console.log("HERE");
+      icon = !icon;
+      console.log(icon);
+    }}
+    >
       {/* Icon to be displayed */}
       {icon === true ? (
         <div>
@@ -58,7 +65,7 @@ const ChecklistDetail = ({ icon, detail }) => {
         </div>
       )}
       {/* Detail */}
-      <span className="ml-2 text-lg font-inter">{detail}</span>
+      <span className="ml-2 text-sm font-inter">{detail}</span>
     </div>
   );
 };
