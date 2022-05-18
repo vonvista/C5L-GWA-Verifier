@@ -134,8 +134,12 @@ exports.userUpdate = async function(req, res, next) {
     "Password": hashedPassword
   }}, {new : true}, function(err,result){
     if(!err && User){
-      res.send(result);
-      console.log(result);
+      //send the updated user
+      User.findOne({_id: mongoose.Types.ObjectId(req.body._id)}, function(err, User){
+        if(!err && User){
+          res.send(User);
+        }
+      });
     } else {
       res.send({err:'Unable to update user'});
     }

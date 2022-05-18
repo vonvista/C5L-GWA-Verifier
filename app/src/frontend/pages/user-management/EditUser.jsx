@@ -67,7 +67,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
         Username: un,
         Position: position,
         Password: pw,
-        Role: 'user',
+        // Role: 'user',
     };
     console.log("here")
     fetch(`http://localhost:3001/user/update`,{
@@ -91,7 +91,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
           title: 'Success',
           text: 'Successfully updated user!',
         })
-        handleEditRecordSave(credentials)
+        handleEditRecordSave(body)
 
       }
     })
