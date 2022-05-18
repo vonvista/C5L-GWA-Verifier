@@ -36,7 +36,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
     const nameStyle = "transition-colors ease-in-out delay-150 flex inter font-bold justify-between z-10 w-full px-4 py-2 text-sm font-medium text-left text-sr-table-text bg-sr-dark-gray hover:transition-colors hover:ease-in hover:delay-150 hover:bg-yellow-100 hover:text-secondary-red";
 
     // set new values for addrow
-    const addData = (values) => {
+    const addRowData = (values) => {
         const targetIndex = semData.length 
         let newSemData = [...semData]
         values.idRow = (parseFloat(newSemData[targetIndex-1].idRow) + 1).toString()
@@ -174,7 +174,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
                             
                             {/* Accordion Contents */}
                             <Disclosure.Panel className="inter z-0 pl-5 py-3 mb-2 text-sm text-gray-500 rounded-b-lg shadow-lg">
-                                <List table={2} total={Total} sem={Name} data={semData} dataHandler={setData} delHandler={delData} handleHistory={setHistory} addHandler={addData} histHandler={historyHandler}/>
+                                <List table={2} total={Total} sem={Name} data={semData} dataHandler={setData} delHandler={delData} handleHistory={setHistory} addHandler={addRowData} histHandler={historyHandler}/>
                                 <section className="mt-3">
                                     <span className="font-montserrat font-bold text-primary-red">Load Status</span>
                                     {( Total <= 20 )
