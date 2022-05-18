@@ -220,7 +220,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                 {data.map((user, index) => (
                     <tr key = {index}>
                       <td className='user-uname'>{user.uname}</td>
-                      <td className='user-name'>{user.name}</td>
+                      <td className='user-name uppercase'>{user.name}</td>
                       <td className='user-position'>
                           {user.position}
                       </td>

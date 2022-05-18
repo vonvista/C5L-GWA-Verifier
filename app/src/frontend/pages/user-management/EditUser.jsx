@@ -115,7 +115,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
   return (
     <>
       <Transition appear show={modalState} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={handleClose}>
+        <Dialog as="div" className="relative z-10 inter" onClose={handleClose}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -125,7 +125,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-black bg-opacity-25 text-montserrat" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
@@ -142,7 +142,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
                 <Dialog.Panel className={modalContent1}>
                   <Dialog.Title
                     as="h3"
-                    className="font-montserrat ml-3 text-2xl font-black leading-6 text-gray-900 flex"
+                    className="ml-3 text-2xl leading-6 text-gray-900 flex"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -284,7 +284,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
                                         } // change handling
                                       />
                                       <button
-                                        className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-[0.9vw] text-gray-600 font-mono cursor-pointer account-button js-password-label w-[3vw] h-11/12"
+                                        className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-[0.9vw] text-gray-600  cursor-pointer account-button js-password-label w-[3vw] h-11/12"
                                         htmlFor="toggle"
                                         type="button"
                                         onClick={buttonHandler}
@@ -295,7 +295,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
                                     <Input
                                       labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
                                       labelVal="Password" // label text
-                                      inputStyle="rounded-lg text-center w-full h-[2.5vw] appearance-none border-2 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" // styling for input
+                                      inputStyle="rounded-lg text-center w-full h-[2.5vw] appearance-none border-2 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 js-password" // styling for input
                                       name="password" // name of label-input components
                                       inputType="password" // type of input password, email, text, etc.
                                       inputPlaceholder="*****" // placeholder text for input
@@ -317,7 +317,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
                           <div className="w-full flex">
                             <section className="my-auto ml-0 mr-auto w-[90.5%]">
                               <button
-                                className="inter w-2/5 h-[5vh] block ml-auto mr-auto bg-login-green text-white font-montserrat font-bold rounded-lg hover:bg-slate-200 user-btn text-[1vw]"
+                                className="inter w-2/5 h-[5vh] block ml-auto mr-auto bg-login-green text-white font-bold rounded-lg hover:bg-slate-200 user-btn text-[1vw]"
                                 type="button"
                                 onClick={edit_user}
                               >
