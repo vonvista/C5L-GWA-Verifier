@@ -359,8 +359,9 @@ Student.find(function(err, student) {
 
 exports.studentFindOne = function(req, res, next) {
 Student.findOne({StudentID:req.body.StudentID}, function(err, Student){
-  if(!err) {res.send(Student);}
-  else { res.send({err:'Unable to find student'}) }
+  if(Student) {res.send(Student);}
+  else if (err) { res.send({err: 'An error occured'}); }
+  else { res.send({err:'Unable to find student'}); }
 });
 }
 
