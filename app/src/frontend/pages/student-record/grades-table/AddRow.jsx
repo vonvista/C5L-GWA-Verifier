@@ -13,6 +13,8 @@ import './AddRow.css';
 /* Function for the "Add Row" feature in the Student View Record page */
 /* Initially shows an "Add" button and prompts the modal window after clicking it */
 const AddRow = ({ sem, grades, addHandler, histHandler }) => {
+
+
     const [openModal, setOpenModal] = useState(false);          // add row modal
     const [gradesData, setGradesData] = useState(grades);
     const [courseName, setCourseName] = useState('');
@@ -20,19 +22,28 @@ const AddRow = ({ sem, grades, addHandler, histHandler }) => {
     const [grade, setGrade] = useState('');
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
     const [studentID, setStudentID] = useState(localStorage.getItem("currStudentID"));
-    const [histTitle, setHistTitle] = useState('');             // value of history title
     const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
+    // const [histTitle, setHistTitle] = useState(''); // value of history title (might use later)
 
+  
     // checks if the course is already in the grade list
     function isGradeDuplicate(course){
+
+        // access each grades
         for(let i = 0; i < gradesData.length; i++){
+
+            // compare course name to courses in grades
             if(course == gradesData[i].courseName){
                 return true
             }
+
         }
+
         return false
     }
 
+  
+    // reset inpute fields called upon closing modal
     const resetInputFields = () => {
         setOpenModal(false);
         setCourseName('');
@@ -40,10 +51,14 @@ const AddRow = ({ sem, grades, addHandler, histHandler }) => {
         setGrade('');
     }
 
+    
     // function for adding new history after adding new row
+    // ..
+    // .. for revisions after adding Justification for AddRow
+    // ..
     function handleHistory(data){
 
-        // new history
+        // new history to save to db
         let newHistory = {
             User: userName,
             Student: studentID,
@@ -57,6 +72,7 @@ const AddRow = ({ sem, grades, addHandler, histHandler }) => {
             Details: `create student grade with Course: ${data.Course} on Sem: ${data.Semyear}`,
         }
 
+        // new history for history tab change handler
         let updateHistory = {
             date: newHistory.Date,
             info: [
@@ -69,15 +85,15 @@ const AddRow = ({ sem, grades, addHandler, histHandler }) => {
             ],
         }
 
+        // history handler
         histHandler(updateHistory);
-        // adds new row to the list
+
+        // adds new grade to list and updates row
         addHandler({
             _id : data._id,
             courseName: courseName,
             units: units,
             grade: grade,
-            //enrolled: (parseFloat(units) * parseFloat(grade)).toString(),
-            //runningSum: runningGWA,
         })
 
 
@@ -118,6 +134,9 @@ const AddRow = ({ sem, grades, addHandler, histHandler }) => {
             return
           }
         
+        // if course is already a duplicate 
+        // show alerts &
+        // returns to add row modal
         if(isGradeDuplicate(courseName)){
             Swal.fire({
                 icon: 'error',
@@ -127,7 +146,7 @@ const AddRow = ({ sem, grades, addHandler, histHandler }) => {
             return
         }
 
-        // new grade from the AddRow modal
+        // new grade from the AddRow fields to be added to DB
         newGrade = {
             Student: localStorage.getItem('currStudentID'),
             Course: courseName,
@@ -158,7 +177,8 @@ const AddRow = ({ sem, grades, addHandler, histHandler }) => {
                 })
                 console.log(err)
             })
-
+        
+        // close AddRow modal after 
         setOpenModal(false)
     }
 
