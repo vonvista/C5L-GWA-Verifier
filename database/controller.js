@@ -442,7 +442,7 @@ const historySchema = new Schema({
   Student: {type: String, required: true},
   Date : {type: String, required : true},
   Time : {type: String, required : true},
-  Description: {type: String, required : true, enum : ['create', 'read', 'update', 'delete']}, // short string ng change na nagyari
+  Description: {type: String, required : true},
   Details: {type: String, required : true}, // long string
 }, {autoCreate:true});
 
