@@ -2,6 +2,7 @@ import { Tab, Transition, Disclosure } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/solid';
 import { useState, useEffect, useRef, Fragment } from 'react';
 import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import Swal from 'sweetalert2';
 
 /* Components */
 import ActionsBtn from 'frontend/components/buttons/Dropdown';
@@ -14,6 +15,7 @@ import Table from './grades-table/TableContents';
 /* CSS */
 import 'tailwindcss/tailwind.css';
 import './StudentViewRecord.css';
+
 
 
 // This component contains all the elements of the student record page
@@ -36,16 +38,78 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const [gradeState, setGradeState] = useState(grades)
     const [notesState, setNotesState] = useState(notes)
     const [historyState, setHistoryState] = useState(history)
+    const [validationsState, setValidationsState] = useState(checklist)
     const [tabId, setTabId] = useState(0)
+    const [ip, setIP] = localStorage.getItem('ServerIP');
+
+    // validation functions
+
+    const handleValApply = () => {
+        console.log(ip)
+
+        sendVal = []
+        for (let i = 0; i < validationsState.length; i++) {
+            sendVal.push(validationsState[i].status)
+        }
+
+        console.log(sendVal)
+
+        const validations = {
+            Validations: sendVal,
+            _id: selectedStudent.Student
+        }
+        
+        fetch(`http://localhost:3001/student/update-validations`,{
+            method: "POST",
+            headers: { "Content-Type":"application/json" },
+            body: JSON.stringify(validations)
+            })
+        .then(response => response.json())
+        .then(body => {
+            console.log(body)
+            if(body.err){ //if error response returned from DB
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: body.err,
+                })
+            }
+            else { //success state
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Successfully updated validations!',
+                })
+
+            }
+        })
+        .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+            Swal.fire({
+                icon: 'error',
+                title: 'Server Error',
+                text: 'Check if the server is running or if database IP is correct',
+            })
+            console.log(err)
+        })
+        
+    }
+
+    const toggleValidation = (index) => {
+        let newValidation = validationsState
+        newValidation[index].status = !newValidation[index].status
+        setValidationsState([...newValidation])
+    }
 
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
         // uses components as values
         Status: <Status state={statusState} />,                     // status component
-        Validations: <CheckList checklistData={checklist} />,       //checklist component
+        Validations: <CheckList checklistData={validationsState} setValData={toggleValidation} handleApply={handleValApply}/>,       //checklist component
         Notes: <Notes notesData={notesState} semesters={gradeState} setNotesData={setNotesState} />,    // notes component
         History: <History historyData={historyState} />,            // history component
     }
+
+    
 
     const tabAnim = {
         hide: {
