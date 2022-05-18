@@ -41,6 +41,7 @@ const checklistDetails = [
   },
 ]
 
+
 // organize grades from database for RecordPage props
 function organizeGrades(data){
 
@@ -111,8 +112,8 @@ function organizeGrades(data){
       cumulative += weight
       total += parseFloat(finalGrades[i].data[j].units)
 
-      finalGrades[i].data[ j ].enrolled = weight.toString()
-      finalGrades[i].data[ j ].runningSum = cumulative.toString()
+      finalGrades[i].data[j].enrolled = weight.toString()
+      finalGrades[i].data[j].runningSum = cumulative.toString()
     }
 
     finalGrades[i].total = total
@@ -123,6 +124,7 @@ function organizeGrades(data){
   return finalGrades
 
 }
+
 
 // organize history from database for RecordPage props
 function organizeHistory(data){
@@ -173,7 +175,6 @@ function organizeHistory(data){
   }
   
   return finalHistory
-
 }
 
 export default function StudentRecord() { // this will probably transferred to another file but this stays here for now
@@ -207,6 +208,7 @@ export default function StudentRecord() { // this will probably transferred to a
 
   }, [])
 
+
   // fetch Student from database using Student Number
   const GetStudentInfo = () => {
 
@@ -226,16 +228,14 @@ export default function StudentRecord() { // this will probably transferred to a
       .then(response => response.json())
       .then(body => {
 
-        // // save to localStorage for exporting
-        // localStorage.setItem("currStudent", JSON.stringify(body))
-
         // save the following info to currUser
         currUser.stud_no = body.StudentID
         currUser.name = `${body.LastName}, ${body.FirstName} ${body.MiddleName}`
         currUser.degree_program = body.Degree
-        currUser.status = "Pending"
+        currUser.status = "Pending"          // revise later?
         currUser.Student = body._id
 
+        // set Student prop
         getStudentProp(currUser) // return student info from db
 
          //handle validations
@@ -266,16 +266,11 @@ export default function StudentRecord() { // this will probably transferred to a
     })
       .then(response => response.json())
       .then(body => {
-        //console.log(body)
-        // sort body ( sort by Year, Semester )
-        // const sortedGrades = body.sort( (x,y)=> (x.Semyear.localeCompare(y.Semyear)) )
-        
-        // save to localStorage for exporting grades
-        // localStorage.setItem("currStudentGrades", JSON.stringify(sortedGrades) )
         
         //organize the data for table contents
         const studentGrades = organizeGrades(body)
-        // console.log(studentGrades)
+        
+        // set Grades prop
         getGradesProp(studentGrades)
 
       })
@@ -288,6 +283,7 @@ export default function StudentRecord() { // this will probably transferred to a
         console.log(err)
       })
   }
+
 
   // fetch History from database using Student _id (PK)
   const GetStudentHistory = () => {
@@ -306,7 +302,8 @@ export default function StudentRecord() { // this will probably transferred to a
         // sort body ( sort by Date)
         // then organize the data for table contents
         const studentHistory = organizeHistory(body.sort((x,y)=> ( y.Date.localeCompare(x.r) )))
-        // console.log(studentHistory)
+
+        // set History props
         getHistoryProp(studentHistory)
 
       })
@@ -320,10 +317,9 @@ export default function StudentRecord() { // this will probably transferred to a
       })
   }
 
+
   // fetch History from database using Student _id (PK)
   const GetStudentNotes = () => {
-
-    var studentNotes = [] // store notes here
 
     // fetch notes by studentkey from db
     fetch(`http://${ip}:3001/note/find-by-student`, {
@@ -336,7 +332,7 @@ export default function StudentRecord() { // this will probably transferred to a
       .then(response => response.json())
       .then(body => {
 
-        // save notes from db to notesProp
+        // set Notes prop
         getNotesProp(body) 
         
       }).catch(err => { //will activate if DB is not reachable or timed out or there are other errors
@@ -348,48 +344,6 @@ export default function StudentRecord() { // this will probably transferred to a
         console.log(err)
       })
   }
-
-  // // update grade table on addrow, editrow, deleterow changes
-  // const setGrades = (values) => {
-
-  //   let grades = [...gradesProp]
-  //   let total = 0
-  //   let cumulative = 0
-  //   let weight = 0
-
-  //   // insert new values to grades
-  //   for (let i = 0; i < grades.length; i++){
-  //     if(grades[i].sem == values.sem){
-  //       //console.log(values)
-  //       grades[i] = values
-  //       break
-  //     }
-  //   }
-    
-
-  //   for (let i = 0; i < grades.length; i++){
-
-  //     for (let j = 0; j < grades[i].data.length; j++){
-
-  //       // compute total unit per sem, weight, and cumulative
-  //       weight = parseFloat(grades[i].data[j].units) * parseFloat(grades[i].data[j].grade)
-  //       if(isNaN(weight)){
-  //         weight = 0;
-  //       }
-  //       cumulative += weight
-  //       total += parseFloat(grades[i].data[j].units)
-
-  //       grades[i].data[j].enrolled = weight.toString()
-  //       grades[i].data[j].runningSum = cumulative.toString()
-  //     }
-
-  //     grades[i].total = total
-  //     total = 0
-  //   }
-  //   //console.log(grades)
-  //   // set new value of props
-  //   getGradesProp(grades)
-  // }
 
 
     return (
