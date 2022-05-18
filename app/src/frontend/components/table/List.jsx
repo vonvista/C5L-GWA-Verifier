@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Actions from '../buttons/Actions'
 import EditUser from 'frontend/pages/user-management/EditUser';
+import Add from 'frontend/components/buttons/AddRowBtn.jsx';
 import AddRow from 'frontend/pages/student-record/grades-table/AddRow';
 import ReadRow from 'frontend/pages/student-record/grades-table/ReadRow';
 import EditRow from 'frontend/pages/student-record/grades-table/EditRow';
@@ -29,6 +30,8 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
     // To be used for Student Record View Page
     const SemRecord = ({ total, sem, data, dataHandler, delHandler, histHandler, addHandler, historyHandler}) => {
 
+        const [openModal, setOpenModal] = useState(false);          // add row modal
+
         return (
             <>  
                 {/* Accordion contents */}
@@ -40,7 +43,12 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             <div className="table-cell w-1/6 text-center">Grade</div>
                             <div className="table-cell w-1/6 text-center">Cumulative</div>
                             <div className="table-cell w-1/6 text-center">Weight</div>
-                            <div className="table-cell w-1/6 text-center"><AddRow sem={sem} grades={data} addHandler={addHandler} histHandler={historyHandler}/></div>
+                            <div className="table-cell w-1/6 text-center">
+                                <Add handleClick={() => setOpenModal(true)}/>
+                                {openModal ? (
+                                    <AddRow sem={sem} grades={data} addHandler={addHandler} histHandler={historyHandler} modalState={true} handleClose={() => setOpenModal(false)}/>
+                                ): (<></>)}
+                            </div>
                         </div>
                     </div>
                     <div className="table-row-group">

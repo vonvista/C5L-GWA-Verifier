@@ -1,9 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { Dialog, Transition} from '@headlessui/react';
+import { Fragment, useEffect, useState } from 'react';
 import Swal from 'sweetalert2'
 
 /* Components */
-import Add from 'frontend/components/buttons/AddRowBtn.jsx';
+// import Add from 'frontend/components/buttons/AddRowBtn.jsx';
 import Justification from './Justification';
 
 /* CSS */
@@ -12,10 +13,9 @@ import './AddRow.css';
 
 /* Function for the "Add Row" feature in the Student View Record page */
 /* Initially shows an "Add" button and prompts the modal window after clicking it */
-const AddRow = ({ sem, grades, addHandler, histHandler }) => {
+const AddRow = ({ sem, grades, addHandler, histHandler, modalState, handleClose }) => {
 
 
-    const [openModal, setOpenModal] = useState(false);          // add row modal
     const [gradesData, setGradesData] = useState(grades);
     const [courseName, setCourseName] = useState('');
     const [units, setUnits] = useState('');
@@ -43,12 +43,14 @@ const AddRow = ({ sem, grades, addHandler, histHandler }) => {
     }
 
   
-    // reset inpute fields called upon closing modal
+    // reset input fields called upon closing modal
     const resetInputFields = () => {
-        setOpenModal(false);
         setCourseName('');
         setUnits('');
         setGrade('');
+
+        // Close add row modal
+        handleClose();
     }
 
     
@@ -178,70 +180,61 @@ const AddRow = ({ sem, grades, addHandler, histHandler }) => {
                 console.log(err)
             })
         
+        //reset input fields
+        resetInputFields();
         // close AddRow modal after 
-        setOpenModal(false)
+        handleClose();
     }
 
 
     return (
         <>
-            <Add handleClick={setOpenModal}/>
-            { openModal && (
-                <AnimatePresence>
-                    {/* Modal animations */}
-                    <motion.div 
-                        initial={{
-                            opacity: 0
-                        }}
-                        animate={{
-                            opacity: 1,
-                            transition: {
-                                duration: 0.2
-                            }
-                        }}
-                        exit={{
-                            opacity: 0,
-                            transition: {
-                                duration: 0.2
-                            }
-                        }}
-                        className='add-row-modal-backdrop'>
-                        <motion.div 
-                            initial={{
-                                scale: 0
-                            }}
-                            animate={{
-                                scale: 1,
-                                transition: {
-                                    duration: 0.2
-                                }
-                            }}
-                            exit={{
-                                scale: 0,
-                                transition: {
-                                    duration: 0.2
-                                }
-                            }}
+            {/* Wrapping everything with transition component to use transition effects from @headlessui/react */}
+            <Transition appear show={modalState} as={Fragment}>
 
-                            className='add-row-modal'>
-                                <motion.div className="add-row-modal-content">
-                                {/* Baybayin Background Image */}
-                                <motion.div className="bg-baybayin add-row-baybayin-style"></motion.div>
-
-                                {/* content */}
-                                <motion.div className='add-row-modal-body'>
+                {/* Wrapping everything with dialog component */}
+                <Dialog as="div" className="relative z-50" onClose={resetInputFields}>
+                    {/* Transition effect for the element inside this Transition.Child tag*/}
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        {/* Container for the layer behind the modal window */}
+                        <div className="fixed inset-0 bg-black bg-opacity-25" />
+                    </Transition.Child>
+                    
+                    {/* Container for the layer containing the modal window */}
+                    <div className="add-row-modal">
+                        {/* Transition effect for the element inside this Transition.Child tag*/}
+                        <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0 scale-95"
+                            enterTo="opacity-100 scale-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100 scale-100"
+                            leaveTo="opacity-0 scale-95"
+                        >
+                            {/* Add Row modal window */}
+                            <Dialog.Panel className="add-row-modal-content">
+                                <div className="bg-baybayin add-row-baybayin-style"></div>
+                                <div className='add-row-modal-body'>
                                     {/* title */}
-                                    <motion.div className='add-row-modal-close text-white float-right'>
+                                    <div className='add-row-modal-close text-white float-right'>
                                         <button onClick={resetInputFields}>
                                             <span>&times;</span>
                                         </button>
-                                    </motion.div>
-                                    <motion.div className='add-row-modal-title text-white text-center'>Please fill in the fields below to insert a new row</motion.div>
-
+                                    </div>
+                                    <div className='add-row-modal-title text-white text-center'>Please fill in the fields below to insert a new row</div>
                                     {/* input form */}
                                     <form className='add-row-modal-inputs flex items-center justify-center'>
                                         {/* course name */}
-                                        <motion.div className='add-row-input-container'>
+                                        <div className='add-row-input-container'>
                                             <section className='inline-block add-row-section-coursename'>
                                                 <input 
                                                     className='add-row-input-style'
@@ -250,12 +243,12 @@ const AddRow = ({ sem, grades, addHandler, histHandler }) => {
                                                     placeholder='Enter course name'
                                                     onChange={(e) => setCourseName(e.target.value)}
                                                 />
-                                                <motion.div className='w-full text-white text-center'>Course Name</motion.div>
+                                                <div className='w-full text-white text-center'>Course Name</div>
                                             </section>
-                                        </motion.div>
+                                        </div>
 
                                         {/* units */}
-                                        <motion.div className='add-row-input-container'>
+                                        <div className='add-row-input-container'>
                                             <section className='inline-block add-row-section-units'>
                                                 <input 
                                                     className='add-row-input-style'
@@ -264,12 +257,12 @@ const AddRow = ({ sem, grades, addHandler, histHandler }) => {
                                                     placeholder='0'
                                                     onChange={(e) => setUnits(e.target.value)}
                                                 />
-                                                <motion.div className='w-full text-white text-center'>Units</motion.div>
+                                                <div className='w-full text-white text-center'>Units</div>
                                             </section>
-                                        </motion.div>
+                                        </div>
 
                                         {/* grade */}
-                                        <motion.div className='add-row-input-container'>
+                                        <div className='add-row-input-container'>
                                             <section className='inline-block add-row-section-grade'>
                                                 <input 
                                                     className='add-row-input-style'
@@ -278,50 +271,21 @@ const AddRow = ({ sem, grades, addHandler, histHandler }) => {
                                                     placeholder='0'
                                                     onChange={(e) => setGrade(e.target.value)}
                                                 />
-                                                <motion.div className='w-full text-white text-center'>Grade</motion.div>
+                                                <div className='w-full text-white text-center'>Grade</div>
                                             </section>
-                                        </motion.div>
-
-                                        
-                                        {/* <motion.div className='add-row-input-container'>
-                                            <section className='inline-block add-row-section-enrolled'>
-                                                <input 
-                                                    className='add-row-input-style'
-                                                    type="number"
-                                                    name="enrolled"
-                                                    placeholder='0'
-                                                    onChange={(e) => setEnrolled(e.target.value)}
-                                                />
-                                                <motion.div className='w-full text-white text-center'>Enrolled</motion.div>
-                                            </section>
-                                        </motion.div>
-
-                                        
-                                        <motion.div className='add-row-input-container'>
-                                            <section className='inline-block add-row-section-runningGWA'>
-                                                <input 
-                                                    className='add-row-input-style'
-                                                    type="text"
-                                                    name="runningGWA"
-                                                    placeholder='0'
-                                                    onChange={(e) => setRunningGWA(e.target.value)}
-                                                />
-                                                <motion.div className='w-full text-white text-center'>Running GWA</motion.div>
-                                            </section>
-                                        </motion.div> */}
-
+                                        </div>
                                     </form>
                                     {/* save and discard buttons */}
-                                    <motion.div className='add-row-modal-footer flex items-end justify-end'>                                        
+                                    <div className='add-row-modal-footer flex items-end justify-end'>                                        
                                         <button className='add-row-modal-btn add-row-btn-discard text-center' onClick={resetInputFields}>Discard</button>
                                         <button className='add-row-modal-btn add-row-btn-save text-center text-white' onClick={handleAddGrade}>Save</button>
-                                    </motion.div>
-                                </motion.div>
-                            </motion.div>
-                        </motion.div>
-                    </motion.div>
-                </AnimatePresence>
-            )}
+                                    </div>
+                                </div>
+                            </Dialog.Panel>
+                        </Transition.Child>
+                    </div>
+                </Dialog>
+            </Transition>
         </>
     )
 }
