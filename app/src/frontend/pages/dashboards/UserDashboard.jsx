@@ -311,6 +311,7 @@ const UserDashboard = () => {
       1
     );
     setRows([...temp]);
+    setUnsortedRows([...temp]);
   };
 
   // Get current rows
