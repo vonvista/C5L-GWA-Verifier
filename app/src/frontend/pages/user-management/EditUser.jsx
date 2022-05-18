@@ -24,6 +24,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
   const [position, setPosition] = useState(editUser.Position); // username
   const [pw, setPW] = useState(''); // password
   const [status, setStatus] = useState('show');
+  const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
 
   // reference for password toggle: https://codepen.io/huphtur/pen/OKJJQY
   const buttonHandler = () => {
@@ -70,7 +71,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
         // Role: 'user',
     };
     console.log("here")
-    fetch(`http://localhost:3001/user/update`,{
+    fetch(`http://${ip}:3001/user/update`,{
         method: "POST",
         headers: { "Content-Type":"application/json" },
         body: JSON.stringify(credentials)

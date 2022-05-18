@@ -19,12 +19,13 @@ import Swal from 'sweetalert2'
 
 const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedSem, setSelectedSem, setTextArea, noteText, setNoteText, semesters }) => {
 
-    
-    // local storage using use state
+  
+    // local storage access using use state
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
     const [currStudentID, setStudentID] = useState(localStorage.getItem("currStudentID"));
+    const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
 
-
+  
     // Handler for changes in text area
     const handleChange = (event) => {
         setNoteText(event.target.value)
@@ -58,7 +59,7 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
 
                 // fetch post request to update note
                 // also includes adding new notes
-                fetch(`http://localhost:3001/note/update`, {
+                fetch(`http://${ip}:3001/note/update`, {
                     method: "POST",
                     headers: {
                     "Content-Type": "application/json",

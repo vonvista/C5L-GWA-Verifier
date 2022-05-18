@@ -14,10 +14,11 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
 
     
     // State that handles selection of sem notes; uses first object as default
-    const [selectedSem, setSelectedSem] = useState(semesters[0])
+    const [selectedSem, setSelectedSem] = useState(semesters[0]);
     const [currStudentID, setStudentID] = useState(localStorage.getItem("currStudentID"));
+    const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
 
-
+  
     // Handler for adding/editing notes
     const handleAddNote = (text) => {
         let currNotesList = [...notesData]      // make copy of current array of notes
@@ -58,8 +59,9 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
             Semyear: values.Semyear,
         }
 
+
         // fetch post request to delete note
-        fetch(`http://localhost:3001/note/delete`, {
+        fetch(`http://${ip}:3001/note/delete`, {
             method: "POST",
             headers: {
             "Content-Type": "application/json",

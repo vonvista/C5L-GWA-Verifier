@@ -39,7 +39,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const [historyState, setHistoryState] = useState(history)
     const [validationsState, setValidationsState] = useState(checklist)
     const [tabId, setTabId] = useState(0)
-    const [ip, setIP] = localStorage.getItem('ServerIP');
+    const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
 
     // validation functions
 
@@ -58,7 +58,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
             _id: selectedStudent.Student
         }
         
-        fetch(`http://localhost:3001/student/update-validations`,{
+        fetch(`http://${ip}:3001/student/update-validations`,{
             method: "POST",
             headers: { "Content-Type":"application/json" },
             body: JSON.stringify(validations)
