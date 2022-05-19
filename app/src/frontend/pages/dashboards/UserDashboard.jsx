@@ -192,17 +192,36 @@ const UserDashboard = () => {
   const [searchStudent, setSearchStudent] = useState('');
 
   const handleSearch = () => {
-    // console.log(searchStudent);
-    // Add code here to search student, fetch sa database, if wala sa DB, display student cannot be found,
-    // if nasa DB, go to record of student
 
-    // if di mahanap si student
+    let onList = false;
 
-    // Swal.fire({
-    //   icon: 'error',
-    //   title: 'Error',
-    //   text: 'Student does not exist',
-    // })
+    // check if search field is empty
+    if(searchStudent === ''){
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Search bar is empty',
+      })
+      return
+    }
+
+    // find student on list
+    for (let i = 0; i < rows.length; i++){
+      if (searchStudent == rows[i].studno){
+        onList = true
+      }
+    }
+
+    // if not on the list
+    // show swal error and does not proceed
+    if(!onList){
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Student does not exist',
+      })
+      return
+    }
 
     // if nahanap si student, go straight to record
 
@@ -222,10 +241,10 @@ const UserDashboard = () => {
         // will activate if DB is not reachable or timed out or there are other errors
         Swal.fire({
           icon: 'error',
-          title: 'Student does not exist',
-          text: 'Check if the student number entered is correct',
-        });
-        console.log(err);
+          title: 'Server Error',
+          text: 'Check if the server is running or if database IP is correct',
+        })
+        console.log(err)
       });
     setSearchStudent('');
   };
