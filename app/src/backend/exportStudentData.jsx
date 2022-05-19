@@ -59,25 +59,21 @@ function organizeRecord(info, grades){
     // reformat grades to be jspdf-autotable ready
     let reGrades = [];
     let totalUnits = 0;
-    //console.log(grades)
+    
     for (let i = 0; i < grades.length; i++){
+
         for (let j = 0; j < grades[i].data.length; j++){
+
             reGrades.push([
                 grades[i].data[j].courseName,
                 grades[i].data[j].grade,
                 grades[i].data[j].units,
                 grades[i].data[j].enrolled,
                 grades[i].data[j].runningSum,
-                // grades[i].data.Course, 
-                // grades[i].data.Grade, 
-                // grades[i].Unit, 
-                // grades[i].Weight, 
-                // grades[i].Cumulative, 
-                // '', 
-                // grades[i].Semyear
             ]);
 
-            if (grades[i].data[j].units != '0'){
+            
+            if (grades[i].data[j].grade != 'S' && grades[i].data[j].units != '0' && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP' && grades[i].data[j].grade != '0'){
                 totalUnits += parseFloat(grades[i].data[j].units)
             }
         }
@@ -88,15 +84,6 @@ function organizeRecord(info, grades){
     }
 
     let cumulative = parseFloat(reGrades[ reGrades.length - 1 ][4])
-    // // removes the duplicates on the last 2 columns
-    // for ( let i = 0 ; i < finalExportData.grades.length ; i++ ){
-    //     if (i + 1 != finalExportData.grades.length){
-    //         if (finalExportData.grades[i][6] == finalExportData.grades[i+1][6]){
-    //             finalExportData.grades[i][5] = ''
-    //             finalExportData.grades[i][6] = ''
-    //         }
-    //     }
-    // }
 
     // store grades
     finalExportData.grades = reGrades
@@ -104,57 +91,7 @@ function organizeRecord(info, grades){
     finalExportData.gwa = cumulative / totalUnits
 
     return finalExportData
-} 
-
-// // this function arranges the structure of the data for export
-// function arrangeForExport(data){
-
-//     // storage of data to be exported
-//     let finalExportData = {
-//         studentNo: data.studnno,
-//         name: data.name,
-//         program: "BACA",
-//         subjects: [],
-//         cumulative: data.cumulative[data.cumulative.length - 1],
-//         gwa: 1.74486, 
-//         totalunits: data.totalunits,
-//         totalunits2: data.totalunits,
-//     };
-
-//     // if student number is not specified
-//     if (data.studnno == null){
-//         finalExportData.studentNo = '' 
-//     }
-
-//     // restructures the subjects
-//     for (let i = 0; i < data.courses.length; i++){
-//         let temp = []
-//         temp.push(data.courses[i])
-//         temp.push(data.grades[i])
-//         temp.push(data.units[i])
-//         temp.push(data.weights[i])
-//         temp.push(data.cumulative[i])
-//         temp.push(data.term[i])
-//         temp.push(data.sem[i])
-//         finalExportData.subjects.push(temp)
-//     }
-
-//     // removes the duplicates on the last 2 columns
-//     for (let i = 0; i < finalExportData.subjects.length; i++){
-//         if (i + 1 != finalExportData.subjects.length){
-//             if (finalExportData.subjects[i][6] == finalExportData.subjects[i+1][6]){
-//                 finalExportData.subjects[i][5] = ''
-//                 finalExportData.subjects[i][6] = ''
-//             }
-//         }
-//     }
-
-//     // adds another row at the end of subject containg the totalunits and final cumulative
-//     finalExportData.subjects.push(['', finalExportData.totalunits, '', '', finalExportData.cumulative, '', ''])
-
-//     console.log(finalExportData)
-//     return finalExportData
-// }
+}
 
 // function to add user watermark to document
 function addWaterMark(doc, user) {

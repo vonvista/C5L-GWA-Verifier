@@ -195,8 +195,9 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                 weight = parseFloat(grades[i].data[j].units) * parseFloat(grades[i].data[j].grade)
 
                 // compute total untis earned
-                if(grades[i].data[j].grade != 'S'){
+                if(grades[i].data[j].units != "0" && grades[i].data[j].grade != "0" && grades[i].data[j].grade != 'S' && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP'){
                     finalTotal += parseFloat(grades[i].data[j].units)
+                    total += parseFloat(grades[i].data[j].units)
                 }
 
                 // if weight is a text then weight considered 0
@@ -228,9 +229,9 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                     }
                 }
 
-                // increment cumulative and total units per sem
+                // increment cumulative
                 cumulative += weight
-                total += parseFloat(grades[i].data[j].units)
+                
 
                 // store weight and cumulative
                 grades[i].data[j].enrolled = weight.toString()
