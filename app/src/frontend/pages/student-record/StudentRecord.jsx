@@ -240,7 +240,7 @@ export default function StudentRecord() { // this will probably transferred to a
         currUser.stud_no = body.StudentID
         currUser.name = `${body.LastName}, ${body.FirstName} ${body.MiddleName}`
         currUser.degree_program = body.Degree
-        currUser.status = body.Status          // revise later?
+        currUser.status = "Pending"          // revise later?
         currUser.Student = body._id
 
         // set Student prop
