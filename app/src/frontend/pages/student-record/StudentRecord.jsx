@@ -99,8 +99,9 @@ function organizeGrades(data){
       weight = parseFloat(finalGrades[i].data[j].units) * parseFloat(finalGrades[i].data[j].grade)
       
       // compute total units earned
-      if(finalGrades[i].data[j].grade != 'S'){
+      if(finalGrades[i].data[j].units != "0" && finalGrades[i].data[j].grade != "0" && finalGrades[i].data[j].grade != 'S' && finalGrades[i].data[j].grade != 'INC' && finalGrades[i].data[j].grade != 'DRP'){
         finalTotal += parseFloat(finalGrades[i].data[j].units)
+        total += parseFloat(finalGrades[i].data[j].units)
       }
       
       // if weight is a text then weight considered 0
@@ -132,9 +133,8 @@ function organizeGrades(data){
         }
       }
 
-      // increment total units per sem and cumulative
+      // increment cumulative
       cumulative += weight
-      total += parseFloat(finalGrades[i].data[j].units)
 
       // store computed weight and cumulative
       finalGrades[i].data[j].enrolled = weight.toString()
