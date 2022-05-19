@@ -49,7 +49,7 @@ const ExportFileBtn = ({ list }) => {
       // swal success message
       Swal.fire(
         'Successfully production of student summary!',
-        'If you pressed <save>, wait for your download to finish',
+        'If you pressed save, wait for your download to finish',
         'success'
       )
       
