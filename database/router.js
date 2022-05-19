@@ -3,7 +3,6 @@
  * File for the url routes for accessing the database functions
 */
 const controller = require('./controller');
-const {authRole} = require('./middleware')
 
 module.exports = (app) => {
 
@@ -33,25 +32,15 @@ module.exports = (app) => {
 
   
   // USER ROUTES
-  app.get('/user/find-all', authRole(["admin"]), controller.userFindAll);
-  app.post('/user/find', authRole(["admin"]), controller.userFind);
+  app.get('/user/find-all', controller.userFindAll);
+  app.post('/user/find', controller.userFind);
   app.post('/user/add', controller.userAdd);
 
-  app.delete('/user/delete', authRole(["admin"]), controller.userDelete);
-  app.delete('/user/delete-all', authRole(["admin"]),  controller.userDeleteAll);
+  app.delete('/user/delete', controller.userDelete);
+  app.delete('/user/delete-all',  controller.userDeleteAll);
   app.post('/user/update', controller.userUpdate);
 
   app.post('/user/login', controller.userLogin);
-
-  // app.get('/user/find-all', controller.userFindAll);
-  // app.post('/user/find', controller.userFind);
-  // app.post('/user/add', controller.userAdd);
-
-  // app.delete('/user/delete', controller.userDelete);
-  // app.delete('/user/delete-all',  controller.userDeleteAll);
-  // app.post('/user/update', controller.userUpdate);
-
-  // app.post('/user/login', controller.userLogin);
   
   // GRADE ROUTES
   app.get('/grade/find-all', controller.gradeFindAll);
