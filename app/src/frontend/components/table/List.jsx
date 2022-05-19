@@ -85,7 +85,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                             histHandler={histHandler}
                                             />
                                          :
-                                        <ReadRow data={course} clickHandler={toggleEdit} delHandler={delHandler}/>
+                                        <ReadRow data={course} clickHandler={toggleEdit} delHandler={delHandler} histHandler={histHandler} />
                                     }
                                 </Fragment>  
                             )
