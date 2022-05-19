@@ -98,11 +98,12 @@ function organizeGrades(data){
       // compute total unit per sem, weight, and cumulative
       weight = parseFloat(finalGrades[i].data[j].units) * parseFloat(finalGrades[i].data[j].grade)
       
+      // compute total units earned
       if(finalGrades[i].data[j].grade != 'S'){
         finalTotal += parseFloat(finalGrades[i].data[j].units)
       }
       
-      // if weight is a text
+      // if weight is a text then weight considered 0
       if(isNaN(weight)){
         weight = 0;
       }
@@ -140,6 +141,7 @@ function organizeGrades(data){
       finalGrades[i].data[j].runningSum = cumulative.toString()
     }
 
+    // store total per sem and reset
     finalGrades[i].total = total
     total = 0
   }
