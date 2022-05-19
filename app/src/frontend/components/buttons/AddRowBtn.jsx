@@ -140,20 +140,6 @@ const AddRowBtn = ({ sem, grades, addHandler, histHandler }) => {
 
     // handles adding grade to DB
     const handleAddGrade = () => {
-        // Check if user has filled out all fields
-        if(
-            courseName === "" || 
-            units === "" || 
-            grade === ""
-          ) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: 'Fill out all fields',
-            })
-            return
-          }
-        
         // if course is already a duplicate 
         // show alerts &
         // returns to add row modal
@@ -203,6 +189,20 @@ const AddRowBtn = ({ sem, grades, addHandler, histHandler }) => {
 
     /* Closes add row modal, opens justification modal */
     const handleSave = () => {
+      // Check if user has filled out all fields
+      if(
+        courseName === "" || 
+        units === "" || 
+        grade === ""
+      ) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Fill out all fields',
+        })
+        return
+      }
+      
       setIsOpen(false)   // closes add row modal
       setOpen(true)      // opens justification modal
     }
