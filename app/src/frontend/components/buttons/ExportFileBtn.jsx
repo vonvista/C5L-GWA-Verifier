@@ -48,8 +48,8 @@ const ExportFileBtn = ({ list }) => {
 
       // swal success message
       Swal.fire(
-        'Successfully imported student summary!',
-        'Wait for your download to finish',
+        'Successfully production of student summary!',
+        'If you pressed <save>, wait for your download to finish',
         'success'
       )
       

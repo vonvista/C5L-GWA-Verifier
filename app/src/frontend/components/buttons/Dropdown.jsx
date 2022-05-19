@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 import expand from '../../../../assets/icons/collapse(1).svg';
 import EditStudentDetails from 'frontend/pages/student-record/StudentDetailEditModal';
@@ -34,8 +35,8 @@ const Dropdown = ({ studentInfo, grades }) => {
 
     // swal success message
     Swal.fire(
-      'Successfully imported student summary!',
-      'Wait for your download to finish',
+      'Successful production of student record',
+      'If you pressed <save>, wait for your download to finish',
       'success'
     )
   }
