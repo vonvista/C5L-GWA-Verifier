@@ -11,6 +11,17 @@ const ExportFileBtn = ({ list }) => {
 
   const handleExport = async () => {
 
+    // does not proceed if no student in list
+    if (list.length <= 0){
+      // swal error message
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No student to be exported',
+      })
+      return
+    }
+
     // allows user to select the sort option using sweet alerts
     const { value: sortOption } = await Swal.fire({
       title: 'Select sort option of summary',
@@ -28,7 +39,8 @@ const ExportFileBtn = ({ list }) => {
       inputPlaceholder: 'Select sort option',
       showCancelButton: true,
     })
-    
+
+    // proceed after selecting sortOption
     if (sortOption) {
 
       // creates the pdf export file
