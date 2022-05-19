@@ -414,26 +414,44 @@ exports.studentAdd = function(req, res, next) {
 
 // update student
 exports.studentUpdateOne = function(req, res, next) {
-Student.updateOne({_id:mongoose.Types.ObjectId(req.body._id)},{"$set":{
-  "StudentNo.": req.body.StudentID,
-  "FirstName": req.body.FirstName,
-  "MiddleName": req.body.MiddleName,
-  "LastName": req.body.LastName,
-  "Degree": req.body.Degree,
-  "Course": req.body.Course,
-  "TotalUnits": req.body.TotalUnits,
-  "TotalUnits2": req.body.TotalUnits2,
-  "TotalCumulative": req.body.TotalCumulative,
-  "OverallGWA": req.body.OverallGWA,
-  "Status": req.body.Status
-}}, {new : true}, function(err,result){
-  if(!err && Student){
-    res.send(result);
-  } else {
-    res.send({err:'Unable to update student'});
-  }
-})
+  Student.updateOne({_id:mongoose.Types.ObjectId(req.body._id)},{"$set":{
+    "StudentNo.": req.body.StudentID,
+    "FirstName": req.body.FirstName,
+    "MiddleName": req.body.MiddleName,
+    "LastName": req.body.LastName,
+    "Degree": req.body.Degree,
+    "Course": req.body.Course,
+    "TotalUnits": req.body.TotalUnits,
+    "TotalUnits2": req.body.TotalUnits2,
+    "TotalCumulative": req.body.TotalCumulative,
+    "OverallGWA": req.body.OverallGWA,
+    "Status": req.body.Status
+  }}, {new : true}, function(err,result){
+    if(!err && Student){
+      res.send(result);
+    } else {
+      res.send({err:'Unable to update student'});
+    }
+  })
 }
+
+
+// update student cumulative, overallgwa, totalunits
+exports.studentUpdateGPA = function(req, res, next) {
+  console.log(req.body);
+  Student.updateOne({_id:mongoose.Types.ObjectId(req.body._id)},{"$set":{
+    "TotalUnits": req.body.TotalUnits,
+    "TotalCumulative": req.body.TotalCumulative,
+    "OverallGWA": req.body.OverallGWA,
+  }}, {new : true}, function(err,result){
+    if(!err && Student){
+      res.send(result);
+    } else {
+      res.send({err:'Unable to update student totalunits, cumulative, gwa'});
+    }
+  })
+}
+
 
 // delete student
 exports.studentDeleteOne = function(req, res, next) {
