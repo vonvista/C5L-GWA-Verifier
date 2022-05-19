@@ -37,7 +37,7 @@ const AddRowBtn = ({ sem, grades, addHandler, histHandler }) => {
 
     const closeModal = () => {
         setIsOpen(false)
-        openJust()
+        openJust()      // open justification window after closing add row modal window
     }
 
 
