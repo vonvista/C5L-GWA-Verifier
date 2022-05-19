@@ -22,6 +22,10 @@ import readInputFile from 'backend/read-input';
 import Swal from 'sweetalert2';
 
 const UserDashboard = () => {
+
+  // for navigating page on search bar and other
+  let navigate = useNavigate()
+
   const [rows, setRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
