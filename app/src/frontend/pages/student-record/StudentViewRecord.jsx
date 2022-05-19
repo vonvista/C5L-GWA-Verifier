@@ -14,6 +14,7 @@ import Table from './grades-table/TableContents';
 
 /* CSS */
 import 'tailwindcss/tailwind.css';
+import { toNamespacedPath } from 'node:path/win32';
 
 
 
@@ -28,7 +29,7 @@ import 'tailwindcss/tailwind.css';
 // -- checklist : list of requirements the student needs to accomplish before being verified
 // -- autoSet:
 
-const RecordPage = ({sem, user, student, notes, history, status, grades, checklist}) => {
+const RecordPage = ({sem, user, student, notes, history, status, grades, checklist, gwa1}) => {
 
     // pass details and other data through props to this component
     
@@ -40,6 +41,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const [validationsState, setValidationsState] = useState(checklist)
     const [tabId, setTabId] = useState(0)
     const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
+    const [gwa, setGWA] = useState(gwa1);
 
     // validation functions
 
@@ -102,7 +104,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
         // uses components as values
-        Status: <Status state={statusState} />,                     // status component
+        Status: <Status state={statusState} gwa={gwa} />,                     // status component
         Validations: <CheckList checklistData={validationsState} setValData={toggleValidation} handleApply={handleValApply}/>,       //checklist component
         Notes: <Notes notesData={notesState} semesters={gradeState} setNotesData={setNotesState} />,    // notes component
         History: <History historyData={historyState} />,            // history component
@@ -166,6 +168,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         let total = 0
         let cumulative = 0
         let weight = 0
+        let finalTotal = 0
 
         // insert new values to grades
         for (let i = 0; i < grades.length; i++){
@@ -181,21 +184,30 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
 
             for (let j = 0; j < grades[i].data.length; j++){
 
-            // compute total unit per sem, weight, and cumulative
-            weight = parseFloat(grades[i].data[j].units) * parseFloat(grades[i].data[j].grade)
-            if(isNaN(weight)){
-                weight = 0;
-            }
-            cumulative += weight
-            total += parseFloat(grades[i].data[j].units)
+                // compute total unit per sem, weight, and cumulative
+                weight = parseFloat(grades[i].data[j].units) * parseFloat(grades[i].data[j].grade)
 
-            grades[i].data[j].enrolled = weight.toString()
-            grades[i].data[j].runningSum = cumulative.toString()
+                if(grades[i].data[j].grade != 'S'){
+                    finalTotal += parseFloat(grades[i].data[j].units)
+                }
+
+                if(isNaN(weight)){
+                    weight = 0;
+                }
+
+                cumulative += weight
+                total += parseFloat(grades[i].data[j].units)
+
+                grades[i].data[j].enrolled = weight.toString()
+                grades[i].data[j].runningSum = cumulative.toString()
             }
+
 
             grades[i].total = total
             total = 0
         }
+        
+        setGWA(cumulative/finalTotal)
         //console.log(grades)
         // set new value of props
         setGradeState(grades)
