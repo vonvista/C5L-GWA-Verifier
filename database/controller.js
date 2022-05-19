@@ -230,7 +230,6 @@ exports.gradeAdd = function(req, res, next) {
     Semyear : req.body.Semyear,
   });
   console.log(newGrade);
-  
 
   newGrade.save(function(err) {
     if (!err) { res.send(newGrade)}
@@ -363,11 +362,29 @@ Student.find(function(err, student) {
 }
 
 exports.studentFindOne = function(req, res, next) {
-Student.findOne({StudentID:req.body.StudentID}, function(err, Student){
-  if(Student) {res.send(Student);}
-  else if (err) { res.send({err: 'An error occured'}); }
-  else { res.send({err:'Unable to find student'}); }
-});
+  Student.findOne({StudentID:req.body.StudentID}, function(err, Student){
+    if(Student) {
+      //update student status to 'Pending' if student status is 'unchecked' and send student object
+      if(Student.Status == 'Unchecked'){
+        Student.Status = 'Pending';
+        Student.save(function(err){
+          if(!err){
+            res.send(Student);
+          } else {
+            res.send({err:'Unable to update student status'});
+          }
+        })
+      } else {
+        res.send(Student);
+      }
+    }
+    else if (err) { 
+      res.send({err: 'An error occured'}); 
+    }
+    else { 
+      res.send({err:'Unable to find student'}); 
+    }
+  });
 }
 
 // add student
