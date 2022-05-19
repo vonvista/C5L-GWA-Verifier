@@ -42,6 +42,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const [tabId, setTabId] = useState(0)
     const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
     const [gpaCalc, setGPA] = useState(gpa);
+    const [currStudentID, setCurrStudentID] = useState(localStorage.getItem("currStudentID"))
 
     // validation functions
 
@@ -208,11 +209,37 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         }
 
         let gpaCalc = {totalGradePoints: cumulative, totalUnitsGPA: finalTotal, gwa: cumulative/finalTotal}
-
-        setGPA(gpaCalc)
-        //console.log(grades)
+        
         // set new value of props
+        setGPA(gpaCalc)
         setGradeState(grades)
+
+        // data to be sent to DB for update
+        let newGPA = {
+            _id: currStudentID,
+            TotalUnits: gpaCalc.totalUnitsGPA,
+            TotalCumulative: gpaCalc.totalGradePoints,
+            OverallGWA: gpaCalc.gwa
+        }
+        
+        // update student gpa to DB
+        fetch(`http://${ip}:3001/student/update-gpa`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newGPA)// use studentID to find student info
+            })
+            .then(response => response.json())
+            .then(body => console.log(body))
+            .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Server Error',
+                    text: 'Check if the server is running or if database IP is correct',
+                })
+                console.log(err)
+            })
     }
     
     // const histAdd = (histObj) => {
