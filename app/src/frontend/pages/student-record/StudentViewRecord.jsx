@@ -29,7 +29,7 @@ import { toNamespacedPath } from 'node:path/win32';
 // -- checklist : list of requirements the student needs to accomplish before being verified
 // -- autoSet:
 
-const RecordPage = ({sem, user, student, notes, history, status, grades, checklist, gwa1}) => {
+const RecordPage = ({sem, user, student, notes, history, status, grades, checklist, gpa}) => {
 
     // pass details and other data through props to this component
     
@@ -41,7 +41,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const [validationsState, setValidationsState] = useState(checklist)
     const [tabId, setTabId] = useState(0)
     const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
-    const [gwa, setGWA] = useState(gwa1);
+    const [gpaCalc, setGPA] = useState(gpa);
 
     // validation functions
 
@@ -104,7 +104,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
         // uses components as values
-        Status: <Status state={statusState} gwa={gwa} />,                     // status component
+        Status: <Status state={statusState} gpaCalc={gpaCalc} />,                     // status component
         Validations: <CheckList checklistData={validationsState} setValData={toggleValidation} handleApply={handleValApply}/>,       //checklist component
         Notes: <Notes notesData={notesState} semesters={gradeState} setNotesData={setNotesState} />,    // notes component
         History: <History historyData={historyState} />,            // history component
@@ -206,8 +206,10 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
             grades[i].total = total
             total = 0
         }
-        
-        setGWA(cumulative/finalTotal)
+
+        let gpaCalc = {totalGradePoints: cumulative, totalUnitsGPA: finalTotal, gwa: cumulative/finalTotal}
+
+        setGPA(gpaCalc)
         //console.log(grades)
         // set new value of props
         setGradeState(grades)

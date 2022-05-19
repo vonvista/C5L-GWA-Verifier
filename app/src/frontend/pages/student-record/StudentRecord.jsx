@@ -126,11 +126,14 @@ function organizeGrades(data){
     finalGrades[i].total = total
     total = 0
   }
+
+  let gpaCalc = {totalGradePoints: cumulative, totalUnitsGPA: finalTotal, gwa: cumulative/finalTotal}
+
+  // console.log(gpaCalc)
   // console.log(finalTotal)
   // console.log(cumulative)
   // console.log(finalGrades)
-  return [finalGrades, cumulative/finalTotal]
-
+  return [finalGrades, gpaCalc]
 }
 
 
@@ -198,7 +201,7 @@ export default function StudentRecord() { // this will probably transferred to a
   const [currStudentKey, setCurrStudentKey] = useState(localStorage.getItem("currStudentID"))
   const [userRole, setUserRole] = useState(localStorage.getItem("Role"))
   const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
-  const [gwa, setGWA] = useState();
+  const [gpaCalc, setGPA] = useState();
   // get Grades, Student, Notes, History from database
   useEffect(() => {
     const fetchData = async () => {
@@ -280,7 +283,7 @@ export default function StudentRecord() { // this will probably transferred to a
         
         // set Grades prop
         getGradesProp(studentGrades[0])
-        setGWA(studentGrades[1])
+        setGPA(studentGrades[1])
 
       })
       .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
@@ -358,7 +361,7 @@ export default function StudentRecord() { // this will probably transferred to a
     return (
 
       // checks if props are already fetched from the DB
-      (studentProp && notesProp && gradesProp && historyProp && gwa) ? 
+      (studentProp && notesProp && gradesProp && historyProp && gpaCalc) ? 
       <>
         <nav class="sticky z-10">
           {userRole == "user" ? <UserNav /> : <AdminNav />}
@@ -373,7 +376,7 @@ export default function StudentRecord() { // this will probably transferred to a
                   status={statusData}
                   grades={gradesProp} 
                   checklist={validationsProp} 
-                  gwa1={gwa}
+                  gpa={gpaCalc}
                   // autoSet={setGrades}
                 />
             </div>
