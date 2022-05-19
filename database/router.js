@@ -39,11 +39,10 @@ module.exports = (app) => {
   app.post('/user/add', controller.userAdd);
 
   app.delete('/user/delete', controller.userDelete);
-  app.delete('/user/delete-all', controller.userDeleteAll);
+  app.delete('/user/delete-all',  controller.userDeleteAll);
   app.post('/user/update', controller.userUpdate);
 
   app.post('/user/login', controller.userLogin);
-
   
   // GRADE ROUTES
   app.get('/grade/find-all', controller.gradeFindAll);
