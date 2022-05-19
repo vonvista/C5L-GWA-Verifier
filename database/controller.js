@@ -230,7 +230,6 @@ exports.gradeAdd = function(req, res, next) {
     Semyear : req.body.Semyear,
   });
   console.log(newGrade);
-  
 
   newGrade.save(function(err) {
     if (!err) { res.send(newGrade)}
@@ -363,11 +362,29 @@ Student.find(function(err, student) {
 }
 
 exports.studentFindOne = function(req, res, next) {
-Student.findOne({StudentID:req.body.StudentID}, function(err, Student){
-  if(Student) {res.send(Student);}
-  else if (err) { res.send({err: 'An error occured'}); }
-  else { res.send({err:'Unable to find student'}); }
-});
+  Student.findOne({StudentID:req.body.StudentID}, function(err, Student){
+    if(Student) {
+      //update student status to 'Pending' if student status is 'unchecked' and send student object
+      if(Student.Status == 'Unchecked'){
+        Student.Status = 'Pending';
+        Student.save(function(err){
+          if(!err){
+            res.send(Student);
+          } else {
+            res.send({err:'Unable to update student status'});
+          }
+        })
+      } else {
+        res.send(Student);
+      }
+    }
+    else if (err) { 
+      res.send({err: 'An error occured'}); 
+    }
+    else { 
+      res.send({err:'Unable to find student'}); 
+    }
+  });
 }
 
 // add student
@@ -445,7 +462,32 @@ exports.studentUpdateValidations = function(req, res, next) {
     "Validations": req.body.Validations
   }}, {new : true}, function(err,result){
     if(!err && Student){
-      res.send(result);
+      //check if all validations are true
+      var allTrue = true;
+      for(var i = 0; i < req.body.Validations.length; i++){
+        if(req.body.Validations[i] == false){
+          allTrue = false;
+        }
+      }
+      if(allTrue){
+        Student.updateOne({_id: mongoose.Types.ObjectId(req.body._id)},{"$set":{
+          "Status": 'Checked'
+        }}, {new : true}, function(err,result){
+          if(!err && Student){
+            res.send(result);
+          }
+        });
+      }
+      else {
+        Student.updateOne({_id: mongoose.Types.ObjectId(req.body._id)},{"$set":{
+          "Status": 'Pending'
+        }}, {new : true}, function(err,result){
+          if(!err && Student){
+            res.send(result);
+          }
+        });
+      }
+      
     } else {
       res.send({err:'Unable to update student'});
     }
