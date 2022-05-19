@@ -34,43 +34,44 @@ const UserDashboard = () => {
   const [sortState, setSortState] = useState([0, 0, 0, 0]);
   const [latestSort, setLatestSort] = useState(-1);
 
-  const navigate = useNavigate();
+  const fetchData = async () => {
+    // Retrieve data from database
+    fetch(`http://${ip}:3001/student/find-all`)
+      .then((response) => response.json())
+      .then(async (body) => {
+        const studentsData = []; // initiating array that will contain the information of students
+        // mapping out all the entries sent by the fetch
+        body.map((student, i) => {
+          studentsData.unshift({
+            name: `${student.FirstName} ${student.LastName}`,
+            studno: student.StudentID,
+            degprog: student.Degree,
+            gwa: student.OverallGWA,
+            status: student.Status,
+            _id: student._id,
+          });
+        });
+
+        await setRows([...studentsData]);
+        await setUnsortedRows([...studentsData]);
+      })
+      .catch((err) => {
+        // will activate if DB is not reachable or timed out or there are other errors
+        Swal.fire({
+          icon: 'error',
+          title: 'Server Error',
+          text: 'Check if the server is running or if database IP is correct',
+        });
+        console.log(err);
+      });
+  }
 
 
+  const forceReload = () => {
+    fetchData();
+  };
   
   useEffect(() => {
-    const fetchData = async () => {
-      // Retrieve data from database
-      fetch(`http://${ip}:3001/student/find-all`)
-        .then((response) => response.json())
-        .then(async (body) => {
-          const studentsData = []; // initiating array that will contain the information of students
-          // mapping out all the entries sent by the fetch
-          body.map((student, i) => {
-            studentsData.unshift({
-              name: `${student.FirstName} ${student.LastName}`,
-              studno: student.StudentID,
-              degprog: student.Degree,
-              gwa: student.OverallGWA,
-              status: student.Status,
-              _id: student._id,
-            });
-          });
-
-          await setRows(studentsData);
-          await setUnsortedRows(studentsData);
-        })
-        .catch((err) => {
-          // will activate if DB is not reachable or timed out or there are other errors
-          Swal.fire({
-            icon: 'error',
-            title: 'Server Error',
-            text: 'Check if the server is running or if database IP is correct',
-          });
-          console.log(err);
-        });
-    };
-
     fetchData();
   }, []);
 
@@ -269,7 +270,7 @@ const UserDashboard = () => {
               </div>
               {/* Refresh button */}
               <div className="flex items-center ml-2">
-                <Refresh handleClick={() => navigate('/user-dashboard')} />
+                <Refresh handleClick={forceReload} />
               </div>
             </div>
             <div className="table-container">
