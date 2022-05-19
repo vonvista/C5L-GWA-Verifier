@@ -36,7 +36,7 @@ const Dropdown = ({ studentInfo, grades }) => {
     // swal success message
     Swal.fire(
       'Successful production of student record',
-      'If you pressed <save>, wait for your download to finish',
+      'If you pressed save, wait for your download to finish',
       'success'
     )
   }
