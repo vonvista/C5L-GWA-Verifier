@@ -1,10 +1,10 @@
-import Actions from 'frontend/components/buttons/Actions'
+import Actions from 'frontend/components/buttons/ActionsJustification'
 
 // component that displays a static view of the data in the row the grades table
 // -- data : contains data to be displayed
 // -- clickHandler : handles toggle for editing the row
 // -- delRow : handles toggle for deleting the row
-const ReadRow = ({data, clickHandler, delHandler}) => {
+const ReadRow = ({data, clickHandler, delHandler, histHandler}) => {
 
     const delRow = () => { 
         // function for deletingRow
@@ -19,7 +19,7 @@ const ReadRow = ({data, clickHandler, delHandler}) => {
             <div className="table-cell align-middle self-center text-sr-dark-text text-center">{data.enrolled}</div>
             <div className="table-cell align-middle self-center text-sr-dark-text text-center">{data.runningSum}</div>
             <div className="table-cell align-middle self-center text-sr-dark-text text-center">
-                <Actions handleEdit={clickHandler} handleDelete={delRow}/>
+                <Actions handleEdit={clickHandler} handleDelete={delRow} handleHist={histHandler} />
             </div>
         </div>
     );

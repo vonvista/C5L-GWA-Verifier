@@ -1,6 +1,7 @@
 import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/solid'
 import { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 
 import List from 'frontend/components/table/List';
 import 'tailwindcss/tailwind.css';
@@ -38,6 +39,13 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         newSemData[targetIndex] = values
         autoSet({sem:Name, data:newSemData})
         semHandler(newSemData)
+
+        // success message
+        Swal.fire({
+            title: 'Success',
+            text: 'Successfully added row',
+            icon: 'success',
+        })
     }
 
 
@@ -99,6 +107,13 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
 
         autoSet({sem:Name, data:newSemData})
         semHandler(newSemData)
+
+        // success message
+        Swal.fire({
+            title: 'Success',
+            text: 'Successfully modified row',
+            icon: 'success',
+        })
     }
 
     const setHistory = (detailsObj) => { // logs action of editing a row to history
@@ -147,13 +162,20 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
 
         autoSet({sem:Name, data:newSemData})
         semHandler(newSemData)
+
+        // success message
+        Swal.fire({
+            title: 'Success',
+            text: 'Successfully deleted row',
+            icon: 'success',
+        })
     }
 
     return (
         <>
             {/* Accordion for the table */}
             <div className="row-span-1">
-                <Disclosure key={key}>
+                <Disclosure key={key} defaultOpen>
                     {({ open }) => (
                         <>
                              {/* Accordion Header */}
