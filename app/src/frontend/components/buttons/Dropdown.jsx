@@ -31,7 +31,13 @@ const Dropdown = ({ studentInfo, grades }) => {
     const studentGrades = grades
 
     exportStudentData(student, studentGrades, currUser);
-    
+
+    // swal success message
+    Swal.fire(
+      'Successfully imported student summary!',
+      'Wait for your download to finish',
+      'success'
+    )
   }
 
 
