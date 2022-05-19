@@ -30,6 +30,7 @@ module.exports = (app) => {
   app.post('/student/update', controller.studentUpdateOne);
   app.delete('/student/delete', controller.studentDeleteOne);
   app.post('/student/update-validations', controller.studentUpdateValidations);
+  app.post('/student/update-gpa', controller.studentUpdateGPA);
 
   
   // USER ROUTES
