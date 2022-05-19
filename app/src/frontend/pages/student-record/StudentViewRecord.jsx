@@ -145,7 +145,11 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         for (let i = 0; i < history.length; i++){
             if(history[i].date == histObj.date){
                 //console.log(values)
+                console.log(history[i])
+                console.log(history[i].info)
+                // console.log(histObj)
                 history[i].info.unshift(histObj.info[0])
+                
                 break
             }
 
