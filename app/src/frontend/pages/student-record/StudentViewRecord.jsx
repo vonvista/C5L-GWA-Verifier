@@ -171,6 +171,11 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         let weight = 0
         let finalTotal = 0
 
+        let tunitTotal = 0;
+        let punitTotal = 0;
+        let tnunitTotal = 0;
+        let pnunitTotal = 0;
+
         // insert new values to grades
         for (let i = 0; i < grades.length; i++){
             if(grades[i].sem == values.sem){
@@ -196,6 +201,26 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                     weight = 0;
                 }
 
+                if(grades[i].data[j].units != "0" && grades[i].data[j].grade != 'S') {
+                    tunitTotal += parseFloat(grades[i].data[j].units)
+                  } 
+            
+                  if(grades[i].data[j].units != "0") {
+                    if(grades[i].data[j].grade != "0" && grades[i].data[j].grade != 'S' && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP') {
+                      punitTotal += parseFloat(grades[i].data[j].units)
+                    } 
+                  }
+            
+                  if(grades[i].data[j].units == "0") {
+                    tnunitTotal += 3;
+                  }
+            
+                  if(grades[i].data[j].units == "0") {
+                    if(grades[i].data[j].grade != "0" && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP') {
+                      pnunitTotal += 3;
+                    }
+                  }
+
                 cumulative += weight
                 total += parseFloat(grades[i].data[j].units)
 
@@ -208,11 +233,13 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
             total = 0
         }
 
+        let unitsGPA = {GPAUnits: {taken: tunitTotal, passed: punitTotal}, NotGPAUnits: {taken: tnunitTotal, passed: pnunitTotal}}
         let gpaCalc = {totalGradePoints: cumulative, totalUnitsGPA: finalTotal, gwa: cumulative/finalTotal}
         
         // set new value of props
         setGPA(gpaCalc)
         setGradeState(grades)
+        setStatus(unitsGPA)
 
         // data to be sent to DB for update
         let newGPA = {

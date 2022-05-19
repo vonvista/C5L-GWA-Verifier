@@ -51,7 +51,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                 ({units}) => isRequired(units) || {units: 'Please fill out'},
                                 ({units}) => !isNaN(units) || {units: 'Invalid value'},
                                 ({grade}) => isRequired(grade) || {grade: 'This is required'},
-                                ({grade}) => !isNaN(grade) || {grade: 'Invalid value'},
+                                //({grade}) => !isNaN(grade) || {grade: 'Invalid value'},
                             ]
                             
                             // State and hook to handle inline editing of data

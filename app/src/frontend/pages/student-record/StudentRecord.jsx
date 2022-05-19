@@ -7,16 +7,16 @@ import Swal from 'sweetalert2';
 
 const statusData = {
   GPAUnits: {
-      taken: 33.000,
-      passed: 33.000
+      taken: 0.000,
+      passed: 0.000
   },
   NotGPAUnits: {
-      taken: 33.000,
-      passed: 33.000
+      taken: 0.000,
+      passed: 0.000
   },
   GPACalc: {
-      totalGradePoints: 33.000,
-      totalUnitsGPA: 33.000,
+      totalGradePoints: 0.000,
+      totalUnitsGPA: 0.000,
       totalGWA: 1.000
   }
 }
@@ -58,6 +58,11 @@ function organizeGrades(data){
   let cumulative = 0
   let total = 0
   let finalTotal = 0;
+  
+  let tunitTotal = 0;
+  let punitTotal = 0;
+  let tnunitTotal = 0;
+  let pnunitTotal = 0;
 
   // loop for organizing data from db
   for ( let i = 0 ; i < data.length ; i++ ){
@@ -116,6 +121,26 @@ function organizeGrades(data){
         weight = 0;
       }
 
+      if(finalGrades[i].data[j].units != "0" && finalGrades[i].data[j].grade != 'S') {
+        tunitTotal += parseFloat(finalGrades[i].data[j].units)
+      } 
+
+      if(finalGrades[i].data[j].units != "0") {
+        if(finalGrades[i].data[j].grade != "0" && finalGrades[i].data[j].grade != 'S' && finalGrades[i].data[j].grade != 'INC' && finalGrades[i].data[j].grade != 'DRP') {
+          punitTotal += parseFloat(finalGrades[i].data[j].units)
+        } 
+      }
+
+      if(finalGrades[i].data[j].units == "0") {
+        tnunitTotal += 3;
+      }
+
+      if(finalGrades[i].data[j].units == "0") {
+        if(finalGrades[i].data[j].grade != "0" && finalGrades[i].data[j].grade != 'INC' && finalGrades[i].data[j].grade != 'DRP') {
+          pnunitTotal += 3;
+        }
+      }
+
       cumulative += weight
       total += parseFloat(finalGrades[i].data[j].units)
 
@@ -127,13 +152,14 @@ function organizeGrades(data){
     total = 0
   }
 
+  let unitsGPA = {GPAUnits: {taken: tunitTotal, passed: punitTotal}, NotGPAUnits: {taken: tnunitTotal, passed: pnunitTotal}}
   let gpaCalc = {totalGradePoints: cumulative, totalUnitsGPA: finalTotal, gwa: cumulative/finalTotal}
 
   // console.log(gpaCalc)
   // console.log(finalTotal)
   // console.log(cumulative)
   // console.log(finalGrades)
-  return [finalGrades, gpaCalc]
+  return [finalGrades, gpaCalc, unitsGPA]
 }
 
 
@@ -202,6 +228,8 @@ export default function StudentRecord() { // this will probably transferred to a
   const [userRole, setUserRole] = useState(localStorage.getItem("Role"))
   const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
   const [gpaCalc, setGPA] = useState();
+  const [unitGPA, setunitGPA] = useState();
+    
   // get Grades, Student, Notes, History from database
   useEffect(() => {
     const fetchData = async () => {
@@ -243,7 +271,7 @@ export default function StudentRecord() { // this will probably transferred to a
         currUser.stud_no = body.StudentID
         currUser.name = `${body.LastName}, ${body.FirstName} ${body.MiddleName}`
         currUser.degree_program = body.Degree
-        currUser.status = "Pending"          // revise later?
+        currUser.status = body.Status          
         currUser.Student = body._id
 
         // set Student prop
@@ -284,6 +312,9 @@ export default function StudentRecord() { // this will probably transferred to a
         // set Grades prop
         getGradesProp(studentGrades[0])
         setGPA(studentGrades[1])
+        console.log(studentGrades[2])
+        setunitGPA(studentGrades[2])
+                     
 
       })
       .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
@@ -361,7 +392,7 @@ export default function StudentRecord() { // this will probably transferred to a
     return (
 
       // checks if props are already fetched from the DB
-      (studentProp && notesProp && gradesProp && historyProp && gpaCalc) ? 
+      (studentProp && notesProp && gradesProp && historyProp && gpaCalc && unitGPA) ? 
       <>
         <nav class="sticky z-10">
           {userRole == "user" ? <UserNav /> : <AdminNav />}
@@ -373,7 +404,7 @@ export default function StudentRecord() { // this will probably transferred to a
                   student={studentProp}
                   notes={notesProp}
                   history={historyProp}
-                  status={statusData}
+                  status={unitGPA}
                   grades={gradesProp} 
                   checklist={validationsProp} 
                   gpa={gpaCalc}
