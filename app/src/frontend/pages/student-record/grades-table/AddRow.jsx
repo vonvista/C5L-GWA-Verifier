@@ -10,21 +10,8 @@ import Justification from './Justification';
 /* CSS */
 import 'tailwindcss/tailwind.css';
 
-/* Styling */
-const addRowModal = `bg-secondary-red h-[36.70360110803324vh] w-[49.479166666666664vw] rounded-[3.2552083333333335vw] px-[3.2552083333333335vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
-const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[36.70360110803324vh]`;
-const modalBody = `absolute inset-x-0 bg-secondary-red top-[10%] bottom-[10%]`;
-const modalClose = `text-[4.847645429362881vh] text-white float-right`;
-const modalTitle = `text-white text-center font-bold italic text-[1.3020833333333333vw] mt-[4.1551246537396125vh] mb-[4.847645429362881vh]`;
-const modalInputs = `text-[1.1067708333333333vw] flex items-center justify-center`;
-const inputContainer = `ml-5 mr-[0.9765625vw]`;
-const inputStyle = `text-center w-full h-[4.847645429362881vh] rounded-[0.6510416666666666vw]`
-const sectionCoursename = `inline-block w-[11.71875vw]`;
-const sectionUnits = `inline-block w-[3.90625vw]`;
-const sectionGrade = `inline-block w-[4.8828125vw]`;
-const modalFooter = `absolute right-0 bottom-0 mt-[4.847645429362881vh] text-[1.1067708333333333vw] flex items-end justify-end`;
-const modalBtnSave = `h-[5.54016620498615vh] w-[9.765625vw] py-[0.6510416666666666vw] px-[1.770083102493075vh] rounded-[0.6510416666666666vw] mr-[0.6510416666666666vw] bg-save hover:bg-save-hover text-center text-white`;
-const modalBtnDiscard = `h-[5.54016620498615vh] w-[9.765625vw] py-[0.6510416666666666vw] px-[1.770083102493075vh] rounded-[0.6510416666666666vw] mr-[0.6510416666666666vw] bg-discard hover:bg-white text-center`;
+
+// Parent component >> AddRowBtn.jsx
 
 // For disabling up-down arrows in input number textfield
 const inputs = 
@@ -38,10 +25,10 @@ const inputs =
         -moz-appearance: textfield;
     }`;
 
+
 /* Function for the "Add Row" feature in the Student View Record page */
 /* Initially shows an "Add" button and prompts the modal window after clicking it */
-const AddRow = ({ sem, grades, addHandler, histHandler, modalState, handleClose }) => {
-
+const AddRow = ({ sem, grades, addHandler, histHandler, modalState, modalHandler }) => {
 
     const [gradesData, setGradesData] = useState(grades);
     const [courseName, setCourseName] = useState('');
@@ -63,7 +50,6 @@ const AddRow = ({ sem, grades, addHandler, histHandler, modalState, handleClose 
             if(course == gradesData[i].courseName){
                 return true
             }
-
         }
 
         return false
@@ -77,7 +63,7 @@ const AddRow = ({ sem, grades, addHandler, histHandler, modalState, handleClose 
         setGrade('');
 
         // Close add row modal
-        handleClose();
+        // modalHandler();
     }
 
     
@@ -210,17 +196,39 @@ const AddRow = ({ sem, grades, addHandler, histHandler, modalState, handleClose 
         //reset input fields
         resetInputFields();
         // close AddRow modal after 
-        handleClose();
+        modalHandler();
     }
+
+
+    // Styling
+    const addRowModal = `relative bg-secondary-red h-[36.70360110803324vh] w-[49.479166666666664vw] rounded-[3.2552083333333335vw] px-[3.2552083333333335vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
+    const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[36.70360110803324vh]`;
+    const modalBody = `absolute inset-x-0 bg-secondary-red top-[10%] bottom-[10%]`;
+    const modalClose = `text-[4.847645429362881vh] text-white float-right`;
+    const modalTitle = `text-white text-center font-bold italic text-[1.3020833333333333vw] mt-[4.1551246537396125vh] mb-[4.847645429362881vh]`;
+    const modalInputs = `text-[1.1067708333333333vw] flex items-center justify-center`;
+    const inputContainer = `ml-5 mr-[0.9765625vw]`;
+    const inputStyle = `text-center w-full h-[4.847645429362881vh] rounded-[0.6510416666666666vw]`
+    const sectionCoursename = `inline-block w-[11.71875vw]`;
+    const sectionUnits = `inline-block w-[3.90625vw]`;
+    const sectionGrade = `inline-block w-[4.8828125vw]`;
+    const modalFooter = `absolute right-0 bottom-0 mt-[4.847645429362881vh] text-[1.1067708333333333vw] flex items-end justify-end`;
+    const modalBtnSave = `h-[5.54016620498615vh] w-[9.765625vw] py-[0.6510416666666666vw] px-[1.770083102493075vh] rounded-[0.6510416666666666vw] mr-[0.6510416666666666vw] bg-save hover:bg-save-hover text-center text-white`;
+    const modalBtnDiscard = `h-[5.54016620498615vh] w-[9.765625vw] py-[0.6510416666666666vw] px-[1.770083102493075vh] rounded-[0.6510416666666666vw] mr-[0.6510416666666666vw] bg-discard hover:bg-white text-center`;
 
 
     return (
         <>
+            {/* <Justification modalState={open} modalHandler={closeJust} parentSubmitHandler={handleAddGrade} histHandler={histHandler} /> */}
+
             {/* Wrapping everything with transition component to use transition effects from @headlessui/react */}
             <Transition appear show={modalState} as={Fragment}>
+
                 {/* Wrapping everything with dialog component */}
                 <Dialog as="div" className="relative z-50" onClose={resetInputFields}>
+
                     <style>{inputs}</style>
+
                     {/* Transition effect for the element inside this Transition.Child tag*/}
                     <Transition.Child
                         as={Fragment}
@@ -236,7 +244,8 @@ const AddRow = ({ sem, grades, addHandler, histHandler, modalState, handleClose 
                     </Transition.Child>
                     
                     {/* Container for the layer containing the modal window */}
-                    <div className={addRowModal}>
+                    <div className="fixed inset-0 overflow-y-auto flex min-h-full items-center justify-center p-4 text-center">
+
                         {/* Transition effect for the element inside this Transition.Child tag*/}
                         <Transition.Child
                             as={Fragment}
@@ -248,18 +257,22 @@ const AddRow = ({ sem, grades, addHandler, histHandler, modalState, handleClose 
                             leaveTo="opacity-0 scale-95"
                         >
                             {/* Add Row modal window */}
-                            <Dialog.Panel className="relative">
+                            <Dialog.Panel className={addRowModal}>
                                 <div className={baybayinStyle}></div>
                                 <div className={modalBody}>
+
                                     {/* title */}
                                     <div className={modalClose}>
                                         <button onClick={resetInputFields}>
                                             <span>&times;</span>
                                         </button>
                                     </div>
+
                                     <div className={modalTitle}>Please fill in the fields below to insert a new row</div>
+
                                     {/* input form */}
                                     <form className={modalInputs}>
+
                                         {/* course name */}
                                         <div className={inputContainer}>
                                             <section className={sectionCoursename}>
@@ -302,6 +315,7 @@ const AddRow = ({ sem, grades, addHandler, histHandler, modalState, handleClose 
                                             </section>
                                         </div>
                                     </form>
+
                                     {/* save and discard buttons */}
                                     <div className={modalFooter}>                                        
                                         <button className={modalBtnDiscard} onClick={resetInputFields}>Discard</button>
