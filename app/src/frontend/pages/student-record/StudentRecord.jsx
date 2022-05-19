@@ -5,22 +5,6 @@ import AdminNav from 'frontend/components/common/AdminNavigation';
 import RecordPage from './StudentViewRecord';
 import Swal from 'sweetalert2';
 
-const statusData = {
-  GPAUnits: {
-      taken: 0.000,
-      passed: 0.000
-  },
-  NotGPAUnits: {
-      taken: 0.000,
-      passed: 0.000
-  },
-  GPACalc: {
-      totalGradePoints: 0.000,
-      totalUnitsGPA: 0.000,
-      totalGWA: 1.000
-  }
-}
-
 // values for checklist details
 const checklistDetails = [
   {
@@ -59,6 +43,7 @@ function organizeGrades(data){
   let total = 0
   let finalTotal = 0;
   
+  // for computation of GPA and non-GPA units
   let tunitTotal = 0;
   let punitTotal = 0;
   let tnunitTotal = 0;
@@ -117,33 +102,40 @@ function organizeGrades(data){
         finalTotal += parseFloat(finalGrades[i].data[j].units)
       }
       
+      // if weight is a text
       if(isNaN(weight)){
         weight = 0;
       }
 
+      // computation of taken GPA units
       if(finalGrades[i].data[j].units != "0" && finalGrades[i].data[j].grade != 'S') {
         tunitTotal += parseFloat(finalGrades[i].data[j].units)
       } 
 
+      // computation of passed GPA units
       if(finalGrades[i].data[j].units != "0") {
         if(finalGrades[i].data[j].grade != "0" && finalGrades[i].data[j].grade != 'S' && finalGrades[i].data[j].grade != 'INC' && finalGrades[i].data[j].grade != 'DRP') {
           punitTotal += parseFloat(finalGrades[i].data[j].units)
         } 
       }
 
+      // computation of taken non-GPA units
       if(finalGrades[i].data[j].units == "0") {
         tnunitTotal += 3;
       }
 
+      // computation of passed non-GPA units
       if(finalGrades[i].data[j].units == "0") {
         if(finalGrades[i].data[j].grade != "0" && finalGrades[i].data[j].grade != 'INC' && finalGrades[i].data[j].grade != 'DRP') {
           pnunitTotal += 3;
         }
       }
 
+      // increment total units per sem and cumulative
       cumulative += weight
       total += parseFloat(finalGrades[i].data[j].units)
 
+      // store computed weight and cumulative
       finalGrades[i].data[j].enrolled = weight.toString()
       finalGrades[i].data[j].runningSum = cumulative.toString()
     }
@@ -152,6 +144,7 @@ function organizeGrades(data){
     total = 0
   }
 
+  // for computation of status tab
   let unitsGPA = {GPAUnits: {taken: tunitTotal, passed: punitTotal}, NotGPAUnits: {taken: tnunitTotal, passed: pnunitTotal}}
   let gpaCalc = {totalGradePoints: cumulative, totalUnitsGPA: finalTotal, gwa: cumulative/finalTotal}
 
@@ -232,10 +225,8 @@ export default function StudentRecord() { // this will probably transferred to a
     
   // get Grades, Student, Notes, History from database
   useEffect(() => {
+    
     const fetchData = async () => {
-      // await setCurrStudentID({StudentID: localStorage.getItem("currStudentKey")})
-      // await setCurrStudentKey(localStorage.getItem("currStudentID"))
-
       GetStudentGrades()
       GetStudentHistory()
       GetStudentInfo()
