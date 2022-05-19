@@ -273,7 +273,7 @@ const AddRow = ({ sem, grades, addHandler, histHandler }) => {
                                             <section className='inline-block add-row-section-grade'>
                                                 <input 
                                                     className='add-row-input-style'
-                                                    type="number"
+                                                    type="text"
                                                     name="grade"
                                                     placeholder='0'
                                                     onChange={(e) => setGrade(e.target.value)}

@@ -69,21 +69,6 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
             _id: values._id
         }
 
-        const historyCredentials = {
-            User: userName,
-            Student: currStudentID,
-            // Date: currentDate,
-            // Time: currentTime,
-            Date: new Date().toLocaleDateString(),
-            Time: new Date().toLocaleTimeString('en-US', { 
-                hour12: false, 
-                hour: "numeric", 
-                minute: "numeric"
-            }),
-            Description: 'update',
-            Details: "Sample Details"
-        };
-
         fetch(`http://${ip}:3001/grade/update` ,{
             method: "POST",
             headers: { "Content-Type":"application/json"},
@@ -95,16 +80,6 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         })
 
         
-        fetch(`http://${ip}:3001/history/add`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify(historyCredentials),
-        })
-        .then((response) => response.json())
-        .then((body) => {
-            console.log(body);
-        })
-
         autoSet({sem:Name, data:newSemData})
         semHandler(newSemData)
 

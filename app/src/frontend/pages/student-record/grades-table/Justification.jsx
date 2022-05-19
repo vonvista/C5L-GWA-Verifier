@@ -40,6 +40,31 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, histHand
         e.preventDefault()  // prevents refreshing of page
         submitHandler(e) // update history log
         parentSubmitHandler(e)    // submit contents of the form
+
+        const historyCredentials = { //updates history in db with title(?) and description
+            User: localStorage.getItem("Username"),
+            Student: localStorage.getItem('currStudentID'),
+            // Date: currentDate,
+            // Time: currentTime,
+            Date: new Date().toLocaleDateString(),
+            Time: new Date().toLocaleTimeString('en-US', { 
+                hour12: false, 
+                hour: "numeric", 
+                minute: "numeric"
+            }),
+            Description: values.title,
+            Details: values.desc
+        };
+
+        fetch(`http://localhost:3001/history/add`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify(historyCredentials),
+        })
+        .then((response) => response.json())
+        .then((body) => {
+            console.log(body);
+        })
     }
 
     return (
