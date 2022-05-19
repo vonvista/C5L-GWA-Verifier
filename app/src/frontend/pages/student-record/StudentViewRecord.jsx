@@ -171,6 +171,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         let weight = 0
         let finalTotal = 0
 
+        // declarartions for GPA and non GPA computation
         let tunitTotal = 0;
         let punitTotal = 0;
         let tnunitTotal = 0;
@@ -185,58 +186,67 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
             }
         }
 
-
+        // loop every sem in grades
         for (let i = 0; i < grades.length; i++){
-
+            // loop every grades in a sem
             for (let j = 0; j < grades[i].data.length; j++){
 
                 // compute total unit per sem, weight, and cumulative
                 weight = parseFloat(grades[i].data[j].units) * parseFloat(grades[i].data[j].grade)
 
+                // compute total untis earned
                 if(grades[i].data[j].grade != 'S'){
                     finalTotal += parseFloat(grades[i].data[j].units)
                 }
 
+                // if weight is a text then weight considered 0
                 if(isNaN(weight)){
                     weight = 0;
                 }
 
+                // computation of taken GPA units
                 if(grades[i].data[j].units != "0" && grades[i].data[j].grade != 'S') {
                     tunitTotal += parseFloat(grades[i].data[j].units)
                   } 
-            
-                  if(grades[i].data[j].units != "0") {
+                
+                // computation of passed GPA units
+                if(grades[i].data[j].units != "0") {
                     if(grades[i].data[j].grade != "0" && grades[i].data[j].grade != 'S' && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP') {
-                      punitTotal += parseFloat(grades[i].data[j].units)
+                    punitTotal += parseFloat(grades[i].data[j].units)
                     } 
-                  }
-            
-                  if(grades[i].data[j].units == "0") {
-                    tnunitTotal += 3;
-                  }
-            
-                  if(grades[i].data[j].units == "0") {
-                    if(grades[i].data[j].grade != "0" && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP') {
-                      pnunitTotal += 3;
-                    }
-                  }
+                }
 
+                // computation of taken non-GPA units
+                if(grades[i].data[j].units == "0") {
+                    tnunitTotal += 3;
+                }
+                
+                // computation of passed non-GPA units
+                if(grades[i].data[j].units == "0") {
+                    if(grades[i].data[j].grade != "0" && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP') {
+                    pnunitTotal += 3;
+                    }
+                }
+
+                // increment cumulative and total units per sem
                 cumulative += weight
                 total += parseFloat(grades[i].data[j].units)
 
+                // store weight and cumulative
                 grades[i].data[j].enrolled = weight.toString()
                 grades[i].data[j].runningSum = cumulative.toString()
             }
 
-
+            // store total per sem and reset
             grades[i].total = total
             total = 0
         }
 
+        // for computation of status tab
         let unitsGPA = {GPAUnits: {taken: tunitTotal, passed: punitTotal}, NotGPAUnits: {taken: tnunitTotal, passed: pnunitTotal}}
         let gpaCalc = {totalGradePoints: cumulative, totalUnitsGPA: finalTotal, gwa: cumulative/finalTotal}
         
-        // set new value of props
+        // update props value
         setGPA(gpaCalc)
         setGradeState(grades)
         setStatus(unitsGPA)
