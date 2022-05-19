@@ -57,6 +57,7 @@ function organizeGrades(data){
   let weight = 0
   let cumulative = 0
   let total = 0
+  let finalTotal = 0;
 
   // loop for organizing data from db
   for ( let i = 0 ; i < data.length ; i++ ){
@@ -106,9 +107,15 @@ function organizeGrades(data){
 
       // compute total unit per sem, weight, and cumulative
       weight = parseFloat(finalGrades[i].data[j].units) * parseFloat(finalGrades[i].data[j].grade)
+      
+      if(finalGrades[i].data[j].grade != 'S'){
+        finalTotal += parseFloat(finalGrades[i].data[j].units)
+      }
+      
       if(isNaN(weight)){
         weight = 0;
       }
+
       cumulative += weight
       total += parseFloat(finalGrades[i].data[j].units)
 
@@ -119,9 +126,10 @@ function organizeGrades(data){
     finalGrades[i].total = total
     total = 0
   }
-
-  //console.log(finalGrades)
-  return finalGrades
+  // console.log(finalTotal)
+  // console.log(cumulative)
+  // console.log(finalGrades)
+  return [finalGrades, cumulative/finalTotal]
 
 }
 
@@ -190,7 +198,7 @@ export default function StudentRecord() { // this will probably transferred to a
   const [currStudentKey, setCurrStudentKey] = useState(localStorage.getItem("currStudentID"))
   const [userRole, setUserRole] = useState(localStorage.getItem("Role"))
   const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
-
+  const [gwa, setGWA] = useState();
   // get Grades, Student, Notes, History from database
   useEffect(() => {
     const fetchData = async () => {
@@ -271,7 +279,8 @@ export default function StudentRecord() { // this will probably transferred to a
         const studentGrades = organizeGrades(body)
         
         // set Grades prop
-        getGradesProp(studentGrades)
+        getGradesProp(studentGrades[0])
+        setGWA(studentGrades[1])
 
       })
       .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
@@ -349,7 +358,7 @@ export default function StudentRecord() { // this will probably transferred to a
     return (
 
       // checks if props are already fetched from the DB
-      (studentProp && notesProp && gradesProp && historyProp) ? 
+      (studentProp && notesProp && gradesProp && historyProp && gwa) ? 
       <>
         <nav class="sticky z-10">
           {userRole == "user" ? <UserNav /> : <AdminNav />}
@@ -364,6 +373,7 @@ export default function StudentRecord() { // this will probably transferred to a
                   status={statusData}
                   grades={gradesProp} 
                   checklist={validationsProp} 
+                  gwa1={gwa}
                   // autoSet={setGrades}
                 />
             </div>

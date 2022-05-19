@@ -5,7 +5,7 @@ import Verify from 'frontend/components/buttons/Verify'
 // -- state : data for the status tab will be passed here
 // -- ...rest : additional prop for backend expansion 
 
-export default function Status({state, ...rest}) {
+export default function Status({ state, gwa, ...rest }) {
 
     return(
         <div className="min-w-[25vw] max-w-[25vw] h-full mx-auto p-5 grid box-border overflow-auto">
@@ -80,8 +80,8 @@ export default function Status({state, ...rest}) {
                         </tr>
 
                         <tr>
-                            <td className="pt-5">Total</td>
-                            <td className="pt-5">{state.GPACalc.totalGWA.toFixed(3)}</td>
+                            <td className="pt-5">GWA</td>
+                            <td className="pt-5">{gwa.toFixed(3)}</td>
                         </tr>
                     </tbody>
                 </table>
