@@ -101,7 +101,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         semHandler(newSemData)
     }
 
-    const setHistory = (detailsObj) => { // logs action of editing a row to history
+    const setHistoryEditRow = (detailsObj) => { // logs action of editing a row to history
         let currHistory = [...history] // make copy of current array of history logs
 
         const newHistObj = {
@@ -185,9 +185,9 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
                                         data={semData}
                                         dataHandler={setData}
                                         delHandler={delData}
-                                        handleHistory={setHistory}
+                                        setHistoryEditRow={setHistoryEditRow}
                                         addHandler={addRowData}
-                                        histHandler={historyHandler}
+                                        historyHandler={historyHandler}
                                     />
                                     <section className="mt-3">
                                         <span className="font-montserrat font-bold text-primary-red">Load Status</span>
