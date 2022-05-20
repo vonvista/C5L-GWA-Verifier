@@ -24,7 +24,7 @@ const AddUserBtn = ({ handleClick }) => {
       <style>{imgBtn}</style>
       <style>{textBtn}</style>
       <button
-        className=" bg-login-green m-2 rounded-xl text-white font-montserrat font-bold hover:shadow-lg hover:bg-login-green-hover"
+        className=" bg-button-green m-2 rounded-xl text-white font-montserrat font-bold hover:shadow-lg hover:bg-button-green-hover"
         type="button"
         onClick={handleClick}
       >

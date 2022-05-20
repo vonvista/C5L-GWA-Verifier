@@ -16,7 +16,7 @@ export default function CheckListTab({ checklistData, setValData, handleApply}) 
         );
       }
       )}
-      <button className="w-[11vw] h-[3vw] bg-login-green m-2 rounded-xl text-white text-base font-montserrat font-bold hover:shadow-lg hover:bg-login-green-hover" 
+      <button className="w-[11vw] h-[3vw] bg-button-green m-2 rounded-xl text-white text-base font-montserrat font-bold hover:shadow-lg hover:bg-button-green-hover" 
       type="button"
       onClick={handleApply}>
         <p className="p-2">Apply Changes</p>

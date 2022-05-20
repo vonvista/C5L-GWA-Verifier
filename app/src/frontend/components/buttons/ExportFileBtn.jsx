@@ -1,6 +1,6 @@
 import 'tailwindcss/tailwind.css';
 import exportIcon from '../../../../assets/icons/export.svg';
-import exportStudentList from 'backend/ExportStudentList';
+import exportStudentList from 'backend/exportStudentList';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 

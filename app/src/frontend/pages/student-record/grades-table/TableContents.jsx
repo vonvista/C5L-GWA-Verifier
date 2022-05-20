@@ -190,9 +190,9 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
                                         <span className="font-montserrat font-bold text-primary-red">Load Status</span>
                                         {( Total <= 20 )
                                             ? ( Total >= 15 )
-                                                ? <span className="ml-4 font-black text-login-green underline">Normal</span>
-                                                : <span className="ml-4 font-black text-login-green underline">Underload</span>
-                                            : <span className="ml-4 font-black text-login-green underline">Overload</span>
+                                                ? <span className="ml-4 font-black text-button-green underline">Normal</span>
+                                                : <span className="ml-4 font-black text-button-green underline">Underload</span>
+                                            : <span className="ml-4 font-black text-button-green underline">Overload</span>
                                         }
                                     </section>
 

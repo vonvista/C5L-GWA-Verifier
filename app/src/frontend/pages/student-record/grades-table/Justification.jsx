@@ -123,7 +123,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                         />
                                         <button
                                             type="submit"
-                                            className="inter mt-4 w-[20%] self-end inline-flex justify-center rounded-md border border-transparent bg-login-green px-4 py-2 text-sm font-medium text-white transition-all ease-out delay-200 hover:transition-all hover:ease-in hover:delay-200 hover:bg-login-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
+                                            className="inter mt-4 w-[20%] self-end inline-flex justify-center rounded-md border border-transparent bg-button-green px-4 py-2 text-sm font-medium text-white transition-all ease-out delay-200 hover:transition-all hover:ease-in hover:delay-200 hover:bg-button-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
                                             onClick={saveChanges}
                                             disabled={!isValid}
                                         >

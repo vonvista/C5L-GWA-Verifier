@@ -57,7 +57,7 @@ const SaveBtn = ({ handleSave, isDisabled }) => {
       <div className="mt-4">
           <button
               type="submit"
-              className="text-sm font-inter font-medium inline-flex justify-center rounded-md border border-transparent bg-login-green px-4 py-2 text-white transition-all ease-out delay-200 hover:transition-all hover:ease-in hover:delay-200 hover:bg-login-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
+              className="text-sm font-inter font-medium inline-flex justify-center rounded-md border border-transparent bg-button-green px-4 py-2 text-white transition-all ease-out delay-200 hover:transition-all hover:ease-in hover:delay-200 hover:bg-button-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
               onClick={handleSave}
               // onClick={confirmPassword}
               disabled={isDisabled}

@@ -16,10 +16,10 @@ export default function Status({ state, gpaCalc, ...rest }) {
                     (gpaCalc.gwa.toFixed(3) > 1.20) 
                         ? (gpaCalc.gwa.toFixed(3) > 1.45) 
                             ? (gpaCalc.gwa.toFixed(3) > 1.75) 
-                                ? <p className="text-4xl text-center text-login-green font-bold my-4 mx-0 inline-block inter">N/A</p> 
-                                : <p className="text-4xl text-center text-login-green font-bold my-4 mx-0 inline-block inter">Cum Laude</p> 
-                            : <p className="text-4xl text-center text-login-green font-bold my-4 mx-0 inline-block inter">Magna Cum Laude</p> 
-                        : <p className="text-4xl text-center text-login-green font-bold my-4 mx-0 inline-block inter">Summa Cum Laude</p> 
+                                ? <p className="text-4xl text-center text-button-green font-bold my-4 mx-0 inline-block inter">N/A</p> 
+                                : <p className="text-4xl text-center text-button-green font-bold my-4 mx-0 inline-block inter">Cum Laude</p> 
+                            : <p className="text-4xl text-center text-button-green font-bold my-4 mx-0 inline-block inter">Magna Cum Laude</p> 
+                        : <p className="text-4xl text-center text-button-green font-bold my-4 mx-0 inline-block inter">Summa Cum Laude</p> 
                 }
             </div>
             {/* Table for Grades */}

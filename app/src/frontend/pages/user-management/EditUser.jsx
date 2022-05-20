@@ -318,7 +318,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
                           <div className="w-full flex">
                             <section className="my-auto ml-0 mr-auto w-[90.5%]">
                               <button
-                                className="inter w-2/5 h-[5vh] block ml-auto mr-auto bg-login-green text-white font-bold rounded-lg hover:bg-slate-200 user-btn text-[1vw]"
+                                className="inter w-2/5 h-[5vh] block ml-auto mr-auto bg-button-green hover:bg-button-green-hover text-white font-bold rounded-lg hover:bg-slate-200 user-btn text-[1vw]"
                                 type="button"
                                 onClick={edit_user}
                               >
