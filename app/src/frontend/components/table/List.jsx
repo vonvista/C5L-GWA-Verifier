@@ -41,7 +41,7 @@ import Swal from 'sweetalert2';
     handleDeleteRecord  ---     function that handles page refresh after deletion of student/user record from the table
     handleEditRecord    ---     function that handles click event for edit button on user management page
     
-    setHistoryEditRow   ---     function that logs the action of editing a row to the student record history
+    setHistoryEditRow   ---     function that logs the action of editing a row to the student record history immediately
     historyHandler      ---     function that logs the action of adding a row to the student record history
 */
 
@@ -51,9 +51,9 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
     
     let navigate = useNavigate();
 
+
     /* Parent component: TableContents.jsx */
     /* Table for displaying the student's summary of grades for a given semester in the Student Record page */
-
     const SemRecord = ({ total, sem, data, dataHandler, delHandler, setHistoryEditRow, addHandler, handleHistory}) => {
         return (
             <>  
@@ -116,9 +116,14 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                             errors={errors}
                                             valid={isValid}
                                             setHistoryEditRow={setHistoryEditRow}
-                                            />
+                                        />
                                          :
-                                        <ReadRow data={course} clickHandler={toggleEdit} delHandler={delHandler} histHandler={histHandler} />
+                                        <ReadRow
+                                            data={course}
+                                            clickHandler={toggleEdit}
+                                            delHandler={delHandler}
+                                            histHandler={setHistoryEditRow} // should be replaced with function that updates the state of history immediately after deleting row
+                                        />
                                     }
                                 </Fragment>  
                             )

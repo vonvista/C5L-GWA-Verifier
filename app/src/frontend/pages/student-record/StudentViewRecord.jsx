@@ -136,7 +136,8 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         }
     }
 
-    // update HistoryState by adding new history to its date
+    // update HistoryState by adding new history to its date (not yet working)
+    // also used for updating state of history after editing a row (working)
     const setHistory = (histObj) => {
 
         let history = [...historyState]
