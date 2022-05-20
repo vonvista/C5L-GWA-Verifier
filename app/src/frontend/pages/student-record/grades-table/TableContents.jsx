@@ -91,7 +91,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         })
     }
 
-    const setHistory = (detailsObj) => { // logs action of editing a row to history
+    const setHistoryEditRow = (detailsObj) => { // logs action of editing a row to history
         let currHistory = [...history] // make copy of current array of history logs
 
         const newHistObj = {
@@ -175,7 +175,17 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
                             >
                                 {/* Accordion Contents */}
                                 <Disclosure.Panel className="inter z-0 pl-5 py-3 mb-2 text-sm text-gray-500 rounded-b-lg shadow-lg">
-                                    <List table={2} total={Total} sem={Name} data={semData} dataHandler={setData} delHandler={delData} handleHistory={setHistory} addHandler={addRowData} histHandler={historyHandler}/>
+                                    <List
+                                        table={2}
+                                        total={Total}
+                                        sem={Name}
+                                        data={semData}
+                                        dataHandler={setData}
+                                        delHandler={delData}
+                                        setHistoryEditRow={setHistoryEditRow}
+                                        addHandler={addRowData}
+                                        historyHandler={historyHandler}
+                                    />
                                     <section className="mt-3">
                                         <span className="font-montserrat font-bold text-primary-red">Load Status</span>
                                         {( Total <= 20 )

@@ -5,7 +5,7 @@ import Input from 'frontend/components/inputs/Input';
 
 // component that creates a modal window for justification from: https://headlessui.dev/react/dialog
 
-const Justification = ({ modalState, modalHandler, parentSubmitHandler, histHandler }) => {
+const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHistory }) => {
     /* how to use
     
         parent will provide modalState and modalHandler
@@ -13,7 +13,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, histHand
         modalHandler is a function that will set modalState to false
 
         parentSubmitHandler takes in a function that deals with submitting the values from the edited row
-        histHandler is for giving the justification to the history and recording the changes
+        handleHistory is for giving the justification to the history and recording the changes
     
     */
 
@@ -26,7 +26,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, histHand
         ({desc}) => isRequired(desc) || {desc: 'Please give a justification for editing the grades'}
     ]
 
-    const {values, isValid, errors, touched, changeHandler, submitHandler, resetValues} = useForm(initialState, validations, histHandler);
+    const {values, isValid, errors, touched, changeHandler, submitHandler, resetValues} = useForm(initialState, validations, handleHistory);
 
     const resetModalValues = () => {
         // function that will clear text area when exiting modal

@@ -31,8 +31,6 @@ import { toNamespacedPath } from 'node:path/win32';
 
 const RecordPage = ({sem, user, student, notes, history, status, grades, checklist, gpa}) => {
 
-    // pass details and other data through props to this component
-    
     const [selectedStudent, setSelectedStudent] = useState(student)
     const [statusState, setStatus] = useState(status)
     const [gradeState, setGradeState] = useState(grades)
@@ -44,8 +42,8 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const [gpaCalc, setGPA] = useState(gpa);
     const [currStudentID, setCurrStudentID] = useState(localStorage.getItem("currStudentID"))
 
-    // validation functions
 
+    // validation functions
     const handleValApply = () => {
         console.log(ip)
 
@@ -148,7 +146,11 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         for (let i = 0; i < history.length; i++){
             if(history[i].date == histObj.date){
                 //console.log(values)
+                console.log(history[i])
+                console.log(history[i].info)
+                // console.log(histObj)
                 history[i].info.unshift(histObj.info[0])
+                
                 break
             }
 
@@ -331,7 +333,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                 {/* student grades */}
                 <div className="w-full flex mx-auto my-5 gap-3">
 
-                    {/* div container for the whole accordion component */}
+                    {/* container for the whole accordion component */}
                     <div className="w-[60vw] flex-1 overflow-auto mx-auto bg-white">
                         {   // map grades per semester
                             gradeState.map((semData, idx)=>(

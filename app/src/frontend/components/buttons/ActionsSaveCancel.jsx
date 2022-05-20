@@ -10,7 +10,7 @@ import 'tailwindcss/tailwind.css';
 // -- handleSave prop   : handles click event for save button
 // -- handleCancel      : handles click event for cancel button
 
-const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, histHandler }) => {
+const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, handleHistory }) => {
   const btn = `
     .btn{
       width: 2vw;
@@ -36,7 +36,7 @@ const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, histH
 
   return (
     <>
-      <Justification modalState={isOpen} modalHandler={closeModal} parentSubmitHandler={handleSave} histHandler={histHandler} />
+      <Justification modalState={isOpen} modalHandler={closeModal} parentSubmitHandler={handleSave} handleHistory={handleHistory} />
 
       <div className="mx-auto w-auto items-center justify-items-center inline-block">
         <style>{btn}</style>

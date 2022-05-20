@@ -1,327 +1,191 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import Swal from 'sweetalert2'
-
-/* Components */
-import Add from 'frontend/components/buttons/AddRowBtn.jsx';
-import Justification from './Justification';
-
-/* CSS */
+import { Dialog, Transition} from '@headlessui/react';
+import { Fragment, useEffect, useState } from 'react';
 import 'tailwindcss/tailwind.css';
-import './AddRow.css';
+
+
+/* Parent component >> frontend/components/buttons/AddRowBtn.jsx */
 
 /* Function for the "Add Row" feature in the Student View Record page */
-/* Initially shows an "Add" button and prompts the modal window after clicking it */
-const AddRow = ({ sem, grades, addHandler, histHandler }) => {
+/* Shows the modal window after clicking the AddRowBtn */
+/* 
+   Props:
+    modalState          ---     holds the state of the add row modal
+    handleSave          ---     function used to close the add row modal and open the justification modal 
+    handleClose         ---     function used to close add row modal and reset the input fields
+    courseNameState     ---     holds the current value of courseName input field
+    courseNameHandler   ---     function that sets the value of courseName input field
+    unitsState          ---     holds the current value of units input field
+    unitsHandler        ---     function that sets the value of units input field
+    gradeState          ---     holds the current value of grade input field
+    gradeHandler        ---     function that sets the value of grade input field
+*/
 
+const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNameHandler, unitsState, unitsHandler, gradeState, gradeHandler}) => {
 
-    const [openModal, setOpenModal] = useState(false);          // add row modal
-    const [gradesData, setGradesData] = useState(grades);
-    const [courseName, setCourseName] = useState('');
-    const [units, setUnits] = useState('');
-    const [grade, setGrade] = useState('');
-    const [userName, setUserName] = useState(localStorage.getItem("Username"));
-    const [studentID, setStudentID] = useState(localStorage.getItem("currStudentID"));
-    const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
-    // const [histTitle, setHistTitle] = useState(''); // value of history title (might use later)
+    // Styling
+    const addRowModal = `relative bg-secondary-red h-[37vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
+    const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[37vh]`;
+    const modalBody = `absolute inset-x-0 bg-secondary-red top-[8%] bottom-[10%]`;
+    const modalClose = `text-[4.85vh] text-white float-right`;
+    const modalTitle = `text-white text-center font-bold italic text-[1.30vw] mt-[4.15vh] mb-[4.85vh]`;
+    const modalInputs = `text-[1.10vw] flex items-center justify-center`;
+    const inputContainer = `ml-5 mr-[1.15vw]`;
+    const inputStyle = `text-center w-full h-[4.85vh] rounded-xl`
+    const sectionCoursename = `inline-block w-[11.71875vw]`;
+    const sectionUnits = `inline-block w-[3.9vw]`;
+    const sectionGrade = `inline-block w-[4.8vw]`;
+    const modalFooter = `absolute right-0 bottom-0 mt-[4.85vh] text-[1.11vw] flex items-end justify-end`;
+    const modalBtnSave = `h-[5vh] w-[9.25vw] rounded-xl mr-[0.65vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green`;
+    const modalBtnDiscard = `h-[5vh] w-[9.25vw] rounded-xl mr-[0.65vw] bg-discard hover:bg-white text-center`;
 
-  
-    // checks if the course is already in the grade list
-    function isGradeDuplicate(course){
-
-        // access each grades
-        for(let i = 0; i < gradesData.length; i++){
-
-            // compare course name to courses in grades
-            if(course == gradesData[i].courseName){
-                return true
-            }
-
-        }
-
-        return false
+    // Change courseName handler
+    const handleCourseChange = (event) => {
+        courseNameHandler(event.target.value);
     }
 
-  
-    // reset inpute fields called upon closing modal
-    const resetInputFields = () => {
-        setOpenModal(false);
-        setCourseName('');
-        setUnits('');
-        setGrade('');
+    // Change units handler
+    const handleUnitsChange = (event) => {
+        unitsHandler(event.target.value);
     }
 
-    
-    // function for adding new history after adding new row
-    // ..
-    // .. for revisions after adding Justification for AddRow
-    // ..
-    function handleHistory(data){
-
-        // new history to save to db
-        let newHistory = {
-            User: userName,
-            Student: studentID,
-            Date: new Date().toLocaleDateString(),
-            Time: new Date().toLocaleTimeString('en-US', { 
-                hour12: false, 
-                hour: "numeric", 
-                minute: "numeric"
-            }),
-            Description: "create",
-            Details: `create student grade with Course: ${data.Course} on Sem: ${data.Semyear}`,
-        }
-
-        // new history for history tab change handler
-        let updateHistory = {
-            date: newHistory.Date,
-            info: [
-                {
-                main: 'create',
-                user: userName,
-                time: newHistory.Time,
-                details: newHistory.Details,
-                },
-            ],
-        }
-
-        // history handler
-        histHandler(updateHistory);
-
-        // adds new grade to list and updates row
-        addHandler({
-            _id : data._id,
-            courseName: courseName,
-            units: units,
-            grade: grade,
-        })
-
-
-        // fetch post request to add new history
-        fetch(`http://${ip}:3001/history/add`, {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newHistory)
-        })
-            .then(response => response.json())
-            .then(body => console.log(body))
-            .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Server Error',
-                    text: 'Check if the server is running or if database IP is correct',
-                })
-                console.log(err)
-            })
+    // Change grade handler
+    const handleGradeChange = (event) => {
+        gradeHandler(event.target.value);
     }
 
+    // Save Button
+    const SaveButton = () => {
+        // check if all input fields have been filled
+        if (courseNameState && unitsState && gradeState){
+          return <button className={modalBtnSave} onClick={handleSave}>Save</button>
+        } else {
+          return <button className={modalBtnSave} disabled>Save</button>
+        };
+    };
 
-    // handles adding grade to DB
-    const handleAddGrade = () => {
-        // Check if user has filled out all fields
-        if(
-            courseName === "" || 
-            units === "" || 
-            grade === ""
-          ) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: 'Fill out all fields',
-            })
-            return
-          }
+    // Used for disabling up-down arrows in input number textfield
+    const inputs = 
+        `input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }`;
         
-        // if course is already a duplicate 
-        // show alerts &
-        // returns to add row modal
-        if(isGradeDuplicate(courseName)){
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Course is already in the list. Change course name or edit the available course',
-            })
-            return
-        }
-
-        // new grade from the AddRow fields to be added to DB
-        newGrade = {
-            Student: localStorage.getItem('currStudentID'),
-            Course: courseName,
-            Unit: parseFloat(units),
-            Grade: grade,
-            Weight: 0,
-            Cumulative: 0,
-            Semyear: sem
-        }
-
-        console.log(newGrade)
-
-        // add new grade to DB
-        fetch(`http://${ip}:3001/grade/add`, {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newGrade)
-        })
-            .then(response => response.json())
-            .then(body => handleHistory(body))
-            .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Server Error',
-                    text: 'Check if the server is running or if database IP is correct',
-                })
-                console.log(err)
-            })
-        
-        // close AddRow modal after 
-        setOpenModal(false)
-    }
-
-
     return (
         <>
-            <Add handleClick={setOpenModal}/>
-            { openModal && (
-                <AnimatePresence>
-                    {/* Modal animations */}
-                    <motion.div 
-                        initial={{
-                            opacity: 0
-                        }}
-                        animate={{
-                            opacity: 1,
-                            transition: {
-                                duration: 0.2
-                            }
-                        }}
-                        exit={{
-                            opacity: 0,
-                            transition: {
-                                duration: 0.2
-                            }
-                        }}
-                        className='add-row-modal-backdrop'>
-                        <motion.div 
-                            initial={{
-                                scale: 0
-                            }}
-                            animate={{
-                                scale: 1,
-                                transition: {
-                                    duration: 0.2
-                                }
-                            }}
-                            exit={{
-                                scale: 0,
-                                transition: {
-                                    duration: 0.2
-                                }
-                            }}
+            {/* Wrapping everything with transition component to use transition effects from @headlessui/react */}
+            <Transition appear show={modalState} as={Fragment}>
 
-                            className='add-row-modal'>
-                                <motion.div className="add-row-modal-content">
-                                {/* Baybayin Background Image */}
-                                <motion.div className="bg-baybayin add-row-baybayin-style"></motion.div>
+                {/* Wrapping everything with dialog component */}
+                <Dialog as="div" className="relative z-50" onClose={handleClose}>
 
-                                {/* content */}
-                                <motion.div className='add-row-modal-body'>
-                                    {/* title */}
-                                    <motion.div className='add-row-modal-close text-white float-right'>
-                                        <button onClick={resetInputFields}>
-                                            <span>&times;</span>
-                                        </button>
-                                    </motion.div>
-                                    <motion.div className='add-row-modal-title text-white text-center'>Please fill in the fields below to insert a new row</motion.div>
+                    <style>{inputs}</style>
 
-                                    {/* input form */}
-                                    <form className='add-row-modal-inputs flex items-center justify-center'>
-                                        {/* course name */}
-                                        <motion.div className='add-row-input-container'>
-                                            <section className='inline-block add-row-section-coursename'>
-                                                <input 
-                                                    className='add-row-input-style'
-                                                    type="text"
-                                                    name="courseName"
-                                                    placeholder='Enter course name'
-                                                    onChange={(e) => setCourseName(e.target.value)}
-                                                />
-                                                <motion.div className='w-full text-white text-center'>Course Name</motion.div>
-                                            </section>
-                                        </motion.div>
+                    {/* Transition effect for the element inside this Transition.Child tag*/}
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        {/* Container for the layer behind the modal window */}
+                        <div className="fixed inset-0 bg-black bg-opacity-25" />
+                    </Transition.Child>
+                    
+                    {/* Container for the layer containing the modal window */}
+                    <div className="fixed inset-0 overflow-y-auto flex min-h-full items-center justify-center p-4 text-center">
 
-                                        {/* units */}
-                                        <motion.div className='add-row-input-container'>
-                                            <section className='inline-block add-row-section-units'>
-                                                <input 
-                                                    className='add-row-input-style'
-                                                    type="number"
-                                                    name="units"
-                                                    placeholder='0'
-                                                    onChange={(e) => setUnits(e.target.value)}
-                                                />
-                                                <motion.div className='w-full text-white text-center'>Units</motion.div>
-                                            </section>
-                                        </motion.div>
+                        {/* Transition effect for the element inside this Transition.Child tag*/}
+                        <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0 scale-95"
+                            enterTo="opacity-100 scale-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100 scale-100"
+                            leaveTo="opacity-0 scale-95"
+                        >
+                            {/* Add Row modal window */}
+                            <Dialog.Panel className={addRowModal}>
+                                <div className='relative'>
+                                    <div className={baybayinStyle}></div>
+                                    <div className={modalBody}>
 
-                                        {/* grade */}
-                                        <motion.div className='add-row-input-container'>
-                                            <section className='inline-block add-row-section-grade'>
-                                                <input 
-                                                    className='add-row-input-style'
-                                                    type="text"
-                                                    name="grade"
-                                                    placeholder='0'
-                                                    onChange={(e) => setGrade(e.target.value)}
-                                                />
-                                                <motion.div className='w-full text-white text-center'>Grade</motion.div>
-                                            </section>
-                                        </motion.div>
+                                        {/* Window title */}
+                                        <div className={modalClose}>
+                                            <button onClick={handleClose}>
+                                                <span>&times;</span>
+                                            </button>
+                                        </div>
 
-                                        
-                                        {/* <motion.div className='add-row-input-container'>
-                                            <section className='inline-block add-row-section-enrolled'>
-                                                <input 
-                                                    className='add-row-input-style'
-                                                    type="number"
-                                                    name="enrolled"
-                                                    placeholder='0'
-                                                    onChange={(e) => setEnrolled(e.target.value)}
-                                                />
-                                                <motion.div className='w-full text-white text-center'>Enrolled</motion.div>
-                                            </section>
-                                        </motion.div>
+                                        <div className={modalTitle}>Please fill in the fields below to insert a new row</div>
 
-                                        
-                                        <motion.div className='add-row-input-container'>
-                                            <section className='inline-block add-row-section-runningGWA'>
-                                                <input 
-                                                    className='add-row-input-style'
-                                                    type="text"
-                                                    name="runningGWA"
-                                                    placeholder='0'
-                                                    onChange={(e) => setRunningGWA(e.target.value)}
-                                                />
-                                                <motion.div className='w-full text-white text-center'>Running GWA</motion.div>
-                                            </section>
-                                        </motion.div> */}
+                                        {/* Input form */}
+                                        <form className={modalInputs}>
 
-                                    </form>
-                                    {/* save and discard buttons */}
-                                    <motion.div className='add-row-modal-footer flex items-end justify-end'>                                        
-                                        <button className='add-row-modal-btn add-row-btn-discard text-center' onClick={resetInputFields}>Discard</button>
-                                        <button className='add-row-modal-btn add-row-btn-save text-center text-white' onClick={handleAddGrade}>Save</button>
-                                    </motion.div>
-                                </motion.div>
-                            </motion.div>
-                        </motion.div>
-                    </motion.div>
-                </AnimatePresence>
-            )}
+                                            {/* Course Name */}
+                                            <div className={inputContainer}>
+                                                <section className={sectionCoursename}>
+                                                    <input 
+                                                        className={inputStyle}
+                                                        type="text"
+                                                        name="courseName"
+                                                        placeholder='Enter course name'
+                                                        onChange={handleCourseChange}
+                                                    />
+                                                    <div className='w-full text-white text-center'>Course Name</div>
+                                                </section>
+                                            </div>
+
+                                            {/* Units */}
+                                            <div className={inputContainer}>
+                                                <section className={sectionUnits}>
+                                                    <input 
+                                                        className={inputStyle}
+                                                        type="number"
+                                                        name="units"
+                                                        placeholder='0'
+                                                        onChange={handleUnitsChange}
+                                                    />
+                                                    <div className='w-full text-white text-center'>Units</div>
+                                                </section>
+                                            </div>
+
+                                            {/* Grade */}
+                                            <div className={inputContainer}>
+                                                <section className={sectionGrade}>
+                                                    <input 
+                                                        className={inputStyle}
+                                                        type="number"
+                                                        name="grade"
+                                                        placeholder='0'
+                                                        onChange={handleGradeChange}
+                                                    />
+                                                    <div className='w-full text-white text-center'>Grade</div>
+                                                </section>
+                                            </div>
+                                        </form>
+
+                                        {/* Save and Cancel buttons */}
+                                        <div className={modalFooter}>
+                                            <SaveButton />
+                                            <button className={modalBtnDiscard} onClick={handleClose}>Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Dialog.Panel>
+                        </Transition.Child>
+                    </div>
+                </Dialog>
+            </Transition>
         </>
     )
 }

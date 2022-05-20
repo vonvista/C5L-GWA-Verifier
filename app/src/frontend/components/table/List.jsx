@@ -1,38 +1,66 @@
 import { React, useState, useEffect, Fragment } from 'react';
 import { useForm, isRequired } from '../../hooks/useForm';
 import { useNavigate } from 'react-router-dom';
+import 'tailwindcss/tailwind.css';
 
+/* Components */
 import Actions from '../buttons/Actions'
 import EditUser from 'frontend/pages/user-management/EditUser';
-import AddRow from 'frontend/pages/student-record/grades-table/AddRow';
+import AddRowBtn from 'frontend/components/buttons/AddRowBtn.jsx';
 import ReadRow from 'frontend/pages/student-record/grades-table/ReadRow';
 import EditRow from 'frontend/pages/student-record/grades-table/EditRow';
 import Swal from 'sweetalert2';
-
-import 'tailwindcss/tailwind.css';
 
 
 /* Backend */
 // import studentDelete from 'backend/studentDelete';
 // import userDelete from 'backend/userDelete';
 
-// Parent components >> UserDashboard.jsx, UserManagementPage.jsx, TableContents.jsx
-// This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end.
 
-const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, delHandler, handleHistory, handleDeleteRecord, handleEditRecord, addHandler, histHandler }) => {
+/* Parent components:
+    SemRecord   >> frontend/pages/student-record/grades-table/TableContents.jsx
+    User        >> frontend/pages/dashboards/UserDashboard.jsx
+    StudentList >> frontend/pages/user-management/UserManagementPage.jsx
+*/
+
+/* This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end. */
+/*
+   Props:
+    table       ---     indicator which table to display
+    data        ---     receives the data to be displayed on the table
+    total       ---     receives the total number of units taken in a semester
+    sem         ---     receives the semester and academic year
+    
+    changeSort          ---     function for changing sort state and row data
+    sortState           ---     handles the current sort state of the rows in the table
+
+    addHandler          ---     function that handles the addition of a row in a particular semester
+    dataHandler         ---     function that handles row changes after editing a student's grade for a particular semester
+    delHandler          ---     function that handles the deletion of a row in a particular semester
+    
+    handleDeleteRecord  ---     function that handles page refresh after deletion of student/user record from the table
+    handleEditRecord    ---     function that handles click event for edit button on user management page
+    
+    setHistoryEditRow   ---     function that logs the action of editing a row to the student record history
+    historyHandler      ---     function that logs the action of adding a row to the student record history
+*/
+
+const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, delHandler, setHistoryEditRow, handleDeleteRecord, handleEditRecord, addHandler, historyHandler }) => {
 
     const [ip, setIp] = useState(localStorage.getItem("ServerIP"));
     
     let navigate = useNavigate();
 
-    // Table for displaying the student's summary of grades for a given semester 
-    // To be used for Student Record View Page
-    const SemRecord = ({ total, sem, data, dataHandler, delHandler, histHandler, addHandler, historyHandler}) => {
+    /* Parent component: TableContents.jsx */
+    /* Table for displaying the student's summary of grades for a given semester in the Student Record page */
 
+    const SemRecord = ({ total, sem, data, dataHandler, delHandler, setHistoryEditRow, addHandler, handleHistory}) => {
         return (
             <>  
                 {/* Accordion contents */}
                 <div className="table w-full m-0">
+
+                    {/* Table column names */}
                     <div className="table-header-group text-left">
                         <div className="table-row font-montserrat font-bold text-primary-red">
                             <div className="table-cell w-1/6">Course Name</div>
@@ -40,9 +68,13 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             <div className="table-cell w-1/6 text-center">Grade</div>
                             <div className="table-cell w-1/6 text-center">Cumulative</div>
                             <div className="table-cell w-1/6 text-center">Weight</div>
-                            <div className="table-cell w-1/6 text-center"><AddRow sem={sem} grades={data} addHandler={addHandler} histHandler={historyHandler}/></div>
+                            <div className="table-cell w-1/6 text-center">
+                                <AddRowBtn sem={sem} grades={data} addHandler={addHandler} handleHistory={handleHistory}/>
+                            </div>
                         </div>
                     </div>
+
+                    {/* Table contents */}
                     <div className="table-row-group">
                         {data.map((course, index) => {
 
@@ -59,19 +91,20 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             const [isEdit, setEdit] = useState(false)
                             
                             const toggleEdit = () => {
-                                // function to toggle to edit
+                                // Function to toggle to edit
                                 setEdit(!isEdit)
                             }
 
                             const cancelEdit = () => {
-                                // function to cancel editing
-                                // resets form values to default
+                                // Function to cancel editing
+                                // Resets form values to default
                                 setEdit(!isEdit)
                                 resetValues()
                             }
 
                             return(
                                 <Fragment key={index}>
+                                    {/* Check which kind of row should be displayed */}
                                     {isEdit ?
                                         <EditRow 
                                             dataDynamic={values}
@@ -82,20 +115,18 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                             touched={touched} 
                                             errors={errors}
                                             valid={isValid}
-                                            histHandler={histHandler}
+                                            setHistoryEditRow={setHistoryEditRow}
                                             />
                                          :
                                         <ReadRow data={course} clickHandler={toggleEdit} delHandler={delHandler} histHandler={histHandler} />
                                     }
                                 </Fragment>  
                             )
-
-                            
                         })}
 
-                        <div className="table-row "> {/* row for total values */}
+                        <div className="table-row ">
                             <div className="table-cell font-montserrat font-bold text-primary-red py-2">Total</div>
-                            <div className="table-cell text-center">{total}</div>       {/* row for total units */}
+                            <div className="table-cell text-center">{total}</div>   {/* row for total units */}
                             <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
                             <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
                             <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
@@ -107,13 +138,15 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         );
     }
 
+
+    // Parent component: UserManagementPage.jsx
     // This table is about
     const User = ({data, handleDeleteRecord, handleEditRecord}) => {
         console.log(data);
         const [showModal, setShowModal] = useState(false)
         const [editUser, setEditUser] = useState();
 
-        // function to delete a user based on their username
+        // Function to delete a user based on their username
         const userDelete = (username) => {
             Swal.fire({   // prompts for user to input password
                 title: "Confirm User Delete",
@@ -224,48 +257,8 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         )
       }
 
-    // Maurice Paguagan
-    // Function for the Color-coded statuses
-    /* const Status = ({ status }) => {
-        const Checked = ( { status }) => {
-            return (
-                <>
-                    <div className='students-status status-checked'>Checked</div>
-                </>
-            )
-        }
-        const Unchecked = ( { status }) => {
-            return (
-                <>
-                    <div className='students-status status-unchecked'>Unchecked</div>
-                </>
-            )
-        }
-        const Pending = ( { status }) => {
-            return (
-                <>
-                    <div className='students-status status-pending'>Pending</div>
-                </>
-            )
-        }
-
-        if (status == "Checked") {
-            return (
-                <Checked status={status} />
-            )
-        } else if (status == "Unchecked") {
-            return (
-                <Unchecked status={status} />
-            )
-        } else if (status == "Pending") {
-            return (
-                <Pending status={status} />
-            )
-        }
-    } */
-
     
-    
+    // Parent component: UserDashboard.jsx
     // Function for Displaying the Student List on the Dashboard
     const StudentList = ({ data, setRows, changeSort, sortState, handleDeleteRecord }) => {
         useEffect(() => {
@@ -280,7 +273,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
             navigate('/student-record');
         }
 
-        // function to delete a student based on their student ID
+        // Function to delete a student based on their student ID
         const studentDelete = (ID, Key) => {
             Swal.fire({   // prompts for user to input password
                 title: 'Confirm Student Delete',
@@ -388,11 +381,15 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                     <td className='student-number'>{student.studno}</td>
                                     <td className='student-degree'>{student.degprog}</td>
                                     <td className='student-gwa'>{student.gwa}</td>
-                                    {/* <td className='student-status'><Status status={student.status}/></td> */}
                                     <td className='students-status'>
                                         <div data-status={student.status} className='status'></div>
                                     </td>
-                                    <td className='student-action'><Actions handleEdit={() => studentEdit(student._id, student.studno)} handleDelete={() => studentDelete(student.studno, student._id)}/></td>
+                                    <td className='student-action'>
+                                        <Actions
+                                            handleEdit={() => studentEdit(student._id, student.studno)}
+                                            handleDelete={() => studentDelete(student.studno, student._id)}
+                                        />
+                                    </td>
                                 </tr>
                             )
                             )}
@@ -410,18 +407,36 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
     }
 
 
-    // Select what specific table to based on the table conditions (1,2,3)
+    // Select what specific table to display based on the table conditions (1,2,3)
     if (table == 1) {
         return(
-          <StudentList data={data} changeSort={changeSort} sortState={sortState} handleDeleteRecord={handleDeleteRecord}/>
+            <StudentList
+                data={data}
+                changeSort={changeSort}
+                sortState={sortState}
+                handleDeleteRecord={handleDeleteRecord}
+            />
         )
     } else if(table == 2) {
         return (
-            <SemRecord total={total} sem={sem} data={data} dataHandler={dataHandler} delHandler={delHandler} histHandler={handleHistory} addHandler={addHandler} historyHandler={histHandler}/>
+            <SemRecord
+                total={total}
+                sem={sem}
+                data={data}
+                dataHandler={dataHandler}
+                delHandler={delHandler}
+                setHistoryEditRow={setHistoryEditRow}
+                addHandler={addHandler}
+                handleHistory={historyHandler}
+            />
         )
     } else if(table == 3) {
         return (
-            <User data={data} handleDeleteRecord={handleDeleteRecord} handleEditRecord={handleEditRecord}/>
+            <User
+                data={data}
+                handleDeleteRecord={handleDeleteRecord}
+                handleEditRecord={handleEditRecord}
+            />
         )
     }
 }
