@@ -30,8 +30,6 @@ import 'tailwindcss/tailwind.css';
 
 const RecordPage = ({sem, user, student, notes, history, status, grades, checklist}) => {
 
-    // pass details and other data through props to this component
-    
     const [selectedStudent, setSelectedStudent] = useState(student)
     const [statusState, setStatus] = useState(status)
     const [gradeState, setGradeState] = useState(grades)
@@ -41,8 +39,8 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const [tabId, setTabId] = useState(0)
     const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
 
-    // validation functions
 
+    // validation functions
     const handleValApply = () => {
         console.log(ip)
 
