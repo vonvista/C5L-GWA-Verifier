@@ -46,11 +46,11 @@ const Dropdown = ({ studentInfo, grades }) => {
     <div className="w-40 relative ml-auto grow-0">
 
       {/* Actions and arrow down */}
-      <div className="grid-cols-2 divide-x w-40 p-2 bg-login-green flex mr-0 items-center justify-items-center rounded-lg border border-slate-300">
+      <div className="grid-cols-2 divide-x w-40 p-2 bg-button-green flex mr-0 items-center justify-items-center rounded-lg border border-slate-300">
         
         <button
           type="button"
-          className="pl-1.75 m-0 inline-block grow hover:bg-login-green-hover rounded-l-lg"
+          className="pl-1.75 m-0 inline-block grow hover:bg-button-green-hover rounded-l-lg"
           // add onclick
           
           onClick={() =>{
@@ -67,7 +67,7 @@ const Dropdown = ({ studentInfo, grades }) => {
 
         <button
           type="button"
-          className="pl-1.5 m-0 inline-block bg-login-green grow hover:bg-login-green-hover rounded-r-lg"
+          className="pl-1.5 m-0 inline-block bg-button-green grow hover:bg-button-green-hover rounded-r-lg"
           onClick={() => {
             setIsActive(!isActive);
           }}
@@ -90,9 +90,9 @@ const Dropdown = ({ studentInfo, grades }) => {
           className="origin-top-right z-50 absolute right-0 mt-0.5 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
           tabIndex="-1"
         >
-          <div className="pt-1 bg-login-green rounded-lg">
+          <div className="pt-1 bg-button-green rounded-lg">
             <button
-              className="text-gray-700 block px-4 py-2 text-sm z-1 w-full hover:bg-login-green-hover hover:rounded-t-lg"
+              className="text-gray-700 block px-4 py-2 text-sm z-1 w-full hover:bg-button-green-hover hover:rounded-t-lg"
               type="button"
               onClick={() => {
                 setIsActive(!isActive);

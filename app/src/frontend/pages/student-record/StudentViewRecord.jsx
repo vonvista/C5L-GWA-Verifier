@@ -136,7 +136,8 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         }
     }
 
-    // update HistoryState by adding new history to its date
+    // update HistoryState by adding new history to its date (not yet working)
+    // also used for updating state of history after editing a row (working)
     const setHistory = (histObj) => {
 
         let history = [...historyState]
@@ -368,8 +369,8 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                                                 <button
                                                     className={
                                                         selected 
-                                                            ? 'transition-all ease-in delay-100 text-login-green pb-2 pt-4 w-1/3 border-b border-login-green focus:outline-none'  
-                                                            : 'transition-all ease-in delay-100 text-sr-tab-inactive pb-2 pt-4 w-1/3 border-b border-sr-divider-light focus:outline-none hover:text-login-green-hover hover:transition hover:ease-in hover:delay-300'
+                                                            ? 'transition-all ease-in delay-100 text-button-green pb-2 pt-4 w-1/3 border-b border-button-green focus:outline-none'  
+                                                            : 'transition-all ease-in delay-100 text-sr-tab-inactive pb-2 pt-4 w-1/3 border-b border-sr-divider-light focus:outline-none hover:text-button-green-hover hover:transition hover:ease-in hover:delay-300'
                                                     }
                                                 >
                                                     {tab}

@@ -9,7 +9,7 @@ import upload from '../../../../assets/icons/upload.svg';
 // -- handleAddRecord   : function to handle addition of new student record
 
 const UploadFileBtn = ({handleClick, handleAddRecord}) => {
-  const uploadbtn = `w-[11vw] h-[3vw] bg-login-green m-2 rounded-xl text-white text-base font-montserrat font-bold hover:shadow-lg hover:bg-login-green-hover`;
+  const uploadbtn = `w-[11vw] h-[3vw] bg-button-green m-2 rounded-xl text-white text-base font-montserrat font-bold hover:shadow-lg hover:bg-button-green-hover`;
   const ip = localStorage.getItem("ServerIP");
 
   // function that "clicks" the input tag to open file dialog window
