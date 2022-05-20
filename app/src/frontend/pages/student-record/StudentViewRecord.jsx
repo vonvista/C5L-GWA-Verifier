@@ -256,7 +256,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                 {/* student grades */}
                 <div className="w-full flex mx-auto my-5 gap-3">
 
-                    {/* div container for the whole accordion component */}
+                    {/* container for the whole accordion component */}
                     <div className="w-[60vw] flex-1 overflow-auto mx-auto bg-white">
                         {   // map grades per semester
                             gradeState.map((semData, idx)=>(

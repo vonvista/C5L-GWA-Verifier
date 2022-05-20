@@ -5,45 +5,67 @@ import AddRow from 'frontend/pages/student-record/grades-table/AddRow';
 import Justification from 'frontend/pages/student-record/grades-table/Justification';
 import Swal from 'sweetalert2'
 
-// Parent component >> List.jsx
 
-// Function contains the Add Row button from Student Record View/Edit Page
-// -- handleAdd prop: function to handle add row click event
+/* Parent component >> frontend/components/table/List.jsx */
 
-const AddRowBtn = ({ sem, grades, addHandler, histHandler }) => {
+/* This component is for the "Add Row" button found in the Student Record page */
+/* 
+   Props:
+    sem         ---     receives the sem and year that indicates which table is the Add Row button placed in
+    grades      ---     receives the list of courses taken and grades received by the selected student in a perticular sem and year
+    addHandler  ---     function that updates the state of the list of courses taken by the student in a semester
+    histHandler ---     function that updates the state of the student record history
+*/
+
+const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
+
+    /*-------------------- State handlers --------------------*/
 
     // State handler for add row modal
     const [isOpen, setIsOpen] = useState(false)
     // State handler for justification modal
     const [open, setOpen] = useState(false)
-
-    const addRowStyle = `w-3/5 h-8 bg-login-green mb-3 rounded-xl text-white font-montserrat font-bold hover:shadow-lg hover:bg-login-green-hover`;
-
-    // Functions to close the justification modal window
-    const closeJust = () => {
-      setOpen(false)
-    }
-
-    // Functions to open the justification modal window
-    const openModal = () => {
-        setIsOpen(true);
-    }
-
-    const closeModal = () => {
-      setIsOpen(false);
-    }
-
+    // State handler for the list of courses taken in a semester
     const [gradesData, setGradesData] = useState(grades);
+
+    // State handlers for the input fields in the add row modal
     const [courseName, setCourseName] = useState('');
     const [units, setUnits] = useState('');
     const [grade, setGrade] = useState('');
+
+
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
     const [studentID, setStudentID] = useState(localStorage.getItem("currStudentID"));
     const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
     // const [histTitle, setHistTitle] = useState(''); // value of history title (might use later)
 
-  
-    // checks if the course is already in the grade list
+    
+    /*-------------------- Functions --------------------*/
+
+    // Function to reset the input fields in the add row modal window
+    const resetInputFields = () => {
+        setCourseName('');
+        setUnits('');
+        setGrade('');
+    }
+
+    // Function to open the add row modal window
+    const openModal = () => {
+        setIsOpen(true);
+    }
+
+    // Function to close the add row modal window
+    const closeAddRow = () => {
+        resetInputFields();
+        setIsOpen(false);
+    }
+
+    // Function to close the justification modal window
+    const closeJust = () => {
+      setOpen(false)
+    }
+    
+    // Function that checks if the course is already in the grade list
     function isGradeDuplicate(course){
 
         // access each grades
@@ -57,22 +79,8 @@ const AddRowBtn = ({ sem, grades, addHandler, histHandler }) => {
 
         return false
     }
-
-    const closeAddRow = () => {
-        resetInputFields();
-        closeModal();
-    }
-
-  
-    // reset input fields called upon closing modal
-    const resetInputFields = () => {
-        setCourseName('');
-        setUnits('');
-        setGrade('');
-    }
-
     
-    // function for adding new history after adding new row
+    // Function for adding new history after adding new row
     // ..
     // .. for revisions after adding Justification for AddRow
     // ..
@@ -138,7 +146,7 @@ const AddRowBtn = ({ sem, grades, addHandler, histHandler }) => {
     }
 
 
-    // handles adding grade to DB
+    // Function that handles adding grade to DB
     const handleAddGrade = () => {
         // if course is already a duplicate 
         // show alerts &
@@ -187,30 +195,22 @@ const AddRowBtn = ({ sem, grades, addHandler, histHandler }) => {
         closeAddRow();
     }
 
-    /* Closes add row modal, opens justification modal */
+    // Function that closes add row modal, opens justification modal
     const handleSave = () => {
-      // Check if user has filled out all fields
-      if(
-        courseName === "" || 
-        units === "" || 
-        grade === ""
-      ) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Fill out all fields',
-        })
-        return
-      }
-      
-      setIsOpen(false)   // closes add row modal
-      setOpen(true)      // opens justification modal
+        setIsOpen(false)   // closes add row modal
+        setOpen(true)      // opens justification modal
     }
 
+    // Styling
+    const addRowStyle = `w-3/5 h-8 bg-button-green mb-3 rounded-xl text-white font-montserrat font-bold hover:shadow-lg hover:bg-button-green-hover`;
+
+    
     return (
         <>
-            <Justification modalState={open} modalHandler={closeJust} parentSubmitHandler={handleAddGrade} histHandler={histHandler} />
-
+            {/* Justification modal */}
+            <Justification modalState={open} modalHandler={closeJust} parentSubmitHandler={handleAddGrade} handleHistory={handleHistory} />
+            
+            {/* Add Row modal */}
             <AddRow
                 modalState={isOpen}      
                 handleSave={handleSave}
@@ -225,6 +225,7 @@ const AddRowBtn = ({ sem, grades, addHandler, histHandler }) => {
                 gradeHandler={setGrade}
             />
 
+            {/* Add Row button */}
             <button className={addRowStyle} type="button" onClick={openModal}>
                 <img
                 className="p-0.25 my-1.5 inline-flex"

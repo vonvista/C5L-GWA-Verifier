@@ -1,59 +1,43 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Dialog, Transition} from '@headlessui/react';
 import { Fragment, useEffect, useState } from 'react';
-
-/* Components */
-import AddRowSave from 'frontend/components/buttons/AddRowSave';
-
-/* CSS */
 import 'tailwindcss/tailwind.css';
 
 
-// Parent component >> AddRowBtn.jsx
-
-// For disabling up-down arrows in input number textfield
-const inputs = 
-    `input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    input[type=number] {
-        -moz-appearance: textfield;
-    }`;
+/* Parent component >> frontend/components/buttons/AddRowBtn.jsx */
 
 /* Function for the "Add Row" feature in the Student View Record page */
 /* Shows the modal window after clicking the AddRowBtn */
-    /* 
-    Props:
-        modalState              ---     state of the add row modal
-        handleSave              ---     closes add row modal and opens justification modal 
-        handleClose             ---     closes add row modal and resets the input fields
-        courseNameState         ---     holds the current value of courseName input field
-        courseNameHandler       ---     function that sets the value of courseName input field
-        unitsState              ---     holds the current value of units input field
-        unitsHandler            ---     function that sets the value of units input field
-        gradeState              ---     holds the current value of grade input field
-        gradeHandler            ---     function that sets the value of grade input field
-    */
+/* 
+   Props:
+    modalState          ---     holds the state of the add row modal
+    handleSave          ---     function used to close the add row modal and open the justification modal 
+    handleClose         ---     function used to close add row modal and reset the input fields
+    courseNameState     ---     holds the current value of courseName input field
+    courseNameHandler   ---     function that sets the value of courseName input field
+    unitsState          ---     holds the current value of units input field
+    unitsHandler        ---     function that sets the value of units input field
+    gradeState          ---     holds the current value of grade input field
+    gradeHandler        ---     function that sets the value of grade input field
+*/
+
 const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNameHandler, unitsState, unitsHandler, gradeState, gradeHandler}) => {
 
     // Styling
-    const addRowModal = `relative bg-secondary-red h-[36.70360110803324vh] w-[49.479166666666664vw] rounded-[3.2552083333333335vw] px-[3.2552083333333335vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
-    const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[36.70360110803324vh]`;
-    const modalBody = `absolute inset-x-0 bg-secondary-red top-[10%] bottom-[10%]`;
-    const modalClose = `text-[4.847645429362881vh] text-white float-right`;
-    const modalTitle = `text-white text-center font-bold italic text-[1.3020833333333333vw] mt-[4.1551246537396125vh] mb-[4.847645429362881vh]`;
-    const modalInputs = `text-[1.1067708333333333vw] flex items-center justify-center`;
-    const inputContainer = `ml-5 mr-[0.9765625vw]`;
-    const inputStyle = `text-center w-full h-[4.847645429362881vh] rounded-[0.6510416666666666vw]`
+    const addRowModal = `relative bg-secondary-red h-[37vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
+    const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[37vh]`;
+    const modalBody = `absolute inset-x-0 bg-secondary-red top-[8%] bottom-[10%]`;
+    const modalClose = `text-[4.85vh] text-white float-right`;
+    const modalTitle = `text-white text-center font-bold italic text-[1.30vw] mt-[4.15vh] mb-[4.85vh]`;
+    const modalInputs = `text-[1.10vw] flex items-center justify-center`;
+    const inputContainer = `ml-5 mr-[1.15vw]`;
+    const inputStyle = `text-center w-full h-[4.85vh] rounded-xl`
     const sectionCoursename = `inline-block w-[11.71875vw]`;
-    const sectionUnits = `inline-block w-[3.90625vw]`;
-    const sectionGrade = `inline-block w-[4.8828125vw]`;
-    const modalFooter = `absolute right-0 bottom-0 mt-[4.847645429362881vh] text-[1.1067708333333333vw] flex items-end justify-end`;
-    const modalBtnSave = `h-[5.54016620498615vh] w-[9.765625vw] py-[0.6510416666666666vw] px-[1.770083102493075vh] rounded-[0.6510416666666666vw] mr-[0.6510416666666666vw] bg-save hover:bg-save-hover text-center text-white`;
-    const modalBtnDiscard = `h-[5.54016620498615vh] w-[9.765625vw] py-[0.6510416666666666vw] px-[1.770083102493075vh] rounded-[0.6510416666666666vw] mr-[0.6510416666666666vw] bg-discard hover:bg-white text-center`;
+    const sectionUnits = `inline-block w-[3.9vw]`;
+    const sectionGrade = `inline-block w-[4.8vw]`;
+    const modalFooter = `absolute right-0 bottom-0 mt-[4.85vh] text-[1.11vw] flex items-end justify-end`;
+    const modalBtnSave = `h-[5vh] w-[9.25vw] rounded-xl mr-[0.65vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green`;
+    const modalBtnDiscard = `h-[5vh] w-[9.25vw] rounded-xl mr-[0.65vw] bg-discard hover:bg-white text-center`;
 
     // Change courseName handler
     const handleCourseChange = (event) => {
@@ -70,6 +54,28 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
         gradeHandler(event.target.value);
     }
 
+    // Save Button
+    const SaveButton = () => {
+        // check if all input fields have been filled
+        if (courseNameState && unitsState && gradeState){
+          return <button className={modalBtnSave} onClick={handleSave}>Save</button>
+        } else {
+          return <button className={modalBtnSave} disabled>Save</button>
+        };
+    };
+
+    // Used for disabling up-down arrows in input number textfield
+    const inputs = 
+        `input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }`;
+        
     return (
         <>
             {/* Wrapping everything with transition component to use transition effects from @headlessui/react */}
@@ -113,7 +119,7 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
                                     <div className={baybayinStyle}></div>
                                     <div className={modalBody}>
 
-                                        {/* title */}
+                                        {/* Window title */}
                                         <div className={modalClose}>
                                             <button onClick={handleClose}>
                                                 <span>&times;</span>
@@ -122,10 +128,10 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
 
                                         <div className={modalTitle}>Please fill in the fields below to insert a new row</div>
 
-                                        {/* input form */}
+                                        {/* Input form */}
                                         <form className={modalInputs}>
 
-                                            {/* course name */}
+                                            {/* Course Name */}
                                             <div className={inputContainer}>
                                                 <section className={sectionCoursename}>
                                                     <input 
@@ -139,7 +145,7 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
                                                 </section>
                                             </div>
 
-                                            {/* units */}
+                                            {/* Units */}
                                             <div className={inputContainer}>
                                                 <section className={sectionUnits}>
                                                     <input 
@@ -153,7 +159,7 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
                                                 </section>
                                             </div>
 
-                                            {/* grade */}
+                                            {/* Grade */}
                                             <div className={inputContainer}>
                                                 <section className={sectionGrade}>
                                                     <input 
@@ -168,10 +174,10 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
                                             </div>
                                         </form>
 
-                                        {/* save and discard buttons */}
-                                        <div className={modalFooter}>                                        
-                                            <button className={modalBtnDiscard} onClick={handleClose}>Discard</button>
-                                            <AddRowSave handleSave={handleSave}/>
+                                        {/* Save and Cancel buttons */}
+                                        <div className={modalFooter}>
+                                            <SaveButton />
+                                            <button className={modalBtnDiscard} onClick={handleClose}>Cancel</button>
                                         </div>
                                     </div>
                                 </div>
