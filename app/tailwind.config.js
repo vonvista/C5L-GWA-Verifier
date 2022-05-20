@@ -8,11 +8,9 @@ module.exports = {
         'baybayin': "url('/assets/icons/baybayin.png')",
       },
       colors: {
-        'login-green': '#2A7146',
-        'login-green-hover': '#35724df5',
+        'button-green': '#2A7146',
+        'button-green-hover': '#35724df5',
         'login-footer': '#fecaca',
-        'save': '#35724df5',
-        'save-hover': '#3d7d57',
         'discard': '#f0f8ff',
         'export-yellow': '#ffc270',
         'export-yellow-hover': '#ffc87f',
