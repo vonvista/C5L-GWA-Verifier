@@ -14,6 +14,7 @@ import Table from './grades-table/TableContents';
 
 /* CSS */
 import 'tailwindcss/tailwind.css';
+import { toNamespacedPath } from 'node:path/win32';
 
 
 
@@ -28,7 +29,7 @@ import 'tailwindcss/tailwind.css';
 // -- checklist : list of requirements the student needs to accomplish before being verified
 // -- autoSet:
 
-const RecordPage = ({sem, user, student, notes, history, status, grades, checklist}) => {
+const RecordPage = ({sem, user, student, notes, history, status, grades, checklist, gpa}) => {
 
     const [selectedStudent, setSelectedStudent] = useState(student)
     const [statusState, setStatus] = useState(status)
@@ -38,6 +39,8 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const [validationsState, setValidationsState] = useState(checklist)
     const [tabId, setTabId] = useState(0)
     const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
+    const [gpaCalc, setGPA] = useState(gpa);
+    const [currStudentID, setCurrStudentID] = useState(localStorage.getItem("currStudentID"))
 
 
     // validation functions
@@ -100,7 +103,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const tabContents = { 
         // status tab contents (dynamic) so easier to add or remove tabs
         // uses components as values
-        Status: <Status state={statusState} />,                     // status component
+        Status: <Status state={statusState} gpaCalc={gpaCalc} />,                     // status component
         Validations: <CheckList checklistData={validationsState} setValData={toggleValidation} handleApply={handleValApply}/>,       //checklist component
         Notes: <Notes notesData={notesState} semesters={gradeState} setNotesData={setNotesState} />,    // notes component
         History: <History historyData={historyState} />,            // history component
@@ -168,6 +171,13 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         let total = 0
         let cumulative = 0
         let weight = 0
+        let finalTotal = 0
+
+        // declarartions for GPA and non GPA computation
+        let tunitTotal = 0;
+        let punitTotal = 0;
+        let tnunitTotal = 0;
+        let pnunitTotal = 0;
 
         // insert new values to grades
         for (let i = 0; i < grades.length; i++){
@@ -178,29 +188,98 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
             }
         }
 
-
+        // loop every sem in grades
         for (let i = 0; i < grades.length; i++){
-
+            // loop every grades in a sem
             for (let j = 0; j < grades[i].data.length; j++){
 
-            // compute total unit per sem, weight, and cumulative
-            weight = parseFloat(grades[i].data[j].units) * parseFloat(grades[i].data[j].grade)
-            if(isNaN(weight)){
-                weight = 0;
-            }
-            cumulative += weight
-            total += parseFloat(grades[i].data[j].units)
+                // compute total unit per sem, weight, and cumulative
+                weight = parseFloat(grades[i].data[j].units) * parseFloat(grades[i].data[j].grade)
 
-            grades[i].data[j].enrolled = weight.toString()
-            grades[i].data[j].runningSum = cumulative.toString()
+                // compute total untis earned
+                if(grades[i].data[j].units != "0" && grades[i].data[j].grade != "0" && grades[i].data[j].grade != 'S' && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP'){
+                    finalTotal += parseFloat(grades[i].data[j].units)
+                    total += parseFloat(grades[i].data[j].units)
+                }
+
+                // if weight is a text then weight considered 0
+                if(isNaN(weight)){
+                    weight = 0;
+                }
+
+                // computation of taken GPA units
+                if(grades[i].data[j].units != "0" && grades[i].data[j].grade != 'S') {
+                    tunitTotal += parseFloat(grades[i].data[j].units)
+                  } 
+                
+                // computation of passed GPA units
+                if(grades[i].data[j].units != "0") {
+                    if(grades[i].data[j].grade != "0" && grades[i].data[j].grade != 'S' && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP') {
+                    punitTotal += parseFloat(grades[i].data[j].units)
+                    } 
+                }
+
+                // computation of taken non-GPA units
+                if(grades[i].data[j].units == "0") {
+                    tnunitTotal += 3;
+                }
+                
+                // computation of passed non-GPA units
+                if(grades[i].data[j].units == "0") {
+                    if(grades[i].data[j].grade != "0" && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP') {
+                    pnunitTotal += 3;
+                    }
+                }
+
+                // increment cumulative
+                cumulative += weight
+                
+
+                // store weight and cumulative
+                grades[i].data[j].enrolled = weight.toString()
+                grades[i].data[j].runningSum = cumulative.toString()
             }
 
+            // store total per sem and reset
             grades[i].total = total
             total = 0
         }
-        //console.log(grades)
-        // set new value of props
+
+        // for computation of status tab
+        let unitsGPA = {GPAUnits: {taken: tunitTotal, passed: punitTotal}, NotGPAUnits: {taken: tnunitTotal, passed: pnunitTotal}}
+        let gpaCalc = {totalGradePoints: cumulative, totalUnitsGPA: finalTotal, gwa: cumulative/finalTotal}
+        
+        // update props value
+        setGPA(gpaCalc)
         setGradeState(grades)
+        setStatus(unitsGPA)
+
+        // data to be sent to DB for update
+        let newGPA = {
+            _id: currStudentID,
+            TotalUnits: gpaCalc.totalUnitsGPA,
+            TotalCumulative: gpaCalc.totalGradePoints,
+            OverallGWA: gpaCalc.gwa
+        }
+        
+        // update student gpa to DB
+        fetch(`http://${ip}:3001/student/update-gpa`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newGPA)// use studentID to find student info
+            })
+            .then(response => response.json())
+            .then(body => console.log(body))
+            .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Server Error',
+                    text: 'Check if the server is running or if database IP is correct',
+                })
+                console.log(err)
+            })
     }
     
     // const histAdd = (histObj) => {

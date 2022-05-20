@@ -230,7 +230,6 @@ exports.gradeAdd = function(req, res, next) {
     Semyear : req.body.Semyear,
   });
   console.log(newGrade);
-  
 
   newGrade.save(function(err) {
     if (!err) { res.send(newGrade)}
@@ -363,11 +362,29 @@ Student.find(function(err, student) {
 }
 
 exports.studentFindOne = function(req, res, next) {
-Student.findOne({StudentID:req.body.StudentID}, function(err, Student){
-  if(Student) {res.send(Student);}
-  else if (err) { res.send({err: 'An error occured'}); }
-  else { res.send({err:'Unable to find student'}); }
-});
+  Student.findOne({StudentID:req.body.StudentID}, function(err, Student){
+    if(Student) {
+      //update student status to 'Pending' if student status is 'unchecked' and send student object
+      if(Student.Status == 'Unchecked'){
+        Student.Status = 'Pending';
+        Student.save(function(err){
+          if(!err){
+            res.send(Student);
+          } else {
+            res.send({err:'Unable to update student status'});
+          }
+        })
+      } else {
+        res.send(Student);
+      }
+    }
+    else if (err) { 
+      res.send({err: 'An error occured'}); 
+    }
+    else { 
+      res.send({err:'Unable to find student'}); 
+    }
+  });
 }
 
 // add student
@@ -397,26 +414,44 @@ exports.studentAdd = function(req, res, next) {
 
 // update student
 exports.studentUpdateOne = function(req, res, next) {
-Student.updateOne({_id:mongoose.Types.ObjectId(req.body._id)},{"$set":{
-  "StudentNo.": req.body.StudentID,
-  "FirstName": req.body.FirstName,
-  "MiddleName": req.body.MiddleName,
-  "LastName": req.body.LastName,
-  "Degree": req.body.Degree,
-  "Course": req.body.Course,
-  "TotalUnits": req.body.TotalUnits,
-  "TotalUnits2": req.body.TotalUnits2,
-  "TotalCumulative": req.body.TotalCumulative,
-  "OverallGWA": req.body.OverallGWA,
-  "Status": req.body.Status
-}}, {new : true}, function(err,result){
-  if(!err && Student){
-    res.send(result);
-  } else {
-    res.send({err:'Unable to update student'});
-  }
-})
+  Student.updateOne({_id:mongoose.Types.ObjectId(req.body._id)},{"$set":{
+    "StudentNo.": req.body.StudentID,
+    "FirstName": req.body.FirstName,
+    "MiddleName": req.body.MiddleName,
+    "LastName": req.body.LastName,
+    "Degree": req.body.Degree,
+    "Course": req.body.Course,
+    "TotalUnits": req.body.TotalUnits,
+    "TotalUnits2": req.body.TotalUnits2,
+    "TotalCumulative": req.body.TotalCumulative,
+    "OverallGWA": req.body.OverallGWA,
+    "Status": req.body.Status
+  }}, {new : true}, function(err,result){
+    if(!err && Student){
+      res.send(result);
+    } else {
+      res.send({err:'Unable to update student'});
+    }
+  })
 }
+
+
+// update student cumulative, overallgwa, totalunits
+exports.studentUpdateGPA = function(req, res, next) {
+  console.log(req.body);
+  Student.updateOne({_id:mongoose.Types.ObjectId(req.body._id)},{"$set":{
+    "TotalUnits": req.body.TotalUnits,
+    "TotalCumulative": req.body.TotalCumulative,
+    "OverallGWA": req.body.OverallGWA,
+  }}, {new : true}, function(err,result){
+    if(!err && Student){
+      res.send(result);
+    } else {
+      res.send({err:'Unable to update student totalunits, cumulative, gwa'});
+    }
+  })
+}
+
 
 // delete student
 exports.studentDeleteOne = function(req, res, next) {
@@ -445,7 +480,32 @@ exports.studentUpdateValidations = function(req, res, next) {
     "Validations": req.body.Validations
   }}, {new : true}, function(err,result){
     if(!err && Student){
-      res.send(result);
+      //check if all validations are true
+      var allTrue = true;
+      for(var i = 0; i < req.body.Validations.length; i++){
+        if(req.body.Validations[i] == false){
+          allTrue = false;
+        }
+      }
+      if(allTrue){
+        Student.updateOne({_id: mongoose.Types.ObjectId(req.body._id)},{"$set":{
+          "Status": 'Checked'
+        }}, {new : true}, function(err,result){
+          if(!err && Student){
+            res.send(result);
+          }
+        });
+      }
+      else {
+        Student.updateOne({_id: mongoose.Types.ObjectId(req.body._id)},{"$set":{
+          "Status": 'Pending'
+        }}, {new : true}, function(err,result){
+          if(!err && Student){
+            res.send(result);
+          }
+        });
+      }
+      
     } else {
       res.send({err:'Unable to update student'});
     }

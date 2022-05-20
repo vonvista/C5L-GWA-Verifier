@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 
 import expand from '../../../../assets/icons/collapse(1).svg';
 import EditStudentDetails from 'frontend/pages/student-record/StudentDetailEditModal';
@@ -21,25 +22,6 @@ const Dropdown = ({ studentInfo, grades }) => {
 
   let navigate = useNavigate()
 
-  
-  // // event handle for Delete button on dropdown
-  // const handleDelete = () => {
-
-  //   // remove student from DB
-  //   // studentDelete(localStorage.getItem('currStudentID'))  // uncomment to delete student (also remove this comment)
-
-  //   // remove student infos on localStorage
-  //   localStorage.removeItem("currStudent")
-  //   localStorage.removeItem("currStudentID")
-  //   localStorage.removeItem("currStudentKey")
-  //   localStorage.removeItem("currStudentGrades")
-
-  //   // navigate to user dashboard
-  //   navigate('/user-dashboard')
-
-  // }
-
-
   // event handle for Export on dropdown
   const handleExport = () => {
 
@@ -49,15 +31,14 @@ const Dropdown = ({ studentInfo, grades }) => {
     const student = studentInfo
     const studentGrades = grades
 
-    // // get current user's full name from localStorage
-    // const fName = localStorage.getItem("FirstName")
-    // const lName = localStorage.getItem("LastName")
-    // const mName = localStorage.getItem("MiddleName")
-
-    // const fullName = `${fName} ${mName} ${lName}`
-
     exportStudentData(student, studentGrades, currUser);
 
+    // swal success message
+    Swal.fire(
+      'Successful production of student record',
+      'If you pressed save, wait for your download to finish',
+      'success'
+    )
   }
 
 

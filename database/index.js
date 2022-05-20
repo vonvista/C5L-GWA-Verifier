@@ -8,6 +8,25 @@ const request = require('request');
 const cors = require('cors');
 const readline = require('readline');
 const si = require('systeminformation');
+const MongoClient = require('mongodb').MongoClient
+
+MongoClient.connect('mongodb://admin:password@localhost:27017/admin')
+  .then(client => client.db('admin').admin())
+  .then(db => {
+    return db.adminCommand({
+      createRole: 'admin',
+      privileges: [{resource: {db: "KALATAS", collection: ""}, actions: ["listCollections"] }], // access all collections
+      roles: []
+    })
+  })
+  .then(() => {
+    console.log('Success!')
+    //process.exit(0)
+  })
+  .catch(err => {
+    console.log('Error!')
+    //process.exit(99)
+  })
 
 const app = express()
 app.use(cors())

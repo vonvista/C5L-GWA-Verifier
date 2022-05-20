@@ -1,6 +1,7 @@
 import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/solid'
 import { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 
 import List from 'frontend/components/table/List';
 import 'tailwindcss/tailwind.css';
@@ -38,6 +39,13 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         newSemData[targetIndex] = values
         autoSet({sem:Name, data:newSemData})
         semHandler(newSemData)
+
+        // success message
+        Swal.fire({
+            title: 'Success',
+            text: 'Successfully added row',
+            icon: 'success',
+        })
     }
 
 
@@ -61,21 +69,6 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
             _id: values._id
         }
 
-        const historyCredentials = {
-            User: userName,
-            Student: currStudentID,
-            // Date: currentDate,
-            // Time: currentTime,
-            Date: new Date().toLocaleDateString(),
-            Time: new Date().toLocaleTimeString('en-US', { 
-                hour12: false, 
-                hour: "numeric", 
-                minute: "numeric"
-            }),
-            Description: 'update',
-            Details: "Sample Details"
-        };
-
         fetch(`http://${ip}:3001/grade/update` ,{
             method: "POST",
             headers: { "Content-Type":"application/json"},
@@ -87,18 +80,15 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         })
 
         
-        fetch(`http://${ip}:3001/history/add`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify(historyCredentials),
-        })
-        .then((response) => response.json())
-        .then((body) => {
-            console.log(body);
-        })
-
         autoSet({sem:Name, data:newSemData})
         semHandler(newSemData)
+
+        // success message
+        Swal.fire({
+            title: 'Success',
+            text: 'Successfully modified row',
+            icon: 'success',
+        })
     }
 
     const setHistoryEditRow = (detailsObj) => { // logs action of editing a row to history
@@ -147,13 +137,20 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
 
         autoSet({sem:Name, data:newSemData})
         semHandler(newSemData)
+
+        // success message
+        Swal.fire({
+            title: 'Success',
+            text: 'Successfully deleted row',
+            icon: 'success',
+        })
     }
 
     return (
         <>
             {/* Accordion for the table */}
             <div className="row-span-1">
-                <Disclosure key={key}>
+                <Disclosure key={key} defaultOpen>
                     {({ open }) => (
                         <>
                              {/* Accordion Header */}

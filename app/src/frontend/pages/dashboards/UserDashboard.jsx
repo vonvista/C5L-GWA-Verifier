@@ -22,6 +22,10 @@ import readInputFile from 'backend/read-input';
 import Swal from 'sweetalert2';
 
 const UserDashboard = () => {
+
+  // for navigating page on search bar and other
+  let navigate = useNavigate()
+
   const [rows, setRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -34,43 +38,44 @@ const UserDashboard = () => {
   const [sortState, setSortState] = useState([0, 0, 0, 0]);
   const [latestSort, setLatestSort] = useState(-1);
 
-  const navigate = useNavigate();
+  const fetchData = async () => {
+    // Retrieve data from database
+    fetch(`http://${ip}:3001/student/find-all`)
+      .then((response) => response.json())
+      .then(async (body) => {
+        const studentsData = []; // initiating array that will contain the information of students
+        // mapping out all the entries sent by the fetch
+        body.map((student, i) => {
+          studentsData.unshift({
+            name: `${student.FirstName} ${student.LastName}`,
+            studno: student.StudentID,
+            degprog: student.Degree,
+            gwa: student.OverallGWA,
+            status: student.Status,
+            _id: student._id,
+          });
+        });
+
+        await setRows([...studentsData]);
+        await setUnsortedRows([...studentsData]);
+      })
+      .catch((err) => {
+        // will activate if DB is not reachable or timed out or there are other errors
+        Swal.fire({
+          icon: 'error',
+          title: 'Server Error',
+          text: 'Check if the server is running or if database IP is correct',
+        });
+        console.log(err);
+      });
+  }
 
 
+  const forceReload = () => {
+    fetchData();
+  };
   
   useEffect(() => {
-    const fetchData = async () => {
-      // Retrieve data from database
-      fetch(`http://${ip}:3001/student/find-all`)
-        .then((response) => response.json())
-        .then(async (body) => {
-          const studentsData = []; // initiating array that will contain the information of students
-          // mapping out all the entries sent by the fetch
-          body.map((student, i) => {
-            studentsData.unshift({
-              name: `${student.FirstName} ${student.LastName}`,
-              studno: student.StudentID,
-              degprog: student.Degree,
-              gwa: student.OverallGWA,
-              status: student.Status,
-              _id: student._id,
-            });
-          });
-
-          await setRows(studentsData);
-          await setUnsortedRows(studentsData);
-        })
-        .catch((err) => {
-          // will activate if DB is not reachable or timed out or there are other errors
-          Swal.fire({
-            icon: 'error',
-            title: 'Server Error',
-            text: 'Check if the server is running or if database IP is correct',
-          });
-          console.log(err);
-        });
-    };
-
     fetchData();
   }, []);
 
@@ -187,17 +192,36 @@ const UserDashboard = () => {
   const [searchStudent, setSearchStudent] = useState('');
 
   const handleSearch = () => {
-    // console.log(searchStudent);
-    // Add code here to search student, fetch sa database, if wala sa DB, display student cannot be found,
-    // if nasa DB, go to record of student
 
-    // if di mahanap si student
+    let onList = false;
 
-    // Swal.fire({
-    //   icon: 'error',
-    //   title: 'Error',
-    //   text: 'Student does not exist',
-    // })
+    // check if search field is empty
+    if(searchStudent === ''){
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Search bar is empty',
+      })
+      return
+    }
+
+    // find student on list
+    for (let i = 0; i < rows.length; i++){
+      if (searchStudent == rows[i].studno){
+        onList = true
+      }
+    }
+
+    // if not on the list
+    // show swal error and does not proceed
+    if(!onList){
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Student does not exist',
+      })
+      return
+    }
 
     // if nahanap si student, go straight to record
 
@@ -217,10 +241,10 @@ const UserDashboard = () => {
         // will activate if DB is not reachable or timed out or there are other errors
         Swal.fire({
           icon: 'error',
-          title: 'Student does not exist',
-          text: 'Check if the student number entered is correct',
-        });
-        console.log(err);
+          title: 'Server Error',
+          text: 'Check if the server is running or if database IP is correct',
+        })
+        console.log(err)
       });
     setSearchStudent('');
   };
@@ -269,7 +293,7 @@ const UserDashboard = () => {
               </div>
               {/* Refresh button */}
               <div className="flex items-center ml-2">
-                <Refresh handleClick={() => navigate('/user-dashboard')} />
+                <Refresh handleClick={forceReload} />
               </div>
             </div>
             <div className="table-container">

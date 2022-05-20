@@ -5,7 +5,7 @@ import Verify from 'frontend/components/buttons/Verify'
 // -- state : data for the status tab will be passed here
 // -- ...rest : additional prop for backend expansion 
 
-export default function Status({state, ...rest}) {
+export default function Status({ state, gpaCalc, ...rest }) {
 
     return(
         <div className="min-w-[25vw] max-w-[25vw] h-full mx-auto p-5 grid box-border overflow-auto">
@@ -13,13 +13,13 @@ export default function Status({state, ...rest}) {
             <div className="border rounded-lg p-4 grid row-auto">
                 <h1 className="place-self-start inline text-lg inter">Academic Achievement</h1>
                 {/* change the academic achievement Box depending on the Final GWA of the Student -lal */ 
-                    (state.GPACalc.totalGWA.toFixed(3) > 1.20) 
-                    ? (state.GPACalc.totalGWA.toFixed(3) > 1.45) 
-                        ? (state.GPACalc.totalGWA.toFixed(3) > 1.75) 
-                            ? <p className="text-4xl text-center text-login-green font-bold my-4 mx-0 inline-block inter">N/A</p> 
-                            : <p className="text-4xl text-center text-login-green font-bold my-4 mx-0 inline-block inter">Cum Laude</p> 
-                        : <p className="text-4xl text-center text-login-green font-bold my-4 mx-0 inline-block inter">Magna Cum Laude</p> 
-                    : <p className="text-4xl text-center text-login-green font-bold my-4 mx-0 inline-block inter">Summa Cum Laude</p> 
+                    (gpaCalc.gwa.toFixed(3) > 1.20) 
+                        ? (gpaCalc.gwa.toFixed(3) > 1.45) 
+                            ? (gpaCalc.gwa.toFixed(3) > 1.75) 
+                                ? <p className="text-4xl text-center text-login-green font-bold my-4 mx-0 inline-block inter">N/A</p> 
+                                : <p className="text-4xl text-center text-login-green font-bold my-4 mx-0 inline-block inter">Cum Laude</p> 
+                            : <p className="text-4xl text-center text-login-green font-bold my-4 mx-0 inline-block inter">Magna Cum Laude</p> 
+                        : <p className="text-4xl text-center text-login-green font-bold my-4 mx-0 inline-block inter">Summa Cum Laude</p> 
                 }
             </div>
             {/* Table for Grades */}
@@ -72,16 +72,16 @@ export default function Status({state, ...rest}) {
                     <tbody>
                         <tr>
                             <td>Total Grade Points</td>
-                            <td>{state.GPACalc.totalGradePoints.toFixed(3)}</td>
+                            <td>{gpaCalc.totalGradePoints.toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td>Units Taken Toward GPA</td>
-                            <td>{state.GPACalc.totalUnitsGPA.toFixed(3)}</td>
+                            <td>{gpaCalc.totalUnitsGPA.toFixed(2)}</td>
                         </tr>
 
                         <tr>
-                            <td className="pt-5">Total</td>
-                            <td className="pt-5">{state.GPACalc.totalGWA.toFixed(3)}</td>
+                            <td className="pt-5">GWA</td>
+                            <td className="pt-5">{gpaCalc.gwa.toFixed(5)}</td>
                         </tr>
                     </tbody>
                 </table>
