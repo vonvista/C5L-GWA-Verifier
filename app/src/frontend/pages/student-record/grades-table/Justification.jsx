@@ -2,10 +2,11 @@ import { Dialog, Transition} from '@headlessui/react';
 import { Fragment, useState, useEffect } from 'react';
 import { useForm, isRequired } from '../../../hooks/useForm';
 import Input from 'frontend/components/inputs/Input';
+import Swal from 'sweetalert2';
 
 // component that creates a modal window for justification from: https://headlessui.dev/react/dialog
 
-const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHistory }) => {
+const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHistory, histTitle, addRowDuplicate }) => {
     /* how to use
     
         parent will provide modalState and modalHandler
@@ -22,7 +23,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
         desc: '',
     }
     const validations = [
-        ({title}) => isRequired(title) || {title: 'Please provide a title'},
+        //({title}) => isRequired(title) || {title: 'Please provide a title'},
         ({desc}) => isRequired(desc) || {desc: 'Please give a justification for editing the grades'}
     ]
 
@@ -38,8 +39,21 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
         // function that'll save changes
         // -- insert function for handling changes to history here --
         e.preventDefault()  // prevents refreshing of page
-        submitHandler(e) // update history log
+
+        // if addRowDuplicate did not proceed due to duplication of 
+        if(addRowDuplicate){
+            resetModalValues();
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Course is already in the list. Change course name or edit the available course',
+            })
+            return;
+        }
+
         parentSubmitHandler(e)    // submit contents of the form
+        submitHandler(e) // update history log
+
 
         const historyCredentials = { //updates history in db with title(?) and description
             User: localStorage.getItem("Username"),
@@ -52,7 +66,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                 hour: "numeric", 
                 minute: "numeric"
             }),
-            Description: values.title,
+            Description: histTitle,
             Details: values.desc
         };
 
