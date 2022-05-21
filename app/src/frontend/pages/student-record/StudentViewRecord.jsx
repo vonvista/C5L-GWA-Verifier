@@ -147,16 +147,17 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         for (let i = 0; i < history.length; i++){
             if(history[i].date == histObj.date){
                 //console.log(values)
-                console.log(history[i])
-                console.log(history[i].info)
                 // console.log(histObj)
-                history[i].info.push(histObj.info[0])       // new date appear on top
-                
+                // console.log(history[i].info)
+                // console.log(histObj)
+                history[i].info.unshift(histObj.info[0])    // new history appear on top   
+                // console.log(history[i].info)
+
                 break
             }
 
             if(i == history.length - 1){
-                history.push(histObj)
+                history.unshift(histObj)    // new date appear on top
             }
         }
         
