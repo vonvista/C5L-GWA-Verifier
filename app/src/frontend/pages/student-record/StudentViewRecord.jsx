@@ -141,7 +141,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const setHistory = (histObj) => {
 
         let history = [...historyState]
-        let newDateFlag = false
+        // let newDateFlag = false
 
         // insert new values to grades
         for (let i = 0; i < history.length; i++){
@@ -150,7 +150,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                 console.log(history[i])
                 console.log(history[i].info)
                 // console.log(histObj)
-                history[i].info.unshift(histObj.info[0])
+                history[i].info.push(histObj.info[0])       // new date appear on top
                 
                 break
             }
