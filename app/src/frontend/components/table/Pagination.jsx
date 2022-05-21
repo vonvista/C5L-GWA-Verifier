@@ -4,7 +4,7 @@ import { useState } from "react"
 import List from './List';
 
 /* CSS */
-import './Pagination.css'
+// import './Pagination.css'
 import 'tailwindcss/tailwind.css';
 
 /* Assets */
@@ -72,21 +72,27 @@ const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
       num > 1 && setNum(--num)
    }
 
+   /* Styling */
+   const paginationBox = `flex bg-white rounded-lg font-montserrat drop-shadow`;
+   const buttonStyle = `rounded-lg py-0 hover:text-white hover:bg-secondary-red h-[4.847645429362881vh] px-[1.0416666666666667vw]`;
+   const arrowStyle = `h-[2.770083102493075vh] w-[1.3020833333333333vw] fill-current`
+   const pageButton = `h-[4.847645429362881vh] w-[2.2786458333333335vw] rounded-[0.5208333333333334vw] px-[1.0416666666666667vw] py-0 text-[1.1067708333333333vw]`;
+   const currentPageStyle = `text-white bg-secondary-red`;
 
    return (
-      <div className="pagination-box flex bg-white rounded-lg font-[Montserrat]">
-         <button onClick={prev} className="button-arrow-style hover:text-white">
-            <svg class="arrow-style fill-current" viewBox="0 0 20 20">
+      <div className={paginationBox}>
+         <button onClick={prev} className={buttonStyle}>
+            <svg class={arrowStyle} viewBox="0 0 20 20">
                <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path>
             </svg>
          </button>
          {
             pageNumbers.map((pg, i) => (
-               <button key={i} onClick={() => paginate(pg.page)} className={`button-page-style ${currentPage === pg.page && 'current-page'}`}>{pg.page}</button>
+               <button key={i} onClick={() => paginate(pg.page)} className={`${pageButton} ${currentPage === pg.page && currentPageStyle}`}>{pg.page}</button>
             ))
          }
-         <button onClick={next} className="button-arrow-style hover:text-white">
-            <svg class="arrow-style fill-current" viewBox="0 0 20 20">
+         <button onClick={next} className={buttonStyle}>
+            <svg class={arrowStyle} viewBox="0 0 20 20">
                <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path>
             </svg>
          </button>
