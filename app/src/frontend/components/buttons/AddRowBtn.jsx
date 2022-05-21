@@ -32,7 +32,7 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
     const [courseName, setCourseName] = useState('');
     const [units, setUnits] = useState('');
     const [grade, setGrade] = useState('');
-
+    const [title, setTitle] = useState('');
 
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
     const [studentID, setStudentID] = useState(localStorage.getItem("currStudentID"));
@@ -84,65 +84,61 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
     // ..
     // .. for revisions after adding Justification for AddRow
     // ..
-    function handleHistory(data){
+    function setHistory(data){
 
-        // new history to save to db
-        let newHistory = {
-            User: userName,
-            Student: studentID,
-            Date: new Date().toLocaleDateString(),
-            Time: new Date().toLocaleTimeString('en-US', { 
-                hour12: false, 
-                hour: "numeric", 
-                minute: "numeric"
-            }),
-            Description: "create",
-            Details: `create student grade with Course: ${data.Course} on Sem: ${data.Semyear}`,
-        }
+        // // new history to save to db
+        // let newHistory = {
+        //     User: userName,
+        //     Student: studentID,
+        //     Date: new Date().toLocaleDateString(),
+        //     Time: new Date().toLocaleTimeString('en-US', { 
+        //         hour12: false, 
+        //         hour: "numeric", 
+        //         minute: "numeric"
+        //     }),
+        //     Description: "create",
+        //     Details: `create student grade with Course: ${data.Course} on Sem: ${data.Semyear}`,
+        // }
 
         // new history for history tab change handler
         let updateHistory = {
-            date: newHistory.Date,
+            date: new Date().toLocaleDateString(),
             info: [
                 {
-                main: 'create',
+                main: title,
                 user: userName,
-                time: newHistory.Time,
-                details: newHistory.Details,
+                time: new Date().toLocaleTimeString('en-US', { 
+                    hour12: false, 
+                    hour: "numeric", 
+                    minute: "numeric"
+                }),
+                details: data.desc,
                 },
             ],
         }
 
         // history handler
-       handleHistory(updateHistory);
-
-        // adds new grade to list and updates row
-        addHandler({
-            _id : data._id,
-            courseName: courseName,
-            units: units,
-            grade: grade,
-        })
+        handleHistory(updateHistory);
 
 
-        // fetch post request to add new history
-        fetch(`http://${ip}:3001/history/add`, {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newHistory)
-        })
-            .then(response => response.json())
-            .then(body => console.log(body))
-            .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Server Error',
-                    text: 'Check if the server is running or if database IP is correct',
-                })
-                console.log(err)
-            })
+        // // fetch post request to add new history
+        // fetch(`http://${ip}:3001/history/add`, {
+        //     method: "POST",
+        //     headers: {
+        //     "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify(newHistory)
+        // })
+        //     .then(response => response.json())
+        //     .then(body => console.log(body))
+        //     .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+        //         Swal.fire({
+        //             icon: 'error',
+        //             title: 'Server Error',
+        //             text: 'Check if the server is running or if database IP is correct',
+        //         })
+        //         console.log(err)
+        //     })
     }
 
 
@@ -152,12 +148,7 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
         // show alerts &
         // returns to add row modal
         if(isGradeDuplicate(courseName)){
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Course is already in the list. Change course name or edit the available course',
-            })
-            return
+            return;
         }
 
         // new grade from the AddRow fields to be added to DB
@@ -182,7 +173,16 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
             body: JSON.stringify(newGrade)
         })
             .then(response => response.json())
-            .then(body => handleHistory(body))
+            .then(body => {
+                // adds new grade to list and updates row
+                addHandler({
+                    _id : body._id,
+                    courseName: courseName,
+                    units: units,
+                    grade: grade,
+                })
+
+            })
             .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
                 Swal.fire({
                     icon: 'error',
@@ -208,7 +208,7 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
     return (
         <>
             {/* Justification modal */}
-            <Justification modalState={open} modalHandler={closeJust} parentSubmitHandler={handleAddGrade} handleHistory={handleHistory} />
+            <Justification modalState={open} modalHandler={closeJust} parentSubmitHandler={handleAddGrade} handleHistory={setHistory} histTitle={title} addRowDuplicate={isGradeDuplicate(courseName)} />
             
             {/* Add Row modal */}
             <AddRow
@@ -223,6 +223,8 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
                 unitsHandler={setUnits}
                 gradeState={grade}
                 gradeHandler={setGrade}
+                histTitleHandler={setTitle}
+                semState={sem}
             />
 
             {/* Add Row button */}

@@ -21,7 +21,7 @@ import 'tailwindcss/tailwind.css';
     gradeHandler        ---     function that sets the value of grade input field
 */
 
-const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNameHandler, unitsState, unitsHandler, gradeState, gradeHandler}) => {
+const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNameHandler, unitsState, unitsHandler, gradeState, gradeHandler, histTitleHandler, semState}) => {
 
     // Styling
     const addRowModal = `relative bg-secondary-red h-[37vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
@@ -58,7 +58,12 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
     const SaveButton = () => {
         // check if all input fields have been filled
         if (courseNameState && unitsState && gradeState){
-          return <button className={modalBtnSave} onClick={handleSave}>Save</button>
+          return <button 
+          className={modalBtnSave} 
+          onClick={() => {
+              handleSave();
+              histTitleHandler(`Created student grade row with Course: ${courseNameState}, Unit: ${unitsState}, and Grade: ${gradeState} on Sem: ${semState}`);
+            }}>Save</button>
         } else {
           return <button className={modalBtnSave} disabled>Save</button>
         };
@@ -164,7 +169,7 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
                                                 <section className={sectionGrade}>
                                                     <input 
                                                         className={inputStyle}
-                                                        type="number"
+                                                        type="text"
                                                         name="grade"
                                                         placeholder='0'
                                                         onChange={handleGradeChange}
