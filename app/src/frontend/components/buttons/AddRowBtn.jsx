@@ -114,7 +114,7 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
         }
 
         // history handler
-        histHandler(updateHistory);
+       handleHistory(updateHistory);
 
         // adds new grade to list and updates row
         addHandler({

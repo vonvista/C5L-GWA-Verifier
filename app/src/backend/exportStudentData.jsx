@@ -175,7 +175,7 @@ function exportStudentData(info, grades, user){
     }
     
     // add text
-    doc.text(`${exportData.totalunits2}`, LeftMargin, finalY)
+    // doc.text(`${exportData.totalunits2}`, LeftMargin, finalY)
 
     // addwatermark
     doc = addWaterMark(doc, user)
