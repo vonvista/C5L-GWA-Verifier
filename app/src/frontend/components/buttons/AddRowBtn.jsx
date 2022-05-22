@@ -106,7 +106,7 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
             info: [
                 {
                 main: title,
-                user: userName,
+                user: data.user,
                 time: new Date().toLocaleTimeString('en-US', { 
                     hour12: false, 
                     hour: "numeric", 
@@ -144,12 +144,6 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
 
     // Function that handles adding grade to DB
     const handleAddGrade = () => {
-        // if course is already a duplicate 
-        // show alerts &
-        // returns to add row modal
-        if(isGradeDuplicate(courseName)){
-            return;
-        }
 
         // new grade from the AddRow fields to be added to DB
         newGrade = {
@@ -197,6 +191,21 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
 
     // Function that closes add row modal, opens justification modal
     const handleSave = () => {
+        
+
+        // if course is already a duplicate 
+        // show alerts &
+        // returns to add row modal
+        if(isGradeDuplicate(courseName)){
+            // resetInputFields();
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Course is already in the list. Change course name or edit the available course.',
+            })
+            return;
+        }
+
         setIsOpen(false)   // closes add row modal
         setOpen(true)      // opens justification modal
     }
@@ -208,7 +217,7 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
     return (
         <>
             {/* Justification modal */}
-            <Justification modalState={open} modalHandler={closeJust} parentSubmitHandler={handleAddGrade} handleHistory={setHistory} histTitle={title} addRowDuplicate={isGradeDuplicate(courseName)} />
+            <Justification modalState={open} modalHandler={closeJust} parentSubmitHandler={handleAddGrade} handleHistory={setHistory} histTitle={title} />
             
             {/* Add Row modal */}
             <AddRow
@@ -225,6 +234,7 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
                 gradeHandler={setGrade}
                 histTitleHandler={setTitle}
                 semState={sem}
+                grades={grades}
             />
 
             {/* Add Row button */}
