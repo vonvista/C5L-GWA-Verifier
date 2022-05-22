@@ -4,7 +4,7 @@ import Actions from 'frontend/components/buttons/ActionsJustification'
 // -- data : contains data to be displayed
 // -- clickHandler : handles toggle for editing the row
 // -- delRow : handles toggle for deleting the row
-const ReadRow = ({data, clickHandler, delHandler, histHandler}) => {
+const ReadRow = ({data, clickHandler, delHandler, histHandler, sem}) => {
 
     const delRow = () => { 
         // function for deletingRow
@@ -19,7 +19,7 @@ const ReadRow = ({data, clickHandler, delHandler, histHandler}) => {
             <div className="table-cell align-middle self-center text-sr-dark-text text-center">{data.enrolled}</div>
             <div className="table-cell align-middle self-center text-sr-dark-text text-center">{data.runningSum}</div>
             <div className="table-cell align-middle self-center text-sr-dark-text text-center">
-                <Actions handleEdit={clickHandler} handleDelete={delRow} handleHist={histHandler} />
+                <Actions handleEdit={clickHandler} handleDelete={delRow} handleHist={histHandler} data={data} sem={sem}/>
             </div>
         </div>
     );

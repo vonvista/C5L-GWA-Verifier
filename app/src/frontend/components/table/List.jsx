@@ -115,14 +115,16 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                             touched={touched} 
                                             errors={errors}
                                             valid={isValid}
-                                            setHistoryEditRow={setHistoryEditRow}
+                                            setHistoryEditRow={handleHistory}
+                                            sem={sem}
                                         />
                                          :
                                         <ReadRow
                                             data={course}
                                             clickHandler={toggleEdit}
                                             delHandler={delHandler}
-                                            histHandler={setHistoryEditRow} // should be replaced with function that updates the state of history immediately after deleting row
+                                            histHandler={handleHistory} // should be replaced with function that updates the state of history immediately after deleting row
+                                            sem={sem}
                                         />
                                     }
                                 </Fragment>  
