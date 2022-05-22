@@ -286,7 +286,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
             `
                 py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
                 border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh] 
-                w-[8.138020833333334vw] text-center
+                w-[7.138020833333334vw] text-center
             `;
         // const tData = `py-[1.1772853185595569vh] px-[1.3020833333333333vw] border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]`;
         
@@ -294,32 +294,34 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         const actionstH = `text-center py-[1.1772853185595569vh] px-[1.3020833333333333vw] border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]`;
         const nametData = 
             `
-                font-bold w-[21.158854166666668vw] cursor-pointer
+                truncate
+                font-bold w-[23.158854166666668vw] cursor-pointer
                 py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
                 border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
             `;
         const numbertData = 
             `
-                w-[12.234375vw]
+                w-[11.234375vw]
                 py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
                 border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
             `;
         const degreetData = 
             `
+                truncate
                 w-[21.158854166666668vw] cursor-pointer
                 py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
                 border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
             `;
         const gwatData = 
             `
-                w-[7.8125vw] cursor-pointer
+                truncate
+                w-[10.8125vw] cursor-pointer
                 py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
                 border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
             `;
         const statustData = 
             `
-                content-center justify-center text-center font-[1.1067708333333333vw] h-[4.293628808864266vh] w-[8.138020833333334vw] p-0
-                py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
+                content-center justify-center text-center font-[1.1067708333333333vw] h-[4.293628808864266vh] w-[7.138020833333334vw] p-0
                 border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
             `;
 
