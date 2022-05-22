@@ -10,7 +10,7 @@ import 'tailwindcss/tailwind.css';
 // -- handleSave prop   : handles click event for save button
 // -- handleCancel      : handles click event for cancel button
 
-const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, handleHistory }) => {
+const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, handleHistory, values, sem }) => {
   const btn = `
     .btn{
       width: 2vw;
@@ -21,7 +21,10 @@ const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, handl
   const disabled = `disabled:ease-in disabled:transition disabled:delay-150 disabled:text-slate-300 disabled:bg-slate-100`
 
   // state handler for modal button
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [histTitle, setTitle] = useState(`Edited student grade row from Course: ${values.courseName}, Units: ${values.units}, and Grade: ${values.grade} to `);
+
+  // const [histTitle, setTitle] = useState('Edit This portion now ActionsSaveCancel.jsx:25');
 
   if (isTouched==null) // if null, assume that inputs haven't been touched
     isTouched = false;
@@ -34,14 +37,44 @@ const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, handl
     setIsOpen(false)
   }
 
+  // update history list dynamically
+  function setHistory(data){
+
+    // new history for history tab change handler
+    let updateHistory = {
+        date: new Date().toLocaleDateString(),
+        info: [
+            {
+            main: histTitle,
+            user: data.user,
+            time: new Date().toLocaleTimeString('en-US', { 
+                hour12: false, 
+                hour: "numeric", 
+                minute: "numeric"
+            }),
+            details: data.desc,
+            },
+        ],
+    }
+
+    // history handler
+    handleHistory(updateHistory);
+
+  }
+
   return (
     <>
-      <Justification modalState={isOpen} modalHandler={closeModal} parentSubmitHandler={handleSave} handleHistory={handleHistory} />
+      <Justification modalState={isOpen} modalHandler={closeModal} parentSubmitHandler={handleSave} handleHistory={setHistory} histTitle={histTitle}/>
 
       <div className="mx-auto w-auto items-center justify-items-center inline-block">
         <style>{btn}</style>
         {/* Save button */}
-        <button className={`${buttons}${disabled}`} type="button" onClick={openModal} disabled={!(isValid && isTouched)}>
+        <button className={`${buttons}${disabled}`} type="button" 
+          onClick={() => {
+              openModal();
+              setTitle(`${histTitle} Course: ${values.courseName}, Units: ${values.units}, and Grade: ${values.grade} on Semester: ${sem}`); // add new values to end of history title
+            }} 
+          disabled={!(isValid && isTouched)}>
           <svg xmlns="http://www.w3.org/2000/svg" className="btn" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
           </svg>
