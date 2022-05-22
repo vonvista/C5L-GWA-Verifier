@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 
 /* Components */
 import EditBtn from 'frontend/components/buttons/EditBtn.jsx';
@@ -45,6 +46,14 @@ const AddRow = () => {
         .then(body => {
             console.log(body)
         })
+        .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+            Swal.fire({
+                icon: 'error',
+                title: 'Server Error',
+                text: 'Check if the server is running or if database IP is correct',
+            })
+            console.log(err)
+        })
         
     }
     
@@ -72,6 +81,14 @@ const AddRow = () => {
         .then((response) => response.json())
         .then((body) => {
             console.log(body);
+        })
+        .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+            Swal.fire({
+                icon: 'error',
+                title: 'Server Error',
+                text: 'Check if the server is running or if database IP is correct',
+            })
+            console.log(err)
         })
         
     }
