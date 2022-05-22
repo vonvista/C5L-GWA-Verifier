@@ -18,9 +18,9 @@ import Swal from 'sweetalert2';
 
 
 /* Parent components:
+    StudentList >> frontend/pages/dashboards/UserDashboard.jsx
     SemRecord   >> frontend/pages/student-record/grades-table/TableContents.jsx
-    User        >> frontend/pages/dashboards/UserDashboard.jsx
-    StudentList >> frontend/pages/user-management/UserManagementPage.jsx
+    User        >> frontend/pages/user-management/UserManagementPage.jsx
 */
 
 /* This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end. */
