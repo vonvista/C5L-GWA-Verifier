@@ -111,7 +111,7 @@ const SpecialCourses= (sampleData) => {
     result.push(Check_NSTP(sampleData));
     result.push(Check_THESIS(sampleData));
 
-    console.log(result);
+    //console.log(result);
     //return value
     return result;
 }

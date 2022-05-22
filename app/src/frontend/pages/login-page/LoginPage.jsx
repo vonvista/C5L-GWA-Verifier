@@ -52,7 +52,7 @@ const Login = () => {
             })
         .then(response => response.json())
         .then(body => {
-            console.log(body)
+            //console.log(body)
             if(body.err){ //if error response returned from DB
                 Swal.fire({
                     icon: 'error',
@@ -87,7 +87,7 @@ const Login = () => {
                 title: 'Server Error',
                 text: 'Check if the server is running or if database IP is correct',
             })
-            console.log(err)
+            //console.log(err)
         })
         
         
@@ -192,10 +192,9 @@ const Login = () => {
 
                 {/* Footer */}
                 <div className="flex justify-center opacity-50 text-[1.25vw] gap-[5vw] absolute bottom-[2vw] inset-x-0 text-login-footer">
-                    <span><TextBtn text="UserDash" handleClick={()=>{debugUser(); localStorage.setItem("Role", "user"); navigate('/user-dashboard')}}/></span>
-                    <span><TextBtn text="AdminDash" handleClick={()=>{debugUser(); localStorage.setItem("Role", "admin"); navigate('/user-dashboard')}}/></span>
-                    <span><TextBtn text="UserManage" handleClick={()=>{navigate('/user-management')}}/></span>
-                    <span><TextBtn text="UserRecord" handleClick={()=>{navigate('/student-record')}}/></span>
+                    <span><TextBtn text="Terms of Use" handleClick={()=>{}}/></span>
+                    <span><TextBtn text="Help" handleClick={()=>{}}/></span>
+                    <span><TextBtn text="Privacy Policy" handleClick={()=>{}}/></span>
                 </div>
             </section>
         </main>

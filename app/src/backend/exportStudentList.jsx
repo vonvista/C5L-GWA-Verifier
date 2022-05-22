@@ -67,34 +67,34 @@ function organizeList(data, opt){
     
     // sort according to the sortOption selected
     if (opt === 'nameAsc'){
-        console.log(opt)
+        //console.log(opt)
         finalList = studentList.sort((a, b) => a[0].localeCompare(b[0]));
     } else if (opt === 'nameDsc') {
-        console.log(opt)
+        //console.log(opt)
         finalList = studentList.sort((a, b) => b[0].localeCompare(a[0]));
     } else if (opt === 'studNoAsc'){
-        console.log(opt)
+        //console.log(opt)
         finalList = studentList.sort(function(a,b) {
             return a[1] - b[1];
         });
     } else if (opt === 'studNoDsc'){
-        console.log(opt)
+        //console.log(opt)
         finalList = studentList.sort(function(a,b) {
             return b[1] - a[1];
         });
     } else if (opt === 'programAsc'){
-        console.log(opt)
+        //console.log(opt)
         finalList = studentList.sort((a, b) => a[2].localeCompare(b[2]));
     } else if (opt === 'programDsc'){
-        console.log(opt)
+        //console.log(opt)
         finalList = studentList.sort((a, b) => b[2].localeCompare(a[2]));
     } else if (opt === 'gwaAsc'){
-        console.log(opt)
+        //console.log(opt)
         finalList = studentList.sort(function(a,b) {
             return a[3] - b[3];
         });
     } else if (opt === 'gwaDsc'){
-        console.log(opt)
+        //console.log(opt)
         finalList = studentList.sort(function(a,b) {
             return b[3] - a[3];
         });
@@ -105,7 +105,7 @@ function organizeList(data, opt){
         finalList[i] = [i+1, ...finalList[i]]
     }
 
-    console.log(finalList)
+    //console.log(finalList)
     return finalList
 }
 

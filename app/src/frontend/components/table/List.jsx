@@ -147,7 +147,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
     // Parent component: UserManagementPage.jsx
     // This table is about
     const User = ({data, handleDeleteRecord, handleEditRecord}) => {
-        console.log(data);
+        //console.log(data);
         const [showModal, setShowModal] = useState(false)
         const [editUser, setEditUser] = useState();
 
@@ -195,7 +195,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                 })
                                 .then(response => response.json())
                                 .then(body => {
-                                    console.log(body);
+                                    //console.log(body);
                                     handleDeleteRecord(user);
                                     Swal.fire({
                                         icon: 'success',
@@ -209,7 +209,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                   title: 'Server Error',
                                   text: 'Check if the server is running or if database IP is correct',
                                 })
-                                console.log(err)
+                                //console.log(err)
                             })
                         }   
                     })
@@ -219,7 +219,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                         title: 'Server Error',
                         text: 'Check if the server is running or if database IP is correct',
                         })
-                        console.log(err)
+                        //console.log(err)
                     })
                 } else if (result.value === '') { // if no password input
                     Swal.fire({
@@ -267,14 +267,14 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
     // Function for Displaying the Student List on the Dashboard
     const StudentList = ({ data, setRows, changeSort, sortState, handleDeleteRecord }) => {
         useEffect(() => {
-            console.log(data)
-            console.log(sortState)
+            //console.log(data)
+            //console.log(sortState)
         })
 
         const studentEdit = async (StudentID, StudentKey) => {
             await localStorage.setItem("currStudentID", StudentID);
             await localStorage.setItem("currStudentKey", StudentKey);
-            console.log(localStorage.getItem("currStudentKey"), localStorage.getItem("currStudentID"))
+            //console.log(localStorage.getItem("currStudentKey"), localStorage.getItem("currStudentID"))
             navigate('/student-record');
         }
 
@@ -332,7 +332,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                 title: 'Server Error',
                                 text: 'Check if the server is running or if database IP is correct',
                                 })
-                                console.log(err)
+                                //console.log(err)
                             })
                         }   
                     })
@@ -342,7 +342,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                         title: 'Server Error',
                         text: 'Check if the server is running or if database IP is correct',
                         })
-                        console.log(err)
+                        //console.log(err)
                     })
                 } else if (result.value === '') { // if no password input
                     Swal.fire({

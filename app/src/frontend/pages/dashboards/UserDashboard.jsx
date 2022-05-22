@@ -66,7 +66,7 @@ const UserDashboard = () => {
           title: 'Server Error',
           text: 'Check if the server is running or if database IP is correct',
         });
-        console.log(err);
+        //console.log(err);
       });
   }
 
@@ -166,7 +166,7 @@ const UserDashboard = () => {
     setRows([...temp]);
     setUnsortedRows([...temp]);
     setSortState([0, 0, 0, 0]); // reset sort state
-    console.log(rows);
+    //console.log(rows);
   };
 
   // handles page refresh on student delete
@@ -184,7 +184,7 @@ const UserDashboard = () => {
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow);
-  console.log('REFRESH');
+  //console.log('REFRESH');
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -232,7 +232,7 @@ const UserDashboard = () => {
     })
       .then((response) => response.json())
       .then((body) => {
-        console.log(body);
+        //console.log(body);
         localStorage.setItem('currStudentID', body._id);
         localStorage.setItem('currStudentKey', body.StudentID);
         navigate('/student-record');
@@ -244,7 +244,7 @@ const UserDashboard = () => {
           title: 'Server Error',
           text: 'Check if the server is running or if database IP is correct',
         })
-        console.log(err)
+        //console.log(err)
       });
     setSearchStudent('');
   };
