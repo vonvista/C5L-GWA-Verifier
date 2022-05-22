@@ -76,7 +76,7 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
                     title: 'Server Error',
                     text: 'Check if the server is running or if database IP is correct',
                 })
-                console.log(err)
+                //console.log(err)
             })
         
         // changeHandler to update Notes

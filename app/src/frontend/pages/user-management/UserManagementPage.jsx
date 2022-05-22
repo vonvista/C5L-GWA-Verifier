@@ -56,7 +56,7 @@ const UserManagementPage = () => {
           title: 'Server Error',
           text: 'Check if the server is running or if database IP is correct',
         })
-        console.log(err)
+        //console.log(err)
       })
     }
 
@@ -71,7 +71,7 @@ const UserManagementPage = () => {
     const [showModalEdit, setShowEditModal] = useState(false)
     const [editUser, setEditUser] = useState({})
 
-    console.log(currentRows);
+    //console.log(currentRows);
 
     //Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);

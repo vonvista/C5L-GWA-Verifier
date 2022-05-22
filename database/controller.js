@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 
 saltRounds = 8; // number of rounds to hash the password
 
-console.log();
+//console.log();
 
 // name of the database will be KALATAS
 const db = mongoose.createConnection(`mongodb://127.0.0.1:27017/KALATAS`, {
@@ -84,7 +84,7 @@ exports.userAdd = async function(req, res, next) {
     Password: hashedPassword,
     History:[]
   });
-  console.log(newUser);
+  //console.log(newUser);
 
   newUser.save(function(err) {
     if (!err) { res.send(newUser)}
@@ -229,7 +229,7 @@ exports.gradeAdd = function(req, res, next) {
     Cumulative: req.body.Cumulative,
     Semyear : req.body.Semyear,
   });
-  console.log(newGrade);
+  //console.log(newGrade);
 
   newGrade.save(function(err) {
     if (!err) { res.send(newGrade)}
@@ -258,7 +258,7 @@ exports.gradeAddMany = function(req, res, next) {
     });
     gradesArray.push(newGrade);
   }
-  console.log(gradesArray);
+  //console.log(gradesArray);
 
   // var newGrade = new Grade({
   //   Student: mongoose.Types.ObjectId(req.body.Student),
@@ -276,7 +276,7 @@ exports.gradeAddMany = function(req, res, next) {
     if(!err){
       res.send(result);
     } else {
-      console.log(err);
+      //console.log(err);
       res.send({err:'Unable to add grade'});
     }
   })
@@ -284,7 +284,7 @@ exports.gradeAddMany = function(req, res, next) {
 
 // Update a grade by using Student and Course
 exports.gradeUpdateOne = function(req, res, next) {
-  console.log(req.body);
+  //console.log(req.body);
 
   Grade.updateOne({_id: mongoose.Types.ObjectId(req.body._id)},{"$set":{
     "Student": req.body.Student,
@@ -404,7 +404,7 @@ exports.studentAdd = function(req, res, next) {
     Status: req.body.Status,
     Validations: req.body.Validations
   });
-  console.log(newStudent);
+  //console.log(newStudent);
 
   newStudent.save(function(err) {
     if (!err) { res.send(newStudent)}
@@ -438,7 +438,7 @@ exports.studentUpdateOne = function(req, res, next) {
 
 // update student cumulative, overallgwa, totalunits
 exports.studentUpdateGPA = function(req, res, next) {
-  console.log(req.body);
+  //console.log(req.body);
   Student.updateOne({_id:mongoose.Types.ObjectId(req.body._id)},{"$set":{
     "TotalUnits": req.body.TotalUnits,
     "TotalCumulative": req.body.TotalCumulative,
@@ -455,7 +455,7 @@ exports.studentUpdateGPA = function(req, res, next) {
 
 // delete student
 exports.studentDeleteOne = function(req, res, next) {
-  console.log(req.body);
+  //console.log(req.body);
   Student.findOneAndDelete({StudentID: req.body.StudentID},function(err, Student){
     if(!err && Student){
       // res.send({suc:'Successfully deleted'});
@@ -475,7 +475,7 @@ exports.studentDeleteOne = function(req, res, next) {
 
 //update validations
 exports.studentUpdateValidations = function(req, res, next) {
-  console.log(req.body);
+  //console.log(req.body);
   Student.updateOne({_id: mongoose.Types.ObjectId(req.body._id)},{"$set":{
     "Validations": req.body.Validations
   }}, {new : true}, function(err,result){
@@ -563,7 +563,7 @@ exports.historyAdd = function(req, res, next) {
     Description: req.body.Description,
     Details: req.body.Details,
   });
-  console.log(newHistory);
+  //console.log(newHistory);
 
   // newHistory.save(function(err) {
   //   User.updateOne({_id:newHistory.User},{$push:{History:newHistory._id}},function(err){
@@ -602,7 +602,7 @@ History.updateOne({User: req.body.User},{"$set":{
 exports.historyDeleteAll = function(req, res, next) {
   // console.log(req.body);
   User.updateMany({},{"$set":{"History":[]}},function(err, result){
-    console.log(result);
+    //console.log(result);
   });
   History.deleteMany({},function(err){
     if(!err){
@@ -645,7 +645,7 @@ exports.noteAdd = function(req,res,next){
     Semyear:req.body.Semyear,
     Details:req.body.Details
   });
-  console.log(newNote);
+  //console.log(newNote);
 
   newNote.save(function(err){
     if(!err) res.send(newNote);
@@ -657,7 +657,7 @@ exports.noteAdd = function(req,res,next){
 exports.noteFindOne = function(req,res,next){
   id = mongoose.Types.ObjectId(req.body.id);
   Note.findOne({_id:id},function(err,note){
-    console.log(note);
+    //console.log(note);
     if(!err) res.send(note)
   });
 }
@@ -673,7 +673,7 @@ exports.noteFindAll = function(req,res,next){
 // returns an array of notes assigned to student
 exports.noteFindAllByStudent = function(req,res,next){
   Note.find({Student:mongoose.Types.ObjectId(req.body.Student)},function(err,notes){
-    console.log(notes);
+    //console.log(notes);
     if(!err) res.send(notes);
   });
 }

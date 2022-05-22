@@ -21,7 +21,7 @@ const userDelete = (username) => {
     })
     .then(response => response.json())
     .then(body => {
-      console.log(body);
+      //console.log(body);
   })
 
 };

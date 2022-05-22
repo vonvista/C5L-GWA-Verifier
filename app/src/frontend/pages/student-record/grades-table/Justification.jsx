@@ -77,7 +77,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
         })
         .then((response) => response.json())
         .then((body) => {
-            console.log(body);
+            //console.log(body);
         })
     }
 
