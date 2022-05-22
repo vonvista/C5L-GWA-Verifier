@@ -255,7 +255,15 @@ const UserDashboard = () => {
 
   const handleReset = () => {
     // Add here code for reset button
-    console.log('Reset button is clicked'); // remove this line
+    Swal.fire({
+      // prompts for user to input password
+      title: 'Delete All Data',
+      text: 'Enter your password to proceed',
+      input: 'password',
+      inputPlaceholder: '*****',
+      icon: 'warning',
+      showCancelButton: true,
+    });
   };
 
   return (
