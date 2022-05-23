@@ -308,14 +308,14 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         const degreetData = 
             `
                 truncate
-                w-[21.158854166666668vw] cursor-pointer
+                w-[19.158854166666668vw] cursor-pointer
                 py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
                 border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
             `;
         const gwatData = 
             `
                 truncate
-                w-[10.8125vw] cursor-pointer
+                w-[12.8125vw] cursor-pointer
                 py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
                 border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
             `;
