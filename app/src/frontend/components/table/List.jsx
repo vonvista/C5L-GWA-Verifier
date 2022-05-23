@@ -18,9 +18,9 @@ import Swal from 'sweetalert2';
 
 
 /* Parent components:
+    StudentList >> frontend/pages/dashboards/UserDashboard.jsx
     SemRecord   >> frontend/pages/student-record/grades-table/TableContents.jsx
-    User        >> frontend/pages/dashboards/UserDashboard.jsx
-    StudentList >> frontend/pages/user-management/UserManagementPage.jsx
+    User        >> frontend/pages/user-management/UserManagementPage.jsx
 */
 
 /* This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end. */
@@ -268,6 +268,99 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
     // Parent component: UserDashboard.jsx
     // Function for Displaying the Student List on the Dashboard
     const StudentList = ({ data, setRows, changeSort, sortState, handleDeleteRecord }) => {
+        
+        // Styling
+        const studentsTable = `border-collapse overflow-hidden table-fixed max-w-[82.078125vw] max-h-[70.6371191135734vh] rounded-t-[0.9765625vw] drop-shadow-lg`;
+        const tHead = 
+                    `
+                        bg-white border-solid rounded-t-[0.9765625vw] border-b-[0.2155124653739612vh] 
+                        table table-fixed whitespace-no-wrap w-full font-montserrat
+                    `;
+        const tBodytR = 
+            `
+                table table-fixed whitespace-no-wrap w-full font-montserrat hover:bg-table-hover-color
+                last:border-b-0
+            `
+        const tRow = `text-left not-italic text-[1.3020833333333333vw] text-sr-text-gray`;
+        const tBody = `bg-white block overflow-auto text-black rounded-b-[0.9765625vw] h-[65.73130193905817vh]`
+        
+        const statustHead = 
+            `
+                py-[1.1772853185595569vh] px-[1.3020833333333333vw] cursor-default
+                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh] 
+                w-[7.138020833333334vw] text-center
+            `;
+        // const tData = `py-[1.1772853185595569vh] px-[1.3020833333333333vw] border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]`;
+        
+        const nametH = `py-[1.1772853185595569vh] px-[1.3020833333333333vw`;
+        const actionstH = `cursor-default text-center py-[1.1772853185595569vh] px-[1.3020833333333333vw] border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]`;
+        const nametData = 
+            `
+                truncate
+                font-bold w-[23.158854166666668vw] cursor-pointer
+                py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
+                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
+            `;
+        const numbertData = 
+            `
+                w-[11.234375vw] cursor-pointer
+                py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
+                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
+            `;
+        const degreetData = 
+            `
+                truncate
+                w-[19.158854166666668vw] cursor-pointer
+                py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
+                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
+            `;
+        const gwatData = 
+            `
+                truncate
+                w-[12.8125vw] cursor-pointer
+                py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
+                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
+            `;
+        const statustData = 
+            `
+                content-center justify-center text-center font-[1.1067708333333333vw] h-[4.293628808864266vh] w-[7.138020833333334vw] p-0
+                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
+            `;
+
+        const asc = `after:float-right after:content-['▲'] after:ml-[0.3255208333333333vw] bg-sr-dark-gray`;
+        const desc = `after:float-right after:content-['▼'] after:ml-[0.3255208333333333vw] bg-sr-dark-gray`;
+
+        /* Status Elements */
+        const cssStyles = 
+            `
+            .status[data-status="Checked"]:after{
+                content : "Checked";
+                background-color: #BBDABB;
+                color: black;
+                border-radius: 3.2552083333333335vw;
+                display: block;
+                text-align: center;
+            }
+
+            .status[data-status="Unchecked"]:after{
+                content : "Unchecked";
+                background-color: #F29B9B;
+                color: black;
+                border-radius: 3.2552083333333335vw;
+                display: block;
+                text-align: center;
+            }
+
+            .status[data-status="Pending"]:after{
+                content : "Pending";
+                background-color: #F2C293;
+                color: #FF1111;
+                border-radius: 3.2552083333333335vw;
+                display: block;
+                text-align: center;
+            }
+            `;
+
         useEffect(() => {
             //console.log(data)
             //console.log(sortState)
@@ -358,40 +451,41 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
 
         return (
             <>
-                <table className="students-table table">
-                    <thead>
-                        <tr>
+                <style>{cssStyles}</style>
+                <table className={studentsTable}>
+                    <thead className={tHead}>
+                        <tr className={tRow}>
                             {/* sort UI asc or desc depends on the state of the parent (user-dashboard) */}
                             {/* state 0: normal; 1: ascending icon; 2: descending icon */}
-                            <th className={`student-name ${
-                                sortState[0] === 0 ? "" : sortState[0] === 1 ? "th-sort-asc" : "th-sort-desc" 
+                            <th className={` ${nametData} ${
+                                sortState[0] === 0 ? "" : sortState[0] === 1 ? asc : desc 
                             }`} onClick={() => changeSort(0)}>Name</th>
-                            <th className={`student-number ${
-                                sortState[1] === 0 ? "" : sortState[1] === 1 ? "th-sort-asc" : "th-sort-desc" 
+                            <th className={` ${numbertData} ${
+                                sortState[1] === 0 ? "" : sortState[1] === 1 ? asc : desc
                             }`} onClick={() => changeSort(1)}>Student No.</th>
-                            <th className={`student-degree ${
-                                sortState[2] === 0 ? "" : sortState[2] === 1 ? "th-sort-asc" : "th-sort-desc" 
+                            <th className={` ${degreetData} ${
+                                sortState[2] === 0 ? "" : sortState[2] === 1 ? asc : desc 
                             }`} onClick={() => changeSort(2)}>Degree Program</th>
-                            <th className={`student-gwa ${
-                                sortState[3] === 0 ? "" : sortState[3] === 1 ? "th-sort-asc" : "th-sort-desc" 
+                            <th className={` ${gwatData} ${
+                                sortState[3] === 0 ? "" : sortState[3] === 1 ? asc : desc 
                             }`} onClick={() => changeSort(3)}>GWA</th>
-                            <th className='student-status'>Status</th>
-                            <th className='student-action'>Actions</th>
+                            <th className={statustHead}>Status</th>
+                            <th className={actionstH}>Actions</th>
                         </tr>
                     </thead>
                     {/* Check if there are data available to display */}
                     {data.length > 0 ? (
-                        <tbody>
+                        <tbody className={tBody}>
                             {data.map((student, index) => (
-                                <tr key = { index }>
-                                    <td className='student-name'>{student.name}</td>
-                                    <td className='student-number'>{student.studno}</td>
-                                    <td className='student-degree'>{student.degprog}</td>
-                                    <td className='student-gwa'>{student.gwa}</td>
-                                    <td className='students-status'>
+                                <tr className={tBodytR} key = { index }>
+                                    <td className={` ${nametData} cursor-default`}>{student.name}</td>
+                                    <td className={ `${numbertData} cursor-default`}>{student.studno}</td>
+                                    <td className={` ${degreetData} cursor-default`}>{student.degprog}</td>
+                                    <td className={` ${gwatData} cursor-default`}>{student.gwa}</td>
+                                    <td className={`${statustData} cursor-default`}>
                                         <div data-status={student.status} className='status'></div>
                                     </td>
-                                    <td className='student-action'>
+                                    <td className='text-center'>
                                         <Actions
                                             handleEdit={() => studentEdit(student._id, student.studno)}
                                             handleDelete={() => studentDelete(student.studno, student._id)}

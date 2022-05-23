@@ -15,7 +15,6 @@ import ExportFileBtn from 'frontend/components/buttons/ExportFileBtn';
 import Reset from 'frontend/components/buttons/ResetBtn';
 
 /* CSS */
-import 'frontend/components/table/List.css';
 import 'tailwindcss/tailwind.css';
 
 /* Backend */
