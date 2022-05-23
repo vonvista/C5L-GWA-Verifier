@@ -8,11 +8,12 @@ import 'tailwindcss/tailwind.css';
 // -- handleDelete      : handles click event for delete button
 // -- handleHist        : handles modification of history
 
-const Actions = ({ handleEdit, handleDelete, handleHist, data }) => {
+const Actions = ({ handleEdit, handleDelete, handleHist, data, sem }) => {
   const buttons = `w-[2vw] h-[2vw] hover:bg-gray-300 rounded-3xl bg-zinc-200 relative mx-1 grow`; // styling of button
 
   // state handler for justification modal
   const [isOpen, setIsOpen] = useState(false); 
+  const [histTitle, setHistTitle] = useState(`Deleted student grade row with Course: ${data.courseName} on Semester: ${sem}`);
 
   function openModal() {
     setIsOpen(true)
@@ -22,9 +23,34 @@ const Actions = ({ handleEdit, handleDelete, handleHist, data }) => {
     setIsOpen(false)
   }
 
+  // update history list dynamically
+  function setHistory(data){
+
+    // new history for history tab change handler
+    let updateHistory = {
+        date: new Date().toLocaleDateString(),
+        info: [
+            {
+            main: histTitle,
+            user: data.user,
+            time: new Date().toLocaleTimeString('en-US', { 
+                hour12: false, 
+                hour: "numeric", 
+                minute: "numeric"
+            }),
+            details: data.desc,
+            },
+        ],
+    }
+
+    // history handler
+    handleHist(updateHistory);
+
+  }
+
   return (
     <>
-      <Justification modalState={isOpen} modalHandler={closeModal} parentSubmitHandler={handleDelete} histHandler={handleHist} />
+      <Justification modalState={isOpen} modalHandler={closeModal} parentSubmitHandler={handleDelete} handleHistory={setHistory} histTitle={histTitle} />
 
       <div className="mx-auto w-auto items-center justify-items-center inline-block">
 

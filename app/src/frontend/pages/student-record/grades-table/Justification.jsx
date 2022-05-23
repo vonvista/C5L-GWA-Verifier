@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 
 // component that creates a modal window for justification from: https://headlessui.dev/react/dialog
 
-const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHistory, histTitle, addRowDuplicate }) => {
+const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHistory, histTitle }) => {
     /* how to use
     
         parent will provide modalState and modalHandler
@@ -18,9 +18,13 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
     
     */
 
+    const [userName, setUserName] = useState(localStorage.getItem("Username"));
+    const [currStudentID, setStudentID] = useState(localStorage.getItem('currStudentID'));
+
     const initialState = {
         title: '',
         desc: '',
+        user: userName,
     }
     const validations = [
         //({title}) => isRequired(title) || {title: 'Please provide a title'},
@@ -39,25 +43,12 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
         // function that'll save changes
         // -- insert function for handling changes to history here --
         e.preventDefault()  // prevents refreshing of page
-
-        // if addRowDuplicate did not proceed due to duplication of 
-        if(addRowDuplicate){
-            resetModalValues();
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Course is already in the list. Change course name or edit the available course',
-            })
-            return;
-        }
-
         parentSubmitHandler(e)    // submit contents of the form
         submitHandler(e) // update history log
 
-
         const historyCredentials = { //updates history in db with title(?) and description
-            User: localStorage.getItem("Username"),
-            Student: localStorage.getItem('currStudentID'),
+            User: userName,
+            Student: currStudentID,
             // Date: currentDate,
             // Time: currentTime,
             Date: new Date().toLocaleDateString(),
@@ -78,6 +69,14 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
         .then((response) => response.json())
         .then((body) => {
             //console.log(body);
+        })
+        .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+            Swal.fire({
+                icon: 'error',
+                title: 'Server Error',
+                text: 'Check if the server is running or if database IP is correct',
+            })
+            console.log(err)
         })
     }
 

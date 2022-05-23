@@ -62,6 +62,9 @@ module.exports = (app) => {
   app.post('/note/update', controller.noteUpdate);
   app.post('/note/delete', controller.noteDeleteOne);
   app.delete('/note/delete-all', controller.noteDeleteAll);
+
+  // RESET TABLES ROUTE
+  app.delete('/database/reset-all', controller.resetAll);
 }
   
   // COURSE ROUTES

@@ -13,7 +13,7 @@ import 'tailwindcss/tailwind.css'
 // -- valid : checks if given data is valid or not
 // -- histHandler : handles the recording of an action to the history log
 
-const EditRow = ({dataDynamic, dataStatic, changeHandler, onSubmit, toggleHandler, touched, errors, valid, setHistoryEditRow}) => {
+const EditRow = ({dataDynamic, dataStatic, changeHandler, onSubmit, toggleHandler, touched, errors, valid, setHistoryEditRow, sem}) => {
 
     const inputStyle = `block box-border focus:outline-none text-sr-dark-text border-b border-sr-disabled-green transition ease-out delay-100 focus:transition focus:ease-in-out focus:delay-100 focus:border-b focus:border-button-green`
     const errorStyle= `block text-sm inter text-secondary-red`
@@ -77,7 +77,7 @@ const EditRow = ({dataDynamic, dataStatic, changeHandler, onSubmit, toggleHandle
             <div className="table-cell w-1/6 align-middle text-center">
                 {/* <button type="submit" disabled={!valid}>Save</button>
                 <button type="button" onClick={toggleHandler}>Cancel</button> */}
-                <SaveCancel handleSave={onSubmit} handleCancel={toggleHandler} isValid={valid} isTouched={touched.courseName || touched.units || touched.grade} handleHistory={setHistoryEditRow}/>
+                <SaveCancel handleSave={onSubmit} handleCancel={toggleHandler} isValid={valid} isTouched={touched.courseName || touched.units || touched.grade} handleHistory={setHistoryEditRow} values={dataDynamic} sem={sem} />
             </div>
         </form>
     );

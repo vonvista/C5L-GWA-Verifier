@@ -62,7 +62,7 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
           className={modalBtnSave} 
           onClick={() => {
               handleSave();
-              histTitleHandler(`Created student grade row with Course: ${courseNameState}, Unit: ${unitsState}, and Grade: ${gradeState} on Sem: ${semState}`);
+              histTitleHandler(`Created student grade row with Course: ${courseNameState}, Units: ${unitsState}, and Grade: ${gradeState} on Semester: ${semState}`);
             }}>Save</button>
         } else {
           return <button className={modalBtnSave} disabled>Save</button>
