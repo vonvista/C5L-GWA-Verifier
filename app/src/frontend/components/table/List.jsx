@@ -284,14 +284,14 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         
         const statustHead = 
             `
-                py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
+                py-[1.1772853185595569vh] px-[1.3020833333333333vw] cursor-default
                 border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh] 
                 w-[7.138020833333334vw] text-center
             `;
         // const tData = `py-[1.1772853185595569vh] px-[1.3020833333333333vw] border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]`;
         
         const nametH = `py-[1.1772853185595569vh] px-[1.3020833333333333vw`;
-        const actionstH = `text-center py-[1.1772853185595569vh] px-[1.3020833333333333vw] border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]`;
+        const actionstH = `cursor-default text-center py-[1.1772853185595569vh] px-[1.3020833333333333vw] border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]`;
         const nametData = 
             `
                 truncate
@@ -301,7 +301,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
             `;
         const numbertData = 
             `
-                w-[11.234375vw]
+                w-[11.234375vw] cursor-pointer
                 py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
                 border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
             `;
@@ -476,11 +476,11 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                         <tbody className={tBody}>
                             {data.map((student, index) => (
                                 <tr className={tBodytR} key = { index }>
-                                    <td className={nametData}>{student.name}</td>
-                                    <td className={numbertData}>{student.studno}</td>
-                                    <td className={degreetData}>{student.degprog}</td>
-                                    <td className={gwatData}>{student.gwa}</td>
-                                    <td className={statustData}>
+                                    <td className={` ${nametData} cursor-default`}>{student.name}</td>
+                                    <td className={ `${numbertData} cursor-default`}>{student.studno}</td>
+                                    <td className={` ${degreetData} cursor-default`}>{student.degprog}</td>
+                                    <td className={` ${gwatData} cursor-default`}>{student.gwa}</td>
+                                    <td className={`${statustData} cursor-default`}>
                                         <div data-status={student.status} className='status'></div>
                                     </td>
                                     <td className='text-center'>
