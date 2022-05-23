@@ -14,7 +14,6 @@ import List from 'frontend/components/table/List';
 import ExportFileBtn from 'frontend/components/buttons/ExportFileBtn';
 
 /* CSS */
-import 'frontend/components/table/List.css';
 import 'tailwindcss/tailwind.css';
 
 /* Backend */
