@@ -81,7 +81,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
     })
       .then((response) => response.json())
       .then((body) => {
-        console.log(body);
+        //console.log(body);
         if (body.err) {
           // if error response returned from DB
           Swal.fire({
@@ -106,7 +106,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
           title: 'Server Error',
           text: 'Check if the server is running or if database IP is correct',
         });
-        console.log(err);
+        //console.log(err);
       });
   };
 

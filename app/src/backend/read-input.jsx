@@ -290,7 +290,7 @@ const readInputFile = (file, handleAddRecord) => {
           for (let i = 0; i < numOfValidations; i++) {
             validations.push(false);
           }
-          console.log(validations)
+          //console.log(validations)
 
           const ip = localStorage.getItem("ServerIP");
           student = {

@@ -74,7 +74,7 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
                             title: 'Server Error',
                             text: 'Check if the server is running or if database IP is correct',
                         })
-                        console.log(err)
+                        //console.log(err)
                     })
             }
         }

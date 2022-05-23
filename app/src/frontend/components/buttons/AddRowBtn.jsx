@@ -162,7 +162,7 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
             Semyear: sem
         }
 
-        console.log(newGrade)
+        //console.log(newGrade)
 
         // add new grade to DB
         fetch(`http://${ip}:3001/grade/add`, {
@@ -189,7 +189,7 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
                     title: 'Server Error',
                     text: 'Check if the server is running or if database IP is correct',
                 })
-                console.log(err)
+                //console.log(err)
             })
         
         closeAddRow();

@@ -26,8 +26,8 @@ const Dropdown = ({ studentInfo, grades }) => {
   const handleExport = () => {
 
     // get student info and grades from props
-    console.log(studentInfo)
-    console.log(grades)
+    //console.log(studentInfo)
+    //console.log(grades)
     const student = studentInfo
     const studentGrades = grades
 

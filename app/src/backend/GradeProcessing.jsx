@@ -53,4 +53,4 @@ const processINC = (data) => {
   return hashset.size == 0 //if hashset empty, no INC and true, else false
 }
 
-console.log(processINC(testDataForINC))
+//console.log(processINC(testDataForINC))

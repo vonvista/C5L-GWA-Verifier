@@ -76,7 +76,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         })
         .then(response => response.json())
         .then(body => {
-            console.log(body)
+            //console.log(body)
         })
 
         
@@ -132,7 +132,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         })
         .then((response) => response.json())
         .then((body) => {
-            console.log(body);
+            //console.log(body);
         })
 
         autoSet({sem:Name, data:newSemData})

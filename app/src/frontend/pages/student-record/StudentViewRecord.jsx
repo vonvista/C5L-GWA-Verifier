@@ -45,14 +45,14 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
 
     // validation functions
     const handleValApply = () => {
-        console.log(ip)
+        //console.log(ip)
 
         sendVal = []
         for (let i = 0; i < validationsState.length; i++) {
             sendVal.push(validationsState[i].status)
         }
 
-        console.log(sendVal)
+        //console.log(sendVal)
 
         const validations = {
             Validations: sendVal,
@@ -66,7 +66,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
             })
         .then(response => response.json())
         .then(body => {
-            console.log(body)
+            //console.log(body)
             if(body.err){ //if error response returned from DB
                 Swal.fire({
                     icon: 'error',
@@ -89,7 +89,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                 title: 'Server Error',
                 text: 'Check if the server is running or if database IP is correct',
             })
-            console.log(err)
+            //console.log(err)
         })
         
     }
@@ -161,7 +161,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
             }
         }
         
-        console.log(history)
+        //console.log(history)
         // set new value of history
         setHistoryState(history)
     }
@@ -273,14 +273,16 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                 body: JSON.stringify(newGPA)// use studentID to find student info
             })
             .then(response => response.json())
-            .then(body => console.log(body))
+            .then(body => {
+                //console.log(body)
+            })
             .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
                 Swal.fire({
                     icon: 'error',
                     title: 'Server Error',
                     text: 'Check if the server is running or if database IP is correct',
                 })
-                console.log(err)
+                //console.log(err)
             })
     }
     

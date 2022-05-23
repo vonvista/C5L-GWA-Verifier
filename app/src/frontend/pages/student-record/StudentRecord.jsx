@@ -281,7 +281,7 @@ export default function StudentRecord() { // this will probably transferred to a
             title: 'Server Error',
             text: 'Check if the server is running or if database IP is correct',
         })
-        console.log(err)
+        //console.log(err)
       })
   }
 
@@ -305,7 +305,7 @@ export default function StudentRecord() { // this will probably transferred to a
         // set Grades prop
         getGradesProp(studentGrades[0])
         setGPA(studentGrades[1])
-        console.log(studentGrades[2])
+        //console.log(studentGrades[2])
         setunitGPA(studentGrades[2])
                      
 
@@ -316,7 +316,7 @@ export default function StudentRecord() { // this will probably transferred to a
             title: 'Server Error',
             text: 'Check if the server is running or if database IP is correct',
         })
-        console.log(err)
+        //console.log(err)
       })
   }
 
@@ -349,7 +349,7 @@ export default function StudentRecord() { // this will probably transferred to a
             title: 'Server Error',
             text: 'Check if the server is running or if database IP is correct',
         })
-        console.log(err)
+        //console.log(err)
       })
   }
 
@@ -377,7 +377,7 @@ export default function StudentRecord() { // this will probably transferred to a
             title: 'Server Error',
             text: 'Check if the server is running or if database IP is correct',
         })
-        console.log(err)
+        //console.log(err)
       })
   }
 
