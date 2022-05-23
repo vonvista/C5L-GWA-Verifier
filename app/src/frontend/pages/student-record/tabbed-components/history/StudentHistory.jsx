@@ -6,6 +6,15 @@ import { useState } from 'react';
 
 // Function for every description having the same date
 // Reference used in accordion component: https://www.freecodecamp.org/news/build-accordion-menu-in-react-without-external-libraries/
+
+/*
+Parent component: StudentRecordHistory.jsx
+  main prop: main title of the history entry
+  user prop: user name who made changes in the record
+  time prop: time modified
+  details prop: additional information about the modification done
+*/
+
 const RecordHistory = ({ main, user, time, details }) => {
   const [isActive, setIsActive] = useState(false); // variable flag to expand and collapse the accordion used in the additional details about the history
 
@@ -21,6 +30,7 @@ const RecordHistory = ({ main, user, time, details }) => {
           type="button"
           onClick={() => setIsActive(!isActive)}
         >
+          {/* collapse or expand button */}
           {isActive ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -50,6 +60,7 @@ const RecordHistory = ({ main, user, time, details }) => {
           )}
         </button>
       </div>
+      {/* more info about the changes */}
       {isActive && (
         // list of details about the main description
         <div>
@@ -58,6 +69,7 @@ const RecordHistory = ({ main, user, time, details }) => {
           </ul>
         </div>
       )}
+      {/* user who modified */}
       <div className="font-inter mt-0.2 mb-3 mr-3.8 italic text-sm font-medium px-6">
         Modified by {user} at {time}
       </div>

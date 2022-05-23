@@ -12,6 +12,7 @@ import Refresh from 'frontend/components/buttons/Refresh';
 import Search from 'frontend/components/search/Search';
 import List from 'frontend/components/table/List';
 import ExportFileBtn from 'frontend/components/buttons/ExportFileBtn';
+import Reset from 'frontend/components/buttons/ResetBtn';
 
 /* CSS */
 import 'frontend/components/table/List.css';
@@ -22,9 +23,8 @@ import readInputFile from 'backend/read-input';
 import Swal from 'sweetalert2';
 
 const UserDashboard = () => {
-
   // for navigating page on search bar and other
-  let navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [rows, setRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,7 +32,7 @@ const UserDashboard = () => {
   const [unsortedRows, setUnsortedRows] = useState([]);
 
   const [userRole, setUserRole] = useState(localStorage.getItem('Role'));
-  const [ip, setIp] = useState(localStorage.getItem('ServerIP'))
+  const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
 
   // index 0: name; 1: num; 2: degree; index 3: GWA;
   const [sortState, setSortState] = useState([0, 0, 0, 0]);
@@ -66,15 +66,14 @@ const UserDashboard = () => {
           title: 'Server Error',
           text: 'Check if the server is running or if database IP is correct',
         });
-        //console.log(err);
+        // console.log(err);
       });
-  }
-
+  };
 
   const forceReload = () => {
     fetchData();
   };
-  
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -166,7 +165,7 @@ const UserDashboard = () => {
     setRows([...temp]);
     setUnsortedRows([...temp]);
     setSortState([0, 0, 0, 0]); // reset sort state
-    //console.log(rows);
+    // console.log(rows);
   };
 
   // handles page refresh on student delete
@@ -184,7 +183,7 @@ const UserDashboard = () => {
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow);
-  //console.log('REFRESH');
+  // console.log('REFRESH');
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -192,35 +191,34 @@ const UserDashboard = () => {
   const [searchStudent, setSearchStudent] = useState('');
 
   const handleSearch = () => {
-
     let onList = false;
 
     // check if search field is empty
-    if(searchStudent === ''){
+    if (searchStudent === '') {
       Swal.fire({
         icon: 'error',
         title: 'Error',
         text: 'Search bar is empty',
-      })
-      return
+      });
+      return;
     }
 
     // find student on list
-    for (let i = 0; i < rows.length; i++){
-      if (searchStudent == rows[i].studno){
-        onList = true
+    for (let i = 0; i < rows.length; i++) {
+      if (searchStudent == rows[i].studno) {
+        onList = true;
       }
     }
 
     // if not on the list
     // show swal error and does not proceed
-    if(!onList){
+    if (!onList) {
       Swal.fire({
         icon: 'error',
         title: 'Error',
         text: 'Student does not exist',
-      })
-      return
+      });
+      return;
     }
 
     // if nahanap si student, go straight to record
@@ -232,7 +230,7 @@ const UserDashboard = () => {
     })
       .then((response) => response.json())
       .then((body) => {
-        //console.log(body);
+        // console.log(body);
         localStorage.setItem('currStudentID', body._id);
         localStorage.setItem('currStudentKey', body.StudentID);
         navigate('/student-record');
@@ -243,8 +241,8 @@ const UserDashboard = () => {
           icon: 'error',
           title: 'Server Error',
           text: 'Check if the server is running or if database IP is correct',
-        })
-        //console.log(err)
+        });
+        // console.log(err)
       });
     setSearchStudent('');
   };
@@ -253,6 +251,19 @@ const UserDashboard = () => {
     if (e.key === 'Enter') {
       handleSearch();
     }
+  };
+
+  const handleReset = () => {
+    // Add here code for reset button
+    Swal.fire({
+      // prompts for user to input password
+      title: 'Delete All Data',
+      text: 'Enter your password to proceed',
+      input: 'password',
+      inputPlaceholder: '*****',
+      icon: 'warning',
+      showCancelButton: true,
+    });
   };
 
   return (
@@ -275,7 +286,7 @@ const UserDashboard = () => {
             <div className="flex">
               {/* Upload button */}
               <div className="flex ml-auto order-2">
-                <ExportFileBtn list={rows}/>
+                <ExportFileBtn list={rows} />
                 <UploadFileBtn
                   handleClick={readInputFile}
                   handleAddRecord={handleAddRecord}
@@ -304,6 +315,10 @@ const UserDashboard = () => {
                 sortState={sortState}
                 handleDeleteRecord={handleDeleteRecord}
               />
+            </div>
+            {/* Reset button */}
+            <div className="float-left">
+              <Reset handleClick={handleReset} />
             </div>
             <div className="float-right">
               <Pagination

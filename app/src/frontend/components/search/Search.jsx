@@ -21,8 +21,13 @@ const handleEnterPress = (e) =>{
 }
 
 //search component
-<Search user={"student"} handleSearch={(e) => setSearchStudent(e.target.value)} searchValue={searchStudent} buttonHandler={handleSearch} handleEnter={handleEnterPress}/>
+<Search user={"student number"} handleSearch={(e) => setSearchStudent(e.target.value)} searchValue={searchStudent} buttonHandler={handleSearch} handleEnter={handleEnterPress}/>
 
+user prop: value is concatenated to text variable; used as placeholder to input field
+handleSearch prop: function to handle the input value
+searchValue prop: value of the input
+buttonHandler prop: function handler used to show and hide password
+handleEnter prop: keypress handler; in case user wants to complete its search by pressing Enter key
 
 */
 
@@ -62,7 +67,7 @@ const Search = ({
         <Input
           labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
           labelVal="Search" // label text
-          inputStyle="rounded-lg m-2 text-center w-full h-[3vw] text-[0.9vw] appearance-none border-2 rounded w-full py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" // styling for input
+          inputStyle="rounded-lg m-2 text-center w-full h-[3vw] text-[0.9vw] appearance-none border-2 rounded py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" // styling for input
           name="search" // name of label-input components
           inputType="text" // type of input password, email, text, etc.
           inputPlaceholder={inputText} // placeholder text for input

@@ -5,7 +5,6 @@ import Swal from 'sweetalert2';
 import Input from 'frontend/components/inputs/Input';
 import user from '../../../../assets/icons/user-icon.jpg';
 import 'tailwindcss/tailwind.css';
-import './AddEditUser.css';
 
 // function which shows the add user modal; to be used in UserSystemPage
 // to use AddUser and AddUserBtn, import needed files and declare and initialize showModal variable:
@@ -15,6 +14,13 @@ import './AddEditUser.css';
 //   :(<></>)
 // }
 
+/*
+ Parent component: UserManagementPage.jsx
+ modalState prop:  boolean; used as flag to open and close the modal window
+ handleClose prop: function used to close the modal window
+ handleAddRecord prop: function used to add user to the database
+*/
+
 const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
   const [firstName, setFirstName] = useState('');
   const [middleName, setMiddleName] = useState('');
@@ -23,7 +29,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
   const [position, setPosition] = useState(''); // position
   const [pw, setPW] = useState(''); // password
   const [status, setStatus] = useState('show');
-  const [ip, setIp] = useState(localStorage.getItem('ServerIP'))
+  const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
 
   // reference for password toggle: https://codepen.io/huphtur/pen/OKJJQY
   const buttonHandler = () => {
@@ -316,7 +322,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                           <div className="w-full flex">
                             <section className="my-auto ml-0 mr-auto w-[90.5%]">
                               <button
-                                className="inter w-2/5 h-[5vh] block ml-auto mr-auto bg-white rounded-lg hover:bg-slate-200 user-btn text-[1vw]"
+                                className="font-inter w-2/5 h-[5vh] block ml-auto mr-auto bg-white rounded-lg hover:bg-slate-200 user-btn text-[1vw]"
                                 type="button"
                                 onClick={add_user}
                               >
