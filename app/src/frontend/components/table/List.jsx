@@ -325,8 +325,8 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                 border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
             `;
 
-        const asc = `after:float-right after:content-up-arrow after:ml-[0.3255208333333333vw] bg-sr-dark-gray`;
-        const desc = `after:float-right after:content-down-arrow after:ml-[0.3255208333333333vw] bg-sr-dark-gray`;
+        const asc = `after:float-right after:content-['▲'] after:ml-[0.3255208333333333vw] bg-sr-dark-gray`;
+        const desc = `after:float-right after:content-['▼'] after:ml-[0.3255208333333333vw] bg-sr-dark-gray`;
 
         /* Status Elements */
         const cssStyles = 
