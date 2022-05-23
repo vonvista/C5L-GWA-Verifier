@@ -306,10 +306,6 @@ const UserDashboard = () => {
               <div className="flex items-center ml-2">
                 <Refresh handleClick={forceReload} />
               </div>
-              {/* Reset button */}
-              <div className="flex items-center">
-                <Reset handleClick={handleReset} />
-              </div>
             </div>
             <div className="table-container">
               <List
@@ -319,6 +315,10 @@ const UserDashboard = () => {
                 sortState={sortState}
                 handleDeleteRecord={handleDeleteRecord}
               />
+            </div>
+            {/* Reset button */}
+            <div className="float-left">
+              <Reset handleClick={handleReset} />
             </div>
             <div className="float-right">
               <Pagination
