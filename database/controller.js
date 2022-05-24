@@ -454,17 +454,29 @@ exports.studentUpdateGPA = function(req, res, next) {
 
 
 // delete student
-exports.studentDeleteOne = function(req, res, next) {
+exports.studentDeleteOne = async function(req, res, next) {
   //console.log(req.body);
+  var studentKey;
+
+  var student = await Student.findOne({StudentID: req.body.StudentID});
+  if(student){
+    studentKey = student._id;
+  } else {
+    res.send({err:'Unable to find student'});
+    return
+  }
+
   Student.findOneAndDelete({StudentID: req.body.StudentID},function(err, Student){
     if(!err && Student){
       // res.send({suc:'Successfully deleted'});
+      // get student key from student
     } else {
       res.send({err:'Unable to delete'});
+      return
     }
   });
 
-  Grade.deleteMany({Student: mongoose.Types.ObjectId(req.body.StudentKey)},function(err, Student){
+  Grade.deleteMany({Student: mongoose.Types.ObjectId(studentKey)},function(err, Student){
     if(!err && Student){
       res.send({suc:'Successfully deleted'});
     } else {
