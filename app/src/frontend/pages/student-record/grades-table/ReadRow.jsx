@@ -1,5 +1,6 @@
 import Actions from 'frontend/components/buttons/ActionsJustification'
 
+// Parent component found in List.jsx
 // component that displays a static view of the data in the row the grades table
 // -- data : contains data to be displayed
 // -- clickHandler : handles toggle for editing the row

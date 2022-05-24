@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import List from 'frontend/components/table/List';
 import 'tailwindcss/tailwind.css';
 
-/* Parent component: path/to/parent-component */
+/* Parent component: ../StudentViewRecord */
 /* This component handles the student's data for a specific semester */
 /* Props:
     Name            :   contains name of semester

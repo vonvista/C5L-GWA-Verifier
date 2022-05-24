@@ -4,7 +4,10 @@ import { useForm, isRequired } from '../../../hooks/useForm';
 import Input from 'frontend/components/inputs/Input';
 import Swal from 'sweetalert2';
 
-/* Parent component: path/to/parent-component */
+/* Parent component: 
+    ../../../components/buttons/ActionsSaveCancel
+    ../../../component/buttons/ActionsJustification
+*/
 /* component that creates a modal window for justification from: https://headlessui.dev/react/dialog */
 /* Props:
     modalState          :   holds state of the modal

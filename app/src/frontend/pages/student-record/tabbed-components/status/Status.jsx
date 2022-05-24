@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Verify from 'frontend/components/buttons/Verify'
 
+// Parent component: ../StudentViewRecord
 // Component for status tab
 // -- state : data for the status tab will be passed here
 // -- ...rest : additional prop for backend expansion 
