@@ -13,7 +13,7 @@ import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
-/* Parent component: path/to/parent-component */
+/* Parent component: frontend\pages\student-record\tabbed-components\notes\AddNote.jsx */
 /* This functional component is for a dropdown select button*/
 /* Props:
     props.options : holds an array that contains the options to be used for the button
@@ -39,7 +39,7 @@ const DropdownInput = (props) => {
             <div className={props.style}>
                 <Listbox value={selected} onChange={(setSelected) => {handleChange(setSelected)}}>
                     <div className="relative mt-1">
-                    <Listbox.Button className="relative w-full py-2 pl-4 pr-10 text-left text-sm lg:text-[0.9vw] font-medium bg-white rounded-md shadow-lg cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75">
+                    <Listbox.Button className="relative w-full py-2 pl-4 pr-10 text-left text-sm lg:text-[0.9vw] font-medium bg-white rounded-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75">
                         <span className="block truncate">{selected.sem}</span>
                         <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                         <SelectorIcon
