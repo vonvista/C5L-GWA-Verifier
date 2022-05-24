@@ -12,8 +12,17 @@ How to use:
 import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
+
+/* Parent component: path/to/parent-component */
+/* This functional component is for a dropdown select button*/
+/* Props:
+    props.options : holds an array that contains the options to be used for the button
+    props.state : holds the initialized useState made by parent
+    props.style : for styling options of the dropdown select
+    props.placeHolderChange : function passes the selected choice in the dropdown from this component to parent
+*/
     
-function DropdownInput(props) {
+const DropdownInput = (props) => {
 
     // Dropdown select
     const options = props.options                   // Pass options here

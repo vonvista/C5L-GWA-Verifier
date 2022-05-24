@@ -20,16 +20,15 @@ import { toNamespacedPath } from 'node:path/win32';
 
 // This component contains all the elements of the student record page
 // such as the student details header, the grades table, and the status tab
-// -- user : details about who is editing the document
-// -- student : contains details of the student (studnumber, name, degree program, status)
-// -- notes : data of per semester notes that can be edited or deleted
-// -- history : data of changes done on given record
-// -- status : whether verified or not
-// -- grades : object containing grades of students divided per semester
+// -- student   : contains details of the student (studnumber, name, degree program, status)
+// -- notes     : data of per semester notes that can be edited or deleted
+// -- history   : data of changes done on given record
+// -- status    : whether verified or not
+// -- grades    : object containing grades of students divided per semester
 // -- checklist : list of requirements the student needs to accomplish before being verified
-// -- autoSet:
+// -- gpa       : contains gpa data
 
-const RecordPage = ({sem, user, student, notes, history, status, grades, checklist, gpa}) => {
+const RecordPage = ({student, notes, history, status, grades, checklist, gpa}) => {
 
     const [selectedStudent, setSelectedStudent] = useState(student)
     const [statusState, setStatus] = useState(status)
@@ -346,8 +345,6 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                                     Name={semData.sem}
                                     Semester={semData.data}
                                     Total={semData.total}
-                                    handler={setGradeState}
-                                    history={historyState}
                                     historyHandler={setHistory}
                                     autoSet={setGrades}/>
                             ))
@@ -357,7 +354,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                                 
                     {/* tabbed information card */}
 
-                    <div className="flex-none max-w-[100%] h-[45rem] sticky top-[11.5rem] shadow-lg rounded-lg">
+                    <div className="flex-none max-w-[100%] h-[45rem] sticky top-[2.5rem] shadow-lg rounded-lg">
                         <Tab.Group
                             selectedIndex={tabId}
                             onChange={(id) => {
@@ -366,8 +363,8 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                             manual
                         >
                             <Tab.List className="flex rounded-t-md">
-                                {Object.keys(tabContents).map((tab) => (
-                                        <Tab key={tab} as={Fragment}>
+                                {Object.keys(tabContents).map((tab, idx) => (
+                                        <Tab key={idx} as={Fragment}>
                                             {({selected}) => (
                                                 <button
                                                     className={
