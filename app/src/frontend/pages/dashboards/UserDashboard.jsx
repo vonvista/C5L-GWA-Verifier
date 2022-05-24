@@ -13,6 +13,7 @@ import Search from 'frontend/components/search/Search';
 import List from 'frontend/components/table/List';
 import ExportFileBtn from 'frontend/components/buttons/ExportFileBtn';
 import Reset from 'frontend/components/buttons/ResetBtn';
+import BulkDeleteBtn from 'frontend/components/buttons/BulkDeleteBtn';
 
 /* CSS */
 import 'tailwindcss/tailwind.css';
@@ -265,6 +266,130 @@ const UserDashboard = () => {
     });
   };
 
+  const handleBulkDelete = async () => {
+    const { value: text } = await Swal.fire({
+      input: 'textarea',
+      inputLabel: 'Enter Student IDs of students to delete (one each line)',
+      inputPlaceholder: 'Input Student IDs...',
+      inputAttributes: {
+        'aria-label': 'Input Student IDs...'
+      },
+      showCancelButton: true
+    })
+    
+    if (!text) {
+      return
+    }
+
+    const { value: password } = await Swal.fire({
+      title: 'Enter your password',
+      input: 'password',
+      inputLabel: 'Password',
+      inputPlaceholder: 'Enter your password',
+      inputAttributes: {
+        maxlength: 10,
+        autocapitalize: 'off',
+        autocorrect: 'off'
+      }
+    })
+
+    if (!password) {
+      return
+    }
+
+    const credentials = {
+      Username: localStorage.getItem("Username"),
+      Password: password
+    }
+    fetch(`http://${ip}:3001/user/login`,{
+      method: "POST",
+      headers: { "Content-Type":"application/json" },
+      body: JSON.stringify(credentials)
+      })
+    .then(response => response.json())
+    .then(body => {
+        if(body.err){ //if error response returned from DB
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: body.err,
+          })
+          return
+        }
+      }
+    )
+    
+    const studentIDs = text.split("\n")
+    console.log(studentIDs);
+    var fileStatuses = []
+    
+    for(let i = 0; i < studentIDs.length; i++){
+      const studentID = studentIDs[i]
+      if(studentID === ""){
+        continue
+      }
+      const student = {
+        StudentID: studentID
+      }
+      await fetch(`http://${ip}:3001/student/delete`,{
+        method: "DELETE",
+        headers: { "Content-Type":"application/json" },
+        body: JSON.stringify(student)
+        })
+      .then(response => response.json())
+      .then(body => {
+          if(body.err){ //if error response returned from DB
+            fileStatuses.push({name: studentIDs[i], status: 'ERROR', message: `${body.err}`});
+            
+          }
+          else {
+            fileStatuses.push({name: studentIDs[i], status: 'SUCCESS', message: `Student successfully deleted`});
+            handleDeleteRecord(studentIDs[i])
+          }
+        }
+      )
+    }
+
+
+    if (fileStatuses.length == 1){  // if there is only one file
+      if (fileStatuses[0].status === 'SUCCESS'){
+        Swal.fire({
+          icon: 'success',
+          title: fileStatuses[0].status,
+          text: fileStatuses[0].message,
+        })
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: fileStatuses[0].status,
+          text: fileStatuses[0].message,
+        })
+      } 
+    } else { // if there is more than one file
+      let str = ''
+      
+      // setting up the borderless table to display file statuses
+      str = `${str}<table>`
+      str = `${str}<tr><td></td><td>STUDENT ID</td><td>STATUS</td><td>MESSAGE</td></tr>`
+      for (let i=0; i<fileStatuses.length; i++){
+        str = `${str}<tr><td>${i+1}.</td><td>${fileStatuses[i].name}</td><td>${fileStatuses[i].status}</td><td>${fileStatuses[i].message}</td></tr>` 
+      }
+      str = `${str}</table>`
+
+      // displaying the summary with custom class
+      Swal.fire({
+        title: 'Upload Summary',
+        html: str,
+        customClass: {  // class formatting detailed in swal.css
+          popup: 'format-table',
+          htmlContainer: 'format-html-container',
+        }
+      })
+    }   
+    
+
+  };
+
   return (
     <>
       <div>
@@ -318,6 +443,7 @@ const UserDashboard = () => {
             {/* Reset button */}
             <div className="float-left">
               <Reset handleClick={handleReset} />
+              <BulkDeleteBtn handleClick={handleBulkDelete} />
             </div>
             <div className="float-right">
               <Pagination
