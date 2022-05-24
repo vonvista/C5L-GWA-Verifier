@@ -11,13 +11,14 @@ import Notes from './tabbed-components/notes/Notes';
 import History from './tabbed-components/history/StudentRecordHistory';
 import CheckList from './tabbed-components/checklist/ChecklistTab';
 import Table from './grades-table/TableContents';
+import Refresh from '../../components/buttons/RefreshSR'
 
 /* CSS */
 import 'tailwindcss/tailwind.css';
 import { toNamespacedPath } from 'node:path/win32';
 
 
-
+// Parent component: ./StudentRecord
 // This component contains all the elements of the student record page
 // such as the student details header, the grades table, and the status tab
 // -- student   : contains details of the student (studnumber, name, degree program, status)
@@ -27,8 +28,9 @@ import { toNamespacedPath } from 'node:path/win32';
 // -- grades    : object containing grades of students divided per semester
 // -- checklist : list of requirements the student needs to accomplish before being verified
 // -- gpa       : contains gpa data
+// -- refresh   : handler for refresh
 
-const RecordPage = ({student, notes, history, status, grades, checklist, gpa}) => {
+const RecordPage = ({student, notes, history, status, grades, checklist, gpa, refresh = () => {} }) => {
 
     const [selectedStudent, setSelectedStudent] = useState(student)
     const [statusState, setStatus] = useState(status)
@@ -41,6 +43,16 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa}) =
     const [gpaCalc, setGPA] = useState(gpa);
     const [currStudentID, setCurrStudentID] = useState(localStorage.getItem("currStudentID"))
 
+
+    // refresh functions
+    const forceReload = () => {
+        refresh();
+      };
+      
+    useEffect(() => {
+        refresh();
+    }, []);
+    
 
     // validation functions
     const handleValApply = () => {
@@ -107,8 +119,6 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa}) =
         Notes: <Notes notesData={notesState} semesters={gradeState} setNotesData={setNotesState} />,    // notes component
         History: <History historyData={historyState} />,            // history component
     }
-
-    
 
     const tabAnim = {
         hide: {
@@ -318,7 +328,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa}) =
                         <div className={`table-row-group`}>
                             <div className="table-row">
                                 <div className={detailStyle.text}>{selectedStudent.stud_no}</div>
-                                <div className={detailStyle.text}>{selectedStudent.name}</div>
+                                <div className={`${detailStyle.text} truncate`}>{selectedStudent.name}</div>
                                 <div className={detailStyle.text}>{selectedStudent.degree_program}</div>
                                 <div className={detailStyle.text}>{selectedStudent.status}</div>
                             </div>
@@ -328,6 +338,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa}) =
 
                     <div className="w-1/5 flex items-center">
                         <ActionsBtn studentInfo={selectedStudent} grades={gradeState}/>
+                        <Refresh handleClick={forceReload} plusStyle="ml-5" />
                     </div>
 
 

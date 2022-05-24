@@ -400,6 +400,7 @@ export default function StudentRecord () { // this will probably transferred to 
                         grades={gradesProp} 
                         checklist={validationsProp} 
                         gpa={gpaCalc}
+                        // refresh = {refreshHandler in here} 
                     />
                 </div>
         </> 
