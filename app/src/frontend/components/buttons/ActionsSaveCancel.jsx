@@ -11,7 +11,7 @@ import 'tailwindcss/tailwind.css';
 
 const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, handleHistory, values, sem }) => {
 
-  const buttons = `transition-all ease-in-out delay-150 text-[rgb(107 114 128)] hover:transition-all hover:ease-out hover:delay-150 w-8 h-8 hover:text-[#141414] hover:bg-slate-300 rounded-3xl bg-slate-200 relative mx-1 grow`; // styling of button
+  const buttons = `transition-all ease-in-out delay-150 text-[rgb(107 114 128)] hover:transition-all hover:ease-out hover:delay-150 w-[2vw] h-[2vw] hover:text-[#141414] hover:bg-slate-300 rounded-3xl bg-slate-200 relative mx-1 grow`; // styling of button
   const disabled = `disabled:ease-in disabled:transition disabled:delay-150 disabled:text-slate-300 disabled:bg-slate-100`
 
   // state handler for modal button
@@ -68,12 +68,12 @@ const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, handl
               setTitle(`${histTitle} Course: ${values.courseName}, Units: ${values.units}, and Grade: ${values.grade} on Semester: ${sem}`); // add new values to end of history title
             }} 
           disabled={!(isValid && isTouched)}>
-          <CheckCircleIcon/>
+          <CheckCircleIcon className="w-[2vw] h-[2vw] mx-auto grow"/>
         </button>
 
         {/* Cancel button */}
         <button className={buttons} type="button" onClick={handleCancel}>
-          <XCircleIcon/>
+          <XCircleIcon className="w-[2vw] h-[2vw] mx-auto grow"/>
         </button>
       </div>
     </>
