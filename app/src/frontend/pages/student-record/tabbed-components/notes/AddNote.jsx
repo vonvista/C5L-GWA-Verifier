@@ -61,9 +61,7 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
                 // also includes adding new notes
                 fetch(`http://${ip}:3001/note/update`, {
                     method: "POST",
-                    headers: {
-                    "Content-Type": "application/json",
-                    },
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
                     body: JSON.stringify(newNote)
                 })
                     .then(response => response.json())

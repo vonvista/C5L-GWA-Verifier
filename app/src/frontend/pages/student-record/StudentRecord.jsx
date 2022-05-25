@@ -258,9 +258,7 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
 
         fetch(`http://${ip}:3001/student/find`, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
+        headers: {"Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
         body: JSON.stringify(currStudentID)// use studentID to find student info
         })
         .then(response => response.json())
@@ -297,9 +295,7 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
         // fetch grade by student from database
         fetch(`http://${ip}:3001/grade/find-by-student`, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
         body: JSON.stringify({Student: currStudentKey})
         })
         .then(response => response.json())
@@ -333,9 +329,7 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
         // fetch history by Student _id
         fetch(`http://${ip}:3001/history/find-by-student`, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
         body: JSON.stringify({Student: currStudentKey})
         })
         .then(response => response.json())
@@ -366,9 +360,7 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
         // fetch notes by studentkey from db
         fetch(`http://${ip}:3001/note/find-by-student`, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
         body: JSON.stringify({Student: currStudentKey}) // use student _id to find student notes
         })
         .then(response => response.json())

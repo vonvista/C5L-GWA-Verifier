@@ -234,7 +234,7 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
 
     fetch(`http://${ip}:3001/student/find`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
       body: JSON.stringify({ StudentID: searchStudent }),
     })
       .then((response) => response.json())
@@ -342,7 +342,7 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
       }
       await fetch(`http://${ip}:3001/student/delete`,{
         method: "DELETE",
-        headers: { "Content-Type":"application/json" },
+        headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
         body: JSON.stringify(student)
         })
       .then(response => response.json())

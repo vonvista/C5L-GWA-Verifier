@@ -73,7 +73,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
     //console.log("here")
     fetch(`http://${ip}:3001/user/update`,{
         method: "POST",
-        headers: { "Content-Type":"application/json" },
+        headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
         body: JSON.stringify(credentials)
         })
     .then((response) => response.json())

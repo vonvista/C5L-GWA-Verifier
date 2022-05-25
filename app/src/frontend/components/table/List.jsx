@@ -192,7 +192,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             
                             fetch(`http://${ip}:3001/user/delete`,{
                                 method: "DELETE",
-                                headers: { "Content-Type":"application/json" },
+                                headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
                                 body: JSON.stringify(user)
                                 })
                                 .then(response => response.json())
@@ -369,7 +369,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             };
                             fetch(`http://${ip}:3001/student/delete`,{
                                 method: "DELETE",
-                                headers: { "Content-Type":"application/json" },
+                                headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
                                 body: JSON.stringify(student)
                             })
                             .then(response => response.json())

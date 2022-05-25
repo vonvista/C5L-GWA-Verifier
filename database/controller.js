@@ -16,6 +16,35 @@ const db = mongoose.createConnection(`mongodb://127.0.0.1:27017/KALATAS`, {
   useUnifiedTopology: true
 })
 
+// middleware implementation
+
+exports.middleware = async function(req, res, next) {
+  const authHeader = req.headers['authorization'];
+
+  if (!authHeader) {
+    res.send({err:'No auth headers given'});
+    return
+  } 
+
+  var username = authHeader.split(' ')[1];
+  var password = authHeader.split(' ')[2];
+
+  //get rid of extra spaces on password
+  const user = await User.findOne({Username: username});
+  if(user){
+    if(user.Password === password){
+      next();
+    } else {
+      res.send({err:'Failed to authenticate'});
+      console.log("HERE")
+    }
+  }
+  else {
+    res.send({err:'Failed to authenticate'});
+    console.log("HERE")
+  }
+}
+
 //NOTE: all responses must be in JSON form
 // err - error response; suc - success response;
 
