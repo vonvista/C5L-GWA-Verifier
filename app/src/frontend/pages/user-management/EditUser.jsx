@@ -92,7 +92,16 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
           title: 'Success',
           text: 'Successfully updated user!',
         })
+        console.log(body)
         handleEditRecordSave(body)
+        if(body.Role == "admin"){
+          localStorage.setItem("FirstName", body.FirstName)
+          localStorage.setItem("LastName", body.LastName)
+          localStorage.setItem("MiddleName", body.MiddleName)
+          localStorage.setItem("Password", body.Password)
+          localStorage.setItem("Position", body.Position)
+          localStorage.setItem("Username", body.Username)
+        }
 
       }
     })
