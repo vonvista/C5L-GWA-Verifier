@@ -16,7 +16,6 @@ const db = mongoose.createConnection(`mongodb://127.0.0.1:27017/KALATAS`, {
   useUnifiedTopology: true
 })
 
-// middleware implementation
 
 exports.middleware = async function(req, res, next) {
   const authHeader = req.headers['Authorization'];
@@ -43,6 +42,29 @@ exports.middleware = async function(req, res, next) {
     res.send({err:'Failed to authenticate'});
     console.log("HERE")
   }
+}
+
+//create admin account
+exports.adminCreate = async function(req, res, next) {
+
+  var hashedPassword = await bcrypt.hash('admin', saltRounds); //encrpyt password first -vov
+
+  const admin = new User({
+    Username: "admin",
+    FirstName: "Admin",
+    MiddleName: "_",
+    LastName: "User",
+    Position: "Chairman",
+    Role: "admin",
+    Password: hashedPassword,
+    History:[]
+  })
+  
+  //save
+  admin.save(function(err) {
+    // if (!err) { res.send(admin)}
+    // else { res.send({err:'Unable to save user'}) }
+  });
 }
 
 //NOTE: all responses must be in JSON form
