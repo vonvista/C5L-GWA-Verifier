@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import 'tailwindcss/tailwind.css';
 import Swal from 'sweetalert2';
 import 'frontend/components/table/UserList.css';
 
@@ -15,7 +16,15 @@ import EditUser from './EditUser';
 import AddUser from './AddUser';
 
 
-const UserManagementPage = () => {
+
+/* Parent component >> renderer/App.jsx */
+/* This is the User Management page which is a primary navigation page. */
+/* Props:
+    hoverRef    --- a callbackRef used by useHover to update the listeners for the 'mouseover' and 'mouseout' events in the navigation bar
+    isHovering  --- handles the hovering state of the navigation bar
+    setIsHovering --- sets hover state, used for logging out user
+*/
+const UserManagementPage = ({ hoverRef, isHovering, setIsHovering }) => {
   const [rows, setRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -152,41 +161,55 @@ const UserManagementPage = () => {
 
     return(
         <>
-          <div>
             <div>
-              {userRole == "user" ? <UserNav /> : <AdminNav />}
-            </div>
-            {/* Right Section */}
-            <div className="absolute inset-0 flex ml-8 xl:ml-12">
-              <div><HeaderWithoutArrowbck pageTitle={"USER MANAGEMENT"}/></div>
-              
-              {/* Page Contents */}
-              <div className='flex ml-10 mt-6 xl:ml-24 justify-center items-center h-screen space-x-14'>
-                <div className='flex items-center w-1/6'>
-                  <AddUserBtn handleClick={() => setShowModal(true)}/>
-                  {showModal ?
-                    (<AddUser modalState={true} handleClose={() => setShowModal(false)} handleAddRecord={handleAddRecord}/>)
-                    :(<></>)
-                  }
-                  {showModalEdit ?
-                    (<EditUser modalState={true} handleClose={() => setShowEditModal(false)} editUser={editUser} handleEditRecordSave={handleEditRecordSave}/>)
-                    :(<></>)
-                  }
-                  {/* <Search user={"user"} handleSearch={(e) => setSearchUser(e.target.value)} searchValue={searchUser} buttonHandler={handleSearch} handleEnter={handleEnterPress}/> */}
-                </div>
+                
+                {/* Navigation Bar */}
                 <div>
-                  <div className='table-container'>
-                    <List table={3} data={currentRows} handleDeleteRecord={handleDeleteRecord} handleEditRecord={handleEditRecord}/>
-                  </div>
-                  <div className='float-right'>
-                    <Pagination rowsPerPage={rowsPerPage} totalRows={rows.length} currentPage={currentPage} paginate={paginate} />
-                  </div>
+                    {userRole == "user" ?
+                        <UserNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
+                        : <AdminNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
+                    }
                 </div>
-              </div>
+
+                {/* Right Section */}
+                <div className="absolute inset-0 flex ml-8 xl:ml-12">
+                    <div><HeaderWithoutArrowbck pageTitle={"USER MANAGEMENT"}/></div>
+                    
+                    {/* Page Contents */}
+                    <div className='flex ml-10 mt-6 xl:ml-24 justify-center items-center h-screen space-x-14'>
+
+                        {/* Add User */}
+                        <div className='flex items-center w-1/6'>
+                            <AddUserBtn handleClick={() => setShowModal(true)}/>
+
+                            {/* Add User Modal */}
+                            {showModal ?
+                                (<AddUser modalState={true} handleClose={() => setShowModal(false)} handleAddRecord={handleAddRecord}/>)
+                                :(<></>)
+                            }
+
+                            {/* Edit User Modal */}
+                            {showModalEdit ?
+                                (<EditUser modalState={true} handleClose={() => setShowEditModal(false)} editUser={editUser} handleEditRecordSave={handleEditRecordSave}/>)
+                                :(<></>)
+                            }
+                        </div>
+
+                        {/* Table and Pagination */}
+                        <div>
+                            <div className='table-container'>
+                                <List table={3} data={currentRows} handleDeleteRecord={handleDeleteRecord} handleEditRecord={handleEditRecord}/>
+                            </div>
+                            <div className='float-right'>
+                                <Pagination rowsPerPage={rowsPerPage} totalRows={rows.length} currentPage={currentPage} paginate={paginate} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
         </>
     )
 }
 
-export default UserManagementPage
+
+export default UserManagementPage;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { refresh } from 'electron-debug';
+import 'tailwindcss/tailwind.css';
 
 /* Components */
 import Header from 'frontend/components/common/HeaderWithoutArrowbck';
@@ -14,14 +15,21 @@ import List from 'frontend/components/table/List';
 import ExportFileBtn from 'frontend/components/buttons/ExportFileBtn';
 import Reset from 'frontend/components/buttons/ResetBtn';
 
-/* CSS */
-import 'tailwindcss/tailwind.css';
-
 /* Backend */
 import readInputFile from 'backend/read-input';
 import Swal from 'sweetalert2';
 
-const UserDashboard = () => {
+
+
+/* Parent component >> renderer/App.jsx */
+/* This is the User Dashboard page which is a primary navigation page. */
+/* Props:
+    hoverRef    --- a callbackRef used by useHover to update the listeners for the 'mouseover' and 'mouseout' events in the navigation bar
+    isHovering  --- handles the hovering state of the navigation bar
+    setIsHovering --- sets hover state, used for logging out user
+*/
+const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
+
   // for navigating page on search bar and other
   const navigate = useNavigate();
 
@@ -265,73 +273,82 @@ const UserDashboard = () => {
     });
   };
 
-  return (
-    <>
-      <div>
-        <div>{userRole == 'user' ? <UserNav /> : <AdminNav />}</div>
+    return (
+        <>
+            <div>
+                {/* Navigation Bar */}
+                <div>
+                    {userRole == "user" ?
+                        <UserNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
+                        : <AdminNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
+                    }
+                </div>
 
-        {/* Right Section */}
-        <div className="absolute inset-0 flex ml-8 xl:ml-12 justify-center">
-          <div>
-            <Header
-              pageTitle={
-                userRole == 'user' ? 'USER DASHBOARD' : 'ADMIN DASHBOARD'
-              }
-            />
-          </div>
+                {/* Right Section */}
+                <div className="absolute inset-0 flex ml-8 xl:ml-12 justify-center">
+                    <div>
+                        <Header pageTitle={ userRole == 'user' ?
+                                'USER DASHBOARD' : 'ADMIN DASHBOARD' }
+                        />
+                    </div>
 
-          {/* Page Contents */}
-          <div className="pt-20 flex-column">
-            <div className="flex">
-              {/* Upload button */}
-              <div className="flex ml-auto order-2">
-                <ExportFileBtn list={rows} />
-                <UploadFileBtn
-                  handleClick={readInputFile}
-                  handleAddRecord={handleAddRecord}
-                />
-              </div>
-              {/* Search input button */}
-              <div className="float-left items-center">
-                <Search
-                  user="student number"
-                  handleSearch={(e) => setSearchStudent(e.target.value)}
-                  searchValue={searchStudent}
-                  buttonHandler={handleSearch}
-                  handleEnter={handleEnterPress}
-                />
-              </div>
-              {/* Refresh button */}
-              <div className="flex items-center ml-2">
-                <Refresh handleClick={forceReload} />
-              </div>
+                    {/* Page Contents */}
+                    <div className="pt-20 flex-column">
+                        
+                        <div className="flex">
+                            {/* Search bar */}
+                            <div className="float-left items-center">
+                                <Search
+                                user="student number"
+                                handleSearch={(e) => setSearchStudent(e.target.value)}
+                                searchValue={searchStudent}
+                                buttonHandler={handleSearch}
+                                handleEnter={handleEnterPress}
+                                />
+                            </div>
+
+                            {/* Refresh button */}
+                            <div className="flex items-center ml-2">
+                                <Refresh handleClick={forceReload} />
+                            </div>
+
+                            {/* Export and Upload buttons */}
+                            <div className="flex ml-auto order-2">
+                                <ExportFileBtn list={rows} />
+                                <UploadFileBtn
+                                    handleClick={readInputFile}
+                                    handleAddRecord={handleAddRecord}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Table */}
+                        <div className="table-container">
+                            <List
+                                table={1}
+                                data={currentRows}
+                                changeSort={changeSort}
+                                sortState={sortState}
+                                handleDeleteRecord={handleDeleteRecord}
+                            />
+                        </div>
+
+                        {/* Reset button and Pagination */}
+                        <div className="flex justify-between">
+                            <Reset handleClick={handleReset} />
+                            <Pagination
+                                rowsPerPage={rowsPerPage}
+                                totalRows={rows.length}
+                                currentPage={currentPage}
+                                paginate={paginate}
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="table-container">
-              <List
-                table={1}
-                data={currentRows}
-                changeSort={changeSort}
-                sortState={sortState}
-                handleDeleteRecord={handleDeleteRecord}
-              />
-            </div>
-            {/* Reset button */}
-            <div className="float-left">
-              <Reset handleClick={handleReset} />
-            </div>
-            <div className="float-right">
-              <Pagination
-                rowsPerPage={rowsPerPage}
-                totalRows={rows.length}
-                currentPage={currentPage}
-                paginate={paginate}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+        </>
+    );
 };
+
 
 export default UserDashboard;
