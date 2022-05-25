@@ -209,7 +209,15 @@ function organizeHistory(data){
   return finalHistory
 }
 
-export default function StudentRecord() { // this will probably transferred to another file but this stays here for now
+
+/* Parent component >> renderer/App.jsx */
+/* This is the Student Record page which is a secondary navigation page. */
+/* Props:
+    hoverRef    --- a callbackRef used by useHover to update the listeners for the 'mouseover' and 'mouseout' events in the navigation bar
+    isHovering  --- handles the hovering state of the navigation bar
+    setIsHovering --- sets hover state, used for logging out user
+*/
+export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
 
   // Backend Linking (Database to Frontend) -lal
   const [studentProp, getStudentProp] = useState()
@@ -384,13 +392,17 @@ export default function StudentRecord() { // this will probably transferred to a
 
     return (
 
-      // checks if props are already fetched from the DB
-      (studentProp && notesProp && gradesProp && historyProp && gpaCalc && unitGPA) ? 
-      <>
-        <nav class="sticky z-10">
-          {userRole == "user" ? <UserNav /> : <AdminNav />}
-        </nav>
-            <div className="relative inset-0 flex ml-8 xl:ml-12 justify-center">
+        // checks if props are already fetched from the DB
+        (studentProp && notesProp && gradesProp && historyProp && gpaCalc && unitGPA) ? 
+        <>
+            <nav class="sticky z-10">
+                {userRole == "user" ?
+                    <UserNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
+                    : <AdminNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
+                }
+            </nav>
+
+            <div className="relative inset-0 flex ml-[4vw] justify-center">
                 <header><Header pageTitle={"Student Record"}/></header>
                 <RecordPage
                   // user={user}                   // dummy data
@@ -404,9 +416,9 @@ export default function StudentRecord() { // this will probably transferred to a
                   // autoSet={setGrades}
                 />
             </div>
-      </> 
-      // empty div while data are not ready
-      : <div></div>      
-      
+        </> 
+
+        // empty div while data are not ready
+        : <div></div>      
     );
 }
