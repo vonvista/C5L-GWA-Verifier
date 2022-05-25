@@ -27,26 +27,34 @@ useEffect(() => {
 
 // Function that contains a functioning Refresh button
 // --handleClick prop: function to handle click event
+// --typeSR           : if true change style for SR page
 
-const Refresh = ({ handleClick }) => {
-  const btn = `
-    .btn{
-      width: 2.2786458333333335vw;
-      height: 4.847645429362881vh;
-  }`; // styling of image inside the button
+const Refresh = ({ handleClick, typeSR }) => {
+    const btn = `
+        .btn{
+            width: 2.2786458333333335vw;
+            height: 4.847645429362881vh;
+        }`; // styling of image inside the button
 
-  const buttons = `w-8 h-8 hover:bg-slate-300 rounded-3xl bg-slate-200 relative ml-2 grow btn`; // styling of button
+    const buttons = `w-8 h-8 hover:bg-slate-300 rounded-3xl bg-slate-200 relative ml-2 grow btn`; // styling of button
+    const buttonSR = `self-center transition-all ease-out delay-150 hover:transition-all hover:ease-in hover:delay-150 hover:bg-slate-300 rounded-3xl bg-slate-200`; // styling of button
 
-  return (
-    <div className="pr-1.5 mr-0 items-center justify-items-center inline-block grow">
-      <style>{btn}</style>
-      
-      {/* Refresh Button */}
-      {/* Reference: https://stackoverflow.com/questions/70069619/refresh-data-on-button-click-react */}
-      <button className={buttons} type="button" onClick={handleClick}>
-        <img className="btn" alt="icon" src={refresh} />
-      </button>
-    </div>
+    return (
+    
+    typeSR 
+    ?   <>
+            <button className={buttonSR} type="button" onClick={handleClick}>
+                <img className="w-full h-full block" alt="icon" src={refresh} />
+            </button>
+        </>
+    :   <div className="pr-1.5 mr-0 items-center justify-items-center inline-block grow">
+            <style>{btn}</style>
+            {/* Refresh Button */}
+            {/* Reference: https://stackoverflow.com/questions/70069619/refresh-data-on-button-click-react */}
+            <button className={buttons} type="button" onClick={handleClick}>
+                <img className="btn" alt="icon" src={refresh} />
+            </button>
+        </div>
   );
 };
 

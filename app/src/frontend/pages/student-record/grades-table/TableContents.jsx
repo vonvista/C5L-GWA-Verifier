@@ -6,10 +6,17 @@ import Swal from 'sweetalert2';
 import List from 'frontend/components/table/List';
 import 'tailwindcss/tailwind.css';
 
+/* Parent component: ../StudentViewRecord */
+/* This component handles the student's data for a specific semester */
+/* Props:
+    Name            :   contains name of semester
+    Total           :   contains total
+    Semester        :   contains semester data 
+    historyHandler  :   add changes to history
+    autoSet         :   backend handler for setting data into grades table
+*/
 
-// This component handles the student's data for a specific semester
-
-const TableContents = ({ Name, Total, Semester, key, handler, history, historyHandler, autoSet }) => {
+const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
 
     // handler prop will handle pushing changes to parent
     // semHandler will handle semData
@@ -100,7 +107,6 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
     }
 
     const setHistoryEditRow = (detailsObj) => { // logs action of editing a row to history
-        let currHistory = [...history] // make copy of current array of history logs
 
         const newHistObj = {
             date: new Date().toLocaleDateString(),
@@ -166,7 +172,7 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
         <>
             {/* Accordion for the table */}
             <div className="row-span-1">
-                <Disclosure key={key} defaultOpen>
+                <Disclosure defaultOpen>
                     {({ open }) => (
                         <>
                              {/* Accordion Header */}
@@ -202,16 +208,6 @@ const TableContents = ({ Name, Total, Semester, key, handler, history, historyHa
                                         addHandler={addRowData}
                                         historyHandler={historyHandler}
                                     />
-                                    <section className="mt-3">
-                                        <span className="font-montserrat font-bold text-primary-red">Load Status</span>
-                                        {( Total <= 20 )
-                                            ? ( Total >= 15 )
-                                                ? <span className="ml-4 font-black text-button-green underline">Normal</span>
-                                                : <span className="ml-4 font-black text-button-green underline">Underload</span>
-                                            : <span className="ml-4 font-black text-button-green underline">Overload</span>
-                                        }
-                                    </section>
-
                                 </Disclosure.Panel>    
                             </Transition>
                         </>

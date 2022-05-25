@@ -15,7 +15,22 @@ How to use:
     /> 
 */
 
-function userInput(props) {
+/* Parent component: path/to/parent-component */
+/* This functional component is a component that condenses the label and input*/
+/* Props:
+    props.lableStyle      : contains styling for label
+    props.labelVal        : contains text for the label
+    props.inputStyle      : contains styling for the input field
+    props.name            : name for the input field
+    props.max             : char limit for the input field
+    props.inputType       : type of input
+    props.value           : value that input contains
+    props.changeHandler   : holds the function for handling changes of input
+    props.handleKeyPress  : key press handler
+    props.required        : if input field is required (set to false for more more customizability)
+*/
+
+const Input = (props) => {
   // function component for input field boxes
 
   return (
@@ -40,4 +55,4 @@ function userInput(props) {
   );
 }
 
-export default userInput;
+export default Input;

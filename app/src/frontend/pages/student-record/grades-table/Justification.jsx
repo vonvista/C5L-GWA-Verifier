@@ -4,7 +4,18 @@ import { useForm, isRequired } from '../../../hooks/useForm';
 import Input from 'frontend/components/inputs/Input';
 import Swal from 'sweetalert2';
 
-// component that creates a modal window for justification from: https://headlessui.dev/react/dialog
+/* Parent component: 
+    ../../../components/buttons/ActionsSaveCancel
+    ../../../component/buttons/ActionsJustification
+*/
+/* component that creates a modal window for justification from: https://headlessui.dev/react/dialog */
+/* Props:
+    modalState          :   holds state of the modal
+    modalHandler        :   holds state handler of the modal
+    parentSubmitHandler :   function that handles the "form submission" of the parent component
+    historyHandler      :   handles the "submission" of the history
+    histTitle           :   holds title of history
+*/
 
 const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHistory, histTitle }) => {
     /* how to use
@@ -42,9 +53,9 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
     const saveChanges = (e) => {
         // function that'll save changes
         // -- insert function for handling changes to history here --
-        e.preventDefault()  // prevents refreshing of page
-        parentSubmitHandler(e)    // submit contents of the form
-        submitHandler(e) // update history log
+        e.preventDefault()          // prevents refreshing of page
+        parentSubmitHandler(e)      // submit contents of the form
+        submitHandler(e)            // update history log
 
         const historyCredentials = { //updates history in db with title(?) and description
             User: userName,

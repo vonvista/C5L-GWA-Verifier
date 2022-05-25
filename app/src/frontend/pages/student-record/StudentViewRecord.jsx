@@ -11,25 +11,26 @@ import Notes from './tabbed-components/notes/Notes';
 import History from './tabbed-components/history/StudentRecordHistory';
 import CheckList from './tabbed-components/checklist/ChecklistTab';
 import Table from './grades-table/TableContents';
+import Refresh from '../../components/buttons/Refresh'
 
 /* CSS */
 import 'tailwindcss/tailwind.css';
 import { toNamespacedPath } from 'node:path/win32';
 
 
-
+// Parent component: ./StudentRecord
 // This component contains all the elements of the student record page
 // such as the student details header, the grades table, and the status tab
-// -- user : details about who is editing the document
-// -- student : contains details of the student (studnumber, name, degree program, status)
-// -- notes : data of per semester notes that can be edited or deleted
-// -- history : data of changes done on given record
-// -- status : whether verified or not
-// -- grades : object containing grades of students divided per semester
+// -- student   : contains details of the student (studnumber, name, degree program, status)
+// -- notes     : data of per semester notes that can be edited or deleted
+// -- history   : data of changes done on given record
+// -- status    : whether verified or not
+// -- grades    : object containing grades of students divided per semester
 // -- checklist : list of requirements the student needs to accomplish before being verified
-// -- autoSet:
+// -- gpa       : contains gpa data
+// -- refresh   : handler for refresh
 
-const RecordPage = ({sem, user, student, notes, history, status, grades, checklist, gpa}) => {
+const RecordPage = ({student, notes, history, status, grades, checklist, gpa, refresh = () => {} }) => {
 
     const [selectedStudent, setSelectedStudent] = useState(student)
     const [statusState, setStatus] = useState(status)
@@ -42,6 +43,16 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
     const [gpaCalc, setGPA] = useState(gpa);
     const [currStudentID, setCurrStudentID] = useState(localStorage.getItem("currStudentID"))
 
+
+    // refresh functions
+    const forceReload = () => {
+        refresh();
+      };
+      
+    useEffect(() => {
+        refresh();
+    }, []);
+    
 
     // validation functions
     const handleValApply = () => {
@@ -108,8 +119,6 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
         Notes: <Notes notesData={notesState} semesters={gradeState} setNotesData={setNotesState} />,    // notes component
         History: <History historyData={historyState} />,            // history component
     }
-
-    
 
     const tabAnim = {
         hide: {
@@ -319,7 +328,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                         <div className={`table-row-group`}>
                             <div className="table-row">
                                 <div className={detailStyle.text}>{selectedStudent.stud_no}</div>
-                                <div className={detailStyle.text}>{selectedStudent.name}</div>
+                                <div className={`${detailStyle.text} truncate`}>{selectedStudent.name}</div>
                                 <div className={detailStyle.text}>{selectedStudent.degree_program}</div>
                                 <div className={detailStyle.text}>{selectedStudent.status}</div>
                             </div>
@@ -329,6 +338,9 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
 
                     <div className="w-1/5 flex items-center">
                         <ActionsBtn studentInfo={selectedStudent} grades={gradeState}/>
+                        <span className="flex ml-5">
+                            <Refresh handleClick={forceReload} typeSR={true} />
+                        </span>
                     </div>
 
 
@@ -346,8 +358,6 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                                     Name={semData.sem}
                                     Semester={semData.data}
                                     Total={semData.total}
-                                    handler={setGradeState}
-                                    history={historyState}
                                     historyHandler={setHistory}
                                     autoSet={setGrades}/>
                             ))
@@ -357,7 +367,7 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                                 
                     {/* tabbed information card */}
 
-                    <div className="flex-none max-w-[100%] h-[45rem] sticky top-[11.5rem] shadow-lg rounded-lg">
+                    <div className="flex-none max-w-[100%] h-[45rem] sticky top-[2.5rem] shadow-lg rounded-lg">
                         <Tab.Group
                             selectedIndex={tabId}
                             onChange={(id) => {
@@ -366,8 +376,8 @@ const RecordPage = ({sem, user, student, notes, history, status, grades, checkli
                             manual
                         >
                             <Tab.List className="flex rounded-t-md">
-                                {Object.keys(tabContents).map((tab) => (
-                                        <Tab key={tab} as={Fragment}>
+                                {Object.keys(tabContents).map((tab, idx) => (
+                                        <Tab key={idx} as={Fragment}>
                                             {({selected}) => (
                                                 <button
                                                     className={

@@ -3,6 +3,7 @@ import Actions from 'frontend/components/buttons/Actions'
 import Input from 'frontend/components/inputs/Input'
 import 'tailwindcss/tailwind.css'
 
+// Parent component: found in List.jsx
 // Component that is active when the row of the grades table is being edited
 // -- dataDynamic : values that are being edited in real time
 // -- dataStatic : values that will only updated when values in the row are saved

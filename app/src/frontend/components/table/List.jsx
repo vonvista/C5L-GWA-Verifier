@@ -131,8 +131,8 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             )
                         })}
 
-                        <div className="table-row ">
-                            <div className="table-cell font-montserrat font-bold text-primary-red py-2">Total</div>
+                        <div className="table-row">
+                            <div className="table-cell pt-5 font-montserrat font-bold text-primary-red py-2">Total</div>
                             <div className="table-cell text-center">{total}</div>   {/* row for total units */}
                             <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
                             <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
