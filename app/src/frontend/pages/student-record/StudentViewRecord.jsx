@@ -11,7 +11,7 @@ import Notes from './tabbed-components/notes/Notes';
 import History from './tabbed-components/history/StudentRecordHistory';
 import CheckList from './tabbed-components/checklist/ChecklistTab';
 import Table from './grades-table/TableContents';
-import Refresh from '../../components/buttons/RefreshSR'
+import Refresh from '../../components/buttons/Refresh'
 
 /* CSS */
 import 'tailwindcss/tailwind.css';
@@ -338,7 +338,9 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
 
                     <div className="w-1/5 flex items-center">
                         <ActionsBtn studentInfo={selectedStudent} grades={gradeState}/>
-                        <Refresh handleClick={forceReload} plusStyle="ml-5" />
+                        <span className="flex ml-5">
+                            <Refresh handleClick={forceReload} typeSR={true} />
+                        </span>
                     </div>
 
 
