@@ -1,18 +1,37 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
-
-/* Components */
-import EditBtn from 'frontend/components/buttons/EditBtn.jsx';
-import ModalStatus from 'frontend/components/buttons/DropdownStatus';
-
-/* CSS */
+import { Dialog, Transition} from '@headlessui/react';
+import { Fragment, useEffect, useState } from 'react';
 import 'tailwindcss/tailwind.css';
-import './EditStudent.css';
+import EditBtn from 'frontend/components/buttons/EditStudentBtn.jsx';
+import 'tailwindcss/tailwind.css';
 
+/* Parent component >> frontend/components/buttons/EditStudentBtn.jsx */
 /* Function for the "Edit Student" feature in the Student View Record page's Dropdown Menu */
-/* Initially shows an "Add" button and prompts the modal window after clicking it */
-const AddRow = () => {
+/* Initially shows an "Edit" button on the dropdown menu and prompts the modal window after clicking it */
+/* 
+   Props:
+    modalState          ---     holds the state of the edit student modal
+    handleClose         ---     function used to close edit student modal and reset the input fields
+*/
+
+const EditStudent = ({modalState, handleClose}) => {
+    /*-------------------- Styling --------------------*/
+    const editStudentModal = `relative bg-secondary-red h-[47vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
+    const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[37vh]`;
+    const modalBody = `absolute inset-x-0 bg-secondary-red top-[8%] bottom-[10%]`;
+    const modalClose = `text-[4.85vh] text-white float-right`;
+    const modalTitle = `text-white text-center font-bold italic text-[1.30vw] mt-[4.15vh] mb-[4.85vh]`;
+    const modalInputs = `text-[1.10vw] flex flex-col space-y-4 items-center justify-center`;
+    const inputContainer = `ml-5 mr-[1.15vw]`;
+    const inputStyle = `text-center w-full h-[4.85vh] rounded-xl`
+    const sectionInputField = `inline-block w-[11.71875vw]`;
+    const sectionFLName = `inline-block w-[16.71875vw] truncate`;
+    const sectionMI = `inline-block w-[6.71875vw]`;
+    const modalFooter = `mt-[4.85vh] text-[1.11vw] flex items-center justify-center`;
+    const modalBtnSave = `h-[5vh] w-[9.25vw] rounded-xl mr-[0.65vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green`;
+
+
+    /*-------------------- State handlers --------------------*/
     const [openModal, setOpenModal] = useState(false);
     const [studNum, setStudNum] = useState('');
     const [studFName, setStudFName] = useState('');
@@ -22,13 +41,15 @@ const AddRow = () => {
     const [currStudentID, setcurrStudentID] = useState(localStorage.getItem('currStudentID'));
     const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
 
+
+    /*-------------------- Functions --------------------*/
     //function which updates Student input fields
     const updateStudent = () => {
         const credentials = {
             StudentID: studNum,
-            FirstName: studName, //put first name variable
-            LastName: "LName", //put last name variable
-            MiddleName: "MName", //put middle name variable
+            FirstName: studFName, //put first name variable
+            LastName: studLName, //put last name variable
+            MiddleName: studMName, //put middle name variable
             Degree: degree,
             TotalUnits: 0,
             TotalUnits2: 0,
@@ -101,156 +122,143 @@ const AddRow = () => {
     }
 
     return (
-        <>
-            <EditBtn handleClick={setOpenModal}/>
-            { openModal && (
-                <AnimatePresence>
-                    {/* Modal animations */}
-                    <motion.div
-                        initial={{
-                            opacity: 0
-                        }}
-                        animate={{
-                            opacity: 1,
-                            transition: {
-                                duration: 0.2
-                            }
-                        }}
-                        exit={{
-                            opacity: 0,
-                            transition: {
-                                duration: 0.2
-                            }
-                        }}
-                        className='edit-students-modal-backdrop'>
-                        <motion.div
-                            initial={{
-                                scale: 0
-                            }}
-                            animate={{
-                                scale: 1,
-                                transition: {
-                                    duration: 0.2
-                                }
-                            }}
-                            exit={{
-                                scale: 0,
-                                transition: {
-                                    duration: 0.2
-                                }
-                            }}
+        <>                           
+            {/* Wrapping everything with transition component to use transition effects from @headlessui/react */}
+            <Transition appear show={modalState} as={Fragment}>
 
-                            className='edit-students-modal '>
-                            <motion.div className="edit-students-modal-content">
-                            {/* Baybayin Background Image */}
-                            <motion.div className="bg-baybayin edit-students-modal-baybayin-style"></motion.div>
+                {/* Wrapping everything with dialog component */}
+                <Dialog as="div" className="relative z-50" onClose={handleClose}>
 
-                            {/* content */}
-                                <motion.div className='edit-students-modal-body '>
-                                    {/* title */}
-                                    <motion.div className='edit-students-modal-close text-white float-right'>
-                                        <button onClick={() => {setOpenModal(false)}}>
-                                            <span>&times;</span>
-                                        </button>
-                                    </motion.div>
-                                    <motion.div className='edit-students-modal-title text-white text-center'>Fill in the fields below to edit student's details successfully</motion.div>
+                    {/* Transition effect for the element inside this Transition.Child tag*/}
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        {/* Container for the layer behind the modal window */}
+                        <div className="fixed inset-0 bg-black bg-opacity-25" />
+                    </Transition.Child>
 
-                                    {/* input form */}
-                                    <form className='edit-students-modal-inputs'>
+                            {/* Container for the layer containing the modal window */}
+                            <div className="fixed inset-0 overflow-y-auto flex min-h-full items-center justify-center p-4 text-center">
 
-                                        <motion.div className='edit-students-modal-name flex flex-row justify-center'>
-                                          {/* Student Name */}
-                                          <motion.div className='edit-students-modal-input-container'>
-                                              <section className='inline-block edit-students-modal-section-studname'>
-                                                    <input
-                                                        className='edit-students-modal-input-style h-fit'
-                                                        type="text"
-                                                        name="studFName"
-                                                        placeholder='First Name'
-                                                        onChange={(e) => setStudFName(e.target.value)}
-                                                    />
+                            {/* Transition effect for the element inside this Transition.Child tag*/}
+                            <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0 scale-95"
+                            enterTo="opacity-100 scale-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100 scale-100"
+                            leaveTo="opacity-0 scale-95"
+                            >
 
-                                                  <motion.div className='w-full text-white text-center'>First Name</motion.div>
-                                              </section>
-                                          </motion.div>
-                                          <motion.div className='edit-students-modal-input-container'>
-                                              <section className='inline-block edit-students-modal-section-studMname'>
-                                                  <input
-                                                      className='edit-students-modal-input-style'
-                                                      type="text"
-                                                      name="studMName"
-                                                      placeholder='M.I.'
-                                                      onChange={(e) => setStudMName(e.target.value)}
-                                                  />
-                                                  <motion.div className='w-full text-white text-center'>Middle Initial</motion.div>
-                                              </section>
-                                          </motion.div>
-                                          <motion.div className='edit-students-modal-input-container'>
-                                              <section className='inline-block edit-students-modal-section-studname'>
-                                                  <input
-                                                      className='edit-students-modal-input-style'
-                                                      type="text"
-                                                      name="studLName"
-                                                      placeholder='Surname'
-                                                      onChange={(e) => setStudLName(e.target.value)}
-                                                  />
-                                                  <motion.div className='w-full text-white text-center'>Surname</motion.div>
-                                              </section>
-                                          </motion.div>
-                                        </motion.div>
+                            {/* Edit Student Details modal window */}
+                            <Dialog.Panel className={editStudentModal}>
+                                    <div className='relative'>
+                                        <div className={baybayinStyle}></div>
+                                        <div className={modalBody}>
 
-                                        <motion.div className='edit-students-modal-deets flex flex-row justify-center'>
-                                          {/* Student Number */}
-                                          <motion.div className='edit-students-modal-input-container'>
-                                              <section className='inline-block edit-students-modal-section-studnum'>
-                                                  <input
-                                                      className='edit-students-modal-input-style'
-                                                      type="text"
-                                                      name="studNum"
-                                                      placeholder='20XX-XXXX'
-                                                      onChange={(e) => setStudNum(e.target.value)}
-                                                  />
-                                                  <motion.div className='w-full text-white text-center'>Student Number</motion.div>
-                                              </section>
-                                          </motion.div>
+                                            {/* Window title */}
+                                            <div className={modalClose}>
+                                                <button onClick={handleClose}>
+                                                    <span>&times;</span>
+                                                </button>
+                                            </div>
 
-                                          {/* Degree Program */}
-                                          <motion.div className='edit-students-modal-input-container'>
-                                              <section className='inline-block edit-students-modal-section-degree'>
-                                                  <input
-                                                      className='edit-students-modal-input-style'
-                                                      type="text"
-                                                      name="degree"
-                                                      placeholder='Degree Program'
-                                                      onChange={(e) => setDegree(e.target.value)}
-                                                  />
-                                                  <motion.div className='w-full text-white text-center'>Degree Program</motion.div>
-                                              </section>
-                                          </motion.div>
+                                            <div className={modalTitle}>Please fill in the fields below to edit student's details</div>
+                                            <div className='flex flex-col justify-center'>
+                                                {/* input form */}
+                                                <form className={modalInputs}>
+                                                        <div className='flex flex-row'> 
+                                                            {/* Student Name */}
+                                                            <div className={inputContainer}>
+                                                                <section className={sectionFLName}>
+                                                                    <input
+                                                                        className={inputStyle}
+                                                                        type="text"
+                                                                        name="studFName"
+                                                                        placeholder='First Name'
+                                                                        onChange={(e) => setStudFName(e.target.value)}
+                                                                    />
 
-                                          {/* Status */}
-                                          <motion.div className='edit-students-modal-input-container'>
-                                                <section className='inline-block edit-students-modal-section-degree'>
-                                                    <ModalStatus />
-                                                    <motion.div className='w-full text-white text-center'>Status</motion.div>
-                                                </section>
-                                          </motion.div>
-                                        </motion.div>
-                                    </form>
-                                    {/* save and discard buttons */}
-                                    <motion.div className='edit-students-modal-footer flex justify-center'>
-                                        <button className='edit-students-modal-btn edit-students-modal-btn-discard text-center' onClick={() => {setOpenModal(false)}}>Discard</button>
-                                        <button className='edit-students-modal-btn edit-students-modal-btn-save text-white' onClick={submitStudentEdit}>Save changes</button>
-                                    </motion.div>
-                                </motion.div>
-                            </motion.div>
-                        </motion.div>
-                    </motion.div>
-                </AnimatePresence>
-            )}
+                                                                    <div className='w-full text-white text-center'>First Name</div>
+                                                                </section>
+                                                            </div>
+                                                            <div className={inputContainer}>
+                                                                <section className={sectionMI}>
+                                                                    <input
+                                                                        className={inputStyle}
+                                                                        type="text"
+                                                                        name="studMName"
+                                                                        placeholder='M.I.'
+                                                                        onChange={(e) => setStudMName(e.target.value)}
+                                                                    />
+                                                                    <div className='w-full text-white text-center text-sm'>Middle Initial</div>
+                                                                </section>
+                                                            </div>
+                                                            <div className={inputContainer}>
+                                                                <section className={sectionFLName}>
+                                                                    <input
+                                                                        className={inputStyle}
+                                                                        type="text"
+                                                                        name="studLName"
+                                                                        placeholder='Surname'
+                                                                        onChange={(e) => setStudLName(e.target.value)}
+                                                                    />
+                                                                    <div className='w-full text-white text-center'>Surname</div>
+                                                                </section>
+                                                            </div> 
+                                                        </div>
+                                                        <div className='flex flex-row'>                                                                                               
+                                                            {/* Student Number */}
+                                                            <div className={inputContainer}>
+                                                                <section className={sectionInputField}>
+                                                                    <input
+                                                                        className={inputStyle}
+                                                                        type="text"
+                                                                        name="studNum"
+                                                                        placeholder='20XX-XXXX'
+                                                                        onChange={(e) => setStudNum(e.target.value)}
+                                                                    />
+                                                                    <div className='w-full text-white text-center'>Student Number</div>
+                                                                </section>
+                                                            </div>
+                                                            {/* Degree Program */}
+                                                            <div className={inputContainer}>
+                                                                <section className={sectionInputField}>
+                                                                    <input
+                                                                        className={inputStyle}
+                                                                        type="text"
+                                                                        name="degree"
+                                                                        placeholder='Degree Program'
+                                                                        onChange={(e) => setDegree(e.target.value)}
+                                                                    />
+                                                                    <div className='w-full text-white text-center'>Degree Program</div>
+                                                                </section>
+                                                            </div>
+                                                        </div> 
+                                                </form>
+
+                                                {/* Save button */}
+                                                <div className={modalFooter}>
+                                                        <button className={modalBtnSave} onClick={submitStudentEdit}>Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Dialog.Panel>
+                            </Transition.Child>
+                        </div>
+                </Dialog>
+            </Transition>
         </>
     )
 }
 
 
-export default AddRow;
+export default EditStudent;

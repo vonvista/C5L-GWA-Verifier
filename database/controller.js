@@ -454,17 +454,29 @@ exports.studentUpdateGPA = function(req, res, next) {
 
 
 // delete student
-exports.studentDeleteOne = function(req, res, next) {
+exports.studentDeleteOne = async function(req, res, next) {
   //console.log(req.body);
+  var studentKey;
+
+  var student = await Student.findOne({StudentID: req.body.StudentID});
+  if(student){
+    studentKey = student._id;
+  } else {
+    res.send({err:'Unable to find student'});
+    return
+  }
+
   Student.findOneAndDelete({StudentID: req.body.StudentID},function(err, Student){
     if(!err && Student){
       // res.send({suc:'Successfully deleted'});
+      // get student key from student
     } else {
       res.send({err:'Unable to delete'});
+      return
     }
   });
 
-  Grade.deleteMany({Student: mongoose.Types.ObjectId(req.body.StudentKey)},function(err, Student){
+  Grade.deleteMany({Student: mongoose.Types.ObjectId(studentKey)},function(err, Student){
     if(!err && Student){
       res.send({suc:'Successfully deleted'});
     } else {
@@ -708,6 +720,56 @@ exports.noteDeleteAll = function(req,res,next){
   });
 }
 
+// RESET ALL TABLES
+exports.resetAll = function(req,res,next){
+
+  // Clear history first from users
+  User.updateMany({},{"$set":{"History":[]}},function(err, result){
+    //console.log(result);
+  });
+
+  // Delete history
+  History.deleteMany({},function(err){
+    if(!err){
+      res.send({suc:'Successfully deleted history'});
+    } else {
+      res.send({err:'Unable to delete history'});
+    }
+  });
+
+  // Delete users
+  User.deleteMany({},function(err){
+    if(!err){
+      res.send({suc:'Successfully deleted users'});
+    } else {
+      res.send({err:'Unable to delete users'});
+    }
+  });
+
+  // Delete grades
+  Grade.deleteMany({},function(err){
+    if(!err){
+      res.send({suc:'Successfully deleted grades'});
+    } else {
+      res.send({err:'Unable to delete grades'});
+    }
+  });
+
+  // Delete students
+  Student.deleteMany({},function(err){
+    if(!err){
+      res.send({suc:'Successfully deleted students'});
+    } else {
+      res.send({err:'Unable to delete students'});
+    }
+  });
+
+  // Delete notes
+  Note.deleteMany(function(err){
+    if (!err) res.send({suc:'Successfully deleted all notes'});
+    else res.send({err:'Unable to delete all notes'});
+  });
+}
 
 // -----------------------------C O U R S E   S E C T I O N----------------------------------------
 // NOW DEPRICATED

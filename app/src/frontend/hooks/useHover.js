@@ -16,21 +16,21 @@ export function useHover () {
   
     // callbackRef uses useCallback() to create/update the listeners for the 'mouseover' and 'mouseout' events.
     const callbackRef = useCallback(
-      node => {
-        if (nodeRef.current) {
-          nodeRef.current.removeEventListener('mouseover', handleMouseOver);
-          nodeRef.current.removeEventListener('mouseout', handleMouseOut);
-        }
-  
-        nodeRef.current = node;
-  
-        if (nodeRef.current) {
-          nodeRef.current.addEventListener('mouseover', handleMouseOver);
-          nodeRef.current.addEventListener('mouseout', handleMouseOut);
-        }
-      },
-      [handleMouseOver, handleMouseOut]
+        node => {
+            if (nodeRef.current) {
+                nodeRef.current.removeEventListener('mouseover', handleMouseOver);
+                nodeRef.current.removeEventListener('mouseout', handleMouseOut);
+            }
+    
+            nodeRef.current = node;
+    
+            if (nodeRef.current) {
+                nodeRef.current.addEventListener('mouseover', handleMouseOver);
+                nodeRef.current.addEventListener('mouseout', handleMouseOut);
+            }
+        },
+        [handleMouseOver, handleMouseOut]
     );
   
-    return [callbackRef, isHovering];
+    return [callbackRef, isHovering, setIsHovering];
 };

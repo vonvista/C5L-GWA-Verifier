@@ -1,17 +1,16 @@
 import { useNavigate } from 'react-router-dom';
-import { useHover } from '../../hooks/useHover';
 import { useEffect, useState } from 'react';
-import UserIcon from '../../../../assets/icons/default-user-icon.png';
 import 'tailwindcss/tailwind.css';
+import UserIcon from '../../../../assets/icons/default-user-icon.png';
 
 
 /* Importing navigation bar and header to pages
 <>
     <div><UserNav /></div>
-    <div className="absolute inset-0 flex ml-8 xl:ml-12 justify-center">
+    <div className="absolute inset-0 flex ml-[4vw] justify-center">
 
         <div><Header pageTitle={""}/></div>
-        <div className='pt-20 flex-column'>
+        <div className='pt-[9vh] flex-column'>
             // Insert page contents here
             // Adjust margins/padding/containers as needed
         </div>
@@ -21,11 +20,19 @@ import 'tailwindcss/tailwind.css';
 */
 
 
-// This component is used to aid user navigation and is implemented as a sidebar that expands on hover.
-const UserNav = () => {
+/* Parent components:
+    frontend/pages/dashboards/UserDashboard.jsx
+    frontend/pages/student-record/StudentRecord.jsx
+*/
+/* This component is used to aid user navigation and is implemented as a sidebar that expands on hover. */
+/* Props:
+    hoverRef    --- a callbackRef used by useHover to update the listeners for the 'mouseover' and 'mouseout' events in the navigation bar
+    isHovering  --- handles the hovering state of the navigation bar
+    setIsHovering --- sets hover state, used for logging out user
+*/
+const UserNav = ({ hoverRef, isHovering, setIsHovering }) => {
     let navigate = useNavigate();
 
-    const [hoverRef, isHovering] = useHover();
     const [userName, setUserName] = useState('');
     const [position, setPosition] = useState('');
 
@@ -39,8 +46,8 @@ const UserNav = () => {
         // localStorage.removeItem("Role")
         // localStorage.removeItem("Username")
         // localStorage.removeItem("ServerIP")
-        localStorage.clear()
-
+        localStorage.clear();
+        setIsHovering(false);
         navigate('/');
     }
 
@@ -136,4 +143,5 @@ const UserNav = () => {
     );
 }
 
-export default UserNav
+
+export default UserNav;

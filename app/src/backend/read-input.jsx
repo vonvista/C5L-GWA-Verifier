@@ -12,7 +12,8 @@
 // - middle name is only *ONE* word long
 // - sem and year are assumed to be in the form of xx/xx/xx
 
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import './swal-customClass.css';
 
 const pdfjs = require('pdfjs-dist/legacy/build/pdf');
 const pdfWorker = require('pdfjs-dist/legacy/build/pdf.worker.entry');
@@ -23,7 +24,9 @@ pdfjs.GlobalWorkerOptions.workerSrc = pdfWorker;
 const fileBase = 'textFile';
 let fileNum = 0;
 
-const readInputFile = (file, handleAddRecord) => {
+var fileStatuses = [];
+
+const readInputFile = (files, handleAddRecord) => {
 
   // verifies the validity of input file
   function verifyInput(studentData){
@@ -258,32 +261,70 @@ const readInputFile = (file, handleAddRecord) => {
     return studentData;
   }
 
+  function displayFileStatuses() {
+    // if all the input files has been read, display the summary
+    if (fileStatuses.length == files.files.length){
+      if (fileStatuses.length == 1){  // if there is only one file
+        if (fileStatuses[0].status === 'SUCCESS'){
+          Swal.fire({
+            icon: 'success',
+            title: fileStatuses[0].status,
+            text: fileStatuses[0].message,
+          })
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: fileStatuses[0].status,
+            text: fileStatuses[0].message,
+          })
+        } 
+      } else { // if there is more than one file
+        let str = ''
+        
+        // setting up the borderless table to display file statuses
+        str = `${str}<table>`
+        str = `${str}<tr><td></td><td>FILE NAME</td><td>STATUS</td><td>MESSAGE</td></tr>`
+        for (let i=0; i<fileStatuses.length; i++){
+          str = `${str}<tr><td>${i+1}.</td><td>${fileStatuses[i].name}</td><td>${fileStatuses[i].status}</td><td>${fileStatuses[i].message}</td></tr>` 
+        }
+        str = `${str}</table>`
+
+        // displaying the summary with custom class
+        Swal.fire({
+          title: 'Upload Summary',
+          html: str,
+          customClass: {  // class formatting detailed in swal.css
+            popup: 'format-table',
+            htmlContainer: 'format-html-container',
+          }
+        })
+      }   
+    }
+  }
+
   function displayInputText(file) {
 
     // read the pdf file
     const reader = new FileReader();
 
     // check if parameter is of type Blob
-    const myBlob = document.getElementById('myfile').files[0];
-    if (!(myBlob instanceof Blob)){
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'An error occured. Please try again.',
-      })
-      return false;
+    if (!(file instanceof Blob)){
+      fileStatuses.push({name: file.name, status: 'ERROR', message: 'An unexpected error occured.'});
+      displayFileStatuses();
+      return;
     }
 
-    reader.readAsArrayBuffer(document.getElementById('myfile').files[0]);
+    reader.readAsArrayBuffer(file); // get the contents of the pdf file as an array buffer
 
     // once the pdf file read is done execute the function
     reader.onload = function () {
-      const fileURL = reader.result;  // get the contents of the pdf file as an array buffer
+      const fileURL = reader.result;  
      
       getItems(fileURL).then(function (data) {  // process the contents to simple text
         const isSuccessful = verifyInput(data); // verifies inputs not catched by the database
-        if (isSuccessful.success) {
-          
+    
+        if (isSuccessful.success) { // verification is a success and no errors were catched
+  
           //set validations
           numOfValidations = 4
           validations = []
@@ -293,7 +334,7 @@ const readInputFile = (file, handleAddRecord) => {
           //console.log(validations)
 
           const ip = localStorage.getItem("ServerIP");
-          student = {
+          const student = {
             StudentID: data.StudentID,
             FirstName: data.FirstName,
             LastName: data.LastName,
@@ -306,7 +347,7 @@ const readInputFile = (file, handleAddRecord) => {
             Status: "Unchecked",
             Validations: validations,
           };
-
+        
           // checks if the student already exists in the database
           fetch(`http://${ip}:3001/student/find`,{
             method: "POST",
@@ -315,13 +356,9 @@ const readInputFile = (file, handleAddRecord) => {
           })
           .then(response => response.json())
           .then(body =>  {
-            // an error occured during finding
-            if (body.err == 'An error occured'){
-              Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: body.err,
-              })
+            if (body.err == 'An error occured'){ // an error occured during finding
+              fileStatuses.push({name: file.name, status: 'ERROR', message: `${body.err}`});
+              displayFileStatuses();
             } else if (body.err == 'Unable to find student') { // no student found in the database, hence proceed
               
               // posting to database
@@ -333,11 +370,8 @@ const readInputFile = (file, handleAddRecord) => {
               .then(response => response.json())
               .then(body =>  {
                 if(body.err){
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: body.err,
-                  })
+                  fileStatuses.push({name: file.name, status: 'ERROR', message: `${body.err}`});
+                  displayFileStatuses();
                 } else {
                   let StudentKey = body._id;
                   var key = fileBase + '_' + fileNum.toString(); // modifying the key for storing in local storage
@@ -345,7 +379,7 @@ const readInputFile = (file, handleAddRecord) => {
                   fileNum++; // update file number
                   
                   handleAddRecord(body);
-
+        
                   // add grades data to database
                   let Grades = [];
                   // loops through each row of the columns
@@ -371,63 +405,49 @@ const readInputFile = (file, handleAddRecord) => {
                   .then(response => response.json())
                   .then(body =>  {
                     if(body.err){
-                      Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: body.err,
-                      })
+                      fileStatuses.push({name: file.name, status: 'ERROR', message: `${body.err}`});
+                      displayFileStatuses();
                     } else {
-                      Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: isSuccessful.message
-                      })
+                      fileStatuses.push({name: file.name, status: 'SUCCESS', message: isSuccessful.message});
+                      displayFileStatuses();
                     }
                   })
                   .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
-                    Swal.fire({
-                      icon: 'error',
-                      title: 'Server Error',
-                      text: 'Check if the server is running or if database IP is correct'
-                    })
+                    fileStatuses.push({name: file.name, status: 'ERROR', message: 'Check if the server is running or if database IP is correct'});
+                    displayFileStatuses();
                   })
                 }
               })
               .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Server Error',
-                  text: 'Check if the server is running or if database IP is correct'
-                })
+                fileStatuses.push({name: file.name, status: 'ERROR', message: 'Check if the server is running or if database IP is correct'});
+                displayFileStatuses();
               })
             } else { // student already exists, prompt user to delete student first
-              Swal.fire({
-                icon: 'error',
-                title: 'Student already exists',
-                text: `Delete previous record of ${body.StudentID} before adding it again`,
-              })
+              fileStatuses.push({name: file.name, status: 'ERROR', message: `Student already exists. Please delete student ${student.StudentID} before proceeding.`});
+              displayFileStatuses();
             }
           })
-          .catch(err => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: 'Check if the server is running or if database IP is correct',
-            })
+          .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+            fileStatuses.push({name: file.name, status: 'ERROR', message: 'Check if the server is running or if database IP is correct'});
+            displayFileStatuses();
           })
-        } else {
-          Swal.fire({ // will activate if preliminary verification of read input sees an error
-            icon: 'error',
-            title: 'Error',
-            text: isSuccessful.message
-          })
+        } else { //will activate if verification is unsuccessful
+          fileStatuses.push({name: file.name, status: 'ERROR', message: isSuccessful.message});
+          displayFileStatuses();
         }
-        return isSuccessful.success;  // indicating everything read input is successful
       });
     };
   }
 
-  return displayInputText(file);
+  // loops through all the input files
+  function loopThroughFiles(files) {
+    fileStatuses = [];  // resets the fileStatuses list to empty
+    for (let i=0; i < files.files.length; i++){
+      displayInputText(files.files[i]);
+    }
+  }
+
+  return loopThroughFiles(files);
 };
 
 export default readInputFile;
