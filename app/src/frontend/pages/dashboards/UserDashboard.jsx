@@ -23,6 +23,7 @@ import Swal from 'sweetalert2';
 
 
 /* Parent component >> renderer/App.jsx */
+
 /* This is the User Dashboard page which is a primary navigation page. */
 /* Props:
     hoverRef    --- a callbackRef used by useHover to update the listeners for the 'mouseover' and 'mouseout' events in the navigation bar
@@ -410,7 +411,7 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
                 </div>
 
                 {/* Right Section */}
-                <div className="absolute inset-0 flex ml-8 xl:ml-12 justify-center">
+                <div className="relative inset-0 flex ml-[4vw] justify-center">
                     <div>
                         <Header pageTitle={ userRole == 'user' ?
                                 'USER DASHBOARD' : 'ADMIN DASHBOARD' }
@@ -418,7 +419,7 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
                     </div>
 
                     {/* Page Contents */}
-                    <div className="pt-20 flex-column">
+                    <div className="pt-[9vh] flex-column">
                         
                         <div className="flex">
                             {/* Search bar */}

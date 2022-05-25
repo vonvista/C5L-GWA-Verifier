@@ -18,6 +18,7 @@ import AddUser from './AddUser';
 
 
 /* Parent component >> renderer/App.jsx */
+
 /* This is the User Management page which is a primary navigation page. */
 /* Props:
     hoverRef    --- a callbackRef used by useHover to update the listeners for the 'mouseover' and 'mouseout' events in the navigation bar
@@ -162,7 +163,6 @@ const UserManagementPage = ({ hoverRef, isHovering, setIsHovering }) => {
     return(
         <>
             <div>
-                
                 {/* Navigation Bar */}
                 <div>
                     {userRole == "user" ?
@@ -172,11 +172,11 @@ const UserManagementPage = ({ hoverRef, isHovering, setIsHovering }) => {
                 </div>
 
                 {/* Right Section */}
-                <div className="absolute inset-0 flex ml-8 xl:ml-12">
+                <div className="relative inset-0 flex ml-[4vw] justify-center">
                     <div><HeaderWithoutArrowbck pageTitle={"USER MANAGEMENT"}/></div>
                     
                     {/* Page Contents */}
-                    <div className='flex ml-10 mt-6 xl:ml-24 justify-center items-center h-screen space-x-14'>
+                    <div className='flex mt-[2.5vh] items-center h-screen space-x-[3vw]'>
 
                         {/* Add User */}
                         <div className='flex items-center w-1/6'>

@@ -211,6 +211,7 @@ function organizeHistory(data){
 
 
 /* Parent component >> renderer/App.jsx */
+
 /* This is the Student Record page which is a secondary navigation page. */
 /* Props:
     hoverRef    --- a callbackRef used by useHover to update the listeners for the 'mouseover' and 'mouseout' events in the navigation bar

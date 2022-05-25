@@ -7,10 +7,10 @@ import UserIcon from '../../../../assets/icons/default-user-icon.png';
 /* Importing navigation bar and header to pages
 <>
     <div><UserNav /></div>
-    <div className="absolute inset-0 flex ml-8 xl:ml-12 justify-center">
+    <div className="absolute inset-0 flex ml-[4vw] justify-center">
 
         <div><Header pageTitle={""}/></div>
-        <div className='pt-20 flex-column'>
+        <div className='pt-[9vh] flex-column'>
             // Insert page contents here
             // Adjust margins/padding/containers as needed
         </div>
