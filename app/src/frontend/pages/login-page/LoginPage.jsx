@@ -1,7 +1,7 @@
 import { isRequired, useForm } from '../../hooks/useForm';
 import { useNavigate } from 'react-router-dom';
 import 'tailwindcss/tailwind.css';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 {/* Components */}
 import { LoginBtn } from '../../components/buttons/LoginBtn';
@@ -11,11 +11,9 @@ import Input from '../../components/inputs/Input';
 //import { electron } from 'process';
 
 
-function isRequired(val) {
-    return val != null && val.trim().length > 0;
-}
-
-const Login = () => {
+/* Parent component >> renderer/App.jsx */
+/* This is the Login page which is the initial page of the application. */
+const LoginPage = () => {
 
     let navigate = useNavigate(); //navigator
 
@@ -201,4 +199,5 @@ const Login = () => {
     );
 }
 
-export default Login
+
+export default LoginPage;
