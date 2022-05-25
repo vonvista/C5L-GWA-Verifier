@@ -60,7 +60,7 @@ const EditStudent = ({modalState, handleClose}) => {
 
         fetch(`http://${ip}:3001/student/update` ,{
             method: "POST",
-            headers: { "Content-Type":"application/json"},
+            headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
             body: JSON.stringify(credentials)
         })
         .then(response => response.json())
@@ -96,7 +96,7 @@ const EditStudent = ({modalState, handleClose}) => {
         //fetch to add history to database
         fetch(`http://${ip}:3001/history/add`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
             body: JSON.stringify(credentials),
         })
         .then((response) => response.json())

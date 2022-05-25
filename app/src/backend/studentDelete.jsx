@@ -16,7 +16,7 @@ const studentDelete = (ID) => {
 
   fetch(`http://${ip}:3001/student/delete`,{
       method: "DELETE",
-      headers: { "Content-Type":"application/json" },
+      headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
       body: JSON.stringify(student)
     })
     .then(response => response.json())

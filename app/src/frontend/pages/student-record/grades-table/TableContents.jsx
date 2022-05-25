@@ -78,7 +78,7 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
 
         fetch(`http://${ip}:3001/grade/update` ,{
             method: "POST",
-            headers: { "Content-Type":"application/json"},
+            headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}`},
             body: JSON.stringify(gradeCredentials)
         })
         .then(response => response.json())
@@ -141,7 +141,7 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
 
         fetch(`http://${ip}:3001/grade/delete`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
             body: JSON.stringify(deleteGradeCredentials),
         })
         .then((response) => response.json())

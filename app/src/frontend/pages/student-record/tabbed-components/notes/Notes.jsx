@@ -63,9 +63,7 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
         // fetch post request to delete note
         fetch(`http://${ip}:3001/note/delete`, {
             method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
             body: JSON.stringify(deleteNote)
         })
             .then(response => response.json())

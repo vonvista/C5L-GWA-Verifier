@@ -72,7 +72,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
         
         fetch(`http://${ip}:3001/student/update-validations`,{
             method: "POST",
-            headers: { "Content-Type":"application/json" },
+            headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
             body: JSON.stringify(validations)
             })
         .then(response => response.json())
@@ -276,9 +276,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
         // update student gpa to DB
         fetch(`http://${ip}:3001/student/update-gpa`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
                 body: JSON.stringify(newGPA)// use studentID to find student info
             })
             .then(response => response.json())

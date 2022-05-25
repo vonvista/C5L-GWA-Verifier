@@ -49,9 +49,13 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
 
   const fetchData = async () => {
     // Retrieve data from database
-    fetch(`http://${ip}:3001/student/find-all`)
+    fetch(`http://${ip}:3001/student/find-all`, {
+        method: "GET",
+        headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
+      })
       .then((response) => response.json())
       .then(async (body) => {
+        console.log(body);
         const studentsData = []; // initiating array that will contain the information of students
         // mapping out all the entries sent by the fetch
         body.map((student, i) => {
@@ -234,7 +238,7 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
 
     fetch(`http://${ip}:3001/student/find`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
       body: JSON.stringify({ StudentID: searchStudent }),
     })
       .then((response) => response.json())
@@ -342,7 +346,7 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
       }
       await fetch(`http://${ip}:3001/student/delete`,{
         method: "DELETE",
-        headers: { "Content-Type":"application/json" },
+        headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
         body: JSON.stringify(student)
         })
       .then(response => response.json())

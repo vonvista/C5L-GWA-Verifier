@@ -16,6 +16,57 @@ const db = mongoose.createConnection(`mongodb://127.0.0.1:27017/KALATAS`, {
   useUnifiedTopology: true
 })
 
+
+exports.middleware = async function(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  if (!authHeader) {
+    res.send({err:'No auth headers given'});
+    return
+  } 
+
+  var username = authHeader.split(' ')[1];
+  var password = authHeader.split(' ')[2];
+  
+  console.log(username, password)
+  //get rid of extra spaces on password
+  const user = await User.findOne({Username: username});
+  if(user){
+    if(user.Password === password){
+      next();
+    } else {
+      res.send({err:'Failed to authenticate'});
+      console.log("HERE")
+    }
+  }
+  else {
+    res.send({err:'Failed to authenticate'});
+    console.log("HERE")
+  }
+}
+
+//create admin account
+exports.adminCreate = async function(req, res, next) {
+
+  var hashedPassword = await bcrypt.hash('admin', saltRounds); //encrpyt password first -vov
+
+  const admin = new User({
+    Username: "admin",
+    FirstName: "Admin",
+    MiddleName: "_",
+    LastName: "User",
+    Position: "Chairman",
+    Role: "admin",
+    Password: hashedPassword,
+    History:[]
+  })
+  
+  //save
+  admin.save(function(err) {
+    // if (!err) { res.send(admin)}
+    // else { res.send({err:'Unable to save user'}) }
+  });
+}
+
 //NOTE: all responses must be in JSON form
 // err - error response; suc - success response;
 

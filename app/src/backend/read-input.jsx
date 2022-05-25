@@ -351,7 +351,7 @@ const readInputFile = (files, handleAddRecord) => {
           // checks if the student already exists in the database
           fetch(`http://${ip}:3001/student/find`,{
             method: "POST",
-            headers: { "Content-Type":"application/json" },
+            headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
             body: JSON.stringify(student)
           })
           .then(response => response.json())
@@ -364,7 +364,7 @@ const readInputFile = (files, handleAddRecord) => {
               // posting to database
               fetch(`http://${ip}:3001/student/add`,{
                 method: "POST",
-                headers: { "Content-Type":"application/json" },
+                headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
                 body: JSON.stringify(student)
               })
               .then(response => response.json())
@@ -399,7 +399,7 @@ const readInputFile = (files, handleAddRecord) => {
                   // posting to database
                   fetch(`http://${ip}:3001/grade/add-many`,{
                     method: "POST",
-                    headers: { "Content-Type":"application/json" },
+                    headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
                     body: JSON.stringify(grades)
                   })
                   .then(response => response.json())

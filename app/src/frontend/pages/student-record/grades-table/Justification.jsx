@@ -74,7 +74,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
 
         fetch(`http://localhost:3001/history/add`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}`},
             body: JSON.stringify(historyCredentials),
         })
         .then((response) => response.json())

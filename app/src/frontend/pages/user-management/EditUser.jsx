@@ -73,7 +73,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
     //console.log("here")
     fetch(`http://${ip}:3001/user/update`,{
         method: "POST",
-        headers: { "Content-Type":"application/json" },
+        headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
         body: JSON.stringify(credentials)
         })
     .then((response) => response.json())
@@ -92,7 +92,16 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
           title: 'Success',
           text: 'Successfully updated user!',
         })
+        console.log(body)
         handleEditRecordSave(body)
+        if(body.Role == "admin"){
+          localStorage.setItem("FirstName", body.FirstName)
+          localStorage.setItem("LastName", body.LastName)
+          localStorage.setItem("MiddleName", body.MiddleName)
+          localStorage.setItem("Password", body.Password)
+          localStorage.setItem("Position", body.Position)
+          localStorage.setItem("Username", body.Username)
+        }
 
       }
     })

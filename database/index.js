@@ -10,24 +10,6 @@ const readline = require('readline');
 const si = require('systeminformation');
 const MongoClient = require('mongodb').MongoClient
 
-// MongoClient.connect('mongodb://admin:password@localhost:27017/admin')
-//   .then(client => client.db('admin').admin())
-//   .then(db => {
-//     return db.adminCommand({
-//       createRole: 'admin',
-//       privileges: [{resource: {db: "KALATAS", collection: ""}, actions: ["listCollections"] }], // access all collections
-//       roles: []
-//     })
-//   })
-//   .then(() => {
-//     console.log('Success!')
-//     //process.exit(0)
-//   })
-//   .catch(err => {
-//     console.log('Error!')
-//     //process.exit(99)
-//   })
-
 const app = express()
 app.use(cors())
 app.use(bodyParser.json())
@@ -76,22 +58,22 @@ async function startServer() {
             // (remove the 'wifi' parameter to return to localhost)
             console.log(`Server started at port 3001`)
         
-            //create admin account if admin doesn't exist. There will always be exactly one admin
-            admin = {
-                Username: "admin",
-                FirstName: "Admin",
-                MiddleName: "_",
-                LastName: "User",
-                Position: "Chairman",
-                Role: "admin",
-                Password: "admin",
-                History:[]
-            }
+            // //create admin account if admin doesn't exist. There will always be exactly one admin
+            // admin = {
+            //     Username: "admin",
+            //     FirstName: "Admin",
+            //     MiddleName: "_",
+            //     LastName: "User",
+            //     Position: "Chairman",
+            //     Role: "admin",
+            //     Password: "admin",
+            //     History:[]
+            // }
             
-            // // add request
-            request('http://127.0.0.1:3001/user/add',{method:"POST",form: admin},function(err,req,body) {
-                // console.log(body);
-            });    
+            // // // add request
+            request('http://127.0.0.1:3001/user/create-admin',{method:"GET"},function(err,req,body) {
+                console.log(body);
+            });  
         });
         rl.close();
     });

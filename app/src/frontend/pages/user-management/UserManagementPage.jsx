@@ -37,7 +37,9 @@ const UserManagementPage = ({ hoverRef, isHovering, setIsHovering }) => {
   useEffect(() => {
     const fetchData = async () => {
       // Retrieve data from database
-      fetch(`http://${ip}:3001/user/find-all`)
+      fetch(`http://${ip}:3001/user/find-all`, {
+        headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
+      })
       .then(response => response.json())
       .then(async (body) => {
         let Users = []; // initiating array that will contain the information of users

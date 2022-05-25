@@ -161,9 +161,7 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
         // add new grade to DB
         fetch(`http://${ip}:3001/grade/add`, {
             method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
             body: JSON.stringify(newGrade)
         })
             .then(response => response.json())
