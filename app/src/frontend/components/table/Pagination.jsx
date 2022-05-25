@@ -1,17 +1,13 @@
-import { useState } from "react"
-
-/* Components */
-import List from './List';
-
-/* CSS */
-// import './Pagination.css'
+import { useState } from "react";
 import 'tailwindcss/tailwind.css';
 
-/* Assets */
 import leftarrow from '../../../assets/icons/pagination-left-arrow.svg';
 import rightarrow from '../../../assets/icons/pagination-right-arrow.svg';
+import List from './List';
 
-/* HOW TO USE:
+
+/*
+HOW TO USE:
    1. Copy and paste this code block at the very beginning of the function/page that will use Pagination
    ------------------------------------------------------------------
    const [rows, setRows] = useState([]);
@@ -38,7 +34,7 @@ import rightarrow from '../../../assets/icons/pagination-right-arrow.svg';
       const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow)
 
       //Change page
-      const paginate = pageNumber => setCurrentPage(pageNumber);
+      const paginate = (pageNumber) => setCurrentPage(pageNumber);
    ------------------------------------------------------------------
 
    3. Copy and paste this line of code to call Pagination
@@ -48,7 +44,7 @@ import rightarrow from '../../../assets/icons/pagination-right-arrow.svg';
 const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
    let [num, setNum] = useState(1);
    const numberOfPages = Math.ceil(totalRows / rowsPerPage);
-   const pageNumbers = []
+   const pageNumbers = [];
 
    if (numberOfPages < 3){
       // If buttons are less than 3, follow that as the number of buttons to show (1 or 2)
@@ -64,19 +60,19 @@ const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
 
    // Show succeeding pages to choose
    function next () {
-      num < numberOfPages-2 && setNum(++num)
+      num < numberOfPages-2 && setNum(++num);
    }
 
    // Show previous pages to choose
    function prev () {
-      num > 1 && setNum(--num)
+      num > 1 && setNum(--num);
    }
 
    /* Styling */
    const paginationBox = `flex bg-white rounded-lg font-montserrat drop-shadow`;
-   const buttonStyle = `rounded-lg py-0 hover:text-white hover:bg-secondary-red h-[4.847645429362881vh] px-[1.0416666666666667vw]`;
-   const arrowStyle = `h-[2.770083102493075vh] w-[1.3020833333333333vw] fill-current`
-   const pageButton = `h-[4.847645429362881vh] w-[2.2786458333333335vw] rounded-[0.5208333333333334vw] px-[1.0416666666666667vw] py-0 text-[1.1067708333333333vw]`;
+   const buttonStyle = `rounded-lg py-0 hover:text-white hover:bg-secondary-red h-[4.85vh] px-[1vw]`;
+   const arrowStyle = `h-[2.75vh] w-[1.25vw] fill-current`
+   const pageButton = `h-[4.85vh] w-[2.25vw] rounded-lg px-[1vw] py-0 text-[1vw]`;
    const currentPageStyle = `text-white bg-secondary-red`;
 
    return (
@@ -100,4 +96,5 @@ const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
    )
 }
 
-export default Pagination
+
+export default Pagination;
