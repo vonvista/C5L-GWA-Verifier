@@ -270,65 +270,25 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
     const StudentList = ({ data, setRows, changeSort, sortState, handleDeleteRecord }) => {
         
         // Styling
-        const studentsTable = `border-collapse overflow-hidden table-fixed max-w-[82.078125vw] max-h-[70.6371191135734vh] rounded-t-[0.9765625vw] drop-shadow-lg`;
-        const tHead = 
-                    `
-                        bg-white border-solid rounded-t-[0.9765625vw] border-b-[0.2155124653739612vh] 
-                        table table-fixed whitespace-no-wrap w-full font-montserrat
-                    `;
-        const tBodytR = 
-            `
-                table table-fixed whitespace-no-wrap w-full font-montserrat hover:bg-table-hover-color
-                last:border-b-0
-            `
-        const tRow = `text-left not-italic text-[1.3020833333333333vw] text-sr-text-gray`;
-        const tBody = `bg-white block overflow-auto text-black rounded-b-[0.9765625vw] h-[65.73130193905817vh]`
-        
-        const statustHead = 
-            `
-                py-[1.1772853185595569vh] px-[1.3020833333333333vw] cursor-default
-                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh] 
-                w-[7.138020833333334vw] text-center
-            `;
-        // const tData = `py-[1.1772853185595569vh] px-[1.3020833333333333vw] border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]`;
-        
-        const nametH = `py-[1.1772853185595569vh] px-[1.3020833333333333vw`;
-        const actionstH = `cursor-default text-center py-[1.1772853185595569vh] px-[1.3020833333333333vw] border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]`;
-        const nametData = 
-            `
-                truncate
-                font-bold w-[23.158854166666668vw] cursor-pointer
-                py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
-                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
-            `;
-        const numbertData = 
-            `
-                w-[11.234375vw] cursor-pointer
-                py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
-                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
-            `;
-        const degreetData = 
-            `
-                truncate
-                w-[19.158854166666668vw] cursor-pointer
-                py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
-                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
-            `;
-        const gwatData = 
-            `
-                truncate
-                w-[12.8125vw] cursor-pointer
-                py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
-                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
-            `;
-        const statustData = 
-            `
-                content-center justify-center text-center font-[1.1067708333333333vw] h-[4.293628808864266vh] w-[7.138020833333334vw] p-0
-                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
-            `;
+        const studentsTable = `border-collapse overflow-hidden table-fixed max-w-[82vw] max-h-[70vh] rounded-t-[1vw] drop-shadow-lg`;
+        const tHead = `bg-white border-solid rounded-t-[1vw] border-b-[0.2vh] table table-fixed whitespace-nowrap w-full font-montserrat`;
+        const tBodytR = `table table-fixed whitespace-nowrap w-full font-montserrat hover:bg-table-hover-color last:border-b-0`
+        const tRow = `text-left not-italic text-[1.3vw] text-sr-text-gray`;
+        const tBody = `bg-white block overflow-auto text-black rounded-b-[1vw] h-[65vh]`
 
-        const asc = `after:float-right after:content-['▲'] after:ml-[0.3255208333333333vw] bg-sr-dark-gray`;
-        const desc = `after:float-right after:content-['▼'] after:ml-[0.3255208333333333vw] bg-sr-dark-gray`;
+        const nametH = `py-[1.2vh] px-[1.3vw]`;
+        const elements = `border-solid overflow-hidden text-[1.1vw] border-page-background border-b-[0.14vh]`
+        const common = `${nametH} ${elements}`
+        const statustHead = `${common} cursor-default w-[7vw] text-center`;
+        const actionstH = `${common} cursor-default text-center`;
+        const nametData = `${common} cursor-pointer w-[23vw] truncate font-bold `;
+        const numbertData = `${common} cursor-pointer w-[11.23vw] `;
+        const degreetData = `${common} cursor-pointer w-[19vw] truncate`;
+        const gwatData = `${common} cursor-pointer w-[12.8125vw] truncate`;
+        const statustData = `${elements} content-center justify-center text-center font-[1.1vw] h-[4.3vh] w-[7.14vw] p-0`;
+
+        const asc = `after:float-right after:content-['▲'] after:ml-[0.33vw] bg-sr-dark-gray`;
+        const desc = `after:float-right after:content-['▼'] after:ml-[0.33vw] bg-sr-dark-gray`;
 
         /* Status Elements */
         const cssStyles = 
@@ -337,7 +297,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                 content : "Checked";
                 background-color: #BBDABB;
                 color: black;
-                border-radius: 3.2552083333333335vw;
+                border-radius: 3vw;
                 display: block;
                 text-align: center;
             }
@@ -346,7 +306,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                 content : "Unchecked";
                 background-color: #F29B9B;
                 color: black;
-                border-radius: 3.2552083333333335vw;
+                border-radius: 3vw;
                 display: block;
                 text-align: center;
             }
@@ -355,7 +315,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                 content : "Pending";
                 background-color: #F2C293;
                 color: #FF1111;
-                border-radius: 3.2552083333333335vw;
+                border-radius: 3vw;
                 display: block;
                 text-align: center;
             }

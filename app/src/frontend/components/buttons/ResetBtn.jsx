@@ -6,7 +6,7 @@ import 'tailwindcss/tailwind.css';
 // --handleClick prop: function to handle click event
 
 const Reset = ({ handleClick }) => {
-  const resetbtn = `w-[11vw] h-[4.847645429362881vh] px-[1.0416666666666667vw] bg-[#823838] rounded-xl mr-2 text-white text-base font-montserrat font-bold hover:shadow-lg hover:bg-[#874646]`;
+  const resetbtn = `w-[11vw] h-[4.85vh] px-[1vw] bg-[#823838] rounded-xl mr-2 text-white text-base font-montserrat font-bold hover:shadow-lg hover:bg-[#874646]`;
 
   return (
     <>
