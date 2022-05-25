@@ -49,12 +49,12 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
 
   const fetchData = async () => {
     // Retrieve data from database
-    fetch(`http://${ip}:3001/student/find-all`,{
-        method: "GET",
+    fetch(`http://${ip}:3001/student/find-all`, {
         headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
       })
       .then((response) => response.json())
       .then(async (body) => {
+        console.log(body);
         const studentsData = []; // initiating array that will contain the information of students
         // mapping out all the entries sent by the fetch
         body.map((student, i) => {

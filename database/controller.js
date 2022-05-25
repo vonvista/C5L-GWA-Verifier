@@ -18,8 +18,7 @@ const db = mongoose.createConnection(`mongodb://127.0.0.1:27017/KALATAS`, {
 
 
 exports.middleware = async function(req, res, next) {
-  const authHeader = req.headers['Authorization'];
-
+  const authHeader = req.headers['authorization'];
   if (!authHeader) {
     res.send({err:'No auth headers given'});
     return
@@ -27,7 +26,8 @@ exports.middleware = async function(req, res, next) {
 
   var username = authHeader.split(' ')[1];
   var password = authHeader.split(' ')[2];
-
+  
+  console.log(username, password)
   //get rid of extra spaces on password
   const user = await User.findOne({Username: username});
   if(user){
