@@ -6,7 +6,13 @@ import rightarrow from '../../../assets/icons/pagination-right-arrow.svg';
 import List from './List';
 
 
+/* Parent components:
+    frontend/pages/dashboards/UserDashboard.jsx
+    frontend/pages/user-management/UserManagement.jsx
+*/
+
 /*
+This component is the pagination component.
 HOW TO USE:
    1. Copy and paste this code block at the very beginning of the function/page that will use Pagination
    ------------------------------------------------------------------
@@ -41,6 +47,13 @@ HOW TO USE:
    <Pagination rowsPerPage={rowsPerPage} totalRows={rows.length} currentPage={currentPage} paginate={paginate} />
 */
 
+
+/* Props:
+    rowsPerPage --- holds the number of rows that needs to be displayed per page
+    totalRows   --- holds the total number of rows of data to be displayed
+    currentPage --- receives the page number of the table that should be displayed
+    paginate    --- function that changes the contents being displayed based on the page number
+*/
 const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
    let [num, setNum] = useState(1);
    const numberOfPages = Math.ceil(totalRows / rowsPerPage);
