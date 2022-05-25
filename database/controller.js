@@ -19,7 +19,7 @@ const db = mongoose.createConnection(`mongodb://127.0.0.1:27017/KALATAS`, {
 // middleware implementation
 
 exports.middleware = async function(req, res, next) {
-  const authHeader = req.headers['authorization'];
+  const authHeader = req.headers['Authorization'];
 
   if (!authHeader) {
     res.send({err:'No auth headers given'});

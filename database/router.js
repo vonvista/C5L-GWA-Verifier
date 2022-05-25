@@ -16,52 +16,54 @@ module.exports = (app) => {
   })
 
   // HISTORY ROUTES
-  app.post('/history/add', controller.historyAdd);
-  app.post('/history/find', controller.historyFindOne);
-  app.post('/history/find-by-student', controller.historyFindByStudent);
-  app.get('/history/find-all', controller.historyFindAll);
-  app.put('/history/update', controller.historyUpdateOne);
-  app.delete('/history/delete-all', controller.historyDeleteAll);
+  app.post('/history/add', controller.middleware, controller.historyAdd);
+  app.post('/history/find', controller.middleware, controller.historyFindOne);
+  app.post('/history/find-by-student', controller.middleware, controller.historyFindByStudent);
+  app.get('/history/find-all', controller.middleware, controller.historyFindAll);
+  app.put('/history/update', controller.middleware, controller.historyUpdateOne);
+  app.delete('/history/delete-all', controller.middleware, controller.historyDeleteAll);
   
   // STUDENT ROUTES
-  app.post('/student/add', controller.studentAdd);
-  app.post('/student/find', controller.studentFindOne);
-  app.get('/student/find-all', controller.studentFindAll);
-  app.post('/student/update', controller.studentUpdateOne);
-  app.delete('/student/delete', controller.studentDeleteOne);
-  app.post('/student/update-validations', controller.studentUpdateValidations);
-  app.post('/student/update-gpa', controller.studentUpdateGPA);
+  app.post('/student/add', controller.middleware, controller.studentAdd);
+  app.post('/student/find', controller.middleware, controller.studentFindOne);
+  app.get('/student/find-all', controller.middleware, controller.studentFindAll);
+  app.post('/student/update', controller.middleware, controller.studentUpdateOne);
+  app.delete('/student/delete', controller.middleware, controller.studentDeleteOne);
+  app.post('/student/update-validations', controller.middleware, controller.studentUpdateValidations);
+  app.post('/student/update-gpa', controller.middleware, controller.studentUpdateGPA);
 
   
   // USER ROUTES
-  app.get('/user/find-all', controller.userFindAll);
-  app.post('/user/find', controller.userFind);
-  app.post('/user/add', controller.userAdd);
+  app.get('/user/create-admin', controller.adminCreate);
 
-  app.delete('/user/delete', controller.userDelete);
-  app.delete('/user/delete-all',  controller.userDeleteAll);
-  app.post('/user/update', controller.userUpdate);
+  app.get('/user/find-all', controller.middleware, controller.userFindAll);
+  app.post('/user/find', controller.middleware, controller.userFind);
+  app.post('/user/add', controller.middleware, controller.userAdd);
+
+  app.delete('/user/delete', controller.middleware, controller.userDelete);
+  app.delete('/user/delete-all',  controller.middleware, controller.userDeleteAll);
+  app.post('/user/update', controller.middleware, controller.userUpdate);
 
   app.post('/user/login', controller.userLogin);
   
   // GRADE ROUTES
-  app.get('/grade/find-all', controller.gradeFindAll);
-  app.post('/grade/find-by-student', controller.gradeFindByStudent);
-  app.post('/grade/add', controller.gradeAdd);
-  app.post('/grade/add-many', controller.gradeAddMany);
-  app.post('/grade/find', controller.gradeFindOne);
-  app.delete('/grade/delete-all', controller.gradeDeleteAll);
-  app.post('/grade/update', controller.gradeUpdateOne);
-  app.post('/grade/delete', controller.gradeDeleteOne);
+  app.get('/grade/find-all', controller.middleware, controller.gradeFindAll);
+  app.post('/grade/find-by-student', controller.middleware, controller.gradeFindByStudent);
+  app.post('/grade/add', controller.middleware, controller.gradeAdd);
+  app.post('/grade/add-many', controller.middleware, controller.gradeAddMany);
+  app.post('/grade/find', controller.middleware, controller.gradeFindOne);
+  app.delete('/grade/delete-all', controller.middleware, controller.gradeDeleteAll);
+  app.post('/grade/update', controller.middleware, controller.gradeUpdateOne);
+  app.post('/grade/delete', controller.middleware, controller.gradeDeleteOne);
 
   // NOTE ROUTES
-  app.post('/note/add', controller.noteAdd);
-  app.post('/note/find', controller.noteFindOne);
-  app.get('/note/find-all', controller.noteFindAll);
-  app.post('/note/find-by-student', controller.noteFindAllByStudent);
-  app.post('/note/update', controller.noteUpdate);
-  app.post('/note/delete', controller.noteDeleteOne);
-  app.delete('/note/delete-all', controller.noteDeleteAll);
+  app.post('/note/add', controller.middleware, controller.noteAdd);
+  app.post('/note/find',  controller.middleware, controller.noteFindOne);
+  app.get('/note/find-all', controller.middleware, controller.noteFindAll);
+  app.post('/note/find-by-student', controller.middleware, controller.noteFindAllByStudent);
+  app.post('/note/update', controller.middleware, controller.noteUpdate);
+  app.post('/note/delete', controller.middleware, controller.noteDeleteOne);
+  app.delete('/note/delete-all', controller.middleware, controller.noteDeleteAll);
 
   // RESET TABLES ROUTE
   app.delete('/database/reset-all', controller.resetAll);
