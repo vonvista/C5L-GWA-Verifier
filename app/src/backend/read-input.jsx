@@ -36,7 +36,10 @@ const readInputFile = (files, handleAddRecord) => {
     // if the student doesnt have a first name or a last name 
     if (studentData.FirstName === '' || studentData.LastName === ''){
       isSuccessful.success = false;
-      isSuccessful.message = "Student does not have a valid First Name or Last Name.";
+      isSuccessful.message = "Student does not have a valid First or Last Name.";
+    } else if (studentData.MiddleName === '') {
+      isSuccessful.success = false;
+      isSuccessful.message = "Student does not have a valid Middle Name.";
     // if the student number exists and has no number
     } else if (studentData.StudentID && !hasNumber(studentData.StudentID)) {
       isSuccessful.success = false;
