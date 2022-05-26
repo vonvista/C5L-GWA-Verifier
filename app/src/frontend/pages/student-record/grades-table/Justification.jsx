@@ -1,4 +1,4 @@
-import { Dialog, Transition} from '@headlessui/react';
+import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState, useEffect } from 'react';
 import { useForm, isRequired } from '../../../hooks/useForm';
 import Input from 'frontend/components/inputs/Input';
@@ -38,7 +38,6 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
         user: userName,
     }
     const validations = [
-        //({title}) => isRequired(title) || {title: 'Please provide a title'},
         ({desc}) => isRequired(desc) || {desc: 'Please give a justification for editing the grades'}
     ]
 
@@ -92,7 +91,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
     return (
         <>
             <Transition appear show={modalState} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={resetModalValues}>
+                <Dialog as="div" className="relative z-10" openModal={modalState} onClose={resetModalValues}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -128,13 +127,6 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                     </Dialog.Title>
 
                                     <div className="mt-2 grid h-[85%]">
-                                        <input
-                                            className="inter font-bold text-md mx-auto px-3 py-1 w-full block resize-none focus:outline-none"
-                                            name="title"
-                                            placeholder="Enter title here."
-                                            value={values.title}
-                                            onChange={changeHandler}
-                                        />
                                         <textarea
                                             className="inter mx-auto text-sm px-3 py-1 w-full h-full block resize-none focus:outline-none"
                                             name="desc"

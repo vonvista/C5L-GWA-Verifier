@@ -169,6 +169,11 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                 history.unshift(histObj)    // new date appear on top
             }
         }
+
+        // case where history is empty
+        if (history.length === 0) {
+            history = [...historyState, histObj]
+        }
         
         //console.log(history)
         // set new value of history
