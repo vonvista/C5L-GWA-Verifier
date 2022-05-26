@@ -231,12 +231,14 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
     const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
     const [gpaCalc, setGPA] = useState();
     const [unitGPA, setunitGPA] = useState();
+    const [reload, setReload] = useState('false');
 
     const fetchData = async () => {
         await GetStudentGrades()
         await GetStudentHistory()
         await GetStudentInfo()
         await GetStudentNotes()
+        setReload(!reload)
     }  
         
     // get Grades, Student, Notes, History from database
@@ -273,7 +275,7 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
             console.log(err)
         })
 
-        fetch(`http://${ip}:3001/student/find`, {
+        await fetch(`http://${ip}:3001/student/find`, {
         method: "POST",
         headers: {"Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
         body: JSON.stringify(currStudentID)// use studentID to find student info
@@ -294,7 +296,7 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
             }
 
             // set Student prop
-            getStudentProp(currUser) // return student info from db
+            getStudentProp({...currUser}) // return student info from db
 
             //handle validations
             for(let i = 0; i < body.Validations.length; i++){
@@ -312,10 +314,10 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
     }
 
     // fetch Grades from database using Student _id (PK)
-    const GetStudentGrades = () => {
+    const GetStudentGrades = async () => {
         
         // fetch grade by student from database
-        fetch(`http://${ip}:3001/grade/find-by-student`, {
+        await fetch(`http://${ip}:3001/grade/find-by-student`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
         body: JSON.stringify({Student: currStudentKey})
@@ -346,10 +348,10 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
 
 
     // fetch History from database using Student _id (PK)
-    const GetStudentHistory = () => {
+    const GetStudentHistory = async () => {
 
         // fetch history by Student _id
-        fetch(`http://${ip}:3001/history/find-by-student`, {
+        await fetch(`http://${ip}:3001/history/find-by-student`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
         body: JSON.stringify({Student: currStudentKey})
@@ -377,10 +379,10 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
 
 
     // fetch History from database using Student _id (PK)
-    const GetStudentNotes = () => {
+    const GetStudentNotes = async () => {
 
         // fetch notes by studentkey from db
-        fetch(`http://${ip}:3001/note/find-by-student`, {
+        await fetch(`http://${ip}:3001/note/find-by-student`, {
         method: "POST",
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
         body: JSON.stringify({Student: currStudentKey}) // use student _id to find student notes
@@ -416,7 +418,7 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
 
             <div className="relative inset-0 flex ml-8 xl:ml-12 justify-center">
                 <header><Header pageTitle={"Student Record"}/></header>
-                <RecordPage
+                <RecordPage key={reload}
                     student={studentProp}
                     notes={notesProp}
                     history={historyProp}
