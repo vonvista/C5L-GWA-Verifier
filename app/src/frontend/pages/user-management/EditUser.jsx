@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 import Input from 'frontend/components/inputs/Input';
 import user from '../../../../assets/icons/user-icon.jpg';
 import 'tailwindcss/tailwind.css';
-import './AddEditUser.css';
+
 
 
 // function which shows the add user modal; to be used in UserSystemPage
@@ -115,12 +115,26 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
     })
   };
 
-  // styling
+  /*-------------------- Styling --------------------*/
+  const editStudentModal = `relative bg-secondary-red h-[47vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
+  const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[37vh]`;
+  const modalBody = `absolute inset-x-0 bg-secondary-red top-[8%] bottom-[10%]`;
+  const modalClose = `text-[4.85vh] text-white float-right`;
+  const modalTitle = `text-white text-center font-bold italic text-[1.30vw] mt-[4.15vh] mb-[4.85vh]`;
+  const modalInputs = `text-[1.10vw] flex flex-col space-y-4 items-center justify-center`;
+  const inputContainer = `ml-5 mr-[1.15vw]`;
+  const inputStyle = `text-center w-full h-[4.85vh] rounded-xl`
+  const sectionInputField = `inline-block w-[11.71875vw]`;
+  const sectionFLName = `inline-block w-[16.71875vw] truncate`;
+  const sectionMI = `inline-block w-[6.71875vw]`;
+  const modalFooter = `mt-[4.85vh] text-[1.11vw] flex items-center justify-center`;
+  const modalBtnSave = `h-[5vh] w-[9.25vw] rounded-xl mr-[0.65vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green`;
+
   const modalContent1 = `h-[60%] w-[70%] flex-col mx-auto p-2 rounded-[30px] relative bg-secondary-red transform overflow-hidden p-6 text-left align-middle shadow-xl transition-all`;
   const modalBody1 = `h-full bg-transparent flex m-auto overflow-hidden overflow-y-auto relative w-full`;
   const inputContent = `overflow-auto w-full text-[1.25vw]`;
   const form = `bg-transparent rounded-lg py-0 px-5`;
-  const inputStyle = `rounded-lg text-center w-full h-[2.5vw]`;
+
 
   return (
     <>
@@ -135,10 +149,12 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25 text-montserrat" />
+            {/* Container for the layer behind the modal window */}
+            <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
 
-          <div className="fixed inset-0 overflow-y-auto">
+           {/* Container for the layer containing the modal window */}
+           <div className="fixed inset-0 overflow-y-auto flex min-h-full items-center justify-center p-4 text-center">
             <div className="flex m-auto w-full h-full items-center justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
@@ -277,22 +293,22 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
                                 </section>
                               </div>
                               {/* password */}
-                              <div className="w-full pb-4 mt-2">
+                              <div className="">
                                 <section className="un-style">
                                   <div className="relative w-full">
-                                    <div className="absolute inset-y-0 right-0 flex items-center px-2">
-                                      <Input
-                                        labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-                                        labelVal="Password" // label text
-                                        inputStyle={[inputStyle, 'hidden']} // styling for input
-                                        name="password" // name of label-input components
-                                        inputType="checkbox" // type of input password, email, text, etc.
-                                        inputPlaceholder="*****" // placeholder text for input
-                                        value={pw} // value of the input
-                                        changeHandler={(e) =>
-                                          setPW(e.target.value)
-                                        } // change handling
-                                      />
+                                    <Input
+                                      labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
+                                      labelVal="Password" // label text
+                                      inputStyle="rounded-xl text-center w-[42.5vw] h-[5vh] appearance-none leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 js-password rounded-xl" // styling for input
+                                      name="password" // name of label-input components
+                                      inputType="password" // type of input password, email, text, etc.
+                                      inputPlaceholder="*****" // placeholder text for input
+                                      value={pw} // value of the input
+                                      changeHandler={(e) =>
+                                        setPW(e.target.value)
+                                      } // change handling
+                                    />
+                                    <div className="absolute inset-y-0  right-[4.7vw] flex items-center px-2">
                                       <button
                                         className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-[0.9vw] text-gray-600  cursor-pointer account-button js-password-label w-[3vw] h-11/12"
                                         htmlFor="toggle"
@@ -302,18 +318,6 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
                                         {status}
                                       </button>
                                     </div>
-                                    <Input
-                                      labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-                                      labelVal="Password" // label text
-                                      inputStyle="rounded-lg text-center w-full h-[2.5vw] appearance-none border-2 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 js-password" // styling for input
-                                      name="password" // name of label-input components
-                                      inputType="password" // type of input password, email, text, etc.
-                                      inputPlaceholder="*****" // placeholder text for input
-                                      value={pw} // value of the input
-                                      changeHandler={(e) =>
-                                        setPW(e.target.value)
-                                      } // change handling
-                                    />
                                   </div>
                                   <h4 className="mt-1 mb-2 w-full text-center text-white">
                                     Password
@@ -324,17 +328,15 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
                           </div>
 
                           {/* create user button */}
-                          <div className="w-full flex">
-                            <section className="my-auto ml-0 mr-auto w-[90.5%]">
+                            <section className="mt-8 flex w-[90.5%] justify-center">
                               <button
-                                className="inter w-2/5 h-[5vh] block ml-auto mr-auto bg-button-green hover:bg-button-green-hover text-white font-bold rounded-lg hover:bg-slate-200 user-btn text-[1vw]"
+                                className={modalBtnSave}
                                 type="button"
                                 onClick={edit_user}
                               >
                                 Save
                               </button>
                             </section>
-                          </div>
                         </form>
                       </section>
                     </div>
