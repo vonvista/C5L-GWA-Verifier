@@ -391,21 +391,25 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
         (studentProp && notesProp && gradesProp && historyProp && gpaCalc && unitGPA) ? 
         <>
             <nav class="sticky z-10">
-            {userRole == "user" ? <UserNav /> : <AdminNav />}
+                {userRole == "user" ?
+                    <UserNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
+                    : <AdminNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
+                }
             </nav>
-                <div className="relative inset-0 flex ml-8 xl:ml-12 justify-center">
-                    <header><Header pageTitle={"Student Record"}/></header>
-                    <RecordPage
-                        student={studentProp}
-                        notes={notesProp}
-                        history={historyProp}
-                        status={unitGPA}
-                        grades={gradesProp} 
-                        checklist={validationsProp} 
-                        gpa={gpaCalc}
-                        // refresh = {refreshHandler in here} 
-                    />
-                </div>
+
+            <div className="relative inset-0 flex ml-8 xl:ml-12 justify-center">
+                <header><Header pageTitle={"Student Record"}/></header>
+                <RecordPage
+                    student={studentProp}
+                    notes={notesProp}
+                    history={historyProp}
+                    status={unitGPA}
+                    grades={gradesProp} 
+                    checklist={validationsProp} 
+                    gpa={gpaCalc}
+                    // refresh = {refreshHandler in here} 
+                />
+            </div>
         </> 
         // empty div while data are not ready
         : <div></div>      
