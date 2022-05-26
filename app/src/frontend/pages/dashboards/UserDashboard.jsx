@@ -286,7 +286,7 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
       showCancelButton: true,
       html:
         '<p>Enter your new password and the random string below:</p>' +
-        '<p>Random String: ' + randomString + '</p>' +
+        '<p style="user-select: none;">Random String: ' + randomString + '</p>' +
         '<input id="swal-input1" class="swal2-input" placeholder="Enter password">' +
         '<input id="swal-input2" class="swal2-input" placeholder="Enter random string">',
       focusConfirm: false,
