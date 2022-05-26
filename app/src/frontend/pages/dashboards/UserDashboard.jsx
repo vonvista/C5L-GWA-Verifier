@@ -433,7 +433,11 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
           }
           else {
             fileStatuses.push({name: studentIDs[i], status: 'SUCCESS', message: `Student successfully deleted`});
-            handleDeleteRecord(studentIDs[i])
+            var deleteStudent = {
+              StudentID: studentIDs[i]
+            }
+
+            handleDeleteRecord(deleteStudent)
           }
         }
       )
