@@ -45,17 +45,6 @@ const Search = ({
     <>
       <div className="relative">
         <div className="absolute inset-y-0 left-[83%] flex items-center px-2">
-          <Input
-            labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-            labelVal="Password" // label text
-            inputStyle="hidden rounded-lg m-2 text-center w-full h-[3vw] text-[0.9vw]" // styling for input
-            name="password" // name of label-input components
-            inputType="checkbox" // type of input password, email, text, etc.
-            inputPlaceholder={inputText} // placeholder text for input
-            value={searchValue} // value of the input
-            changeHandler={handleSearch} // change handling
-            handleKeyPress={handleEnter}
-          />
           <button
             className="bg-gray-200 hover:bg-gray-300 rounded px-2 py-1 cursor-pointer w-[2.5vw] h-11/12"
             type="button"
