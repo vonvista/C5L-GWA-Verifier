@@ -464,11 +464,11 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
                         </div>
 
                         {/* Delete buttons and Pagination */}
-                        <div className="float-left">
+                        <div className="float-left mt-6">
                             <Reset handleClick={handleReset} />
                             <BulkDeleteBtn handleClick={handleBulkDelete} />
                         </div>
-                        <div className="float-right">
+                        <div className="float-right mt-6">
                             <Pagination
                               rowsPerPage={rowsPerPage}
                               totalRows={rows.length}
