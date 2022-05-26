@@ -231,16 +231,16 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
     const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
     const [gpaCalc, setGPA] = useState();
     const [unitGPA, setunitGPA] = useState();
+
+    const fetchData = async () => {
+        await GetStudentGrades()
+        await GetStudentHistory()
+        await GetStudentInfo()
+        await GetStudentNotes()
+    }  
         
     // get Grades, Student, Notes, History from database
     useEffect(() => {
-        
-        const fetchData = async () => {
-            GetStudentGrades()
-            GetStudentHistory()
-            GetStudentInfo()
-            GetStudentNotes()
-        }  
         // call the function
         fetchData()
 
@@ -407,7 +407,7 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
                     grades={gradesProp} 
                     checklist={validationsProp} 
                     gpa={gpaCalc}
-                    // refresh = {refreshHandler in here} 
+                    refresh = {fetchData} 
                 />
             </div>
         </> 
