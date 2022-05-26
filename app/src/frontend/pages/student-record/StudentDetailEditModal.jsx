@@ -41,11 +41,14 @@ const EditStudent = ({modalState, handleClose, studentInfo}) => {
     const [currStudentID, setcurrStudentID] = useState(localStorage.getItem('currStudentID'));
     const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
-    
-    
+        
+
     useEffect(() =>{
         setStudNum(studentInfo.stud_no)
         setDegree(studentInfo.degree_program)
+        setStudFName(studentInfo.iname.fname)
+        setStudMName(studentInfo.iname.mname)
+        setStudLName(studentInfo.iname.lname)
     }, [])
     
     /*-------------------- Functions --------------------*/
@@ -190,6 +193,7 @@ const EditStudent = ({modalState, handleClose, studentInfo}) => {
                                                                         type="text"
                                                                         name="studFName"
                                                                         placeholder='First Name'
+                                                                        value={studFName}
                                                                         onChange={(e) => setStudFName(e.target.value)}
                                                                     />
 
@@ -203,6 +207,7 @@ const EditStudent = ({modalState, handleClose, studentInfo}) => {
                                                                         type="text"
                                                                         name="studMName"
                                                                         placeholder='M.I.'
+                                                                        value={studMName}
                                                                         onChange={(e) => setStudMName(e.target.value)}
                                                                     />
                                                                     <div className='w-full text-white text-center text-sm'>Middle Initial</div>
@@ -215,6 +220,7 @@ const EditStudent = ({modalState, handleClose, studentInfo}) => {
                                                                         type="text"
                                                                         name="studLName"
                                                                         placeholder='Surname'
+                                                                        value={studLName}
                                                                         onChange={(e) => setStudLName(e.target.value)}
                                                                     />
                                                                     <div className='w-full text-white text-center'>Surname</div>

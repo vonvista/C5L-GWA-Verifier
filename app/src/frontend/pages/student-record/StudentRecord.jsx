@@ -270,6 +270,11 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
             currUser.degree_program = body.Degree
             currUser.status = body.Status          
             currUser.Student = body._id
+            currUser.iname = {
+                fname: body.FirstName,
+                mname: body.MiddleName,
+                lname: body.LastName
+            }
 
             // set Student prop
             getStudentProp(currUser) // return student info from db
