@@ -23,7 +23,7 @@ import 'tailwindcss/tailwind.css';
     -- grades            : contains student gradesheet which will be used for exporting student record file
 */
 
-const Dropdown = ({ studentInfo, grades }) => {
+const Dropdown = ({ studentInfo, grades, setHistory }) => {
 
   /*-------------------- State handlers --------------------*/
 
@@ -114,7 +114,7 @@ const Dropdown = ({ studentInfo, grades }) => {
             >
               <p className="text-white">Export</p>
             </button>
-            <EditBtn studentInfo={studentInfo}/>
+            <EditBtn studentInfo={studentInfo} setHistory={setHistory}/>
           </div>
         </div>
       ) : (
