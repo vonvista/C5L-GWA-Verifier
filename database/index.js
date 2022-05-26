@@ -27,30 +27,34 @@ let interfaces = new Map();
 
 async function startServer() {
     await si.networkInterfaces(function(data) {
-        // console.log(data);
-        for (let i of data) {
-            if(i.ip4 != '') interfaces.set(i.iface.toLowerCase(), i.ip4);
+        console.log(data);
+        for (let i = 0; i < data.length; i++) {
+            if(data[i].ip4 != '') {
+                interfaces.set(i.toString(), data[i].ip4);
+            } 
         }
         console.log("Available IP interfaces")
         //console log keys and values of interfaces
-        for (let [key, value] of interfaces.entries()) {
-            console.log(`${key}: ${value}`);
+        for (let i = 0; i < data.length; i++) {
+            if(data[i].ip4 != '') {
+                console.log(`[${i}] ${data[i].iface}(${data[i].ifaceName}): ${data[i].ip4}`);
+            } 
         }
         console.log('')
     })
 
     app.use(express.static('static'))
 
-    rl.question("Choose IP address name (case insensitive):",async function(name){
+    rl.question("Choose IP address (number):",async function(name){
         let ip;
         //console.log(interfaces)
-        if(interfaces.has(name.toLowerCase())) {
-            ip = interfaces.get(name.toLowerCase());
+        if(interfaces.has(name)) {
+            ip = interfaces.get(name);
             console.log(`IP address at ${ip}`);
         }
         else {
             console.log('DEFAULT: IP address at localhost');
-            ip = 'localhost';
+            ip = '127.0.0.1';
         }
 
         app.listen(3001, function() {  
