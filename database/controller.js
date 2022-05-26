@@ -415,26 +415,28 @@ Student.find(function(err, student) {
 exports.studentFindOne = function(req, res, next) {
   Student.findOne({StudentID:req.body.StudentID}, function(err, Student){
     if(Student) {
-      //update student status to 'Pending' if student status is 'unchecked' and send student object
-      if(Student.Status == 'Unchecked'){
-        Student.Status = 'Pending';
-        Student.save(function(err){
-          if(!err){
-            res.send(Student);
-          } else {
-            res.send({err:'Unable to update student status'});
-          }
-        })
-      } else {
-        res.send(Student);
-      }
-    }
-    else if (err) { 
-      res.send({err: 'An error occured'}); 
+      res.send(Student);
     }
     else { 
       res.send({err:'Unable to find student'}); 
     }
+  });
+}
+
+//student update status
+exports.studentUpdateStatus = async function(req, res, next) {
+  
+  //find student by StudentID
+  var student = await Student.findOne({StudentID:req.body.StudentID});
+
+  if (student.Status == 'Unchecked'){
+    student.Status = 'Pending';
+  }
+  
+  //save
+  student.save(function(err) {
+    if (!err) { res.send(student)}
+    else { res.send({err:'Unable to save student'}) }
   });
 }
 

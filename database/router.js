@@ -31,7 +31,7 @@ module.exports = (app) => {
   app.delete('/student/delete', controller.middleware, controller.studentDeleteOne);
   app.post('/student/update-validations', controller.middleware, controller.studentUpdateValidations);
   app.post('/student/update-gpa', controller.middleware, controller.studentUpdateGPA);
-
+  app.post('/student/update-status', controller.middleware, controller.studentUpdateStatus);
   
   // USER ROUTES
   app.get('/user/create-admin', controller.adminCreate);

@@ -248,13 +248,30 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
 
 
     // fetch Student from database using Student Number
-    const GetStudentInfo = () => {
+    const GetStudentInfo = async () => {
 
         var currUser = { // store student info here
         stud_no: '',
         name: '',
         degree_program: '',
         }
+
+        await fetch(`http://${ip}:3001/student/update-status`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
+        body: JSON.stringify(currStudentID)// use studentID to find student info
+        })
+        .then(response => response.json())
+        .then(body => {
+        })
+        .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+            Swal.fire({
+                icon: 'error',
+                title: 'Server Error',
+                text: 'Check if the server is running or if database IP is correct',
+            })
+            console.log(err)
+        })
 
         fetch(`http://${ip}:3001/student/find`, {
         method: "POST",
