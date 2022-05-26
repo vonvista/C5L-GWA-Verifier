@@ -466,7 +466,7 @@ exports.studentAdd = function(req, res, next) {
 // update student
 exports.studentUpdateOne = function(req, res, next) {
   Student.updateOne({_id:mongoose.Types.ObjectId(req.body._id)},{"$set":{
-    "StudentNo.": req.body.StudentID,
+    "StudentID": req.body.StudentID,
     "FirstName": req.body.FirstName,
     "MiddleName": req.body.MiddleName,
     "LastName": req.body.LastName,

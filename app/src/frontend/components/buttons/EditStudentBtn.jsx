@@ -14,7 +14,7 @@ import EditStudentDetails from 'frontend/pages/student-record/StudentDetailEditM
     -- handleClick prop: function to handle click event
 */
 
-const EditBtn = () => {
+const EditBtn = ({studentInfo}) => {
   
   /*-------------------- Styling --------------------*/
   const editBtnStyle = `text-gray-700 block px-4 rounded-xl py-2 text-sm z-1 w-full hover:bg-button-green-hover`;
@@ -46,6 +46,7 @@ const EditBtn = () => {
         }}
         modalState={isActive}
         handleClose={closeEditRow}
+        studentInfo={studentInfo}
         />
 
       {/* Edit Students button */}

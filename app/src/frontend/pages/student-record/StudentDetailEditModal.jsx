@@ -14,7 +14,7 @@ import 'tailwindcss/tailwind.css';
     handleClose         ---     function used to close edit student modal and reset the input fields
 */
 
-const EditStudent = ({modalState, handleClose}) => {
+const EditStudent = ({modalState, handleClose, studentInfo}) => {
     /*-------------------- Styling --------------------*/
     const editStudentModal = `relative bg-secondary-red h-[47vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
     const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[37vh]`;
@@ -40,8 +40,17 @@ const EditStudent = ({modalState, handleClose}) => {
     const [degree, setDegree] = useState('');
     const [currStudentID, setcurrStudentID] = useState(localStorage.getItem('currStudentID'));
     const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
+    const [userName, setUserName] = useState(localStorage.getItem("Username"));
+        
 
-
+    useEffect(() =>{
+        setStudNum(studentInfo.stud_no)
+        setDegree(studentInfo.degree_program)
+        setStudFName(studentInfo.iname.fname)
+        setStudMName(studentInfo.iname.mname)
+        setStudLName(studentInfo.iname.lname)
+    }, [])
+    
     /*-------------------- Functions --------------------*/
     //function which updates Student input fields
     const updateStudent = () => {
@@ -51,10 +60,10 @@ const EditStudent = ({modalState, handleClose}) => {
             LastName: studLName, //put last name variable
             MiddleName: studMName, //put middle name variable
             Degree: degree,
-            TotalUnits: 0,
-            TotalUnits2: 0,
-            TotalCumulative: 0,
-            OverallGWA: 0,
+            //TotalUnits: 0,
+            //TotalUnits2: 0,
+            //TotalCumulative: 0,
+            //OverallGWA: 0,
             _id: currStudentID
         }
 
@@ -80,15 +89,16 @@ const EditStudent = ({modalState, handleClose}) => {
     
     //function which records changes in student record 
     const addHistory = () => {
-        const current = new Date(); //variable which will get current date and time
-        const currentTime = `${current.getHours()}:${current.getMinutes()}`; //variable containing current time
-        const currentDate = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`; //variable containing current date
         
         const credentials = {
-            User: "User",
-            Student: "Student",
-            Date: currentDate,
-            Time: currentTime,
+            User: userName,
+            Student: currStudentID,
+            Date: new Date().toLocaleDateString(),
+            Time: new Date().toLocaleTimeString('en-US', { 
+                hour12: false, 
+                hour: "numeric", 
+                minute: "numeric"
+            }),
             Description: 'update',
             Details: "Sample Details"
         };
@@ -183,6 +193,7 @@ const EditStudent = ({modalState, handleClose}) => {
                                                                         type="text"
                                                                         name="studFName"
                                                                         placeholder='First Name'
+                                                                        value={studFName}
                                                                         onChange={(e) => setStudFName(e.target.value)}
                                                                     />
 
@@ -196,6 +207,7 @@ const EditStudent = ({modalState, handleClose}) => {
                                                                         type="text"
                                                                         name="studMName"
                                                                         placeholder='M.I.'
+                                                                        value={studMName}
                                                                         onChange={(e) => setStudMName(e.target.value)}
                                                                     />
                                                                     <div className='w-full text-white text-center text-sm'>Middle Initial</div>
@@ -208,6 +220,7 @@ const EditStudent = ({modalState, handleClose}) => {
                                                                         type="text"
                                                                         name="studLName"
                                                                         placeholder='Surname'
+                                                                        value={studLName}
                                                                         onChange={(e) => setStudLName(e.target.value)}
                                                                     />
                                                                     <div className='w-full text-white text-center'>Surname</div>
@@ -223,6 +236,7 @@ const EditStudent = ({modalState, handleClose}) => {
                                                                         type="text"
                                                                         name="studNum"
                                                                         placeholder='20XX-XXXX'
+                                                                        value={studNum}
                                                                         onChange={(e) => setStudNum(e.target.value)}
                                                                     />
                                                                     <div className='w-full text-white text-center'>Student Number</div>
@@ -236,6 +250,7 @@ const EditStudent = ({modalState, handleClose}) => {
                                                                         type="text"
                                                                         name="degree"
                                                                         placeholder='Degree Program'
+                                                                        value={degree}
                                                                         onChange={(e) => setDegree(e.target.value)}
                                                                     />
                                                                     <div className='w-full text-white text-center'>Degree Program</div>
