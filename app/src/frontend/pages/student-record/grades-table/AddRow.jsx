@@ -87,7 +87,7 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
             <Transition appear show={modalState} as={Fragment}>
 
                 {/* Wrapping everything with dialog component */}
-                <Dialog as="div" className="relative z-50" onClose={handleClose}>
+                <Dialog as="div" className="relative z-50" open={modalState} onClose={handleClose}>
 
                     <style>{inputs}</style>
 
