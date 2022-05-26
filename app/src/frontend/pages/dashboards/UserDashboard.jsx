@@ -60,7 +60,7 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
         // mapping out all the entries sent by the fetch
         body.map((student, i) => {
           studentsData.unshift({
-            name: `${student.FirstName} ${student.LastName}`,
+            name: `${student.LastName}, ${student.FirstName}, ${student.MiddleName}`,
             studno: student.StudentID,
             degprog: student.Degree,
             gwa: student.OverallGWA,
@@ -169,7 +169,7 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
     const temp = unsortedRows; // let original data
     temp.unshift({
       _id: student._id,
-      name: `${student.FirstName} ${student.LastName}`,
+      name: `${student.LastName}, ${student.FirstName}, ${student.MiddleName}`,
       studno: student.StudentID,
       degprog: student.Degree,
       gwa: student.OverallGWA,
