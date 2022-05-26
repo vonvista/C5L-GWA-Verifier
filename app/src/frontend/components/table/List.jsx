@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import 'tailwindcss/tailwind.css';
 
 /* Components */
-import Actions from '../buttons/Actions'
+import Actions from '../buttons/Actions';
 import EditUser from 'frontend/pages/user-management/EditUser';
 import AddRowBtn from 'frontend/components/buttons/AddRowBtn.jsx';
 import ReadRow from 'frontend/pages/student-record/grades-table/ReadRow';
@@ -12,15 +12,11 @@ import EditRow from 'frontend/pages/student-record/grades-table/EditRow';
 import Swal from 'sweetalert2';
 
 
-/* Backend */
-// import studentDelete from 'backend/studentDelete';
-// import userDelete from 'backend/userDelete';
-
-
 /* Parent components:
-    StudentList >> frontend/pages/dashboards/UserDashboard.jsx
-    SemRecord   >> frontend/pages/student-record/grades-table/TableContents.jsx
-    User        >> frontend/pages/user-management/UserManagementPage.jsx
+    StudentList >> frontend/pages/dashboards/UserDashboard
+    SemRecord   >> frontend/pages/student-record/grades-table/TableContents
+    User        >> frontend/pages/user-management/UserManagementPage
+    Pagination  >> ./Pagination
 */
 
 /* This list component requires a (1) condition that indicates what table to display, (2) data to be displayed. See return part at the end. */
@@ -83,7 +79,6 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                 ({units}) => isRequired(units) || {units: 'Please fill out'},
                                 ({units}) => !isNaN(units) || {units: 'Invalid value'},
                                 ({grade}) => isRequired(grade) || {grade: 'This is required'},
-                                //({grade}) => !isNaN(grade) || {grade: 'Invalid value'},
                             ]
                             
                             // State and hook to handle inline editing of data
@@ -91,15 +86,12 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             const [isEdit, setEdit] = useState(false)
                             
                             const toggleEdit = () => {
-                                // Function to toggle to edit
-                                setEdit(!isEdit)
+                                setEdit(!isEdit)            // Function to toggle to edit
                             }
 
                             const cancelEdit = () => {
-                                // Function to cancel editing
-                                // Resets form values to default
-                                setEdit(!isEdit)
-                                resetValues()
+                                setEdit(!isEdit)            // Function to cancel editing
+                                resetValues()               // Resets form values to default
                             }
 
                             return(
@@ -123,7 +115,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                             data={course}
                                             clickHandler={toggleEdit}
                                             delHandler={delHandler}
-                                            histHandler={handleHistory} // should be replaced with function that updates the state of history immediately after deleting row
+                                            histHandler={handleHistory}
                                             sem={sem}
                                         />
                                     }
@@ -146,54 +138,29 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
     }
 
 
-    // Parent component: UserManagementPage.jsx
-    // This table is about the different user's data
+    /* Parent component >> UserManagementPage.jsx */
+    /* Table for displaying list of user accounts */
     const User = ({data, changeSort, sortState, handleDeleteRecord, handleEditRecord}) => {
 
         const [showModal, setShowModal] = useState(false)
         const [editUser, setEditUser] = useState();
 
         // Styling
-        const usersTable = `border-collapse overflow-hidden table-fixed max-w-[72.078125vw] max-h-[70.6371191135734vh] rounded-t-[0.9765625vw] drop-shadow-lg`;
-        const tHead = 
-                    `
-                        bg-white border-solid rounded-t-[0.9765625vw] border-b-[0.2155124653739612vh] 
-                        table table-fixed whitespace-no-wrap w-full font-montserrat w-[65.73130193905817vw]
-                    `;
-        const tBodytR = 
-            `
-                table table-fixed whitespace-no-wrap w-full font-montserrat hover:bg-table-hover-color
-                last:border-b-0 
-            `
-        const tRow = `text-left not-italic text-[1.3020833333333333vw] text-sr-text-gray`;
-        const tBody = `bg-white block overflow-auto text-black rounded-b-[0.9765625vw] h-[65.73130193905817vh] w-[65.73130193905817vw]`
-        const actionstH = `cursor-default text-center py-[1.1772853185595569vh] px-[1.3020833333333333vw] border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]`;
-        const usernametData = 
-            `
-                truncate
-                font-bold w-[13.158854166666668vw] cursor-pointer
-                py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
-                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
-            `;
-        const nametData = 
-            `
-                truncate
-                font-bold w-[23.158854166666668vw] cursor-pointer
-                py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
-                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
-            `;
-        const positiontData = 
-            `
-                truncate
-                w-[19.158854166666668vw] cursor-pointer
-                py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
-                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
-            `;
-        const asc = `after:float-right after:content-['▲'] after:ml-[0.3255208333333333vw] bg-sr-dark-gray`;
-        const desc = `after:float-right after:content-['▼'] after:ml-[0.3255208333333333vw] bg-sr-dark-gray`;
+        const usersTable = `border-collapse overflow-hidden table-fixed max-w-[72vw] max-h-[71vh] rounded-t-[1vw] drop-shadow-lg`;
+        const tHead = `bg-white border-solid rounded-t-[1vw] border-b-[0.2vh] table table-fixed whitespace-no-wrap w-full font-montserrat w-[66vw]`;
+        const tBodytR = `table table-fixed whitespace-no-wrap w-full font-montserrat hover:bg-table-hover-color last:border-b-0`;
+        
+        const tRow = `text-left not-italic text-[1vw] text-sr-text-gray`;
+        const tBody = `bg-white block overflow-auto text-black rounded-b-[1vw] h-[65.73130193905817vh] w-[65.73130193905817vw]`;
+        const element = `py-[1.2vh] px-[1.3vw] border-solid overflow-hidden text-[1vw] border-page-background border-b-[0.14vh]`;
 
-        useEffect(() => {
-        })
+        const actionstH = `${element} cursor-default text-center`;
+        const usernametData = `${element} truncate font-bold w-[13vw] cursor-pointer`;
+        const nametData = `${element} truncate font-bold w-[23vw] cursor-pointer`;
+        const positiontData = `${element} truncate w-[19vw] cursor-pointer`;
+
+        const asc = `after:float-right after:content-['▲'] after:ml-[0.3vw] bg-sr-dark-gray`;
+        const desc = `after:float-right after:content-['▼'] after:ml-[0.3vw] bg-sr-dark-gray`;
 
         // Function to delete a user based on their username
         const userDelete = (username) => {
@@ -317,8 +284,8 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
       }
 
     
-    // Parent component: UserDashboard.jsx
-    // Function for Displaying the Student List on the Dashboard
+    /* Parent component >> UserDashboard.jsx */
+    /* Table for displaying the Student List on the Dashboard */
     const StudentList = ({ data, setRows, changeSort, sortState, handleDeleteRecord }) => {
         
         // Styling
@@ -556,4 +523,5 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
     }
 }
 
-export default List
+
+export default List;
