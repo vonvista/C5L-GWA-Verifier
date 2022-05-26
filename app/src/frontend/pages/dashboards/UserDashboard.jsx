@@ -429,7 +429,6 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
                             {/* Search bar */}
                             <div className="float-left items-center">
                                 <Search
-                                    user="student number"
                                     handleSearch={(e) => setSearchStudent(e.target.value)}
                                     searchValue={searchStudent}
                                     buttonHandler={handleSearch}
@@ -438,7 +437,7 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
                             </div>
 
                             {/* Refresh button */}
-                            <div className="flex items-center ml-4">
+                            <div className="flex items-center ml-2">
                                 <Refresh handleClick={forceReload} />
                             </div>
 
