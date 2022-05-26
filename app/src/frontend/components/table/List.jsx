@@ -147,11 +147,53 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
 
 
     // Parent component: UserManagementPage.jsx
-    // This table is about
-    const User = ({data, handleDeleteRecord, handleEditRecord}) => {
-        //console.log(data);
+    // This table is about the different user's data
+    const User = ({data, changeSort, sortState, handleDeleteRecord, handleEditRecord}) => {
+
         const [showModal, setShowModal] = useState(false)
         const [editUser, setEditUser] = useState();
+
+        // Styling
+        const usersTable = `border-collapse overflow-hidden table-fixed max-w-[72.078125vw] max-h-[70.6371191135734vh] rounded-t-[0.9765625vw] drop-shadow-lg`;
+        const tHead = 
+                    `
+                        bg-white border-solid rounded-t-[0.9765625vw] border-b-[0.2155124653739612vh] 
+                        table table-fixed whitespace-no-wrap w-full font-montserrat w-[65.73130193905817vw]
+                    `;
+        const tBodytR = 
+            `
+                table table-fixed whitespace-no-wrap w-full font-montserrat hover:bg-table-hover-color
+                last:border-b-0 
+            `
+        const tRow = `text-left not-italic text-[1.3020833333333333vw] text-sr-text-gray`;
+        const tBody = `bg-white block overflow-auto text-black rounded-b-[0.9765625vw] h-[65.73130193905817vh] w-[65.73130193905817vw]`
+        const actionstH = `cursor-default text-center py-[1.1772853185595569vh] px-[1.3020833333333333vw] border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]`;
+        const usernametData = 
+            `
+                truncate
+                font-bold w-[13.158854166666668vw] cursor-pointer
+                py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
+                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
+            `;
+        const nametData = 
+            `
+                truncate
+                font-bold w-[23.158854166666668vw] cursor-pointer
+                py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
+                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
+            `;
+        const positiontData = 
+            `
+                truncate
+                w-[19.158854166666668vw] cursor-pointer
+                py-[1.1772853185595569vh] px-[1.3020833333333333vw] 
+                border-solid overflow-hidden text-[1.1067708333333333vw] border-page-background border-b-[0.13850415512465375vh]
+            `;
+        const asc = `after:float-right after:content-['▲'] after:ml-[0.3255208333333333vw] bg-sr-dark-gray`;
+        const desc = `after:float-right after:content-['▼'] after:ml-[0.3255208333333333vw] bg-sr-dark-gray`;
+
+        useEffect(() => {
+        })
 
         // Function to delete a user based on their username
         const userDelete = (username) => {
@@ -235,31 +277,41 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
 
         return (
           <>
-            <table className="user-table table">
-              <thead>
-                  <tr>
-                  <th className='user-uname'>Username</th>
-                  <th className='user-name'>Name</th>
-                  <th className='user-position'>Position</th>
-                  <th className='user-action'>Actions</th>
-                  </tr>
-              </thead>
-              <tbody>
-                {data.map((user, index) => (
-                    <tr key = {index}>
-                      <td className='user-uname'>{user.uname}</td>
-                      <td className='user-name uppercase'>{user.name}</td>
-                      <td className='user-position'>
-                          {user.position}
-                      </td>
-                      <td className='user-action'>
-                      <Actions handleEdit={() => handleEditRecord(user)} handleDelete={() => userDelete(user.uname)} data={user}/>
-                      </td>
-                    </tr>
-                  )
-                )}
-              </tbody>
-            </table>
+            <table className={usersTable}>
+                    <thead className={tHead}>
+                        <tr className={tRow}>
+                            {/* sort UI asc or desc depends on the state of the parent (user-dashboard) */}
+                            {/* state 0: normal; 1: ascending icon; 2: descending icon */}
+                            <th className={` ${usernametData} ${
+                                sortState[0] === 0 ? "" : sortState[0] === 1 ? asc : desc 
+                            }`} onClick={() => changeSort(0)}>Username</th>
+                            <th className={` ${nametData} ${
+                                sortState[1] === 0 ? "" : sortState[1] === 1 ? asc : desc
+                            }`} onClick={() => changeSort(1)}>Name</th>
+                            <th className={` ${positiontData} ${
+                                sortState[2] === 0 ? "" : sortState[2] === 1 ? asc : desc 
+                            }`} onClick={() => changeSort(2)}>Position</th>
+                            <th className={actionstH}>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody className={tBody}>
+                            {data.map((user, index) => (
+                                <tr className={tBodytR} key = { index }>
+                                    <td className={` ${usernametData} cursor-default`}> {user.uname}</td>
+                                    <td className={ `${nametData} cursor-default`}> {user.name}</td>
+                                    <td className={` ${positiontData} cursor-default`}> {user.position}</td>
+                                    <td className='text-center'>
+                                        <Actions
+                                            handleEdit={() =>  handleEditRecord(user)}
+                                            handleDelete={() => userDelete(user.uname)} 
+                                            data={user}
+                                        />
+                                    </td>
+                                </tr>
+                            )
+                            )}
+                    </tbody>
+                </table>
           </>
         )
       }
@@ -495,6 +547,8 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         return (
             <User
                 data={data}
+                changeSort={changeSort}
+                sortState={sortState}
                 handleDeleteRecord={handleDeleteRecord}
                 handleEditRecord={handleEditRecord}
             />

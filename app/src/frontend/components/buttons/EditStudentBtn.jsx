@@ -32,7 +32,7 @@ const EditBtn = ({studentInfo}) => {
   }
 
   // Function to close the add row modal window
-  const closeEditRow = () => {
+  const closeEditStud = () => {
     setIsActive(false);
   }
 
@@ -45,7 +45,7 @@ const EditBtn = ({studentInfo}) => {
           setValueClicked('Edit');
         }}
         modalState={isActive}
-        handleClose={closeEditRow}
+        handleClose={closeEditStud}
         studentInfo={studentInfo}
         />
 

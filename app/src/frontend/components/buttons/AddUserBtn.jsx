@@ -11,28 +11,24 @@ import user1 from '../../../../assets/icons/user1.svg';
 */
 const AddUserBtn = ({ handleClick }) => {
 
-    // styling
-    const imgBtn = `.img-btn{
-            width: 15vw;
-            height: 5vh;
-        }`;
+//Styling
+const adduserbtn = `w-[12vw] h-[5vw] bg-button-green m-2 rounded-xl text-white text-base font-montserrat font-bold hover:shadow-lg hover:bg-button-green-hover`;
 
-    return (
-        <>
-            <style>{imgBtn}</style>
-            <button
-                className=" bg-button-green m-2 rounded-xl text-white font-montserrat font-bold hover:shadow-lg hover:bg-button-green-hover"
-                type="button"
-                onClick={handleClick}
-            >
-                <img
-                    className="img-btn pt-[1vh]"
-                    alt="icon"
-                    src={user1}
-                />
-                <p className="text-[1vw] text-center py-1">Add User</p>
-            </button>
-        </>
+return (
+    <>
+      <button
+        className={adduserbtn}
+        type="button"
+        onClick={handleClick}
+      >
+        <img
+          className="p-0.25 ml-0.25 mr-1.5 inline-flex w-[2vw] h-[2vw]"
+          alt="icon"
+          src={user1}
+        />
+        <p className="text-[1.2vw] inline-block">Add User</p>
+      </button>
+    </>
     );
 };
 

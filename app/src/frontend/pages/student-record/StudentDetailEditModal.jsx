@@ -128,7 +128,7 @@ const EditStudent = ({modalState, handleClose, studentInfo}) => {
     const submitStudentEdit = () =>{
         updateStudent();
         addHistory();
-        setOpenModal(false);
+        setOpenModal(handleClose);
     }
 
     return (
