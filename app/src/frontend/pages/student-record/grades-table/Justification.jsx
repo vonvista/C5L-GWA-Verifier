@@ -1,4 +1,4 @@
-import { Dialog, Transition} from '@headlessui/react';
+import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState, useEffect } from 'react';
 import { useForm, isRequired } from '../../../hooks/useForm';
 import Input from 'frontend/components/inputs/Input';
@@ -92,7 +92,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
     return (
         <>
             <Transition appear show={modalState} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={resetModalValues}>
+                <Dialog as="div" className="relative z-10" openModal={modalState} onClose={resetModalValues}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
