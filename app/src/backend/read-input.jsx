@@ -136,7 +136,7 @@ const readInputFile = (files, handleAddRecord) => {
           }
 
           studentData.FirstName = firstname.trim();
-          studentData.MiddleName = middlename
+          studentData.MiddleName = middlename.slice(0, -1);
           studentData.LastName = lastname.trim().replace(',', '');
 
         } else if (lineNum == 1) {
