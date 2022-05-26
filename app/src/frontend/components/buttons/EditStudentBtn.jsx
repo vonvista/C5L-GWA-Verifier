@@ -22,13 +22,18 @@ const EditBtn = ({ studentInfo, setHistory }) => {
   
   /*-------------------- State handlers --------------------*/
   const [valueClicked, setValueClicked] = useState('Actions');
+  // Edit student modal
   const [isActive, setIsActive] = useState(false);
+  // Justification modal
+  const [justModal, setJustModal] = useState(false);
+
+  // input fields
   const [studNum, setStudNum] = useState('');
   const [studFName, setStudFName] = useState('');
   const [studMName, setStudMName] = useState('');
   const [studLName, setStudLName] = useState('');
   const [degree, setDegree] = useState('');
-  const [justModal, setJustModal] = useState(false);
+
   const [histTitle, setTitle] = useState(`Edited student detail information from Name: ${studentInfo.iname.lname}, ${studentInfo.iname.fname} ${studentInfo.iname.mname}., Student No.: ${studentInfo.stud_no}, and Degree: ${studentInfo.degree_program} to `);
   const [currStudentID, setcurrStudentID] = useState(localStorage.getItem('currStudentID'));
   const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
@@ -55,6 +60,10 @@ const EditBtn = ({ studentInfo, setHistory }) => {
   // Function to close the edit student modal window
   const closeEditStud = () => {
     setIsActive(false);
+  }
+
+  const closeJustModal = () => {
+      setJustModal(false);
   }
 
   //function which updates Student input fields
@@ -85,53 +94,56 @@ const EditBtn = ({ studentInfo, setHistory }) => {
         })
         console.log(err)
     })
-    
+    closeJustModal();
   }
+    // Function for adding new history after adding new row
+    function handleHistory(data){
+        let updateHistory = {
+        date: new Date().toLocaleDateString(),
+        info: [
+            {
+            main: histTitle,
+            user: data.user,
+            time: new Date().toLocaleTimeString('en-US', { 
+                hour12: false, 
+                hour: "numeric", 
+                minute: "numeric"
+            }),
+            details: data.desc,
+            },
+        ],
+        }
 
-  // Function for adding new history after adding new row
-  function handleHistory(data){
-    let updateHistory = {
-      date: new Date().toLocaleDateString(),
-      info: [
-          {
-          main: histTitle,
-          user: data.user,
-          time: new Date().toLocaleTimeString('en-US', { 
-              hour12: false, 
-              hour: "numeric", 
-              minute: "numeric"
-          }),
-          details: data.desc,
-          },
-      ],
+        // history handler
+        setHistory(updateHistory);
     }
-
-    // history handler
-    setHistory(updateHistory);
-  }
 
   return (
     <>
-      <Justification modalState={justModal} modalHandler={setJustModal} parentSubmitHandler={updateStudent} handleHistory={handleHistory} histTitle={histTitle}/> 
+      <Justification modalState={justModal} modalHandler={closeJustModal} parentSubmitHandler={updateStudent} handleHistory={handleHistory} histTitle={histTitle}/> 
+      
       <EditStudentDetails
-        onClick={() => {
-          setIsActive(!isActive);
-          setValueClicked('Edit');
-        }}
-        modalState={isActive}
-        handleClose={closeEditStud}
-        studNum={studNum}
-        studFName={studFName}
-        studMName={studMName}
-        studLName={studLName}
-        degree={degree}
-        setStudNum={setStudNum}
-        setStudFName={setStudFName}
-        setStudMName={setStudMName}
-        setStudLName={setStudLName}
-        setDegree={setDegree}
-        setJustModal={setJustModal}
-        setTitle={setTitle}
+            onClick={() => {
+            setIsActive(!isActive);
+            setValueClicked('Edit');
+            }}
+            modalState={isActive}
+            handleClose={closeEditStud}
+            handleSave={updateStudent}
+
+            studNum={studNum}
+            studFName={studFName}
+            studMName={studMName}
+            studLName={studLName}
+            degree={degree}
+            setStudNum={setStudNum}
+            setStudFName={setStudFName}
+            setStudMName={setStudMName}
+            setStudLName={setStudLName}
+            setDegree={setDegree}
+
+            setJustModal={setJustModal}
+            setTitle={setTitle}
         />
 
       {/* Edit Students button */}
