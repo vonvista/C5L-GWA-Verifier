@@ -1,5 +1,5 @@
-import 'tailwindcss/tailwind.css';
 import { useEffect, useState } from 'react';
+import 'tailwindcss/tailwind.css';
 
 /* Components */
 import EditStudentDetails from 'frontend/pages/student-record/StudentDetailEditModal';
@@ -7,15 +7,14 @@ import Justification from 'frontend/pages/student-record/grades-table/Justificat
 import Swal from 'sweetalert2';
 
 
-/* Parent component >> frontend\components\buttons\Dropdown.jsx */
+/* Parent component >> frontend/components/buttons/Dropdown.jsx */
 
-/* Function contains the Edit button from Student Record View/Edit Page's Dropdown Menu */
+/* This function contains the Edit button from student record page's dropdown menu */
 /* 
    Props:
-    -- handleClick prop  : function to handle click event
-    -- setHistory prop   : function to update history logs
+    handleClick  ---  function to handle click event
+    setHistory   ---  function to update history logs
 */
-
 const EditBtn = ({ studentInfo, setHistory }) => {
   
   /*-------------------- Styling --------------------*/

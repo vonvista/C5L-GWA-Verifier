@@ -1,12 +1,12 @@
-import 'tailwindcss/tailwind.css';
 import { useState } from 'react';
 import add from '../../../../assets/icons/addRow.svg';
 import AddRow from 'frontend/pages/student-record/grades-table/AddRow';
 import Justification from 'frontend/pages/student-record/grades-table/Justification';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import 'tailwindcss/tailwind.css';
 
 
-/* Parent component >> frontend/components/table/List.jsx */
+/* Parent component >> frontend/components/table/List */
 
 /* This component is for the "Add Row" button found in the Student Record page */
 /* 
@@ -16,7 +16,6 @@ import Swal from 'sweetalert2'
     addHandler  ---     function that updates the state of the list of courses taken by the student in a semester
     histHandler ---     function that updates the state of the student record history
 */
-
 const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
 
     /*-------------------- State handlers --------------------*/
@@ -250,5 +249,6 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
         </>
     );
 };
+
 
 export default AddRowBtn;

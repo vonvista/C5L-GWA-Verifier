@@ -142,9 +142,6 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
     /* Table for displaying list of user accounts */
     const User = ({data, changeSort, sortState, handleDeleteRecord, handleEditRecord}) => {
 
-        const [showModal, setShowModal] = useState(false)
-        const [editUser, setEditUser] = useState();
-
         // Styling
         const usersTable = `border-collapse overflow-hidden table-fixed max-w-[72vw] max-h-[71vh] rounded-t-[1vw] drop-shadow-lg`;
         const tHead = `bg-white border-solid rounded-t-[1vw] border-b-[0.2vh] table table-fixed whitespace-no-wrap w-full font-montserrat w-[66vw]`;

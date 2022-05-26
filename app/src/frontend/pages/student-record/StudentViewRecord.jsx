@@ -2,7 +2,8 @@ import { Tab, Transition, Disclosure } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/solid';
 import { useState, useEffect, useRef, Fragment } from 'react';
 import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
-import Swal from 'sweetalert2';
+import { toNamespacedPath } from 'node:path/win32';
+import 'tailwindcss/tailwind.css';
 
 /* Components */
 import ActionsBtn from 'frontend/components/buttons/Dropdown';
@@ -12,24 +13,24 @@ import History from './tabbed-components/history/StudentRecordHistory';
 import CheckList from './tabbed-components/checklist/ChecklistTab';
 import Table from './grades-table/TableContents';
 import Refresh from '../../components/buttons/Refresh'
-
-/* CSS */
-import 'tailwindcss/tailwind.css';
-import { toNamespacedPath } from 'node:path/win32';
+import Swal from 'sweetalert2';
 
 
-// Parent component: ./StudentRecord
-// This component contains all the elements of the student record page
-// such as the student details header, the grades table, and the status tab
-// -- student   : contains details of the student (studnumber, name, degree program, status)
-// -- notes     : data of per semester notes that can be edited or deleted
-// -- history   : data of changes done on given record
-// -- status    : whether verified or not
-// -- grades    : object containing grades of students divided per semester
-// -- checklist : list of requirements the student needs to accomplish before being verified
-// -- gpa       : contains gpa data
-// -- refresh   : handler for refresh
+/* Parent component >> ./StudentRecord */
 
+/* This component contains all the elements of the student record page
+   such as the student details header, the grades table, and the status tab. */
+/*
+   Props:
+    student     ---   contains details of the student (studnumber, name, degree program, status)
+    notes       ---   data of per semester notes that can be edited or deleted
+    history     ---   data of changes done on given record
+    status      ---   whether verified or not
+    grades      ---   object containing grades of students divided per semester
+    checklist   ---   list of requirements the student needs to accomplish before being verified
+    gpa         ---   contains gpa data
+    refresh     ---   handler for refresh
+*/
 const RecordPage = ({student, notes, history, status, grades, checklist, gpa, refresh}) => {
 
     const [selectedStudent, setSelectedStudent] = useState(student)
@@ -44,12 +45,12 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
     const [currStudentID, setCurrStudentID] = useState(localStorage.getItem("currStudentID"))
 
 
-    // refresh functions
+    // Refresh functions
     const forceReload = async () => {
         await refresh();
     };
 
-    // validation functions
+    // Validation functions
     const handleValApply = () => {
         //console.log(ip)
 
@@ -106,15 +107,16 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
         setValidationsState([...newValidation])
     }
 
+    // Tabbed components on the right side of the page
+    // Uses components as values
     const tabContents = { 
-        // status tab contents (dynamic) so easier to add or remove tabs
-        // uses components as values
-        Status: <Status state={statusState} gpaCalc={gpaCalc} />,                     // status component
+        Status: <Status state={statusState} gpaCalc={gpaCalc} />,    // status component
         Validations: <CheckList checklistData={validationsState} setValData={toggleValidation} handleApply={handleValApply}/>,       //checklist component
         Notes: <Notes notesData={notesState} semesters={gradeState} setNotesData={setNotesState} />,    // notes component
         History: <History historyData={historyState} />,            // history component
     }
 
+    // Animation for the tabbed components
     const tabAnim = {
         hide: {
             opacity: 0,
@@ -140,8 +142,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
         }
     }
 
-    // update HistoryState by adding new history to its date (not yet working)
-    // also used for updating state of history after editing a row (working)
+    // Function that pushes changes to history
     const setHistory = (histObj) => {
 
         let history = [...historyState]
@@ -175,7 +176,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
         setHistoryState(history)
     }
 
-    // update grade table on addrow, editrow, deleterow changes
+    // Update grade table on addrow, editrow, deleterow changes
     const setGrades = (values) => {
 
         let grades = [...gradeState]
@@ -301,7 +302,8 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
     //     setHistoryState(newHist)
     // }
 
-    const detailStyle = { // styling for student detail header
+    // Styling for student detail header
+    const detailStyle = { 
         title: "font-inter table-cell text-left text-sm 2xl:text-xl",
         text: "font-inter table-cell text-left text-xl 2xl:text-2xl font-bold",
     }
@@ -310,7 +312,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
         <main>
             <div className='w-100% pt-14 lg:pt-16 xl:pt-20 flex-column box-border'>
 
-                {/* student details */}
+                {/* Student Details */}
                 <div className="w-full top-16 flex px-7 py-5 rounded-lg mx-auto bg-sr-dark-gray shadow-lg box-border">
 
                 <div className="table w-0 table-fixed">
@@ -341,12 +343,12 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                 </div>                   
 
 
-                {/* student grades */}
+                {/* Student Grades */}
                 <div className="w-full flex mx-auto my-5 gap-3">
 
-                    {/* container for the whole accordion component */}
+                    {/* Container for the whole accordion component */}
                     <div className="w-[60vw] flex-1 overflow-auto mx-auto bg-white">
-                        {   // map grades per semester
+                        {   // map the grades per semester
                             gradeState.map((semData, idx)=>(
                                 <Table
                                     key={idx}
@@ -358,9 +360,8 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                             ))
                         }
                     </div>
-
                                 
-                    {/* tabbed information card */}
+                    {/* Tabbed information card */}
 
                     <div className="flex-none max-w-[100%] h-[45rem] sticky top-[2.5rem] shadow-lg rounded-lg">
                         <Tab.Group
@@ -406,12 +407,12 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                                 </AnimatePresence>
                             </Tab.Panels>
                         </Tab.Group>
-
                     </div>
                 </div>
             </div>
         </main>        
     );
 }
+
 
 export default RecordPage;

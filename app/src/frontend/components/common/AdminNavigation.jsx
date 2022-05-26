@@ -4,28 +4,31 @@ import 'tailwindcss/tailwind.css';
 import UserIcon from '../../../../assets/icons/default-user-icon.png';
 
 
-/* How to use navigation bar and header when importing to pages
-<>
-    <div><AdminNav /></div>
-    <div className="relative inset-0 flex ml-[4vw] justify-center">
-
-        <div><Header pageTitle={""}/></div>
-        <div className='pt-[9vh] flex-column'>
-            // Insert page contents here
-            // Adjust margins/padding/containers as needed
-        </div>
-
-    </div>
-</>
-*/
-
-
 /* Parent components:
-    frontend/pages/dashboards/UserDashboard.jsx
-    frontend/pages/student-record/StudentRecord.jsx
-    frontend/pages/user-management/UserManagementPage.jsx
+    UserDashboard  >> frontend/pages/dashboards/UserDashboard
+    StudentRecord  >> frontend/pages/student-record/StudentRecord
+    UserManagement >> frontend/pages/user-management/UserManagementPage
 */
-/* This component is used to aid admin navigation and is implemented as a sidebar that expands on hover. */
+
+/* This component is used to aid admin navigation and is implemented as a sidebar that expands on hover.
+
+    HOW TO USE WITH HEADER IN PAGES:
+
+    <>
+        <div><AdminNav /></div>
+        <div className="relative inset-0 flex ml-[4vw] justify-center">
+
+            <div><Header pageTitle={""}/></div>
+            <div className='pt-[9vh] flex-column'>
+                // Insert page contents here
+                // Adjust margins/padding/containers as needed
+            </div>
+
+        </div>
+    </>
+*/
+
+
 /* Props:
     hoverRef    --- a callbackRef used by useHover to update the listeners for the 'mouseover' and 'mouseout' events in the navigation bar
     isHovering  --- handles the hovering state of the navigation bar

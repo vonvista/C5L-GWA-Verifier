@@ -1,8 +1,8 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition} from '@headlessui/react';
 import SemSelect from 'frontend/components/inputs/DropdownSelect';
-import 'tailwindcss/tailwind.css';
 import Swal from 'sweetalert2';
+import 'tailwindcss/tailwind.css';
 
 
 /* Parent component >> AddNoteBtn.jsx */

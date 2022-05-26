@@ -1,29 +1,25 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import Swal from 'sweetalert2';
+import expand from '../../../../assets/icons/collapse(1).svg';
+import 'tailwindcss/tailwind.css';
 
 /* Components */
-import expand from '../../../../assets/icons/collapse(1).svg';
 import EditBtn from 'frontend/components/buttons/EditStudentBtn.jsx';
 import studentDelete from 'backend/studentDelete';
 import exportStudentData from 'backend/exportStudentData';
-
-/* CSS */
-import 'tailwindcss/tailwind.css';
+import Swal from 'sweetalert2';
 
 
-/* Parent component >> frontend\pages\student-record\StudentViewRecord.jsx */
+/* Parent component >> frontend\pages\student-record\StudentViewRecord */
 
-/* Function for the "Edit Student" feature in the Student View Record page's Dropdown Menu */
-/* Initially shows an "Edit" button on the dropdown menu and prompts the modal window after clicking it */
-/* Additional references: https://tailwindui.com/components/application-ui/elements/dropdowns */
+/* This function contains the "Actions" dropdown menu in the student information header
+   Additional references: https://tailwindui.com/components/application-ui/elements/dropdowns */
 /* 
    Props:
     -- studentInfo prop  : contains student information which will be used for exporting student record file
     -- grades            : contains student gradesheet which will be used for exporting student record file
     -- setHistory prop   : function to update history logs
 */
-
 const Dropdown = ({ studentInfo, grades, setHistory }) => {
 
   /*-------------------- State handlers --------------------*/
@@ -122,5 +118,6 @@ const Dropdown = ({ studentInfo, grades, setHistory }) => {
     </div>
   );
 };
+
 
 export default Dropdown;

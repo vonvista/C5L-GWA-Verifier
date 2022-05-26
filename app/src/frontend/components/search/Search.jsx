@@ -3,10 +3,10 @@ import Input from '../inputs/Input';
 import search from '../../../../assets/icons/search.svg';
 
 
-/* Parent component >> frontend/pages/dashboards/UserDashboard.jsx */
+/* Parent component >> frontend/pages/dashboards/UserDashboard */
 
-/* This function contains the search component. */
-/* HOW TO USE:
+/* This function contains the search component.
+   HOW TO USE:
     1. Declare and initialize searchStudent and setSearchStudent variables, handleSearch() and handleEnterPress():
 
         const [searchStudent, setSearchStudent] = useState("");

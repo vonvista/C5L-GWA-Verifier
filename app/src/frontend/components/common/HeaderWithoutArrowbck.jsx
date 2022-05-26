@@ -2,8 +2,8 @@ import 'tailwindcss/tailwind.css';
 
 
 /* Parent components:
-    frontend/pages/dashboards/UserDashboard.jsx
-    frontend/pages/user-management/UserManagementPage.jsx
+    UserDashboard  >> frontend/pages/dashboards/UserDashboard
+    UserManagement >> frontend/pages/user-management/UserManagementPage
 */
 
 /* This header shows the page title of the current page being displayed.

@@ -3,7 +3,7 @@ import arrowbck from '../../../../assets/icons/previous.svg';
 import { useNavigate } from 'react-router-dom';
 
 
-/* Parent component >> frontend/pages/student-record/StudentRecord.jsx */
+/* Parent component >> frontend/pages/student-record/StudentRecord */
 
 /* This header shows the page title of the current page being displayed.
    Only used for the secondary pages (pages that are at least one level deeper than the primary navigation pages). */

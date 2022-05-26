@@ -1,10 +1,13 @@
 import 'tailwindcss/tailwind.css';
 
 
-// This button component is used for text that acts like buttons
-// -- text prop     : text label of button
-// -- handleClick   : function to handle click event
+/* Parent component >> frontend/pages/login-page/LoginPage */
 
+/* This button component is used for text that acts like a button. */
+/* Props:
+    text         ---  text label of button
+    handleClick  ---  function to handle click event
+*/
 const TextBtn = ({ text, handleClick }) => {
   const textClass = `w-30 h-10 hover:text-stone-100 font-poppins rounded-lg`;
   return (
@@ -15,5 +18,6 @@ const TextBtn = ({ text, handleClick }) => {
     </>
   );
 };
+
 
 export default TextBtn;
