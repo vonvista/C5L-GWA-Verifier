@@ -262,6 +262,8 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
 
                                                             {/* Username and Position */}
                                                             <div className="w-full pb-4 mt-2">
+                                                                
+                                                                {/* Username */}
                                                                 <section className="w-2/5 inline-block grow mr-2">
                                                                     <Input
                                                                         labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
@@ -272,12 +274,15 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                                                         inputType="text"                    // type of input password, email, text, etc.
                                                                         inputPlaceholder="Username"         // placeholder text for input
                                                                         value={un}                          // value of the input
-                                                                        changeHandler={(e) => setUN(e.target.value)}            // change handling
+                                                                        changeHandler={(e) =>
+                                                                            setUN(e.target.value)}          // change handling
                                                                     />
                                                                     <h4 className="mt-1 w-full text-center text-white">
                                                                         Username
                                                                     </h4>
                                                                 </section>
+
+                                                                {/* Position */}
                                                                 <section className="w-1/2 inline-block grow mr-2">
                                                                     <Input
                                                                         labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
@@ -298,22 +303,21 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                                             </div>
 
                                                             {/* Password */}
-                                                            <div className="w-full pb-4 mt-2">
+                                                            <div className="w-full pb-4 mt-2 pr-24">
                                                                 <section className="un-style">
                                                                     <div className="relative w-full">
+                                                                        <Input
+                                                                            labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
+                                                                            labelVal="Password"             // label text
+                                                                            inputStyle="rounded-lg text-center w-full h-[2.5vw] appearance-none border-2 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono" // styling for input
+                                                                            name="password"                 // name of label-input components
+                                                                            inputType="password"            // type of input password, email, text, etc.
+                                                                            inputPlaceholder="*****"        // placeholder text for input
+                                                                            value={pw}                      // value of the input
+                                                                            changeHandler={(e) =>
+                                                                                setPW(e.target.value)}      // change handling
+                                                                        />
                                                                         <div className="absolute inset-y-0 right-0 flex items-center px-2">
-                                                                            <Input
-                                                                                labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-                                                                                labelVal="Password" // label text
-                                                                                inputStyle={[inputStyle, 'hidden']} // styling for input
-                                                                                name="password" // name of label-input components
-                                                                                inputType="checkbox" // type of input password, email, text, etc.
-                                                                                inputPlaceholder="*****" // placeholder text for input
-                                                                                value={pw} // value of the input
-                                                                                changeHandler={(e) =>
-                                                                                setPW(e.target.value)
-                                                                                } // change handling
-                                                                            />
                                                                             <button
                                                                                 className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-[0.9vw] text-gray-600 font-mono cursor-pointer account-button js-password-label w-[3vw] h-11/12"
                                                                                 htmlFor="toggle"
@@ -323,18 +327,6 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                                                                 {status}
                                                                             </button>
                                                                         </div>
-                                                                        <Input
-                                                                            labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-                                                                            labelVal="Password" // label text
-                                                                            inputStyle="rounded-lg text-center w-full h-[2.5vw] appearance-none border-2 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" // styling for input
-                                                                            name="password" // name of label-input components
-                                                                            inputType="password" // type of input password, email, text, etc.
-                                                                            inputPlaceholder="*****" // placeholder text for input
-                                                                            value={pw} // value of the input
-                                                                            changeHandler={(e) =>
-                                                                                setPW(e.target.value)
-                                                                            } // change handling
-                                                                        />
                                                                     </div>
 
                                                                     <h4 className="mt-1 mb-2 w-full text-center text-white">
@@ -345,7 +337,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                                         </div>
                                                     </div>
 
-                                                    {/* create user button */}
+                                                    {/* Create User Button */}
                                                     <div className="w-full flex">
                                                         <section className="my-auto ml-0 mr-auto w-[90.5%]">
                                                             <button

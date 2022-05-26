@@ -308,7 +308,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
 
     return(
         <main>
-            <div className='w-100% pt-14 lg:pt-16 xl:pt-20 px-6 flex-column box-border'>
+            <div className='w-100% pt-14 lg:pt-16 xl:pt-20 flex-column box-border'>
 
                 {/* student details */}
                 <div className="w-full top-16 flex px-7 py-5 rounded-lg mx-auto bg-sr-dark-gray shadow-lg box-border">

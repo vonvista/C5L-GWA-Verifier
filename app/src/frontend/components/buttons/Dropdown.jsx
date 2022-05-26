@@ -99,12 +99,12 @@ const Dropdown = ({ studentInfo, grades, setHistory }) => {
       {isActive ? (
         // buttons after expanding
         <div
-          className="origin-top-right z-50 absolute right-0 mt-0.5 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
+          className="origin-top-right z-10 absolute right-0 mt-0.5 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
           tabIndex="-1"
         >
           <div className="pt-1 bg-button-green rounded-lg">
             <button
-              className="text-gray-700 block px-4 py-2 text-sm z-1 w-full hover:bg-button-green-hover hover:rounded-t-lg"
+              className="text-gray-700 block px-4 py-2 text-sm w-full hover:bg-button-green-hover hover:rounded-t-lg"
               type="button"
               onClick={() => {
                 setIsActive(!isActive);

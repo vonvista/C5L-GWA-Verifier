@@ -3,22 +3,23 @@ import AddNoteBtn from 'frontend/components/buttons/AddNoteBtn';
 import Delete from '../../../../../../assets/icons/delete.svg';
 import Swal from 'sweetalert2'
 
-// Parent component >> Tab component found in StudentViewRecord.jsx
 
-// This is a functional component for the notes tab in student record view page
-// -- notesData prop : gets the current state of array of notes from parent component
-// -- semesters      : gets the list of semesters that the student has enrolled in; to be used for dropdown select
-// -- setNotesData:  : used to update the state for the notesData in parent component
+/* Parent component >> Tab component found in StudentViewRecord.jsx */
 
+/* This is a functional component for the notes tab in student record view page */
+/* Props:
+    notesData prop  ---  gets the current state of array of notes from parent component
+    semesters       ---  gets the list of semesters that the student has enrolled in; to be used for dropdown select
+    setNotesData:   ---  used to update the state for the notesData in parent component
+*/
 export default function NotesTab({notesData, semesters, setNotesData}) { 
 
-    
     // State that handles selection of sem notes; uses first object as default
     const [selectedSem, setSelectedSem] = useState(semesters[0]);
     const [currStudentID, setStudentID] = useState(localStorage.getItem("currStudentID"));
     const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
 
-  
+
     // Handler for adding/editing notes
     const handleAddNote = (text) => {
         let currNotesList = [...notesData]      // make copy of current array of notes
@@ -41,7 +42,6 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
         setNotesData(currNotesList)
 	}
 
-
     // Handler for deleting notes
     const handleDeleteNote = (values) => {
 
@@ -58,7 +58,6 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
             Student: currStudentID,
             Semyear: values.Semyear,
         }
-
 
         // fetch post request to delete note
         fetch(`http://${ip}:3001/note/delete`, {
@@ -80,7 +79,6 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
         // changeHandler to update Notes
         setNotesData(newNotes)
     }
-
 
     return(
 
@@ -124,4 +122,4 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
             })}
         </div>
     );
-}
+};
