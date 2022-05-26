@@ -4,6 +4,7 @@ import { Fragment, useEffect, useState } from 'react';
 import 'tailwindcss/tailwind.css';
 import EditBtn from 'frontend/components/buttons/EditStudentBtn.jsx';
 import 'tailwindcss/tailwind.css';
+import Justification from './grades-table/Justification';
 
 /* Parent component >> frontend/components/buttons/EditStudentBtn.jsx */
 /* Function for the "Edit Student" feature in the Student View Record page's Dropdown Menu */
@@ -41,6 +42,7 @@ const EditStudent = ({modalState, handleClose, studentInfo}) => {
     const [currStudentID, setcurrStudentID] = useState(localStorage.getItem('currStudentID'));
     const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
+    const [justModal, setJustModal] = useState(false);
         
 
     useEffect(() =>{
@@ -126,13 +128,15 @@ const EditStudent = ({modalState, handleClose, studentInfo}) => {
 
     //main function for student update and add history
     const submitStudentEdit = () =>{
-        updateStudent();
+        //updateStudent();
         addHistory();
         setOpenModal(handleClose);
+        setJustModal(true);
     }
 
     return (
-        <>                           
+        <>          
+            <Justification modalState={justModal} modalHandler={setJustModal} parentSubmitHandler={updateStudent}/>                 
             {/* Wrapping everything with transition component to use transition effects from @headlessui/react */}
             <Transition appear show={modalState} as={Fragment}>
 

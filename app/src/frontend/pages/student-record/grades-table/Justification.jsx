@@ -54,7 +54,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
         // -- insert function for handling changes to history here --
         e.preventDefault()          // prevents refreshing of page
         parentSubmitHandler(e)      // submit contents of the form
-        submitHandler(e)            // update history log
+        //submitHandler(e)            // update history log
 
         const historyCredentials = { //updates history in db with title and description
             User: userName,
