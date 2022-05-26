@@ -12,7 +12,8 @@ import Swal from 'sweetalert2';
 /* Function contains the Edit button from Student Record View/Edit Page's Dropdown Menu */
 /* 
    Props:
-    -- handleClick prop: function to handle click event
+    -- handleClick prop  : function to handle click event
+    -- setHistory prop   : function to update history logs
 */
 
 const EditBtn = ({ studentInfo, setHistory }) => {
@@ -37,9 +38,10 @@ const EditBtn = ({ studentInfo, setHistory }) => {
   const [histTitle, setTitle] = useState(`Edited student detail information from Name: ${studentInfo.iname.lname}, ${studentInfo.iname.fname} ${studentInfo.iname.mname}., Student No.: ${studentInfo.stud_no}, and Degree: ${studentInfo.degree_program} to `);
   const [currStudentID, setcurrStudentID] = useState(localStorage.getItem('currStudentID'));
   const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
-  // const [userName, setUserName] = useState(localStorage.getItem("Username"));
 
   /*-------------------- Functions --------------------*/
+  
+  // sets fields upon rendering
   useEffect(() => {
     setStudNum(studentInfo.stud_no)
     setDegree(studentInfo.degree_program)
@@ -47,10 +49,6 @@ const EditBtn = ({ studentInfo, setHistory }) => {
     setStudMName(studentInfo.iname.mname)
     setStudLName(studentInfo.iname.lname)
   }, [])
-
-  useEffect(() => {
-    console.log(histTitle);
-  }, [histTitle])
 
   // Function to open the edit student modal window
   const openModal = () => {
@@ -62,6 +60,7 @@ const EditBtn = ({ studentInfo, setHistory }) => {
     setIsActive(false);
   }
 
+  // Function to close justification modal
   const closeJustModal = () => {
       setJustModal(false);
   }
@@ -70,9 +69,9 @@ const EditBtn = ({ studentInfo, setHistory }) => {
   const updateStudent = () => {
     const credentials = {
         StudentID: studNum,
-        FirstName: studFName, //put first name variable
-        LastName: studLName, //put last name variable
-        MiddleName: studMName, //put middle name variable
+        FirstName: studFName,     //put first name variable
+        LastName: studLName,      //put last name variable
+        MiddleName: studMName,    //put middle name variable
         Degree: degree,
         _id: currStudentID
     }
@@ -96,38 +95,41 @@ const EditBtn = ({ studentInfo, setHistory }) => {
     })
     closeJustModal();
   }
-    // Function for adding new history after adding new row
-    function handleHistory(data){
-        let updateHistory = {
-        date: new Date().toLocaleDateString(),
-        info: [
-            {
-            main: histTitle,
-            user: data.user,
-            time: new Date().toLocaleTimeString('en-US', { 
-                hour12: false, 
-                hour: "numeric", 
-                minute: "numeric"
-            }),
-            details: data.desc,
-            },
-        ],
-        }
 
-        // history handler
-        setHistory(updateHistory);
-    }
-    //main function for student update and add history
-    const submitStudentEdit = () => {
-        // updateStudent();
-        // addHistory();
-        
-        setTitle(prevTitle => prevTitle + `Name: ${studLName}, ${studFName} ${studMName}., Student No.: ${studNum}, and Degree: ${degree}.`)
-        localStorage.setItem('currStudentKey', studNum);
+  // Function for adding new history after adding new row
+  function handleHistory(data){
+      let updateHistory = {
+      date: new Date().toLocaleDateString(),
+      info: [
+          {
+          main: histTitle,
+          user: data.user,
+          time: new Date().toLocaleTimeString('en-US', { 
+              hour12: false, 
+              hour: "numeric", 
+              minute: "numeric"
+          }),
+          details: data.desc,
+          },
+      ],
+      }
 
-        closeEditStud();        // close edit student modal
-        setJustModal(true);     // open justification
-    }
+      // history handler
+      setHistory(updateHistory);
+  }
+
+  //main function for student update and add history
+  const submitStudentEdit = () => {
+      
+      // update history title for edit
+      setTitle(prevTitle => prevTitle + `Name: ${studLName}, ${studFName} ${studMName}., Student No.: ${studNum}, and Degree: ${degree}.`)
+
+      // update current student number on localStorage
+      localStorage.setItem('currStudentKey', studNum);
+
+      closeEditStud();        // close edit student modal
+      setJustModal(true);     // open justification
+  }
 
   return (
     <>
