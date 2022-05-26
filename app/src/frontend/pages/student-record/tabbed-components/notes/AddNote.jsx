@@ -88,7 +88,7 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
             <Transition appear show={modalState} as={Fragment}>
                 
                 {/* Wrapping everything with dialog component */}
-                <Dialog as="div" classname="relative z-50" openModal={modalState} onClose={handleClose}>
+                <Dialog as="div" className="relative z-30" openModal={modalState} onClose={handleClose}>
                     
                     {/* Transition effect for the element inside this Transition.Child tag*/}
                     <Transition.Child
