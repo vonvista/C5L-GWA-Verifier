@@ -88,9 +88,31 @@ const EditBtn = ({ studentInfo, setHistory }) => {
     
   }
 
+  // Function for adding new history after adding new row
+  function handleHistory(data){
+    let updateHistory = {
+      date: new Date().toLocaleDateString(),
+      info: [
+          {
+          main: histTitle,
+          user: data.user,
+          time: new Date().toLocaleTimeString('en-US', { 
+              hour12: false, 
+              hour: "numeric", 
+              minute: "numeric"
+          }),
+          details: data.desc,
+          },
+      ],
+    }
+
+    // history handler
+    setHistory(updateHistory);
+  }
+
   return (
     <>
-      <Justification modalState={justModal} modalHandler={setJustModal} parentSubmitHandler={updateStudent} handleHistory={setHistory} histTitle={histTitle}/> 
+      <Justification modalState={justModal} modalHandler={setJustModal} parentSubmitHandler={updateStudent} handleHistory={handleHistory} histTitle={histTitle}/> 
       <EditStudentDetails
         onClick={() => {
           setIsActive(!isActive);
