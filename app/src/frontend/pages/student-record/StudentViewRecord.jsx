@@ -335,19 +335,10 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                     </div>
 
                     <div className="w-1/5 flex items-center">
-                        <ActionsBtn studentInfo={selectedStudent} grades={gradeState}/>
-                        <span className="flex ml-2">
-                            <Refresh handleClick={forceReload} typeSR={true} />
-                        </span>
-                    </div>
-                    
-                    {/* <div className="w-[13.5vw] flex items-center gap-x-2">
                         <ActionsBtn studentInfo={selectedStudent} grades={gradeState} />
-                        <Refresh handleClick={forceReload} />
-                    </div> */}
-                </div>
-
-                    
+                        <Refresh className="ml-2" handleClick={forceReload} />
+                    </div>
+                </div>                   
 
 
                 {/* student grades */}
