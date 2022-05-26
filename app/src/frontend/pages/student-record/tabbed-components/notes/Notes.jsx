@@ -107,8 +107,7 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
                             <h1 className="text-xl font-inter font-semibold">
                                 {data.Semyear}
                             </h1>
-                            <p className="font-inter text-md mt-3">
-                                {data.content}
+                            <p className="font-inter text-md mt-3 max-w-sm break-words">
                                 {data.Details}
                             </p>
 
