@@ -31,42 +31,41 @@ handleEnter prop: keypress handler; in case user wants to complete its search by
 
 */
 
-const Search = ({
-  user,
-  handleSearch,
-  searchValue,
-  buttonHandler,
-  handleEnter,
-}) => {
-  const text = 'Search by ';
-  const inputText = text.concat(user);
-  // const finalText = inputText.concat(" to search");
-  return (
-    <>
-      <div className="relative">
-        <div className="absolute inset-y-0 left-[83%] flex items-center px-2">
-          <button
-            className="bg-gray-200 hover:bg-gray-300 rounded px-2 py-1 cursor-pointer w-[2.5vw] h-11/12"
-            type="button"
-            onClick={buttonHandler}
-          >
-            <img className="btn-img" alt="icon" src={search} />
-          </button>
-        </div>
-        <Input
-          labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-          labelVal="Search" // label text
-          inputStyle="rounded-lg m-2 text-center w-full h-[3vw] text-[0.9vw] appearance-none border-2 rounded py-3 px-3 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" // styling for input
-          name="search" // name of label-input components
-          inputType="text" // type of input password, email, text, etc.
-          inputPlaceholder={inputText} // placeholder text for input
-          value={searchValue} // value of the input
-          changeHandler={handleSearch} // change handling
-          handleKeyPress={handleEnter}
-        />
-      </div>
-    </>
-  );
+const Search = ({ user, handleSearch, searchValue, buttonHandler, handleEnter }) => {
+    
+    // Styling of image inside the search bar
+    const searchBtn = `
+        .search-btn{
+            width: 1.5vw;
+        }`;
+
+    return (
+        <>
+            <div className="flex relative">
+                <style>{searchBtn}</style>
+                <Input
+                    inputStyle="rounded-lg my-2 text-sm xl:text-lg appearance-none border-2 rounded py-3 px-4
+                        border-gray-300 bg-gray-100 focus:border-orange-400 focus:bg-white text-gray-700 pr-[3.5vw] font-mono"  // styling for input
+                    name="search"                               // name of label-input components
+                    inputType="text"                            // type of input password, email, text, etc.
+                    inputPlaceholder="Search by student no."    // placeholder text for input
+                    value={searchValue}                         // value of the input
+                    changeHandler={handleSearch}                // change handling
+                    handleKeyPress={handleEnter}
+                />
+                <div className="absolute inset-y-0 left-[83%] flex items-center px-2">
+                   <button
+                        className="rounded cursor-pointer w-[2.5vw] h-11/12"
+                        type="button"
+                        onClick={buttonHandler}
+                    >
+                        <img className="search-btn" alt="icon" src={search} />
+                    </button>
+                </div>
+            </div>
+        </>
+    );
 };
+
 
 export default Search;
