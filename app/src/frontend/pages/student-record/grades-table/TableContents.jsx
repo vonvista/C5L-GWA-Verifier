@@ -36,7 +36,8 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
         fetchData();
     }, []);
 
-    const nameStyle = "transition-colors ease-in-out delay-150 flex inter font-bold justify-between z-10 w-full px-4 py-2 text-sm font-medium text-left text-sr-table-text bg-sr-dark-gray hover:transition-colors hover:ease-in hover:delay-150 hover:bg-yellow-100 hover:text-secondary-red";
+    const nameStyle = `transition-colors ease-in-out delay-150 flex inter font-bold justify-between z-10 w-full px-4 py-2 text-sm font-medium text-left
+        text-sr-table-text bg-sr-dark-gray hover:transition-colors hover:ease-in hover:delay-50 hover:bg-yellow-100 hover:text-secondary-red`;
 
     // set new values for addrow
     const addRowData = (values) => {
@@ -191,7 +192,7 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
                                 enter="transition duration-300 ease-out"
                                 enterFrom="transform -translate-y-6 opacity-0"
                                 enterTo="transform translate-y-0 opacity-100"
-                                leave="transition duration-200 ease-in"
+                                leave="transition duration-200"
                                 leaveFrom="transform translate-y-0 opacity-100"
                                 leaveTo="transform -translate-y-6 opacity-0"
                             >

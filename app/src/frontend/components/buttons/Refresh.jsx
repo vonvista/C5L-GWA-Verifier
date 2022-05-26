@@ -1,6 +1,14 @@
 import 'tailwindcss/tailwind.css';
 import refresh from '../../../../assets/icons/refresh.svg';
 
+
+/* Parent Components:
+    frontend/pages/dashboards/UserDashboard.jsx
+    frontend/pages/student-record/StudentViewRecord.jsx
+*/
+
+/* This function that contains a functioning Refresh button */
+
 /* HOW TO USE:
 1. Copy and paste this line of code somewhere at the start of your function/page
 ----------------------------------------------------------
@@ -23,39 +31,34 @@ useEffect(() => {
 */
 
 
-// Parent Component >> UserDashboard.jsx
-
-// Function that contains a functioning Refresh button
-// --handleClick prop: function to handle click event
-// --typeSR           : if true change style for SR page
-
-const Refresh = ({ handleClick, typeSR }) => {
-    const btn = `
-        .btn{
-            width: 2.2786458333333335vw;
-            height: 4.847645429362881vh;
+/* Props:
+    handleClick --- function to handle click event
+*/
+const Refresh = ({ handleClick }) => {
+    // Styling of image inside the button
+    const refreshBtn = `
+        .refresh-btn{
+            width: 2.5vw;
+            height: 4.5vh;
         }`; // styling of image inside the button
 
-    const buttons = `w-8 h-8 hover:bg-slate-300 rounded-3xl bg-slate-200 relative ml-2 grow btn`; // styling of button
-    const buttonSR = `self-center transition-all ease-out delay-150 hover:transition-all hover:ease-in hover:delay-150 hover:bg-slate-300 rounded-3xl bg-slate-200`; // styling of button
+    // Styling of button
+    const buttons = `hover:bg-slate-300 rounded-3xl bg-slate-200 relative ml-2 grow btn self-center
+        transition-all hover:transition-all hover:bg-slate-300 rounded-3xl bg-slate-200 min-w-max`;
 
     return (
-    
-    typeSR 
-    ?   <>
-            <button className={buttonSR} type="button" onClick={handleClick}>
-                <img className="w-full h-full block" alt="icon" src={refresh} />
-            </button>
+        <>
+            <div className="pr-1.5 mr-0 items-center justify-items-center inline-block grow">
+                <style>{refreshBtn}</style>
+                {/* Refresh Button */}
+                {/* Reference: https://stackoverflow.com/questions/70069619/refresh-data-on-button-click-react */}
+                <button className={buttons} type="button" onClick={handleClick}>
+                    <img className="refresh-btn min-w-fit" alt="icon" src={refresh} />
+                </button>
+            </div>
         </>
-    :   <div className="pr-1.5 mr-0 items-center justify-items-center inline-block grow">
-            <style>{btn}</style>
-            {/* Refresh Button */}
-            {/* Reference: https://stackoverflow.com/questions/70069619/refresh-data-on-button-click-react */}
-            <button className={buttons} type="button" onClick={handleClick}>
-                <img className="btn" alt="icon" src={refresh} />
-            </button>
-        </div>
-  );
+    );
 };
+
 
 export default Refresh;

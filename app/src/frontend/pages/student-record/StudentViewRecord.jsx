@@ -318,36 +318,33 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                 {/* student details */}
                 <div className="w-full top-16 flex px-7 py-5 rounded-lg mx-auto bg-sr-dark-gray shadow-lg box-border">
 
-                    <div className="table w-4/5">
+                <div className="table w-0 table-fixed">
                         <div className={`table-header-group`}>
                             <div className="table-row">
-                                <div className={detailStyle.title}>Student Number</div>
-                                <div className={detailStyle.title}>Name</div>
-                                <div className={detailStyle.title}>Degree Program</div>
-                                <div className={detailStyle.title}>Status</div>
+                                <div className={`${detailStyle.title} w-[12vw]`}>Student Number</div>
+                                <div className={`${detailStyle.title} w-[25vw]`}>Name</div>
+                                <div className={`${detailStyle.title} w-[20vw] pl-[2.5vw]`}>Degree Program</div>
+                                <div className={`${detailStyle.title} w-[12vw] pl-[2.5vw]`}>Status</div>
                             </div>
                         </div>
 
                         <div className={`table-row-group`}>
                             <div className="table-row">
-                                <div className={detailStyle.text}>{selectedStudent.stud_no}</div>
-                                <div className={`${detailStyle.text} truncate`}>{selectedStudent.name}</div>
-                                <div className={detailStyle.text}>{selectedStudent.degree_program}</div>
-                                <div className={detailStyle.text}>{selectedStudent.status}</div>
+                                <div className={`${detailStyle.text} w-[12vw]`}>{selectedStudent.stud_no}</div>
+                                <div className={`${detailStyle.text} w-[29vw] truncate`}>{selectedStudent.name}</div>
+                                <div className={`${detailStyle.text} w-[16vw] pl-[2.5vw] truncate`}>{selectedStudent.degree_program}</div>
+                                <div className={`${detailStyle.text} w-[12vw] pl-[2.5vw]`}>{selectedStudent.status}</div>
                             </div>
 
                         </div>
                     </div>
 
                     <div className="w-1/5 flex items-center">
-                        <ActionsBtn studentInfo={selectedStudent} grades={gradeState}/>
-                        <span className="flex ml-5">
-                            <Refresh handleClick={forceReload} typeSR={true} />
-                        </span>
+                        <ActionsBtn studentInfo={selectedStudent} grades={gradeState} />
+                        <Refresh className="ml-2" handleClick={forceReload} />
                     </div>
+                </div>                   
 
-
-                </div>
 
                 {/* student grades */}
                 <div className="w-full flex mx-auto my-5 gap-3">
