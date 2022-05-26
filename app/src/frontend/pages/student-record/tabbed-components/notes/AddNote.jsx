@@ -2,42 +2,40 @@ import { Fragment, useState } from 'react';
 import { Dialog, Transition} from '@headlessui/react';
 import SemSelect from 'frontend/components/inputs/DropdownSelect';
 import 'tailwindcss/tailwind.css';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
-// Parent component >> AddNoteBtn.jsx
 
-// This functional component is used for adding/editing of notes for each semester
-// -- modalState prop   : holds a boolean value
-// -- modalHandler      : handler for setting modalState to false
-// -- notesList         : gets the current state of array of notes from parent component
-// -- handleAddNote     : gets the handler for adding notes from parent component
-// -- selectedSem       : gets the state of selectedSem from parent component
-// -- setSelectedSem    : used to update the state for selectedSem in parent component
-// -- setTextArea       : used to update the state of the textarea
-// -- noteText          : gets the state to be displayed for the textarea
-// -- semesters         : gets the list of semesters that the student has enrolled in; to be used for dropdown select
+/* Parent component >> AddNoteBtn.jsx */
 
+/* This functional component is used for adding/editing of notes for each semester */
+/* Props:
+    modalState prop   ---  holds a boolean value
+    modalHandler      ---  handler for setting modalState to false
+    notesList         ---  gets the current state of array of notes from parent component
+    handleAddNote     ---  gets the handler for adding notes from parent component
+    selectedSem       ---  gets the state of selectedSem from parent component
+    setSelectedSem    ---  used to update the state for selectedSem in parent component
+    setTextArea       ---  used to update the state of the textarea
+    noteText          ---  gets the state to be displayed for the textarea
+    semesters         ---  gets the list of semesters that the student has enrolled in; to be used for dropdown select
+*/
 const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedSem, setSelectedSem, setTextArea, noteText, setNoteText, semesters }) => {
-
   
     // local storage access using use state
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
     const [currStudentID, setStudentID] = useState(localStorage.getItem("currStudentID"));
     const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
-
   
     // Handler for changes in text area
     const handleChange = (event) => {
         setNoteText(event.target.value)
     }
 
-
     // Handle for closing add note window
     const handleClose = () => {
         setSelectedSem(semesters[0])        // reset selected option in dropdown select to first object
         modalHandler()                      // close window
     }
-   
 
     // Handler for save button
     const handleSaveClick = () => {
@@ -83,7 +81,6 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
         // reset selected option in dropdown to first object
         setSelectedSem(semesters[0])
     }
-
 
     return (
         <>
@@ -173,4 +170,5 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
     )
 }
 
-export default AddNote
+
+export default AddNote;
