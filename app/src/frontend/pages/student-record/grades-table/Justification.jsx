@@ -91,7 +91,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
     return (
         <>
             <Transition appear show={modalState} as={Fragment}>
-                <Dialog as="div" className="relative z-10" openModal={modalState} onClose={resetModalValues}>
+                <Dialog as="div" className="relative z-30" openModal={modalState} onClose={resetModalValues}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"

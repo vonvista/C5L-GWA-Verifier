@@ -73,7 +73,7 @@ const AdminNav = ({ hoverRef, isHovering, setIsHovering }) => {
         <nav 
             ref={hoverRef}
             className={` ${isHovering ? "w-1/4 3xl:w-1/5" : "w-14 xl:w-20"}
-                        h-full overflow-hidden fixed top-0 duration-300 min-w-min z-1 bg-primary-red text-sidebar-text`}
+                        h-full overflow-hidden fixed top-0 duration-300 min-w-min z-20 bg-primary-red text-sidebar-text`}
         >
             {/* Baybayin Background Image */}
             <div className="bg-baybayin bg-repeat-y bg-contain h-screen mt-[1vw] ml-[-15.25vh]"></div>
