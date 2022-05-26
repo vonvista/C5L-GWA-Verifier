@@ -27,7 +27,7 @@ exports.middleware = async function(req, res, next) {
   var username = authHeader.split(' ')[1];
   var password = authHeader.split(' ')[2];
   
-  console.log(username, password)
+  //console.log(username, password)
   //get rid of extra spaces on password
   const user = await User.findOne({Username: username});
   if(user){
