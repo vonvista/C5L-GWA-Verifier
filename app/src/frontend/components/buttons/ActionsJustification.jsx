@@ -9,7 +9,7 @@ import 'tailwindcss/tailwind.css';
 // -- handleHist        : handles modification of history
 
 const Actions = ({ handleEdit, handleDelete, handleHist, data, sem }) => {
-  const buttons = `w-[2vw] h-[2vw] hover:bg-gray-300 rounded-3xl bg-zinc-200 relative mx-1 grow`; // styling of button
+  const buttons = `w-[2vw] h-[2vw] transition ease-out delay-150 hover:transition hover:ease-in hover:delay-200 hover:bg-gray-300 rounded-3xl bg-zinc-200 relative mx-1 grow`; // styling of button
 
   // state handler for justification modal
   const [isOpen, setIsOpen] = useState(false); 
@@ -58,7 +58,7 @@ const Actions = ({ handleEdit, handleDelete, handleHist, data, sem }) => {
         <button className={buttons} type="button" onClick={handleEdit}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="[1.5vw] h-[1.5vw] m-auto hover:fill-black"
+            className="[1.5vw] h-[1.5vw] transition ease-out delay-150 hover:transition hover:ease-in hover:delay-200 m-auto hover:fill-black"
             viewBox="0 0 20 20"
             fill="rgb(107 114 128)"
           >
@@ -74,7 +74,7 @@ const Actions = ({ handleEdit, handleDelete, handleHist, data, sem }) => {
           <button className={buttons} type="button" onClick={openModal}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="[1.5vw] h-[1.5vw] m-auto hover:fill-black"
+              className="[1.5vw] h-[1.5vw] transition ease-out delay-150 hover:transition hover:ease-in hover:delay-200 m-auto hover:fill-black"
               viewBox="0 0 20 20"
               fill="rgb(107 114 128)"
             >
