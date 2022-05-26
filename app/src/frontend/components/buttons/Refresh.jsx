@@ -36,8 +36,8 @@ useEffect(() => {
 */
 const Refresh = ({ handleClick }) => {
     // Styling of image inside the button
-    const btn = `
-        .btn{
+    const refreshBtn = `
+        .refresh-btn{
             width: 2.5vw;
             height: 4.5vh;
         }`; // styling of image inside the button
@@ -49,11 +49,11 @@ const Refresh = ({ handleClick }) => {
     return (
         <>
             <div className="pr-1.5 mr-0 items-center justify-items-center inline-block grow">
-                <style>{btn}</style>
+                <style>{refreshBtn}</style>
                 {/* Refresh Button */}
                 {/* Reference: https://stackoverflow.com/questions/70069619/refresh-data-on-button-click-react */}
                 <button className={buttons} type="button" onClick={handleClick}>
-                    <img className="btn min-w-fit" alt="icon" src={refresh} />
+                    <img className="refresh-btn min-w-fit" alt="icon" src={refresh} />
                 </button>
             </div>
         </>
