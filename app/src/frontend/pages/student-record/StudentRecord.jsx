@@ -253,9 +253,10 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
     const GetStudentInfo = async () => {
 
         var currUser = { // store student info here
-        stud_no: '',
-        name: '',
-        degree_program: '',
+            stud_no: '',
+            name: '',
+            degree_program: '',
+            iname:{},
         }
 
         await fetch(`http://${ip}:3001/student/update-status`, {
