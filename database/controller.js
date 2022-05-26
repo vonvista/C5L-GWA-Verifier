@@ -772,54 +772,68 @@ exports.noteDeleteAll = function(req,res,next){
 }
 
 // RESET ALL TABLES
-exports.resetAll = function(req,res,next){
+exports.resetAll = async function(req,res,next)  {
 
   // Clear history first from users
-  User.updateMany({},{"$set":{"History":[]}},function(err, result){
-    //console.log(result);
-  });
+  // User.updateMany({},{"$set":{"History":[]}},function(err, result){
+  //   //console.log(result);
+  // });
 
   // Delete history
   History.deleteMany({},function(err){
     if(!err){
-      res.send({suc:'Successfully deleted history'});
     } else {
-      res.send({err:'Unable to delete history'});
     }
   });
 
   // Delete users
   User.deleteMany({},function(err){
     if(!err){
-      res.send({suc:'Successfully deleted users'});
     } else {
-      res.send({err:'Unable to delete users'});
     }
   });
 
   // Delete grades
   Grade.deleteMany({},function(err){
     if(!err){
-      res.send({suc:'Successfully deleted grades'});
     } else {
-      res.send({err:'Unable to delete grades'});
     }
   });
 
   // Delete students
   Student.deleteMany({},function(err){
     if(!err){
-      res.send({suc:'Successfully deleted students'});
     } else {
-      res.send({err:'Unable to delete students'});
     }
   });
 
   // Delete notes
   Note.deleteMany(function(err){
-    if (!err) res.send({suc:'Successfully deleted all notes'});
-    else res.send({err:'Unable to delete all notes'});
+    if(!err){
+    } else {
+    }
   });
+
+  var hashedPassword = await bcrypt.hash('admin', saltRounds); //encrpyt password first -vov
+
+  const admin = new User({
+    Username: "admin",
+    FirstName: "Admin",
+    MiddleName: "_",
+    LastName: "User",
+    Position: "Chairman",
+    Role: "admin",
+    Password: hashedPassword,
+    History:[]
+  })
+  
+  //save
+  await admin.save(function(err) {
+    // if (!err) { res.send(admin)}
+    // else { res.send({err:'Unable to save user'}) }
+  });
+
+  res.send({suc:'Successfully reset all collections'});
 }
 
 // -----------------------------C O U R S E   S E C T I O N----------------------------------------

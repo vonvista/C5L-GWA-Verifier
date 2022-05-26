@@ -266,17 +266,93 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
     }
   };
 
-  const handleReset = () => {
-    // Add here code for reset button
-    Swal.fire({
-      // prompts for user to input password
-      title: 'Delete All Data',
-      text: 'Enter your password to proceed',
-      input: 'password',
-      inputPlaceholder: '*****',
-      icon: 'warning',
+  const handleReset = async () => {
+    
+    if (localStorage.getItem('Role') !== 'admin') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'You are not authorized to perform this action',
+      });
+      return;
+    }
+
+    //create random 16 character string
+    const randomString = Math.random().toString(36).substring(2, 18);
+
+    //Swal with two textfields and a prompt to copy
+    const { value: formValues } = await Swal.fire({
+      title: 'Reset Data',
       showCancelButton: true,
-    });
+      html:
+        '<p>Enter your new password and the random string below:</p>' +
+        '<p>Random String: ' + randomString + '</p>' +
+        '<input id="swal-input1" class="swal2-input" placeholder="Enter password">' +
+        '<input id="swal-input2" class="swal2-input" placeholder="Enter random string">',
+      focusConfirm: false,
+      preConfirm: () => {
+        return [
+          document.getElementById('swal-input1').value,
+          document.getElementById('swal-input2').value,
+        ]
+      }
+    })
+
+    if(!formValues){
+      return
+    }
+
+    const credentials = {
+      Username: localStorage.getItem("Username"),
+      Password: formValues[0]
+    }
+    fetch(`http://${ip}:3001/user/login`,{
+      method: "POST",
+      headers: { "Content-Type":"application/json" },
+      body: JSON.stringify(credentials)
+      })
+    .then(response => response.json())
+    .then(body => {
+        if(body.err){ //if error response returned from DB
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: body.err,
+          })
+          return
+        }
+      }
+    )
+
+    //check if random string is correct
+    if (formValues[1] !== randomString) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Random string is incorrect',
+      });
+      return;
+    }
+  
+    // uncomment to test if proper student ID is being passed
+    // console.log("Delete " + student.StudentID);
+  
+    fetch(`http://${ip}:3001/database/reset-all`,{
+        method: "DELETE",
+        headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
+      })
+      .then(response => response.json())
+      .then(body => {
+      //success message
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'All data has been wiped',
+      });
+      localStorage.clear();
+      navigate('/');
+    })
+    
   };
 
   const handleBulkDelete = async () => {
