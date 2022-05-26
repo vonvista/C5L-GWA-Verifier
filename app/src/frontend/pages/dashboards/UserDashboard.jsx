@@ -471,7 +471,7 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
 
       // displaying the summary with custom class
       Swal.fire({
-        title: 'Upload Summary',
+        title: 'Delete Summary',
         html: str,
         customClass: {  // class formatting detailed in swal.css
           popup: 'format-table',
