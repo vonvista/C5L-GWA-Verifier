@@ -2,35 +2,37 @@ import 'tailwindcss/tailwind.css';
 import Input from '../inputs/Input';
 import search from '../../../../assets/icons/search.svg';
 
+
+/* Parent component >> frontend/pages/dashboards/UserDashboard.jsx */
+
+/* This function contains the search component. */
+/* HOW TO USE:
+    1. Declare and initialize searchStudent and setSearchStudent variables, handleSearch() and handleEnterPress():
+
+        const [searchStudent, setSearchStudent] = useState("");
+
+        const handleSearch =()=>{
+            // console.log(searchStudent);
+            //Add code here to search student
+            }
+
+        const handleEnterPress = (e) =>{
+            if (e.key === "Enter") {
+            handleSearch();
+            }
+        }
+    
+    2. Importing the component to pages:
+        <Search user={"student number"} handleSearch={(e) => setSearchStudent(e.target.value)} searchValue={searchStudent} buttonHandler={handleSearch} handleEnter={handleEnterPress}/>
 /*
-Function contains the Search component.
------ use "Student" for UserDashboard and "User" for UserManagementPage ------
-To use the component, declare and initialize searchStudent and setSearchStudent variables, handleSearch() and handleEnterPress()
 
-const [searchStudent, setSearchStudent] = useState("");
-
-const handleSearch =()=>{
-      // console.log(searchStudent);
-      //Add code here to search student
-    }
-
-const handleEnterPress = (e) =>{
-    if (e.key === "Enter") {
-    handleSearch();
-    }
-}
-
-//search component
-<Search user={"student number"} handleSearch={(e) => setSearchStudent(e.target.value)} searchValue={searchStudent} buttonHandler={handleSearch} handleEnter={handleEnterPress}/>
-
-user prop: value is concatenated to text variable; used as placeholder to input field
-handleSearch prop: function to handle the input value
-searchValue prop: value of the input
-buttonHandler prop: function handler used to show and hide password
-handleEnter prop: keypress handler; in case user wants to complete its search by pressing Enter key
-
+/* Props:
+    user            --- value is concatenated to text variable; used as placeholder to input field
+    handleSearch    --- function to handle the input value
+    searchValue     --- value of the input
+    buttonHandler   --- function handler used to show and hide password
+    handleEnter     --- keypress handler; in case user wants to complete its search by pressing Enter key
 */
-
 const Search = ({ user, handleSearch, searchValue, buttonHandler, handleEnter }) => {
     
     // Styling of image inside the search bar
