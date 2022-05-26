@@ -24,7 +24,7 @@ import 'tailwindcss/tailwind.css';
     -- setHistory prop   : function to update history logs
 */
 
-const Dropdown = ({ studentInfo, grades, setHistory }) => {
+const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
 
   /*-------------------- State handlers --------------------*/
 
@@ -113,7 +113,7 @@ const Dropdown = ({ studentInfo, grades, setHistory }) => {
             >
               <p className="text-white">Export</p>
             </button>
-            <EditBtn studentInfo={studentInfo} setHistory={setHistory}/>
+            <EditBtn studentInfo={studentInfo} setHistory={setHistory} setSelectedStudent={setSelectedStudent}/>
           </div>
         </div>
       ) : (

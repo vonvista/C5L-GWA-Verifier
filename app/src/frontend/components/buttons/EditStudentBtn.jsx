@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
     -- setHistory prop   : function to update history logs
 */
 
-const EditBtn = ({ studentInfo, setHistory }) => {
+const EditBtn = ({ studentInfo, setHistory, setSelectedStudent }) => {
   
   /*-------------------- Styling --------------------*/
   const editBtnStyle = `text-gray-700 block px-4 rounded-xl py-2 text-sm z-1 w-full hover:bg-button-green-hover`;
@@ -94,6 +94,8 @@ const EditBtn = ({ studentInfo, setHistory }) => {
         console.log(err)
     })
     closeJustModal();
+    setSelectedStudent( (prevState)=>({...prevState, stud_no: studNum, degree_program: degree, Student: currStudentID, iname: {fname: studFName, mname: studMName, lname: studLName}}))
+    
   }
 
   // Function for adding new history after adding new row
@@ -129,6 +131,8 @@ const EditBtn = ({ studentInfo, setHistory }) => {
 
       closeEditStud();        // close edit student modal
       setJustModal(true);     // open justification
+      //setSelectedStudent( (prevState)=>({...prevState, stud_no: studNum, degree_program: degree, Student: currStudentID, iname: {fname: studFName, mname: studMName, lname: studLName}}))
+    
   }
 
   return (
@@ -154,9 +158,11 @@ const EditBtn = ({ studentInfo, setHistory }) => {
             setStudMName={setStudMName}
             setStudLName={setStudLName}
             setDegree={setDegree}
+            setcurrStudentID={currStudentID}
 
             setJustModal={setJustModal}
             setTitle={setTitle}
+            studentInfo={studentInfo}
         />
 
       {/* Edit Students button */}
