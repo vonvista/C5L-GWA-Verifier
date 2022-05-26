@@ -4,6 +4,7 @@ import { Fragment, useEffect, useState } from 'react';
 import 'tailwindcss/tailwind.css';
 import EditBtn from 'frontend/components/buttons/EditStudentBtn.jsx';
 import 'tailwindcss/tailwind.css';
+import Justification from './grades-table/Justification';
 
 /* Parent component >> frontend/components/buttons/EditStudentBtn.jsx */
 /* Function for the "Edit Student" feature in the Student View Record page's Dropdown Menu */
@@ -12,9 +13,21 @@ import 'tailwindcss/tailwind.css';
    Props:
     modalState          ---     holds the state of the edit student modal
     handleClose         ---     function used to close edit student modal and reset the input fields
+    handleSave          ---     handles changes after saving on edit student modal
+    studNum             ---     holds the value of student number field
+    studFName           ---     holds the value of student first name field
+    studMName           ---     holds the value of student middle name field
+    studLName           ---     holds the value of student last name field
+    degree              ---     holds the value of student degree field
+    setStudNum          ---     change handler for studNum state
+    setStudFName        ---     change handler for studFName state
+    setStudMName        ---     change handler for studMName state
+    setStudLName        ---     change handler for studLName state
+    setDegree           ---     change handler for degree state
+    setJustModal        ---     change handler for opening/closing justification modal
 */
 
-const EditStudent = ({modalState, handleClose, studentInfo}) => {
+const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, studMName, studLName, degree, setStudNum, setStudFName, setStudMName, setStudLName, setDegree, setJustModal }) => {
     /*-------------------- Styling --------------------*/
     const editStudentModal = `relative bg-secondary-red h-[47vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
     const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[37vh]`;
@@ -30,109 +43,8 @@ const EditStudent = ({modalState, handleClose, studentInfo}) => {
     const modalFooter = `mt-[4.85vh] text-[1.11vw] flex items-center justify-center`;
     const modalBtnSave = `h-[5vh] w-[9.25vw] rounded-xl mr-[0.65vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green`;
 
-
-    /*-------------------- State handlers --------------------*/
-    const [openModal, setOpenModal] = useState(false);
-    const [studNum, setStudNum] = useState('');
-    const [studFName, setStudFName] = useState('');
-    const [studMName, setStudMName] = useState('');
-    const [studLName, setStudLName] = useState('');
-    const [degree, setDegree] = useState('');
-    const [currStudentID, setcurrStudentID] = useState(localStorage.getItem('currStudentID'));
-    const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
-    const [userName, setUserName] = useState(localStorage.getItem("Username"));
-        
-
-    useEffect(() =>{
-        setStudNum(studentInfo.stud_no)
-        setDegree(studentInfo.degree_program)
-        setStudFName(studentInfo.iname.fname)
-        setStudMName(studentInfo.iname.mname)
-        setStudLName(studentInfo.iname.lname)
-    }, [])
-    
-    /*-------------------- Functions --------------------*/
-    //function which updates Student input fields
-    const updateStudent = () => {
-        const credentials = {
-            StudentID: studNum,
-            FirstName: studFName, //put first name variable
-            LastName: studLName, //put last name variable
-            MiddleName: studMName, //put middle name variable
-            Degree: degree,
-            //TotalUnits: 0,
-            //TotalUnits2: 0,
-            //TotalCumulative: 0,
-            //OverallGWA: 0,
-            _id: currStudentID
-        }
-
-        fetch(`http://${ip}:3001/student/update` ,{
-            method: "POST",
-            headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
-            body: JSON.stringify(credentials)
-        })
-        .then(response => response.json())
-        .then(body => {
-            console.log(body)
-        })
-        .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
-            Swal.fire({
-                icon: 'error',
-                title: 'Server Error',
-                text: 'Check if the server is running or if database IP is correct',
-            })
-            console.log(err)
-        })
-        
-    }
-    
-    //function which records changes in student record 
-    const addHistory = () => {
-        
-        const credentials = {
-            User: userName,
-            Student: currStudentID,
-            Date: new Date().toLocaleDateString(),
-            Time: new Date().toLocaleTimeString('en-US', { 
-                hour12: false, 
-                hour: "numeric", 
-                minute: "numeric"
-            }),
-            Description: 'update',
-            Details: "Sample Details"
-        };
-        
-        //fetch to add history to database
-        fetch(`http://${ip}:3001/history/add`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
-            body: JSON.stringify(credentials),
-        })
-        .then((response) => response.json())
-        .then((body) => {
-            console.log(body);
-        })
-        .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
-            Swal.fire({
-                icon: 'error',
-                title: 'Server Error',
-                text: 'Check if the server is running or if database IP is correct',
-            })
-            console.log(err)
-        })
-        
-    }
-
-    //main function for student update and add history
-    const submitStudentEdit = () =>{
-        updateStudent();
-        addHistory();
-        setOpenModal(handleClose);
-    }
-
     return (
-        <>                           
+        <>          
             {/* Wrapping everything with transition component to use transition effects from @headlessui/react */}
             <Transition appear show={modalState} as={Fragment}>
 
@@ -261,7 +173,7 @@ const EditStudent = ({modalState, handleClose, studentInfo}) => {
 
                                                 {/* Save button */}
                                                 <div className={modalFooter}>
-                                                        <button className={modalBtnSave} onClick={submitStudentEdit}>Save</button>
+                                                        <button className={modalBtnSave} onClick={handleSave}>Save</button>
                                                 </div>
                                             </div>
                                         </div>
