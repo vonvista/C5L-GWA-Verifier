@@ -139,7 +139,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
   return (
     <>
       <Transition appear show={modalState} as={Fragment}>
-        <Dialog as="div" className="relative z-30 inter" onClose={handleClose}>
+        <Dialog as="div" className="relative z-10 inter" onClose={handleClose}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -292,14 +292,15 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
                                   </h4>
                                 </section>
                               </div>
+
                               {/* password */}
-                              <div className="">
+                              <div className="w-full pb-4 mt-2 pr-24">
                                 <section className="un-style">
                                   <div className="relative w-full">
                                     <Input
                                       labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
                                       labelVal="Password" // label text
-                                      inputStyle="rounded-xl text-center w-[42.5vw] h-[5vh] appearance-none leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 js-password rounded-xl" // styling for input
+                                      inputStyle="rounded-xl text-center w-full h-[2.5vw] appearance-none leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 js-password rounded-xl" // styling for input
                                       name="password" // name of label-input components
                                       inputType="password" // type of input password, email, text, etc.
                                       inputPlaceholder="*****" // placeholder text for input
@@ -308,7 +309,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
                                         setPW(e.target.value)
                                       } // change handling
                                     />
-                                    <div className="absolute inset-y-0  right-[4.7vw] flex items-center px-2">
+                                    <div className="absolute inset-y-0 right-0 flex items-center px-2">
                                       <button
                                         className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-[0.9vw] text-gray-600  cursor-pointer account-button js-password-label w-[3vw] h-11/12"
                                         htmlFor="toggle"
