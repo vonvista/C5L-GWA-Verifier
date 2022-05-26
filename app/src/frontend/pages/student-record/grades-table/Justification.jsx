@@ -57,11 +57,9 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
         parentSubmitHandler(e)      // submit contents of the form
         submitHandler(e)            // update history log
 
-        const historyCredentials = { //updates history in db with title(?) and description
+        const historyCredentials = { //updates history in db with title and description
             User: userName,
             Student: currStudentID,
-            // Date: currentDate,
-            // Time: currentTime,
             Date: new Date().toLocaleDateString(),
             Time: new Date().toLocaleTimeString('en-US', { 
                 hour12: false, 

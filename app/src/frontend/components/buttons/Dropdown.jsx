@@ -30,7 +30,7 @@ const Dropdown = ({ studentInfo, grades }) => {
   const [valueClicked, setValueClicked] = useState('Actions');
   const [isActive, setIsActive] = useState(false);
   const [currUser, setUser] = useState(`${localStorage.getItem("FirstName")} ${localStorage.getItem("LastName")} ${localStorage.getItem("MiddleName")}`);
-
+  
   /*-------------------- Functions --------------------*/
 
   let navigate = useNavigate()
@@ -77,7 +77,7 @@ const Dropdown = ({ studentInfo, grades }) => {
             {valueClicked}
           </p>
         </button>
-
+          
         <button
           type="button"
           className="pl-1.5 m-0 inline-block bg-button-green grow hover:bg-button-green-hover rounded-r-lg"
@@ -114,7 +114,7 @@ const Dropdown = ({ studentInfo, grades }) => {
             >
               <p className="text-white">Export</p>
             </button>
-            <EditBtn/>
+            <EditBtn studentInfo={studentInfo}/>
           </div>
         </div>
       ) : (
