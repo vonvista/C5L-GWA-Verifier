@@ -62,7 +62,8 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
 
     // Function to close the justification modal window
     const closeJust = () => {
-      setOpen(false)
+        resetInputFields();
+        setOpen(false)
     }
     
     // Function that checks if the course is already in the grade list
