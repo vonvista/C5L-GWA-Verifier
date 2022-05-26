@@ -15,7 +15,7 @@ import Justification from './grades-table/Justification';
     handleClose         ---     function used to close edit student modal and reset the input fields
 */
 
-const EditStudent = ({ modalState, handleClose, studNum, studFName, studMName, studLName, degree, setStudNum, setStudFName, setStudMName, setStudLName, setDegree, setJustModal, setTitle }) => {
+const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, studMName, studLName, degree, setStudNum, setStudFName, setStudMName, setStudLName, setDegree, setJustModal, setTitle }) => {
     /*-------------------- Styling --------------------*/
     const editStudentModal = `relative bg-secondary-red h-[47vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
     const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[37vh]`;
@@ -108,15 +108,7 @@ const EditStudent = ({ modalState, handleClose, studNum, studFName, studMName, s
         
     // }
 
-    //main function for student update and add history
-    const submitStudentEdit = () => {
-        // updateStudent();
-        // addHistory();
-        handleClose();
-        setJustModal(true);
-        setTitle(prevTitle => prevTitle + `Name: ${studLName}, ${studFName} ${studMName}., Student No.: ${studNum}, and Degree: ${degree}.`)
-        localStorage.setItem('currStudentKey', studNum);
-    }
+    
 
     return (
         <>          
@@ -248,7 +240,7 @@ const EditStudent = ({ modalState, handleClose, studNum, studFName, studMName, s
 
                                                 {/* Save button */}
                                                 <div className={modalFooter}>
-                                                        <button className={modalBtnSave} onClick={submitStudentEdit}>Save</button>
+                                                        <button className={modalBtnSave} onClick={handleSave}>Save</button>
                                                 </div>
                                             </div>
                                         </div>

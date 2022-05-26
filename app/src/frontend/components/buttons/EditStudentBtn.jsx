@@ -117,6 +117,17 @@ const EditBtn = ({ studentInfo, setHistory }) => {
         // history handler
         setHistory(updateHistory);
     }
+    //main function for student update and add history
+    const submitStudentEdit = () => {
+        // updateStudent();
+        // addHistory();
+        
+        setTitle(prevTitle => prevTitle + `Name: ${studLName}, ${studFName} ${studMName}., Student No.: ${studNum}, and Degree: ${degree}.`)
+        localStorage.setItem('currStudentKey', studNum);
+
+        closeEditStud();        // close edit student modal
+        setJustModal(true);     // open justification
+    }
 
   return (
     <>
@@ -129,7 +140,7 @@ const EditBtn = ({ studentInfo, setHistory }) => {
             }}
             modalState={isActive}
             handleClose={closeEditStud}
-            handleSave={updateStudent}
+            handleSave={submitStudentEdit}
 
             studNum={studNum}
             studFName={studFName}
