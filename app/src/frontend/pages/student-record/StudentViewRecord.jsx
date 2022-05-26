@@ -47,16 +47,6 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
     // refresh functions
     const forceReload = async () => {
         await refresh();
-        console.log("FORCE!")
-        //force reload all states
-        setSelectedStudent(student)
-        setStatus(status)
-        setGradeState(grades)
-        setNotesState(notes)
-        setHistoryState(history)
-        setValidationsState(checklist)
-        setGPA(gpa)
-
     };
 
     // validation functions
