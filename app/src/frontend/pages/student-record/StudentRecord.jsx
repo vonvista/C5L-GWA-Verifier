@@ -417,7 +417,7 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
         // Checks if props are already fetched from the DB
         (studentProp && notesProp && gradesProp && historyProp && gpaCalc && unitGPA) ? 
         <>
-            <nav class="sticky z-20">
+            <nav className="sticky z-20">
                 {userRole == "user" ?
                     <UserNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
                     : <AdminNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
