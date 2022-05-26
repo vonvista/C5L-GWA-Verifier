@@ -438,7 +438,7 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
                             </div>
 
                             {/* Refresh button */}
-                            <div className="flex items-center ml-2">
+                            <div className="flex items-center ml-4">
                                 <Refresh handleClick={forceReload} />
                             </div>
 
