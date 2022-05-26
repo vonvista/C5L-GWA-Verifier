@@ -30,7 +30,7 @@ import { toNamespacedPath } from 'node:path/win32';
 // -- gpa       : contains gpa data
 // -- refresh   : handler for refresh
 
-const RecordPage = ({student, notes, history, status, grades, checklist, gpa, refresh = () => {} }) => {
+const RecordPage = ({student, notes, history, status, grades, checklist, gpa, refresh}) => {
 
     const [selectedStudent, setSelectedStudent] = useState(student)
     const [statusState, setStatus] = useState(status)
@@ -45,14 +45,19 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
 
 
     // refresh functions
-    const forceReload = () => {
-        refresh();
-      };
-      
-    useEffect(() => {
-        refresh();
-    }, []);
-    
+    const forceReload = async () => {
+        await refresh();
+        console.log("FORCE!")
+        //force reload all states
+        setSelectedStudent(student)
+        setStatus(status)
+        setGradeState(grades)
+        setNotesState(notes)
+        setHistoryState(history)
+        setValidationsState(checklist)
+        setGPA(gpa)
+
+    };
 
     // validation functions
     const handleValApply = () => {
