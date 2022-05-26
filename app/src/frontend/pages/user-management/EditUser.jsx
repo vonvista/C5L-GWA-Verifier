@@ -139,7 +139,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
   return (
     <>
       <Transition appear show={modalState} as={Fragment}>
-        <Dialog as="div" className="relative z-10 inter" onClose={handleClose}>
+        <Dialog as="div" className="relative z-30 inter" onClose={handleClose}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"

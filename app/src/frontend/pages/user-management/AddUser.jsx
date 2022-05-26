@@ -127,7 +127,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
             <Transition appear show={modalState} as={Fragment}>
 
                 {/* Wrapping everything with dialog component */}
-                <Dialog as="div" className="relative z-10" onClose={handleClose}>
+                <Dialog as="div" className="relative z-30" onClose={handleClose}>
 
                     {/* Transition effect for the element inside this Transition.Child tag*/}
                     <Transition.Child
@@ -345,7 +345,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                                         </div>
                                                     </div>
 
-                                                    {/* create user button */}
+                                                    {/* Create User Button */}
                                                     <div className="w-full flex">
                                                         <section className="my-auto ml-0 mr-auto w-[90.5%]">
                                                             <button
