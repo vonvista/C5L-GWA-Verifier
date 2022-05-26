@@ -38,7 +38,6 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
         user: userName,
     }
     const validations = [
-        //({title}) => isRequired(title) || {title: 'Please provide a title'},
         ({desc}) => isRequired(desc) || {desc: 'Please give a justification for editing the grades'}
     ]
 
@@ -128,13 +127,6 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                     </Dialog.Title>
 
                                     <div className="mt-2 grid h-[85%]">
-                                        <input
-                                            className="inter font-bold text-md mx-auto px-3 py-1 w-full block resize-none focus:outline-none"
-                                            name="title"
-                                            placeholder="Enter title here."
-                                            value={values.title}
-                                            onChange={changeHandler}
-                                        />
                                         <textarea
                                             className="inter mx-auto text-sm px-3 py-1 w-full h-full block resize-none focus:outline-none"
                                             name="desc"
