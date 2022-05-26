@@ -91,7 +91,7 @@ const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
    return (
       <div className={paginationBox}>
          <button onClick={prev} className={buttonStyle}>
-            <svg class={arrowStyle} viewBox="0 0 20 20">
+            <svg className={arrowStyle} viewBox="0 0 20 20">
                <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path>
             </svg>
          </button>
@@ -101,7 +101,7 @@ const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
             ))
          }
          <button onClick={next} className={buttonStyle}>
-            <svg class={arrowStyle} viewBox="0 0 20 20">
+            <svg className={arrowStyle} viewBox="0 0 20 20">
                <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path>
             </svg>
          </button>
