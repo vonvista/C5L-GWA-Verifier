@@ -10,6 +10,8 @@ import AppIcon from '../../../../assets/icons/icon.png';
 import Input from '../../components/inputs/Input';
 //import { electron } from 'process';
 
+import DevTeamImage from '../../../../assets/dev_team.png'
+
 
 /* Parent component >> renderer/App.jsx */
 /* This is the Login page which is the initial page of the application. */
@@ -34,6 +36,19 @@ const LoginPage = () => {
     // useForm hook
     const {values, isValid, errors, touched, changeHandler, submitHandler, resetValues} = useForm(initialState, validations);
     const errorStyle = "block w-full mt-1 pl-1 text-sm text-red-300"
+
+    const handleTeam = () => {
+        //create sweetalert with image taking up all available space
+        Swal.fire({
+            imageUrl: DevTeamImage,
+            width: '120vh',
+            padding: '20px',
+            background: '#fff',
+            showCloseButton: true,
+            showConfirmButton: false,
+            focusConfirm: false,
+        })
+    }
 
     const handleLogIn = () => {
         const credentials = {
@@ -192,7 +207,7 @@ const LoginPage = () => {
 
                 {/* Footer */}
                 <div className="flex justify-center opacity-50 text-[1.25vw] gap-[5vw] absolute bottom-[2vw] inset-x-0 text-login-footer">
-                    <span><TextBtn text="Terms of Use" handleClick={()=>{}}/></span>
+                    <span><TextBtn text="About" handleClick={handleTeam}/></span>
                     <span><TextBtn text="Help" handleClick={()=>{}}/></span>
                     <span><TextBtn text="Privacy Policy" handleClick={()=>{}}/></span>
                 </div>
