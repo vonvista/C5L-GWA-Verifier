@@ -21,6 +21,7 @@ import 'tailwindcss/tailwind.css';
    Props:
     -- studentInfo prop  : contains student information which will be used for exporting student record file
     -- grades            : contains student gradesheet which will be used for exporting student record file
+    -- setHistory prop   : function to update history logs
 */
 
 const Dropdown = ({ studentInfo, grades, setHistory }) => {
@@ -39,8 +40,6 @@ const Dropdown = ({ studentInfo, grades, setHistory }) => {
   const handleExport = () => {
 
     // get student info and grades from props
-    //console.log(studentInfo)
-    //console.log(grades)
     const student = studentInfo
     const studentGrades = grades
 
