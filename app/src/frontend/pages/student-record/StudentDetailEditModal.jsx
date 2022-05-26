@@ -15,7 +15,7 @@ import Justification from './grades-table/Justification';
     handleClose         ---     function used to close edit student modal and reset the input fields
 */
 
-const EditStudent = ({modalState, handleClose, studentInfo}) => {
+const EditStudent = ({ modalState, handleClose, studNum, studFName, studMName, studLName, degree, setStudNum, setStudFName, setStudMName, setStudLName, setDegree, setJustModal, setTitle }) => {
     /*-------------------- Styling --------------------*/
     const editStudentModal = `relative bg-secondary-red h-[47vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
     const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[37vh]`;
@@ -33,110 +33,93 @@ const EditStudent = ({modalState, handleClose, studentInfo}) => {
 
 
     /*-------------------- State handlers --------------------*/
-    const [openModal, setOpenModal] = useState(false);
-    const [studNum, setStudNum] = useState('');
-    const [studFName, setStudFName] = useState('');
-    const [studMName, setStudMName] = useState('');
-    const [studLName, setStudLName] = useState('');
-    const [degree, setDegree] = useState('');
-    const [currStudentID, setcurrStudentID] = useState(localStorage.getItem('currStudentID'));
-    const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
-    const [userName, setUserName] = useState(localStorage.getItem("Username"));
-    const [justModal, setJustModal] = useState(false);
-        
-
-    useEffect(() =>{
-        setStudNum(studentInfo.stud_no)
-        setDegree(studentInfo.degree_program)
-        setStudFName(studentInfo.iname.fname)
-        setStudMName(studentInfo.iname.mname)
-        setStudLName(studentInfo.iname.lname)
-    }, [])
+    // const [openModal, setOpenModal] = useState(false);
     
     /*-------------------- Functions --------------------*/
     //function which updates Student input fields
-    const updateStudent = () => {
-        const credentials = {
-            StudentID: studNum,
-            FirstName: studFName, //put first name variable
-            LastName: studLName, //put last name variable
-            MiddleName: studMName, //put middle name variable
-            Degree: degree,
-            //TotalUnits: 0,
-            //TotalUnits2: 0,
-            //TotalCumulative: 0,
-            //OverallGWA: 0,
-            _id: currStudentID
-        }
+    // const updateStudent = () => {
+    //     const credentials = {
+    //         StudentID: studNum,
+    //         FirstName: studFName, //put first name variable
+    //         LastName: studLName, //put last name variable
+    //         MiddleName: studMName, //put middle name variable
+    //         Degree: degree,
+    //         //TotalUnits: 0,
+    //         //TotalUnits2: 0,
+    //         //TotalCumulative: 0,
+    //         //OverallGWA: 0,
+    //         _id: currStudentID
+    //     }
 
-        fetch(`http://${ip}:3001/student/update` ,{
-            method: "POST",
-            headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
-            body: JSON.stringify(credentials)
-        })
-        .then(response => response.json())
-        .then(body => {
-            console.log(body)
-        })
-        .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
-            Swal.fire({
-                icon: 'error',
-                title: 'Server Error',
-                text: 'Check if the server is running or if database IP is correct',
-            })
-            console.log(err)
-        })
+    //     fetch(`http://${ip}:3001/student/update` ,{
+    //         method: "POST",
+    //         headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
+    //         body: JSON.stringify(credentials)
+    //     })
+    //     .then(response => response.json())
+    //     .then(body => {
+    //         console.log(body)
+    //     })
+    //     .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+    //         Swal.fire({
+    //             icon: 'error',
+    //             title: 'Server Error',
+    //             text: 'Check if the server is running or if database IP is correct',
+    //         })
+    //         console.log(err)
+    //     })
         
-    }
+    // }
     
-    //function which records changes in student record 
-    const addHistory = () => {
+    // //function which records changes in student record 
+    // const addHistory = () => {
         
-        const credentials = {
-            User: userName,
-            Student: currStudentID,
-            Date: new Date().toLocaleDateString(),
-            Time: new Date().toLocaleTimeString('en-US', { 
-                hour12: false, 
-                hour: "numeric", 
-                minute: "numeric"
-            }),
-            Description: 'update',
-            Details: "Sample Details"
-        };
+    //     const credentials = {
+    //         User: userName,
+    //         Student: currStudentID,
+    //         Date: new Date().toLocaleDateString(),
+    //         Time: new Date().toLocaleTimeString('en-US', { 
+    //             hour12: false, 
+    //             hour: "numeric", 
+    //             minute: "numeric"
+    //         }),
+    //         Description: 'update',
+    //         Details: "Sample Details"
+    //     };
         
-        //fetch to add history to database
-        fetch(`http://${ip}:3001/history/add`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
-            body: JSON.stringify(credentials),
-        })
-        .then((response) => response.json())
-        .then((body) => {
-            console.log(body);
-        })
-        .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
-            Swal.fire({
-                icon: 'error',
-                title: 'Server Error',
-                text: 'Check if the server is running or if database IP is correct',
-            })
-            console.log(err)
-        })
+    //     //fetch to add history to database
+    //     fetch(`http://${ip}:3001/history/add`, {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
+    //         body: JSON.stringify(credentials),
+    //     })
+    //     .then((response) => response.json())
+    //     .then((body) => {
+    //         console.log(body);
+    //     })
+    //     .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+    //         Swal.fire({
+    //             icon: 'error',
+    //             title: 'Server Error',
+    //             text: 'Check if the server is running or if database IP is correct',
+    //         })
+    //         console.log(err)
+    //     })
         
-    }
+    // }
 
     //main function for student update and add history
-    const submitStudentEdit = () =>{
-        //updateStudent();
-        addHistory();
-        setOpenModal(handleClose);
+    const submitStudentEdit = () => {
+        // updateStudent();
+        // addHistory();
+        handleClose();
         setJustModal(true);
+        setTitle(prevTitle => prevTitle + `Name: ${studLName}, ${studFName} ${studMName}., Student No.: ${studNum}, and Degree: ${degree}.`)
+        localStorage.setItem('currStudentKey', studNum);
     }
 
     return (
         <>          
-            <Justification modalState={justModal} modalHandler={setJustModal} parentSubmitHandler={updateStudent}/>                 
             {/* Wrapping everything with transition component to use transition effects from @headlessui/react */}
             <Transition appear show={modalState} as={Fragment}>
 
