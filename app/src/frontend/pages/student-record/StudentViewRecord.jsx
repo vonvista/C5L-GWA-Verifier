@@ -326,7 +326,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                         <div className={`table-row-group`}>
                             <div className="table-row">
                                 <div className={`${detailStyle.text} w-[12vw]`}>{selectedStudent.stud_no}</div>
-                                <div className={`${detailStyle.text} w-[29vw] truncate`}>{selectedStudent.name}</div>
+                                <div className={`${detailStyle.text} w-[29vw] truncate`}>{`${selectedStudent.iname.lname} ${selectedStudent.iname.fname} ${selectedStudent.iname.mname}.`}</div>
                                 <div className={`${detailStyle.text} w-[16vw] pl-[2.5vw] truncate`}>{selectedStudent.degree_program}</div>
                                 <div className={`${detailStyle.text} w-[12vw] pl-[2.5vw]`}>{selectedStudent.status}</div>
                             </div>
