@@ -24,13 +24,15 @@ const LoginPage = () => {
         password: ''
     }
 
+    // Used for errors
     const validations = [
         ({databaseIP}) => isRequired(databaseIP) || {databaseIP: 'Database IP is required'},
         ({username}) => isRequired(username) || {username: 'Username is required'},
         ({password}) => isRequired(password) || {password: 'Password is required'}
     ]
 
-    const {values, errors, touched, changeHandler, submitHandler} = useForm(initialState, validations);
+    // useForm hook
+    const {values, isValid, errors, touched, changeHandler, submitHandler, resetValues} = useForm(initialState, validations);
     const errorStyle = "block w-full mt-1 pl-1 text-sm text-red-300"
 
     const handleLogIn = () => {
@@ -184,7 +186,7 @@ const LoginPage = () => {
 
                     {/* Login Button */}
                     <div className="flex justify-center mt-[4vh] text-[1.25vw]  text-sidebar-text">
-                        <LoginBtn handleClick={handleLogIn}/>
+                        <LoginBtn handleClick={handleLogIn} disabled={!isValid}/>
                     </div>                    
                 </form>
 

@@ -26,12 +26,15 @@ import Swal from 'sweetalert2';
     handleAddRecord --- function used to add user to the database
 */
 const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
+
+  // State handlers for input form
   const [firstName, setFirstName] = useState('');
   const [middleName, setMiddleName] = useState('');
   const [lastName, setLastName] = useState('');
   const [un, setUN] = useState(''); // username
   const [position, setPosition] = useState(''); // position
   const [pw, setPW] = useState(''); // password
+
   const [status, setStatus] = useState('show');
   const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
 
