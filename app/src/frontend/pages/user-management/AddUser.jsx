@@ -1,18 +1,18 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-import Swal from 'sweetalert2';
-
 import Input from 'frontend/components/inputs/Input';
 import user from '../../../../assets/icons/user-icon.jpg';
 import 'tailwindcss/tailwind.css';
+import Swal from 'sweetalert2';
 
 
-/* Parent component: ./UserManagementPage.jsx */
-/* This function contains the add user modal window. */
+/* Parent component: ./UserManagementPage */
 
-/* HOW TO USE:
-    1. Import AddUserBtn.jsx and AddUser.jsx into the file
-    2. Declare and initialize showModal variable:
+/* This function contains the add user modal window. 
+
+   HOW TO USE:
+    1. Import AddUserBtn.jsx and AddUser.jsx into the file.
+    2. Declare and initialize showModal variable.
         <AddUserBtn handleClick={() => setShowModal(true)}/>
         {showModal ?
             (<AddUser modalState={true} handleClose={() => setShowModal(false)}/>)

@@ -5,15 +5,12 @@ import Swal from 'sweetalert2';
 /* Components */
 import List from 'frontend/components/table/List';
 import Pagination from 'frontend/components/table/Pagination';
-import UserNav from 'frontend/components/common/UserNavigation';
 import AdminNav from 'frontend/components/common/AdminNavigation';
 import HeaderWithoutArrowbck from 'frontend/components/common/HeaderWithoutArrowbck';
 import AddUserBtn from 'frontend/components/buttons/AddUserBtn';
 import Search from 'frontend/components/search/Search';
-import SearchModal from 'frontend/components/search/SearchModal';
 import EditUser from './EditUser';
 import AddUser from './AddUser';
-
 
 
 /* Parent component >> renderer/App.jsx */
@@ -237,12 +234,7 @@ const UserManagementPage = ({ hoverRef, isHovering, setIsHovering }) => {
         <>
             <div>
                 {/* Navigation Bar */}
-                <div>
-                    {userRole == "user" ?
-                        <UserNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
-                        : <AdminNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
-                    }
-                </div>
+                <div><AdminNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} /></div>
 
                 {/* Right Section */}
                 <div className="relative inset-0 flex ml-[4vw] justify-center">

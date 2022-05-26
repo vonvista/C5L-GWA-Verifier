@@ -3,13 +3,14 @@ import upload from '../../../../assets/icons/upload.svg';
 import Swal from 'sweetalert2';
 
 
-// Parent component >> UserDashboard.jsx
+/* Parent component >> frontend/pages/dashboards/UserDashboard */
 
-// This button component is used for uploading files
-// -- handleClick prop  : function to handle click event
-// -- handleAddRecord   : function to handle addition of new student record
-
-const UploadFileBtn = ({handleClick, handleAddRecord}) => {
+/* This button component is used for uploading files. */
+/* Props:
+    handleClick       ---  function to handle click event
+    handleAddRecord   ---  function to handle addition of new student record
+*/
+const UploadFileBtn = ({ handleClick, handleAddRecord }) => {
   const uploadbtn = `w-[11vw] h-[3vw] bg-button-green m-2 rounded-xl text-white text-base font-montserrat font-bold hover:shadow-lg hover:bg-button-green-hover`;
   const ip = localStorage.getItem("ServerIP");
 
@@ -23,7 +24,9 @@ const UploadFileBtn = ({handleClick, handleAddRecord}) => {
       confirmButtonText: 'Single',
       denyButtonText: 'Bulk',
       denyButtonColor: '#2a7546',
+
     }).then((result) => {
+
       if (result.isConfirmed) {
         document.getElementById("singleFile").value = null;
         document.getElementById("singleFile").click();
@@ -36,6 +39,7 @@ const UploadFileBtn = ({handleClick, handleAddRecord}) => {
 
   function handleOnChange(uploadMethod) {
     let file;
+    
     if (uploadMethod) {
       file = document.getElementById("singleFile");
     } else {
@@ -60,5 +64,6 @@ const UploadFileBtn = ({handleClick, handleAddRecord}) => {
     </>
   );
 };
+
 
 export default UploadFileBtn;

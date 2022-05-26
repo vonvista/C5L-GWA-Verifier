@@ -1,12 +1,13 @@
 import 'tailwindcss/tailwind.css';
 
-/* 
-    props:
-    • icon - 0 for default, 1 for checkmark, else crossmark
-    • detail - what ever the statement or details to be put (c/o backend)
-*/
 
-// This component is used for displaying necessary data/details with its corresponding icons (check/cross)
+/* Parent component >> ./ChecklistTab */
+
+/* This component is used for displaying necessary data/details with its corresponding icons (check/cross). */
+/* Props:
+    icon    --- receives the number which icon to be displayed: 0 for default, 1 for checkmark, else crossmark
+    detail  --- receives the statement to be displayed
+*/
 const ChecklistDetail = ({ icon, detail, setValData, index}) => {
   return (
     <div className="flex w-full items-center"
@@ -67,5 +68,6 @@ const ChecklistDetail = ({ icon, detail, setValData, index}) => {
     </div>
   );
 };
+
 
 export default ChecklistDetail;

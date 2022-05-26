@@ -1,25 +1,22 @@
 import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/solid'
 import { useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
-
 import List from 'frontend/components/table/List';
+import Swal from 'sweetalert2';
 import 'tailwindcss/tailwind.css';
 
-/* Parent component: ../StudentViewRecord */
+
+/* Parent component >> frontend/pages/student-record/StudentViewRecord */
+
 /* This component handles the student's data for a specific semester */
 /* Props:
-    Name            :   contains name of semester
-    Total           :   contains total
-    Semester        :   contains semester data 
-    historyHandler  :   add changes to history
-    autoSet         :   backend handler for setting data into grades table
+    Name            ---  contains name of semester
+    Total           ---  contains total
+    Semester        ---  contains semester data 
+    historyHandler  ---  add changes to history
+    autoSet         ---  backend handler for setting data into grades table
 */
-
 const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
-
-    // handler prop will handle pushing changes to parent
-    // semHandler will handle semData
 
     const [rows, setRows] = useState([]);
     const [semData, semHandler] = useState(Semester);
@@ -61,7 +58,6 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
     const setData = (values) => { // modifies values of a row
         // get array index of object that was changed
         const targetIndex = semData.findIndex(obj => obj.idRow == values.idRow) 
-        
 
         let newSemData = [...semData]
         newSemData[targetIndex] = values
@@ -107,7 +103,8 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
         })
     }
 
-    const setHistoryEditRow = (detailsObj) => { // logs action of editing a row to history
+    // logs action of editing a row to history
+    const setHistoryEditRow = (detailsObj) => {
 
         const newHistObj = {
             date: new Date().toLocaleDateString(),
@@ -128,7 +125,8 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
         historyHandler(newHistObj)  //set changes
     } 
 
-    const delData = (values) => { // deletes row from table
+    // deletes row from table
+    const delData = (values) => {
         // get array index of object that was changed
         const targetIndex = semData.findIndex(obj => obj.idRow == values.idRow)
         
@@ -215,9 +213,9 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
                     )}
                 </Disclosure>
             </div>
-            
         </>
     )
 }
 
-export default TableContents
+
+export default TableContents;

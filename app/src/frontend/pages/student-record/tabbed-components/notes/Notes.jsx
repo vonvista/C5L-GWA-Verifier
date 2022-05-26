@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import AddNoteBtn from 'frontend/components/buttons/AddNoteBtn';
 import Delete from '../../../../../../assets/icons/delete.svg';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 
 /* Parent component >> Tab component found in StudentViewRecord.jsx */

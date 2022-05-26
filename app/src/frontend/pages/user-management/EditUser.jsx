@@ -1,21 +1,33 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
-import Swal from 'sweetalert2'
-
 import Input from 'frontend/components/inputs/Input';
 import user from '../../../../assets/icons/user-icon.jpg';
 import 'tailwindcss/tailwind.css';
+import Swal from 'sweetalert2';
 
 
+/* Parent components:
+    List           >> frontend/components/table/List
+    UserManagement >> ./UserManagementPage
+*/
+/* This function shows the edit user modal window.
 
-// function which shows the add user modal; to be used in UserSystemPage
-// to use EditUser and AddUserBtn, import needed files and declare and initialize showModal variable:
-// <Actions handleEdit={() => setShowModal(true)}/>
-// {showModal ?
-//   (<EditUser handleClose={() => setShowModal(false)}/>)
-//   :(<></>)
-// }
+   HOW TO USE:
+    1. Import EditUser into the file.
+    2. Declare and initialize showModal variable:
+        <Actions handleEdit={() => setShowModal(true)}/>
+        {showModal ?
+            (<EditUser handleClose={() => setShowModal(false)}/>)
+            :(<></>)
+        }
+*/
 
+/* Props:
+    modalState            ---
+    handleClose           ---
+    editUser              ---
+    handleEditRecordSave  ---  fsadas
+*/
 const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) => {
   const [firstName, setFirstName] = useState(editUser.FirstName);
   const [middleName, setMiddleName] = useState(editUser.MiddleName);
@@ -352,5 +364,6 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
     </>
   );
 };
+
 
 export default EditUser;

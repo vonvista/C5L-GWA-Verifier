@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
+
+/* Components */
 import Header from 'frontend/components/common/HeaderWithArrowbck';
 import UserNav from 'frontend/components/common/UserNavigation';
 import AdminNav from 'frontend/components/common/AdminNavigation';
 import RecordPage from './StudentViewRecord';
 import Swal from 'sweetalert2';
 
-// values for checklist details
+
+
+/* Parent component >> renderer/App.jsx */
+/* This is the Student Record page which is a secondary navigation page. */
+
+
+// Values for checklist details
 const checklistDetails = [
     {
         status: false,
@@ -26,7 +34,7 @@ const checklistDetails = [
 ]
 
 
-// organize grades from database for RecordPage props
+// Organize grades from database for RecordPage props
 function organizeGrades(data){
 
     // final variable to be return
@@ -158,7 +166,7 @@ function organizeGrades(data){
 }
 
 
-// organize history from database for RecordPage props
+// Organize history from database for RecordPage props
 function organizeHistory(data){
 
     // final var to be returned
@@ -209,16 +217,15 @@ function organizeHistory(data){
     return finalHistory
 }
 
-/* Parent component >> renderer/App.jsx */
 
-/* This is the Student Record page which is a secondary navigation page. */
 /* Props:
-    hoverRef    --- a callbackRef used by useHover to update the listeners for the 'mouseover' and 'mouseout' events in the navigation bar
-    isHovering  --- handles the hovering state of the navigation bar
+    hoverRef      --- a callbackRef used by useHover to update the listeners for the 'mouseover' and 'mouseout' events in the navigation bar
+    isHovering    --- handles the hovering state of the navigation bar
     setIsHovering --- sets hover state, used for logging out user
 */
 export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
-    // Backend Linking (Database to Frontend) -lal
+
+    // Backend Linking (Database to Frontend)
     const [studentProp, getStudentProp] = useState()
     const [notesProp, getNotesProp] = useState()
     const [gradesProp, getGradesProp] = useState()
@@ -407,7 +414,7 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
 
     return (
 
-        // checks if props are already fetched from the DB
+        // Checks if props are already fetched from the DB
         (studentProp && notesProp && gradesProp && historyProp && gpaCalc && unitGPA) ? 
         <>
             <nav class="sticky z-20">
@@ -431,6 +438,7 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
                 />
             </div>
         </> 
+        
         // empty div while data are not ready
         : <div></div>      
     );

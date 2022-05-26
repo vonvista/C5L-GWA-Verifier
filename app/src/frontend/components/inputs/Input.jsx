@@ -1,22 +1,19 @@
-/* 
-How to use:
-<userInput
-    labelStyle=""       // styling for label
-    labelVal=""         // label text
-    inputStyle=""       // styling for input
-    name=""             // name of label-input components
-    max=""              // max char limit
-    inputType=""        // type of input password, email, text, etc.
-    inputPlaceholder="" // placeholder text for input
-    value=""            // value of the input
-    changeHandler=""    // change handling
-    handleKeyPress=""   //key press handler
-    required=""   
-    /> 
+/* This functional component is a component that condenses the label and input */
+/* HOW TO USE:
+    <userInput
+        labelStyle=""       // styling for label
+        labelVal=""         // label text
+        inputStyle=""       // styling for input
+        name=""             // name of label-input components
+        max=""              // max char limit
+        inputType=""        // type of input password, email, text, etc.
+        inputPlaceholder="" // placeholder text for input
+        value=""            // value of the input
+        changeHandler=""    // change handling
+        handleKeyPress=""   //key press handler
+        required=""   
+    />
 */
-
-/* Parent component: path/to/parent-component */
-/* This functional component is a component that condenses the label and input*/
 /* Props:
     props.lableStyle      : contains styling for label
     props.labelVal        : contains text for the label
@@ -29,10 +26,7 @@ How to use:
     props.handleKeyPress  : key press handler
     props.required        : if input field is required (set to false for more more customizability)
 */
-
 const Input = (props) => {
-  // function component for input field boxes
-
   return (
     <>
       <label className={props.labelStyle} htmlFor={props.name}>

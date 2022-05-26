@@ -1,15 +1,15 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Dialog, Transition} from '@headlessui/react';
 import { Fragment, useEffect, useState } from 'react';
-import 'tailwindcss/tailwind.css';
-import EditBtn from 'frontend/components/buttons/EditStudentBtn.jsx';
-import 'tailwindcss/tailwind.css';
 import Justification from './grades-table/Justification';
+import 'tailwindcss/tailwind.css';
+
 
 
 /* Parent component >> frontend/components/buttons/EditStudentBtn.jsx */
-/* Function for the "Edit Student" feature in the Student View Record page's Dropdown Menu */
-/* Initially shows an "Edit" button on the dropdown menu and prompts the modal window after clicking it */
+
+/* This is a function for the "Edit Student" feature in the Student View Record page's Dropdown Menu.
+   Initially shows an "Edit" button on the dropdown menu and prompts the modal window after clicking it. */
 /* 
    Props:
     modalState          ---     holds the state of the edit student modal
@@ -27,8 +27,8 @@ import Justification from './grades-table/Justification';
     setDegree           ---     change handler for degree state
     setJustModal        ---     change handler for opening/closing justification modal
 */
-
 const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, studMName, studLName, degree, setStudNum, setStudFName, setStudMName, setStudLName, setDegree, setJustModal }) => {
+    
     /*-------------------- Styling --------------------*/
     const editStudentModal = `relative bg-secondary-red h-[47vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
     const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[37vh]`;
@@ -66,11 +66,11 @@ const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, 
                         <div className="fixed inset-0 bg-black bg-opacity-25" />
                     </Transition.Child>
 
-                            {/* Container for the layer containing the modal window */}
-                            <div className="fixed inset-0 overflow-y-auto flex min-h-full items-center justify-center p-4 text-center">
+                    {/* Container for the layer containing the modal window */}
+                    <div className="fixed inset-0 overflow-y-auto flex min-h-full items-center justify-center p-4 text-center">
 
-                            {/* Transition effect for the element inside this Transition.Child tag*/}
-                            <Transition.Child
+                        {/* Transition effect for the element inside this Transition.Child tag*/}
+                        <Transition.Child
                             as={Fragment}
                             enter="ease-out duration-300"
                             enterFrom="opacity-0 scale-95"
@@ -78,7 +78,7 @@ const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, 
                             leave="ease-in duration-200"
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
-                            >
+                        >
 
                             {/* Edit Student Details modal window */}
                             <Dialog.Panel className={editStudentModal}>
@@ -95,10 +95,14 @@ const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, 
 
                                             <div className={modalTitle}>Please fill in the fields below to edit student's details</div>
                                             <div className='flex flex-col justify-center'>
-                                                {/* input form */}
+
+                                                {/* Input form */}
                                                 <form className={modalInputs}>
+
+                                                        {/* Student Name */}
                                                         <div className='flex flex-row'> 
-                                                            {/* Student Name */}
+
+                                                            {/* First Name */}
                                                             <div className={inputContainer}>
                                                                 <section className={sectionFLName}>
                                                                     <input
@@ -113,6 +117,8 @@ const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, 
                                                                     <div className='w-full text-white text-center'>First Name</div>
                                                                 </section>
                                                             </div>
+
+                                                            {/* Middle Initial */}
                                                             <div className={inputContainer}>
                                                                 <section className={sectionMI}>
                                                                     <input
@@ -126,6 +132,8 @@ const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, 
                                                                     <div className='w-full text-white text-center text-sm'>Middle Initial</div>
                                                                 </section>
                                                             </div>
+
+                                                            {/* Last Name */}
                                                             <div className={inputContainer}>
                                                                 <section className={sectionFLName}>
                                                                     <input
@@ -140,7 +148,9 @@ const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, 
                                                                 </section>
                                                             </div> 
                                                         </div>
-                                                        <div className='flex flex-row'>                                                                                               
+
+                                                        <div className='flex flex-row'>
+
                                                             {/* Student Number */}
                                                             <div className={inputContainer}>
                                                                 <section className={sectionInputField}>
@@ -155,6 +165,7 @@ const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, 
                                                                     <div className='w-full text-white text-center'>Student Number</div>
                                                                 </section>
                                                             </div>
+
                                                             {/* Degree Program */}
                                                             <div className={inputContainer}>
                                                                 <section className={sectionInputField}>

@@ -1,10 +1,16 @@
-import 'tailwindcss/tailwind.css';
+import { useState } from 'react';
 import exportIcon from '../../../../assets/icons/export.svg';
 import exportStudentList from 'backend/exportStudentList';
-import { useState } from 'react';
 import Swal from 'sweetalert2';
+import 'tailwindcss/tailwind.css';
 
-//Button for export file 
+
+/* Parent component >> frontend/pages/dashboards/UserDashboard */
+
+/* This button component is used for exporting records into a file. */
+/* Props:
+    list   ---  receives the list of students to be exported into a file
+*/
 const ExportFileBtn = ({ list }) => {
   const exportbtn = `w-[11vw] h-[3vw] bg-export-yellow m-2 rounded-xl text-white text-base font-montserrat font-bold hover:shadow-lg hover:bg-export-yellow-hover`;
   const [currUser, setUser] = useState(`${localStorage.getItem("FirstName")} ${localStorage.getItem("LastName")} ${localStorage.getItem("MiddleName")}`);
@@ -69,5 +75,6 @@ const ExportFileBtn = ({ list }) => {
     </>
   );
 };
+
 
 export default ExportFileBtn;

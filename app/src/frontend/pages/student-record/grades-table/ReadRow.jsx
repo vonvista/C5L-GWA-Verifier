@@ -1,14 +1,18 @@
 import Actions from 'frontend/components/buttons/ActionsJustification'
 
-// Parent component found in List.jsx
-// component that displays a static view of the data in the row the grades table
-// -- data : contains data to be displayed
-// -- clickHandler : handles toggle for editing the row
-// -- delRow : handles toggle for deleting the row
+
+/* Parent component >> frontend/components/table/List */
+
+/* This function contains a component that displays a static view of the data in the row the grades table. */
+/* Props:
+    data          ---  contains data to be displayed
+    clickHandler  ---  handles toggle for editing the row
+    delRow        ---  handles toggle for deleting the row
+*/
 const ReadRow = ({data, clickHandler, delHandler, histHandler, sem}) => {
 
+    // Function for deleting row
     const delRow = () => { 
-        // function for deletingRow
         delHandler(data)
     }
 
@@ -25,5 +29,6 @@ const ReadRow = ({data, clickHandler, delHandler, histHandler, sem}) => {
         </div>
     );
 }
+
 
 export default ReadRow;

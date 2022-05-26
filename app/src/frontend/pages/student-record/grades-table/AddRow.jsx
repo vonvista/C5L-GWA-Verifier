@@ -20,7 +20,6 @@ import 'tailwindcss/tailwind.css';
     gradeState          ---     holds the current value of grade input field
     gradeHandler        ---     function that sets the value of grade input field
 */
-
 const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNameHandler, unitsState, unitsHandler, gradeState, gradeHandler, histTitleHandler, semState}) => {
 
     // Styling

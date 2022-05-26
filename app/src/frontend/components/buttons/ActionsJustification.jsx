@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import Justification from 'frontend/pages/student-record/grades-table/Justification';
-
 import 'tailwindcss/tailwind.css';
 
-// This function contains the Actions buttons (edit and delete)
-// -- handleEdit prop   : handles click event for edit button
-// -- handleDelete      : handles click event for delete button
-// -- handleHist        : handles modification of history
 
+/* Parent component >> frontend/ */
+
+/* This function contains the Actions buttons (edit and delete) */
+/* Props:
+    handleEdit      --- handles click event for edit button
+    handleDelete    --- handles click event for delete button
+    handleHist      --- handles modification of history
+*/
 const Actions = ({ handleEdit, handleDelete, handleHist, data, sem }) => {
   const buttons = `w-[2vw] h-[2vw] transition ease-out delay-150 hover:transition hover:ease-in hover:delay-200 hover:bg-gray-300 rounded-3xl bg-zinc-200 relative mx-1 grow`; // styling of button
 
@@ -88,9 +91,8 @@ const Actions = ({ handleEdit, handleDelete, handleHist, data, sem }) => {
         )}
       </div>
     </>
-
-    
   );
 };
+
 
 export default Actions;

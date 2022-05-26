@@ -1,30 +1,36 @@
 import { useState } from 'react';
 import Verify from 'frontend/components/buttons/Verify'
 
-// Parent component: ../StudentViewRecord
-// Component for status tab
-// -- state : data for the status tab will be passed here
-// -- ...rest : additional prop for backend expansion 
 
+/* Parent component >> frontend/pages/student-record/StudentViewRecord */
+
+/* This function contains the contents of the tab component called "Status" */
+/* Props:
+    state    ---  data for the status tab will be passed here
+    ...rest  ---  additional prop for backend expansion 
+*/
 export default function Status({ state, gpaCalc, ...rest }) {
 
     return(
         <div className="min-w-[25vw] max-w-[25vw] h-full mx-auto p-5 grid box-border overflow-auto">
+
             {/* Academic Achievement Box */}
             <div className="border rounded-lg p-4 grid row-auto">
-                <h1 className="place-self-start inline text-lg inter">Academic Achievement</h1>
+                <h1 className="place-self-start inline text-lg font-inter">Academic Achievement</h1>
+
                 {/* change the academic achievement Box depending on the Final GWA of the Student -lal */ 
                     (gpaCalc.gwa.toFixed(3) > 1.20) 
                         ? (gpaCalc.gwa.toFixed(3) > 1.45) 
                             ? (gpaCalc.gwa.toFixed(3) > 1.75) 
-                                ? <p className="text-4xl text-center text-button-green font-bold my-4 mx-0 inline-block inter">N/A</p> 
-                                : <p className="text-4xl text-center text-button-green font-bold my-4 mx-0 inline-block inter">Cum Laude</p> 
-                            : <p className="text-4xl text-center text-button-green font-bold my-4 mx-0 inline-block inter">Magna Cum Laude</p> 
-                        : <p className="text-4xl text-center text-button-green font-bold my-4 mx-0 inline-block inter">Summa Cum Laude</p> 
+                                ? <p className="text-4xl text-center text-button-green font-bold my-4 mx-0 inline-block font-inter">N/A</p> 
+                                : <p className="text-4xl text-center text-button-green font-bold my-4 mx-0 inline-block font-inter">Cum Laude</p> 
+                            : <p className="text-4xl text-center text-button-green font-bold my-4 mx-0 inline-block font-inter">Magna Cum Laude</p> 
+                        : <p className="text-4xl text-center text-button-green font-bold my-4 mx-0 inline-block font-inter">Summa Cum Laude</p> 
                 }
             </div>
+
             {/* Table for Grades */}
-            <div className="inter text-md">
+            <div className="font-inter text-md">
                 <table className="table-auto w-full my-5">
                     <thead className="text-left">
                         <tr>

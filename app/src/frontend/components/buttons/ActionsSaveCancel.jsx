@@ -1,14 +1,21 @@
 import { useState } from 'react';
-
+import { CheckCircleIcon , XCircleIcon } from '@heroicons/react/solid';
 import Justification from 'frontend/pages/student-record/grades-table/Justification';
-import { CheckCircleIcon , XCircleIcon } from '@heroicons/react/solid'
 import 'tailwindcss/tailwind.css';
 
-// Parent Component : frontend\pages\student-record\grades-table\EditRow.jsx
-// This function contains the Save and Cancel action buttons for the student record page
-// -- handleSave prop   : handles click event for save button
-// -- handleCancel      : handles click event for cancel button
 
+/* Parent Component >> frontend/pages/student-record/grades-table/EditRow */
+
+/* This function contains the Save and Cancel action buttons for the student record page */
+/* Props:
+    handleSave      --- handles click event for save button
+    handleCancel    --- handles click event for cancel button
+    isValid         --- 
+    isTouched       --- 
+    handleHistory   --- 
+    values          --- 
+    sem             --- 
+*/
 const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, handleHistory, values, sem }) => {
 
   const buttons = `transition-all ease-in-out delay-150 text-[rgb(107 114 128)] hover:transition-all hover:ease-out hover:delay-150 w-[2vw] h-[2vw] hover:text-[#141414] hover:bg-slate-300 rounded-3xl bg-slate-200 relative mx-1 grow`; // styling of button
@@ -53,32 +60,32 @@ const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, handl
 
     // history handler
     handleHistory(updateHistory);
-
   }
 
-  return (
-    <>
-      <Justification modalState={isOpen} modalHandler={closeModal} parentSubmitHandler={handleSave} handleHistory={setHistory} histTitle={histTitle}/>
+    return (
+        <>
+            <Justification modalState={isOpen} modalHandler={closeModal} parentSubmitHandler={handleSave} handleHistory={setHistory} histTitle={histTitle}/>
 
-      <div className="mx-auto w-auto items-center justify-items-center inline-block">
-        {/* Save button */}
-        <button className={`${buttons}${disabled}`} type="button" 
-          onClick={() => {
-              openModal();
-              setTitle(`${histTitle} Course: ${values.courseName}, Units: ${values.units}, and Grade: ${values.grade} on Semester: ${sem}`); // add new values to end of history title
-            }} 
-          disabled={!(isValid && isTouched)}>
-          <CheckCircleIcon className="w-[2vw] h-[2vw] mx-auto grow"/>
-        </button>
+            <div className="mx-auto w-auto items-center justify-items-center inline-block">
+                {/* Save button */}
+                <button className={`${buttons}${disabled}`} type="button" 
+                    onClick={() => {
+                            openModal();
+                            setTitle(`${histTitle} Course: ${values.courseName}, Units: ${values.units}, and Grade: ${values.grade} on Semester: ${sem}`); // add new values to end of history title
+                        }} 
+                    disabled={!(isValid && isTouched)}
+                >
+                    <CheckCircleIcon className="w-[2vw] h-[2vw] mx-auto grow"/>
+                </button>
 
-        {/* Cancel button */}
-        <button className={buttons} type="button" onClick={handleCancel}>
-          <XCircleIcon className="w-[2vw] h-[2vw] mx-auto grow"/>
-        </button>
-      </div>
-    </>
-    
-  );
+                {/* Cancel button */}
+                <button className={buttons} type="button" onClick={handleCancel}>
+                    <XCircleIcon className="w-[2vw] h-[2vw] mx-auto grow"/>
+                </button>
+            </div>
+        </>
+    );
 };
+
 
 export default ActionsSaveCancel;

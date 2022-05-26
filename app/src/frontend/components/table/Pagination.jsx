@@ -1,19 +1,19 @@
 import { useState } from "react";
 import 'tailwindcss/tailwind.css';
-
 import leftarrow from '../../../assets/icons/pagination-left-arrow.svg';
 import rightarrow from '../../../assets/icons/pagination-right-arrow.svg';
 import List from './List';
 
 
 /* Parent components:
-    frontend/pages/dashboards/UserDashboard.jsx
-    frontend/pages/user-management/UserManagement.jsx
+    UserDashboard  >> frontend/pages/dashboards/UserDashboard
+    UserManagement >>frontend/pages/user-management/UserManagementPage
 */
 
-/*
-This component is the pagination component.
-HOW TO USE:
+/* This component is the pagination component.
+   
+   HOW TO USE:
+
    1. Copy and paste this code block at the very beginning of the function/page that will use Pagination
    ------------------------------------------------------------------
    const [rows, setRows] = useState([]);
@@ -59,12 +59,12 @@ const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
    const numberOfPages = Math.ceil(totalRows / rowsPerPage);
    const pageNumbers = [];
 
-   if (numberOfPages < 3){
+   if (numberOfPages < 3) {
       // If buttons are less than 3, follow that as the number of buttons to show (1 or 2)
       for (let i=0; i < numberOfPages; i++) {
          pageNumbers.push({page: num + i});
       }
-   }else{
+   } else {
       // 3 page buttons shown at a time
       for (let i=0; i <= 2; i++) {
          pageNumbers.push({page: num + i});
@@ -90,18 +90,21 @@ const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
 
    return (
       <div className={paginationBox}>
+          {/* Back arrow */}
          <button onClick={prev} className={buttonStyle}>
-            <svg class={arrowStyle} viewBox="0 0 20 20">
+            <svg className={arrowStyle} viewBox="0 0 20 20">
                <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path>
             </svg>
          </button>
+         {/* Page Numbers */}
          {
             pageNumbers.map((pg, i) => (
                <button key={i} onClick={() => paginate(pg.page)} className={`${pageButton} ${currentPage === pg.page && currentPageStyle}`}>{pg.page}</button>
             ))
          }
+         {/* Next arrow */}
          <button onClick={next} className={buttonStyle}>
-            <svg class={arrowStyle} viewBox="0 0 20 20">
+            <svg className={arrowStyle} viewBox="0 0 20 20">
                <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path>
             </svg>
          </button>
