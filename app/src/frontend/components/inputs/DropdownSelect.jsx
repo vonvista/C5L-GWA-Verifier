@@ -1,27 +1,26 @@
-/* 
-How to use:
-<Dropdown
-    style =   // style options
-    options = // options here
-    state =   // state functions
-    /> 
-*/
-
-// component/ref used: https://headlessui.dev/react/listbox
-
 import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
-/* Parent component: frontend\pages\student-record\tabbed-components\notes\AddNote.jsx */
-/* This functional component is for a dropdown select button*/
+
+/* Parent component: frontend/pages/student-record/tabbed-components/notes/AddNote */
+
+/* This functional component is for a dropdown select button
+   Referenced from: https://headlessui.dev/react/listbox */
+/* HOW TO USE:
+    <Dropdown
+        style =   // style options
+        options = // options here
+        state =   // state functions
+    /> 
+*/
+
 /* Props:
     props.options : holds an array that contains the options to be used for the button
     props.state : holds the initialized useState made by parent
     props.style : for styling options of the dropdown select
     props.placeHolderChange : function passes the selected choice in the dropdown from this component to parent
-*/
-    
+*/   
 const DropdownInput = (props) => {
 
     // Dropdown select
