@@ -456,7 +456,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                     <td className={ `${numbertData} cursor-default`}>{student.studno}</td>
                                     <td className={` ${degreetData} cursor-default`}>{student.degprog}</td>
                                     <td className={` ${gwatData} cursor-default`}>{student.gwa}</td>
-                                    <td className={`${statustData} font-poppins cursor-default`}>
+                                    <td className={`${statustData} cursor-default`}>
                                         <div data-status={student.status} className='status'></div>
                                     </td>
                                     <td className='text-center'>

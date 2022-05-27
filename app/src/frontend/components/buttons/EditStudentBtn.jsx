@@ -140,10 +140,6 @@ const EditBtn = ({ studentInfo, setHistory, setSelectedStudent }) => {
       <Justification modalState={justModal} modalHandler={closeJustModal} parentSubmitHandler={updateStudent} handleHistory={handleHistory} histTitle={histTitle}/> 
       
       <EditStudentDetails
-            onClick={() => {
-            setIsActive(!isActive);
-            setValueClicked('Edit');
-            }}
             modalState={isActive}
             handleClose={closeEditStud}
             handleSave={submitStudentEdit}

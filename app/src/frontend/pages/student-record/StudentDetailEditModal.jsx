@@ -42,7 +42,7 @@ const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, 
     const sectionFLName = `inline-block w-[16.71875vw] truncate`;
     const sectionMI = `inline-block w-[6.71875vw]`;
     const modalFooter = `font-poppins mt-[4.85vh] text-[1vw] flex items-center justify-center`;
-    const modalBtnSave = `h-[4.75vh] w-[8.8vw] rounded-xl mr-[0.65vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green`;
+    const modalBtnSave = `h-[4.75vh] w-[8.8vw] rounded-xl mr-[0.65vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green`;
 
     
     return (

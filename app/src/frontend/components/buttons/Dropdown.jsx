@@ -63,8 +63,9 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
           type="button"
           className="inline-block grow hover:bg-button-green-hover rounded-l-lg"
           onClick={() =>{
-              if (valueClicked === 'Export') handleExport();
+                if (valueClicked === 'Export') handleExport();
             }
+                // (!(valueClicked == "Export")) ? null : handleExport()
           }
         >
           <p className="inline-block grow font-medium text-center text-white">
