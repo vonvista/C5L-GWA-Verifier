@@ -44,6 +44,7 @@ const ExportFileBtn = ({ list }) => {
       },
       inputPlaceholder: 'Select sort option',
       showCancelButton: true,
+      confirmButtonColor: '#2A7146',
     })
 
     // proceed after selecting sortOption
