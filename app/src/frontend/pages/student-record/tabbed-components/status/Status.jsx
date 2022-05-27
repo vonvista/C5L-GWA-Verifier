@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Verify from 'frontend/components/buttons/Verify';
 
 
 /* Parent component >> frontend/pages/student-record/StudentViewRecord */
@@ -92,11 +91,6 @@ export default function Status({ state, gpaCalc, ...rest }) {
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            
-            {/* Verify Button */}
-            <div className="self-end">
-                <Verify isDisabled={false}/>
             </div>
         </div>
     );
