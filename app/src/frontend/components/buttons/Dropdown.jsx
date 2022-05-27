@@ -5,7 +5,7 @@ import { Transition } from '@headlessui/react';
 import 'tailwindcss/tailwind.css';
 
 /* Components */
-import EditStudent from 'frontend/pages/student-record/StudentDetailEditModal';
+import EditStudentDetails from 'frontend/pages/student-record/StudentDetailEditModal';
 import Justification from 'frontend/pages/student-record/grades-table/Justification';
 import studentDelete from 'backend/studentDelete';
 import exportStudentData from 'backend/exportStudentData';
@@ -131,9 +131,9 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
         })
         console.log(err)
     })
-    // closeJustModal();
+
+    closeJustModal();
     setSelectedStudent( (prevState)=>({...prevState, stud_no: studNum, degree_program: degree, Student: currStudentID, iname: {fname: studFName, mname: studMName, lname: studLName}}))
-    
   }
 
   // Function for adding new history after adding new row
