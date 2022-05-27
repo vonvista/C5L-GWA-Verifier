@@ -181,7 +181,7 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
                                 <ChevronUpIcon
                                     className={`${
                                         !open ? 'transform rotate-180' : ''
-                                    } ml-1 w-5 xl:w-7 self-center`}
+                                    } ml-1 w-5 xl:w-7 self-center duration-200`}
                                 />
                             </Disclosure.Button>
                             
