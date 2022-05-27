@@ -50,6 +50,78 @@ const LoginPage = () => {
         })
     }
 
+    const handleTOS = () => {
+        //swal for text
+        Swal.fire({
+            //make scrollable
+            title: 'License Agreement',
+            html: 
+            //MIT LICENSE
+            `
+            MIT License <br><br>
+
+            Copyright (c) 2022 Kalatas Development Team <br><br>
+
+            Permission is hereby granted, free of charge, to any person obtaining a copy
+            of this software and associated documentation files (the "Software"), to deal
+            in the Software without restriction, including without limitation the rights
+            to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+            copies of the Software, and to permit persons to whom the Software is
+            furnished to do so, subject to the following conditions: <br> <br>
+
+            The above copyright notice and this permission notice shall be included in all
+            copies or substantial portions of the Software. <br> <br>
+
+            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+            IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+            FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+            AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+            OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+            SOFTWARE. <br>
+
+            `,
+            heightAuto: true,
+            padding: '20px',
+            background: '#fff',
+            showCloseButton: true,
+            showConfirmButton: false,
+            focusConfirm: false,
+            width: '60vw',
+        })
+                
+    }
+
+    const handleHelp = () => {
+        //swal for text
+        Swal.fire({
+            position: 'left', 
+            title: 'Help',
+            html: 
+            `    
+            <div class="text-left">
+                <h3 class="font-bold"> Database IP </h3>
+                <p> - Start the server in the host machine by running the server executable. </p>
+                <p> - Select the IP address that the server will used in the choices provided </p>
+                <p> - Enter the IP address on the database IP field </p>
+                <br>
+                <h3 class="font-bold"> Username and Password </h3>
+                <p> - Request the admin to create a user account for you </p>
+                <p> - Log in with the credentials given </p>
+            </div>
+
+            `,
+            heightAuto: true,
+            padding: '20px',
+            background: '#fff',
+            showCloseButton: true,
+            showConfirmButton: false,
+            focusConfirm: false,
+            width: '60vw',
+        })
+                
+    }
+
     const handleLogIn = () => {
         const credentials = {
             Username: values.username,
@@ -208,8 +280,8 @@ const LoginPage = () => {
                 {/* Footer */}
                 <div className="flex justify-center opacity-50 text-[1.25vw] gap-[5vw] absolute bottom-[2vw] inset-x-0 text-login-footer">
                     <span><TextBtn text="About" handleClick={handleTeam}/></span>
-                    <span><TextBtn text="Privacy Policy" handleClick={()=>{}}/></span>
-                    <span><TextBtn text="Help" handleClick={()=>{}}/></span>
+                    <span><TextBtn text="License Agreement" handleClick={handleTOS}/></span>
+                    <span><TextBtn text="Help" handleClick={handleHelp}/></span>
                 </div>
             </section>
         </main>

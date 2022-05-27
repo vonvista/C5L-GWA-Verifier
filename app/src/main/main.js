@@ -100,7 +100,7 @@ const createWindow = async () => {
     mainWindow = null;
   });
 
-  mainWindow.webContents.toggleDevTools();
+  // mainWindow.webContents.toggleDevTools();
   const menuBuilder = new MenuBuilder(mainWindow);
   menuBuilder.buildMenu();
 
