@@ -283,6 +283,7 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
     //Swal with two textfields and a prompt to copy
     const { value: formValues } = await Swal.fire({
       title: 'Reset Data',
+      confirmButtonColor: '#2A7146',
       showCancelButton: true,
       html:
         '<p>Enter your new password and the random string below:</p>' +
@@ -348,6 +349,7 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
         icon: 'success',
         title: 'Success',
         text: 'All data has been wiped',
+        confirmButtonColor: '#2A7146',
       });
       localStorage.clear();
       navigate('/');
@@ -363,7 +365,8 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
       inputAttributes: {
         'aria-label': 'Input Student IDs...'
       },
-      showCancelButton: true
+      showCancelButton: true,
+      confirmButtonColor: '#2A7146',
     })
     
     if (!text) {

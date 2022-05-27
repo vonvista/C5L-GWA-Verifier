@@ -1,6 +1,7 @@
-import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState, useEffect } from 'react';
 import { useForm, isRequired } from '../../../hooks/useForm';
+import { Dialog, Transition } from '@headlessui/react';
+import { XIcon } from '@heroicons/react/solid';
 import Input from 'frontend/components/inputs/Input';
 import Swal from 'sweetalert2';
 
@@ -138,9 +139,11 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                         className="font-montserrat ml-3 mt-2 text-2xl font-black leading-6 text-gray-900 flex"
                                     >
                                         <span className="self-start">Justification</span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="ml-auto mr-0 transition-all ease-out delay-200 hover:text-gray-500 hover:transition-all hover:ease-in hover:delay-200 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" onClick={resetModalValues}>
-                                            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                                        </svg>
+                                        {/* Close button */}
+                                        <XIcon
+                                            className="cursor-pointer ml-auto mr-0 transition-all ease-out delay-200 hover:text-gray-500 hover:transition-all hover:ease-in hover:delay-200 h-5 w-5"
+                                            onClick={resetModalValues}
+                                        />
                                     </Dialog.Title>
 
                                     {/* Window Body */}

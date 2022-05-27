@@ -1,5 +1,6 @@
 import 'tailwindcss/tailwind.css';
 import arrowbck from '../../../../assets/icons/previous.svg';
+import { ChevronLeftIcon } from '@heroicons/react/solid';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -21,11 +22,7 @@ const HeaderWithArrowbck = ({ pageTitle }) => {
     return (
         <header className="flex w-full items-center absolute top-0 right-0 z-10 bg-secondary-red  text-sidebar-text py-2.5 xl:py-3.5 2xl:py-4 duration-300">
             <div className="pl-7 xl:pl-10  hover:bg-primary-red cursor-pointer duration-300">
-                <img 
-                    className="w-6 lg:w-7 1.75xl:w-9"    
-                    src={arrowbck}
-                    onClick = {goBack}
-                />
+                <ChevronLeftIcon className="w-6 lg:w-7 1.75xl:w-9" onClick={goBack}/>
             </div>
             <span className="text-md lg:text-xl 1.75xl:text-3xl font-montserrat font-bold pl-1.5 xl:pl-2 duration-300">
                 {pageTitle}

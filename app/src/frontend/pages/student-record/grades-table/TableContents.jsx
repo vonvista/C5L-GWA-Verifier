@@ -1,5 +1,5 @@
-import { Disclosure, Transition } from '@headlessui/react'
-import { ChevronUpIcon } from '@heroicons/react/solid'
+import { Disclosure, Transition } from '@headlessui/react';
+import { ChevronUpIcon } from '@heroicons/react/solid';
 import { useEffect, useState } from 'react';
 import List from 'frontend/components/table/List';
 import Swal from 'sweetalert2';
@@ -181,7 +181,7 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
                                 <ChevronUpIcon
                                     className={`${
                                         !open ? 'transform rotate-180' : ''
-                                    } ml-1 w-5 xl:w-7 self-center`}
+                                    } ml-1 w-5 xl:w-7 self-center duration-200`}
                                 />
                             </Disclosure.Button>
                             

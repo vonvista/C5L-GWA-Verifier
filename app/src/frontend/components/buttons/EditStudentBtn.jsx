@@ -19,7 +19,7 @@ const EditBtn = ({ studentInfo, setHistory, setSelectedStudent }) => {
 
   
   /*-------------------- Styling --------------------*/
-  const editBtnStyle = `text-gray-700 block px-4 rounded-xl py-2 text-sm z-1 w-full hover:bg-button-green-hover`;
+  const editBtnStyle = `bg-button-green hover:bg-button-green-hover block px-4 rounded-b-lg py-2 text-sm z-1 w-full`;
   
   /*-------------------- State handlers --------------------*/
   const [valueClicked, setValueClicked] = useState('Actions');
@@ -171,7 +171,7 @@ const EditBtn = ({ studentInfo, setHistory, setSelectedStudent }) => {
         type="button"
         onClick={openModal}
       >
-        <p className="text-white">Edit</p>
+        <p className=" text-white">Edit</p>
       </button>
     </>
   );

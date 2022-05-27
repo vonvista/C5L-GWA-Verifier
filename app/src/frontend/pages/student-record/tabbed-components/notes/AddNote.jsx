@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react';
+import { XIcon } from '@heroicons/react/solid';
 import { Dialog, Transition} from '@headlessui/react';
 import SemSelect from 'frontend/components/inputs/DropdownSelect';
 import Swal from 'sweetalert2';
@@ -123,7 +124,7 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
                                 {/* Window Title */}
                                 <Dialog.Title
                                     as="div"
-                                    className="flex items-center mb-2 text-[2.5vh]"
+                                    className="flex items-center mt-2 mb-2 text-[2.5vh]"
                                 >
                                     <div>
                                         {/* Dropdown select  */}
@@ -135,14 +136,11 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
                                         />
                                     </div>
                         
-                                    {/* Exit button */}
-                                    <button
-                                        className="text-[2vw] ml-auto mr-0 hover:text-gray-500"
-                                        type="button"
+                                    {/* Close button */}
+                                    <XIcon
+                                        className="cursor-pointer w-6 mt-3 ml-auto mr-0 hover:text-gray-500 hover:transition-all hover:ease-in"
                                         onClick={handleClose}
-                                    >
-                                        &times;
-                                    </button>
+                                    />
                                 </Dialog.Title>
 
                                 {/* Window body */}

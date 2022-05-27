@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 {/* Components */}
 import { LoginBtn } from '../../components/buttons/LoginBtn';
 import TextBtn from '../../components/buttons/TextBtn';
-import AppIcon from '../../../../assets/icons/icon.png';
+import AppIcon from '../../../../assets/icon.png';
 import Input from '../../components/inputs/Input';
 //import { electron } from 'process';
 
