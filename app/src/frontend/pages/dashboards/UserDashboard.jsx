@@ -521,7 +521,9 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
 
                             {/* Refresh button */}
                             <div className="flex items-center ml-2">
-                                <Refresh handleClick={forceReload} />
+                                <span className="pr-1.5 mr-0 items-center justify-items-center inline-block grow">
+                                  <Refresh handleClick={forceReload} />
+                                </span>
                             </div>
 
                             {/* Export and Upload buttons */}

@@ -44,19 +44,24 @@ const Refresh = ({ handleClick }) => {
         }`;
 
     // Styling of button
-    const buttons = `hover:bg-slate-300 rounded-3xl bg-slate-200 relative ml-2 grow btn self-center
-        transition-all hover:transition-all hover:bg-slate-300 rounded-3xl bg-slate-200 min-w-max`;
+    const buttons = `min-w-max rounded-3xl bg-slate-200 relative ml-2 btn self-center
+        transition-all ease-out duration-150
+        hover:transition-all hover:ease-in hover:duration-200 hover:bg-slate-300`;
+    const buttonImg = `
+        transform-gpu
+        refresh-btn min-w-fit 
+        transition ease-in-out duration-300 
+        hover:transition hover:rotate-[-360deg] hover:ease-in-out hover:duration-300
+        `;
 
     return (
         <>
-            <div className="pr-1.5 mr-0 items-center justify-items-center inline-block grow">
-                <style>{refreshBtn}</style>
-                {/* Refresh Button */}
-                {/* Reference: https://stackoverflow.com/questions/70069619/refresh-data-on-button-click-react */}
-                <button className={buttons} type="button" onClick={handleClick}>
-                    <img className="refresh-btn min-w-fit" alt="icon" src={refresh} />
-                </button>
-            </div>
+            <style>{refreshBtn}</style>
+            {/* Refresh Button */}
+            {/* Reference: https://stackoverflow.com/questions/70069619/refresh-data-on-button-click-react */}
+            <button className={buttons} type="button" onClick={handleClick}>
+                <img className={buttonImg} alt="icon" src={refresh} />
+            </button>
         </>
     );
 };

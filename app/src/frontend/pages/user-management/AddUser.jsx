@@ -110,7 +110,8 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
   // Create user Button
   const CreateUserButton = () => {
     const createbtn = `w-2/5 h-[5vh] block ml-auto mr-auto bg-button-green rounded-lg user-btn text-[1vw] text-sidebar-text
-            hover:shadow-lg hover:bg-button-green-hover disabled:bg-sr-disabled-green`;
+            hover:shadow-lg hover:bg-button-green-hover disabled:bg-sr-disabled-green
+            transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300`;
     // check if all input fields have been filled
     if (firstName && middleName && lastName && un && position && pw) {
       return (
@@ -127,7 +128,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
   };
 
   // Styling
-  const modalContent1 = `h-[60%] w-[70%] flex-col mx-auto p-2 rounded-[30px] relative bg-secondary-red transform overflow-hidden p-6 text-left align-middle shadow-xl transition-all`;
+  const modalContent1 = `h-[60%] w-[70%] flex-col mx-auto p-2 rounded-[30px] relative bg-secondary-red transform overflow-hidden p-6 text-left align-middle shadow-xl transition ease-out duration-300`;
   const modalBody1 = `h-full bg-transparent flex m-auto overflow-hidden overflow-y-auto relative w-full`;
   const inputContent = `overflow-auto w-full text-[1.25vw]`;
   const form = `bg-transparent rounded-lg py-0 px-5`;

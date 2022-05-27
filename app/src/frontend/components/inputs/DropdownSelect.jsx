@@ -53,7 +53,7 @@ const DropdownInput = (props) => {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <Listbox.Options className="absolute w-full py-2 mt-1 overflow-auto text-sm lg:text-[0.85vw]  bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Listbox.Options className="absolute w-full py-2 mt-1 overflow-auto text-sm lg:text-[0.85vw] bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none">
                         {options.map((person, personIdx) => (
                             <Listbox.Option
                             key={personIdx}

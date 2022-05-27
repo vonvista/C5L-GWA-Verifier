@@ -57,12 +57,12 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                     {/* Table column names */}
                     <div className="table-header-group text-left">
                         <div className="table-row font-montserrat font-bold text-primary-red">
-                            <div className="table-cell w-1/6">Course Name</div>
-                            <div className="table-cell w-1/6 text-center">Grade</div>
-                            <div className="table-cell w-1/6 text-center">Units</div>
-                            <div className="table-cell w-1/6 text-center">Cumulative</div>
-                            <div className="table-cell w-1/6 text-center">Weight</div>
-                            <div className="table-cell w-1/6 text-center">
+                            <div className="table-cell w-1/6 align-middle">Course Name</div>
+                            <div className="table-cell w-1/6 text-center align-middle">Grade</div>
+                            <div className="table-cell w-1/6 text-center align-middle">Units</div>
+                            <div className="table-cell w-1/6 text-center align-middle">Weight</div>
+                            <div className="table-cell w-1/6 text-center align-middle">Cumulative</div>
+                            <div className="table-cell w-1/6 text-center align-middle">
                                 <AddRowBtn sem={sem} grades={data} addHandler={addHandler} handleHistory={handleHistory}/>
                             </div>
                         </div>
@@ -143,7 +143,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         // Styling
         const usersTable = `border-collapse overflow-hidden table-fixed max-w-[72vw] max-h-[71vh] rounded-t-[1vw] drop-shadow-lg`;
         const tHead = `bg-white border-solid rounded-t-[1vw] border-b-[0.2vh] table table-fixed whitespace-no-wrap w-full font-montserrat w-[66vw]`;
-        const tBodytR = `table table-fixed whitespace-no-wrap w-full font-montserrat hover:bg-table-hover-color last:border-b-0`;
+        const tBodytR = `table table-fixed whitespace-no-wrap w-full font-montserrat transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:bg-table-hover-color last:border-b-0`;
         
         const tRow = `text-left not-italic text-[1vw] text-sr-text-gray`;
         const tBody = `bg-white block overflow-auto text-black rounded-b-[1vw] h-[65.73130193905817vh] w-[65.73130193905817vw]`;
@@ -156,6 +156,8 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
 
         const asc = `after:float-right after:content-['▲'] after:ml-[0.3vw] bg-sr-dark-gray`;
         const desc = `after:float-right after:content-['▼'] after:ml-[0.3vw] bg-sr-dark-gray`;
+
+        const transition = `hover:bg-sr-dark-gray transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300`;
 
         // Function to delete a user based on their username
         const userDelete = (username) => {
@@ -244,13 +246,13 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                         <tr className={tRow}>
                             {/* sort UI asc or desc depends on the state of the parent (user-dashboard) */}
                             {/* state 0: normal; 1: ascending icon; 2: descending icon */}
-                            <th className={` ${usernametData} ${
+                            <th className={` ${usernametData} ${transition} ${
                                 sortState[0] === 0 ? "" : sortState[0] === 1 ? asc : desc 
                             }`} onClick={() => changeSort(0)}>Username</th>
-                            <th className={` ${nametData} ${
+                            <th className={` ${nametData} ${transition} ${
                                 sortState[1] === 0 ? "" : sortState[1] === 1 ? asc : desc
                             }`} onClick={() => changeSort(1)}>Name</th>
-                            <th className={` ${positiontData} ${
+                            <th className={` ${positiontData} ${transition} ${
                                 sortState[2] === 0 ? "" : sortState[2] === 1 ? asc : desc 
                             }`} onClick={() => changeSort(2)}>Position</th>
                             <th className={actionstH}>Actions</th>
@@ -286,13 +288,13 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         // Styling
         const studentsTable = `border-collapse overflow-hidden table-fixed max-w-[82vw] max-h-[70vh] rounded-t-[1vw] drop-shadow-lg`;
         const tHead = `bg-white border-solid rounded-t-[1vw] border-b-[0.2vh] table table-fixed whitespace-nowrap w-full font-montserrat`;
-        const tBodytR = `table table-fixed whitespace-nowrap w-full font-montserrat hover:bg-table-hover-color last:border-b-0`
+        const tBodytR = `table table-fixed whitespace-nowrap w-full font-montserrat transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:bg-table-hover-color last:border-b-0`
         const tRow = `text-left not-italic text-[1.3vw] text-sr-text-gray`;
         const tBody = `bg-white block overflow-auto text-black rounded-b-[1vw] h-[65vh]`
 
         const nametH = `py-[1.2vh] px-[1.3vw]`;
-        const elements = `border-solid overflow-hidden text-[1.1vw] border-page-background border-b-[0.14vh]`
-        const common = `${nametH} ${elements}`
+        const elements = `border-solid overflow-hidden text-[1.1vw] border-page-background border-b-[0.14vh]`;
+        const common = `${nametH} ${elements}`;
         const statustHead = `${common} cursor-default w-[7vw] text-center`;
         const actionstH = `${common} cursor-default text-center`;
         const nametData = `${common} cursor-pointer w-[23vw] truncate font-bold `;
@@ -303,6 +305,8 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
 
         const asc = `after:float-right after:content-['▲'] after:ml-[0.33vw] bg-sr-dark-gray`;
         const desc = `after:float-right after:content-['▼'] after:ml-[0.33vw] bg-sr-dark-gray`;
+
+        const transition = `hover:bg-sr-dark-gray transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300`;
 
         /* Status Elements */
         const cssStyles = 
@@ -431,16 +435,16 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                         <tr className={tRow}>
                             {/* sort UI asc or desc depends on the state of the parent (user-dashboard) */}
                             {/* state 0: normal; 1: ascending icon; 2: descending icon */}
-                            <th className={` ${nametData} ${
+                            <th className={` ${nametData} ${transition} ${
                                 sortState[0] === 0 ? "" : sortState[0] === 1 ? asc : desc 
                             }`} onClick={() => changeSort(0)}>Name</th>
-                            <th className={` ${numbertData} ${
+                            <th className={` ${numbertData} ${transition} ${
                                 sortState[1] === 0 ? "" : sortState[1] === 1 ? asc : desc
                             }`} onClick={() => changeSort(1)}>Student No.</th>
-                            <th className={` ${degreetData} ${
+                            <th className={` ${degreetData} ${transition} ${
                                 sortState[2] === 0 ? "" : sortState[2] === 1 ? asc : desc 
                             }`} onClick={() => changeSort(2)}>Degree Program</th>
-                            <th className={` ${gwatData} ${
+                            <th className={` ${gwatData} ${transition} ${
                                 sortState[3] === 0 ? "" : sortState[3] === 1 ? asc : desc 
                             }`} onClick={() => changeSort(3)}>GWA</th>
                             <th className={statustHead}>Status</th>

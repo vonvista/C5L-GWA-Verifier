@@ -96,7 +96,7 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
             {/* Notes tab */}
             {/* Checks first if the array of notes is currently empty. */}
             { notesData.length === 0
-                ? <h2 className="font-inter font-light text-[1.05vw] italic">
+                ? <h2 className="font-inter font-light text-md italic mt-3">
                     No notes found.
                 </h2>
                 : notesData.map( (data, idx) => {

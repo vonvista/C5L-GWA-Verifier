@@ -9,7 +9,7 @@ import 'tailwindcss/tailwind.css';
     handleClick  ---  function to handle click event
 */
 const TextBtn = ({ text, handleClick }) => {
-  const textClass = `w-30 h-10 hover:text-stone-100 font-poppins rounded-lg`;
+  const textClass = `w-30 h-10 transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:text-stone-100 font-poppins rounded-lg`;
   return (
     <>
       <button className={textClass} type="button" onClick={handleClick}>
