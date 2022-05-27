@@ -474,7 +474,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             )}
                         </tbody>
                     ) : (
-                        <tbody className='flex items-center justify-center h-[65.73130193905817vh]'>
+                        <tbody className={`${tBody} flex items-center justify-center`}>
                             <tr className='text-lg xl:text-xl font-bold font-montserrat'>
                                 <td>No available data to display.</td>
                             </tr>
