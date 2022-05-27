@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import addIcon from '../../../../assets/icons/addRow.svg';
+import { PlusSmIcon } from '@heroicons/react/solid';
 import AddNote from 'frontend/pages/student-record/tabbed-components/notes/AddNote';
 import 'tailwindcss/tailwind.css';
 
@@ -65,13 +65,7 @@ const AddNoteBtn = ({ notesList, semesters, handleAddNote, selectedSem, setSelec
 
             {/* Add/Edit Note Button */}
             <button className={addNoteStyle} type="button" onClick={openModal}>
-                <img
-                    className="p-0.25 my-1.5 ml-0.25 mr-1.5 inline-flex"
-                    width="18px"
-                    height="18px"
-                    alt="icon"
-                    src={addIcon}
-                />
+                <PlusSmIcon className="p-0.25 w-6 my-1.5 ml-0.25 mr-1.5 inline-flex"/>
                 <p className="text-xs inline-block">Add / Edit Note</p>
             </button>
         </>
