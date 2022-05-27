@@ -1,6 +1,6 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import { Dialog, Transition} from '@headlessui/react';
 import { Fragment, useEffect, useState } from 'react';
+import { Dialog, Transition} from '@headlessui/react';
+import { XIcon } from '@heroicons/react/outline';
 import 'tailwindcss/tailwind.css';
 
 
@@ -122,14 +122,16 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
                                 <div className='relative'>
                                     <div className={baybayinStyle}></div>
                                     <div className={modalBody}>
-
-                                        {/* Window title */}
+                                        
+                                        {/* Close button */}
                                         <div className={modalClose}>
-                                            <button onClick={handleClose}>
-                                                <span>&times;</span>
-                                            </button>
+                                            <XIcon
+                                                className="h-7 w-7 cursor-pointer transition-all ease-out delay-200 hover:text-gray-400 hover:transition-all hover:ease-in hover:delay-200"
+                                                onClick={handleClose}
+                                            />
                                         </div>
 
+                                        {/* Window text */}
                                         <div className={modalTitle}>Please fill in the fields below to insert a new row</div>
 
                                         {/* Input form */}

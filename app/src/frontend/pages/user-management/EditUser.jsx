@@ -1,9 +1,10 @@
-import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { XIcon } from '@heroicons/react/solid';
 import Input from 'frontend/components/inputs/Input';
 import user from '../../../../assets/icons/user-icon.jpg';
-import 'tailwindcss/tailwind.css';
 import Swal from 'sweetalert2';
+import 'tailwindcss/tailwind.css';
 
 
 /* Parent components:
@@ -182,19 +183,11 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
                     as="h3"
                     className="ml-3 text-2xl leading-6 text-gray-900 flex"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="ml-auto mr-0 transition-all ease-out delay-200 hover:text-gray-500 hover:transition-all hover:ease-in hover:delay-200 h-6 w-6"
-                      viewBox="0 0 20 20"
-                      fill="white"
-                      onClick={handleClose}
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                    {/* Close button */}
+                    <XIcon
+                        className="cursor-pointer ml-auto mr-0 transition-all ease-out delay-200 text-sidebar-text hover:text-gray-400 hover:transition-all hover:ease-in hover:delay-200 h-6 w-6"
+                        onClick={handleClose}
+                    />
                   </Dialog.Title>
 
                   <div className="m-0 absolute top-[50%] translate-y-[-50%] w-full">
