@@ -143,11 +143,11 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         // Styling
         const usersTable = `border-collapse overflow-hidden table-fixed max-w-[72vw] max-h-[71vh] rounded-t-[1vw] drop-shadow-lg`;
         const tHead = `bg-white border-solid rounded-t-[1vw] border-b-[0.2vh] table table-fixed whitespace-no-wrap w-full font-montserrat w-[66vw]`;
-        const tBodytR = `table table-fixed whitespace-no-wrap w-full font-montserrat hover:bg-table-hover-color last:border-b-0`;
+        const tBodytR = `table table-fixed whitespace-no-wrap w-full font-montserrat transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:bg-table-hover-color last:border-b-0`;
         
         const tRow = `text-left not-italic text-[1vw] text-sr-text-gray`;
         const tBody = `bg-white block overflow-auto text-black rounded-b-[1vw] h-[65.73130193905817vh] w-[65.73130193905817vw]`;
-        const element = `py-[1.2vh] px-[1.3vw] border-solid overflow-hidden text-[1vw] border-page-background border-b-[0.14vh]`;
+        const element = `py-[1.2vh] px-[1.3vw] border-solid overflow-hidden text-[1vw] border-page-background border-b-[0.14vh] hover:bg-sr-dark-gray transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300`;
 
         const actionstH = `${element} cursor-default text-center`;
         const usernametData = `${element} truncate font-bold w-[13vw] cursor-pointer`;
@@ -286,12 +286,12 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         // Styling
         const studentsTable = `border-collapse overflow-hidden table-fixed max-w-[82vw] max-h-[70vh] rounded-t-[1vw] drop-shadow-lg`;
         const tHead = `bg-white border-solid rounded-t-[1vw] border-b-[0.2vh] table table-fixed whitespace-nowrap w-full font-montserrat`;
-        const tBodytR = `table table-fixed whitespace-nowrap w-full font-montserrat hover:bg-table-hover-color last:border-b-0`
+        const tBodytR = `table table-fixed whitespace-nowrap w-full font-montserrat transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:bg-table-hover-color last:border-b-0`
         const tRow = `text-left not-italic text-[1.3vw] text-sr-text-gray`;
         const tBody = `bg-white block overflow-auto text-black rounded-b-[1vw] h-[65vh]`
 
         const nametH = `py-[1.2vh] px-[1.3vw]`;
-        const elements = `border-solid overflow-hidden text-[1.1vw] border-page-background border-b-[0.14vh]`
+        const elements = `border-solid overflow-hidden text-[1.1vw] border-page-background border-b-[0.14vh] hover:bg-sr-dark-gray transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300`
         const common = `${nametH} ${elements}`
         const statustHead = `${common} cursor-default w-[7vw] text-center`;
         const actionstH = `${common} cursor-default text-center`;

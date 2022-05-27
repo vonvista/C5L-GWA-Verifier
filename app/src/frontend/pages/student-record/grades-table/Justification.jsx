@@ -141,7 +141,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                         <span className="self-start">Justification</span>
                                         {/* Close button */}
                                         <XIcon
-                                            className="cursor-pointer ml-auto mr-0 transition-all ease-out delay-200 hover:text-gray-500 hover:transition-all hover:ease-in hover:delay-200 h-5 w-5"
+                                            className="cursor-pointer ml-auto mr-0 transition-all ease-out duration-200 hover:text-gray-500 hover:transition-all hover:ease-in hover:duration-200 h-5 w-5"
                                             onClick={resetModalValues}
                                         />
                                     </Dialog.Title>
@@ -161,7 +161,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                     {/* Save Button */}
                                     <button
                                         type="submit"
-                                        className="inter h-auto mt-3 w-[20%] self-end inline-flex justify-center rounded-md border border-transparent bg-button-green px-4 py-2 text-sm font-medium text-white transition-all ease-out delay-200 hover:transition-all hover:ease-in hover:delay-200 hover:bg-button-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
+                                        className="inter h-auto mt-3 w-[20%] self-end inline-flex justify-center rounded-md border border-transparent bg-button-green px-4 py-2 text-sm font-medium text-white transition-all ease-out duration-200 hover:transition-all hover:ease-in hover:duration-200 hover:bg-button-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
                                         onClick={saveChanges}
                                         disabled={!isValid}
                                     >

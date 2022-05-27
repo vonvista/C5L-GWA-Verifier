@@ -54,8 +54,8 @@ const Actions = ({ handleEdit, handleDelete, handleHist, data, sem }) => {
   }
 
   // Styling
-  const buttons = `w-[2vw] h-[2vw] transition ease-out delay-150 hover:transition hover:ease-in hover:delay-200 hover:bg-gray-300 rounded-3xl bg-zinc-200 relative mx-1 grow`; // styling of button
-  const iconStyle = `text-[#666666] h-[1.5vw] transition ease-out delay-150 hover:transition hover:ease-in hover:delay-200 m-auto hover:fill-black`;
+  const buttons = `w-[2vw] h-[2vw] transition ease-out duration-150 hover:transition hover:ease-in hover:duration-200 hover:bg-gray-300 rounded-3xl bg-zinc-200 relative mx-1 grow`; // styling of button
+  const iconStyle = `text-[#666666] h-[1.5vw] transition ease-out duration-150 hover:transition hover:ease-in hover:duration-200 m-auto hover:fill-black`;
 
   return (
     <>

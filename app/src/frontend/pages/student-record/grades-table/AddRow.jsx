@@ -126,7 +126,7 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
                                         {/* Close button */}
                                         <div className={modalClose}>
                                             <XIcon
-                                                className="h-7 w-7 cursor-pointer transition-all ease-out delay-200 hover:text-gray-400 hover:transition-all hover:ease-in hover:delay-200"
+                                                className="h-7 w-7 cursor-pointer transition-all ease-out duration-200 hover:text-gray-400 hover:transition-all hover:ease-in hover:duration-200"
                                                 onClick={handleClose}
                                             />
                                         </div>

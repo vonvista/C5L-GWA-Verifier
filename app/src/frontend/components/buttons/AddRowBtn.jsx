@@ -209,7 +209,9 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
     }
 
     // Styling
-    const addRowStyle = `h-[3.25vh] my-2 mx-auto bg-button-green px-2 rounded-2xl text-white font-montserrat font-bold hover:shadow-lg hover:bg-button-green-hover`;
+    const addRowStyle = `h-[3.25vh] my-2 mx-auto bg-button-green px-2 rounded-2xl text-white font-montserrat font-bold 
+                        transform-gpu transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300
+                        hover:shadow-lg hover:bg-button-green-hover`;
 
     
     return (

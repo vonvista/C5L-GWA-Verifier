@@ -378,8 +378,8 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                                                 <button
                                                     className={
                                                         selected 
-                                                            ? 'transition-all ease-in delay-100 text-button-green pb-2 pt-4 w-1/3 border-b border-button-green focus:outline-none'  
-                                                            : 'transition-all ease-in delay-100 text-sr-tab-inactive pb-2 pt-4 w-1/3 border-b border-sr-divider-light focus:outline-none hover:text-button-green-hover hover:transition hover:ease-in hover:delay-300'
+                                                            ? 'transition-all ease-in duration-100 text-button-green pb-2 pt-4 w-1/3 border-b border-button-green focus:outline-none'  
+                                                            : 'transition-all ease-in duration-100 text-sr-tab-inactive pb-2 pt-4 w-1/3 border-b border-sr-divider-light focus:outline-none hover:text-button-green-hover hover:transition hover:ease-in hover:duration-300'
                                                     }
                                                 >
                                                     {tab}
