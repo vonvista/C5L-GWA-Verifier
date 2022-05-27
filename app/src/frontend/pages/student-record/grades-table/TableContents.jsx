@@ -1,5 +1,5 @@
-import { Disclosure, Transition } from '@headlessui/react'
-import { ChevronUpIcon } from '@heroicons/react/solid'
+import { Disclosure, Transition } from '@headlessui/react';
+import { ChevronUpIcon } from '@heroicons/react/solid';
 import { useEffect, useState } from 'react';
 import List from 'frontend/components/table/List';
 import Swal from 'sweetalert2';
