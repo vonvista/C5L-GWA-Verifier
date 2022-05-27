@@ -7,21 +7,13 @@ import Swal from 'sweetalert2';
 import 'tailwindcss/tailwind.css';
 
 
-/* Parent components:
-    List           >> frontend/components/table/List
-    UserManagement >> ./UserManagementPage
-*/
-/* This function shows the edit user modal window.
-
-   HOW TO USE:
-    1. Import EditUser into the file.
-    2. Declare and initialize showModal variable:
-        <Actions handleEdit={() => setShowModal(true)}/>
-        {showModal ?
-            (<EditUser handleClose={() => setShowModal(false)}/>)
-            :(<></>)
-        }
-*/
+// function which shows the add user modal; to be used in UserSystemPage
+// to use EditUser and AddUserBtn, import needed files and declare and initialize showModal variable:
+// <Actions handleEdit={() => setShowModal(true)}/>
+// {showModal ?
+//   (<EditUser handleClose={() => setShowModal(false)}/>)
+//   :(<></>)
+// }
 
 /* Props:
     modalState            ---
@@ -29,13 +21,22 @@ import 'tailwindcss/tailwind.css';
     editUser              ---
     handleEditRecordSave  ---  fsadas
 */
-const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) => {
+const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditRecordSave }) => {
   const [firstName, setFirstName] = useState(editUser.FirstName);
   const [middleName, setMiddleName] = useState(editUser.MiddleName);
   const [lastName, setLastName] = useState(editUser.LastName);
   const [un, setUN] = useState(editUser.Username); // username
   const [position, setPosition] = useState(editUser.Position); // username
+
+
+  const [firstNameUnedited, setFirstNameUnedited] = useState(uneditedUser.FirstName);
+  const [middleNameUnedited, setMiddleNameUnedited] = useState(uneditedUser.MiddleName);
+  const [lastNameUnedited, setLastNameUnedited] = useState(uneditedUser.LastName);
+  const [unUnedited, setUNUnedited] = useState(uneditedUser.Username); // username
+  const [positionUnedited, setPositionUnedited] = useState(uneditedUser.Position); // username
+
   const [pw, setPW] = useState(''); // password
+
   const [status, setStatus] = useState('show');
   const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
 
@@ -55,7 +56,6 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
   };
 
   const edit_user = () => {
-
     if(
       firstName === "" || 
       middleName === "" || 
@@ -71,7 +71,6 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
       })
       return
     }
-
 
     const credentials = {
         _id: editUser._id,
@@ -142,11 +141,15 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
   const sectionMI = `inline-block w-[6.71875vw]`;
   const modalFooter = `mt-[4.85vh] text-[1.11vw] flex items-center justify-center`;
   const modalBtnSave = `h-[5vh] w-[9.25vw] rounded-xl mr-[0.65vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green`;
-
   const modalContent1 = `h-[60%] w-[70%] flex-col mx-auto p-2 rounded-[30px] relative bg-secondary-red transform overflow-hidden p-6 text-left align-middle shadow-xl transition-all`;
   const modalBody1 = `h-full bg-transparent flex m-auto overflow-hidden overflow-y-auto relative w-full`;
   const inputContent = `overflow-auto w-full text-[1.25vw]`;
   const form = `bg-transparent rounded-lg py-0 px-5`;
+
+  //prevent default form submission
+  const preventDefault = (e) => {
+    e.preventDefault();
+  };
 
 
   return (
@@ -273,7 +276,6 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
                                     inputPlaceholder="" // placeholder text for input
                                     value={un} // value of the input
                                     changeHandler={(e) => setUN(e.target.value)} // change handling
-                                    disabled={un == 'admin' ? true : false} // disable input
                                   />
                                   <h4 className="mt-1 w-full text-center text-white">
                                     Username
@@ -298,15 +300,14 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
                                   </h4>
                                 </section>
                               </div>
-
                               {/* password */}
-                              <div className="w-full pb-4 mt-2 pr-24">
+                              <div className="">
                                 <section className="un-style">
                                   <div className="relative w-full">
                                     <Input
                                       labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
                                       labelVal="Password" // label text
-                                      inputStyle="rounded-xl text-center w-full h-[2.5vw] appearance-none leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 js-password rounded-xl" // styling for input
+                                      inputStyle="rounded-xl text-center w-[42.5vw] h-[5vh] appearance-none leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 js-password rounded-xl" // styling for input
                                       name="password" // name of label-input components
                                       inputType="password" // type of input password, email, text, etc.
                                       inputPlaceholder="*****" // placeholder text for input
@@ -315,7 +316,7 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
                                         setPW(e.target.value)
                                       } // change handling
                                     />
-                                    <div className="absolute inset-y-0 right-0 flex items-center px-2">
+                                    <div className="absolute inset-y-0  right-[4.7vw] flex items-center px-2">
                                       <button
                                         className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-[0.9vw] text-gray-600  cursor-pointer account-button js-password-label w-[3vw] h-11/12"
                                         htmlFor="toggle"
@@ -334,16 +335,24 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
                             </div>
                           </div>
 
-                          {/* create user button */}
-                            <section className="mt-8 flex w-[90.5%] justify-center">
-                              <button
-                                className={modalBtnSave}
-                                type="button"
-                                onClick={edit_user}
-                              >
-                                Save
-                              </button>
-                            </section>
+                        {/* Save button */}
+                          <section className="mt-8 flex w-[90.5%] justify-center">
+                            <button 
+                              //prevent default
+                              onClick={(e) => 
+                                {
+                                e.preventDefault();
+                                edit_user();
+                                }
+                              }
+                              className={modalBtnSave} 
+                              disabled={(pw != '' && (firstName != firstNameUnedited || middleName!= middleNameUnedited || 
+                                lastName != lastNameUnedited || un != unUnedited || position != positionUnedited)) ? false : true}
+                            >
+                              Save
+                            </button>
+                          
+                          </section>
                         </form>
                       </section>
                     </div>
@@ -357,6 +366,5 @@ const EditUser = ({ modalState, handleClose, editUser, handleEditRecordSave }) =
     </>
   );
 };
-
 
 export default EditUser;

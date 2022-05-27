@@ -3,13 +3,12 @@ import { Dialog, Transition} from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 import Justification from './grades-table/Justification';
 import 'tailwindcss/tailwind.css';
-
-
+import EditBtn from 'frontend/components/buttons/EditStudentBtn.jsx';
+import 'tailwindcss/tailwind.css';
 
 /* Parent component >> frontend/components/buttons/EditStudentBtn.jsx */
-
-/* This is a function for the "Edit Student" feature in the Student View Record page's Dropdown Menu.
-   Initially shows an "Edit" button on the dropdown menu and prompts the modal window after clicking it. */
+/* Function for the "Edit Student" feature in the Student View Record page's Dropdown Menu */
+/* Initially shows an "Edit" button on the dropdown menu and prompts the modal window after clicking it */
 /* 
    Props:
     modalState          ---     holds the state of the edit student modal
@@ -25,9 +24,19 @@ import 'tailwindcss/tailwind.css';
     setStudMName        ---     change handler for studMName state
     setStudLName        ---     change handler for studLName state
     setDegree           ---     change handler for degree state
+    studNumUnedited     ---     holds the value of the unedited student number field for save button access
+    studFNameUnedited   ---     holds the value of the unedited student first name field for save button access
+    studMNameUnedited   ---     holds the value of the unedited student middle name field for save button access
+    studLNameUnedited   ---     holds the value of the unedited student last name field for save button access
+    degreeUnedited      ---     holds the value of the unedited student degree field for save button access
+    setStudNumUnedited  ---     change handler for studNumUnedited state
+    setStudFNameUnedited---     change handler for studFNameUnedited state
+    setStudMNameUnedited---     change handler for studMNameUnedited state
+    setStudLNameUnedited---     change handler for studLNameUnedited state
+    setDegreeUnedited   ---     change handler for degreeUnedited state
     setJustModal        ---     change handler for opening/closing justification modal
 */
-const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, studMName, studLName, degree, setStudNum, setStudFName, setStudMName, setStudLName, setDegree, setJustModal }) => {
+const EditStudent = ({ modalState, handleClose, handleSave, setcurrStudentID,studNum, studFName, studMName, studLName, degree, setStudNum, setStudFName, setStudMName, setStudLName, setDegree, studNumUnedited, studFNameUnedited, studMNameUnedited, studLNameUnedited, degreeUnedited, setStudNumUnedited, setStudFNameUnedited, setStudMNameUnedited, setStudLNameUnedited, setDegreeUnedited, setJustModal, setTitle }) => {
     
     /*-------------------- Styling --------------------*/
     const editStudentModal = `relative bg-secondary-red h-[49vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
@@ -44,9 +53,28 @@ const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, 
     const modalFooter = `mt-[4.85vh] text-[1.11vw] flex items-center justify-center`;
     const modalBtnSave = `h-[5vh] w-[9.25vw] rounded-xl mr-[0.65vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green`;
 
-    
+    // Save Button
+    const SaveButton = () => {
+
+        // check if there is atleast one change in all input fields
+        if (studFName != studFNameUnedited || studMName != studMNameUnedited || studLName != studLNameUnedited || studNum != studNumUnedited || degree != degreeUnedited ){
+          return <button 
+          className={modalBtnSave} 
+          onClick={() => {
+                // update history title for edit
+                setTitle(prevTitle => prevTitle + `Name: ${studLName}, ${studFName} ${studMName}., Student No.: ${studNum}, and Degree: ${degree}.`)
+                // update current student number on localStorage
+                localStorage.setItem('currStudentKey', studNum);
+                handleSave()           // close edit student modal
+                setJustModal(true);     // open justification
+            }}>Save</button>
+        } else {
+          return <button className={modalBtnSave} disabled>Save</button>
+        };
+    };
+
     return (
-        <>          
+        <>                           
             {/* Wrapping everything with transition component to use transition effects from @headlessui/react */}
             <Transition appear show={modalState} as={Fragment}>
 
@@ -67,11 +95,11 @@ const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, 
                         <div className="fixed inset-0 bg-black bg-opacity-25" />
                     </Transition.Child>
 
-                    {/* Container for the layer containing the modal window */}
-                    <div className="fixed inset-0 overflow-y-auto flex min-h-full items-center justify-center p-4 text-center">
+                            {/* Container for the layer containing the modal window */}
+                            <div className="fixed inset-0 overflow-y-auto flex min-h-full items-center justify-center p-4 text-center">
 
-                        {/* Transition effect for the element inside this Transition.Child tag*/}
-                        <Transition.Child
+                            {/* Transition effect for the element inside this Transition.Child tag*/}
+                            <Transition.Child
                             as={Fragment}
                             enter="ease-out duration-300"
                             enterFrom="opacity-0 scale-95"
@@ -79,7 +107,7 @@ const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, 
                             leave="ease-in duration-200"
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
-                        >
+                            >
 
                             {/* Edit Student Details modal window */}
                             <Dialog.Panel className={editStudentModal}>
@@ -188,7 +216,7 @@ const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, 
 
                                             {/* Save button */}
                                             <div className={modalFooter}>
-                                                <button className={modalBtnSave} onClick={handleSave}>Save</button>
+                                                <SaveButton />
                                             </div>
                                         </div>
                                     </div>

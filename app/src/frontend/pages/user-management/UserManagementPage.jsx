@@ -5,12 +5,15 @@ import Swal from 'sweetalert2';
 /* Components */
 import List from 'frontend/components/table/List';
 import Pagination from 'frontend/components/table/Pagination';
+import UserNav from 'frontend/components/common/UserNavigation';
 import AdminNav from 'frontend/components/common/AdminNavigation';
 import HeaderWithoutArrowbck from 'frontend/components/common/HeaderWithoutArrowbck';
 import AddUserBtn from 'frontend/components/buttons/AddUserBtn';
 import Search from 'frontend/components/search/Search';
+import SearchModal from 'frontend/components/search/SearchModal';
 import EditUser from './EditUser';
 import AddUser from './AddUser';
+
 
 
 /* Parent component >> renderer/App.jsx */
@@ -79,6 +82,7 @@ const UserManagementPage = ({ hoverRef, isHovering, setIsHovering }) => {
     const [showModal, setShowModal] = useState(false)
     const [showModalEdit, setShowEditModal] = useState(false)
     const [editUser, setEditUser] = useState({})
+    const [uneditedUser, setUneditedUser] = useState({})
 
     const [sortState, setSortState] = useState([0, 0, 0, 0]);
     const [latestSort, setLatestSort] = useState(-1);
@@ -132,6 +136,7 @@ const UserManagementPage = ({ hoverRef, isHovering, setIsHovering }) => {
     const handleEditRecord = (user) => {
       setShowEditModal(true);
       setEditUser(user);
+      setUneditedUser(user);
     }
 
     const handleEditRecordSave = (user) => {
@@ -234,7 +239,12 @@ const UserManagementPage = ({ hoverRef, isHovering, setIsHovering }) => {
         <>
             <div>
                 {/* Navigation Bar */}
-                <div><AdminNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} /></div>
+                <div>
+                    {userRole == "user" ?
+                        <UserNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
+                        : <AdminNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
+                    }
+                </div>
 
                 {/* Right Section */}
                 <div className="relative inset-0 flex ml-[4vw] justify-center">
@@ -255,7 +265,7 @@ const UserManagementPage = ({ hoverRef, isHovering, setIsHovering }) => {
 
                             {/* Edit User Modal */}
                             {showModalEdit ?
-                                (<EditUser modalState={true} handleClose={() => setShowEditModal(false)} editUser={editUser} handleEditRecordSave={handleEditRecordSave}/>)
+                                (<EditUser modalState={true} handleClose={() => setShowEditModal(false)} editUser={editUser} uneditedUser={uneditedUser} handleEditRecordSave={handleEditRecordSave}/>)
                                 :(<></>)
                             }
                         </div>

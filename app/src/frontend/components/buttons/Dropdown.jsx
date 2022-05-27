@@ -5,7 +5,7 @@ import { Transition } from '@headlessui/react';
 import 'tailwindcss/tailwind.css';
 
 /* Components */
-import EditBtn from 'frontend/components/buttons/EditStudentBtn.jsx';
+import EditBtn from 'frontend/components/buttons/EditStudentBtn';
 import studentDelete from 'backend/studentDelete';
 import exportStudentData from 'backend/exportStudentData';
 import Swal from 'sweetalert2';
