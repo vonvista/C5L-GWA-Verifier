@@ -92,8 +92,8 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
       <Transition
           show={isActive}
           enter="transition duration-200 ease-out"
-          enterFrom="transform scale-95 opacity-0"
-          enterTo="transform scale-100 opacity-100"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
           leave="transition duration-200 ease-out"
           leaveFrom="transform scale-100 opacity-100"
           leaveTo="transform scale-95 opacity-0"
