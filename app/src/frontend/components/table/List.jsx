@@ -57,12 +57,12 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                     {/* Table column names */}
                     <div className="table-header-group text-left">
                         <div className="table-row font-montserrat font-bold text-primary-red">
-                            <div className="table-cell w-1/6">Course Name</div>
-                            <div className="table-cell w-1/6 text-center">Grade</div>
-                            <div className="table-cell w-1/6 text-center">Units</div>
-                            <div className="table-cell w-1/6 text-center">Cumulative</div>
-                            <div className="table-cell w-1/6 text-center">Weight</div>
-                            <div className="table-cell w-1/6 text-center">
+                            <div className="table-cell w-1/6 align-middle">Course Name</div>
+                            <div className="table-cell w-1/6 text-center align-middle">Grade</div>
+                            <div className="table-cell w-1/6 text-center align-middle">Units</div>
+                            <div className="table-cell w-1/6 text-center align-middle">Cumulative</div>
+                            <div className="table-cell w-1/6 text-center align-middle">Weight</div>
+                            <div className="table-cell w-1/6 text-center align-middle">
                                 <AddRowBtn sem={sem} grades={data} addHandler={addHandler} handleHistory={handleHistory}/>
                             </div>
                         </div>
