@@ -5,7 +5,6 @@ import { Transition } from '@headlessui/react';
 import 'tailwindcss/tailwind.css';
 
 /* Components */
-import EditBtn from 'frontend/components/buttons/EditStudentBtn';
 import studentDelete from 'backend/studentDelete';
 import exportStudentData from 'backend/exportStudentData';
 import Swal from 'sweetalert2';
@@ -98,7 +97,7 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
           enterFrom="opacity-0"
           enterTo="opacity-100"
           leave="transition duration-200 ease-out"
-          leaveFrom="transform scale-100 opacity-100"
+          leaveFrom="transform scae-100 opacity-100"
           leaveTo="transform scale-95 opacity-0"
       >
         <div
