@@ -33,7 +33,7 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
         fetchData();
     }, []);
 
-    const nameStyle = `transition-colors ease-in-out delay-150 flex inter font-bold justify-between z-10 w-full px-4 py-2 text-sm font-medium text-left
+    const nameStyle = `transition-colors ease-in-out delay-150 flex font-montserrat font-semibold justify-between z-10 w-full px-4 py-2 text-sm text-left
         text-sr-table-text bg-sr-dark-gray hover:transition-colors hover:ease-in hover:delay-50 hover:bg-yellow-100 hover:text-secondary-red`;
 
     // set new values for addrow

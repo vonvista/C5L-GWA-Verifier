@@ -34,9 +34,9 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
     const sectionCoursename = `inline-block w-[11.71875vw]`;
     const sectionUnits = `inline-block w-[3.9vw]`;
     const sectionGrade = `inline-block w-[4.8vw]`;
-    const modalFooter = `absolute right-0 bottom-0 mt-[4.85vh] text-[1.11vw] flex items-end justify-end`;
-    const modalBtnSave = `h-[5vh] w-[9.25vw] rounded-xl mr-[0.65vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green`;
-    const modalBtnDiscard = `h-[5vh] w-[9.25vw] rounded-xl mr-[0.65vw] bg-discard hover:bg-white text-center`;
+    const modalFooter = `absolute font-poppins right-0 bottom-0 mt-[4.85vh] text-[0.95vw] flex items-end justify-end`;
+    const modalBtnSave = `h-[4.75vh] w-[8.8vw] rounded-xl mr-[1vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green`;
+    const modalBtnDiscard = `h-[4.75vh] w-[8.8vw] rounded-xl mr-[0.65vw] bg-discard hover:bg-white text-center`;
 
     // Change courseName handler
     const handleCourseChange = (event) => {

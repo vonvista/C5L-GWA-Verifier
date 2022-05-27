@@ -53,7 +53,7 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
 
 
   return (
-    <div className="w-2/3 relative ml-auto grow-0">
+    <div className="w-2/3 font-poppins relative ml-auto grow-0">
         
 
       {/* Active word and dropdown icon */}
@@ -67,7 +67,7 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
             }
           }
         >
-          <p className="inline-block grow text-center text-white">
+          <p className="inline-block grow font-medium text-center text-white">
             {valueClicked}
           </p>
         </button>

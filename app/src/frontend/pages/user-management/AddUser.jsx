@@ -109,7 +109,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
 
   // Create user Button
   const CreateUserButton = () => {
-    const createbtn = `font-inter w-2/5 h-[5vh] block ml-auto mr-auto bg-button-green rounded-lg user-btn text-[1vw] text-sidebar-text
+    const createbtn = `w-2/5 h-[5vh] block ml-auto mr-auto bg-button-green rounded-lg user-btn text-[1vw] text-sidebar-text
             hover:shadow-lg hover:bg-button-green-hover disabled:bg-sr-disabled-green`;
     // check if all input fields have been filled
     if (firstName && middleName && lastName && un && position && pw) {
@@ -171,7 +171,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                   {/* Window Title */}
                   <Dialog.Title
                     as="h3"
-                    className="font-montserrat ml-3 text-2xl font-black leading-6 text-gray-900 flex"
+                    className="ml-3 text-2xl leading-6 text-gray-900 flex"
                   >
                     {/* Close button */}
                     <XIcon
@@ -182,7 +182,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
 
                   {/* Window body */}
 
-                  <div className="m-0 absolute top-[50%] translate-y-[-50%] w-full">
+                  <div className="font-montserrat m-0 absolute top-[50%] translate-y-[-50%] w-full">
                     <div className={modalBody1}>
                       {/* User Photo */}
                       <div className="w-1/6 ml-auto mt-2">
@@ -337,7 +337,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
 
                           {/* Create User Button */}
                           <div className="w-full flex">
-                            <section className="my-auto ml-0 mr-auto w-[90.5%]">
+                            <section className="my-auto ml-0 mr-auto w-[90.5%] font-poppins font-medium">
                               <CreateUserButton />
                             </section>
                           </div>

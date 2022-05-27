@@ -371,7 +371,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                             }}
                             manual
                         >
-                            <Tab.List className="flex rounded-t-md">
+                            <Tab.List className="flex rounded-t-md font-inter">
                                 {Object.keys(tabContents).map((tab, idx) => (
                                         <Tab key={idx} as={Fragment}>
                                             {({selected}) => (

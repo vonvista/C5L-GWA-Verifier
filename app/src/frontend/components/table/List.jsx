@@ -52,7 +52,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         return (
             <>  
                 {/* Accordion contents */}
-                <div className="table w-full m-0">
+                <div className="table font-inter w-full m-0">
 
                     {/* Table column names */}
                     <div className="table-header-group text-left">
@@ -299,7 +299,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         const numbertData = `${common} cursor-pointer w-[11.23vw] `;
         const degreetData = `${common} cursor-pointer w-[19vw] truncate`;
         const gwatData = `${common} cursor-pointer w-[12.8125vw] truncate`;
-        const statustData = `${elements} content-center justify-center text-center font-[1.1vw] h-[4.3vh] w-[7.14vw] p-0`;
+        const statustData = `${elements} content-center justify-center text-center font-[1vw] h-[4.3vh] w-[7.14vw] p-0`;
 
         const asc = `after:float-right after:content-['▲'] after:ml-[0.33vw] bg-sr-dark-gray`;
         const desc = `after:float-right after:content-['▼'] after:ml-[0.33vw] bg-sr-dark-gray`;
@@ -456,7 +456,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                     <td className={ `${numbertData} cursor-default`}>{student.studno}</td>
                                     <td className={` ${degreetData} cursor-default`}>{student.degprog}</td>
                                     <td className={` ${gwatData} cursor-default`}>{student.gwa}</td>
-                                    <td className={`${statustData} cursor-default`}>
+                                    <td className={`${statustData} font-poppins cursor-default`}>
                                         <div data-status={student.status} className='status'></div>
                                     </td>
                                     <td className='text-center'>

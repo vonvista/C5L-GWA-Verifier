@@ -67,11 +67,11 @@ const ExportFileBtn = ({ list }) => {
     <>
       <button className={exportbtn} type="button" onClick={handleExport}>
         <img
-          className="p-0.25 ml-0.25 mr-1.5 inline-flex w-[2vw] h-[2vw]"
+          className="p-0.25 ml-0.25 mr-2.5 inline-flex w-[2vw] h-[2vw]"
           alt="icon"
           src={exportIcon}
         />
-        <p className="text-[0.9vw] inline-block">Export as PDF</p>
+        <p className="text-[0.9vw] font-montserrat inline-block">Export as PDF</p>
       </button>
     </>
   );
