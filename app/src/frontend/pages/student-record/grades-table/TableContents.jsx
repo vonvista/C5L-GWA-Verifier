@@ -190,10 +190,10 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
                             
                             <Transition
                                 show={open}
-                                enter="transition duration-400 ease-in"
+                                enter="transition duration-300 ease-in"
                                 enterFrom="transform -translate-y-6 opacity-0"
                                 enterTo="transform translate-y-0 opacity-100"
-                                leave="transition duration-400 ease-out"
+                                leave="transition duration-300 ease-out"
                                 leaveFrom="transform translate-y-0 opacity-100"
                                 leaveTo="transform -translate-y-6 opacity-0"
                             >
