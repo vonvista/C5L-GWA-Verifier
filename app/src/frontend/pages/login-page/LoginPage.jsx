@@ -208,8 +208,8 @@ const LoginPage = () => {
                 {/* Footer */}
                 <div className="flex justify-center opacity-50 text-[1.25vw] gap-[5vw] absolute bottom-[2vw] inset-x-0 text-login-footer">
                     <span><TextBtn text="About" handleClick={handleTeam}/></span>
-                    <span><TextBtn text="Help" handleClick={()=>{}}/></span>
                     <span><TextBtn text="Privacy Policy" handleClick={()=>{}}/></span>
+                    <span><TextBtn text="Help" handleClick={()=>{}}/></span>
                 </div>
             </section>
         </main>
