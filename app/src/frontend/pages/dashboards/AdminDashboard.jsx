@@ -311,7 +311,9 @@ const AdminDashboard = () => {
                   </div>
                   {/* Refresh button */}
                   <div className='flex items-center'>
-                    <Refresh refreshData={refreshData} setRefreshData={setRefreshData}/>
+                    <span className="pr-1.5 mr-0 items-center justify-items-center inline-block grow">
+                      <Refresh refreshData={refreshData} setRefreshData={setRefreshData}/>
+                    </span>
                   </div>
                 </div>
                 <div className='table-container'>
