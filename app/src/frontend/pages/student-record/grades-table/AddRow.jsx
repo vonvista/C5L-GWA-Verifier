@@ -23,7 +23,7 @@ import 'tailwindcss/tailwind.css';
 const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNameHandler, unitsState, unitsHandler, gradeState, gradeHandler, histTitleHandler, semState}) => {
 
     // Styling
-    const addRowModal = `relative bg-secondary-red h-[37vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
+    const addRowModal = `relative bg-secondary-red h-[37vh] w-[45vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
     const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[37vh]`;
     const modalBody = `absolute inset-x-0 bg-secondary-red top-[8%] bottom-[10%]`;
     const modalClose = `text-[4.85vh] text-white float-right`;
