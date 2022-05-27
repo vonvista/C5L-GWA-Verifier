@@ -25,13 +25,12 @@ import 'tailwindcss/tailwind.css';
     setStudMName        ---     change handler for studMName state
     setStudLName        ---     change handler for studLName state
     setDegree           ---     change handler for degree state
-    setJustModal        ---     change handler for opening/closing justification modal
 */
-const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, studMName, studLName, degree, setStudNum, setStudFName, setStudMName, setStudLName, setDegree, setJustModal }) => {
+const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, studMName, studLName, degree, setStudNum, setStudFName, setStudMName, setStudLName, setDegree }) => {
     
     /*-------------------- Styling --------------------*/
     const editStudentModal = `relative bg-secondary-red h-[49vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
-    const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[37vh]`;
+    const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain -ml-[14.25vh] h-[49vh]`;
     const modalBody = `absolute inset-x-0 bg-secondary-red top-[8%] bottom-[10%]`;
     const modalClose = `text-[4.85vh] text-white float-right`;
     const modalTitle = `text-white text-center font-bold italic text-[1.30vw] mt-[4.15vh] mb-[4.85vh]`;
@@ -51,7 +50,7 @@ const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, 
             <Transition appear show={modalState} as={Fragment}>
 
                 {/* Wrapping everything with dialog component */}
-                <Dialog as="div" className="relative z-50" onClose={handleClose}>
+                <Dialog as="div" className="relative z-50" openModal={modalState} onClose={handleClose}>
 
                     {/* Transition effect for the element inside this Transition.Child tag*/}
                     <Transition.Child
