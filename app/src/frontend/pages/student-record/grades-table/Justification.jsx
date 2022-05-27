@@ -147,7 +147,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                     </Dialog.Title>
 
                                     {/* Window Body */}
-                                    <div className="mt-4 grid h-[85%]">
+                                    <div className="mt-4 grid h-[11.5rem]">
                                         <textarea
                                             className="inter mx-auto text-sm lg:text-lg px-3 py-1 w-full h-full block resize-none focus:outline-none"
                                             name="desc"
@@ -156,17 +156,17 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                             onChange={changeHandler}
                                             
                                         />
-
-                                        {/* Save Button */}
-                                        <button
-                                            type="submit"
-                                            className="inter mt-4 w-[20%] self-end inline-flex justify-center rounded-md border border-transparent bg-button-green px-4 py-2 text-sm font-medium text-white transition-all ease-out delay-200 hover:transition-all hover:ease-in hover:delay-200 hover:bg-button-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
-                                            onClick={saveChanges}
-                                            disabled={!isValid}
-                                        >
-                                            Save
-                                        </button>
                                     </div>
+
+                                    {/* Save Button */}
+                                    <button
+                                        type="submit"
+                                        className="inter h-auto mt-3 w-[20%] self-end inline-flex justify-center rounded-md border border-transparent bg-button-green px-4 py-2 text-sm font-medium text-white transition-all ease-out delay-200 hover:transition-all hover:ease-in hover:delay-200 hover:bg-button-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
+                                        onClick={saveChanges}
+                                        disabled={!isValid}
+                                    >
+                                        Save
+                                    </button>
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>
