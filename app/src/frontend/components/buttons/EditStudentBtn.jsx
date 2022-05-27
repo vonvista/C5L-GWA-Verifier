@@ -15,8 +15,7 @@ import Swal from 'sweetalert2';
     handleClick  ---  function to handle click event
     setHistory   ---  function to update history logs
 */
-const EditBtn = ({ studentInfo, setHistory, setSelectedStudent }) => {
-
+const EditBtn = ({ studentInfo, setHistory, setSelectedStudent}) => {
   
   /*-------------------- Styling --------------------*/
   const editBtnStyle = `text-gray-700 block px-4 rounded-xl py-2 text-sm z-1 w-full hover:bg-button-green-hover`;
@@ -35,6 +34,13 @@ const EditBtn = ({ studentInfo, setHistory, setSelectedStudent }) => {
   const [studLName, setStudLName] = useState('');
   const [degree, setDegree] = useState('');
 
+  // input fields
+  const [studNumUnedited, setStudNumUnedited] = useState('');
+  const [studFNameUnedited, setStudFNameUnedited] = useState('');
+  const [studMNameUnedited, setStudMNameUnedited] = useState('');
+  const [studLNameUnedited, setStudLNameUnedited] = useState('');
+  const [degreeUnedited, setDegreeUnedited] = useState('');
+
   const [histTitle, setTitle] = useState(`Edited student detail information from Name: ${studentInfo.iname.lname}, ${studentInfo.iname.fname} ${studentInfo.iname.mname}., Student No.: ${studentInfo.stud_no}, and Degree: ${studentInfo.degree_program} to `);
   const [currStudentID, setcurrStudentID] = useState(localStorage.getItem('currStudentID'));
   const [ip, setIp] = useState(localStorage.getItem('ServerIP'));
@@ -48,14 +54,19 @@ const EditBtn = ({ studentInfo, setHistory, setSelectedStudent }) => {
     setStudFName(studentInfo.iname.fname)
     setStudMName(studentInfo.iname.mname)
     setStudLName(studentInfo.iname.lname)
+    setStudNumUnedited(studentInfo.stud_no)
+    setDegreeUnedited(studentInfo.degree_program)
+    setStudFNameUnedited(studentInfo.iname.fname)
+    setStudMNameUnedited(studentInfo.iname.mname)
+    setStudLNameUnedited(studentInfo.iname.lname)
   }, [])
 
-  // Function to open the edit student modal window
+  // Function to open the add row modal window
   const openModal = () => {
     setIsActive(true);
   }
 
-  // Function to close the edit student modal window
+  // Function to close the add row modal window
   const closeEditStud = () => {
     setIsActive(false);
   }
@@ -121,18 +132,10 @@ const EditBtn = ({ studentInfo, setHistory, setSelectedStudent }) => {
   }
 
   //main function for student update and add history
-  const submitStudentEdit = () => {
-      
-      // update history title for edit
-      setTitle(prevTitle => prevTitle + `Name: ${studLName}, ${studFName} ${studMName}., Student No.: ${studNum}, and Degree: ${degree}.`)
-
-      // update current student number on localStorage
-      localStorage.setItem('currStudentKey', studNum);
-
+  const editModalClose = () => {
       closeEditStud();        // close edit student modal
       setJustModal(true);     // open justification
       //setSelectedStudent( (prevState)=>({...prevState, stud_no: studNum, degree_program: degree, Student: currStudentID, iname: {fname: studFName, mname: studMName, lname: studLName}}))
-    
   }
 
   return (
@@ -140,13 +143,9 @@ const EditBtn = ({ studentInfo, setHistory, setSelectedStudent }) => {
       <Justification modalState={justModal} modalHandler={closeJustModal} parentSubmitHandler={updateStudent} handleHistory={handleHistory} histTitle={histTitle}/> 
       
       <EditStudentDetails
-            onClick={() => {
-            setIsActive(!isActive);
-            setValueClicked('Edit');
-            }}
             modalState={isActive}
             handleClose={closeEditStud}
-            handleSave={submitStudentEdit}
+            handleSave={editModalClose}
 
             studNum={studNum}
             studFName={studFName}
@@ -159,6 +158,17 @@ const EditBtn = ({ studentInfo, setHistory, setSelectedStudent }) => {
             setStudLName={setStudLName}
             setDegree={setDegree}
             setcurrStudentID={currStudentID}
+
+            studNumUnedited={studNumUnedited}
+            studFNameUnedited={studFNameUnedited}
+            studMNameUnedited={studMNameUnedited}
+            studLNameUnedited={studLNameUnedited}
+            degreeUnedited={degreeUnedited}
+            setStudNumUnedited={setStudNumUnedited}
+            setStudFNameUnedited={setStudFNameUnedited}
+            setStudMNameUnedited={setStudMNameUnedited}
+            setStudLNameUnedited={setStudLNameUnedited}
+            setDegreeUnedited={setDegreeUnedited}
 
             setJustModal={setJustModal}
             setTitle={setTitle}
@@ -176,5 +186,4 @@ const EditBtn = ({ studentInfo, setHistory, setSelectedStudent }) => {
     </>
   );
 };
-
 export default EditBtn;
