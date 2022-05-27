@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import add from '../../../../assets/icons/addRow.svg';
+import { PlusSmIcon } from '@heroicons/react/solid';
 import AddRow from 'frontend/pages/student-record/grades-table/AddRow';
 import Justification from 'frontend/pages/student-record/grades-table/Justification';
 import Swal from 'sweetalert2';
@@ -209,7 +209,7 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
     }
 
     // Styling
-    const addRowStyle = `w-3/5 h-8 bg-button-green mb-3 rounded-xl text-white font-montserrat font-bold hover:shadow-lg hover:bg-button-green-hover`;
+    const addRowStyle = `w-3/5 h-[3.25vh] bg-button-green mb-3 rounded-xl text-white font-montserrat font-bold hover:shadow-lg hover:bg-button-green-hover`;
 
     
     return (
@@ -237,14 +237,8 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
 
             {/* Add Row button */}
             <button className={addRowStyle} type="button" onClick={openModal}>
-                <img
-                className="p-0.25 my-1.5 inline-flex"
-                width="18px"
-                height="18px"
-                alt="icon"
-                src={add}
-                />
-                <p className="text-xs inline-block">Add Row</p>
+                <PlusSmIcon className="w-[2.5vh] ml-0.5 mt-1 3xl:mt-0 mr-1.5 inline-flex"/>
+                <p className="text-xs pr-1 inline-block">Add Row</p>
             </button>
         </>
     );

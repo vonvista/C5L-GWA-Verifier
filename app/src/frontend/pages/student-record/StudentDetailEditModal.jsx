@@ -1,6 +1,6 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import { Dialog, Transition} from '@headlessui/react';
 import { Fragment, useEffect, useState } from 'react';
+import { Dialog, Transition} from '@headlessui/react';
+import { XIcon } from '@heroicons/react/outline';
 import Justification from './grades-table/Justification';
 import 'tailwindcss/tailwind.css';
 import EditBtn from 'frontend/components/buttons/EditStudentBtn.jsx';
@@ -39,7 +39,7 @@ import 'tailwindcss/tailwind.css';
 const EditStudent = ({ modalState, handleClose, handleSave, setcurrStudentID,studNum, studFName, studMName, studLName, degree, setStudNum, setStudFName, setStudMName, setStudLName, setDegree, studNumUnedited, studFNameUnedited, studMNameUnedited, studLNameUnedited, degreeUnedited, setStudNumUnedited, setStudFNameUnedited, setStudMNameUnedited, setStudLNameUnedited, setDegreeUnedited, setJustModal, setTitle }) => {
     
     /*-------------------- Styling --------------------*/
-    const editStudentModal = `relative bg-secondary-red h-[47vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
+    const editStudentModal = `relative bg-secondary-red h-[49vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
     const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[37vh]`;
     const modalBody = `absolute inset-x-0 bg-secondary-red top-[8%] bottom-[10%]`;
     const modalClose = `text-[4.85vh] text-white float-right`;
@@ -111,109 +111,119 @@ const EditStudent = ({ modalState, handleClose, handleSave, setcurrStudentID,stu
 
                             {/* Edit Student Details modal window */}
                             <Dialog.Panel className={editStudentModal}>
-                                    <div className='relative'>
-                                        <div className={baybayinStyle}></div>
-                                        <div className={modalBody}>
+                                <div className='relative'>
+                                    <div className={baybayinStyle}></div>
+                                    <div className={modalBody}>
 
-                                            {/* Window title */}
-                                            <div className={modalClose}>
-                                                <button onClick={handleClose}>
-                                                    <span>&times;</span>
-                                                </button>
-                                            </div>
+                                        {/* Close button */}
+                                        <div className={modalClose}>
+                                            <XIcon
+                                                className="h-7 w-7 cursor-pointer transition-all ease-out delay-200 hover:text-gray-400 hover:transition-all hover:ease-in hover:delay-200"
+                                                onClick={handleClose}
+                                            />
+                                        </div>
+                                        
+                                        {/* Window text */}
+                                        <div className={modalTitle}>Please fill in the fields below to edit student's details</div>
+                                        <div className='flex flex-col justify-center'>
 
-                                            <div className={modalTitle}>Please fill in the fields below to edit student's details</div>
-                                            <div className='flex flex-col justify-center'>
-                                                {/* input form */}
-                                                <form className={modalInputs}>
-                                                        <div className='flex flex-row'> 
-                                                            {/* Student Name */}
-                                                            <div className={inputContainer}>
-                                                                <section className={sectionFLName}>
-                                                                    <input
-                                                                        className={inputStyle}
-                                                                        type="text"
-                                                                        name="studFName"
-                                                                        placeholder='First Name'
-                                                                        value={studFName}
-                                                                        onChange={(e) => setStudFName(e.target.value)}
-                                                                    />
+                                            {/* Input form */}
+                                            <form className={modalInputs}>
 
-                                                                    <div className='w-full text-white text-center'>First Name</div>
-                                                                </section>
-                                                            </div>
-                                                            <div className={inputContainer}>
-                                                                <section className={sectionMI}>
-                                                                    <input
-                                                                        className={inputStyle}
-                                                                        type="text"
-                                                                        name="studMName"
-                                                                        placeholder='M.I.'
-                                                                        value={studMName}
-                                                                        onChange={(e) => setStudMName(e.target.value)}
-                                                                    />
-                                                                    <div className='w-full text-white text-center text-sm'>Middle Initial</div>
-                                                                </section>
-                                                            </div>
+                                                {/* Student Name */}
+                                                <div className='flex flex-row'> 
 
-                                                            {/* Last Name */}
-                                                            <div className={inputContainer}>
-                                                                <section className={sectionFLName}>
-                                                                    <input
-                                                                        className={inputStyle}
-                                                                        type="text"
-                                                                        name="studLName"
-                                                                        placeholder='Surname'
-                                                                        value={studLName}
-                                                                        onChange={(e) => setStudLName(e.target.value)}
-                                                                    />
-                                                                    <div className='w-full text-white text-center'>Surname</div>
-                                                                </section>
-                                                            </div> 
-                                                        </div>
-                                                        <div className='flex flex-row'>
+                                                    {/* First Name */}
+                                                    <div className={inputContainer}>
+                                                        <section className={sectionFLName}>
+                                                            <input
+                                                                className={inputStyle}
+                                                                type="text"
+                                                                name="studFName"
+                                                                placeholder='First Name'
+                                                                value={studFName}
+                                                                onChange={(e) => setStudFName(e.target.value)}
+                                                            />
 
-                                                            {/* Student Number */}
-                                                            <div className={inputContainer}>
-                                                                <section className={sectionInputField}>
-                                                                    <input
-                                                                        className={inputStyle}
-                                                                        type="text"
-                                                                        name="studNum"
-                                                                        placeholder='20XX-XXXX'
-                                                                        value={studNum}
-                                                                        onChange={(e) => setStudNum(e.target.value)}
-                                                                    />
-                                                                    <div className='w-full text-white text-center'>Student Number</div>
-                                                                </section>
-                                                            </div>
-                                                            {/* Degree Program */}
-                                                            <div className={inputContainer}>
-                                                                <section className={sectionInputField}>
-                                                                    <input
-                                                                        className={inputStyle}
-                                                                        type="text"
-                                                                        name="degree"
-                                                                        placeholder='Degree Program'
-                                                                        value={degree}
-                                                                        onChange={(e) => setDegree(e.target.value)}
-                                                                    />
-                                                                    <div className='w-full text-white text-center'>Degree Program</div>
-                                                                </section>
-                                                            </div>
-                                                        </div> 
-                                                </form>
+                                                            <div className='w-full text-white text-center'>First Name</div>
+                                                        </section>
+                                                    </div>
 
-                                                {/* Save button */}
-                                                <div className={modalFooter}>
-                                                    <SaveButton />
+                                                    {/* Middle Initial */}
+                                                    <div className={inputContainer}>
+                                                        <section className={sectionMI}>
+                                                            <input
+                                                                className={inputStyle}
+                                                                type="text"
+                                                                name="studMName"
+                                                                placeholder='M.I.'
+                                                                value={studMName}
+                                                                onChange={(e) => setStudMName(e.target.value)}
+                                                            />
+                                                            <div className='w-full text-white text-center text-sm'>Middle Initial</div>
+                                                        </section>
+                                                    </div>
+
+                                                    {/* Last Name */}
+                                                    <div className={inputContainer}>
+                                                        <section className={sectionFLName}>
+                                                            <input
+                                                                className={inputStyle}
+                                                                type="text"
+                                                                name="studLName"
+                                                                placeholder='Surname'
+                                                                value={studLName}
+                                                                onChange={(e) => setStudLName(e.target.value)}
+                                                            />
+                                                            <div className='w-full text-white text-center'>Surname</div>
+                                                        </section>
+                                                    </div> 
                                                 </div>
+
+                                                <div className='flex flex-row'>
+
+                                                    {/* Student Number */}
+                                                    <div className={inputContainer}>
+                                                        <section className={sectionInputField}>
+                                                            <input
+                                                                className={inputStyle}
+                                                                type="text"
+                                                                name="studNum"
+                                                                placeholder='20XX-XXXX'
+                                                                value={studNum}
+                                                                onChange={(e) => setStudNum(e.target.value)}
+                                                            />
+                                                            <div className='w-full text-white text-center'>Student Number</div>
+                                                        </section>
+                                                    </div>
+
+                                                    {/* Degree Program */}
+                                                    <div className={inputContainer}>
+                                                        <section className={sectionInputField}>
+                                                            <input
+                                                                className={inputStyle}
+                                                                type="text"
+                                                                name="degree"
+                                                                placeholder='Degree Program'
+                                                                value={degree}
+                                                                onChange={(e) => setDegree(e.target.value)}
+                                                            />
+                                                            <div className='w-full text-white text-center'>Degree Program</div>
+                                                        </section>
+                                                    </div>
+                                                </div> 
+                                            </form>
+
+                                            {/* Save button */}
+                                            <div className={modalFooter}>
+                                                <SaveButton />
                                             </div>
                                         </div>
                                     </div>
-                                </Dialog.Panel>
-                            </Transition.Child>
-                        </div>
+                                </div>
+                            </Dialog.Panel>
+                        </Transition.Child>
+                    </div>
                 </Dialog>
             </Transition>
         </>

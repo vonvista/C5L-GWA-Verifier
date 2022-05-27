@@ -6,7 +6,7 @@ import 'tailwindcss/tailwind.css';
 /* Components */
 import Actions from '../buttons/Actions';
 import EditUser from 'frontend/pages/user-management/EditUser';
-import AddRowBtn from 'frontend/components/buttons/AddRowBtn.jsx';
+import AddRowBtn from 'frontend/components/buttons/AddRowBtn';
 import ReadRow from 'frontend/pages/student-record/grades-table/ReadRow';
 import EditRow from 'frontend/pages/student-record/grades-table/EditRow';
 import Swal from 'sweetalert2';

@@ -1,6 +1,6 @@
-import 'tailwindcss/tailwind.css';
+import { SearchIcon } from '@heroicons/react/solid';
 import Input from '../inputs/Input';
-import search from '../../../../assets/icons/search.svg';
+import 'tailwindcss/tailwind.css';
 
 
 /* Parent component >> frontend/pages/dashboards/UserDashboard */
@@ -56,13 +56,10 @@ const Search = ({ user, handleSearch, searchValue, buttonHandler, handleEnter })
                     handleKeyPress={handleEnter}
                 />
                 <div className="absolute inset-y-0 left-[83%] flex items-center px-2">
-                   <button
-                        className="rounded cursor-pointer w-[2.5vw] h-11/12"
-                        type="button"
+                    <SearchIcon
+                        className="w-[1.5vw] text-[#bfbfbf] rounded cursor-pointer h-11/12"
                         onClick={buttonHandler}
-                    >
-                        <img className="search-btn" alt="icon" src={search} />
-                    </button>
+                    />
                 </div>
             </div>
         </>

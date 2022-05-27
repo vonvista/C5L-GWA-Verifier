@@ -14,7 +14,7 @@ export default function CheckListTab ({ checklistData, setValData, handleApply }
 
     return (
         <div className="min-w-[25vw] max-w-[25vw] h-[41rem] max-h-[41rem] mx-auto p-5 block overflow-auto">
-            <p className="text-sm font-inter ml-[0.5vw] text-left">
+            <p className="text-md font-inter ml-[0.5vw] text-left mb-3">
                 The following are the details of the validation results from this
                 student record's summary of grades:
             </p>
@@ -35,7 +35,7 @@ export default function CheckListTab ({ checklistData, setValData, handleApply }
 
             {/* Apply changes button */}
             <button
-                className="h-9 px-5 flex items-center mt-4 rounded-xl bg-button-green text-white font-montserrat font-bold hover:shadow-lg hover:bg-button-green-hover"
+                className="h-9 px-5 flex items-center mt-6 rounded-xl bg-button-green text-white font-montserrat font-bold hover:shadow-lg hover:bg-button-green-hover"
                 type="button"
                 onClick={handleApply}
             >

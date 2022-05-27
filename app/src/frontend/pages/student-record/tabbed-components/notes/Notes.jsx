@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { TrashIcon } from '@heroicons/react/solid';
 import AddNoteBtn from 'frontend/components/buttons/AddNoteBtn';
 import Delete from '../../../../../../assets/icons/delete.svg';
 import Swal from 'sweetalert2';
@@ -110,11 +111,12 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
                             </p>
 
                             {/* Delete button */}
-                            <button className='w-max rounded-lg mt-4 p-2 flex content-center hover:bg-gray-300' onClick={() => handleDeleteNote(data)}>
-                                <img
+                            <button className='w-max rounded-lg mt-4 p-2 items-center flex content-center hover:bg-gray-300' onClick={() => handleDeleteNote(data)}>
+                                <TrashIcon className="w-5"/>
+                                {/* <img
                                     width="18"
                                     src={Delete}
-                                />
+                                /> */}
                                 <span className="text-sm font-inter ml-2">Delete</span>
                             </button>
                         </div>

@@ -22,6 +22,7 @@ const UploadFileBtn = ({ handleClick, handleAddRecord }) => {
       showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: 'Single',
+      confirmButtonColor: '#ffc270',
       denyButtonText: 'Bulk',
       denyButtonColor: '#2a7546',
 
