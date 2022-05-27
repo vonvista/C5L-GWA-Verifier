@@ -60,8 +60,8 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             <div className="table-cell w-1/6 align-middle">Course Name</div>
                             <div className="table-cell w-1/6 text-center align-middle">Grade</div>
                             <div className="table-cell w-1/6 text-center align-middle">Units</div>
-                            <div className="table-cell w-1/6 text-center align-middle">Cumulative</div>
                             <div className="table-cell w-1/6 text-center align-middle">Weight</div>
+                            <div className="table-cell w-1/6 text-center align-middle">Cumulative</div>
                             <div className="table-cell w-1/6 text-center align-middle">
                                 <AddRowBtn sem={sem} grades={data} addHandler={addHandler} handleHistory={handleHistory}/>
                             </div>
