@@ -5,6 +5,7 @@ import user from '../../../../assets/icons/user-icon.jpg';
 import 'tailwindcss/tailwind.css';
 import Swal from 'sweetalert2';
 
+
 /* Parent component: ./UserManagementPage */
 
 /* This function contains the add user modal window. 
@@ -53,21 +54,6 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
 
   // Please put this logic on parent component/main page -vov
   const add_user = () => {
-    if (
-      firstName === '' ||
-      middleName === '' ||
-      lastName === '' ||
-      un === '' ||
-      position === '' ||
-      pw === ''
-    ) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Fill out all fields',
-      });
-      return;
-    }
 
     const credentials = {
       FirstName: firstName,
@@ -122,7 +108,8 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
 
   // Create user Button
   const CreateUserButton = () => {
-    const createbtn = `font-inter w-2/5 h-[5vh] block ml-auto mr-auto bg-white rounded-lg hover:bg-slate-100 user-btn text-[1vw] disabled:bg-gray-300 disabled:hover:bg-gray-300`;
+    const createbtn = `font-inter w-2/5 h-[5vh] block ml-auto mr-auto bg-button-green rounded-lg user-btn text-[1vw] text-sidebar-text
+            hover:shadow-lg hover:bg-button-green-hover disabled:bg-sr-disabled-green`;
     // check if all input fields have been filled
     if (firstName && middleName && lastName && un && position && pw) {
       return (
