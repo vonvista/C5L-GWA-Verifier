@@ -7,7 +7,6 @@ import user from '../../../../assets/icons/user-icon.jpg';
 import 'tailwindcss/tailwind.css';
 
 
-
 // function which shows the add user modal; to be used in UserSystemPage
 // to use EditUser and AddUserBtn, import needed files and declare and initialize showModal variable:
 // <Actions handleEdit={() => setShowModal(true)}/>
@@ -73,7 +72,6 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
       return
     }
 
-
     const credentials = {
         _id: editUser._id,
         FirstName: firstName,
@@ -129,20 +127,6 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
     })
   };
 
-  // Save Button
-  const SaveButton = () => {
-    console.log(firstName);
-    console.log(firstNameUnedited);
-    // check if there is atleast one change in all input fields
-    if (pw != '' && (firstName != firstNameUnedited || middleName!= middleNameUnedited || lastName != lastNameUnedited || un != unUnedited || position != positionUnedited)){
-      return <button 
-      className={modalBtnSave} 
-      onClick={edit_user}>Save</button>
-    } else {
-      return <button className={modalBtnSave} disabled>Save</button>
-    };
-};
-
   /*-------------------- Styling --------------------*/
   const editStudentModal = `relative bg-secondary-red h-[47vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
   const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[37vh]`;
@@ -162,7 +146,10 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
   const inputContent = `overflow-auto w-full text-[1.25vw]`;
   const form = `bg-transparent rounded-lg py-0 px-5`;
 
-
+  //prevent default form submission
+  const preventDefault = (e) => {
+    e.preventDefault();
+  };
 
 
   return (
@@ -356,10 +343,24 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                             </div>
                           </div>
 
-                          {/* Save button */}
-                            <section className="mt-8 flex w-[90.5%] justify-center">
-                              <SaveButton />
-                            </section>
+                        {/* Save button */}
+                          <section className="mt-8 flex w-[90.5%] justify-center">
+                            <button 
+                              //prevent default
+                              onClick={(e) => 
+                                {
+                                e.preventDefault();
+                                edit_user();
+                                }
+                              }
+                              className={modalBtnSave} 
+                              disabled={(pw != '' && (firstName != firstNameUnedited || middleName!= middleNameUnedited || 
+                                lastName != lastNameUnedited || un != unUnedited || position != positionUnedited)) ? false : true}
+                            >
+                              Save
+                            </button>
+                          
+                          </section>
                         </form>
                       </section>
                     </div>
