@@ -66,7 +66,7 @@ const AddNoteBtn = ({ notesList, semesters, handleAddNote, selectedSem, setSelec
             {/* Add/Edit Note Button */}
             <button className={addNoteStyle} type="button" onClick={openModal}>
                 <PlusSmIcon className="p-0.25 w-6 my-1.5 ml-0.25 mr-1.5 inline-flex"/>
-                <p className="text-xs inline-block">Add / Edit Note</p>
+                <p className="text-sm font-poppins font-medium odd:inline-block">Add / Edit Note</p>
             </button>
         </>
     );

@@ -237,8 +237,8 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
 
             {/* Add Row button */}
             <button className={addRowStyle} type="button" onClick={openModal}>
-                <PlusSmIcon className="w-[2.5vh] ml-0.5 mt-1 3xl:mt-0 mr-1.5 inline-flex"/>
-                <p className="text-xs pr-1 inline-block">Add Row</p>
+                <PlusSmIcon className="w-[2.5vh] ml-0.5 mt-1 3xl:mt-0 mr-0.5 inline-flex"/>
+                <p className="text-sm font-poppins font-normal pr-1 inline-block">Add Row</p>
             </button>
         </>
     );

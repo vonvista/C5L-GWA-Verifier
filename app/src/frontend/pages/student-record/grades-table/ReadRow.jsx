@@ -7,7 +7,9 @@ import Actions from 'frontend/components/buttons/ActionsJustification'
 /* Props:
     data          ---  contains data to be displayed
     clickHandler  ---  handles toggle for editing the row
-    delRow        ---  handles toggle for deleting the row
+    delHandler    ---  handles toggle for deleting the row
+    histHandler   ---  handles pushing read row changes to history
+    sem           ---  receives the semester and academic year where the row is located
 */
 const ReadRow = ({data, clickHandler, delHandler, histHandler, sem}) => {
 
@@ -19,8 +21,8 @@ const ReadRow = ({data, clickHandler, delHandler, histHandler, sem}) => {
     return(
         <div className="table-row">
             <div className="table-cell align-middle self-center text-sr-dark-text">{data.courseName}</div>
-            <div className="table-cell align-middle self-center text-sr-dark-text text-center">{data.units}</div>
             <div className="table-cell align-middle self-center text-sr-dark-text text-center">{data.grade}</div>
+            <div className="table-cell align-middle self-center text-sr-dark-text text-center">{data.units}</div>
             <div className="table-cell align-middle self-center text-sr-dark-text text-center">{data.enrolled}</div>
             <div className="table-cell align-middle self-center text-sr-dark-text text-center">{data.runningSum}</div>
             <div className="table-cell align-middle self-center text-sr-dark-text text-center">

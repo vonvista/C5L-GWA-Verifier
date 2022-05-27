@@ -39,7 +39,7 @@ export default function CheckListTab ({ checklistData, setValData, handleApply }
                 type="button"
                 onClick={handleApply}
             >
-                <p className="text-sm inline-block">Apply Changes</p>
+                <p className="text-sm font-poppins font-medium inline-block">Apply Changes</p>
             </button>
         </div>
     );

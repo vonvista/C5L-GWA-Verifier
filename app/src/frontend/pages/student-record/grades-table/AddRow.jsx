@@ -23,7 +23,7 @@ import 'tailwindcss/tailwind.css';
 const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNameHandler, unitsState, unitsHandler, gradeState, gradeHandler, histTitleHandler, semState}) => {
 
     // Styling
-    const addRowModal = `relative bg-secondary-red h-[37vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
+    const addRowModal = `relative bg-secondary-red h-[37vh] w-[45vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
     const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[37vh]`;
     const modalBody = `absolute inset-x-0 bg-secondary-red top-[8%] bottom-[10%]`;
     const modalClose = `text-[4.85vh] text-white float-right`;
@@ -34,9 +34,9 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
     const sectionCoursename = `inline-block w-[11.71875vw]`;
     const sectionUnits = `inline-block w-[3.9vw]`;
     const sectionGrade = `inline-block w-[4.8vw]`;
-    const modalFooter = `absolute right-0 bottom-0 mt-[4.85vh] text-[1.11vw] flex items-end justify-end`;
-    const modalBtnSave = `h-[5vh] w-[9.25vw] rounded-xl mr-[0.65vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green`;
-    const modalBtnDiscard = `h-[5vh] w-[9.25vw] rounded-xl mr-[0.65vw] bg-discard hover:bg-white text-center`;
+    const modalFooter = `absolute font-poppins right-0 bottom-0 mt-[4.85vh] text-[0.95vw] flex items-end justify-end`;
+    const modalBtnSave = `h-[4.75vh] w-[8.8vw] rounded-xl mr-[1vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green`;
+    const modalBtnDiscard = `h-[4.75vh] w-[8.8vw] rounded-xl mr-[0.65vw] bg-discard hover:bg-white text-center`;
 
     // Change courseName handler
     const handleCourseChange = (event) => {
@@ -61,7 +61,7 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
           className={modalBtnSave} 
           onClick={() => {
               handleSave();
-              histTitleHandler(`Created student grade row with Course: ${courseNameState}, Units: ${unitsState}, and Grade: ${gradeState} on Semester: ${semState}`);
+              histTitleHandler(`Created student grade row with Course: ${courseNameState}, Grade: ${gradeState}, and Units: ${unitsState} on Semester: ${semState}`);
             }}>Save</button>
         } else {
           return <button className={modalBtnSave} disabled>Save</button>
@@ -151,20 +151,6 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
                                                 </section>
                                             </div>
 
-                                            {/* Units */}
-                                            <div className={inputContainer}>
-                                                <section className={sectionUnits}>
-                                                    <input 
-                                                        className={inputStyle}
-                                                        type="number"
-                                                        name="units"
-                                                        placeholder='0'
-                                                        onChange={handleUnitsChange}
-                                                    />
-                                                    <div className='w-full text-white text-center'>Units</div>
-                                                </section>
-                                            </div>
-
                                             {/* Grade */}
                                             <div className={inputContainer}>
                                                 <section className={sectionGrade}>
@@ -176,6 +162,20 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
                                                         onChange={handleGradeChange}
                                                     />
                                                     <div className='w-full text-white text-center'>Grade</div>
+                                                </section>
+                                            </div>
+
+                                            {/* Units */}
+                                            <div className={inputContainer}>
+                                                <section className={sectionUnits}>
+                                                    <input 
+                                                        className={inputStyle}
+                                                        type="number"
+                                                        name="units"
+                                                        placeholder='0'
+                                                        onChange={handleUnitsChange}
+                                                    />
+                                                    <div className='w-full text-white text-center'>Units</div>
                                                 </section>
                                             </div>
                                         </form>

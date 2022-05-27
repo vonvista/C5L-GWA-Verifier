@@ -13,7 +13,10 @@ import 'tailwindcss/tailwind.css';
    Props:
     modalState          ---     holds the state of the edit student modal
     handleClose         ---     function used to close edit student modal and reset the input fields
+    setJustModal        ---     function used to set JustModal state in parent component
     handleSave          ---     handles changes after saving on edit student modal
+    setTitle            ---     used for updating history title for student detail edit
+    
     studNum             ---     holds the value of student number field
     studFName           ---     holds the value of student first name field
     studMName           ---     holds the value of student middle name field
@@ -24,6 +27,7 @@ import 'tailwindcss/tailwind.css';
     setStudMName        ---     change handler for studMName state
     setStudLName        ---     change handler for studLName state
     setDegree           ---     change handler for degree state
+    
     studNumUnedited     ---     holds the value of the unedited student number field for save button access
     studFNameUnedited   ---     holds the value of the unedited student first name field for save button access
     studMNameUnedited   ---     holds the value of the unedited student middle name field for save button access
@@ -34,13 +38,15 @@ import 'tailwindcss/tailwind.css';
     setStudMNameUnedited---     change handler for studMNameUnedited state
     setStudLNameUnedited---     change handler for studLNameUnedited state
     setDegreeUnedited   ---     change handler for degreeUnedited state
-    setJustModal        ---     change handler for opening/closing justification modal
+    
 */
-const EditStudent = ({ modalState, handleClose, handleSave, setcurrStudentID,studNum, studFName, studMName, studLName, degree, setStudNum, setStudFName, setStudMName, setStudLName, setDegree, studNumUnedited, studFNameUnedited, studMNameUnedited, studLNameUnedited, degreeUnedited, setStudNumUnedited, setStudFNameUnedited, setStudMNameUnedited, setStudLNameUnedited, setDegreeUnedited, setJustModal, setTitle }) => {
+const EditStudent = ({ modalState, handleClose, setJustModal, handleSave, setTitle, setcurrStudentID,studNum, studFName, studMName, studLName, degree, setStudNum, setStudFName, setStudMName, setStudLName, setDegree,studNumUnedited, studFNameUnedited,
+                      studMNameUnedited, studLNameUnedited, degreeUnedited, setStudNumUnedited, setStudFNameUnedited, setStudMNameUnedited, setStudLNameUnedited, setDegreeUnedited }) => {
+
     
     /*-------------------- Styling --------------------*/
     const editStudentModal = `relative bg-secondary-red h-[49vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
-    const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[37vh]`;
+    const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain -ml-[14.25vh] h-[49vh]`;
     const modalBody = `absolute inset-x-0 bg-secondary-red top-[8%] bottom-[10%]`;
     const modalClose = `text-[4.85vh] text-white float-right`;
     const modalTitle = `text-white text-center font-bold italic text-[1.30vw] mt-[4.15vh] mb-[4.85vh]`;
@@ -50,8 +56,8 @@ const EditStudent = ({ modalState, handleClose, handleSave, setcurrStudentID,stu
     const sectionInputField = `inline-block w-[11.71875vw]`;
     const sectionFLName = `inline-block w-[16.71875vw] truncate`;
     const sectionMI = `inline-block w-[6.71875vw]`;
-    const modalFooter = `mt-[4.85vh] text-[1.11vw] flex items-center justify-center`;
-    const modalBtnSave = `h-[5vh] w-[9.25vw] rounded-xl mr-[0.65vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green`;
+    const modalFooter = `font-poppins mt-[4.85vh] text-[1vw] flex items-center justify-center`;
+    const modalBtnSave = `h-[4.75vh] w-[8.8vw] rounded-xl mr-[0.65vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green`;
 
     // Save Button
     const SaveButton = () => {
@@ -79,7 +85,7 @@ const EditStudent = ({ modalState, handleClose, handleSave, setcurrStudentID,stu
             <Transition appear show={modalState} as={Fragment}>
 
                 {/* Wrapping everything with dialog component */}
-                <Dialog as="div" className="relative z-50" onClose={handleClose}>
+                <Dialog as="div" className="relative z-50" openModal={modalState} onClose={handleClose}>
 
                     {/* Transition effect for the element inside this Transition.Child tag*/}
                     <Transition.Child

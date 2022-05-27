@@ -11,11 +11,14 @@ import 'tailwindcss/tailwind.css';
     handleEdit      --- handles click event for edit button
     handleDelete    --- handles click event for delete button
     handleHist      --- handles modification of history
+    data            --- contains data displayed in the row
+    sem             --- receives the semester and academic year where the row is located
 */
 const Actions = ({ handleEdit, handleDelete, handleHist, data, sem }) => {
   
   // State handler for justification modal
   const [isOpen, setIsOpen] = useState(false); 
+  // State handler for history title for delete row
   const [histTitle, setHistTitle] = useState(`Deleted student grade row with Course: ${data.courseName} on Semester: ${sem}`);
 
   function openModal() {
@@ -65,7 +68,7 @@ const Actions = ({ handleEdit, handleDelete, handleHist, data, sem }) => {
             </button>
 
             {/* Delete button */}
-            <button className={buttons} type="button" onClick={handleDelete}>
+            <button className={buttons} type="button" onClick={openModal}>
                 <TrashIcon className={iconStyle} />
             </button>
         </div>

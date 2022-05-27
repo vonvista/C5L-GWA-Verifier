@@ -36,12 +36,10 @@ import Swal from 'sweetalert2';
     
     handleDeleteRecord  ---     function that handles page refresh after deletion of student/user record from the table
     handleEditRecord    ---     function that handles click event for edit button on user management page
-    
-    setHistoryEditRow   ---     function that logs the action of editing a row to the student record history immediately
     historyHandler      ---     function that logs the action of adding a row to the student record history
 */
 
-const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, delHandler, setHistoryEditRow, handleDeleteRecord, handleEditRecord, addHandler, historyHandler }) => {
+const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, delHandler, handleDeleteRecord, handleEditRecord, addHandler, historyHandler }) => {
 
     const [ip, setIp] = useState(localStorage.getItem("ServerIP"));
     
@@ -54,14 +52,14 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         return (
             <>  
                 {/* Accordion contents */}
-                <div className="table w-full m-0">
+                <div className="table font-inter w-full m-0">
 
                     {/* Table column names */}
                     <div className="table-header-group text-left">
                         <div className="table-row font-montserrat font-bold text-primary-red">
                             <div className="table-cell w-1/6">Course Name</div>
-                            <div className="table-cell w-1/6 text-center">Units</div>
                             <div className="table-cell w-1/6 text-center">Grade</div>
+                            <div className="table-cell w-1/6 text-center">Units</div>
                             <div className="table-cell w-1/6 text-center">Cumulative</div>
                             <div className="table-cell w-1/6 text-center">Weight</div>
                             <div className="table-cell w-1/6 text-center">
@@ -107,8 +105,8 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                             touched={touched} 
                                             errors={errors}
                                             valid={isValid}
-                                            setHistoryEditRow={handleHistory}
                                             sem={sem}
+                                            setHistoryEditRow={handleHistory}
                                         />
                                          :
                                         <ReadRow
@@ -124,12 +122,12 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                         })}
 
                         <div className="table-row">
-                            <div className="table-cell pt-5 font-montserrat font-bold text-primary-red py-2">Total</div>
+                            <div className="table-cell pt-5 font-montserrat font-bold text-primary-red py-2">Total Units:</div>
                             <div className="table-cell text-center">{total}</div>   {/* row for total units */}
                             <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
                             <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
                             <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
-                            <div className="table-cell"></div>                      {/* empty row to not ruin styling */}
+                            <div className="table-cell text-sr-dark-text"></div>  {/* empty row to not ruin styling */}
                         </div>
                     </div>
                 </div>
@@ -301,7 +299,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         const numbertData = `${common} cursor-pointer w-[11.23vw] `;
         const degreetData = `${common} cursor-pointer w-[19vw] truncate`;
         const gwatData = `${common} cursor-pointer w-[12.8125vw] truncate`;
-        const statustData = `${elements} content-center justify-center text-center font-[1.1vw] h-[4.3vh] w-[7.14vw] p-0`;
+        const statustData = `${elements} content-center justify-center text-center font-[1vw] h-[4.3vh] w-[7.14vw] p-0`;
 
         const asc = `after:float-right after:content-['▲'] after:ml-[0.33vw] bg-sr-dark-gray`;
         const desc = `after:float-right after:content-['▼'] after:ml-[0.33vw] bg-sr-dark-gray`;
@@ -502,7 +500,6 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                 data={data}
                 dataHandler={dataHandler}
                 delHandler={delHandler}
-                setHistoryEditRow={setHistoryEditRow}
                 addHandler={addHandler}
                 handleHistory={historyHandler}
             />

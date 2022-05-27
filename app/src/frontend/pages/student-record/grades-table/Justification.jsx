@@ -131,7 +131,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                 leaveTo="opacity-0 scale-95"
                             >   
                                 {/* Justification modal window */}
-                                <Dialog.Panel className="w-full max-w-md h-[30vh] transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                <Dialog.Panel className="w-full max-w-md h-[32vh] transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                                     
                                     {/* Window Title */}
                                     <Dialog.Title
@@ -147,9 +147,9 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                     </Dialog.Title>
 
                                     {/* Window Body */}
-                                    <div className="mt-2 grid h-[85%]">
+                                    <div className="mt-4 grid h-[85%]">
                                         <textarea
-                                            className="inter mx-auto text-sm px-3 py-1 w-full h-full block resize-none focus:outline-none"
+                                            className="inter mx-auto text-sm lg:text-lg px-3 py-1 w-full h-full block resize-none focus:outline-none"
                                             name="desc"
                                             placeholder="Enter description here."
                                             value={values.desc}

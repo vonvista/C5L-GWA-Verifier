@@ -33,7 +33,7 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
         fetchData();
     }, []);
 
-    const nameStyle = `transition-colors ease-in-out delay-150 flex inter font-bold justify-between z-10 w-full px-4 py-2 text-sm font-medium text-left
+    const nameStyle = `transition-colors ease-in-out delay-150 flex font-montserrat font-semibold justify-between z-10 w-full px-4 py-2 text-sm text-left
         text-sr-table-text bg-sr-dark-gray hover:transition-colors hover:ease-in hover:delay-50 hover:bg-yellow-100 hover:text-secondary-red`;
 
     // set new values for addrow
@@ -103,28 +103,29 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
         })
     }
 
-    // logs action of editing a row to history
-    const setHistoryEditRow = (detailsObj) => {
+    // // logs action of editing a row to history
+    // const setHistoryEditRow = (detailsObj) => {
 
-        const newHistObj = {
-            date: new Date().toLocaleDateString(),
-            info: [
-                {
-                    main: detailsObj.title,
-                    user: userName,
-                    time: new Date().toLocaleTimeString('en-US', { 
-                        hour12: false, 
-                        hour: "numeric", 
-                        minute: "numeric"
-                    }),
-                    details: detailsObj.desc,         // place justification into details
-                },
-            ],
-        }
+    //     const newHistObj = {
+    //         date: new Date().toLocaleDateString(),
+    //         info: [
+    //             {
+    //                 main: detailsObj.title,
+    //                 user: userName,
+    //                 time: new Date().toLocaleTimeString('en-US', { 
+    //                     hour12: false, 
+    //                     hour: "numeric", 
+    //                     minute: "numeric"
+    //                 }),
+    //                 details: detailsObj.desc,         // place justification into details
+    //             },
+    //         ],
+    //     }
 
-        historyHandler(newHistObj)  //set changes
-    } 
+    //     historyHandler(newHistObj)  //set changes
+    // } 
 
+    
     // deletes row from table
     const delData = (values) => {
         // get array index of object that was changed
@@ -167,6 +168,7 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
         })
     }
 
+
     return (
         <>
             {/* Accordion for the table */}
@@ -177,6 +179,7 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
                              {/* Accordion Header */}
                              <Disclosure.Button className={`${open ? 'bg-sr-dark-gray rounded-t-lg' : 'mb-3 rounded-lg shadow-lg'} ${nameStyle}`}>
                                 <span className="text-lg xl:text-xl">{Name}</span>
+                                
                                 {/* Icon */}
                                 <ChevronUpIcon
                                     className={`${
@@ -203,7 +206,6 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
                                         data={semData}
                                         dataHandler={setData}
                                         delHandler={delData}
-                                        setHistoryEditRow={setHistoryEditRow}
                                         addHandler={addRowData}
                                         historyHandler={historyHandler}
                                     />

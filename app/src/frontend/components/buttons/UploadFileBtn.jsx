@@ -56,11 +56,11 @@ const UploadFileBtn = ({ handleClick, handleAddRecord }) => {
       <input type="file" id="bulkFile" accept="application/pdf" style={{"display":"none"}} onChange={() => handleOnChange(false)} multiple/>
       <button className={uploadbtn} type="button" onClick={openFileDialog}>
         <img
-          className="p-0.25 ml-0.25 mr-1.5 inline-flex w-[2vw] h-[2vw]"
+          className="p-0.25 ml-0.25 mr-2.5 inline-flex w-[2vw] h-[2vw]"
           alt="icon"
           src={upload}
         />
-        <p className="text-[0.9vw] inline-block">Upload a file</p>
+        <p className="text-[0.9vw] font-montserrat font-normal inline-block">Upload a file</p>
       </button>
     </>
   );

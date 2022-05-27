@@ -11,30 +11,39 @@ import exportStudentData from 'backend/exportStudentData';
 import Swal from 'sweetalert2';
 
 
-/* Parent component >> frontend\pages\student-record\StudentViewRecord */
+/* Parent component >> frontend/pages/student-record/StudentViewRecord */
 
 /* This function contains the "Actions" dropdown menu in the student information header
    Additional references: https://tailwindui.com/components/application-ui/elements/dropdowns */
 /* 
    Props:
-    -- studentInfo prop  : contains student information which will be used for exporting student record file
-    -- grades            : contains student gradesheet which will be used for exporting student record file
-    -- setHistory prop   : function to update history logs
+    studentInfo   ---   contains student information which will be used for exporting student record file
+    grades        ---   contains student gradesheet which will be used for exporting student record file
+    setHistory    ---   function to update history logs
+    setSelectedStudent  ---  function that sets selectedStudent state in parent component
 */
 const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
 
-
-  /*-------------------- State handlers --------------------*/
-
-  const [valueClicked, setValueClicked] = useState('Actions');
+  // State handlers for dropdown
   const [isActive, setIsActive] = useState(false);
+  // State handler for edit student modal
+  const [editModal, setEditModal] = useState(false);
+  
   const [currUser, setUser] = useState(`${localStorage.getItem("FirstName")} ${localStorage.getItem("LastName")} ${localStorage.getItem("MiddleName")}`);
   
-  /*-------------------- Functions --------------------*/
+  let navigate = useNavigate();
 
-  let navigate = useNavigate()
+  // Function to open the edit student modal window
+  const openModal = () => {
+    setEditModal(true);
+  }
 
-  // event handle for Export on dropdown
+  // Function to close the edit student modal window
+  const closeEditStud = () => {
+    setEditModal(false);
+  }
+
+  // Event handler for Export on dropdown
   const handleExport = () => {
 
     // get student info and grades from props
@@ -51,24 +60,18 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
     )
   }
 
-
   return (
-    <div className="w-2/3 relative ml-auto grow-0">
+    <div className="w-2/3 font-poppins relative ml-auto grow-0">
         
-
       {/* Active word and dropdown icon */}
       <div className="grid-cols-2 divide-x w-full py-1.5 bg-button-green hover:bg-button-green-hover  flex items-center justify-items-center rounded-lg border border-slate-300">
         
         <button
           type="button"
           className="inline-block grow hover:bg-button-green-hover rounded-l-lg"
-          onClick={() =>{
-              if (valueClicked === 'Export') handleExport();
-            }
-          }
         >
-          <p className="inline-block grow text-center text-white">
-            {valueClicked}
+          <p className="inline-block grow font-medium text-center text-white">
+            Actions
           </p>
         </button>
           
@@ -103,21 +106,31 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
           tabIndex="-1"
         >
           <div>
-            
             {/* Export button */}
             <button
               className="rounded-t-lg block py-2 text-sm text-center w-full bg-button-green hover:bg-button-green-hover hover:rounded-t-lg"
               type="button"
               onClick={() => {
-                setIsActive(!isActive);
-                setValueClicked('Export');
+                setIsActive(false);
+                handleExport();
               }}
             >
               <p className="text-white">Export</p>
             </button>
             
             {/* Edit button */}
-            <EditBtn studentInfo={studentInfo} setHistory={setHistory} setSelectedStudent={setSelectedStudent}/>
+            <button
+                className="bg-button-green hover:bg-button-green-hover block px-4 rounded-b-lg py-2 text-sm z-1 w-full"
+                type="button"
+                onClick={openModal}
+            >
+                <p className=" text-white">Edit</p>
+            </button>
+            
+            {editModal ? 
+                <EditBtn editModal={editModal} closeEditStud={closeEditStud} studentInfo={studentInfo} setHistory={setHistory} setSelectedStudent={setSelectedStudent}/>
+            :   <></>
+            }
           </div>
         </div>
       </Transition>

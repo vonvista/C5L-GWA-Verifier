@@ -12,22 +12,18 @@ import Swal from 'sweetalert2';
 /* This function contains the Edit button from student record page's dropdown menu */
 /* 
    Props:
-    handleClick  ---  function to handle click event
-    setHistory   ---  function to update history logs
+    editModal           ---  boolean; state of student detail edit modal window
+    closeEditStud       ---  function that sets editModal to false
+    studentInfo         ---  contains student information which will be used for exporting student record file
+    setHistory          ---  function to update history logs
+    setSelectedStudent  ---  function that sets selected student
 */
-const EditBtn = ({ studentInfo, setHistory, setSelectedStudent}) => {
-  
-  /*-------------------- Styling --------------------*/
-  const editBtnStyle = `bg-button-green hover:bg-button-green-hover block px-4 rounded-b-lg py-2 text-sm z-1 w-full`;
-  
-  /*-------------------- State handlers --------------------*/
-  const [valueClicked, setValueClicked] = useState('Actions');
-  // Edit student modal
-  const [isActive, setIsActive] = useState(false);
-  // Justification modal
+const EditBtn = ({ editModal, closeEditStud, studentInfo, setHistory, setSelectedStudent }) => {
+
+  // State handler for justification modal
   const [justModal, setJustModal] = useState(false);
 
-  // input fields
+  // State handler for input fields
   const [studNum, setStudNum] = useState('');
   const [studFName, setStudFName] = useState('');
   const [studMName, setStudMName] = useState('');
@@ -60,16 +56,6 @@ const EditBtn = ({ studentInfo, setHistory, setSelectedStudent}) => {
     setStudMNameUnedited(studentInfo.iname.mname)
     setStudLNameUnedited(studentInfo.iname.lname)
   }, [])
-
-  // Function to open the add row modal window
-  const openModal = () => {
-    setIsActive(true);
-  }
-
-  // Function to close the add row modal window
-  const closeEditStud = () => {
-    setIsActive(false);
-  }
 
   // Function to close justification modal
   const closeJustModal = () => {
@@ -104,7 +90,7 @@ const EditBtn = ({ studentInfo, setHistory, setSelectedStudent}) => {
         })
         console.log(err)
     })
-    closeJustModal();
+    // closeJustModal();
     setSelectedStudent( (prevState)=>({...prevState, stud_no: studNum, degree_program: degree, Student: currStudentID, iname: {fname: studFName, mname: studMName, lname: studLName}}))
     
   }
@@ -143,7 +129,7 @@ const EditBtn = ({ studentInfo, setHistory, setSelectedStudent}) => {
       <Justification modalState={justModal} modalHandler={closeJustModal} parentSubmitHandler={updateStudent} handleHistory={handleHistory} histTitle={histTitle}/> 
       
       <EditStudentDetails
-            modalState={isActive}
+            modalState={editModal}
             handleClose={closeEditStud}
             handleSave={editModalClose}
 
@@ -174,16 +160,9 @@ const EditBtn = ({ studentInfo, setHistory, setSelectedStudent}) => {
             setTitle={setTitle}
             studentInfo={studentInfo}
         />
-
-      {/* Edit Students button */}
-      <button
-        className={editBtnStyle}
-        type="button"
-        onClick={openModal}
-      >
-        <p className=" text-white">Edit</p>
-      </button>
     </>
   );
 };
+
+
 export default EditBtn;
