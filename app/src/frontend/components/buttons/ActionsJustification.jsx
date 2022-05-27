@@ -65,7 +65,7 @@ const Actions = ({ handleEdit, handleDelete, handleHist, data, sem }) => {
             </button>
 
             {/* Delete button */}
-            <button className={buttons} type="button" onClick={handleDelete}>
+            <button className={buttons} type="button" onClick={openModal}>
                 <TrashIcon className={iconStyle} />
             </button>
         </div>
