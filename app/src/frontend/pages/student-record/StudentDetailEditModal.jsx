@@ -30,7 +30,7 @@ import 'tailwindcss/tailwind.css';
 const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, studMName, studLName, degree, setStudNum, setStudFName, setStudMName, setStudLName, setDegree, setJustModal }) => {
     
     /*-------------------- Styling --------------------*/
-    const editStudentModal = `relative bg-secondary-red h-[48vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
+    const editStudentModal = `relative bg-secondary-red h-[49vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
     const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[37vh]`;
     const modalBody = `absolute inset-x-0 bg-secondary-red top-[8%] bottom-[10%]`;
     const modalClose = `text-[4.85vh] text-white float-right`;
@@ -43,8 +43,8 @@ const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, 
     const sectionMI = `inline-block w-[6.71875vw]`;
     const modalFooter = `mt-[4.85vh] text-[1.11vw] flex items-center justify-center`;
     const modalBtnSave = `h-[5vh] w-[9.25vw] rounded-xl mr-[0.65vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green`;
-    const modalBtnDiscard = `h-[5vh] w-[9.25vw] rounded-xl mr-[0.65vw] bg-discard hover:bg-white text-center`;
 
+    
     return (
         <>          
             {/* Wrapping everything with transition component to use transition effects from @headlessui/react */}
@@ -189,7 +189,6 @@ const EditStudent = ({ modalState, handleClose, handleSave, studNum, studFName, 
                                             {/* Save button */}
                                             <div className={modalFooter}>
                                                 <button className={modalBtnSave} onClick={handleSave}>Save</button>
-                                                <button className={modalBtnDiscard} onClick={handleClose}>Cancel</button>
                                             </div>
                                         </div>
                                     </div>
