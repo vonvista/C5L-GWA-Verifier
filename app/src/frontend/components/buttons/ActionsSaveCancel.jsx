@@ -10,22 +10,22 @@ import 'tailwindcss/tailwind.css';
 /* Props:
     handleSave      --- handles click event for save button
     handleCancel    --- handles click event for cancel button
-    isValid         --- 
-    isTouched       --- 
-    handleHistory   --- 
-    values          --- 
-    sem             --- 
+    isValid         --- checks if given data is valid or not
+    isTouched       --- holds a boolean value; indicates if input field values were touched
+    handleHistory   --- handles pushing edit row changes to history
+    values          --- values that are being edited in real time
+    sem             --- receives the semester and academic year where the row is located
 */
 const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, handleHistory, values, sem }) => {
 
   const buttons = `transition-all ease-in-out delay-150 text-[rgb(107 114 128)] hover:transition-all hover:ease-out hover:delay-150 w-[2vw] h-[2vw] hover:text-[#141414] hover:bg-slate-300 rounded-3xl bg-slate-200 relative mx-1 grow`; // styling of button
   const disabled = `disabled:ease-in disabled:transition disabled:delay-150 disabled:text-slate-300 disabled:bg-slate-100`
 
-  // state handler for modal button
+  // State handler for modal button
   const [isOpen, setIsOpen] = useState(false);
-  const [histTitle, setTitle] = useState(`Edited student grade row from Course: ${values.courseName}, Units: ${values.units}, and Grade: ${values.grade} to `);
+  // State handler for history title for edit row
+  const [histTitle, setTitle] = useState(`Edited student grade row from Course: ${values.courseName}, Grade: ${values.grade}, and Units: ${values.units} to `);
 
-  // const [histTitle, setTitle] = useState('Edit This portion now ActionsSaveCancel.jsx:25');
 
   if (isTouched==null) // if null, assume that inputs haven't been touched
     isTouched = false;
@@ -71,7 +71,9 @@ const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, handl
                 <button className={`${buttons}${disabled}`} type="button" 
                     onClick={() => {
                             openModal();
-                            setTitle(`${histTitle} Course: ${values.courseName}, Units: ${values.units}, and Grade: ${values.grade} on Semester: ${sem}`); // add new values to end of history title
+
+                            // add new values to end of history title
+                            setTitle(`${histTitle} Course: ${values.courseName}, Units: ${values.units}, and Grade: ${values.grade} on Semester: ${sem}`); 
                         }} 
                     disabled={!(isValid && isTouched)}
                 >

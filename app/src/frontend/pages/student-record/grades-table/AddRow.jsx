@@ -61,7 +61,7 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
           className={modalBtnSave} 
           onClick={() => {
               handleSave();
-              histTitleHandler(`Created student grade row with Course: ${courseNameState}, Units: ${unitsState}, and Grade: ${gradeState} on Semester: ${semState}`);
+              histTitleHandler(`Created student grade row with Course: ${courseNameState}, Grade: ${gradeState}, and Units: ${unitsState} on Semester: ${semState}`);
             }}>Save</button>
         } else {
           return <button className={modalBtnSave} disabled>Save</button>
@@ -151,20 +151,6 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
                                                 </section>
                                             </div>
 
-                                            {/* Units */}
-                                            <div className={inputContainer}>
-                                                <section className={sectionUnits}>
-                                                    <input 
-                                                        className={inputStyle}
-                                                        type="number"
-                                                        name="units"
-                                                        placeholder='0'
-                                                        onChange={handleUnitsChange}
-                                                    />
-                                                    <div className='w-full text-white text-center'>Units</div>
-                                                </section>
-                                            </div>
-
                                             {/* Grade */}
                                             <div className={inputContainer}>
                                                 <section className={sectionGrade}>
@@ -176,6 +162,20 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
                                                         onChange={handleGradeChange}
                                                     />
                                                     <div className='w-full text-white text-center'>Grade</div>
+                                                </section>
+                                            </div>
+
+                                            {/* Units */}
+                                            <div className={inputContainer}>
+                                                <section className={sectionUnits}>
+                                                    <input 
+                                                        className={inputStyle}
+                                                        type="number"
+                                                        name="units"
+                                                        placeholder='0'
+                                                        onChange={handleUnitsChange}
+                                                    />
+                                                    <div className='w-full text-white text-center'>Units</div>
                                                 </section>
                                             </div>
                                         </form>
