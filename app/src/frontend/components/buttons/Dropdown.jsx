@@ -1,6 +1,7 @@
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import expand from '../../../../assets/icons/collapse(1).svg';
+import { useNavigate } from 'react-router-dom';
+import { ChevronUpIcon } from '@heroicons/react/solid';
+import { Transition } from '@headlessui/react';
 import 'tailwindcss/tailwind.css';
 
 /* Components */
@@ -52,56 +53,60 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
 
 
   return (
-    <div className="w-40 relative ml-auto grow-0">
+    <div className="w-2/3 relative ml-auto grow-0">
+        
 
-      {/* Actions and arrow down */}
-      <div className="grid-cols-2 divide-x w-40 p-2 bg-button-green flex mr-0 items-center justify-items-center rounded-lg border border-slate-300">
+      {/* Active word and dropdown icon */}
+      <div className="grid-cols-2 divide-x w-full py-1.5 bg-button-green hover:bg-button-green-hover  flex items-center justify-items-center rounded-lg border border-slate-300">
         
         <button
           type="button"
-          className="pl-1.75 m-0 inline-block grow hover:bg-button-green-hover rounded-l-lg"
-          // add onclick
-          
+          className="inline-block grow hover:bg-button-green-hover rounded-l-lg"
           onClick={() =>{
               if (valueClicked === 'Export') handleExport();
             }
-            // (!(valueClicked == "Export")) ? null : handleExport()
           }
-
         >
-          <p className="pl-1.5 m-0 inline-block grow text-center text-white">
+          <p className="inline-block grow text-center text-white">
             {valueClicked}
           </p>
         </button>
           
         <button
           type="button"
-          className="pl-1.5 m-0 inline-block bg-button-green grow hover:bg-button-green-hover rounded-r-lg"
+          className="inline-block bg-button-green grow hover:bg-button-green-hover rounded-r-lg"
           onClick={() => {
             setIsActive(!isActive);
           }}
         >
-          <section className="pl-1.5 m-0 inline-block grow">
-            <img
-              className="p-0.25 inline-flex"
-              width="20px"
-              height="20px"
-              alt="icon"
-              src={expand}
-            />
+          <section className="inline-block grow">
+            <ChevronUpIcon 
+                className={`${
+                    !isActive ? 'transform rotate-180 ' : ''
+                } w-5 xl:w-7 duration-200 text-sidebar-text inline-flex self-center`} />
           </section>
         </button>
       </div>
-
-      {isActive ? (
-        // buttons after expanding
+     
+      {/* Dropdown Options */}
+      <Transition
+          show={isActive}
+          enter="transition duration-200 ease-out"
+          enterFrom="transform scale-95 opacity-0"
+          enterTo="transform scale-100 opacity-100"
+          leave="transition duration-200 ease-out"
+          leaveFrom="transform scale-100 opacity-100"
+          leaveTo="transform scale-95 opacity-0"
+      >
         <div
-          className="origin-top-right z-10 absolute right-0 mt-0.5 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
+          className="origin-top-right z-10 absolute w-full mt-0.5 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
           tabIndex="-1"
         >
-          <div className="pt-1 bg-button-green rounded-lg">
+          <div>
+            
+            {/* Export button */}
             <button
-              className="text-gray-700 block px-4 py-2 text-sm w-full hover:bg-button-green-hover hover:rounded-t-lg"
+              className="rounded-t-lg block py-2 text-sm text-center w-full bg-button-green hover:bg-button-green-hover hover:rounded-t-lg"
               type="button"
               onClick={() => {
                 setIsActive(!isActive);
@@ -110,12 +115,12 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
             >
               <p className="text-white">Export</p>
             </button>
+            
+            {/* Edit button */}
             <EditBtn studentInfo={studentInfo} setHistory={setHistory} setSelectedStudent={setSelectedStudent}/>
           </div>
         </div>
-      ) : (
-        <></>
-      )}
+      </Transition>
     </div>
   );
 };
