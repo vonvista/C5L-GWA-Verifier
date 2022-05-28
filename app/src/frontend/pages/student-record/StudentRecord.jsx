@@ -218,12 +218,7 @@ function organizeHistory(data){
 }
 
 
-/* Props:
-    hoverRef      --- a callbackRef used by useHover to update the listeners for the 'mouseover' and 'mouseout' events in the navigation bar
-    isHovering    --- handles the hovering state of the navigation bar
-    setIsHovering --- sets hover state, used for logging out user
-*/
-export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
+export default function StudentRecord() {
 
     // Backend Linking (Database to Frontend)
     const [studentProp, getStudentProp] = useState()
@@ -417,7 +412,6 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
         // Checks if props are already fetched from the DB
         (studentProp && notesProp && gradesProp && historyProp && gpaCalc && unitGPA) ? 
         <div className="relative inset-0 flex ml-[4vw] justify-center">
-            {/* <header><Header pageTitle={"Student Record"}/></header> */}
             <RecordPage key={reload}
                 student={studentProp}
                 notes={notesProp}

@@ -5,9 +5,6 @@ import Swal from 'sweetalert2';
 /* Components */
 import List from 'frontend/components/table/List';
 import Pagination from 'frontend/components/table/Pagination';
-import UserNav from 'frontend/components/common/UserNavigation';
-import AdminNav from 'frontend/components/common/AdminNavigation';
-// import HeaderWithoutArrowbck from 'frontend/components/common/HeaderWithoutArrowbck';
 import AddUserBtn from 'frontend/components/buttons/AddUserBtn';
 import Search from 'frontend/components/search/Search';
 import SearchModal from 'frontend/components/search/SearchModal';
@@ -17,14 +14,8 @@ import AddUser from './AddUser';
 
 
 /* Parent component >> renderer/App.jsx */
-
 /* This is the User Management page which is a primary navigation page. */
-/* Props:
-    hoverRef    --- a callbackRef used by useHover to update the listeners for the 'mouseover' and 'mouseout' events in the navigation bar
-    isHovering  --- handles the hovering state of the navigation bar
-    setIsHovering --- sets hover state, used for logging out user
-*/
-const UserManagementPage = ({ hoverRef, isHovering, setIsHovering }) => {
+const UserManagementPage = () => {
   const [rows, setRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -239,7 +230,6 @@ const UserManagementPage = ({ hoverRef, isHovering, setIsHovering }) => {
         <>
             {/* Right Section */}
             <div className="relative inset-0 flex ml-[4vw] justify-center">
-                {/* <div><HeaderWithoutArrowbck pageTitle={"USER MANAGEMENT"}/></div> */}
                 
                 {/* Page Contents */}
                 <div className='flex mt-[2.5vh] items-center h-screen space-x-[3vw]'>

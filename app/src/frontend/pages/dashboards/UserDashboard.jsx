@@ -4,10 +4,7 @@ import { refresh } from 'electron-debug';
 import 'tailwindcss/tailwind.css';
 
 /* Components */
-// import Header from 'frontend/components/common/HeaderWithoutArrowbck';
 import UploadFileBtn from 'frontend/components/buttons/UploadFileBtn';
-import AdminNav from 'frontend/components/common/AdminNavigation';
-import UserNav from 'frontend/components/common/UserNavigation';
 import Pagination from 'frontend/components/table/Pagination';
 import Refresh from 'frontend/components/buttons/Refresh';
 import Search from 'frontend/components/search/Search';
@@ -23,13 +20,7 @@ import Swal from 'sweetalert2';
 
 
 /* Parent component >> renderer/App.jsx */
-
 /* This is the User Dashboard page which is a primary navigation page. */
-/* Props:
-    hoverRef    --- a callbackRef used by useHover to update the listeners for the 'mouseover' and 'mouseout' events in the navigation bar
-    isHovering  --- handles the hovering state of the navigation bar
-    setIsHovering --- sets hover state, used for logging out user
-*/
 const UserDashboard = () => {
 
   // for navigating page on search bar and other
@@ -47,6 +38,7 @@ const UserDashboard = () => {
   const [sortState, setSortState] = useState([0, 0, 0, 0]);
   const [latestSort, setLatestSort] = useState(-1);
 
+  
   const fetchData = async () => {
     // Retrieve data from database
     fetch(`http://${ip}:3001/student/find-all`, {
@@ -490,11 +482,6 @@ const UserDashboard = () => {
         <>
             {/* Right Section */}
             <div className="relative inset-0 flex ml-[4vw] justify-center">
-                {/* <div>
-                    <Header pageTitle={ userRole == 'user' ?
-                            'USER DASHBOARD' : 'ADMIN DASHBOARD' }
-                    />
-                </div> */}
 
                 {/* Page Contents */}
                 <div className="pt-[9vh] flex-column">
