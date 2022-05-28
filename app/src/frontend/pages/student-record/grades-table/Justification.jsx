@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
     ActionsJustification   >> frontend/components/buttons/ActionsJustification    
     ActionsSaveCancel      >> frontend/components/buttons/ActionsSaveCancel
     AddRowBtn              >> frontend/components/buttons/AddRowBtn
-    StudentDetailEditModal >> frontend/pages/student-record/StudentDetailEditModal
+    Dropdown               >> frontend/components/buttons/Dropdown
 */
 
 /* This function contains the component that creates a modal window for justification.
@@ -117,8 +117,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                     </Transition.Child>
 
                     {/* Container for the layer containing the modal window */}
-                    <div className="fixed inset-0 overflow-y-auto">
-                        <div className="flex min-h-full items-center justify-center p-4 text-center">
+                    <div className="fixed inset-0 overflow-y-auto flex min-h-full items-center justify-center p-4 text-center">
                             
                             {/* Transition effect for the element inside this Transition.Child tag*/}
                             <Transition.Child
@@ -131,37 +130,35 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                 leaveTo="opacity-0 scale-95"
                             >   
                                 {/* Justification modal window */}
-                                <Dialog.Panel className="w-full max-w-md h-[32vh] transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white pt-6 px-6 text-left align-middle shadow-xl transition-all">
                                     
                                     {/* Window Title */}
                                     <Dialog.Title
                                         as="h3"
-                                        className="font-montserrat ml-3 mt-2 text-2xl font-black leading-6 text-gray-900 flex"
+                                        className="font-montserrat ml-3 mt-[0.5vh] mb-2 text-2xl font-black leading-6 text-gray-900 flex"
                                     >
                                         <span className="self-start">Justification</span>
                                         {/* Close button */}
                                         <XIcon
-                                            className="cursor-pointer ml-auto mr-0 transition-all ease-out duration-200 hover:text-gray-500 hover:transition-all hover:ease-in hover:duration-200 h-5 w-5"
+                                            className="w-5 cursor-pointer ml-auto mr-0 transition-all ease-out delay-200 hover:text-gray-500 hover:transition-all hover:ease-in hover:delay-200"
                                             onClick={resetModalValues}
                                         />
                                     </Dialog.Title>
 
                                     {/* Window Body */}
-                                    <div className="mt-4 grid h-[11.5rem]">
-                                        <textarea
-                                            className="inter mx-auto text-sm lg:text-lg px-3 py-1 w-full h-full block resize-none focus:outline-none"
-                                            name="desc"
-                                            placeholder="Enter description here."
-                                            value={values.desc}
-                                            onChange={changeHandler}
-                                            
-                                        />
-                                    </div>
-
+                                    <textarea
+                                        className="font-inter mt-4 mx-auto text-sm lg:text-lg px-3 w-full h-[18vh] block resize-none focus:outline-none"
+                                        name="desc"
+                                        placeholder="Enter description here."
+                                        value={values.desc}
+                                        onChange={changeHandler}
+                                        
+                                    />
                                     {/* Save Button */}
                                     <button
                                         type="submit"
-                                        className="inter h-auto mt-3 w-[20%] self-end inline-flex justify-center rounded-md border border-transparent bg-button-green px-4 py-2 text-sm font-medium text-white transition-all ease-out duration-200 hover:transition-all hover:ease-in hover:duration-200 hover:bg-button-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
+                                        className="rounded-lg mt-3 mb-4 w-1/5 inline-flex justify-center border border-transparent bg-button-green px-3 py-1.5 text-sm lg:text-base font-poppins font-medium text-white
+                                            transition-all ease-out delay-200 hover:transition-all hover:ease-in hover:delay-200 hover:bg-button-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
                                         onClick={saveChanges}
                                         disabled={!isValid}
                                     >
@@ -169,7 +166,6 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                     </button>
                                 </Dialog.Panel>
                             </Transition.Child>
-                        </div>
                     </div>
                 </Dialog>
             </Transition>
