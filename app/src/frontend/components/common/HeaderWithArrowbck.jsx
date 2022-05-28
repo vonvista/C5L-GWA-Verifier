@@ -20,7 +20,7 @@ const HeaderWithArrowbck = ({ pageTitle, arrow }) => {
     }
 
     return (
-        <header className="flex w-full items-center absolute top-0 right-0 z-10 bg-secondary-red hover:text-highlight text-sidebar-text py-2.5 xl:py-3.5 2xl:py-4">
+        <header className="flex w-full items-center absolute top-0 right-0 z-10 pl-[4vw] bg-secondary-red hover:text-highlight text-sidebar-text py-2.5 xl:py-3.5 2xl:py-4">
             {
                 arrow ?
                     <div className="pl-7 xl:pl-10  hover:bg-primary-red cursor-pointer">
