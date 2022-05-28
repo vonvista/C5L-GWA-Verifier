@@ -14,8 +14,8 @@ const Reset = ({ handleClick }) => {
   return (
     <>
       <button className={resetbtn} type="button" onClick={handleClick}>
-        <FolderRemoveIcon className="p-0.25 ml-0.25 mr-2.5 inline-flex w-[2vw] h-[2vw]"/>
-        <p className="text-[0.9vw] inline-block">Clear all data</p>
+        <FolderRemoveIcon className="p-0.25 mx-[0.25vw] inline-flex w-[2vw] h-[2vw]"/>
+        <p className="text-[0.9vw] ml-[0.3vw] inline-block">Clear all data</p>
       </button>
     </>
   );

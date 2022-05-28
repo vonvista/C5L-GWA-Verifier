@@ -14,8 +14,8 @@ const BulkDeleteBtn = ({ handleClick }) => {
   return (
     <>
       <button className={resetbtn} type="button" onClick={handleClick}>
-        <TrashIcon className=" p-0.25 ml-0.25 mr-2.5 inline-flex w-[1.7vw] h-[1.7vw]" />
-        <p className="text-[0.9vw] inline-block">Bulk Delete</p>
+        <TrashIcon className=" p-0.25 mx-[0.25vw] inline-flex w-[1.7vw] h-[1.7vw]" />
+        <p className="text-[0.9vw] ml-[0.3vw] inline-block">Bulk Delete</p>
       </button>
     </>
   );
