@@ -20,7 +20,7 @@ module.exports = {
         'sidebar-text': '#e5e5e5',
         'page-background': '#f5f6f8',
         'highlight': '#fff384',
-        'table-hover-color': '#fffded',
+        'table-hover-color': '#fff9da',
         'sr-dark-gray': '#e5e5e5',
         'sr-text-gray': '#969696',
         'sr-tab-inactive': '#334D6E',
@@ -50,9 +50,9 @@ module.exports = {
       spacing: {
         '5.5': '1.35rem',
       },
-      zIndex: {
-        '1': '1',
-      },
+      transitionDuration: {
+        '250': '250ms',
+      }
     },
   },
   plugins: [],

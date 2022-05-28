@@ -4,10 +4,7 @@ import { refresh } from 'electron-debug';
 import 'tailwindcss/tailwind.css';
 
 /* Components */
-import Header from 'frontend/components/common/HeaderWithoutArrowbck';
 import UploadFileBtn from 'frontend/components/buttons/UploadFileBtn';
-import AdminNav from 'frontend/components/common/AdminNavigation';
-import UserNav from 'frontend/components/common/UserNavigation';
 import Pagination from 'frontend/components/table/Pagination';
 import Refresh from 'frontend/components/buttons/Refresh';
 import Search from 'frontend/components/search/Search';
@@ -23,14 +20,8 @@ import Swal from 'sweetalert2';
 
 
 /* Parent component >> renderer/App.jsx */
-
 /* This is the User Dashboard page which is a primary navigation page. */
-/* Props:
-    hoverRef    --- a callbackRef used by useHover to update the listeners for the 'mouseover' and 'mouseout' events in the navigation bar
-    isHovering  --- handles the hovering state of the navigation bar
-    setIsHovering --- sets hover state, used for logging out user
-*/
-const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
+const UserDashboard = () => {
 
   // for navigating page on search bar and other
   const navigate = useNavigate();
@@ -47,6 +38,7 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
   const [sortState, setSortState] = useState([0, 0, 0, 0]);
   const [latestSort, setLatestSort] = useState(-1);
 
+  
   const fetchData = async () => {
     // Retrieve data from database
     fetch(`http://${ip}:3001/student/find-all`, {
@@ -246,7 +238,7 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
         // console.log(body);
         localStorage.setItem('currStudentID', body._id);
         localStorage.setItem('currStudentKey', body.StudentID);
-        navigate('/student-record');
+        navigate('/in/student-record');
       })
       .catch((err) => {
         // will activate if DB is not reachable or timed out or there are other errors
@@ -488,78 +480,63 @@ const UserDashboard = ({ hoverRef, isHovering, setIsHovering }) => {
 
     return (
         <>
-            <div>
-                {/* Navigation Bar */}
-                <div>
-                    {userRole == "user" ?
-                        <UserNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
-                        : <AdminNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
-                    }
-                </div>
+            {/* Right Section */}
+            <div className="relative inset-0 flex ml-[4vw] justify-center">
 
-                {/* Right Section */}
-                <div className="relative inset-0 flex ml-[4vw] justify-center">
-                    <div>
-                        <Header pageTitle={ userRole == 'user' ?
-                                'USER DASHBOARD' : 'ADMIN DASHBOARD' }
+                {/* Page Contents */}
+                <div className="pt-[9vh] flex-column">
+                    
+                    <div className="flex">
+                        {/* Search bar */}
+                        <div className="float-left items-center">
+                            <Search
+                                handleSearch={(e) => setSearchStudent(e.target.value)}
+                                searchValue={searchStudent}
+                                buttonHandler={handleSearch}
+                                handleEnter={handleEnterPress}
+                            />
+                        </div>
+
+                        {/* Refresh button */}
+                        <div className="flex items-center ml-2">
+                            <span className="pr-1.5 mr-0 items-center justify-items-center inline-block grow">
+                                <Refresh handleClick={forceReload} />
+                            </span>
+                        </div>
+
+                        {/* Export and Upload buttons */}
+                        <div className="flex ml-auto order-2">
+                            <ExportFileBtn list={rows} />
+                            <UploadFileBtn
+                                handleClick={readInputFile}
+                                handleAddRecord={handleAddRecord}
+                            />
+                        </div>
+                    </div>
+
+                    {/* Table */}
+                    <div className="table-container">
+                        <List
+                            table={1}
+                            data={currentRows}
+                            changeSort={changeSort}
+                            sortState={sortState}
+                            handleDeleteRecord={handleDeleteRecord}
                         />
                     </div>
 
-                    {/* Page Contents */}
-                    <div className="pt-[9vh] flex-column">
-                        
-                        <div className="flex">
-                            {/* Search bar */}
-                            <div className="float-left items-center">
-                                <Search
-                                    handleSearch={(e) => setSearchStudent(e.target.value)}
-                                    searchValue={searchStudent}
-                                    buttonHandler={handleSearch}
-                                    handleEnter={handleEnterPress}
-                                />
-                            </div>
-
-                            {/* Refresh button */}
-                            <div className="flex items-center ml-2">
-                                <span className="pr-1.5 mr-0 items-center justify-items-center inline-block grow">
-                                  <Refresh handleClick={forceReload} />
-                                </span>
-                            </div>
-
-                            {/* Export and Upload buttons */}
-                            <div className="flex ml-auto order-2">
-                                <ExportFileBtn list={rows} />
-                                <UploadFileBtn
-                                    handleClick={readInputFile}
-                                    handleAddRecord={handleAddRecord}
-                                />
-                            </div>
-                        </div>
-
-                        {/* Table */}
-                        <div className="table-container">
-                            <List
-                                table={1}
-                                data={currentRows}
-                                changeSort={changeSort}
-                                sortState={sortState}
-                                handleDeleteRecord={handleDeleteRecord}
-                            />
-                        </div>
-
-                        {/* Delete buttons and Pagination */}
-                        <div className="float-left mt-6">
-                            <Reset handleClick={handleReset} />
-                            <BulkDeleteBtn handleClick={handleBulkDelete} />
-                        </div>
-                        <div className="float-right mt-6">
-                            <Pagination
-                              rowsPerPage={rowsPerPage}
-                              totalRows={rows.length}
-                              currentPage={currentPage}
-                              paginate={paginate}
-                            />
-                        </div>
+                    {/* Delete buttons and Pagination */}
+                    <div className="float-left mt-6">
+                        <Reset handleClick={handleReset} />
+                        <BulkDeleteBtn handleClick={handleBulkDelete} />
+                    </div>
+                    <div className="float-right mt-6">
+                        <Pagination
+                            rowsPerPage={rowsPerPage}
+                            totalRows={rows.length}
+                            currentPage={currentPage}
+                            paginate={paginate}
+                        />
                     </div>
                 </div>
             </div>
