@@ -124,7 +124,7 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
                                 {/* Window Title */}
                                 <Dialog.Title
                                     as="div"
-                                    className="flex items-center mt-2 mb-2 text-[2.5vh]"
+                                    className="flex items-center mt-2 mb-2 text-sm lg:text-lg"
                                 >
                                     <div>
                                         {/* Dropdown select  */}

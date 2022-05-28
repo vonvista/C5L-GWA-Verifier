@@ -38,7 +38,7 @@ const DropdownInput = (props) => {
             <div className={props.style}>
                 <Listbox value={selected} onChange={(setSelected) => {handleChange(setSelected)}}>
                     <div className="relative mt-1">
-                    <Listbox.Button className="relative w-full py-2 pl-4 pr-10 text-left text-sm lg:text-[0.9vw] font-medium bg-white rounded-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75">
+                    <Listbox.Button className="relative w-full py-2 pl-4 pr-10 text-left font-medium bg-white rounded-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75">
                         <span className="block truncate">{selected.sem}</span>
                         <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                         <SelectorIcon
@@ -53,7 +53,7 @@ const DropdownInput = (props) => {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <Listbox.Options className="absolute w-full py-2 mt-1 overflow-auto text-sm lg:text-[0.85vw] bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Listbox.Options className="absolute w-full py-2 mt-1 overflow-auto bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none">
                         {options.map((person, personIdx) => (
                             <Listbox.Option
                             key={personIdx}
