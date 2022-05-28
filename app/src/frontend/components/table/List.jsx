@@ -456,7 +456,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                         <tbody className={tBody}>
                             {data.map((student, index) => (
                                 <tr className={tBodytR} key = { index }>
-                                    <td className={` ${nametData} cursor-default`}>{student.name}</td>
+                                    <td className={` ${nametData} cursor-default`}>{student.name.toUpperCase()}</td>
                                     <td className={ `${numbertData} cursor-default`}>{student.studno}</td>
                                     <td className={` ${degreetData} cursor-default`}>{student.degprog}</td>
                                     <td className={` ${gwatData} cursor-default`}>{student.gwa}</td>
