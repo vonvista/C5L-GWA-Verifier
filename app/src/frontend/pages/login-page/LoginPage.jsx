@@ -164,7 +164,7 @@ const LoginPage = () => {
                 localStorage.setItem("ServerIP", ip)
 
 
-                navigate('/user-dashboard') //redirect to user
+                navigate('/in/user-dashboard') //redirect to user
             }
            
         })

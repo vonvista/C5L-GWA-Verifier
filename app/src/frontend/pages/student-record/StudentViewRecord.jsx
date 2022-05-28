@@ -344,7 +344,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
 
 
                 {/* Student Grades */}
-                <div className="w-full flex mx-auto my-5 gap-3">
+                <div className="w-full flex mx-auto my-5 gap-[1.5vw]">
 
                     {/* Container for the whole accordion component */}
                     <div className="w-[60vw] flex-1 overflow-auto mx-auto bg-white">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 /* Components */
-import Header from 'frontend/components/common/HeaderWithArrowbck';
+// import Header from 'frontend/components/common/HeaderWithArrowbck';
 import UserNav from 'frontend/components/common/UserNavigation';
 import AdminNav from 'frontend/components/common/AdminNavigation';
 import RecordPage from './StudentViewRecord';
@@ -416,28 +416,19 @@ export default function StudentRecord({ hoverRef, isHovering, setIsHovering }) {
 
         // Checks if props are already fetched from the DB
         (studentProp && notesProp && gradesProp && historyProp && gpaCalc && unitGPA) ? 
-        <>
-            <nav className="sticky z-20">
-                {userRole == "user" ?
-                    <UserNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
-                    : <AdminNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
-                }
-            </nav>
-
-            <div className="relative inset-0 flex ml-[4vw] justify-center">
-                <header><Header pageTitle={"Student Record"}/></header>
-                <RecordPage key={reload}
-                    student={studentProp}
-                    notes={notesProp}
-                    history={historyProp}
-                    status={unitGPA}
-                    grades={gradesProp} 
-                    checklist={validationsProp} 
-                    gpa={gpaCalc}
-                    refresh = {fetchData} 
-                />
-            </div>
-        </> 
+        <div className="relative inset-0 flex ml-[4vw] justify-center">
+            {/* <header><Header pageTitle={"Student Record"}/></header> */}
+            <RecordPage key={reload}
+                student={studentProp}
+                notes={notesProp}
+                history={historyProp}
+                status={unitGPA}
+                grades={gradesProp} 
+                checklist={validationsProp} 
+                gpa={gpaCalc}
+                refresh = {fetchData} 
+            />
+        </div>
         
         // empty div while data are not ready
         : <div></div>      

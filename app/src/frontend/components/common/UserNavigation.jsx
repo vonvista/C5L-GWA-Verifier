@@ -115,7 +115,7 @@ const UserNav = ({ hoverRef, isHovering, setIsHovering }) => {
                                 cursor-pointer grid grid-cols-1 duration-300 gap-[0.25vw] font-poppins font-medium`}>
                     
                     {/* User Dashboard */}
-                    <div className="inline-flex items-center py-2 gap-x-4 hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/user-dashboard')}}>
+                    <div className="inline-flex items-center py-2 gap-x-4 hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/in/user-dashboard')}}>
                         <div>
                             <svg className={` ${isHovering? "ml-7 1.5xl:ml-8 1.75xl:ml-8": "ml-3.5 xl:ml-5.5"} w-7 xl:w-8 duration-300 fill-current`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" >
                                 <path d="M33 19a1 1 0 0 1-.71-.29L18 4.41 3.71 18.71A1 1 0 0 1 2.3 17.3l15-15a1 1 0 0 1 1.41 0l15 15A1 1 0 0 1 33 19Z"/>

@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
     ActionsJustification   >> frontend/components/buttons/ActionsJustification    
     ActionsSaveCancel      >> frontend/components/buttons/ActionsSaveCancel
     AddRowBtn              >> frontend/components/buttons/AddRowBtn
-    StudentDetailEditModal >> frontend/pages/student-record/StudentDetailEditModal
+    Dropdown               >> frontend/components/buttons/Dropdown
 */
 
 /* This function contains the component that creates a modal window for justification.

@@ -348,7 +348,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
             await localStorage.setItem("currStudentID", StudentID);
             await localStorage.setItem("currStudentKey", StudentKey);
             //console.log(localStorage.getItem("currStudentKey"), localStorage.getItem("currStudentID"))
-            navigate('/student-record');
+            navigate('/in/student-record');
         }
 
         // Function to delete a student based on their student ID

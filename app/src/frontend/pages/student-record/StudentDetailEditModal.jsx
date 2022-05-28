@@ -1,12 +1,11 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Transition} from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
-import Justification from './grades-table/Justification';
-import 'tailwindcss/tailwind.css';
-import EditBtn from 'frontend/components/buttons/EditStudentBtn.jsx';
 import 'tailwindcss/tailwind.css';
 
-/* Parent component >> frontend/components/buttons/EditStudentBtn.jsx */
+
+/* Parent component >> frontend/components/buttons/Dropdown */
+
 /* Function for the "Edit Student" feature in the Student View Record page's Dropdown Menu */
 /* Initially shows an "Edit" button on the dropdown menu and prompts the modal window after clicking it */
 /* 

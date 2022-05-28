@@ -7,7 +7,7 @@ import List from 'frontend/components/table/List';
 import Pagination from 'frontend/components/table/Pagination';
 import UserNav from 'frontend/components/common/UserNavigation';
 import AdminNav from 'frontend/components/common/AdminNavigation';
-import HeaderWithoutArrowbck from 'frontend/components/common/HeaderWithoutArrowbck';
+// import HeaderWithoutArrowbck from 'frontend/components/common/HeaderWithoutArrowbck';
 import AddUserBtn from 'frontend/components/buttons/AddUserBtn';
 import Search from 'frontend/components/search/Search';
 import SearchModal from 'frontend/components/search/SearchModal';
@@ -237,47 +237,37 @@ const UserManagementPage = ({ hoverRef, isHovering, setIsHovering }) => {
 
     return(
         <>
-            <div>
-                {/* Navigation Bar */}
-                <div>
-                    {userRole == "user" ?
-                        <UserNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
-                        : <AdminNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
-                    }
-                </div>
+            {/* Right Section */}
+            <div className="relative inset-0 flex ml-[4vw] justify-center">
+                {/* <div><HeaderWithoutArrowbck pageTitle={"USER MANAGEMENT"}/></div> */}
+                
+                {/* Page Contents */}
+                <div className='flex mt-[2.5vh] items-center h-screen space-x-[3vw]'>
 
-                {/* Right Section */}
-                <div className="relative inset-0 flex ml-[4vw] justify-center">
-                    <div><HeaderWithoutArrowbck pageTitle={"USER MANAGEMENT"}/></div>
-                    
-                    {/* Page Contents */}
-                    <div className='flex mt-[2.5vh] items-center h-screen space-x-[3vw]'>
+                    {/* Add User */}
+                    <div className='flex items-center w-1/6'>
+                        <AddUserBtn handleClick={() => setShowModal(true)}/>
 
-                        {/* Add User */}
-                        <div className='flex items-center w-1/6'>
-                            <AddUserBtn handleClick={() => setShowModal(true)}/>
+                        {/* Add User Modal */}
+                        {showModal ?
+                            (<AddUser modalState={true} handleClose={() => setShowModal(false)} handleAddRecord={handleAddRecord}/>)
+                            :(<></>)
+                        }
 
-                            {/* Add User Modal */}
-                            {showModal ?
-                                (<AddUser modalState={true} handleClose={() => setShowModal(false)} handleAddRecord={handleAddRecord}/>)
-                                :(<></>)
-                            }
+                        {/* Edit User Modal */}
+                        {showModalEdit ?
+                            (<EditUser modalState={true} handleClose={() => setShowEditModal(false)} editUser={editUser} uneditedUser={uneditedUser} handleEditRecordSave={handleEditRecordSave}/>)
+                            :(<></>)
+                        }
+                    </div>
 
-                            {/* Edit User Modal */}
-                            {showModalEdit ?
-                                (<EditUser modalState={true} handleClose={() => setShowEditModal(false)} editUser={editUser} uneditedUser={uneditedUser} handleEditRecordSave={handleEditRecordSave}/>)
-                                :(<></>)
-                            }
+                    {/* Table and Pagination */}
+                    <div>
+                        <div className='table-container'>
+                            <List table={3} changeSort={changeSort} sortState={sortState} data={currentRows} handleDeleteRecord={handleDeleteRecord} handleEditRecord={handleEditRecord}/>
                         </div>
-
-                        {/* Table and Pagination */}
-                        <div>
-                            <div className='table-container'>
-                              <List table={3} changeSort={changeSort} sortState={sortState} data={currentRows} handleDeleteRecord={handleDeleteRecord} handleEditRecord={handleEditRecord}/>
-                            </div>
-                            <div className='float-right mt-6'>
-                                <Pagination rowsPerPage={rowsPerPage} totalRows={rows.length} currentPage={currentPage} paginate={paginate} />
-                            </div>
+                        <div className='float-right mt-6'>
+                            <Pagination rowsPerPage={rowsPerPage} totalRows={rows.length} currentPage={currentPage} paginate={paginate} />
                         </div>
                     </div>
                 </div>

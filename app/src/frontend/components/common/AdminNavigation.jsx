@@ -75,7 +75,7 @@ const AdminNav = ({ hoverRef, isHovering, setIsHovering }) => {
     return (
         <nav 
             ref={hoverRef}
-            className={` ${isHovering ? "w-1/4 3xl:w-1/5" : "w-14 xl:w-20"}
+            className={` ${isHovering ? "w-[20vw]" : "w-14 xl:w-20"}
                         h-full overflow-hidden fixed top-0 duration-300 min-w-min z-20 bg-primary-red text-sidebar-text`}
         >
             {/* Baybayin Background Image */}
@@ -84,7 +84,7 @@ const AdminNav = ({ hoverRef, isHovering, setIsHovering }) => {
             <div className="py-2 absolute inset-x-0 top-0 text-[1.15vw]">
                 
                 {/* App Name */}   
-                <div className={`${ isHovering? "pl-12 xl:pl-14 1.5xl:pl-16 3xl:pl-12 duration-500" : "duration-300 pl-[8vw]" } flex py-4 1.5xl:py-8 text-highlight`}>            
+                <div className={`${ isHovering? "pl-[3vw] duration-500" : "duration-300 pl-[8vw]" } flex py-4 1.5xl:py-8 text-highlight`}>            
                     <div className="flex-shrink-0 font-medium italic tracking-wider">
                         Kalatas: CAS GWA Verifier
                     </div>
@@ -114,7 +114,7 @@ const AdminNav = ({ hoverRef, isHovering, setIsHovering }) => {
                                 cursor-pointer grid grid-cols-1 duration-300 gap-[0.25vw] font-poppins font-medium`}>
                     
                     {/* Admin Dashboard */}
-                    <div className="inline-flex items-center py-2 gap-x-4 hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/user-dashboard')}}>
+                    <div className="inline-flex items-center py-2 gap-x-4 hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/in/user-dashboard')}}>
                         <div>
                             <svg className={` ${isHovering? "ml-7 1.5xl:ml-8 1.75xl:ml-8": "ml-3.5 xl:ml-5.5"} w-7 xl:w-8 duration-300 fill-current`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" >
                                 <path d="M33 19a1 1 0 0 1-.71-.29L18 4.41 3.71 18.71A1 1 0 0 1 2.3 17.3l15-15a1 1 0 0 1 1.41 0l15 15A1 1 0 0 1 33 19Z"/>
@@ -128,7 +128,7 @@ const AdminNav = ({ hoverRef, isHovering, setIsHovering }) => {
                     </div>
 
                     {/* User Management */}
-                    <div className="inline-flex items-center mt-2 px-1 py-2 my-10 hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/user-management')}}>
+                    <div className="inline-flex items-center mt-2 px-1 py-2 my-10 hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/in/user-management')}}>
                         <div>
                             <svg className={` ${isHovering? "ml-6 1.5xl:ml-7":"ml-2.5 xl:ml-4"} w-7 xl:w-9 duration-300 fill-current`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
                                 <path d="M319.9 320c57.41 0 103.1-46.56 103.1-104s-46.54-104-103.1-104c-57.41 0-103.1 46.56-103.1 104-.9 57.4 45.7 104 103.1 104zm50 32h-99.8C191.6 352 128 411.7
