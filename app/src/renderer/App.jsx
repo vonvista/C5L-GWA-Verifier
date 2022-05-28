@@ -27,8 +27,8 @@ const NavigationBar = () => {
     const [arrow, setArrow] = useState(false);
 
     // Object containing the exact path of current page
-    const location = useLocation()
-    
+    const location = useLocation();
+
     
     useEffect(() => {
         setArrow(false);
@@ -56,13 +56,12 @@ const NavigationBar = () => {
                     : <AdminNav hoverRef={hoverRef} isHovering={isHovering} setIsHovering={setIsHovering} />
                 }
             </nav>
-            <div className="relative ml-[4vw]">
-                <Header pageTitle={pageTitle} arrow={arrow}/>
-            </div>
+            <Header pageTitle={pageTitle} arrow={arrow}/>
             <Outlet />
         </>
     )
 }
+
 
 export default function App() {
     
