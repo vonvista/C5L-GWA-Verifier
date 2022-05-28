@@ -288,7 +288,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         // Styling
         const studentsTable = `border-collapse overflow-hidden table-fixed max-w-[82vw] max-h-[70vh] rounded-t-[1vw] drop-shadow-lg`;
         const tHead = `bg-white border-solid rounded-t-[1vw] border-b-[0.2vh] table table-fixed whitespace-nowrap w-full font-montserrat`;
-        const tBodytR = `table table-fixed whitespace-nowrap w-full font-montserrat transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:bg-table-hover-color last:border-b-0`
+        const tBodytR = `table table-fixed whitespace-nowrap w-full font-montserrat transition ease-out hover:transition hover:ease-in hover:bg-table-hover-color last:border-b-0`
         const tRow = `text-left not-italic text-[1.3vw] text-sr-text-gray`;
         const tBody = `bg-white block overflow-auto text-black rounded-b-[1vw] h-[65vh]`
 
