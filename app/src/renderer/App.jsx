@@ -29,7 +29,7 @@ const NavigationBar = () => {
     // Object containing the exact path of current page
     const location = useLocation();
 
-    
+    // Used for setting page title of current page dislayed
     useEffect(() => {
         setArrow(false);
         if (location.pathname == "/in/user-dashboard") {
