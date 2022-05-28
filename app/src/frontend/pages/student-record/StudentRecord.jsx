@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
-/* Components */
-// import Header from 'frontend/components/common/HeaderWithArrowbck';
-import UserNav from 'frontend/components/common/UserNavigation';
-import AdminNav from 'frontend/components/common/AdminNavigation';
 import RecordPage from './StudentViewRecord';
 import Swal from 'sweetalert2';
 
 
-
 /* Parent component >> renderer/App.jsx */
 /* This is the Student Record page which is a secondary navigation page. */
-
 
 // Values for checklist details
 const checklistDetails = [
