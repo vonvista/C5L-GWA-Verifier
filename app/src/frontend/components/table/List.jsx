@@ -436,20 +436,20 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                         <tr className={tRow}>
                             {/* sort UI asc or desc depends on the state of the parent (user-dashboard) */}
                             {/* state 0: normal; 1: ascending icon; 2: descending icon */}
-                            <th className={` ${nametData} ${transition} ${
+                            <th className={` ${nametData} ${transition} border-b-0 ${
                                 sortState[0] === 0 ? "" : sortState[0] === 1 ? asc : desc 
                             }`} onClick={() => changeSort(0)}>Name</th>
-                            <th className={` ${numbertData} ${transition} ${
+                            <th className={` ${numbertData} ${transition} border-b-0 ${
                                 sortState[1] === 0 ? "" : sortState[1] === 1 ? asc : desc
                             }`} onClick={() => changeSort(1)}>Student No.</th>
-                            <th className={` ${degreetData} ${transition} ${
+                            <th className={` ${degreetData} ${transition} border-b-0 ${
                                 sortState[2] === 0 ? "" : sortState[2] === 1 ? asc : desc 
                             }`} onClick={() => changeSort(2)}>Degree Program</th>
-                            <th className={` ${gwatData} ${transition} ${
+                            <th className={` ${gwatData} ${transition} border-b-0 ${
                                 sortState[3] === 0 ? "" : sortState[3] === 1 ? asc : desc 
                             }`} onClick={() => changeSort(3)}>GWA</th>
-                            <th className={statustHead}>Status</th>
-                            <th className={actionstH}>Actions</th>
+                            <th className={`${statustHead} border-b-0 `}>Status</th>
+                            <th className={`${actionstH} border-b-0 `}>Actions</th>
                         </tr>
                     </thead>
                     {/* Check if there are data available to display */}
