@@ -137,8 +137,8 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
         })
         console.log(err)
     })
-
-    closeJustModal();
+    closeJustModal()
+    setEditModal(false);
     setSelectedStudent( (prevState)=>({...prevState, stud_no: studNum, degree_program: degree.toUpperCase(), Student: currStudentID, iname: {fname: studFName.toUpperCase(), mname: studMName.toUpperCase(), lname: studLName.toUpperCase()}}))
   }
 
@@ -166,8 +166,8 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
 
   //main function for student update and add history
   const editModalClose = () => {
-      closeEditStud();        // close edit student modal
-      setJustModal(true);     // open justification
+        setEditModal(false);       // close edit student modal
+        setJustModal(true);     // open justification
       //setSelectedStudent( (prevState)=>({...prevState, stud_no: studNum, degree_program: degree, Student: currStudentID, iname: {fname: studFName, mname: studMName, lname: studLName}}))
   }
 

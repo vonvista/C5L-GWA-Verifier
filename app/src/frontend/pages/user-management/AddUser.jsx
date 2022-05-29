@@ -107,7 +107,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
 
   // Create user Button
   const CreateUserButton = () => {
-    const createbtn = `w-[14vw] h-[5vh] block bg-button-green rounded-lg text-[1vw] text-sidebar-text
+    const createbtn = `w-[14vw] h-[5vh] block bg-button-green rounded-lg text-[1vw] font-medium text-sidebar-text
             hover:shadow-lg hover:bg-button-green-hover disabled:bg-sr-disabled-green transition hover:transition`;
     // check if all input fields have been filled
     if (firstName && middleName && lastName && un && position && pw) {
@@ -131,7 +131,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
   const inputStyle = `text-center w-full h-[4.85vh] rounded-xl`;
   const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain -ml-[9.75vh] h-[49vh]`;
   const modalBody = `absolute inset-x-0 bg-transparent top-[2%] bottom-[2%]`;
-  const modalBtnCancel = `w-[14vw] h-[5vh] text-[1vw] rounded-lg rounded-xl bg-discard hover:bg-white text-center`;
+  const modalBtnCancel = `w-[14vw] h-[5vh] text-[1vw] rounded-lg rounded-xl bg-discard hover:bg-white text-center font-medium`;
 
   return (
     <>
@@ -212,10 +212,10 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                       inputStyle={inputStyle} // styling for input
                                       name="firstName" // name of label-input components
                                       inputType="text" // type of input password, email, text, etc.
-                                      inputPlaceholder="First Name" // placeholder text for input
-                                      value={firstName} // value of the input
+                                      inputPlaceholder="FIRST NAME" // placeholder text for input
+                                      value={firstName.toUpperCase()} // value of the input
                                       changeHandler={(e) =>
-                                        setFirstName(e.target.value)
+                                        setFirstName(e.target.value.toUpperCase())
                                       } // change handling
                                     />
                                     <h4 className="mt-1 w-full text-center text-white">
@@ -232,9 +232,9 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                       name="middleName" // name of label-input components
                                       inputType="text" // type of input password, email, text, etc.
                                       inputPlaceholder="_" // placeholder text for input
-                                      value={middleName} // value of the input
+                                      value={middleName.toUpperCase()} // value of the input
                                       changeHandler={(e) =>
-                                        setMiddleName(e.target.value)
+                                        setMiddleName(e.target.value.toUpperCase())
                                       } // change handling
                                     />
                                     <h4 className="w-full text-center mt-1 text-white">
@@ -250,10 +250,10 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                       inputStyle={inputStyle} // styling for input
                                       name="lastName" // name of label-input components
                                       inputType="text" // type of input password, email, text, etc.
-                                      inputPlaceholder="Last Name" // placeholder text for input
-                                      value={lastName} // value of the input
+                                      inputPlaceholder="LAST NAME" // placeholder text for input
+                                      value={lastName.toUpperCase()} // value of the input
                                       changeHandler={(e) =>
-                                        setLastName(e.target.value)
+                                        setLastName(e.target.value.toUpperCase())
                                       } // change handling
                                     />
                                     <h4 className="w-full text-center mt-1 text-white">
@@ -339,7 +339,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                             </div>
 
                             {/* Create User and Cancel buttons */}
-                            <div className="w-[91%] flex flex-row mt-[2vh] pl-[1%] font-poppins font-medium justify-center gap-x-[1vw]">
+                            <div className="w-[91%] flex flex-row mt-[2vh] pl-[1%] font-poppins  justify-center gap-x-[1vw]">
                                 <CreateUserButton />
                                 <button
                                   className={modalBtnCancel}

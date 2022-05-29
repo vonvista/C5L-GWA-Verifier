@@ -156,9 +156,9 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
   const inputStyle = `text-center w-full h-[4.85vh] rounded-xl`;
   const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain -ml-[9.75vh] h-[49vh]`;
   const modalBody = `absolute inset-x-0 bg-transparent top-[2%] bottom-[2%]`;
-  const modalBtnSave = `w-[14vw] h-[5vh] block bg-button-green rounded-lg text-[1vw] text-sidebar-text
+  const modalBtnSave = `w-[14vw] h-[5vh] font-medium block bg-button-green rounded-lg text-[1vw] text-sidebar-text
     hover:shadow-lg hover:bg-button-green-hover disabled:bg-sr-disabled-green transition hover:transition`;
-  const modalBtnCancel = `w-[14vw] h-[5vh] text-[1vw] rounded-lg rounded-xl bg-discard hover:bg-white text-center`;
+  const modalBtnCancel = `w-[14vw] h-[5vh] text-[1vw]  font-medium rounded-lg rounded-xl bg-discard hover:bg-white text-center`;
 
   
   return (
