@@ -133,9 +133,8 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
   const inputStyle = `text-center w-full h-[4.85vh] rounded-xl`;
   const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain -ml-[9.75vh] h-[49vh]`;
   const modalBody = `absolute inset-x-0 bg-transparent top-[2%] bottom-[10%]`;
-  const modalBtnCancel = `w-2/5 h-[5vh] block ml-auto mr-auto rounded-lg user-btn text-[1vw] text-sidebar-text bg-transparent border border-zinc-200
-  hover:shadow-lg hover:bg-white
-  transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:text-black`;
+  const modalBtnCancel = `w-2/5 h-[5vh] block ml-auto mr-auto rounded-lg rounded-xl mr-[0.65vw] bg-discard hover:bg-white text-center`;
+
   return (
     <>
       {/* Wrapping everything with transition component to use transition effects from @headlessui/react */}
@@ -346,13 +345,14 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                             {/* Create User Button */}
                             <div className="w-full flex flex-row">
                               <section className="my-auto ml-0 mr-auto w-[90.5%] font-poppins font-medium flex justify-center">
+                                <CreateUserButton />
                                 <button
                                   className={modalBtnCancel}
                                   onClick={handleClose}
+                                  type="button"
                                 >
                                   Cancel
                                 </button>
-                                <CreateUserButton />
                               </section>
                             </div>
                           </form>

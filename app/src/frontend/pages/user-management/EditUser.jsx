@@ -161,9 +161,7 @@ const EditUser = ({
   const modalBtnSave = `w-2/5 h-[5vh] block ml-auto mr-auto bg-button-green rounded-lg user-btn text-[1vw] text-sidebar-text
   hover:shadow-lg hover:bg-button-green-hover disabled:bg-sr-disabled-green
   transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300`;
-  const modalBtnCancel = `w-2/5 h-[5vh] block ml-auto mr-auto rounded-lg user-btn text-[1vw] text-sidebar-text bg-transparent border border-zinc-200
-  hover:shadow-lg hover:bg-white
-  transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:text-black`;
+  const modalBtnCancel = `w-2/5 h-[5vh] block ml-auto mr-auto rounded-lg rounded-xl mr-[0.65vw] bg-discard hover:bg-white text-center`;
 
   // prevent default form submission
   const preventDefault = (e) => {
@@ -381,13 +379,6 @@ const EditUser = ({
                             {/* Save button */}
                             <section className="my-auto ml-0 mr-auto w-[90.5%] font-poppins font-medium flex justify-center">
                               <button
-                                className={modalBtnCancel}
-                                onClick={handleClose}
-                                type="button"
-                              >
-                                Cancel
-                              </button>
-                              <button
                                 // prevent default
                                 onClick={(e) => {
                                   e.preventDefault();
@@ -407,6 +398,13 @@ const EditUser = ({
                                 }
                               >
                                 Save
+                              </button>
+                              <button
+                                className={modalBtnCancel}
+                                onClick={handleClose}
+                                type="button"
+                              >
+                                Cancel
                               </button>
                             </section>
                           </form>
