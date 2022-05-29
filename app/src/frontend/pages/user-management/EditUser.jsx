@@ -7,19 +7,24 @@ import Swal from 'sweetalert2';
 import 'tailwindcss/tailwind.css';
 
 
-// function which shows the add user modal; to be used in UserSystemPage
-// to use EditUser and AddUserBtn, import needed files and declare and initialize showModal variable:
-// <Actions handleEdit={() => setShowModal(true)}/>
-// {showModal ?
-//   (<EditUser handleClose={() => setShowModal(false)}/>)
-//   :(<></>)
-// }
+/* Parent component: ./UserManagementPage */
+
+/* This function contains the edit user modal window. 
+
+   HOW TO USE:
+    1. In the user management page, declare and initialize showModal variable.
+        {showModal ?
+            (<EditUser {props}/>)
+            :(<></>)
+        }
+*/
 
 /* Props:
-    modalState            ---
-    handleClose           ---
-    editUser              ---
-    handleEditRecordSave  ---  fsadas
+    modalState            ---  boolean; used as flag to open and close the modal window
+    handleClose           ---  function used to close the modal window
+    editUser              ---  receives state of current user details
+    uneditedUser          ---  receives state of unedited user details
+    handleEditRecordSave  ---  function that handles saving of changes in user details
 */
 const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditRecordSave }) => {
   const [firstName, setFirstName] = useState(editUser.FirstName);

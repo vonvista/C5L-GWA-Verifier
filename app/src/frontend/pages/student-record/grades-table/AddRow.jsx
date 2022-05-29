@@ -19,6 +19,8 @@ import 'tailwindcss/tailwind.css';
     unitsHandler        ---     function that sets the value of units input field
     gradeState          ---     holds the current value of grade input field
     gradeHandler        ---     function that sets the value of grade input field
+    histTitleHandler    ---     holds the main description for logging history about the changes made
+    semState            ---     receives the sem and year that indicates which table should the new row be added in
 */
 const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNameHandler, unitsState, unitsHandler, gradeState, gradeHandler, histTitleHandler, semState}) => {
 
