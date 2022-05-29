@@ -25,13 +25,7 @@ import 'tailwindcss/tailwind.css';
     uneditedUser          ---  receives state of unedited user details
     handleEditRecordSave  ---  function that handles saving of changes in user details
 */
-const EditUser = ({
-  modalState,
-  handleClose,
-  editUser,
-  uneditedUser,
-  handleEditRecordSave,
-}) => {
+const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditRecordSave }) => {
   const [firstName, setFirstName] = useState(editUser.FirstName);
   const [middleName, setMiddleName] = useState(editUser.MiddleName);
   const [lastName, setLastName] = useState(editUser.LastName);
@@ -150,24 +144,23 @@ const EditUser = ({
       });
   };
 
-  /* -------------------- Styling --------------------*/
-  const modalContent1 = `h-[60%] w-[70%] flex-col mx-auto p-2 rounded-[3.25vw] relative bg-secondary-red transform overflow-hidden p-6 text-left align-middle shadow-xl transition ease-out duration-300`;
-  const modalBody1 = `h-full bg-transparent flex m-auto overflow-hidden overflow-y-auto relative w-full`;
-  const inputContent = `overflow-auto my-auto ml-0 mr-auto w-[90.5%] text-[1.25vw]`;
-  const form = `bg-transparent rounded-lg my-auto ml-auto mr-auto py-0`;
-  const inputStyle = `rounded-lg text-center w-full h-[2.5vw]`;
-  const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain -ml-[9.75vh] h-[49vh]`;
-  const modalBody = `absolute inset-x-0 bg-transparent top-[2%] bottom-[10%]`;
-  const modalBtnSave = `w-2/5 h-[5vh] block ml-auto mr-auto bg-button-green rounded-lg user-btn text-[1vw] text-sidebar-text
-  hover:shadow-lg hover:bg-button-green-hover disabled:bg-sr-disabled-green
-  transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300`;
-  const modalBtnCancel = `w-2/5 h-[5vh] block ml-auto mr-auto rounded-lg rounded-xl mr-[0.65vw] bg-discard hover:bg-white text-center`;
-
   // prevent default form submission
   const preventDefault = (e) => {
     e.preventDefault();
   };
+  
+  /* -------------------- Styling --------------------*/
+  const modalContent1 = `w-[70%] flex-col mx-auto p-2 rounded-[3.25vw] relative bg-secondary-red transform overflow-hidden p-6 text-left align-middle shadow-xl transition ease-out duration-300`;
+  const modalBody1 = `h-full bg-transparent flex m-auto overflow-hidden overflow-y-auto relative w-full`;
+  const inputContent = `overflow-auto pl-[1%] my-auto w-full text-[1vw]`;
+  const inputStyle = `text-center w-full h-[4.85vh] rounded-xl`;
+  const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain -ml-[9.75vh] h-[49vh]`;
+  const modalBody = `absolute inset-x-0 bg-transparent top-[2%] bottom-[2%]`;
+  const modalBtnSave = `w-[14vw] h-[5vh] block bg-button-green rounded-lg text-[1vw] text-sidebar-text
+    hover:shadow-lg hover:bg-button-green-hover disabled:bg-sr-disabled-green transition hover:transition`;
+  const modalBtnCancel = `w-[14vw] h-[5vh] text-[1vw] rounded-lg rounded-xl bg-discard hover:bg-white text-center`;
 
+  
   return (
     <>
       <Transition appear show={modalState} as={Fragment}>
@@ -186,8 +179,7 @@ const EditUser = ({
           </Transition.Child>
 
           {/* Container for the layer containing the modal window */}
-          <div className="fixed inset-0 overflow-y-auto ">
-            <div className="flex m-auto w-full h-full items-center justify-center p-4 text-center">
+          <div className="fixed inset-0 overflow-y-auto flex m-auto w-full h-full items-center justify-center p-4">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-500"
@@ -208,14 +200,14 @@ const EditUser = ({
                       >
                         {/* Close button */}
                         <XIcon
-                          className="cursor-pointer ml-auto mr-0 transition-all ease-out delay-200 text-sidebar-text hover:text-gray-400 hover:transition-all hover:ease-in hover:delay-200 h-6 w-6"
+                          className="h-6 w-6 cursor-pointer ml-auto mr-0 transition-all ease-out text-sidebar-text hover:text-gray-400 hover:transition-all hover:ease-in"
                           onClick={handleClose}
                         />
                       </Dialog.Title>
                     </div>
 
                     {/* Window body */}
-                    <div className="font-inter m-0 absolute top-[50%] translate-y-[-50%] w-full">
+                    <div className="font-montserrat m-0 absolute top-[50%] translate-y-[-50%] w-full">
                       <div className={modalBody1}>
                         {/* User Photo */}
                         <div className="w-1/6 ml-auto mt-2">
@@ -226,11 +218,12 @@ const EditUser = ({
                           />
                         </div>
 
-                        <section className="flex-rows-4 relative w-9/12">
-                          {/* Input Form */}
-                          <form className="justify-center">
-                            <div className="flex justify-center">
-                              <div className={[inputContent, form]}>
+                        {/* Input Form */}
+                        <form className="flex-rows-4 relative w-9/12">
+                            
+                            {/* Input fields */}
+                            <div className={inputContent}>
+
                                 {/* Name */}
                                 <div className="w-full pb-4 mt-2">
                                   {/* First Name */}
@@ -341,8 +334,7 @@ const EditUser = ({
                                 </div>
 
                                 {/* Password */}
-                                <div className="w-full pb-4 mt-2">
-                                  <section className="w-[91%] inline-block grow mr-2">
+                                <div className="w-[91%] inline-block pb-4 mt-2 mr-2">
                                     <div className="relative w-full">
                                       <Input
                                         labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
@@ -371,13 +363,11 @@ const EditUser = ({
                                     <h4 className="mt-1 mb-2 w-full text-center text-white">
                                       Password
                                     </h4>
-                                  </section>
                                 </div>
-                              </div>
                             </div>
 
-                            {/* Save button */}
-                            <section className="my-auto ml-[0.5vw] mr-auto w-[90.5%] font-poppins font-medium flex justify-center">
+                            {/* Save and Cancel buttons */}
+                            <section className="w-[91%] flex flex-row mt-[2vh] pl-[1%] font-poppins font-medium justify-center gap-x-[1vw]">
                               <button
                                 // prevent default
                                 onClick={(e) => {
@@ -387,14 +377,13 @@ const EditUser = ({
                                 className={modalBtnSave}
                                 type="button"
                                 disabled={
-                                  !(
-                                    pw != '' &&
-                                    (firstName != firstNameUnedited ||
-                                      middleName != middleNameUnedited ||
-                                      lastName != lastNameUnedited ||
-                                      un != unUnedited ||
-                                      position != positionUnedited)
-                                  )
+                                    !( pw != '' &&
+                                        (firstName != firstNameUnedited ||
+                                        middleName != middleNameUnedited ||
+                                        lastName != lastNameUnedited ||
+                                        un != unUnedited ||
+                                        position != positionUnedited)
+                                    )
                                 }
                               >
                                 Save
@@ -407,14 +396,12 @@ const EditUser = ({
                                 Cancel
                               </button>
                             </section>
-                          </form>
-                        </section>
+                        </form>
                       </div>
                     </div>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
-            </div>
           </div>
         </Dialog>
       </Transition>
