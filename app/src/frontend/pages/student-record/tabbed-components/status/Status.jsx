@@ -15,7 +15,7 @@ export default function Status({ state, gpaCalc, ...rest }) {
 
             {/* Academic Achievement Box */}
             <div className="border rounded-lg p-4 grid row-auto">
-                <h1 className="place-self-start inline text-lg font-inter">Academic Achievement</h1>
+                <h1 className="place-self-start inline text-lg 2xl:text-[19px] font-inter">Academic Achievement</h1>
 
                 {/* change the academic achievement Box depending on the Final GWA of the Student -lal */ 
                     (gpaCalc.gwa.toFixed(3) > 1.20) 
@@ -29,7 +29,7 @@ export default function Status({ state, gpaCalc, ...rest }) {
             </div>
 
             {/* Table for Grades */}
-            <div className="font-inter text-md">
+            <div className="font-inter text-base 2xl:text-[17px]">
                 <table className="table-auto w-full my-5">
                     <thead className="text-left">
                         <tr>

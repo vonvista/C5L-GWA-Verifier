@@ -27,8 +27,8 @@ const StudentRecordHistory = ({ historyData, ...rest }) => {
                 <section key={i} className="mb-3">
 
                   {/* History per date */}
-                  <div className="rounded-lg border border-solid border-t-zinc-200 border-b-zinc-200">
-                    <h2 className="font-inter pt-2 pb-2 pl-4 font-light text-md">
+                  <div className=" text-sm xl:text-base rounded-lg border border-solid border-t-zinc-200 border-b-zinc-200">
+                    <h2 className="font-inter pt-2 pb-2 pl-4 font-light">
                       Last Modified: {date}
                     </h2>
 

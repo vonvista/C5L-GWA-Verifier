@@ -240,6 +240,7 @@ const LoginPage = () => {
                                     labelVal="Username"                                 // label text
                                     inputStyle="shadow rounded border font-medium leading-tight py-2 px-3 w-full text-neutral-700"       // styling for input
                                     name="username"                                     // name of label-input components
+                                    max={17}                                            // character limit
                                     inputType="text"                                    // type of input password, email, text, etc.
                                     inputPlaceholder="Username"                         // placeholder text for input
                                     value={values.username}                             // value of the input

@@ -235,10 +235,10 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
                 /> : <></>
             }
 
-            <div className="w-2/3 font-poppins relative ml-auto grow-0">
+            <div className="w-2/3 font-poppins relative ml-auto grow-0 text-sm 2xl:text-base">
             
                 {/* Active word and dropdown icon */}
-                <div className="grid-cols-2 divide-x w-full py-1.5 bg-button-green hover:bg-button-green-hover hover:transition-all flex items-center justify-items-center rounded-lg border border-slate-300"
+                <div className="grid-cols-2 divide-x w-full py-1.5 text-center text-sidebar-text bg-button-green hover:bg-button-green-hover hover:transition-all flex items-center justify-items-center rounded-lg border border-slate-300"
                     onClick={() => {
                         setIsActive(!isActive);
                     }}
@@ -247,7 +247,7 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
                         type="button"
                         className="inline-block grow transition ease-out hover:transition hover:ease-in hover:bg-button-green-hover rounded-l-lg"
                     >
-                        <p className="inline-block grow font-medium text-center text-white">
+                        <p className="inline-block grow font-medium">
                             Actions
                         </p>
                     </button>
@@ -259,7 +259,7 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
                             <ChevronUpIcon 
                                 className={`${
                                     !isActive ? 'transform rotate-180 ' : ''
-                                } w-5 xl:w-7 duration-200 text-sidebar-text inline-flex self-center`} />
+                                } w-5 xl:w-7 duration-200 inline-flex self-center`} />
                         </section>
                     </button>
                 </div>
@@ -275,29 +275,29 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
                     leaveTo="transform scale-95 opacity-0"
                 >
                     <div
-                        className="origin-top-right z-10 absolute w-full mt-0.5 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
+                        className="origin-top-right z-10 absolute w-full mt-0.5 rounded-md shadow-lg text-sidebar-text"
                         tabIndex="-1"
                     >
                         <div>
                             {/* Export button */}
                             <button
-                                className="rounded-t-lg block py-2 text-sm text-center w-full bg-button-green transition ease-out hover:transition hover:ease-in  hover:bg-button-green-hover hover:rounded-t-lg"
+                                className="rounded-t-lg block py-2 w-full bg-button-green transition ease-out hover:transition hover:ease-in  hover:bg-button-green-hover hover:rounded-t-lg"
                                 type="button"
                                 onClick={() => {
                                     setIsActive(false);
                                     handleExport();
                                 }}
                             >
-                                <p className="text-white">Export</p>
+                                <span>Export</span>
                             </button>
                             
                             {/* Edit button */}
                             <button
-                                className="bg-button-green transition ease-out hover:transition hover:ease-in0 hover:bg-button-green-hover block px-4 rounded-b-lg py-2 text-sm z-1 w-full"
+                                className="bg-button-green transition ease-out hover:transition hover:ease-in hover:bg-button-green-hover block px-4 rounded-b-lg py-2  z-1 w-full"
                                 type="button"
                                 onClick={openModal}
                             >
-                                <p className=" text-white">Edit</p>
+                                <span>Edit</span>
                             </button>
                         </div>
                     </div>

@@ -319,7 +319,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                         <div className={`table-header-group`}>
                             <div className="table-row">
                                 <div className={`${detailStyle.title} w-[12vw]`}>Student Number</div>
-                                <div className={`${detailStyle.title} w-[25vw]`}>Name</div>
+                                <div className={`${detailStyle.title} w-[25vw] pl-[2.5vw]`}>Name</div>
                                 <div className={`${detailStyle.title} w-[20vw] pl-[2.5vw]`}>Degree Program</div>
                                 <div className={`${detailStyle.title} w-[12vw] pl-[2.5vw]`}>Status</div>
                             </div>
@@ -327,8 +327,8 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
 
                         <div className={`table-row-group`}>
                             <div className="table-row">
-                                <div className={`${detailStyle.text} w-[12vw]`}>{selectedStudent.stud_no}</div>
-                                <div className={`${detailStyle.text} w-[29vw] truncate`}>
+                                <div className={`${detailStyle.text} w-[12vw] truncate`}>{selectedStudent.stud_no}</div>
+                                <div className={`${detailStyle.text} w-[29vw] pl-[2.5vw] truncate`}>
                                     {`${selectedStudent.iname.lname.toUpperCase()}, ${selectedStudent.iname.fname.toUpperCase()} ${selectedStudent.iname.mname.toUpperCase()}.`}
                                 </div>
                                 <div className={`${detailStyle.text} w-[16vw] pl-[2.5vw] truncate`}>{selectedStudent.degree_program}</div>
@@ -373,7 +373,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                             }}
                             manual
                         >
-                            <Tab.List className="flex rounded-t-md font-inter">
+                            <Tab.List className="flex rounded-t-md font-inter 2xl:text-lg">
                                 {Object.keys(tabContents).map((tab, idx) => (
                                         <Tab key={idx} as={Fragment}>
                                             {({selected}) => (

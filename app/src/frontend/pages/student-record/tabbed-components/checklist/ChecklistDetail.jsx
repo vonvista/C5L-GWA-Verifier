@@ -26,7 +26,7 @@ const ChecklistDetail = ({ icon, detail, setValData, index}) => {
         <XCircleIcon className="w-[2vw] text-[#FE7979]"/>
       )}
       {/* Detail */}
-      <span className="ml-2 text-base font-inter">{detail}</span>
+      <span className="ml-2 text-base 2xl:text-lg font-inter">{detail}</span>
     </div>
   );
 };
