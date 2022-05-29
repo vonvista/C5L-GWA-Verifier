@@ -35,7 +35,7 @@ export default function CheckListTab ({ checklistData, setValData, handleApply }
 
             {/* Apply changes button */}
             <button
-                className="h-9 px-5 flex items-center mt-6 rounded-xl bg-button-green text-white font-montserrat font-bold hover:shadow-lg hover:bg-button-green-hover"
+                className="h-9 px-5 flex items-center mt-6 rounded-xl bg-button-green text-white font-montserrat font-bold transition ease-out hover:transition hover:ease-in hover:shadow-lg hover:bg-button-green-hover"
                 type="button"
                 onClick={handleApply}
             >

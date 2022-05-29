@@ -12,7 +12,7 @@ import 'tailwindcss/tailwind.css';
     list   ---  receives the list of students to be exported into a file
 */
 const ExportFileBtn = ({ list }) => {
-  const exportbtn = `w-[11vw] h-[3vw] bg-export-yellow m-2 rounded-xl text-white text-base font-montserrat font-bold transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:shadow-lg hover:bg-export-yellow-hover`;
+  const exportbtn = `w-[11vw] h-[3vw] bg-export-yellow m-2 rounded-xl text-white text-base font-montserrat font-bold transition ease-out hover:transition hover:ease-in hover:shadow-lg hover:bg-export-yellow-hover`;
   const [currUser, setUser] = useState(`${localStorage.getItem("FirstName")} ${localStorage.getItem("LastName")} ${localStorage.getItem("MiddleName")}`);
 
   const handleExport = async () => {

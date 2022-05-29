@@ -9,7 +9,7 @@ import { TrashIcon } from '@heroicons/react/outline';
     handleClick  --- function to handle click event
 */
 const BulkDeleteBtn = ({ handleClick }) => {
-  const resetbtn = `w-[11vw] h-[4.85vh] font-montserrat font-medium px-[1vw] bg-[#823838] rounded-xl mr-2 text-white text-base font-montserrat font-bold transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:shadow-lg hover:bg-[#874646]`;
+  const resetbtn = `w-[11vw] h-[4.85vh] font-montserrat font-medium px-[1vw] bg-[#823838] rounded-xl mr-2 text-white text-base font-montserrat font-bold transition ease-out hover:transition hover:ease-in hover:shadow-lg hover:bg-[#874646]`;
 
   return (
     <>
