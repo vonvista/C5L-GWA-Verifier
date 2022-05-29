@@ -81,25 +81,7 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
     }
     
     // Function for adding new history after adding new row
-    // ..
-    // .. for revisions after adding Justification for AddRow
-    // ..
     function setHistory(data){
-
-        // // new history to save to db
-        // let newHistory = {
-        //     User: userName,
-        //     Student: studentID,
-        //     Date: new Date().toLocaleDateString(),
-        //     Time: new Date().toLocaleTimeString('en-US', { 
-        //         hour12: false, 
-        //         hour: "numeric", 
-        //         minute: "numeric"
-        //     }),
-        //     Description: "create",
-        //     Details: `create student grade with Course: ${data.Course} on Sem: ${data.Semyear}`,
-        // }
-
         // new history for history tab change handler
         let updateHistory = {
             date: new Date().toLocaleDateString(),
@@ -119,26 +101,6 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
 
         // history handler
         handleHistory(updateHistory);
-
-
-        // // fetch post request to add new history
-        // fetch(`http://${ip}:3001/history/add`, {
-        //     method: "POST",
-        //     headers: {
-        //     "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify(newHistory)
-        // })
-        //     .then(response => response.json())
-        //     .then(body => console.log(body))
-        //     .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Server Error',
-        //             text: 'Check if the server is running or if database IP is correct',
-        //         })
-        //         console.log(err)
-        //     })
     }
 
 

@@ -152,7 +152,14 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
     closeJustModal()
     setEditModal(false);
     setSelectedStudent( (prevState)=>({...prevState, stud_no: studNum, degree_program: degree.toUpperCase(), Student: currStudentID, iname: {fname: studFName.toUpperCase(), mname: studMName.toUpperCase(), lname: studLName.toUpperCase()}}))
-  }
+    
+    // success message
+    Swal.fire({
+        title: 'Success',
+        text: 'Successfully edited student detail.',
+        icon: 'success',
+    })
+}
 
   // Function for adding new history after adding new row
   function handleHistory(data){
