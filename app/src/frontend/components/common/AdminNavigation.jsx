@@ -81,9 +81,9 @@ const AdminNav = ({ hoverRef, isHovering, setIsHovering }) => {
                     />
 
                     {/* User Information */}
-                    <div className="flex-shrink-0">
-                        <div className="font-poppins font-medium" id="userName"></div>
-                        <div id="position" className="font-poppins"></div>
+                    <div className="w-[13vw] ">
+                        <div className="font-poppins font-medium truncate" id="userName"></div>
+                        <div className="font-poppins truncate" id="position"></div>
                     </div>
                 </div>
                 
