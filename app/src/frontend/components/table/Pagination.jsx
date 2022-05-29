@@ -54,7 +54,8 @@ import 'tailwindcss/tailwind.css';
     paginate    --- function that changes the contents being displayed based on the page number
 */
 const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
-   let [num, setNum] = useState(1);
+   let [num, setNum] = useState(1);       // for tracking the page buttons display
+   let [currPage, setCurrPage] = useState(1);      // for tracking the current page displayed when arrows are clicked
    const numberOfPages = Math.ceil(totalRows / rowsPerPage);
    const pageNumbers = [];
 
@@ -72,11 +73,26 @@ const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
 
    // Show succeeding pages to choose
    function next () {
+      console.log("Number of pages: "+numberOfPages);
+      console.log("Next "+ currPage);
+
+      if (currPage < numberOfPages){
+         paginate(++currPage);
+         setCurrPage(currPage);
+      }
+
       num < numberOfPages-2 && setNum(++num);
    }
 
    // Show previous pages to choose
    function prev () {
+      console.log("Prev "+currPage);
+
+      if (currPage > 1){
+         paginate(--currPage);
+         setCurrPage(currPage);
+      }
+
       num > 1 && setNum(--num);
    }
 
@@ -96,7 +112,7 @@ const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
          {/* Page Numbers */}
          {
             pageNumbers.map((pg, i) => (
-               <button key={i} onClick={() => paginate(pg.page)} className={`${pageButton} ${currentPage === pg.page && currentPageStyle}`}>{pg.page}</button>
+               <button key={i} onClick={() => {paginate(pg.page), setCurrPage(pg.page)}} className={`${pageButton} ${currentPage === pg.page && currentPageStyle}`}>{pg.page}</button>
             ))
          }
          {/* Next arrow */}
