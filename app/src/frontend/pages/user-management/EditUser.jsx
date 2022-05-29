@@ -74,9 +74,9 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
 
     const credentials = {
         _id: editUser._id,
-        FirstName: firstName,
-        MiddleName: middleName,
-        LastName: lastName,
+        FirstName: firstName.toUpperCase(),
+        MiddleName: middleName.toUpperCase(),
+        LastName: lastName.toUpperCase(),
         Username: un,
         Position: position,
         Password: pw,
@@ -107,9 +107,9 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
         console.log(body)
         handleEditRecordSave(body)
         if(body.Role == "admin"){
-          localStorage.setItem("FirstName", body.FirstName)
-          localStorage.setItem("LastName", body.LastName)
-          localStorage.setItem("MiddleName", body.MiddleName)
+          localStorage.setItem("FirstName", body.FirstName.toUpperCase())
+          localStorage.setItem("LastName", body.LastName.toUpperCase())
+          localStorage.setItem("MiddleName", body.MiddleName.toUpperCase())
           localStorage.setItem("Password", body.Password)
           localStorage.setItem("Position", body.Position)
           localStorage.setItem("Username", body.Username)
@@ -128,23 +128,17 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
   };
 
   /*-------------------- Styling --------------------*/
-  const editStudentModal = `relative bg-secondary-red h-[47vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
-  const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain mt-0 relative top-0 ml-[-11.25vh] h-[37vh]`;
-  const modalBody = `absolute inset-x-0 bg-secondary-red top-[8%] bottom-[10%]`;
-  const modalClose = `text-[4.85vh] text-white float-right`;
-  const modalTitle = `text-white text-center font-bold italic text-[1.30vw] mt-[4.15vh] mb-[4.85vh]`;
-  const modalInputs = `text-[1.10vw] flex flex-col space-y-4 items-center justify-center`;
-  const inputContainer = `ml-5 mr-[1.15vw]`;
-  const inputStyle = `text-center w-full h-[4.85vh] rounded-xl`
-  const sectionInputField = `inline-block w-[11.71875vw]`;
-  const sectionFLName = `inline-block w-[16.71875vw] truncate`;
-  const sectionMI = `inline-block w-[6.71875vw]`;
-  const modalFooter = `mt-[4.85vh] text-[1.11vw] flex items-center justify-center`;
-  const modalBtnSave = `h-[5vh] w-[9.25vw] rounded-xl mr-[0.65vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300`;
-  const modalContent1 = `h-[60%] w-[70%] flex-col mx-auto p-2 rounded-[30px] relative bg-secondary-red transform overflow-hidden p-6 text-left align-middle shadow-xl transition-all ease-in-out duration-300`;
+  const modalContent1 = `h-[60%] w-[70%] flex-col mx-auto p-2 rounded-[30px] relative bg-secondary-red transform overflow-hidden p-6 text-left align-middle shadow-xl transition ease-out duration-300`;
   const modalBody1 = `h-full bg-transparent flex m-auto overflow-hidden overflow-y-auto relative w-full`;
   const inputContent = `overflow-auto w-full text-[1.25vw]`;
   const form = `bg-transparent rounded-lg py-0 px-5`;
+  const inputStyle = `rounded-lg text-center w-full h-[2.5vw]`;
+  const modalBtnSave = `w-2/5 h-[5vh] block ml-auto mr-auto bg-button-green rounded-lg user-btn text-[1vw] text-sidebar-text
+  hover:shadow-lg hover:bg-button-green-hover disabled:bg-sr-disabled-green
+  transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300`;
+  const modalBtnCancel = `w-2/5 h-[5vh] block ml-auto mr-auto rounded-lg user-btn text-[1vw] text-sidebar-text bg-transparent border border-zinc-200
+  hover:shadow-lg hover:bg-white
+  transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:text-black`;
 
   //prevent default form submission
   const preventDefault = (e) => {
@@ -155,7 +149,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
   return (
     <>
       <Transition appear show={modalState} as={Fragment}>
-        <Dialog as="div" className="relative z-10 inter" onClose={handleClose}>
+        <Dialog as="div" className="relative z-30 " onClose={handleClose}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -170,7 +164,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
           </Transition.Child>
 
            {/* Container for the layer containing the modal window */}
-           <div className="fixed inset-0 overflow-y-auto flex min-h-full items-center justify-center p-4 text-center">
+           <div className="fixed inset-0 overflow-y-auto ">
             <div className="flex m-auto w-full h-full items-center justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
@@ -181,7 +175,9 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
+                {/* Edit User Modal Window */}
                 <Dialog.Panel className={modalContent1}>
+                  {/* Window Title */}
                   <Dialog.Title
                     as="h3"
                     className="ml-3 text-2xl leading-6 text-gray-900 flex"
@@ -193,9 +189,10 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                     />
                   </Dialog.Title>
 
-                  <div className="m-0 absolute top-[50%] translate-y-[-50%] w-full">
+                  {/* Window body */}
+                  <div className="font-inter m-0 absolute top-[50%] translate-y-[-50%] w-full">
                     <div className={modalBody1}>
-                      {/* photo  */}
+                      {/* User Photo */}
                       <div className="w-1/6 ml-auto mt-2">
                         <img
                           className="rounded-lg w-[10vw] h-[10vw]"
@@ -203,14 +200,15 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                           src={user}
                         />
                       </div>
-                      {/* form */}
+
                       <section className="flex-rows-4 relative w-9/12">
+                      {/* Input Form */}
                         <form className="justify-center">
                           <div className="flex justify-center">
-                            {/* Input form */}
                             <div className={[inputContent, form]}>
-                              {/* name */}
+                              {/* Name */}
                               <div className="w-full pb-4 mt-2">
+                                {/* First Name */}
                                 <section className="w-2/5 inline-block grow mr-2">
                                   <Input
                                     labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
@@ -219,15 +217,17 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                     name="firstName" // name of label-input components
                                     inputType="text" // type of input password, email, text, etc.
                                     inputPlaceholder="" // placeholder text for input
-                                    value={firstName} // value of the input
+                                    value={firstName.toUpperCase()} // value of the input
                                     changeHandler={(e) =>
-                                      setFirstName(e.target.value)
+                                      setFirstName(e.target.value.toUpperCase())
                                     } // change handling
                                   />
                                   <h4 className="mt-1 w-full text-center text-white">
                                     First Name
                                   </h4>
                                 </section>
+
+                                {/* Middle Initial */}
                                 <section className="w-1/12 inline-block grow mr-2">
                                   <Input
                                     labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
@@ -236,15 +236,17 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                     name="middleName" // name of label-input components
                                     inputType="text" // type of input password, email, text, etc.
                                     inputPlaceholder="" // placeholder text for input
-                                    value={middleName} // value of the input
+                                    value={middleName.toUpperCase()} // value of the input
                                     changeHandler={(e) =>
-                                      setMiddleName(e.target.value)
+                                      setMiddleName(e.target.value.toUpperCase())
                                     } // change handling
                                   />
                                   <h4 className="w-full text-center mt-1 text-white">
                                     M.I.
                                   </h4>
                                 </section>
+
+                                {/* Last Name */}
                                 <section className="w-2/5 inline-block grow mr-2">
                                   <Input
                                     labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
@@ -253,9 +255,9 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                     name="lastName" // name of label-input components
                                     inputType="text" // type of input password, email, text, etc.
                                     inputPlaceholder="" // placeholder text for input
-                                    value={lastName} // value of the input
+                                    value={lastName.toUpperCase()} // value of the input
                                     changeHandler={(e) =>
-                                      setLastName(e.target.value)
+                                      setLastName(e.target.value.toUpperCase())
                                     } // change handling
                                   />
                                   <h4 className="w-full text-center mt-1 text-white">
@@ -263,8 +265,10 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                   </h4>
                                 </section>
                               </div>
-                              {/* username and position */}
+
+                              {/* Username and Position */}
                               <div className="w-full pb-4 mt-2">
+                                {/* Username */}
                                 <section className="w-2/5 inline-block grow mr-2">
                                   <Input
                                     labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
@@ -281,6 +285,8 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                     Username
                                   </h4>
                                 </section>
+
+                                {/* Position */}
                                 <section className="w-1/2 inline-block grow mr-2">
                                   <Input
                                     labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
@@ -300,14 +306,15 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                   </h4>
                                 </section>
                               </div>
-                              {/* password */}
-                              <div className="">
+
+                              {/* Password */}
+                              <div className="w-full pb-4 mt-2 pr-24">
                                 <section className="un-style">
                                   <div className="relative w-full">
                                     <Input
                                       labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
                                       labelVal="Password" // label text
-                                      inputStyle="rounded-xl text-center w-[42.5vw] h-[5vh] appearance-none leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 js-password rounded-xl" // styling for input
+                                      inputStyle="rounded-xl text-center w-full h-[2.5vw] appearance-none border-2 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" // styling for input
                                       name="password" // name of label-input components
                                       inputType="password" // type of input password, email, text, etc.
                                       inputPlaceholder="*****" // placeholder text for input
@@ -316,9 +323,9 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                         setPW(e.target.value)
                                       } // change handling
                                     />
-                                    <div className="absolute inset-y-0  right-[4.7vw] flex items-center px-2">
+                                    <div className="absolute inset-y-0 right-0 flex items-center px-2">
                                       <button
-                                        className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-[0.9vw] text-gray-600  cursor-pointer account-button js-password-label w-[3vw] h-11/12"
+                                        className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-[0.9vw] text-gray-600 font-mono cursor-pointer account-button js-password-label w-[3vw] h-11/12"
                                         htmlFor="toggle"
                                         type="button"
                                         onClick={buttonHandler}
@@ -327,6 +334,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                       </button>
                                     </div>
                                   </div>
+
                                   <h4 className="mt-1 mb-2 w-full text-center text-white">
                                     Password
                                   </h4>
@@ -335,8 +343,11 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                             </div>
                           </div>
 
-                        {/* Save button */}
-                          <section className="mt-8 flex w-[90.5%] justify-center">
+                          {/* Save button */}
+                          <section className="my-auto ml-0 mr-auto w-[90.5%] font-poppins font-medium flex justify-center">
+                            <button className={modalBtnCancel} onClick={handleClose}>
+                              Cancel
+                            </button> 
                             <button 
                               //prevent default
                               onClick={(e) => 
@@ -350,8 +361,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                 lastName != lastNameUnedited || un != unUnedited || position != positionUnedited)) ? false : true}
                             >
                               Save
-                            </button>
-                          
+                            </button>                         
                           </section>
                         </form>
                       </section>

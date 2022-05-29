@@ -60,15 +60,15 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
   // sets fields upon rendering
   useEffect(() => {
     setStudNum(studentInfo.stud_no)
-    setDegree(studentInfo.degree_program)
-    setStudFName(studentInfo.iname.fname)
-    setStudMName(studentInfo.iname.mname)
-    setStudLName(studentInfo.iname.lname)
+    setDegree(studentInfo.degree_program.toUpperCase())
+    setStudFName(studentInfo.iname.fname.toUpperCase())
+    setStudMName(studentInfo.iname.mname.toUpperCase())
+    setStudLName(studentInfo.iname.lname.toUpperCase())
     setStudNumUnedited(studentInfo.stud_no)
-    setDegreeUnedited(studentInfo.degree_program)
-    setStudFNameUnedited(studentInfo.iname.fname)
-    setStudMNameUnedited(studentInfo.iname.mname)
-    setStudLNameUnedited(studentInfo.iname.lname)
+    setDegreeUnedited(studentInfo.degree_program.toUpperCase())
+    setStudFNameUnedited(studentInfo.iname.fname.toUpperCase())
+    setStudMNameUnedited(studentInfo.iname.mname.toUpperCase())
+    setStudLNameUnedited(studentInfo.iname.lname.toUpperCase())
   }, [])
 
   // Function to open the edit student modal window
@@ -107,10 +107,10 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
   const updateStudent = () => {
     const credentials = {
         StudentID: studNum,
-        FirstName: studFName,     //put first name variable
-        LastName: studLName,      //put last name variable
-        MiddleName: studMName,    //put middle name variable
-        Degree: degree,
+        FirstName: studFName.toUpperCase(),     //put first name variable
+        LastName: studLName.toUpperCase(),      //put last name variable
+        MiddleName: studMName.toUpperCase(),    //put middle name variable
+        Degree: degree.toUpperCase(),
         _id: currStudentID
     }
 
@@ -133,7 +133,7 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
     })
 
     closeJustModal();
-    setSelectedStudent( (prevState)=>({...prevState, stud_no: studNum, degree_program: degree, Student: currStudentID, iname: {fname: studFName, mname: studMName, lname: studLName}}))
+    setSelectedStudent( (prevState)=>({...prevState, stud_no: studNum, degree_program: degree.toUpperCase(), Student: currStudentID, iname: {fname: studFName.toUpperCase(), mname: studMName.toUpperCase(), lname: studLName.toUpperCase()}}))
   }
 
   // Function for adding new history after adding new row

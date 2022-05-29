@@ -133,13 +133,17 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
   const inputContent = `overflow-auto w-full text-[1.25vw]`;
   const form = `bg-transparent rounded-lg py-0 px-5`;
   const inputStyle = `rounded-lg text-center w-full h-[2.5vw]`;
+  const modalBtnCancel = `w-2/5 h-[5vh] block ml-auto mr-auto rounded-lg user-btn text-[1vw] text-sidebar-text bg-transparent border border-zinc-200
+  hover:shadow-lg hover:bg-white
+  transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:text-black`;
+
 
   return (
     <>
       {/* Wrapping everything with transition component to use transition effects from @headlessui/react */}
       <Transition appear show={modalState} as={Fragment}>
         {/* Wrapping everything with dialog component */}
-        <Dialog as="div" className="relative z-10" onClose={handleClose}>
+        <Dialog as="div" className="relative z-30 " onClose={handleClose}>
           {/* Transition effect for the element inside this Transition.Child tag */}
           <Transition.Child
             as={Fragment}
@@ -155,7 +159,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
           </Transition.Child>
 
           {/* Container for the layer containing the modal window */}
-          <div className="fixed inset-0 overflow-y-auto">
+          <div className="fixed inset-0 overflow-y-auto ">
             <div className="flex m-auto w-full h-full items-center justify-center p-4 text-center">
               {/* Transition effect for the element inside this Transition.Child tag */}
               <Transition.Child
@@ -181,9 +185,10 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                     />
                   </Dialog.Title>
 
-                  {/* Window body */}
+                  
 
-                  <div className="font-montserrat m-0 absolute top-[50%] translate-y-[-50%] w-full">
+                  {/* Window body */}
+                  <div className="font-inter m-0 absolute top-[50%] translate-y-[-50%] w-full">
                     <div className={modalBody1}>
                       {/* User Photo */}
                       <div className="w-1/6 ml-auto mt-2">
@@ -209,10 +214,10 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                     inputStyle={inputStyle} // styling for input
                                     name="firstName" // name of label-input components
                                     inputType="text" // type of input password, email, text, etc.
-                                    inputPlaceholder="First Name" // placeholder text for input
+                                    inputPlaceholder="FIRST NAME" // placeholder text for input
                                     value={firstName} // value of the input
                                     changeHandler={(e) =>
-                                      setFirstName(e.target.value)
+                                      setFirstName(e.target.value.toUpperCase())
                                     } // change handling
                                   />
                                   <h4 className="mt-1 w-full text-center text-white">
@@ -231,7 +236,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                     inputPlaceholder="_" // placeholder text for input
                                     value={middleName} // value of the input
                                     changeHandler={(e) =>
-                                      setMiddleName(e.target.value)
+                                      setMiddleName(e.target.value.toUpperCase())
                                     } // change handling
                                   />
                                   <h4 className="w-full text-center mt-1 text-white">
@@ -247,10 +252,10 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                     inputStyle={inputStyle} // styling for input
                                     name="lastName" // name of label-input components
                                     inputType="text" // type of input password, email, text, etc.
-                                    inputPlaceholder="Last Name" // placeholder text for input
+                                    inputPlaceholder="LAST NAME" // placeholder text for input
                                     value={lastName} // value of the input
                                     changeHandler={(e) =>
-                                      setLastName(e.target.value)
+                                      setLastName(e.target.value.toUpperCase())
                                     } // change handling
                                   />
                                   <h4 className="w-full text-center mt-1 text-white">
@@ -307,7 +312,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                     <Input
                                       labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
                                       labelVal="Password" // label text
-                                      inputStyle="rounded-lg text-center w-full h-[2.5vw] appearance-none border-2 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" // styling for input
+                                      inputStyle="rounded-xl text-center w-full h-[2.5vw] appearance-none border-2 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" // styling for input
                                       name="password" // name of label-input components
                                       inputType="password" // type of input password, email, text, etc.
                                       inputPlaceholder="*****" // placeholder text for input
@@ -337,8 +342,11 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                           </div>
 
                           {/* Create User Button */}
-                          <div className="w-full flex">
-                            <section className="my-auto ml-0 mr-auto w-[90.5%] font-poppins font-medium">
+                          <div className="w-full flex flex-row">
+                            <section className="my-auto ml-0 mr-auto w-[90.5%] font-poppins font-medium flex justify-center">
+                              <button className={modalBtnCancel} onClick={handleClose}>
+                                Cancel
+                              </button>
                               <CreateUserButton />
                             </section>
                           </div>
