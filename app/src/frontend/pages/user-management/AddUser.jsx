@@ -91,7 +91,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
           Swal.fire({
             icon: 'success',
             title: 'Success',
-            text: 'Successfully add user!',
+            text: 'Successfully added user!',
           });
           handleAddRecord(body);
         }
