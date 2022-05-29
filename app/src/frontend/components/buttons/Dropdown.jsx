@@ -101,12 +101,24 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
 
     exportStudentData(student, studentGrades, currUser);
 
-    // swal success message
-    Swal.fire(
-      'Successful production of student record',
-      'If you pressed save, wait for your download to finish',
-      'success'
-    )
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 5000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+        //close on click
+
+      })
+      
+      Toast.fire({
+        icon: 'info',
+        title: 'Save or cancel file export'
+      })
   }
 
   //function which updates Student input fields
