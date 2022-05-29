@@ -287,7 +287,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         // Styling
         const studentsTable = `border-collapse overflow-hidden table-fixed max-w-[82vw] max-h-[70vh] rounded-t-[1vw] drop-shadow-lg`;
         const tHead = `bg-white border-solid rounded-t-[1vw] border-b-[0.2vh] table table-fixed whitespace-nowrap w-full font-montserrat`;
-        const tBodytR = `table table-fixed whitespace-nowrap w-full font-montserrat transition ease-out hover:transition hover:ease-in hover:bg-table-hover-color last:border-b-0`
+        const tBodytR = `h-[6.5vh] table table-fixed whitespace-nowrap w-full font-montserrat transition ease-out hover:transition hover:ease-in hover:bg-table-hover-color last:border-b-0`
         const tRow = `text-left not-italic text-[1.3vw] text-sr-text-gray`;
         const tBody = `bg-white block overflow-auto text-black rounded-b-[1vw] h-[65vh]`
 
@@ -301,6 +301,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         const degreetData = `${common} cursor-pointer w-[19vw] truncate`;
         const gwatData = `${common} cursor-pointer w-[12.8125vw] truncate`;
         const statustData = `${elements} content-center justify-center text-center font-[1vw] h-[4.3vh] w-[7.14vw] p-0`;
+        const actiontData = `${elements} text-center`
 
         const asc = `after:float-right after:content-['▲'] after:ml-[0.33vw] bg-sr-dark-gray`;
         const desc = `after:float-right after:content-['▼'] after:ml-[0.33vw] bg-sr-dark-gray`;
@@ -434,20 +435,20 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                         <tr className={tRow}>
                             {/* sort UI asc or desc depends on the state of the parent (user-dashboard) */}
                             {/* state 0: normal; 1: ascending icon; 2: descending icon */}
-                            <th className={` ${nametData} ${transition} ${
+                            <th className={` ${nametData} ${transition} border-b-0 ${
                                 sortState[0] === 0 ? "" : sortState[0] === 1 ? asc : desc 
                             }`} onClick={() => changeSort(0)}>Name</th>
-                            <th className={` ${numbertData} ${transition} ${
+                            <th className={` ${numbertData} ${transition} border-b-0 ${
                                 sortState[1] === 0 ? "" : sortState[1] === 1 ? asc : desc
                             }`} onClick={() => changeSort(1)}>Student No.</th>
-                            <th className={` ${degreetData} ${transition} ${
+                            <th className={` ${degreetData} ${transition} border-b-0 ${
                                 sortState[2] === 0 ? "" : sortState[2] === 1 ? asc : desc 
                             }`} onClick={() => changeSort(2)}>Degree Program</th>
-                            <th className={` ${gwatData} ${transition} ${
+                            <th className={` ${gwatData} ${transition} border-b-0 ${
                                 sortState[3] === 0 ? "" : sortState[3] === 1 ? asc : desc 
                             }`} onClick={() => changeSort(3)}>GWA</th>
-                            <th className={statustHead}>Status</th>
-                            <th className={actionstH}>Actions</th>
+                            <th className={`${statustHead} border-b-0 `}>Status</th>
+                            <th className={`${actionstH} border-b-0 `}>Actions</th>
                         </tr>
                     </thead>
                     {/* Check if there are data available to display */}
@@ -457,12 +458,12 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                 <tr className={tBodytR} key = { index }>
                                     <td className={` ${nametData} cursor-default`}>{student.name.toUpperCase()}</td>
                                     <td className={ `${numbertData} cursor-default`}>{student.studno}</td>
-                                    <td className={` ${degreetData} cursor-default`}>{student.degprog}</td>
+                                    <td className={` ${degreetData} cursor-default`}>{student.degprog.toUpperCase()}</td>
                                     <td className={` ${gwatData} cursor-default`}>{student.gwa}</td>
                                     <td className={`${statustData} cursor-default`}>
                                         <div data-status={student.status} className='status'></div>
                                     </td>
-                                    <td className='text-center'>
+                                    <td className={actiontData}>
                                         <Actions
                                             handleEdit={() => studentEdit(student._id, student.studno)}
                                             handleDelete={() => studentDelete(student.studno, student._id)}
