@@ -73,9 +73,6 @@ const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
 
    // Show succeeding pages to choose
    function next () {
-      console.log("Number of pages: "+numberOfPages);
-      console.log("Next "+ currPage);
-
       if (currPage < numberOfPages){
          paginate(++currPage);
          setCurrPage(currPage);
@@ -86,8 +83,6 @@ const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
 
    // Show previous pages to choose
    function prev () {
-      console.log("Prev "+currPage);
-
       if (currPage > 1){
          paginate(--currPage);
          setCurrPage(currPage);
