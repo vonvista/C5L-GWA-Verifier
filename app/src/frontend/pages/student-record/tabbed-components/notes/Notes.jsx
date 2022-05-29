@@ -103,10 +103,10 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
                     return (
                         <div className="grid border rounded-lg p-5 mb-2" key={idx}>
                             {/* Note details */}
-                            <h1 className="text-lg 2xl:text-xl font-inter font-semibold">
+                            <h1 className="text-lg 2xl:text-[19px] font-inter font-semibold">
                                 {data.Semyear}
                             </h1>
-                            <p className="font-inter text-base 2xl:text-lg mt-3 max-w-sm break-words">
+                            <p className="font-inter text-base 2xl:text-[17px] mt-3 max-w-sm break-words">
                                 {data.Details}
                             </p>
 
@@ -117,7 +117,7 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
                                     width="18"
                                     src={Delete}
                                 /> */}
-                                <span className="text-base 2xl:text-lg font-inter ml-2">Delete</span>
+                                <span className="text-base 2xl:text-[17px] font-inter ml-2">Delete</span>
                             </button>
                         </div>
                     )

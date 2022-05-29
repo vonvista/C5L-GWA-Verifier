@@ -23,7 +23,7 @@ const RecordHistory = ({ main, user, time, details }) => {
       <div className="flex justify-between mt-2">
           
         {/* Main description */}
-        <p className="font-inter mb-3 m-1 text-md 2xl:text-lg font-semibold px-5">
+        <p className="font-inter mb-3 m-1 font-semibold px-5">
           {main}
         </p>
         <button
@@ -44,13 +44,13 @@ const RecordHistory = ({ main, user, time, details }) => {
       {isActive && (
         <div>
           <ul className="ml-14 mb-5 list-disc">
-            <li className="font-inter font-medium text-md 2xl:text-lg">{details}</li>
+            <li className="font-inter font-medium">{details}</li>
           </ul>
         </div>
       )}
 
       {/* User who applied the changes */}
-      <div className="font-inter mt-2 mb-3 mr-3.8 italic text-md 2xl:text-lg font-medium px-6">
+      <div className="font-inter mt-2 mb-3 mr-3.8 italic font-medium px-6">
         Modified by {user} at {time}
       </div>
     </div>

@@ -33,7 +33,7 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
         fetchData();
     }, []);
 
-    const nameStyle = `transition-colors ease-in-out duration-300 flex font-montserrat font-semibold justify-between z-10 w-full px-4 py-2 text-sm text-left
+    const nameStyle = `transition-colors ease-in-out duration-300 flex font-montserrat font-semibold justify-between z-10 w-full px-4 py-2
         text-sr-table-text bg-sr-dark-gray hover:transition-colors hover:ease-in hover:duration-300 hover:bg-yellow-100 hover:text-secondary-red`;
 
     // set new values for addrow
@@ -178,7 +178,7 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
                         <>
                              {/* Accordion Header */}
                              <Disclosure.Button className={`${open ? 'bg-sr-dark-gray rounded-t-lg' : 'mb-3 rounded-lg shadow-lg'} ${nameStyle}`}>
-                                <span className="text-lg 1.5xl:text-xl">{Name}</span>
+                                <span className="text-lg 2xl:text-[20px] ">{Name}</span>
                                 
                                 {/* Icon */}
                                 <ChevronUpIcon
