@@ -73,21 +73,25 @@ const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
 
    // Show succeeding pages to choose
    function next () {
+      // Display the immediate next page simultaneously as the next arrow is clicked
       if (currPage < numberOfPages){
          paginate(++currPage);
          setCurrPage(currPage);
       }
 
+      // Display the page number buttons
       num < numberOfPages-2 && setNum(++num);
    }
 
    // Show previous pages to choose
    function prev () {
+      // Display the immediate previous page simultaneously as the prev arrow is clicked
       if (currPage > 1){
          paginate(--currPage);
          setCurrPage(currPage);
       }
 
+      // Display the page number buttons
       num > 1 && setNum(--num);
    }
 
