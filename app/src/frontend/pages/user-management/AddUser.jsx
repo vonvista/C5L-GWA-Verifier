@@ -128,8 +128,8 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
   // Styling
   const modalContent1 = `h-[60%] w-[70%] flex-col mx-auto p-2 rounded-[3.25vw] relative bg-secondary-red transform overflow-hidden p-6 text-left align-middle shadow-xl transition ease-out duration-300`;
   const modalBody1 = `h-full bg-transparent flex m-auto overflow-hidden overflow-y-auto relative w-full`;
-  const inputContent = `overflow-auto w-full text-[1.25vw]`;
-  const form = `bg-transparent rounded-lg py-0 px-5`;
+  const inputContent = `overflow-auto my-auto ml-0 mr-auto w-[90.5%] text-[1.25vw]`;
+  const form = `bg-transparent rounded-lg my-auto ml-auto mr-auto py-0`;
   const inputStyle = `text-center w-full h-[4.85vh] rounded-xl`;
   const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain -ml-[9.75vh] h-[49vh]`;
   const modalBody = `absolute inset-x-0 bg-transparent top-[2%] bottom-[10%]`;
@@ -307,13 +307,13 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                 </div>
 
                                 {/* Password */}
-                                <div className="w-full pb-4 mt-2 pr-24">
-                                  <section className="un-style">
+                                <div className="w-full pb-4 mt-2">
+                                  <section className="w-[91%] inline-block grow mr-2">
                                     <div className="relative w-full">
                                       <Input
                                         labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
                                         labelVal="Password" // label text
-                                        inputStyle="rounded-xl text-center w-full h-[2.5vw] appearance-none border-2 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-indigo-700 focus:bg-white text-gray-700 pr-16 font-mono js-password" // styling for input
+                                        inputStyle="h-[4.85vh] rounded-xl text-center w-full appearance-none border-2 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-orange-300 focus:bg-white text-gray-700 pr-16 font-mono js-password" // styling for input
                                         name="password" // name of label-input components
                                         inputType="password" // type of input password, email, text, etc.
                                         inputPlaceholder="*****" // placeholder text for input
@@ -344,7 +344,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
 
                             {/* Create User Button */}
                             <div className="w-full flex flex-row">
-                              <section className="my-auto ml-0 mr-auto w-[90.5%] font-poppins font-medium flex justify-center">
+                              <section className="my-auto ml-[0.5vw] mr-auto w-[90.5%] font-poppins font-medium flex justify-center">
                                 <CreateUserButton />
                                 <button
                                   className={modalBtnCancel}
