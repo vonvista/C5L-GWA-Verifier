@@ -178,7 +178,7 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
                         <>
                              {/* Accordion Header */}
                              <Disclosure.Button className={`${open ? 'bg-sr-dark-gray rounded-t-lg' : 'mb-3 rounded-lg shadow-lg'} ${nameStyle}`}>
-                                <span className="text-lg xl:text-xl">{Name}</span>
+                                <span className="text-lg 1.5xl:text-xl">{Name}</span>
                                 
                                 {/* Icon */}
                                 <ChevronUpIcon
@@ -198,7 +198,7 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
                                 leaveTo="transform -translate-y-6 opacity-0"
                             >
                                 {/* Accordion Contents */}
-                                <Disclosure.Panel className="inter z-0 pl-5 py-3 mb-2 text-sm text-gray-500 rounded-b-lg shadow-lg">
+                                <Disclosure.Panel className="inter z-0 pl-5 py-3 mb-2 text-sm 1.75xl:text-base text-gray-500 rounded-b-lg shadow-lg">
                                     <List
                                         table={2}
                                         total={Total}

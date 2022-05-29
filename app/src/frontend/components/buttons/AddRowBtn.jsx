@@ -171,7 +171,7 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
     }
 
     // Styling
-    const addRowStyle = `h-[3.25vh] my-2 mx-auto bg-button-green px-2 rounded-2xl text-white font-montserrat font-bold 
+    const addRowStyle = `h-[3.5vh] xl:flex my-2 mx-auto justify-center bg-button-green px-2 rounded-2xl text-white font-montserrat font-bold 
                         transform-gpu transition ease-out hover:transition hover:ease-in hover:shadow-lg hover:bg-button-green-hover`;
     
     return (
@@ -199,11 +199,8 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
 
             {/* Add Row button */}
             <button className={addRowStyle} type="button" onClick={openModal}>
-                <span className="flex">
-                    <PlusSmIcon className="w-[2.5vh] 3xl:mt-0 inline-flex self-center"/>
-                    <p className="text-sm font-normal pr-1 inline-block self-center">Add Row</p>
-                </span>
-                
+                <PlusSmIcon className="w-[2.6vh] py-0.5 xl:py-0 3xl:mt-0 inline-flex self-center"/>
+                <p className="text-sm font-normal pr-1 inline-block self-center">Add Row</p>
             </button>
         </>
     );

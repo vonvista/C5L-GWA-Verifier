@@ -28,7 +28,7 @@ const StudentRecordHistory = ({ historyData, ...rest }) => {
 
                   {/* History per date */}
                   <div className="rounded-lg border border-solid border-t-zinc-200 border-b-zinc-200">
-                    <h2 className="font-inter pt-2 pb-2 pl-4 font-light text-md">
+                    <h2 className="font-inter pt-2 pb-2 pl-4 font-light text-md 2xl:text-lg">
                       Last Modified: {date}
                     </h2>
 
