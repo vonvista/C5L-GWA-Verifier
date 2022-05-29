@@ -54,7 +54,8 @@ import 'tailwindcss/tailwind.css';
     paginate    --- function that changes the contents being displayed based on the page number
 */
 const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
-   let [num, setNum] = useState(1);
+   let [num, setNum] = useState(1);       // for tracking the page buttons display
+   let [currPage, setCurrPage] = useState(1);      // for tracking the current page displayed when arrows are clicked
    const numberOfPages = Math.ceil(totalRows / rowsPerPage);
    const pageNumbers = [];
 
@@ -72,17 +73,31 @@ const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
 
    // Show succeeding pages to choose
    function next () {
+      // Display the immediate next page simultaneously as the next arrow is clicked
+      if (currPage < numberOfPages){
+         paginate(++currPage);
+         setCurrPage(currPage);
+      }
+
+      // Display the page number buttons
       num < numberOfPages-2 && setNum(++num);
    }
 
    // Show previous pages to choose
    function prev () {
+      // Display the immediate previous page simultaneously as the prev arrow is clicked
+      if (currPage > 1){
+         paginate(--currPage);
+         setCurrPage(currPage);
+      }
+
+      // Display the page number buttons
       num > 1 && setNum(--num);
    }
 
    /* Styling */
    const paginationBox = `flex bg-white rounded-lg font-montserrat drop-shadow`;
-   const buttonStyle = `rounded-lg py-0 hover:text-white hover:bg-secondary-red h-[4.85vh] px-[1vw] transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300`;
+   const buttonStyle = `rounded-lg py-0 hover:text-white hover:bg-secondary-red h-[4.85vh] px-[1vw] transition hover:transition`;
    const arrowStyle = `h-[2.75vh] w-[1.25vw] fill-current`
    const pageButton = `h-[4.85vh] w-[2.25vw] rounded-lg px-[1vw] py-0 text-[1vw]`;
    const currentPageStyle = `text-white bg-secondary-red`;
@@ -96,7 +111,13 @@ const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
          {/* Page Numbers */}
          {
             pageNumbers.map((pg, i) => (
-               <button key={i} onClick={() => paginate(pg.page)} className={`${pageButton} ${currentPage === pg.page && currentPageStyle}`}>{pg.page}</button>
+               <button
+                    key={i}
+                    onClick={() => {paginate(pg.page), setCurrPage(pg.page)}}
+                    className={`${pageButton} ${currentPage === pg.page && currentPageStyle}`}
+                >
+                        {pg.page}
+                </button>
             ))
          }
          {/* Next arrow */}
