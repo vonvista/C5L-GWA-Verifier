@@ -97,7 +97,7 @@ const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
 
    /* Styling */
    const paginationBox = `flex bg-white rounded-lg font-montserrat drop-shadow`;
-   const buttonStyle = `rounded-lg py-0 hover:text-white hover:bg-secondary-red h-[4.85vh] px-[1vw] transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300`;
+   const buttonStyle = `rounded-lg py-0 hover:text-white hover:bg-secondary-red h-[4.85vh] px-[1vw] transition hover:transition`;
    const arrowStyle = `h-[2.75vh] w-[1.25vw] fill-current`
    const pageButton = `h-[4.85vh] w-[2.25vw] rounded-lg px-[1vw] py-0 text-[1vw]`;
    const currentPageStyle = `text-white bg-secondary-red`;
@@ -111,7 +111,13 @@ const Pagination = ({ rowsPerPage, totalRows, currentPage, paginate }) => {
          {/* Page Numbers */}
          {
             pageNumbers.map((pg, i) => (
-               <button key={i} onClick={() => {paginate(pg.page), setCurrPage(pg.page)}} className={`${pageButton} ${currentPage === pg.page && currentPageStyle}`}>{pg.page}</button>
+               <button
+                    key={i}
+                    onClick={() => {paginate(pg.page), setCurrPage(pg.page)}}
+                    className={`${pageButton} ${currentPage === pg.page && currentPageStyle}`}
+                >
+                        {pg.page}
+                </button>
             ))
          }
          {/* Next arrow */}
