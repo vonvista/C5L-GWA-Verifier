@@ -130,8 +130,8 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
   const inputContent = `overflow-auto pl-[1%] my-auto w-full text-[1vw]`;
   const inputStyle = `text-center w-full h-[4.85vh] rounded-xl`;
   const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain -ml-[9.75vh] h-[49vh]`;
-  const modalBody = `absolute inset-x-0 bg-transparent top-[2%] bottom-[2%]`;
-  const modalBtnCancel = `w-[14vw] h-[5vh] text-[1vw] rounded-lg rounded-xl bg-discard hover:bg-white text-center font-medium`;
+  const modalBody = `absolute inset-x-0 bg-transparent top-[2%] bottom-[2%] transition ease-out hover:transition hover:ease-in hover:shadow-lg`;
+  const modalBtnCancel = `w-[14vw] h-[5vh] text-[1vw] rounded-lg rounded-xl bg-discard hover:bg-white text-center font-medium transition ease-out hover:transition hover:ease-in hover:shadow-lg`;
 
   return (
     <>
