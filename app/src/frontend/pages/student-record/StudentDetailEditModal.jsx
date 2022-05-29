@@ -57,7 +57,7 @@ const EditStudent = ({ modalState, handleClose, setJustModal, handleSave, setTit
     const sectionMI = `inline-block w-[6.71875vw]`;
     const modalFooter = `font-poppins mt-[4.85vh] text-[1vw] flex items-center justify-center`;
     const modalBtnSave = `h-[4.75vh] w-[8.8vw] rounded-xl mr-[0.65vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green`;
-    const modalBtnCancel = `h-[4.75vh] w-[8.8vw] rounded-xl mr-[0.65vw] bg-discard hover:bg-white text-center`;
+    const modalBtnCancel = `h-[4.75vh] w-[8.8vw] rounded-xl mr-[0.65vw] bg-transparent border border-zinc-200 text-zinc-200 hover:shadow-lg hover:bg-white transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:text-black`;
 
     // Save Button
     const SaveButton = () => {
@@ -222,10 +222,10 @@ const EditStudent = ({ modalState, handleClose, setJustModal, handleSave, setTit
 
                                             {/* Save button */}
                                             <div className={modalFooter}>
-                                                <SaveButton />
                                                 <button className={modalBtnCancel} onClick={handleClose}>
                                                     Cancel
                                                 </button>
+                                                <SaveButton />
                                             </div>
                                         </div>
                                     </div>

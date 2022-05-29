@@ -74,11 +74,17 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
   // Function to open the edit student modal window
   const openModal = () => {
     setEditModal(true);
+
   }
 
   // Function to close the edit student modal window
   const closeEditStud = () => {
     setEditModal(false);
+    setStudNum(studentInfo.stud_no)
+    setDegree(studentInfo.degree_program.toUpperCase())
+    setStudFName(studentInfo.iname.fname.toUpperCase())
+    setStudMName(studentInfo.iname.mname.toUpperCase())
+    setStudLName(studentInfo.iname.lname.toUpperCase())
   }
 
   // Function to close justification modal
