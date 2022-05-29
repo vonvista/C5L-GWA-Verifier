@@ -72,21 +72,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
         })
         .then((response) => response.json())
         .then((body) => {
-            //console.log(body);
-            if(body.err){ //if error response returned from DB
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: body.err,
-                })
-            }
-            else { //success state
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: 'Successfully Edited!',
-                })
-            }    
+            console.log(body);
         })
         .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
             Swal.fire({
@@ -96,6 +82,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
             })
             console.log(err)
         })
+        resetModalValues();
     }
 
     return (
