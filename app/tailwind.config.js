@@ -9,7 +9,7 @@ module.exports = {
       },
       colors: {
         'button-green': '#2A7146',
-        'button-green-hover': '#35724df5',
+        'button-green-hover': '#307B4E',
         'login-footer': '#fecaca',
         'discard': '#f0f8ff',
         'export-yellow': '#ffc270',

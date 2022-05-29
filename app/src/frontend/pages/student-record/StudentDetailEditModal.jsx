@@ -56,8 +56,8 @@ const EditStudent = ({ modalState, handleClose, setJustModal, handleSave, setTit
     const sectionFLName = `inline-block w-[15vw]`;
     const sectionMI = `inline-block w-[6.71875vw]`;
     const modalFooter = `font-poppins mt-[4.85vh] text-[1vw] flex justify-center gap-x-[1vw]`;
-    const modalBtnSave = `h-[4.75vh] w-[8.8vw] rounded-xl bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green`;
-    const modalBtnCancel = `h-[4.75vh] w-[8.8vw] rounded-xl bg-discard hover:bg-white text-center`;
+    const modalBtnSave = `h-[4.75vh] w-[8.8vw] rounded-xl bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green transition ease-out hover:transition hover:ease-in hover:shadow-lg`;
+    const modalBtnCancel = `h-[4.75vh] w-[8.8vw] rounded-xl bg-discard hover:bg-white text-center transition ease-out hover:transition hover:ease-in hover:shadow-lg`;
 
     // Save Button
     const SaveButton = () => {

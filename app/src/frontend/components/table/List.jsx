@@ -142,10 +142,10 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         // Styling
         const usersTable = `border-collapse overflow-hidden table-fixed max-w-[72vw] max-h-[71vh] rounded-t-[1vw] drop-shadow-lg`;
         const tHead = `bg-white border-solid rounded-t-[1vw] border-b-[0.2vh] table table-fixed whitespace-no-wrap w-full font-montserrat w-[65.73130193905817vw]`;
-        const tBodytR = `table table-fixed whitespace-no-wrap w-full font-montserrat transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:bg-table-hover-color last:border-b-0`;
+        const tBodytR = `table table-fixed whitespace-no-wrap h-[6.5vh] w-full font-montserrat transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:bg-table-hover-color last:border-b-0`;
         
         const tRow = `text-left not-italic text-[1vw] text-sr-text-gray`;
-        const tBody = `bg-white block overflow-auto text-black rounded-b-[1vw] h-[65.73130193905817vh] w-[65.73130193905817vw]`;
+        const tBody = `bg-white block overflow-auto text-black rounded-b-[1vw] h-[65vh] w-[65.73130193905817vw]`;
         const element = `py-[1.2vh] px-[1.3vw] border-solid overflow-hidden text-[1vw] border-page-background border-b-[0.14vh]`;
 
         const actionstH = `${element} cursor-default text-center`;

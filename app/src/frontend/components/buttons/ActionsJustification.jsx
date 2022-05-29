@@ -54,14 +54,14 @@ const Actions = ({ handleEdit, handleDelete, handleHist, data, sem }) => {
   }
 
   // Styling
-  const buttons = `w-[2vw] h-[2vw] transition ease-out duration-150 hover:transition hover:ease-in hover:duration-200 hover:bg-gray-300 rounded-3xl bg-zinc-200 relative mx-1 grow`; // styling of button
-  const iconStyle = `text-[#666666] h-[1.5vw] transition ease-out duration-150 hover:transition hover:ease-in hover:duration-200 m-auto hover:fill-black`;
+  const buttons = `w-[2vw] h-[2vw] transition ease-out hover:transition hover:ease-in hover:bg-gray-300 rounded-3xl bg-zinc-200 relative mx-1 grow`; // styling of button
+  const iconStyle = `text-[#666666] h-[1.5vw] transition ease-out hover:transition hover:ease-in m-auto hover:fill-black`;
 
   return (
     <>
         <Justification modalState={isOpen} modalHandler={closeModal} parentSubmitHandler={handleDelete} handleHistory={setHistory} histTitle={histTitle} />
 
-        <div className="mx-auto w-auto items-center justify-items-center inline-block">
+        <div className="mx-auto w-auto items-center transition justify-items-center inline-block">
             {/* Edit button */}
             <button className={buttons} type="button" onClick={handleEdit}>
                 <PencilIcon className={iconStyle} />

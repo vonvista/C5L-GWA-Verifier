@@ -18,8 +18,8 @@ import 'tailwindcss/tailwind.css';
 */
 const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, handleHistory, values, sem }) => {
 
-  const buttons = `transition-all ease-in-out duration-150 text-[rgb(107 114 128)] hover:transition-all hover:ease-out hover:duration-150 w-[2vw] h-[2vw] hover:text-[#141414] hover:bg-slate-300 rounded-3xl bg-slate-200 relative mx-1 grow`; // styling of button
-  const disabled = `disabled:ease-in disabled:transition disabled:duration-150 disabled:text-slate-300 disabled:bg-slate-100`
+  const buttons = `transition-all ease-in-out text-[rgb(107 114 128)] hover:transition-all hover:ease-out w-[2vw] h-[2vw] hover:text-[#141414] hover:bg-slate-300 rounded-3xl bg-slate-200 relative mx-1 grow`; // styling of button
+  const disabled = `disabled:ease-in disabled:transition disabled:text-slate-300 disabled:bg-slate-100`
 
   // State handler for modal button
   const [isOpen, setIsOpen] = useState(false);

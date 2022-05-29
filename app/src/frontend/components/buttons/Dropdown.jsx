@@ -137,8 +137,8 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
         })
         console.log(err)
     })
-
-    closeJustModal();
+    closeJustModal()
+    setEditModal(false);
     setSelectedStudent( (prevState)=>({...prevState, stud_no: studNum, degree_program: degree.toUpperCase(), Student: currStudentID, iname: {fname: studFName.toUpperCase(), mname: studMName.toUpperCase(), lname: studLName.toUpperCase()}}))
   }
 
@@ -166,8 +166,8 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
 
   //main function for student update and add history
   const editModalClose = () => {
-      closeEditStud();        // close edit student modal
-      setJustModal(true);     // open justification
+        setEditModal(false);       // close edit student modal
+        setJustModal(true);     // open justification
       //setSelectedStudent( (prevState)=>({...prevState, stud_no: studNum, degree_program: degree, Student: currStudentID, iname: {fname: studFName, mname: studMName, lname: studLName}}))
   }
 
@@ -219,10 +219,14 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
             <div className="w-2/3 font-poppins relative ml-auto grow-0">
             
                 {/* Active word and dropdown icon */}
-                <div className="grid-cols-2 divide-x w-full py-1.5 bg-button-green hover:bg-button-green-hover flex items-center justify-items-center rounded-lg border border-slate-300">
+                <div className="grid-cols-2 divide-x w-full py-1.5 bg-button-green hover:bg-button-green-hover hover:transition-all flex items-center justify-items-center rounded-lg border border-slate-300"
+                    onClick={() => {
+                        setIsActive(!isActive);
+                    }}
+                >
                     <button
                         type="button"
-                        className="inline-block grow transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:bg-button-green-hover rounded-l-lg"
+                        className="inline-block grow transition ease-out hover:transition hover:ease-in hover:bg-button-green-hover rounded-l-lg"
                     >
                         <p className="inline-block grow font-medium text-center text-white">
                             Actions
@@ -230,17 +234,14 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
                     </button>
                     <button
                         type="button"
-                        className="inline-block bg-button-green grow hover:bg-button-green-hover rounded-r-lg"
-                        onClick={() => {
-                            setIsActive(!isActive);
-                        }}
+                        className="inline-block grow bg-transparent rounded-r-lg"
                     >
-                    <section className="inline-block grow">
-                        <ChevronUpIcon 
-                            className={`${
-                                !isActive ? 'transform rotate-180 ' : ''
-                            } w-5 xl:w-7 duration-200 text-sidebar-text inline-flex self-center`} />
-                    </section>
+                        <section className="inline-block grow">
+                            <ChevronUpIcon 
+                                className={`${
+                                    !isActive ? 'transform rotate-180 ' : ''
+                                } w-5 xl:w-7 duration-200 text-sidebar-text inline-flex self-center`} />
+                        </section>
                     </button>
                 </div>
                 
@@ -261,7 +262,7 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
                         <div>
                             {/* Export button */}
                             <button
-                                className="rounded-t-lg block py-2 text-sm text-center w-full bg-button-green transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:bg-button-green-hover hover:rounded-t-lg"
+                                className="rounded-t-lg block py-2 text-sm text-center w-full bg-button-green transition ease-out hover:transition hover:ease-in  hover:bg-button-green-hover hover:rounded-t-lg"
                                 type="button"
                                 onClick={() => {
                                     setIsActive(false);
@@ -273,7 +274,7 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
                             
                             {/* Edit button */}
                             <button
-                                className="bg-button-green transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:bg-button-green-hover block px-4 rounded-b-lg py-2 text-sm z-1 w-full"
+                                className="bg-button-green transition ease-out hover:transition hover:ease-in0 hover:bg-button-green-hover block px-4 rounded-b-lg py-2 text-sm z-1 w-full"
                                 type="button"
                                 onClick={openModal}
                             >

@@ -11,7 +11,7 @@ import user1 from '../../../../assets/icons/user1.svg';
 const AddUserBtn = ({ handleClick }) => {
 
     // Styling
-    const adduserbtn = `w-[12vw] h-[4.25vw] m-2 text-white rounded-xl bg-button-green transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:shadow-lg hover:bg-button-green-hover`;
+    const adduserbtn = `w-[12vw] h-[4.25vw] m-2 text-white rounded-xl bg-button-green transition ease-out hover:transition hover:ease-in hover:shadow-lg hover:bg-button-green-hover`;
 
     return (
         <>

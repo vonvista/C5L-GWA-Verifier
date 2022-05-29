@@ -155,7 +155,11 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
                                 
                                 {/* Save button */}
                                 <div>
-                                    <button className='rounded-lg float-left w-1/5 mt-3 mb-3 p-1 text-white bg-button-green hover:bg-button-green-hover' onClick={handleSaveClick}>
+                                    <button
+                                        className='rounded-lg float-left w-1/5 mt-3 mb-4 p-1 text-white bg-button-green hover:bg-button-green-hover
+                                                    transition ease-out hover:transition hover:ease-in hover:shadow-lg'
+                                        onClick={handleSaveClick}
+                                    >
                                         Save
                                     </button>
                                 </div>

@@ -46,7 +46,7 @@ const AddNoteBtn = ({ notesList, semesters, handleAddNote, selectedSem, setSelec
 
     // Styling for the button
     const addNoteStyle = `h-8 px-3.5 flex items-center mb-2 rounded-xl bg-button-green text-sidebar-text font-poppins font-medium
-        transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:shadow-lg hover:bg-button-green-hover`;
+        transition ease-out hover:transition hover:ease-in hover:shadow-lg hover:bg-button-green-hover`;
 
     return (
         <>
