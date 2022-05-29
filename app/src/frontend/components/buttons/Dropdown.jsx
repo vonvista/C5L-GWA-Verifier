@@ -173,7 +173,13 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
 
   return (
         <>
-            <Justification modalState={justModal} modalHandler={closeJustModal} parentSubmitHandler={updateStudent} handleHistory={handleHistory} histTitle={histTitle}/> 
+            <Justification
+                modalState={justModal}
+                modalHandler={closeJustModal}
+                parentSubmitHandler={updateStudent}
+                handleHistory={handleHistory}
+                histTitle={histTitle}
+            />
             
             { editModal ? 
                 <EditStudentDetails
