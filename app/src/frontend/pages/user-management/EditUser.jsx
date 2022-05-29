@@ -234,7 +234,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                       inputStyle={inputStyle} // styling for input
                                       name="firstName" // name of label-input components
                                       inputType="text" // type of input password, email, text, etc.
-                                      inputPlaceholder="" // placeholder text for input
+                                      inputPlaceholder="First Name" // placeholder text for input
                                       value={firstName.toUpperCase()} // value of the input
                                       changeHandler={(e) =>
                                         setFirstName(
@@ -255,7 +255,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                       inputStyle={inputStyle} // styling for input
                                       name="middleName" // name of label-input components
                                       inputType="text" // type of input password, email, text, etc.
-                                      inputPlaceholder="" // placeholder text for input
+                                      inputPlaceholder="_" // placeholder text for input
                                       value={middleName.toUpperCase()} // value of the input
                                       changeHandler={(e) =>
                                         setMiddleName(
@@ -276,7 +276,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                       inputStyle={inputStyle} // styling for input
                                       name="lastName" // name of label-input components
                                       inputType="text" // type of input password, email, text, etc.
-                                      inputPlaceholder="" // placeholder text for input
+                                      inputPlaceholder="Last Name" // placeholder text for input
                                       value={lastName.toUpperCase()} // value of the input
                                       changeHandler={(e) =>
                                         setLastName(
@@ -301,7 +301,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                       name="username" // name of label-input components
                                       max={17} // character limit - max no of char is 17
                                       inputType="text" // type of input password, email, text, etc.
-                                      inputPlaceholder="" // placeholder text for input
+                                      inputPlaceholder="Username" // placeholder text for input
                                       value={un} // value of the input
                                       changeHandler={(e) =>
                                         setUN(e.target.value)
@@ -321,7 +321,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                       name="position" // name of label-input components
                                       max={17} // character limit - max no of char is 17
                                       inputType="text" // type of input password, email, text, etc.
-                                      inputPlaceholder="" // placeholder text for input
+                                      inputPlaceholder="Position" // placeholder text for input
                                       value={position} // value of the input
                                       changeHandler={(e) =>
                                         setPosition(e.target.value)

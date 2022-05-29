@@ -212,7 +212,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                       inputStyle={inputStyle} // styling for input
                                       name="firstName" // name of label-input components
                                       inputType="text" // type of input password, email, text, etc.
-                                      inputPlaceholder="FIRST NAME" // placeholder text for input
+                                      inputPlaceholder="First Name" // placeholder text for input
                                       value={firstName.toUpperCase()} // value of the input
                                       changeHandler={(e) =>
                                         setFirstName(e.target.value.toUpperCase())
@@ -250,7 +250,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                       inputStyle={inputStyle} // styling for input
                                       name="lastName" // name of label-input components
                                       inputType="text" // type of input password, email, text, etc.
-                                      inputPlaceholder="LAST NAME" // placeholder text for input
+                                      inputPlaceholder="Last Name" // placeholder text for input
                                       value={lastName.toUpperCase()} // value of the input
                                       changeHandler={(e) =>
                                         setLastName(e.target.value.toUpperCase())
