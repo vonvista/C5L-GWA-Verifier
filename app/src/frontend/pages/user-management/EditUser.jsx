@@ -31,6 +31,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
   const [lastName, setLastName] = useState(editUser.LastName);
   const [un, setUN] = useState(editUser.Username); // username
   const [position, setPosition] = useState(editUser.Position); // username
+  const [role, setRole] = useState(editUser.Role); // username
 
   const [firstNameUnedited, setFirstNameUnedited] = useState(
     uneditedUser.FirstName
@@ -310,6 +311,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                       inputType="text"                  // type of input password, email, text, etc.
                                       inputPlaceholder="Username"       // placeholder text for input
                                       value={un}                        // value of the input
+                                      disabled={role == 'admin' ? true : false}
                                       changeHandler={(e) =>
                                         setUN(e.target.value)
                                       }                                 // change handling
