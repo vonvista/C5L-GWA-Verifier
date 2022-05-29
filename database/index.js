@@ -27,7 +27,6 @@ let interfaces = new Map();
 
 async function startServer() {
     await si.networkInterfaces(function(data) {
-        console.log(data);
         for (let i = 0; i < data.length; i++) {
             if(data[i].ip4 != '') {
                 interfaces.set(i.toString(), data[i].ip4);
