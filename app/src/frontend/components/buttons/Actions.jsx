@@ -8,6 +8,7 @@ import { PencilIcon, TrashIcon } from '@heroicons/react/solid';
 /* Props:
     handleEdit      --- handles click event for edit button
     handleDelete    --- handles click event for delete button
+    data            --- receives user data
 */
 const Actions = ({ handleEdit, handleDelete, data }) => {
     const buttons = `w-[2vw] h-[2vw] transition ease-out duration-150 hover:transition hover:ease-in hover:duration-200 hover:bg-gray-300 rounded-3xl bg-zinc-200 relative mx-1 grow`; // styling of button

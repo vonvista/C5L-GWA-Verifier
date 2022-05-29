@@ -240,13 +240,23 @@ const UserManagementPage = () => {
 
                         {/* Add User Modal */}
                         {showModal ?
-                            (<AddUser modalState={true} handleClose={() => setShowModal(false)} handleAddRecord={handleAddRecord}/>)
+                            (<AddUser
+                                modalState={true}
+                                handleClose={() => setShowModal(false)}
+                                handleAddRecord={handleAddRecord}
+                            />)
                             :(<></>)
                         }
 
                         {/* Edit User Modal */}
                         {showModalEdit ?
-                            (<EditUser modalState={true} handleClose={() => setShowEditModal(false)} editUser={editUser} uneditedUser={uneditedUser} handleEditRecordSave={handleEditRecordSave}/>)
+                            (<EditUser
+                                modalState={true}
+                                handleClose={() => setShowEditModal(false)}
+                                editUser={editUser}
+                                uneditedUser={uneditedUser}
+                                handleEditRecordSave={handleEditRecordSave}
+                            />)
                             :(<></>)
                         }
                     </div>
@@ -254,10 +264,22 @@ const UserManagementPage = () => {
                     {/* Table and Pagination */}
                     <div>
                         <div className='table-container'>
-                            <List table={3} changeSort={changeSort} sortState={sortState} data={currentRows} handleDeleteRecord={handleDeleteRecord} handleEditRecord={handleEditRecord}/>
+                            <List
+                                table={3}
+                                changeSort={changeSort}
+                                sortState={sortState}
+                                data={currentRows}
+                                handleDeleteRecord={handleDeleteRecord}
+                                handleEditRecord={handleEditRecord}
+                            />
                         </div>
                         <div className='float-right mt-6'>
-                            <Pagination rowsPerPage={rowsPerPage} totalRows={rows.length} currentPage={currentPage} paginate={paginate} />
+                            <Pagination
+                                rowsPerPage={rowsPerPage}
+                                totalRows={rows.length}
+                                currentPage={currentPage}
+                                paginate={paginate}
+                            />
                         </div>
                     </div>
                 </div>

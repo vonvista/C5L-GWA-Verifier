@@ -39,8 +39,8 @@ import 'tailwindcss/tailwind.css';
     setDegreeUnedited   ---     change handler for degreeUnedited state
     
 */
-const EditStudent = ({ modalState, handleClose, setJustModal, handleSave, setTitle, setcurrStudentID,studNum, studFName, studMName, studLName, degree, setStudNum, setStudFName, setStudMName, setStudLName, setDegree,studNumUnedited, studFNameUnedited,
-                      studMNameUnedited, studLNameUnedited, degreeUnedited, setStudNumUnedited, setStudFNameUnedited, setStudMNameUnedited, setStudLNameUnedited, setDegreeUnedited }) => {
+const EditStudent = ({ modalState, handleClose, setJustModal, handleSave, setTitle, setcurrStudentID,studNum, studFName, studMName, studLName, degree, setStudNum, setStudFName, setStudMName, setStudLName, setDegree,
+                    studNumUnedited, studFNameUnedited, studMNameUnedited, studLNameUnedited, degreeUnedited, setStudNumUnedited, setStudFNameUnedited, setStudMNameUnedited, setStudLNameUnedited, setDegreeUnedited }) => {
 
     
     /*-------------------- Styling --------------------*/
@@ -49,32 +49,36 @@ const EditStudent = ({ modalState, handleClose, setJustModal, handleSave, setTit
     const modalBody = `absolute inset-x-0 bg-secondary-red top-[8%] bottom-[10%]`;
     const modalClose = `text-[4.85vh] text-white float-right`;
     const modalTitle = `text-white text-center font-bold italic text-[1.30vw] mt-[4.15vh] mb-[4.85vh]`;
-    const modalInputs = `text-[1.10vw] flex flex-col space-y-4 items-center justify-center`;
+    const modalInputs = `text-[1vw] flex flex-col space-y-4 items-center justify-center`;
     const inputContainer = `ml-5 mr-[1.15vw]`;
     const inputStyle = `text-center w-full h-[4.85vh] rounded-xl`
     const sectionInputField = `inline-block w-[11.71875vw]`;
-    const sectionFLName = `inline-block w-[16.71875vw] truncate`;
+    const sectionFLName = `inline-block w-[15vw]`;
     const sectionMI = `inline-block w-[6.71875vw]`;
-    const modalFooter = `font-poppins mt-[4.85vh] text-[1vw] flex items-center justify-center`;
-    const modalBtnSave = `h-[4.75vh] w-[8.8vw] rounded-xl mr-[0.65vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green`;
+    const modalFooter = `font-poppins mt-[4.85vh] text-[1vw] flex justify-center gap-x-[1vw]`;
+    const modalBtnSave = `h-[4.75vh] w-[8.8vw] rounded-xl bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green`;
+    const modalBtnCancel = `h-[4.75vh] w-[8.8vw] rounded-xl bg-discard hover:bg-white text-center`;
 
     // Save Button
     const SaveButton = () => {
 
         // check if there is atleast one change in all input fields
         if (studFName != studFNameUnedited || studMName != studMNameUnedited || studLName != studLNameUnedited || studNum != studNumUnedited || degree != degreeUnedited ){
-          return <button 
-          className={modalBtnSave} 
-          onClick={() => {
-                // update history title for edit
-                setTitle(prevTitle => prevTitle + `Name: ${studLName}, ${studFName} ${studMName}., Student No.: ${studNum}, and Degree: ${degree}.`)
-                // update current student number on localStorage
-                localStorage.setItem('currStudentKey', studNum);
-                handleSave()           // close edit student modal
-                setJustModal(true);     // open justification
-            }}>Save</button>
+          return (
+            <button 
+                className={modalBtnSave} 
+                onClick={() => {
+                    // update history title for edit
+                    setTitle(prevTitle => prevTitle + `Name: ${studLName.toUpperCase()}, ${studFName.toUpperCase()} ${studMName.toUpperCase()}., Student No.: ${studNum}, and Degree: ${degree.toUpperCase()}.`)
+                    
+                    // update current student number on localStorage
+                    localStorage.setItem('currStudentKey', studNum);
+                    handleSave()           // close edit student modal
+                    setJustModal(true);     // open justification
+                }}>Save</button>
+          )
         } else {
-          return <button className={modalBtnSave} disabled>Save</button>
+          return ( <button className={modalBtnSave} disabled>Save</button> )
         };
     };
 
@@ -105,13 +109,13 @@ const EditStudent = ({ modalState, handleClose, setJustModal, handleSave, setTit
 
                             {/* Transition effect for the element inside this Transition.Child tag*/}
                             <Transition.Child
-                            as={Fragment}
-                            enter="ease-out duration-300"
-                            enterFrom="opacity-0 scale-95"
-                            enterTo="opacity-100 scale-100"
-                            leave="ease-in duration-200"
-                            leaveFrom="opacity-100 scale-100"
-                            leaveTo="opacity-0 scale-95"
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 scale-95"
+                                enterTo="opacity-100 scale-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 scale-100"
+                                leaveTo="opacity-0 scale-95"
                             >
 
                             {/* Edit Student Details modal window */}
@@ -147,7 +151,7 @@ const EditStudent = ({ modalState, handleClose, setJustModal, handleSave, setTit
                                                                 name="studFName"
                                                                 placeholder='First Name'
                                                                 value={studFName}
-                                                                onChange={(e) => setStudFName(e.target.value)}
+                                                                onChange={(e) => setStudFName(e.target.value.toUpperCase())}
                                                             />
 
                                                             <div className='w-full text-white text-center'>First Name</div>
@@ -163,9 +167,9 @@ const EditStudent = ({ modalState, handleClose, setJustModal, handleSave, setTit
                                                                 name="studMName"
                                                                 placeholder='M.I.'
                                                                 value={studMName}
-                                                                onChange={(e) => setStudMName(e.target.value)}
+                                                                onChange={(e) => setStudMName(e.target.value.toUpperCase())}
                                                             />
-                                                            <div className='w-full text-white text-center text-sm'>Middle Initial</div>
+                                                            <div className='w-full text-white text-center'>Middle Initial</div>
                                                         </section>
                                                     </div>
 
@@ -178,7 +182,7 @@ const EditStudent = ({ modalState, handleClose, setJustModal, handleSave, setTit
                                                                 name="studLName"
                                                                 placeholder='Surname'
                                                                 value={studLName}
-                                                                onChange={(e) => setStudLName(e.target.value)}
+                                                                onChange={(e) => setStudLName(e.target.value.toUpperCase())}
                                                             />
                                                             <div className='w-full text-white text-center'>Surname</div>
                                                         </section>
@@ -211,7 +215,7 @@ const EditStudent = ({ modalState, handleClose, setJustModal, handleSave, setTit
                                                                 name="degree"
                                                                 placeholder='Degree Program'
                                                                 value={degree}
-                                                                onChange={(e) => setDegree(e.target.value)}
+                                                                onChange={(e) => setDegree(e.target.value.toUpperCase())}
                                                             />
                                                             <div className='w-full text-white text-center'>Degree Program</div>
                                                         </section>
@@ -222,6 +226,9 @@ const EditStudent = ({ modalState, handleClose, setJustModal, handleSave, setTit
                                             {/* Save button */}
                                             <div className={modalFooter}>
                                                 <SaveButton />
+                                                <button className={modalBtnCancel} onClick={handleClose}>
+                                                    Cancel
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

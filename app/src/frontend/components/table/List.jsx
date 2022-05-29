@@ -5,7 +5,6 @@ import 'tailwindcss/tailwind.css';
 
 /* Components */
 import Actions from '../buttons/Actions';
-import EditUser from 'frontend/pages/user-management/EditUser';
 import AddRowBtn from 'frontend/components/buttons/AddRowBtn';
 import ReadRow from 'frontend/pages/student-record/grades-table/ReadRow';
 import EditRow from 'frontend/pages/student-record/grades-table/EditRow';
@@ -142,7 +141,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
 
         // Styling
         const usersTable = `border-collapse overflow-hidden table-fixed max-w-[72vw] max-h-[71vh] rounded-t-[1vw] drop-shadow-lg`;
-        const tHead = `bg-white border-solid rounded-t-[1vw] border-b-[0.2vh] table table-fixed whitespace-no-wrap w-full font-montserrat w-[66vw]`;
+        const tHead = `bg-white border-solid rounded-t-[1vw] border-b-[0.2vh] table table-fixed whitespace-no-wrap w-full font-montserrat w-[65.73130193905817vw]`;
         const tBodytR = `table table-fixed whitespace-no-wrap w-full font-montserrat transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300 hover:bg-table-hover-color last:border-b-0`;
         
         const tRow = `text-left not-italic text-[1vw] text-sr-text-gray`;
@@ -262,7 +261,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                             {data.map((user, index) => (
                                 <tr className={tBodytR} key = { index }>
                                     <td className={` ${usernametData} cursor-default`}> {user.uname}</td>
-                                    <td className={ `${nametData} cursor-default`}> {user.name}</td>
+                                    <td className={ `${nametData} cursor-default`}> {user.name.toUpperCase()}</td>
                                     <td className={` ${positiontData} cursor-default`}> {user.position}</td>
                                     <td className='text-center'>
                                         <Actions

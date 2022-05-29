@@ -5,23 +5,8 @@ import UserIcon from '../../../../assets/icons/default-user-icon.png';
 
 
 /* Parent component >> src/renderer/App.jsx */
-/* This component is used to aid admin navigation and is implemented as a sidebar that expands on hover.
 
-    HOW TO USE WITH HEADER IN PAGES:
-
-    <>
-        <div><AdminNav /></div>
-        <div className="relative ml-[4vw]">
-
-            <div><Header pageTitle={""}/></div>
-            <div className='pt-[9vh] flex-column'>
-                // Insert page contents here
-                // Adjust margins/padding/containers as needed
-            </div>
-        </div>
-    </>
-*/
-
+/* This component is used to aid admin navigation and is implemented as a sidebar that expands on hover. */
 /* Props:
     hoverRef    --- a callbackRef used by useHover to update the listeners for the 'mouseover' and 'mouseout' events in the navigation bar
     isHovering  --- handles the hovering state of the navigation bar

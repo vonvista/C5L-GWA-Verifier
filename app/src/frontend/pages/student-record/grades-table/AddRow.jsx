@@ -19,6 +19,8 @@ import 'tailwindcss/tailwind.css';
     unitsHandler        ---     function that sets the value of units input field
     gradeState          ---     holds the current value of grade input field
     gradeHandler        ---     function that sets the value of grade input field
+    histTitleHandler    ---     holds the main description for logging history about the changes made
+    semState            ---     receives the sem and year that indicates which table should the new row be added in
 */
 const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNameHandler, unitsState, unitsHandler, gradeState, gradeHandler, histTitleHandler, semState}) => {
 
@@ -28,14 +30,14 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
     const modalBody = `absolute inset-x-0 bg-secondary-red top-[8%] bottom-[10%]`;
     const modalClose = `text-[4.85vh] text-white float-right`;
     const modalTitle = `text-white text-center font-bold italic text-[1.30vw] mt-[4.15vh] mb-[4.85vh]`;
-    const modalInputs = `text-[1.10vw] flex items-center justify-center`;
+    const modalInputs = `text-[1vw] flex items-center justify-center`;
     const inputContainer = `ml-5 mr-[1.15vw]`;
     const inputStyle = `text-center w-full h-[4.85vh] rounded-xl`
     const sectionCoursename = `inline-block w-[11.71875vw]`;
     const sectionUnits = `inline-block w-[3.9vw]`;
     const sectionGrade = `inline-block w-[4.8vw]`;
-    const modalFooter = `absolute font-poppins right-0 bottom-0 mt-[4.85vh] text-[0.95vw] flex items-end justify-end`;
-    const modalBtnSave = `h-[4.75vh] w-[8.8vw] rounded-xl mr-[1vw] bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green`;
+    const modalFooter = `absolute font-poppins right-0 bottom-0 mt-[4.85vh] text-[1vw] flex items-end justify-end gap-x-[1vw]`;
+    const modalBtnSave = `h-[4.75vh] w-[8.8vw] rounded-xl bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green`;
     const modalBtnDiscard = `h-[4.75vh] w-[8.8vw] rounded-xl mr-[0.65vw] bg-discard hover:bg-white text-center`;
 
     // Change courseName handler

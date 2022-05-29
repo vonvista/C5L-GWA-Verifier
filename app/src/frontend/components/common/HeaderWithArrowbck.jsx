@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
    Only used for the secondary pages (pages that are at least one level deeper than the primary navigation pages). */
 /* Props:
     pageTitle   --- page title of the current page 
+    arrow       --- boolean; receives whether arrow back should be displayed for the page header
 */
 const HeaderWithArrowbck = ({ pageTitle, arrow }) => {
 
