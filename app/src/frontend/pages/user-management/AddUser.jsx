@@ -137,8 +137,10 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
     <>
       {/* Wrapping everything with transition component to use transition effects from @headlessui/react */}
       <Transition appear show={modalState} as={Fragment}>
+
         {/* Wrapping everything with dialog component */}
-        <Dialog as="div" className="relative z-10" onClose={handleClose}>
+        <Dialog as="div" className="relative z-30" onClose={handleClose}>
+
           {/* Transition effect for the element inside this Transition.Child tag */}
           <Transition.Child
             as={Fragment}
@@ -166,6 +168,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
+
                 {/* Add User Modal Window */}
                 <Dialog.Panel className={modalContent1}>
                   <div className="relative">
@@ -187,6 +190,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
 
                     <div className="font-montserrat m-0 absolute top-[50%] translate-y-[-50%] w-full">
                       <div className={modalBody1}>
+
                         {/* User Photo */}
                         <div className="w-1/6 ml-auto mt-2">
                           <img
@@ -204,19 +208,20 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
 
                                 {/* Name */}
                                 <div className="w-full pb-4 mt-2">
+
                                   {/* First Name */}
                                   <section className="w-2/5 inline-block grow mr-2">
                                     <Input
                                       labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-                                      labelVal="First Name" // label text
-                                      inputStyle={inputStyle} // styling for input
-                                      name="firstName" // name of label-input components
-                                      inputType="text" // type of input password, email, text, etc.
-                                      inputPlaceholder="First Name" // placeholder text for input
-                                      value={firstName.toUpperCase()} // value of the input
+                                      labelVal="First Name"             // label text
+                                      inputStyle={inputStyle}           // styling for input
+                                      name="firstName"                  // name of label-input components
+                                      inputType="text"                  // type of input password, email, text, etc.
+                                      inputPlaceholder="First Name"     // placeholder text for input
+                                      value={firstName.toUpperCase()}   // value of the input
                                       changeHandler={(e) =>
                                         setFirstName(e.target.value.toUpperCase())
-                                      } // change handling
+                                      }                                 // change handling
                                     />
                                     <h4 className="mt-1 w-full text-center text-white">
                                       First Name
@@ -227,15 +232,15 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                   <section className="w-1/12 inline-block grow mr-2">
                                     <Input
                                       labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-                                      labelVal="M.I." // label text
-                                      inputStyle={inputStyle} // styling for input
-                                      name="middleName" // name of label-input components
-                                      inputType="text" // type of input password, email, text, etc.
-                                      inputPlaceholder="_" // placeholder text for input
-                                      value={middleName.toUpperCase()} // value of the input
+                                      labelVal="M.I."                   // label text
+                                      inputStyle={inputStyle}           // styling for input
+                                      name="middleName"                 // name of label-input components
+                                      inputType="text"                  // type of input password, email, text, etc.
+                                      inputPlaceholder="_"              // placeholder text for input
+                                      value={middleName.toUpperCase()}  // value of the input
                                       changeHandler={(e) =>
                                         setMiddleName(e.target.value.toUpperCase())
-                                      } // change handling
+                                      }                                 // change handling
                                     />
                                     <h4 className="w-full text-center mt-1 text-white">
                                       M.I.
@@ -246,15 +251,15 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                   <section className="w-2/5 inline-block grow mr-2">
                                     <Input
                                       labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-                                      labelVal="Last Name" // label text
-                                      inputStyle={inputStyle} // styling for input
-                                      name="lastName" // name of label-input components
-                                      inputType="text" // type of input password, email, text, etc.
-                                      inputPlaceholder="Last Name" // placeholder text for input
-                                      value={lastName.toUpperCase()} // value of the input
+                                      labelVal="Last Name"              // label text
+                                      inputStyle={inputStyle}           // styling for input
+                                      name="lastName"                   // name of label-input components
+                                      inputType="text"                  // type of input password, email, text, etc.
+                                      inputPlaceholder="Last Name"      // placeholder text for input
+                                      value={lastName.toUpperCase()}    // value of the input
                                       changeHandler={(e) =>
                                         setLastName(e.target.value.toUpperCase())
-                                      } // change handling
+                                      }                                 // change handling
                                     />
                                     <h4 className="w-full text-center mt-1 text-white">
                                       Last Name
@@ -264,20 +269,21 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
 
                                 {/* Username and Position */}
                                 <div className="w-full pb-4 mt-2">
+
                                   {/* Username */}
                                   <section className="w-2/5 inline-block grow mr-2">
                                     <Input
                                       labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-                                      labelVal="Username" // label text
-                                      inputStyle={inputStyle} // styling for input
-                                      name="username" // name of label-input components
-                                      max={17} // character limit - max no of char is 17
-                                      inputType="text" // type of input password, email, text, etc.
-                                      inputPlaceholder="Username" // placeholder text for input
-                                      value={un} // value of the input
+                                      labelVal="Username"               // label text
+                                      inputStyle={inputStyle}           // styling for input
+                                      name="username"                   // name of label-input components
+                                      max={17}                          // character limit - max no of char is 17
+                                      inputType="text"                  // type of input password, email, text, etc.
+                                      inputPlaceholder= "Username"      // placeholder text for input
+                                      value={un}                        // value of the input
                                       changeHandler={(e) =>
                                         setUN(e.target.value)
-                                      } // change handling
+                                      }                                 // change handling
                                     />
                                     <h4 className="mt-1 w-full text-center text-white">
                                       Username
@@ -288,16 +294,16 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                   <section className="w-1/2 inline-block grow mr-2">
                                     <Input
                                       labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-                                      labelVal="Position" // label text
-                                      inputStyle={inputStyle} // styling for input
-                                      name="position" // name of label-input components
-                                      max={17} // character limit - max no of char is 17
-                                      inputType="text" // type of input password, email, text, etc.
-                                      inputPlaceholder="Position" // placeholder text for input
-                                      value={position} // value of the input
+                                      labelVal="Position"               // label text
+                                      inputStyle={inputStyle}           // styling for input
+                                      name="position"                   // name of label-input components
+                                      max={17}                          // character limit - max no of char is 17
+                                      inputType="text"                  // type of input password, email, text, etc.
+                                      inputPlaceholder="Position"       // placeholder text for input
+                                      value={position}                  // value of the input
                                       changeHandler={(e) =>
                                         setPosition(e.target.value)
-                                      } // change handling
+                                      }                                 // change handling
                                     />
                                     <h4 className="w-full text-center mt-1 text-white">
                                       Position
@@ -310,15 +316,15 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                     <div className="relative w-full">
                                       <Input
                                         labelStyle="mt-1 w-full text-center text-white sr-only" // styling for label
-                                        labelVal="Password" // label text
+                                        labelVal="Password"             // label text
                                         inputStyle="h-[4.85vh] rounded-xl text-center w-full appearance-none border-2 leading-tight border-gray-300 bg-gray-100 focus:outline-none focus:border-orange-300 focus:bg-white text-gray-700 pr-16 font-mono js-password" // styling for input
-                                        name="password" // name of label-input components
-                                        inputType="password" // type of input password, email, text, etc.
-                                        inputPlaceholder="*****" // placeholder text for input
-                                        value={pw} // value of the input
+                                        name="password"                 // name of label-input components
+                                        inputType="password"            // type of input password, email, text, etc.
+                                        inputPlaceholder="*****"        // placeholder text for input
+                                        value={pw}                      // value of the input
                                         changeHandler={(e) =>
                                           setPW(e.target.value)
-                                        } // change handling
+                                        }                               // change handling
                                       />
                                       <div className="absolute inset-y-0 right-0 flex items-center px-2">
                                         <button
