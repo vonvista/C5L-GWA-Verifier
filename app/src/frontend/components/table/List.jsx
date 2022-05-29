@@ -302,6 +302,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
         const degreetData = `${common} cursor-pointer w-[19vw] truncate`;
         const gwatData = `${common} cursor-pointer w-[12.8125vw] truncate`;
         const statustData = `${elements} content-center justify-center text-center font-[1vw] h-[4.3vh] w-[7.14vw] p-0`;
+        const actiontData = `${elements} text-center`
 
         const asc = `after:float-right after:content-['▲'] after:ml-[0.33vw] bg-sr-dark-gray`;
         const desc = `after:float-right after:content-['▼'] after:ml-[0.33vw] bg-sr-dark-gray`;
@@ -463,7 +464,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
                                     <td className={`${statustData} cursor-default`}>
                                         <div data-status={student.status} className='status'></div>
                                     </td>
-                                    <td className='text-center'>
+                                    <td className={actiontData}>
                                         <Actions
                                             handleEdit={() => studentEdit(student._id, student.studno)}
                                             handleDelete={() => studentDelete(student.studno, student._id)}
