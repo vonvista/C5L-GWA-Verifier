@@ -38,7 +38,8 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
     const sectionGrade = `inline-block w-[4.8vw]`;
     const modalFooter = `absolute font-poppins right-0 bottom-0 mt-[4.85vh] text-[1vw] flex items-end justify-end gap-x-[1vw]`;
     const modalBtnSave = `h-[4.75vh] w-[8.8vw] rounded-xl  text-center text-white disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green
-                        bg-button-green hover:bg-button-green-hover transition ease-out hover:transition hover:ease-in hover:shadow-lg`;
+                        bg-button-green hover:bg-button-green-hover transition ease-out hover:transition hover:ease-in hover:shadow-lg
+                        duration-300 hover:duration-300`;
     const modalBtnDiscard = `h-[4.75vh] w-[8.8vw] rounded-xl mr-[0.65vw] bg-discard hover:bg-white text-center transition ease-out hover:transition hover:ease-in hover:shadow-lg`;
 
     // Change courseName handler
@@ -55,21 +56,6 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
     const handleGradeChange = (event) => {
         gradeHandler(event.target.value);
     }
-
-    // Save Button
-    const SaveButton = () => {
-        // check if all input fields have been filled
-        if (courseNameState && unitsState && gradeState){
-          return <button 
-          className={modalBtnSave} 
-          onClick={() => {
-              handleSave();
-              histTitleHandler(`Created student grade row with Course: ${courseNameState}, Grade: ${gradeState}, and Units: ${unitsState} on Semester: ${semState}`);
-            }}>Save</button>
-        } else {
-          return <button className={modalBtnSave} disabled>Save</button>
-        };
-    };
 
     // Used for disabling up-down arrows in input number textfield
     const inputs = 
@@ -185,7 +171,16 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
 
                                         {/* Save and Cancel buttons */}
                                         <div className={modalFooter}>
-                                            <SaveButton />
+                                            <button 
+                                                onClick={() => {
+                                                    handleSave();
+                                                    histTitleHandler(`Created student grade row with Course: ${courseNameState}, Grade: ${gradeState}, and Units: ${unitsState} on Semester: ${semState}`);
+                                                }}
+                                                className={modalBtnSave} 
+                                                type="button"
+                                                disabled={ !(courseNameState && unitsState && gradeState) }
+                                            >Save
+                                            </button>
                                             <button className={modalBtnDiscard} onClick={handleClose}>Cancel</button>
                                         </div>
                                     </div>

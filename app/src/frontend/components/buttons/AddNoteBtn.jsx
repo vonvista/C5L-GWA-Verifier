@@ -21,6 +21,8 @@ const AddNoteBtn = ({ notesList, semesters, handleAddNote, selectedSem, setSelec
     const [isOpen, setIsOpen] = useState(false)
     // State that handles the content in the text area
     const [noteText, setNoteText] = useState("");
+    // State that handles initial content of text area
+    const [unedited, setUnedited] = useState("");
 
     
     // Sets text area to existing object content if a note for the sem already exists
@@ -28,20 +30,23 @@ const AddNoteBtn = ({ notesList, semesters, handleAddNote, selectedSem, setSelec
         const index = notesList.map(i => i.Semyear).indexOf(givenSem.sem)
         
         if(index != -1){
-            setNoteText(notesList[index].Details)
+            setNoteText(notesList[index].Details);
+            setUnedited(notesList[index].Details);
+
         } else {
-            setNoteText('')
+            setNoteText('');
+            setUnedited('');
         }
     }
 
     // Functions to open/close the modal window
     const openModal = () => {
-        setIsOpen(true)
-        setTextArea(selectedSem)   // set contents for textarea
+        setIsOpen(true);
+        setTextArea(selectedSem);   // set contents for textarea
     }
 
     const closeModal = () => {
-        setIsOpen(false)
+        setIsOpen(false);
     }
 
     // Styling for the button
@@ -54,6 +59,8 @@ const AddNoteBtn = ({ notesList, semesters, handleAddNote, selectedSem, setSelec
             <AddNote
                 modalState={isOpen}
                 modalHandler={closeModal}
+                unedited={unedited}
+                
                 notesList={notesList}
                 semesters={semesters}
                 handleAddNote={handleAddNote}
@@ -67,7 +74,7 @@ const AddNoteBtn = ({ notesList, semesters, handleAddNote, selectedSem, setSelec
             {/* Add/Edit Note Button */}
             <button className={addNoteStyle} type="button" onClick={openModal}>
                 <PlusSmIcon className="p-0.25 w-6 my-1.5 ml-0.25 mr-1.5 inline-flex"/>
-                <p className="text-sm 2xl:text-base odd:inline-block">Add / Edit Note</p>
+                <p className="text-sm odd:inline-block">Add / Edit Note</p>
             </button>
         </>
     );
