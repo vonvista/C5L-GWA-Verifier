@@ -590,6 +590,7 @@ const historySchema = new Schema({
   Time : {type: String, required : true},
   Description: {type: String, required : true},
   Details: {type: String, required : true}, // long string
+  Image: {type: String},
 }, {autoCreate:true});
 
 
@@ -611,9 +612,28 @@ History.findOne(function(err, History){
 });
 }
 
-exports.historyFindByStudent = function(req, res, next){
-  History.find({Student:req.body.Student},function(err,histories){
-    if (!err) res.send(histories);
+exports.historyFindByStudent = async function(req, res, next){
+  History.find({Student:req.body.Student},function(err,histories)
+  {
+    if (!err) {
+      //do not send Image
+      for(var i = 0; i < histories.length; i++){
+        histories[i].Image = undefined;
+      }
+      res.send(histories);
+    }
+  })
+}
+
+exports.historyFindImage = async function(req, res, next){
+  History.findOne({_id:req.body._id},function(err,history)
+  {
+    if (!err) {
+      res.send({suc: history.Image});
+    }
+    else {
+      res.send({err:'No image'})
+    }
   })
 }
 
@@ -627,8 +647,9 @@ exports.historyAdd = function(req, res, next) {
     Time: req.body.Time,
     Description: req.body.Description,
     Details: req.body.Details,
+    Image: req.body.Image,
   });
-  //console.log(newHistory);
+  console.log(newHistory);
 
   // newHistory.save(function(err) {
   //   User.updateOne({_id:newHistory.User},{$push:{History:newHistory._id}},function(err){

@@ -95,6 +95,7 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
                     minute: "numeric"
                 }),
                 details: data.desc,
+                id: data._id,
                 },
             ],
         }

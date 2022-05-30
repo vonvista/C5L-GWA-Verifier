@@ -4,6 +4,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/solid';
 import Input from 'frontend/components/inputs/Input';
 import Swal from 'sweetalert2';
+import { read } from 'node:fs';
 
 
 /* Parent components:
@@ -27,6 +28,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
     // Get username of user and student number of student record where the action has taken place
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
     const [currStudentID, setStudentID] = useState(localStorage.getItem('currStudentID'));
+    const [image, setImage] = useState();
 
     const initialState = {
         title: '',
@@ -49,8 +51,8 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
     const saveChanges = (e) => {
         e.preventDefault()          // prevents refreshing of page
         parentSubmitHandler(e)      // submit contents of the form
-        submitHandler(e)            // update history log
-
+        // submitHandler(e)            // update history log  <-moved to success to get id as well
+        console.log(image)
         // updates history in db with title and description
         const historyCredentials = {
             User: userName,
@@ -62,7 +64,8 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                 minute: "numeric"
             }),
             Description: histTitle,
-            Details: values.desc
+            Details: values.desc,
+            Image: image
         };
 
         fetch(`http://localhost:3001/history/add`, {
@@ -72,7 +75,10 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
         })
         .then((response) => response.json())
         .then((body) => {
-            console.log(body);
+            //console.log(body);
+            values._id = body._id;
+            submitHandler(e)            // update history log 
+
         })
         .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
             Swal.fire({
@@ -131,6 +137,27 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                             onClick={resetModalValues}
                                         />
                                     </Dialog.Title>
+                                    {/* Submit image with file dialog */}
+                                    <input
+                                        type="file"
+                                        //only accept image files
+                                        id="fileInput"
+                                        accept="image/png, image/jpeg"
+                                        onChange={
+                                            (e) => {
+                                                console.log(e.target.files[0])
+                                                var reader = new FileReader();
+                                                var result = reader.readAsDataURL(e.target.files[0])
+
+                                                reader.onload = function(e) {
+                                                    // get loaded data and render thumbnail.
+                                                   setImage(e.target.result)
+                                                }
+                                                
+
+                                            }
+                                        }
+                                    />
 
                                     {/* Window Body */}
                                     <textarea

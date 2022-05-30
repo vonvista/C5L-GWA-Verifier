@@ -40,7 +40,6 @@ const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, handl
 
   // update history list dynamically
   function setHistory(data){
-
     // new history for history tab change handler
     let updateHistory = {
         date: new Date().toLocaleDateString(),
@@ -54,6 +53,7 @@ const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, handl
                 minute: "numeric"
             }),
             details: data.desc,
+            id: data._id
             },
         ],
     }
