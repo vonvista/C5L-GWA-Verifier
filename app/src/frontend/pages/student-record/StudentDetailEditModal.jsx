@@ -13,7 +13,7 @@ import 'tailwindcss/tailwind.css';
     modalState          ---     holds the state of the edit student modal
     handleClose         ---     function used to close edit student modal and reset the input fields
     setJustModal        ---     function used to set JustModal state in parent component
-    handleSave          ---     handles changes after saving on edit student modal
+    editModalSave       ---     closes edit student detail modal and opens justification modal
     setTitle            ---     used for updating history title for student detail edit
     
     studNum             ---     holds the value of student number field
@@ -39,7 +39,7 @@ import 'tailwindcss/tailwind.css';
     setDegreeUnedited   ---     change handler for degreeUnedited state
     
 */
-const EditStudent = ({ modalState, handleClose, setJustModal, handleSave, setTitle, setcurrStudentID,studNum, studFName, studMName, studLName, degree, setStudNum, setStudFName, setStudMName, setStudLName, setDegree,
+const EditStudent = ({ modalState, handleClose, setJustModal, editModalSave, setTitle, setcurrStudentID,studNum, studFName, studMName, studLName, degree, setStudNum, setStudFName, setStudMName, setStudLName, setDegree,
                     studNumUnedited, studFNameUnedited, studMNameUnedited, studLNameUnedited, degreeUnedited, setStudNumUnedited, setStudFNameUnedited, setStudMNameUnedited, setStudLNameUnedited, setDegreeUnedited }) => {
 
     
@@ -59,27 +59,15 @@ const EditStudent = ({ modalState, handleClose, setJustModal, handleSave, setTit
     const modalBtnSave = `h-[4.75vh] w-[8.8vw] rounded-xl bg-button-green hover:bg-button-green-hover text-center text-white disabled:bg-sr-disabled-green transition ease-out hover:transition hover:ease-in hover:shadow-lg`;
     const modalBtnCancel = `h-[4.75vh] w-[8.8vw] rounded-xl bg-discard hover:bg-white text-center transition ease-out hover:transition hover:ease-in hover:shadow-lg`;
 
-    // Save Button
-    const SaveButton = () => {
-
-        // check if there is atleast one change in all input fields
-        if (studFName != studFNameUnedited || studMName != studMNameUnedited || studLName != studLNameUnedited || studNum != studNumUnedited || degree != degreeUnedited ){
-          return (
-            <button 
-                className={modalBtnSave} 
-                onClick={() => {
-                    // update history title for edit
-                    setTitle(prevTitle => prevTitle + `Name: ${studLName.toUpperCase()}, ${studFName.toUpperCase()} ${studMName.toUpperCase()}., Student No.: ${studNum}, and Degree: ${degree.toUpperCase()}.`)
-                    
-                    // update current student number on localStorage
-                    localStorage.setItem('currStudentKey', studNum);
-                    handleSave()           // close edit student modal
-                    setJustModal(true);     // open justification
-                }}>Save</button>
-          )
-        } else {
-          return ( <button className={modalBtnSave} disabled>Save</button> )
-        };
+    // Save Handler
+    const handleSave = () => {
+        // update history title for edit
+        setTitle(prevTitle => prevTitle + `Name: ${studLName.toUpperCase()}, ${studFName.toUpperCase()} ${studMName.toUpperCase()}., Student No.: ${studNum}, and Degree: ${degree.toUpperCase()}.`)
+        
+        // update current student number on localStorage
+        localStorage.setItem('currStudentKey', studNum);
+        editModalSave();       // close edit student modal
+        setJustModal(true);    // open justification
     };
 
     return (
@@ -225,7 +213,14 @@ const EditStudent = ({ modalState, handleClose, setJustModal, handleSave, setTit
 
                                             {/* Save button */}
                                             <div className={modalFooter}>
-                                                <SaveButton />
+                                                <button className={modalBtnSave} onClick={handleSave}
+                                                    disabled={ !(studFName != studFNameUnedited ||
+                                                                studMName != studMNameUnedited ||
+                                                                studLName != studLNameUnedited ||
+                                                                studNum != studNumUnedited ||
+                                                                degree != degreeUnedited )}>
+                                                    Save
+                                                </button>
                                                 <button className={modalBtnCancel} onClick={handleClose}>
                                                     Cancel
                                                 </button>

@@ -80,11 +80,13 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
   // Function to close the edit student modal window
   const closeEditStud = () => {
     setEditModal(false);
-    setStudNum(studentInfo.stud_no)
-    setDegree(studentInfo.degree_program.toUpperCase())
-    setStudFName(studentInfo.iname.fname.toUpperCase())
-    setStudMName(studentInfo.iname.mname.toUpperCase())
-    setStudLName(studentInfo.iname.lname.toUpperCase())
+
+    // drop changes in input fields
+    setStudNum(studentInfo.stud_no);
+    setDegree(studentInfo.degree_program.toUpperCase());
+    setStudFName(studentInfo.iname.fname.toUpperCase());
+    setStudMName(studentInfo.iname.mname.toUpperCase());
+    setStudLName(studentInfo.iname.lname.toUpperCase());
   }
 
   // Function to close justification modal
@@ -149,8 +151,18 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
         })
         console.log(err)
     })
-    closeJustModal()
+
+    // update new values for student details
+    setStudNumUnedited(studNum);
+    setStudFNameUnedited(studFName.toUpperCase());
+    setStudMNameUnedited(studMName.toUpperCase());
+    setStudLNameUnedited(studLName.toUpperCase());
+    setDegreeUnedited(degree.toUpperCase());
+
+    // close modal windows
+    closeJustModal();
     setEditModal(false);
+
     setSelectedStudent( (prevState)=>({...prevState, stud_no: studNum, degree_program: degree.toUpperCase(), Student: currStudentID, iname: {fname: studFName.toUpperCase(), mname: studMName.toUpperCase(), lname: studLName.toUpperCase()}}))
     
     // success message
@@ -185,7 +197,7 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
   }
 
   //main function for student update and add history
-  const editModalClose = () => {
+  const editModalSave = () => {
         setEditModal(false);       // close edit student modal
         setJustModal(true);     // open justification
       //setSelectedStudent( (prevState)=>({...prevState, stud_no: studNum, degree_program: degree, Student: currStudentID, iname: {fname: studFName, mname: studMName, lname: studLName}}))
@@ -205,7 +217,7 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
                 <EditStudentDetails
                     modalState={editModal}
                     handleClose={closeEditStud}
-                    handleSave={editModalClose}
+                    editModalSave={editModalSave}
 
                     studNum={studNum}
                     studFName={studFName}
