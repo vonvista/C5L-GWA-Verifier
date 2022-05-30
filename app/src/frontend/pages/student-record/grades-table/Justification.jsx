@@ -29,6 +29,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
     const [currStudentID, setStudentID] = useState(localStorage.getItem('currStudentID'));
     const [image, setImage] = useState();
+    const [imgName, setImgName] = useState("Max file size is 16MB");
     const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
 
     const initialState = {
@@ -46,6 +47,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
     const resetModalValues = () => {
         resetValues()
         modalHandler()
+        setImgName("Max file size is 16MB") // clear img name upon close
     }
 
     // Function that will save changes
@@ -141,7 +143,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
 
                                 {/* Window Body */}
                                 <textarea
-                                    className="font-inter mt-4 mx-auto text-sm md:text-md lg:text-lg w-full h-[16vh] block resize-none focus:outline-none"
+                                    className="font-inter mt-4 mb-3 mx-auto text-sm md:text-md lg:text-lg w-full h-[13vh] block resize-none focus:outline-none"
                                     name="desc"
                                     placeholder="Enter description here."
                                     value={values.desc}
@@ -150,40 +152,62 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                 />
 
                                 {/* Submit image with file dialog */}
-                                <input
-                                    className="font-inter block w-full text-sm text-gray-700 cursor-pointer transition ease-out duration-200 hover:transition hover:ease-in hover:duration-300 focus:outline-none"
-                                    type="file"
-                                    //only accept image files
-                                    id="fileInput"
-                                    accept="image/png, image/jpeg"
-                                    onChange={
-                                        (e) => {
-                                            console.log(e.target.files[0])
-                                            var reader = new FileReader();
-                                            var result = reader.readAsDataURL(e.target.files[0])
+                                <label 
+                                    forHtml="fileInput"
+                                    className="cursor-pointer w-full focus:outline-none"
+                                
+                                >
+                                    <div className="flex w-full block gap-1">
+                                        <span className="flex-none font-poppins text-sm font-medium py-1 px-2 block bg-sr-dark-gray rounded-lg text-sm text-gray-700 hover:bg-yellow-100 hover:text-secondary-red transition ease-in-out duration-300 hover:transition hover:ease-in hover:duration-300">
+                                            Upload Image
+                                        </span>
 
-                                            //check file size if greater than 2MB
-                                            if(e.target.files[0].size > 16000000){
+                                        <span // section that displays file name
+                                            id="selectedFileName"
+                                            className="font-inter inline truncate text-xs self-center"
+                                        >
+                                            {imgName}
+                                        </span>
+                                    </div>
+                                    <input
+                                        className="hidden"
+                                        type="file"
+                                        //only accept image files
+                                        id="fileInput"
+                                        name="fileInput"
+                                        accept="image/png, image/jpeg"
+                                        onChange={
+                                            (e) => {
+                                                console.log(e.target.files[0])
+                                                
+                                                var reader = new FileReader();
+                                                var result = reader.readAsDataURL(e.target.files[0])
+                                                //check file size if greater than 2MB
+                                                if(e.target.files[0].size > 16000000){
 
-                                            // if(e.target.files[0].size > 16777216) {
-                                                Swal.fire({
-                                                    icon: 'error',
-                                                    title: 'File too large',
-                                                    text: 'File size must be less than 16MB',
-                                                })
-                                                //clear file input
-                                                document.getElementById("fileInput").value = "";
-                                                return;
+                                                // if(e.target.files[0].size > 16777216) {
+                                                    Swal.fire({
+                                                        icon: 'error',
+                                                        title: 'File too large',
+                                                        text: 'File size must be less than 16MB',
+                                                    })
+                                                    //clear file input
+                                                    document.getElementById("fileInput").value = "";
+                                                    return;
+                                                }
+
+                                                reader.onload = function(e) {
+                                                    // get loaded data and render thumbnail.
+                                                    setImage(e.target.result)
+                                                }
+
+                                                e.target.files[0] ? setImgName(e.target.files[0].name) : null // set img name to appear
+
                                             }
-
-                                            reader.onload = function(e) {
-                                                // get loaded data and render thumbnail.
-                                                setImage(e.target.result)
-                                            }
-
                                         }
-                                    }
-                                />
+                                    />
+
+                                </label>
 
                                 {/* Save Button */}
                                 <button
