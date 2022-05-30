@@ -232,7 +232,7 @@ const UserManagementPage = () => {
             <div className="relative inset-0 flex ml-[4vw] justify-center">
                 
                 {/* Page Contents */}
-                <div className='flex mt-[2.5vh] items-center h-screen space-x-[3vw]'>
+                <div className='flex mt-[13vh] items-center space-x-[3vw]'>
 
                     {/* Add User */}
                     <div className='flex items-center w-1/6'>
