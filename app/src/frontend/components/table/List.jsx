@@ -314,7 +314,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
             .status[data-status="Checked"]:after{
                 content : "Checked";
                 background-color: #BBDABB;
-                color: black;
+                color: #2A7146;
                 border-radius: 3vw;
                 display: block;
                 text-align: center;
@@ -323,7 +323,7 @@ const List = ({ table, total, sem, data, changeSort, sortState, dataHandler, del
             .status[data-status="Unchecked"]:after{
                 content : "Unchecked";
                 background-color: #F29B9B;
-                color: black;
+                color: #611111;
                 border-radius: 3vw;
                 display: block;
                 text-align: center;

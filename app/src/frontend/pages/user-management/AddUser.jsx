@@ -9,7 +9,6 @@ import 'tailwindcss/tailwind.css';
 /* Parent component: ./UserManagementPage */
 
 /* This function contains the add user modal window. 
-
    HOW TO USE:
     1. Import AddUserBtn.jsx and AddUser.jsx into the file.
     2. Declare and initialize showModal variable.
@@ -105,25 +104,6 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
       });
   };
 
-  // Create user Button
-  const CreateUserButton = () => {
-    const createbtn = `w-[14vw] h-[5vh] block bg-button-green rounded-lg text-[1vw] font-medium text-sidebar-text
-            hover:shadow-lg hover:bg-button-green-hover disabled:bg-sr-disabled-green transition hover:transition`;
-    // check if all input fields have been filled
-    if (firstName && middleName && lastName && un && position && pw) {
-      return (
-        <button className={createbtn} type="button" onClick={add_user}>
-          Create Account
-        </button>
-      );
-    }
-    return (
-      <button className={createbtn} type="button" disabled>
-        Create Account
-      </button>
-    );
-  };
-
   /* -------------------- Styling --------------------*/
   const modalContent1 = `w-[70%] flex-col mx-auto p-2 rounded-[3.25vw] relative bg-secondary-red transform overflow-hidden p-6 text-left align-middle shadow-xl transition ease-out duration-300`;
   const modalBody1 = `h-full bg-transparent flex m-auto overflow-hidden overflow-y-auto relative w-full`;
@@ -131,6 +111,9 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
   const inputStyle = `text-center w-full h-[4.85vh] rounded-xl`;
   const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain -ml-[9.75vh] h-[49vh]`;
   const modalBody = `absolute inset-x-0 bg-transparent top-[2%] bottom-[2%] transition ease-out hover:transition hover:ease-in hover:shadow-lg`;
+  const createbtn = `w-[14vw] h-[5vh] block bg-button-green rounded-lg text-[1vw] font-medium text-sidebar-text
+            bg-button-green transition ease-out duration-300 hover:transition hover:ease-in hover:duration-300
+            hover:shadow-lg hover:bg-button-green-hover disabled:bg-sr-disabled-green`
   const modalBtnCancel = `w-[14vw] h-[5vh] text-[1vw] rounded-lg rounded-xl bg-discard hover:bg-white text-center font-medium transition ease-out hover:transition hover:ease-in hover:shadow-lg`;
 
   return (
@@ -297,7 +280,6 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                       labelVal="Position"               // label text
                                       inputStyle={inputStyle}           // styling for input
                                       name="position"                   // name of label-input components
-                                      max={17}                          // character limit - max no of char is 17
                                       inputType="text"                  // type of input password, email, text, etc.
                                       inputPlaceholder="Position"       // placeholder text for input
                                       value={position}                  // value of the input
@@ -345,14 +327,21 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                             </div>
 
                             {/* Create User and Cancel buttons */}
-                            <div className="w-[91%] flex flex-row mt-[2vh] pl-[1%] font-poppins  justify-center gap-x-[1vw]">
-                                <CreateUserButton />
+                            <div className="w-[91%] flex flex-row mt-[2vh] pl-[1%] font-poppins justify-center gap-x-[1vw]">
                                 <button
-                                  className={modalBtnCancel}
-                                  onClick={handleClose}
-                                  type="button"
+                                    onClick={add_user}
+                                    className={createbtn}
+                                    type="button"
+                                    disabled={ !(firstName && middleName && lastName && un && position && pw) }
                                 >
-                                  Cancel
+                                    Create Account
+                                </button>
+                                <button
+                                    className={modalBtnCancel}
+                                    onClick={handleClose}
+                                    type="button"
+                                >
+                                    Cancel
                                 </button>
                             </div>
                         </form>
@@ -367,5 +356,6 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
     </>
   );
 };
+
 
 export default AddUser;
