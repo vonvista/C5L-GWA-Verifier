@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
-import { XIcon } from '@heroicons/react/solid';
 import { Dialog, Transition} from '@headlessui/react';
+import { XIcon } from '@heroicons/react/solid';
 import SemSelect from 'frontend/components/inputs/DropdownSelect';
 import Swal from 'sweetalert2';
 import 'tailwindcss/tailwind.css';
@@ -12,6 +12,7 @@ import 'tailwindcss/tailwind.css';
 /* Props:
     modalState prop   ---  holds a boolean value
     modalHandler      ---  handler for setting modalState to false
+    unedited          ---  holds the value of the unedited text area
     notesList         ---  gets the current state of array of notes from parent component
     handleAddNote     ---  gets the handler for adding notes from parent component
     selectedSem       ---  gets the state of selectedSem from parent component
@@ -20,7 +21,7 @@ import 'tailwindcss/tailwind.css';
     noteText          ---  gets the state to be displayed for the textarea
     semesters         ---  gets the list of semesters that the student has enrolled in; to be used for dropdown select
 */
-const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedSem, setSelectedSem, setTextArea, noteText, setNoteText, semesters }) => {
+const AddNote = ({ modalState, modalHandler, unedited, notesList, handleAddNote, selectedSem, setSelectedSem, setTextArea, noteText, setNoteText, semesters }) => {
   
     // local storage access using use state
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
@@ -157,8 +158,9 @@ const AddNote = ({ modalState, modalHandler, notesList, handleAddNote, selectedS
                                 <div>
                                     <button
                                         className='rounded-lg float-left w-1/5 mt-3 mb-4 p-1 text-white bg-button-green hover:bg-button-green-hover
-                                                    transition ease-out hover:transition hover:ease-in hover:shadow-lg'
+                                                    transition ease-out hover:transition hover:ease-in hover:shadow-lg disabled:bg-sr-disabled-green'
                                         onClick={handleSaveClick}
+                                        disabled={(unedited == noteText)}
                                     >
                                         Save
                                     </button>

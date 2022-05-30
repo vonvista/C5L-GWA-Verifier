@@ -158,7 +158,8 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
   const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain -ml-[9.75vh] h-[49vh]`;
   const modalBody = `absolute inset-x-0 bg-transparent top-[2%] bottom-[2%]`;
   const modalBtnSave = `w-[14vw] h-[5vh] font-medium block bg-button-green rounded-lg text-[1vw] text-sidebar-text ease-out hover:ease-in
-    hover:shadow-lg hover:bg-button-green-hover disabled:bg-sr-disabled-green transition hover:transition`;
+    hover:shadow-lg hover:bg-button-green-hover disabled:bg-sr-disabled-green transition hover:transition
+    duration-300 hover:duration-300`;
   const modalBtnCancel = `w-[14vw] h-[5vh] text-[1vw] font-medium rounded-lg rounded-xl bg-discard hover:bg-white text-center ease-out hover:ease-in`;
 
   
@@ -328,7 +329,6 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                       labelVal="Position"               // label text
                                       inputStyle={inputStyle}           // styling for input
                                       name="position"                   // name of label-input components
-                                      max={17}                          // character limit - max no of char is 17
                                       inputType="text"                  // type of input password, email, text, etc.
                                       inputPlaceholder="Position"       // placeholder text for input
                                       value={position}                  // value of the input
@@ -377,33 +377,29 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
 
                             {/* Save and Cancel buttons */}
                             <section className="w-[91%] flex flex-row mt-[2vh] pl-[1%] font-poppins font-medium justify-center gap-x-[1vw]">
-                              <button
-                                // prevent default
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  edit_user();
-                                }}
-                                className={modalBtnSave}
-                                type="button"
-                                disabled={
-                                    !( pw != '' &&
-                                        (firstName != firstNameUnedited ||
-                                        middleName != middleNameUnedited ||
-                                        lastName != lastNameUnedited ||
-                                        un != unUnedited ||
-                                        position != positionUnedited)
-                                    )
-                                }
-                              >
-                                Save
-                              </button>
-                              <button
-                                className={modalBtnCancel}
-                                onClick={handleClose}
-                                type="button"
-                              >
-                                Cancel
-                              </button>
+                                <button
+                                    onClick={edit_user}
+                                    className={modalBtnSave}
+                                    type="button"
+                                    disabled={
+                                        !( pw != '' &&
+                                            (firstName != firstNameUnedited ||
+                                            middleName != middleNameUnedited ||
+                                            lastName != lastNameUnedited ||
+                                            un != unUnedited ||
+                                            position != positionUnedited)
+                                        )
+                                    }
+                                >
+                                    Save
+                                </button>
+                                <button
+                                    className={modalBtnCancel}
+                                    onClick={handleClose}
+                                    type="button"
+                                >
+                                    Cancel
+                                </button>
                             </section>
                         </form>
                       </div>
