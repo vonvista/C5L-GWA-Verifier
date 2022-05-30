@@ -16,7 +16,7 @@ const HeaderWithArrowbck = ({ pageTitle, arrow }) => {
 
     const navigate = useNavigate();
 
-    goBack = () => {
+    const goBack = () => {
         navigate('/in/user-dashboard');
     }
 
