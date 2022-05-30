@@ -188,6 +188,7 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
           }),
           details: data.desc,
           id: data._id,
+          hasImage: data.hasImage,
           },
       ],
       }

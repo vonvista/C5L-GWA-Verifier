@@ -68,7 +68,8 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
             }),
             Description: histTitle,
             Details: values.desc,
-            Image: image
+            Image: image,
+            HasImage: image ? true : false
         };
 
         fetch(`http://${ip}:3001/history/add`, {
@@ -80,6 +81,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
         .then((body) => {
             //console.log(body);
             values._id = body._id;
+            values.hasImage = image ? true : false
             submitHandler(e)            // update history log 
 
         })
@@ -178,7 +180,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                         accept="image/png, image/jpeg, image/jpg"
                                         onChange={
                                             (e) => {
-                                                console.log(e.target.files[0])
+                                                //console.log(e.target.files[0])
                                                 
                                                 var reader = new FileReader();
 

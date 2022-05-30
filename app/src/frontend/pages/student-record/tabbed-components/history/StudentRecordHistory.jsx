@@ -40,7 +40,7 @@ const StudentRecordHistory = ({ historyData, ...rest }) => {
                     </h2>
 
                     {/* descriptions of the same date */}
-                    {info.map(({ main, user, time, details, id, j }) => (
+                    {info.map(({ main, user, time, details, id, hasImage, j }) => (
                       <RecordHistory
                         key={j}
                         main={main}
@@ -48,6 +48,7 @@ const StudentRecordHistory = ({ historyData, ...rest }) => {
                         time={time}
                         details={details}
                         id={id}
+                        hasImage={hasImage}
                       />
                     ))}
                   </div>

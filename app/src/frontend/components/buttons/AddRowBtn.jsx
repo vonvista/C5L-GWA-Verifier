@@ -96,6 +96,7 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
                 }),
                 details: data.desc,
                 id: data._id,
+                hasImage: data.hasImage
                 },
             ],
         }

@@ -590,6 +590,7 @@ const historySchema = new Schema({
   Time : {type: String, required : true},
   Description: {type: String, required : true},
   Details: {type: String, required : true}, // long string
+  HasImage: {type: Boolean, required : true},
   Image: {type: String},
 }, {autoCreate:true});
 
@@ -653,6 +654,7 @@ exports.historyAdd = function(req, res, next) {
     Description: req.body.Description,
     Details: req.body.Details,
     Image: req.body.Image,
+    HasImage: req.body.HasImage,
   });
   // console.log(newHistory);
 

@@ -53,7 +53,8 @@ const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, handl
                 minute: "numeric"
             }),
             details: data.desc,
-            id: data._id
+            id: data._id,
+            hasImage: data.hasImage
             },
         ],
     }

@@ -3,7 +3,6 @@ import { ChevronUpIcon } from '@heroicons/react/solid';
 import 'tailwindcss/tailwind.css';
 import Swal from 'sweetalert2';
 
-
 /* Parent component >> ./StudentRecordHistory */
 
 /* This function contains the history entries in the student's record history.
@@ -16,7 +15,7 @@ import Swal from 'sweetalert2';
     time     ---  time modified
     details  ---  additional information about the modification done
 */
-const RecordHistory = ({ main, user, time, details, id }) => {
+const RecordHistory = ({ main, user, time, details, id, hasImage }) => {
   const [isActive, setIsActive] = useState(false); // variable flag to expand and collapse the accordion used in the additional details about the history
   const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
 
@@ -106,9 +105,11 @@ const RecordHistory = ({ main, user, time, details, id }) => {
       )}
 
       {/* Create clickable text 'View image' with underline */}
-      <div className="font-inter mt-2 mb-3 mr-3.8 italic font-medium px-6" onClick={handleImage}>
+      {hasImage && (
+      <div className="font-inter mt-2 mb-3 mr-3.8 italic font-medium px-6 underline text-green-900" onClick={handleImage}>
         View Image
       </div>
+      )}
 
       {/* User who applied the changes */}
       <div className="font-inter mt-2 mb-3 mr-3.8 italic font-medium px-6">
