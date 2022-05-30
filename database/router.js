@@ -22,6 +22,7 @@ module.exports = (app) => {
   app.get('/history/find-all', controller.middleware, controller.historyFindAll);
   app.put('/history/update', controller.middleware, controller.historyUpdateOne);
   app.delete('/history/delete-all', controller.middleware, controller.historyDeleteAll);
+  app.post('/history/image', controller.middleware, controller.historyFindImage);
   
   // STUDENT ROUTES
   app.post('/student/add', controller.middleware, controller.studentAdd);

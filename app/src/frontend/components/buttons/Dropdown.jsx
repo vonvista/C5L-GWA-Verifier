@@ -175,6 +175,7 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
               minute: "numeric"
           }),
           details: data.desc,
+          id: data._id,
           },
       ],
       }

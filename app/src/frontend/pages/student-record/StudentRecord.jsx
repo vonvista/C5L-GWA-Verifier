@@ -199,6 +199,7 @@ function organizeHistory(data){
         historySet.info[ historySet.info.length - 1 ].user = data[i].User
         historySet.info[ historySet.info.length - 1 ].time = data[i].Time
         historySet.info[ historySet.info.length - 1 ].details = data[i].Details
+        historySet.info[ historySet.info.length - 1 ].id = data[i]._id
 
         // push last Set
         if(i == data.length - 1){

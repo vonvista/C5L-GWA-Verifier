@@ -45,6 +45,7 @@ const Actions = ({ handleEdit, handleDelete, handleHist, data, sem }) => {
                 minute: "numeric"
             }),
             details: data.desc,
+            id: data._id,
             },
         ],
     }

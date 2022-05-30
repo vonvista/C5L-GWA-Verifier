@@ -12,8 +12,8 @@ const MongoClient = require('mongodb').MongoClient
 
 const app = express()
 app.use(cors())
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json({limit: '16mb'}))
+app.use(bodyParser.urlencoded({ extended: true, limit: '16mb' }));
 
 require('./router')(app);
 

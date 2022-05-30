@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ChevronUpIcon } from '@heroicons/react/solid';
 import 'tailwindcss/tailwind.css';
+import Swal from 'sweetalert2';
 
 
 /* Parent component >> ./StudentRecordHistory */
@@ -15,8 +16,63 @@ import 'tailwindcss/tailwind.css';
     time     ---  time modified
     details  ---  additional information about the modification done
 */
-const RecordHistory = ({ main, user, time, details }) => {
+const RecordHistory = ({ main, user, time, details, id }) => {
   const [isActive, setIsActive] = useState(false); // variable flag to expand and collapse the accordion used in the additional details about the history
+  const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
+
+  const handleImage = () => {
+
+    //remove scroll
+    const scrollY = window.scrollY;
+
+    const image = {
+      _id: id
+    }
+
+    fetch(`http://${ip}:3001/history/image`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}`},
+          body: JSON.stringify(image),
+      })
+      .then((response) => response.json())
+      .then((body) => {
+          if(body.suc){
+            //Swal image
+            Swal.fire({
+              heightAuto: false,
+              padding: '20px',
+              showCloseButton: true,
+              showConfirmButton: false,
+              focusConfirm: false,
+              imageUrl: body.suc,
+              didClose: () => {
+                window.scrollTo(0, scrollY);
+              }
+            })
+          }
+          else {
+            Swal.fire({
+              title: 'Info',
+              text: 'No image found / No image provided',
+              icon: 'info',
+              didClose: () => {
+                window.scrollTo(0, scrollY);
+              }
+            })
+          }
+      })
+      .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+          Swal.fire({
+              icon: 'error',
+              title: 'Server Error',
+              text: 'Check if the server is running or if database IP is correct',
+              didClose: () => {
+                window.scrollTo(0, scrollY);
+              }
+          })
+          //console.log(err)
+      })
+  }
 
   return (
     <div className="border-t border-b-zinc-300">
@@ -48,6 +104,11 @@ const RecordHistory = ({ main, user, time, details }) => {
           </ul>
         </div>
       )}
+
+      {/* Create clickable text 'View image' with underline */}
+      <div className="font-inter mt-2 mb-3 mr-3.8 italic font-medium px-6" onClick={handleImage}>
+        View Image
+      </div>
 
       {/* User who applied the changes */}
       <div className="font-inter mt-2 mb-3 mr-3.8 italic font-medium px-6">

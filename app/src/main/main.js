@@ -83,7 +83,7 @@ const createWindow = async () => {
   mainWindow.maximize();
   mainWindow.loadURL(resolveHtmlPath('index.html'));
 
-  
+  mainWindow.webContents.openDevTools();
 
   mainWindow.on('ready-to-show', () => {
     if (!mainWindow) {

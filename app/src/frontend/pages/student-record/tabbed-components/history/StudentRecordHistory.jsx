@@ -1,5 +1,6 @@
 import RecordHistory from './StudentHistory';
 import 'tailwindcss/tailwind.css';
+import { useState, useEffect } from 'react';
 
 
 /* Parent component >> frontend/pages/student-record/StudentViewRecord */
@@ -9,6 +10,12 @@ import 'tailwindcss/tailwind.css';
     historyData  ---  data of changes done on given record
 */
 const StudentRecordHistory = ({ historyData, ...rest }) => {
+
+  useEffect(() => {
+
+    console.log(historyData);
+  }, []);
+
   return (
     <>
       <div className="min-w-[25vw] max-w-[25vw] p-5 max-h-[41rem] flex-col my-0 mx-auto relative overflow-auto">
@@ -33,13 +40,14 @@ const StudentRecordHistory = ({ historyData, ...rest }) => {
                     </h2>
 
                     {/* descriptions of the same date */}
-                    {info.map(({ main, user, time, details, j }) => (
+                    {info.map(({ main, user, time, details, id, j }) => (
                       <RecordHistory
                         key={j}
                         main={main}
                         user={user}
                         time={time}
                         details={details}
+                        id={id}
                       />
                     ))}
                   </div>
