@@ -51,9 +51,9 @@ const RecordHistory = ({ main, user, time, details, id }) => {
           }
           else {
             Swal.fire({
-              title: 'Error',
-              text: 'No image found',
-              icon: 'error',
+              title: 'Info',
+              text: 'No image found / No image provided',
+              icon: 'info',
               didClose: () => {
                 window.scrollTo(0, scrollY);
               }
@@ -69,7 +69,7 @@ const RecordHistory = ({ main, user, time, details, id }) => {
                 window.scrollTo(0, scrollY);
               }
           })
-          console.log(err)
+          //console.log(err)
       })
   }
 
