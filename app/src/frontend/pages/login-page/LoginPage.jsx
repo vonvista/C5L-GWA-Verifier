@@ -210,12 +210,11 @@ const LoginPage = () => {
                 {/* Page Title */}
                 <span className="flex justify-center pt-[12vh] font-montserrat font-semibold text-[2.25vw] text-sidebar-text">User Login</span>
                 
+                {/* Container for input form and login button*/}
                 <form className="justify-center pt-[8vh]" onSubmit={submitHandler}>
 
-                    {/* Div container for input form and login button*/}
+                    {/* Input form */}
                     <div className="flex justify-center">               
-                        
-                        {/* Input form */}
                         <div className="overflow-hidden w-1/2 text-[1.25vw] font-montserrat rounded-lg px-5 pb-2 pt-4 bg-white text-gray-800">
                             <div className="pb-4">
                                 <Input

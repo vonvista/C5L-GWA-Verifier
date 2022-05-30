@@ -9,7 +9,6 @@ import 'tailwindcss/tailwind.css';
 /* Parent component: ./UserManagementPage */
 
 /* This function contains the add user modal window. 
-
    HOW TO USE:
     1. Import AddUserBtn.jsx and AddUser.jsx into the file.
     2. Declare and initialize showModal variable.
@@ -335,7 +334,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                     type="button"
                                     disabled={ !(firstName && middleName && lastName && un && position && pw) }
                                 >
-                                    Save
+                                    Create Account
                                 </button>
                                 <button
                                     className={modalBtnCancel}
@@ -357,5 +356,6 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
     </>
   );
 };
+
 
 export default AddUser;
