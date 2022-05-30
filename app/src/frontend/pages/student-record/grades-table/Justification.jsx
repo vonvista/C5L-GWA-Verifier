@@ -113,88 +113,90 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                     {/* Container for the layer containing the modal window */}
                     <div className="fixed inset-0 overflow-y-auto flex min-h-full items-center justify-center p-4 text-center">
                             
-                            {/* Transition effect for the element inside this Transition.Child tag*/}
-                            <Transition.Child
-                                as={Fragment}
-                                enter="ease-out duration-300"
-                                enterFrom="opacity-0 scale-95"
-                                enterTo="opacity-100 scale-100"
-                                leave="ease-in duration-200"
-                                leaveFrom="opacity-100 scale-100"
-                                leaveTo="opacity-0 scale-95"
-                            >   
-                                {/* Justification modal window */}
-                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white pt-6 px-6 text-left align-middle shadow-xl transition-all">
+                        {/* Transition effect for the element inside this Transition.Child tag*/}
+                        <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0 scale-95"
+                            enterTo="opacity-100 scale-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100 scale-100"
+                            leaveTo="opacity-0 scale-95"
+                        >   
+                            {/* Justification modal window */}
+                            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white py-6 px-7 text-left align-middle shadow-xl transition-all">
+                                
+                                {/* Window Title */}
+                                <Dialog.Title
+                                    as="h3"
+                                    className="font-montserrat mt-[0.5vh] mb-2 text-2xl font-black leading-6 text-gray-900 flex"
+                                >
+                                    <span className="self-start">Justification</span>
+                                    {/* Close button */}
+                                    <XIcon
+                                        className="w-5 cursor-pointer ml-auto mr-0 transition-all ease-out delay-200 hover:text-gray-500 hover:transition-all hover:ease-in hover:delay-200"
+                                        onClick={resetModalValues}
+                                    />
+                                </Dialog.Title>
+
+                                {/* Window Body */}
+                                <textarea
+                                    className="font-inter mt-4 mx-auto text-sm md:text-md lg:text-lg w-full h-[16vh] block resize-none focus:outline-none"
+                                    name="desc"
+                                    placeholder="Enter description here."
+                                    value={values.desc}
+                                    onChange={changeHandler}
                                     
-                                    {/* Window Title */}
-                                    <Dialog.Title
-                                        as="h3"
-                                        className="font-montserrat ml-3 mt-[0.5vh] mb-2 text-2xl font-black leading-6 text-gray-900 flex"
-                                    >
-                                        <span className="self-start">Justification</span>
-                                        {/* Close button */}
-                                        <XIcon
-                                            className="w-5 cursor-pointer ml-auto mr-0 transition-all ease-out delay-200 hover:text-gray-500 hover:transition-all hover:ease-in hover:delay-200"
-                                            onClick={resetModalValues}
-                                        />
-                                    </Dialog.Title>
-                                    {/* Submit image with file dialog */}
-                                    <input
-                                        type="file"
-                                        //only accept image files
-                                        id="fileInput"
-                                        accept="image/png, image/jpeg"
-                                        onChange={
-                                            (e) => {
-                                                console.log(e.target.files[0])
-                                                var reader = new FileReader();
-                                                var result = reader.readAsDataURL(e.target.files[0])
+                                />
 
-                                                //check file size if greater than 2MB
-                                                if(e.target.files[0].size > 16000000){
+                                {/* Submit image with file dialog */}
+                                <input
+                                    className="font-inter block w-full text-sm text-gray-700 cursor-pointer transition ease-out duration-200 hover:transition hover:ease-in hover:duration-300 focus:outline-none"
+                                    type="file"
+                                    //only accept image files
+                                    id="fileInput"
+                                    accept="image/png, image/jpeg"
+                                    onChange={
+                                        (e) => {
+                                            console.log(e.target.files[0])
+                                            var reader = new FileReader();
+                                            var result = reader.readAsDataURL(e.target.files[0])
 
-                                                // if(e.target.files[0].size > 16777216) {
-                                                    Swal.fire({
-                                                        icon: 'error',
-                                                        title: 'File too large',
-                                                        text: 'File size must be less than 16MB',
-                                                    })
-                                                    //clear file input
-                                                    document.getElementById("fileInput").value = "";
-                                                    return;
-                                                }
+                                            //check file size if greater than 2MB
+                                            if(e.target.files[0].size > 16000000){
 
-                                                reader.onload = function(e) {
-                                                    // get loaded data and render thumbnail.
-                                                   setImage(e.target.result)
-                                                }
-                                                
-
+                                            // if(e.target.files[0].size > 16777216) {
+                                                Swal.fire({
+                                                    icon: 'error',
+                                                    title: 'File too large',
+                                                    text: 'File size must be less than 16MB',
+                                                })
+                                                //clear file input
+                                                document.getElementById("fileInput").value = "";
+                                                return;
                                             }
-                                        }
-                                    />
 
-                                    {/* Window Body */}
-                                    <textarea
-                                        className="font-inter mt-4 mx-auto text-sm lg:text-lg px-3 w-full h-[18vh] block resize-none focus:outline-none"
-                                        name="desc"
-                                        placeholder="Enter description here."
-                                        value={values.desc}
-                                        onChange={changeHandler}
-                                        
-                                    />
-                                    {/* Save Button */}
-                                    <button
-                                        type="submit"
-                                        className="rounded-lg mt-3 mb-4 w-1/5 inline-flex justify-center border border-transparent bg-button-green px-3 py-1.5 text-sm lg:text-base font-poppins font-medium text-white
-                                            transition-all ease-out delay-200 hover:transition-all hover:ease-in hover:bg-button-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
-                                        onClick={saveChanges}
-                                        disabled={!isValid}
-                                    >
-                                        Save
-                                    </button>
-                                </Dialog.Panel>
-                            </Transition.Child>
+                                            reader.onload = function(e) {
+                                                // get loaded data and render thumbnail.
+                                                setImage(e.target.result)
+                                            }
+
+                                        }
+                                    }
+                                />
+
+                                {/* Save Button */}
+                                <button
+                                    type="submit"
+                                    className="rounded-lg mt-3 w-1/5 inline-flex justify-center border border-transparent bg-button-green px-3 py-1.5 text-sm lg:text-base font-poppins font-medium text-white
+                                        transition-all ease-out delay-200 hover:transition-all hover:ease-in hover:bg-button-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
+                                    onClick={saveChanges}
+                                    disabled={!isValid}
+                                >
+                                    Save
+                                </button>
+                            </Dialog.Panel>
+                        </Transition.Child>
                     </div>
                 </Dialog>
             </Transition>
