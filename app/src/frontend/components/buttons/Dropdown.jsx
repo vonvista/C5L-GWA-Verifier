@@ -252,7 +252,7 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
             <div className="w-2/3 font-poppins relative ml-auto grow-0 text-sm 2xl:text-base">
             
                 {/* Active word and dropdown icon */}
-                <div className="grid-cols-2 divide-x w-full py-1.5 text-center text-sidebar-text bg-button-green hover:bg-button-green-hover hover:transition-all flex items-center justify-items-center rounded-lg border border-slate-300"
+                <div className="grid-cols-2 divide-x w-full py-1.5 text-center text-sidebar-text bg-button-green hover:bg-button-green-hover flex items-center justify-items-center rounded-lg border border-slate-300 transition-all ease-in-out duration-300 hover:transition-all hover:ease-in-out hover:duration-300"
                     onClick={() => {
                         setIsActive(!isActive);
                     }}
