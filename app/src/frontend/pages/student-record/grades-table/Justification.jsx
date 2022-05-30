@@ -149,6 +149,20 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                                 var reader = new FileReader();
                                                 var result = reader.readAsDataURL(e.target.files[0])
 
+                                                //check file size if greater than 2MB
+                                                if(e.target.files[0].size > 16000000){
+
+                                                // if(e.target.files[0].size > 16777216) {
+                                                    Swal.fire({
+                                                        icon: 'error',
+                                                        title: 'File too large',
+                                                        text: 'File size must be less than 16MB',
+                                                    })
+                                                    //clear file input
+                                                    document.getElementById("fileInput").value = "";
+                                                    return;
+                                                }
+
                                                 reader.onload = function(e) {
                                                     // get loaded data and render thumbnail.
                                                    setImage(e.target.result)

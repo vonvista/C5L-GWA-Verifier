@@ -21,6 +21,9 @@ const RecordHistory = ({ main, user, time, details, id }) => {
 
   const handleImage = () => {
 
+    //remove scroll
+    const scrollY = window.scrollY;
+
     const image = {
       _id: id
     }
@@ -35,7 +38,15 @@ const RecordHistory = ({ main, user, time, details, id }) => {
           if(body.suc){
             //Swal image
             Swal.fire({
+              heightAuto: false,
+              padding: '20px',
+              showCloseButton: true,
+              showConfirmButton: false,
+              focusConfirm: false,
               imageUrl: body.suc,
+              didClose: () => {
+                window.scrollTo(0, scrollY);
+              }
             })
           }
           else {
@@ -43,6 +54,9 @@ const RecordHistory = ({ main, user, time, details, id }) => {
               title: 'Error',
               text: 'No image found',
               icon: 'error',
+              didClose: () => {
+                window.scrollTo(0, scrollY);
+              }
             })
           }
       })
@@ -51,6 +65,9 @@ const RecordHistory = ({ main, user, time, details, id }) => {
               icon: 'error',
               title: 'Server Error',
               text: 'Check if the server is running or if database IP is correct',
+              didClose: () => {
+                window.scrollTo(0, scrollY);
+              }
           })
           console.log(err)
       })
