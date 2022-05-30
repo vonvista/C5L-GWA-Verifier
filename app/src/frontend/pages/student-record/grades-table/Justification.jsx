@@ -175,12 +175,17 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                         //only accept image files
                                         id="fileInput"
                                         name="fileInput"
-                                        accept="image/png, image/jpeg"
+                                        accept="image/png, image/jpeg, image/jpg"
                                         onChange={
                                             (e) => {
                                                 console.log(e.target.files[0])
                                                 
                                                 var reader = new FileReader();
+
+                                                // check if parameter is of type Blob
+                                                if (!(e.target.files[0] instanceof Blob)){
+                                                    return;
+                                                }
                                                 var result = reader.readAsDataURL(e.target.files[0])
                                                 //check file size if greater than 2MB
                                                 if(e.target.files[0].size > 16000000){
