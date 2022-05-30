@@ -180,7 +180,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                         accept="image/png, image/jpeg, image/jpg"
                                         onChange={
                                             (e) => {
-                                                console.log(e.target.files[0])
+                                                //console.log(e.target.files[0])
                                                 
                                                 var reader = new FileReader();
 
