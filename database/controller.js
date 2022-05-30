@@ -634,6 +634,7 @@ exports.historyFindImage = async function(req, res, next){
   {
     if (!err) {
       res.send({suc: history.Image});
+      
     }
     else {
       res.send({err:'No image'})

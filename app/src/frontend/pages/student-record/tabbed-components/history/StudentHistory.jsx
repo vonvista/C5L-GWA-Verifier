@@ -18,6 +18,7 @@ import Swal from 'sweetalert2';
 */
 const RecordHistory = ({ main, user, time, details, id }) => {
   const [isActive, setIsActive] = useState(false); // variable flag to expand and collapse the accordion used in the additional details about the history
+  const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
 
   const handleImage = () => {
 
@@ -28,7 +29,7 @@ const RecordHistory = ({ main, user, time, details, id }) => {
       _id: id
     }
 
-    fetch(`http://localhost:3001/history/image`, {
+    fetch(`http://${ip}:3001/history/image`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}`},
           body: JSON.stringify(image),

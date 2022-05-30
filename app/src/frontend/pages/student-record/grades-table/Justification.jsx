@@ -29,6 +29,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
     const [currStudentID, setStudentID] = useState(localStorage.getItem('currStudentID'));
     const [image, setImage] = useState();
+    const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
 
     const initialState = {
         title: '',
@@ -68,7 +69,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
             Image: image
         };
 
-        fetch(`http://localhost:3001/history/add`, {
+        fetch(`http://${ip}:3001/history/add`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}`},
             body: JSON.stringify(historyCredentials),
