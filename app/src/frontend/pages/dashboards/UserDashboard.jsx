@@ -299,7 +299,7 @@ const UserDashboard = () => {
       Username: localStorage.getItem("Username"),
       Password: formValues[0]
     }
-    fetch(`http://${ip}:3001/user/login`,{
+    var passwordVerify = await fetch(`http://${ip}:3001/user/login`,{
       method: "POST",
       headers: { "Content-Type":"application/json" },
       body: JSON.stringify(credentials)
@@ -312,10 +312,15 @@ const UserDashboard = () => {
             title: 'Error',
             text: body.err,
           })
-          return
+          return false
         }
+        return true
       }
     )
+
+    if(!passwordVerify){
+      return
+    }
 
     //check if random string is correct
     if (formValues[1] !== randomString) {
@@ -370,11 +375,6 @@ const UserDashboard = () => {
       input: 'password',
       inputLabel: 'Password',
       inputPlaceholder: 'Enter your password',
-      inputAttributes: {
-        maxlength: 10,
-        autocapitalize: 'off',
-        autocorrect: 'off'
-      }
     })
 
     if (!password) {
@@ -385,7 +385,7 @@ const UserDashboard = () => {
       Username: localStorage.getItem("Username"),
       Password: password
     }
-    fetch(`http://${ip}:3001/user/login`,{
+    var passwordVerify = await fetch(`http://${ip}:3001/user/login`,{
       method: "POST",
       headers: { "Content-Type":"application/json" },
       body: JSON.stringify(credentials)
@@ -398,10 +398,15 @@ const UserDashboard = () => {
             title: 'Error',
             text: body.err,
           })
-          return
+          return false
         }
+        return true
       }
     )
+
+    if(!passwordVerify){
+      return
+    }
     
     const studentIDs = text.split("\n")
     console.log(studentIDs);
