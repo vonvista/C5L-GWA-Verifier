@@ -626,6 +626,10 @@ exports.historyFindByStudent = async function(req, res, next){
 }
 
 exports.historyFindImage = async function(req, res, next){
+  if(!req.body._id){
+    res.send({err:'No id'});
+    return;
+  }
   History.findOne({_id:req.body._id},function(err,history)
   {
     if (!err) {
@@ -649,7 +653,7 @@ exports.historyAdd = function(req, res, next) {
     Details: req.body.Details,
     Image: req.body.Image,
   });
-  console.log(newHistory);
+  // console.log(newHistory);
 
   // newHistory.save(function(err) {
   //   User.updateOne({_id:newHistory.User},{$push:{History:newHistory._id}},function(err){
