@@ -46,6 +46,7 @@ const Actions = ({ handleEdit, handleDelete, handleHist, data, sem }) => {
             }),
             details: data.desc,
             id: data._id,
+            hasImage: data.hasImage,
             },
         ],
     }

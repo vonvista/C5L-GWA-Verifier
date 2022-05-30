@@ -200,7 +200,7 @@ function organizeHistory(data){
         historySet.info[ historySet.info.length - 1 ].time = data[i].Time
         historySet.info[ historySet.info.length - 1 ].details = data[i].Details
         historySet.info[ historySet.info.length - 1 ].id = data[i]._id
-
+        historySet.info[ historySet.info.length - 1 ].hasImage = data[i].HasImage
         // push last Set
         if(i == data.length - 1){
         finalHistory.push( historySet )
