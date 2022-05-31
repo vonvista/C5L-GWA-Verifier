@@ -2,7 +2,7 @@ import { jsPDF } from 'jspdf';      // http://raw.githack.com/MrRio/jsPDF/master
 import 'jspdf-autotable';           // https://www.npmjs.com/package/jspdf-autotable
 
 // column headers for table 
-const tableHeader = [['CRSE NO.', 'Grade', 'Unit', 'Enrolled', 'Cumulative', "",'Term']];
+const tableHeader = [['Course Name', 'Grade', 'Unit', 'Weight', 'Cumulative', "",'Term']];
 
 const YMargin = 50;     // top page margin
 const LeftMargin = 55;  // left page margin
@@ -50,7 +50,7 @@ function organizeRecord(info, grades){
     // storage of data to be exported
     let finalExportData = {
         studentNo: info.stud_no,
-        name: info.name,
+        name: `${info.iname.lname}, ${info.iname.fname}, ${info.iname.mname}`,
         program: info.degree_program,
         grades: [],
         gwa: 0, 
