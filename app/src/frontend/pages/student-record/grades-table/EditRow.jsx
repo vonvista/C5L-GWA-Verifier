@@ -22,7 +22,7 @@ import 'tailwindcss/tailwind.css'
 const EditRow = ({dataDynamic, dataStatic, changeHandler, onSubmit, toggleHandler, touched, errors, valid, sem, setHistoryEditRow}) => {
 
     const inputStyle = `block box-border focus:outline-none text-sr-dark-text border-b border-sr-disabled-green transition ease-out duration-100 focus:transition focus:ease-in-out focus:duration-100 focus:border-b focus:border-button-green`
-    const errorStyle= `block text-sm inter text-secondary-red`
+    const errorStyle= `block text-sm 5xl:text-[0.75vw] font-inter text-secondary-red`
     const centerInput= `w-1/3 text-center mx-auto`
 
     return(

@@ -120,12 +120,12 @@ const AddNote = ({ modalState, modalHandler, unedited, notesList, handleAddNote,
                             leaveTo="opacity-0 scale-95"
                         >
                             {/* Add/Edit note modal window */}
-                            <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white px-5 text-left align-middle shadow-xl transition-all">
+                            <Dialog.Panel className="w-full max-w-md 3xl:max-w-lg 5xl:max-w-xl transform overflow-hidden rounded-2xl bg-white px-5 text-left align-middle shadow-xl transition-all">
                                 
                                 {/* Window Title */}
                                 <Dialog.Title
                                     as="div"
-                                    className="flex items-center mt-2 mb-2 text-sm lg:text-lg"
+                                    className="flex items-center mt-2 mb-2 text-sm xl:text-base 1.75xl:text-lg 5xl:text-[0.9vw]"
                                 >
                                     <div>
                                         {/* Dropdown select  */}
@@ -139,7 +139,7 @@ const AddNote = ({ modalState, modalHandler, unedited, notesList, handleAddNote,
                         
                                     {/* Close button */}
                                     <XIcon
-                                        className="cursor-pointer w-6 mt-3 ml-auto mr-0 hover:text-gray-500 hover:transition-all hover:ease-in"
+                                        className="cursor-pointer w-6 5xl:w-[1vw] mt-3 ml-auto mr-0 hover:text-gray-500 hover:transition-all hover:ease-in"
                                         onClick={handleClose}
                                     />
                                 </Dialog.Title>
@@ -148,7 +148,7 @@ const AddNote = ({ modalState, modalHandler, unedited, notesList, handleAddNote,
 
                                 {/* Textarea */}
                                 <textarea
-                                    className='font-inter text-sm lg:text-lg border-none resize-none focus:outline-none p-3 w-full h-[25vh]'
+                                    className='w-full h-[25vh] p-3 font-inter text-sm xl:text-base 1.75xl:text-lg 5xl:text-[0.9vw] border-none resize-none focus:outline-none'
                                     placeholder='Type to add a note...'
                                     value={noteText}
                                     onChange={handleChange}
@@ -157,8 +157,8 @@ const AddNote = ({ modalState, modalHandler, unedited, notesList, handleAddNote,
                                 {/* Save button */}
                                 <div>
                                     <button
-                                        className='font-poppins font-medium text-sm lg:text-base rounded-lg float-left w-1/5 mt-3 mb-4 px-3 py-1.5 text-white bg-button-green hover:bg-button-green-hover
-                                                    transition ease-out hover:transition hover:ease-in hover:shadow-lg disabled:bg-sr-disabled-green disabled:hover:transition-none disabled:hover:shadow-transparent'
+                                        className='font-poppins font-medium rounded-lg float-left w-1/5 mt-3 mb-4 p-1 px-3 py-1.5 5xl:text-[0.8vw] text-white bg-button-green hover:bg-button-green-hover
+                                                transition ease-out hover:transition hover:ease-in hover:shadow-lg disabled:bg-sr-disabled-green disabled:hover:transition-none disabled:hover:shadow-transparent'
                                         onClick={handleSaveClick}
                                         disabled={(unedited == noteText)}
                                     >

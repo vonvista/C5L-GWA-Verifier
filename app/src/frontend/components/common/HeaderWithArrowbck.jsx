@@ -20,15 +20,15 @@ const HeaderWithArrowbck = ({ pageTitle, arrow }) => {
     }
 
     return (
-        <header className="flex w-full items-center absolute top-0 right-0 z-10 pl-[4vw] bg-secondary-red hover:text-highlight text-sidebar-text py-2.5 xl:py-3.5 2xl:py-4">
+        <header className="flex w-full items-center absolute top-0 right-0 z-10 pl-[4vw] py-[1vh] bg-secondary-red hover:text-highlight text-sidebar-text">
             {
                 arrow ?
-                    <div className="pl-7 xl:pl-10 cursor-pointer  hover:bg-primary-red transition ease-out hover:transition hover:ease-in">
-                        <ChevronLeftIcon className="w-6 lg:w-7 1.75xl:w-9" onClick={goBack}/>
+                    <div className="pl-[2vw] cursor-pointer  hover:bg-primary-red transition ease-out hover:transition hover:ease-in">
+                        <ChevronLeftIcon className="w-[2vw]" onClick={goBack}/>
                     </div>
                 : <></>
             }
-            <span className={`${ arrow ? "ml-5" : "pl-8 lg:pl-10 xl:pl-12" } text-md lg:text-xl 1.75xl:text-3xl font-montserrat font-bold
+            <span className={`${ arrow ? "ml-[1vw]" : "ml-[3vw]" } text-[1.6vw] font-montserrat font-bold
                 transition ease-out hover:transition hover:ease-in hover:duration-300`}>
                 {pageTitle}
             </span>

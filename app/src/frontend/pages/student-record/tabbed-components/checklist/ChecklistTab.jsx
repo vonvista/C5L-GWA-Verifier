@@ -13,8 +13,8 @@ import ChecklistDetail from './ChecklistDetail';
 export default function CheckListTab ({ checklistData, setValData, handleApply }) {
 
     return (
-        <div className="min-w-[25vw] max-w-[25vw] h-[41rem] max-h-[41rem] mx-auto p-5 block overflow-auto">
-            <p className="text-base 2xl:text-lg font-inter ml-[0.5vw] text-left mb-3">
+        <div className="min-w-[25vw] max-w-[25vw] h-full max-h-[61vh] mx-auto p-[1vw] block overflow-auto">
+            <p className="text-xs xl:text-sm 1.75xl:text-base 3xl:text-lg 4xl:text-[0.95vw] 3xl:leading-7 5xl:leading-10 font-inter ml-[0.5vw] text-left mb-[2vh]">
                 The following are the details of the validation results from this
                 student record's summary of grades:
             </p>
@@ -22,7 +22,7 @@ export default function CheckListTab ({ checklistData, setValData, handleApply }
             {/* Mapping the list of details */}
             {checklistData.map((data, idx) => {
                 return (
-                <div className="grid rounded-lg ml-[0.5vw] pt-2" key={idx}>
+                <div className="grid rounded-lg ml-[0.5vw] p-[0.2vh]" key={idx}>
                     <ChecklistDetail
                     icon={data.status}
                     detail={data.detail}
@@ -35,11 +35,11 @@ export default function CheckListTab ({ checklistData, setValData, handleApply }
 
             {/* Apply changes button */}
             <button
-                className="h-9 px-5 flex items-center mt-6 rounded-xl bg-button-green text-white font-montserrat font-bold transition ease-out hover:transition hover:ease-in hover:shadow-lg hover:bg-button-green-hover"
+                className="h-7 1.75xl:h-8 5xl:h-[3.25vh] px-4 5xl:px-[0.85vw] flex items-center mt-[2vh] rounded-xl bg-button-green text-white font-montserrat font-bold transition ease-out hover:transition hover:ease-in hover:shadow-lg hover:bg-button-green-hover"
                 type="button"
                 onClick={handleApply}
             >
-                <p className="text-sm 2xl:text-base font-poppins font-medium inline-block">Apply Changes</p>
+                <p className="text-xs 1.75xl:text-sm 3xl:text-base 4xl:text-[0.8vw] font-poppins font-medium inline-block">Apply Changes</p>
             </button>
         </div>
     );

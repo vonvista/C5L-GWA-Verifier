@@ -50,7 +50,7 @@ const AddNoteBtn = ({ notesList, semesters, handleAddNote, selectedSem, setSelec
     }
 
     // Styling for the button
-    const addNoteStyle = `h-8 px-3.5 flex items-center mb-2 rounded-xl bg-button-green text-sidebar-text font-poppins font-medium
+    const addNoteStyle = `px-3 h-[2vw] 1.5xl:h-[1.75vw] 5xl:px-[0.75vw] flex items-center mb-2 rounded-xl bg-button-green text-sidebar-text font-poppins font-medium
         transition ease-out hover:transition hover:ease-in hover:shadow-lg hover:bg-button-green-hover`;
 
     return (
@@ -73,8 +73,8 @@ const AddNoteBtn = ({ notesList, semesters, handleAddNote, selectedSem, setSelec
 
             {/* Add/Edit Note Button */}
             <button className={addNoteStyle} type="button" onClick={openModal}>
-                <PlusSmIcon className="p-0.25 w-6 my-1.5 ml-0.25 mr-1.5 inline-flex"/>
-                <p className="text-sm odd:inline-block">Add / Edit Note</p>
+                <PlusSmIcon className="mr-1.5 w-[1.25vw] 5xl:mr-[0.25vw] inline-flex"/>
+                <p className="text-[0.85vw] odd:inline-block">Add / Edit Note</p>
             </button>
         </>
     );

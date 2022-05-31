@@ -178,13 +178,13 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
                         <>
                              {/* Accordion Header */}
                              <Disclosure.Button className={`${open ? 'bg-sr-dark-gray rounded-t-lg' : 'mb-3 rounded-lg shadow-lg'} ${nameStyle}`}>
-                                <span className="text-lg 2xl:text-[20px] ">{Name}</span>
+                                <span className="5xl:p-2 text-base 1.75xl:text-[20px] 5xl:text-[1.2vw] 5xl:py-3">{Name}</span>
                                 
                                 {/* Icon */}
                                 <ChevronUpIcon
                                     className={`${
                                         !open ? 'transform rotate-180' : ''
-                                    } ml-1 w-5 xl:w-7 self-center duration-200`}
+                                    } w-5 xl:w-7 5xl:w-[1.5vw] self-center duration-200`}
                                 />
                             </Disclosure.Button>
                             
@@ -198,7 +198,7 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
                                 leaveTo="transform -translate-y-6 opacity-0"
                             >
                                 {/* Accordion Contents */}
-                                <Disclosure.Panel className="inter z-0 pl-5 py-3 mb-2 text-sm 1.75xl:text-base text-gray-500 rounded-b-lg shadow-lg">
+                                <Disclosure.Panel className="inter z-0 pl-5 5xl:pl-[1vw] py-3 5xl:py-[1vh] mb-2 5xl:mb-[1vh] text-sm 1.75xl:text-base 3xl:text-lg 5xl:text-[1vw] text-gray-500 rounded-b-lg shadow-lg">
                                     <List
                                         table={2}
                                         total={Total}
