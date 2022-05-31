@@ -82,7 +82,7 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
 
     return(
 
-        <div className="min-w-[25vw] max-w-[25vw] h-[41rem] max-h-[41rem] mx-auto p-5 block overflow-auto">
+        <div className="min-w-[25vw] max-w-[25vw] h-full max-h-[61vh] mx-auto p-5 block overflow-auto">
             {/* Add note button */}
             <AddNoteBtn
                 notesList={notesData}
