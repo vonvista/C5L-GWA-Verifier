@@ -14,6 +14,7 @@ import CheckList from './tabbed-components/checklist/ChecklistTab';
 import Table from './grades-table/TableContents';
 import Refresh from '../../components/buttons/Refresh'
 import Swal from 'sweetalert2';
+import e from 'express';
 
 
 /* Parent component >> ./StudentRecord */
@@ -54,11 +55,22 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
     const handleValApply = () => {
         //console.log(ip)
 
+        newStatus = true
         sendVal = []
         for (let i = 0; i < validationsState.length; i++) {
             sendVal.push(validationsState[i].status)
+            newStatus = newStatus && validationsState[i].status
         }
 
+        //update selected student status
+        var updatedStudent = selectedStudent
+        if (newStatus){
+            updatedStudent.status = 'Checked'
+            
+        } else {
+            updatedStudent.status = 'Pending'
+        }
+        setSelectedStudent({...updatedStudent})
         //console.log(sendVal)
 
         const validations = {
@@ -87,10 +99,6 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                     title: 'Success',
                     text: 'Successfully updated validations!',
                 })
-                //update selected student status
-                var updatedStudent = selectedStudent
-                updatedStudent.status = body.suc
-                setSelectedStudent({...updatedStudent})
             }
         })
         .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
