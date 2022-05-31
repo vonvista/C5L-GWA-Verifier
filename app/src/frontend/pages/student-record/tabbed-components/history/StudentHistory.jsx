@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronUpIcon } from '@heroicons/react/solid';
+import { ChevronUpIcon, PhotographIcon } from '@heroicons/react/solid';
 import 'tailwindcss/tailwind.css';
 import Swal from 'sweetalert2';
 
@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
     user     ---  user name who made changes in the record
     time     ---  time modified
     details  ---  additional information about the modification done
+    hasImage ---  display view image button based on hasImage
 */
 const RecordHistory = ({ main, user, time, details, id, hasImage }) => {
   const [isActive, setIsActive] = useState(false); // variable flag to expand and collapse the accordion used in the additional details about the history
@@ -98,17 +99,24 @@ const RecordHistory = ({ main, user, time, details, id, hasImage }) => {
       {/* Description about the changes */}
       {isActive && (
         <div>
-          <ul className="ml-14 mb-5 list-disc">
+          <ul className="ml-14 mb-3 list-disc">
             <li className="font-inter font-medium">{details}</li>
           </ul>
-        </div>
-      )}
 
-      {/* Create clickable text 'View image' with underline */}
-      {hasImage && (
-      <div className="font-inter mt-2 mb-3 mr-3.8 italic font-medium px-6 underline text-green-900" onClick={handleImage}>
-        View Image
-      </div>
+          {hasImage && ( // create clickable 'view image' button
+            <button
+              onClick={handleImage}
+              className="font-poppins font-medium text-sm inline-block ml-5 px-2 py-1 bg-sr-dark-gray rounded-lg align-middle text-gray-700
+                        hover:bg-highlight hover:text-secondary-red
+                        transition ease-in-out duration-300 hover:transition hover:ease-in-out hover:duration-300" 
+            >
+              <PhotographIcon className="w-[1.25vw] h-[1.25vw] inline"/> 
+              <span className="inline align-middle ml-1">
+                View
+              </span>
+            </button>
+          )}
+        </div>
       )}
 
       {/* User who applied the changes */}
