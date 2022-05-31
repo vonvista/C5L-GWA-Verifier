@@ -788,7 +788,7 @@ exports.noteUpdate = function(req,res,next){
 
 // DELETE NOTE BY ID
 exports.noteDeleteOne = function(req,res,next){
-  Note.remove({Student:mongoose.Types.ObjectId(req.body.Student), Semyear:req.body.Semyear}, {justOne:true}, function(err,result){
+  Note.deleteOne({Student:mongoose.Types.ObjectId(req.body.Student), Semyear:req.body.Semyear}, {justOne:true}, function(err,result){
     if (!err) res.send(result);
   });
 }
