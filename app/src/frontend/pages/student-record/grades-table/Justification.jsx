@@ -138,7 +138,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                     <span className="self-start">Justification</span>
                                     {/* Close button */}
                                     <XIcon
-                                        className="w-5 cursor-pointer ml-auto mr-0 transition-all ease-out delay-200 hover:text-gray-500 hover:transition-all hover:ease-in hover:delay-200"
+                                        className="w-5 cursor-pointer ml-auto mr-0 transition-all ease-out duration-200 hover:text-gray-500 hover:transition-all hover:ease-in hover:duration-200"
                                         onClick={resetModalValues}
                                     />
                                 </Dialog.Title>
@@ -220,7 +220,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                 <button
                                     type="submit"
                                     className="rounded-lg mt-3 w-1/5 inline-flex justify-center border border-transparent bg-button-green px-3 py-1.5 text-sm lg:text-base font-poppins font-medium text-white
-                                        transition-all ease-out delay-200 hover:transition-all hover:ease-in hover:bg-button-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
+                                        transition-all ease-out duration-200 hover:transition-all hover:ease-in hover:bg-button-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
                                     onClick={saveChanges}
                                     disabled={!isValid}
                                 >
