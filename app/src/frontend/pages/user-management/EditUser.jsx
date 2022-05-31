@@ -73,8 +73,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
       middleName === '' ||
       lastName === '' ||
       un === '' ||
-      position === '' ||
-      pw === ''
+      position === ''
     ) {
       Swal.fire({
         icon: 'error',
@@ -370,7 +369,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                     </div>
 
                                     <h4 className="mt-1 mb-2 w-full text-center text-white">
-                                      Password
+                                      Password (only put data if you want to change password of user)
                                     </h4>
                                 </div>
                             </div>
@@ -382,7 +381,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                     className={modalBtnSave}
                                     type="button"
                                     disabled={
-                                        !( pw != '' &&
+                                        !( pw != '' ||
                                             (firstName != firstNameUnedited ||
                                             middleName != middleNameUnedited ||
                                             lastName != lastNameUnedited ||
