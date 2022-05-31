@@ -43,7 +43,20 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
 	}
 
     // Handler for deleting notes
-    const handleDeleteNote = (values) => {
+    const handleDeleteNote = async (values) => {
+
+        //add confirm dialog
+        var confirm = await Swal.fire({
+            title: 'Confirm note delete',
+            text: "Are you sure you want to delete this note?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes'
+        })
+        
+        if(confirm.isConfirmed === false){
+            return
+        }
 
         // get array index of object that will be deleted
         const targetIndex = notesData.findIndex(obj => obj.sem == values.sem)
@@ -66,7 +79,14 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
             body: JSON.stringify(deleteNote)
         })
             .then(response => response.json())
-            .then(body => console.log(body))
+            .then(body => {
+                Swal.fire({
+                    title: 'Note Deleted',
+                    text: 'Note has been deleted',
+                    icon: 'success',
+                })
+            
+            })
             .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
                 Swal.fire({
                     icon: 'error',

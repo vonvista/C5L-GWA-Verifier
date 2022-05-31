@@ -370,40 +370,47 @@ const UserDashboard = () => {
       return
     }
 
-    const { value: password } = await Swal.fire({
-      title: 'Enter your password',
-      input: 'password',
-      inputLabel: 'Password',
-      inputPlaceholder: 'Enter your password',
-    })
+    var passwordVerify = false
 
-    if (!password) {
-      return
-    }
-
-    const credentials = {
-      Username: localStorage.getItem("Username"),
-      Password: password
-    }
-    var passwordVerify = await fetch(`http://${ip}:3001/user/login`,{
-      method: "POST",
-      headers: { "Content-Type":"application/json" },
-      body: JSON.stringify(credentials)
+    while(passwordVerify === false){
+      const { value: password } = await Swal.fire({
+        title: 'Enter your password',
+        input: 'password',
+        inputLabel: 'Password',
+        inputPlaceholder: 'Enter your password',
+        showCancelButton: true,
       })
-    .then(response => response.json())
-    .then(body => {
+      console.log(password);
+      //if password is undefined, cancel bulk delete
+      if(!password){
+        return
+      }
+
+      const credentials = {
+        Username: localStorage.getItem("Username"),
+        Password: password
+      }
+      passwordVerify = await fetch(`http://${ip}:3001/user/login`,{
+        method: "POST",
+        headers: { "Content-Type":"application/json" },
+        body: JSON.stringify(credentials)
+        })
+      .then(response => response.json())
+      .then(body => {
         if(body.err){ //if error response returned from DB
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: body.err,
-          })
           return false
         }
         return true
+        }
+      )
+      if(!passwordVerify){
+        await Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Incorrect password',
+        })
       }
-    )
-
+    }
     if(!passwordVerify){
       return
     }
