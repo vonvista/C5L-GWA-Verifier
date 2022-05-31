@@ -220,6 +220,7 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
             <Justification
                 modalState={justModal}
                 modalHandler={closeJustModal}
+                handleDiscard = {discardJustModal}
                 parentSubmitHandler={updateStudent}
                 handleHistory={handleHistory}
                 histTitle={histTitle}

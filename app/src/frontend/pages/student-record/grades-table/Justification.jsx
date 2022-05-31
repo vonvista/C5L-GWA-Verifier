@@ -23,7 +23,7 @@ import { read } from 'node:fs';
     historyHandler      ---  handles the "submission" of the history and recording of changes
     histTitle           ---  holds title of history
 */
-const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHistory, histTitle }) => {
+const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHistory, handleDiscard, histTitle }) => {
 
     // Get username of user and student number of student record where the action has taken place
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
@@ -139,7 +139,7 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                     {/* Close button */}
                                     <XIcon
                                         className="w-5 cursor-pointer ml-auto mr-0 transition-all ease-out delay-200 hover:text-gray-500 hover:transition-all hover:ease-in hover:delay-200"
-                                        onClick={resetModalValues}
+                                        onClick={()=>{resetModalValues(),handleDiscard()}}
                                     />
                                 </Dialog.Title>
 
