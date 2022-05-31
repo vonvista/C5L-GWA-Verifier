@@ -557,7 +557,7 @@ exports.studentUpdateValidations = function(req, res, next) {
           "Status": 'Checked'
         }}, {new : true}, function(err,result){
           if(!err && Student){
-            res.send(result);
+            res.send({suc: "Checked"});
           }
         });
       }
@@ -566,7 +566,7 @@ exports.studentUpdateValidations = function(req, res, next) {
           "Status": 'Pending'
         }}, {new : true}, function(err,result){
           if(!err && Student){
-            res.send(result);
+            res.send({suc: "Pending"});
           }
         });
       }
