@@ -90,17 +90,6 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
   }
 
     // Function to close justification modal
-    const discardJustModal = () => {
-        setJustModal(false);
-
-        // drop changes in input fields
-        setStudNum(studentInfo.stud_no);
-        setDegree(studentInfo.degree_program.toUpperCase());
-        setStudFName(studentInfo.iname.fname.toUpperCase());
-        setStudMName(studentInfo.iname.mname.toUpperCase());
-        setStudLName(studentInfo.iname.lname.toUpperCase());
-    }
-
     const closeJustModal = () => {
         setJustModal(false);
     }
@@ -220,7 +209,6 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
             <Justification
                 modalState={justModal}
                 modalHandler={closeJustModal}
-                handleDiscard = {discardJustModal}
                 parentSubmitHandler={updateStudent}
                 handleHistory={handleHistory}
                 histTitle={histTitle}
