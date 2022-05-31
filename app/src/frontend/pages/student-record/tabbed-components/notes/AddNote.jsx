@@ -120,7 +120,7 @@ const AddNote = ({ modalState, modalHandler, unedited, notesList, handleAddNote,
                             leaveTo="opacity-0 scale-95"
                         >
                             {/* Add/Edit note modal window */}
-                            <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white px-6 text-left align-middle shadow-xl transition-all">
+                            <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white px-5 text-left align-middle shadow-xl transition-all">
                                 
                                 {/* Window Title */}
                                 <Dialog.Title
@@ -148,7 +148,7 @@ const AddNote = ({ modalState, modalHandler, unedited, notesList, handleAddNote,
 
                                 {/* Textarea */}
                                 <textarea
-                                    className='font-inter text-sm lg:text-lg border-none p-3 w-full h-[25vh]'
+                                    className='font-inter text-sm lg:text-lg border-none resize-none focus:outline-none p-3 w-full h-[25vh]'
                                     placeholder='Type to add a note...'
                                     value={noteText}
                                     onChange={handleChange}
@@ -157,8 +157,8 @@ const AddNote = ({ modalState, modalHandler, unedited, notesList, handleAddNote,
                                 {/* Save button */}
                                 <div>
                                     <button
-                                        className='rounded-lg float-left w-1/5 mt-3 mb-4 p-1 text-white bg-button-green hover:bg-button-green-hover
-                                                    transition ease-out hover:transition hover:ease-in hover:shadow-lg disabled:bg-sr-disabled-green'
+                                        className='font-poppins font-medium text-sm lg:text-base rounded-lg float-left w-1/5 mt-3 mb-4 px-3 py-1.5 text-white bg-button-green hover:bg-button-green-hover
+                                                    transition ease-out hover:transition hover:ease-in hover:shadow-lg disabled:bg-sr-disabled-green disabled:hover:transition-none disabled:hover:shadow-transparent'
                                         onClick={handleSaveClick}
                                         disabled={(unedited == noteText)}
                                     >
