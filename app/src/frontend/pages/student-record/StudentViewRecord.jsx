@@ -87,7 +87,10 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                     title: 'Success',
                     text: 'Successfully updated validations!',
                 })
-
+                //update selected student status
+                var updatedStudent = selectedStudent
+                updatedStudent.status = body.suc
+                setSelectedStudent({...updatedStudent})
             }
         })
         .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
@@ -98,6 +101,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
             })
             //console.log(err)
         })
+
         
     }
 
