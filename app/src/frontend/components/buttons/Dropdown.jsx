@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronUpIcon } from '@heroicons/react/solid';
 import { Transition } from '@headlessui/react';
+import { useForm, isRequired } from 'frontend/hooks/useForm';
 import 'tailwindcss/tailwind.css';
 
 /* Components */
@@ -9,6 +10,7 @@ import EditStudentDetails from 'frontend/pages/student-record/StudentDetailEditM
 import Justification from 'frontend/pages/student-record/grades-table/Justification';
 import studentDelete from 'backend/studentDelete';
 import exportStudentData from 'backend/exportStudentData';
+
 import Swal from 'sweetalert2';
 
 
@@ -33,18 +35,86 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
   const [justModal, setJustModal] = useState(false);
 
   // State handler for input fields
-  const [studNum, setStudNum] = useState('');
-  const [studFName, setStudFName] = useState('');
-  const [studMName, setStudMName] = useState('');
-  const [studLName, setStudLName] = useState('');
-  const [degree, setDegree] = useState('');
+//   const [studNum, setStudNum] = useState('');
+//   const [studFName, setStudFName] = useState('');
+//   const [studMName, setStudMName] = useState('');
+//   const [studLName, setStudLName] = useState('');
+//   const [degree, setDegree] = useState('');
 
-  // State handler for initial value of input fields
-  const [studNumUnedited, setStudNumUnedited] = useState('');
-  const [studFNameUnedited, setStudFNameUnedited] = useState('');
-  const [studMNameUnedited, setStudMNameUnedited] = useState('');
-  const [studLNameUnedited, setStudLNameUnedited] = useState('');
-  const [degreeUnedited, setDegreeUnedited] = useState('');
+    //function which updates Student input fields
+  const updateStudent = (values) => {
+    const credentials = {
+        StudentID: values.studNum,
+        FirstName: values.studFName.toUpperCase(),     //put first name variable
+        LastName: values.studLName.toUpperCase(),      //put last name variable
+        MiddleName: values.studMName.toUpperCase(),    //put middle name variable
+        Degree: values.degree.toUpperCase(),
+        _id: currStudentID
+    }
+
+    fetch(`http://${ip}:3001/student/update` ,{
+        method: "POST",
+        headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
+        body: JSON.stringify(credentials)
+    })
+    .then(response => response.json())
+    .then(body => {
+        console.log(body)
+    })
+    .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+        Swal.fire({
+            icon: 'error',
+            title: 'Server Error',
+            text: 'Check if the server is running or if database IP is correct',
+        })
+        console.log(err)
+    })
+
+    // // update new values for student details
+    // setStudNumUnedited(studNum);
+    // setStudFNameUnedited(studFName.toUpperCase());
+    // setStudMNameUnedited(studMName.toUpperCase());
+    // setStudLNameUnedited(studLName.toUpperCase());
+    // setDegreeUnedited(degree.toUpperCase());
+
+    // close modal windows
+    setJustModal(false);
+    setEditModal(false);
+
+    setSelectedStudent( (prevState)=>({...prevState, stud_no: values.studNum, degree_program: values.degree.toUpperCase(), Student: currStudentID, iname: {fname: values.studFName.toUpperCase(), mname: values.studMName.toUpperCase(), lname: values.studLName.toUpperCase()}}))
+    
+    // success message
+    Swal.fire({
+        title: 'Success',
+        text: 'Successfully edited student detail.',
+        icon: 'success',
+    })
+}
+
+    const initialState = {
+        studNum: studentInfo.stud_no,
+        studFName: studentInfo.iname.fname,
+        studMName: studentInfo.iname.mname,
+        studLName: studentInfo.iname.lname,
+        degree: studentInfo.degree_program
+    }
+    const validations = [
+        ({studNum}) => isRequired(studNum) || {studNum: 'Student Number is required'},
+        ({studFName}) => isRequired(studFName) || {studFName: 'First Name is required'},
+        ({studMName}) => isRequired(studMName) || {studMName: 'Middle Initial is required'},
+        ({studLName}) => isRequired(studLName) || {studLName: 'Last Name is required'},
+        ({degree}) => isRequired(degree) || {degree: 'Degree is required'},
+    ]
+
+    const {values, isValid, errors, touched, changeHandler, submitHandler, resetValues} = useForm(initialState, validations, updateStudent);
+
+
+//   // State handler for initial value of input fields
+//   const [studNumUnedited, setStudNumUnedited] = useState('');
+//   const [studFNameUnedited, setStudFNameUnedited] = useState('');
+//   const [studMNameUnedited, setStudMNameUnedited] = useState('');
+//   const [studLNameUnedited, setStudLNameUnedited] = useState('');
+//   const [degreeUnedited, setDegreeUnedited] = useState('');
 
   const [histTitle, setTitle] = useState(`Edited student detail information from Name: ${studentInfo.iname.lname}, ${studentInfo.iname.fname} ${studentInfo.iname.mname}., Student No.: ${studentInfo.stud_no}, and Degree: ${studentInfo.degree_program} to `);
   const [currStudentID, setcurrStudentID] = useState(localStorage.getItem('currStudentID'));
@@ -57,19 +127,19 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
 
   /*-------------------- Functions --------------------*/
   
-  // sets fields upon rendering
-  useEffect(() => {
-    setStudNum(studentInfo.stud_no)
-    setDegree(studentInfo.degree_program.toUpperCase())
-    setStudFName(studentInfo.iname.fname.toUpperCase())
-    setStudMName(studentInfo.iname.mname.toUpperCase())
-    setStudLName(studentInfo.iname.lname.toUpperCase())
-    setStudNumUnedited(studentInfo.stud_no)
-    setDegreeUnedited(studentInfo.degree_program.toUpperCase())
-    setStudFNameUnedited(studentInfo.iname.fname.toUpperCase())
-    setStudMNameUnedited(studentInfo.iname.mname.toUpperCase())
-    setStudLNameUnedited(studentInfo.iname.lname.toUpperCase())
-  }, [])
+//   // sets fields upon rendering
+//   useEffect(() => {
+//     setStudNum(studentInfo.stud_no)
+//     setDegree(studentInfo.degree_program.toUpperCase())
+//     setStudFName(studentInfo.iname.fname.toUpperCase())
+//     setStudMName(studentInfo.iname.mname.toUpperCase())
+//     setStudLName(studentInfo.iname.lname.toUpperCase())
+//     setStudNumUnedited(studentInfo.stud_no)
+//     setDegreeUnedited(studentInfo.degree_program.toUpperCase())
+//     setStudFNameUnedited(studentInfo.iname.fname.toUpperCase())
+//     setStudMNameUnedited(studentInfo.iname.mname.toUpperCase())
+//     setStudLNameUnedited(studentInfo.iname.lname.toUpperCase())
+//   }, [])
 
   // Function to open the edit student modal window
   const openModal = () => {
@@ -80,13 +150,13 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
   // Function to close the edit student modal window
   const closeEditStud = () => {
     setEditModal(false);
-
-    // drop changes in input fields
-    setStudNum(studentInfo.stud_no);
-    setDegree(studentInfo.degree_program.toUpperCase());
-    setStudFName(studentInfo.iname.fname.toUpperCase());
-    setStudMName(studentInfo.iname.mname.toUpperCase());
-    setStudLName(studentInfo.iname.lname.toUpperCase());
+    resetValues()
+    // // drop changes in input fields
+    // setStudNum(studentInfo.stud_no);
+    // setDegree(studentInfo.degree_program.toUpperCase());
+    // setStudFName(studentInfo.iname.fname.toUpperCase());
+    // setStudMName(studentInfo.iname.mname.toUpperCase());
+    // setStudLName(studentInfo.iname.lname.toUpperCase());
   }
 
     // Function to close justification modal
@@ -122,56 +192,6 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
         title: 'Save or cancel file export'
       })
   }
-
-  //function which updates Student input fields
-  const updateStudent = () => {
-    const credentials = {
-        StudentID: studNum,
-        FirstName: studFName.toUpperCase(),     //put first name variable
-        LastName: studLName.toUpperCase(),      //put last name variable
-        MiddleName: studMName.toUpperCase(),    //put middle name variable
-        Degree: degree.toUpperCase(),
-        _id: currStudentID
-    }
-
-    fetch(`http://${ip}:3001/student/update` ,{
-        method: "POST",
-        headers: { "Content-Type":"application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
-        body: JSON.stringify(credentials)
-    })
-    .then(response => response.json())
-    .then(body => {
-        console.log(body)
-    })
-    .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
-        Swal.fire({
-            icon: 'error',
-            title: 'Server Error',
-            text: 'Check if the server is running or if database IP is correct',
-        })
-        console.log(err)
-    })
-
-    // update new values for student details
-    setStudNumUnedited(studNum);
-    setStudFNameUnedited(studFName.toUpperCase());
-    setStudMNameUnedited(studMName.toUpperCase());
-    setStudLNameUnedited(studLName.toUpperCase());
-    setDegreeUnedited(degree.toUpperCase());
-
-    // close modal windows
-    setJustModal(false);
-    setEditModal(false);
-
-    setSelectedStudent( (prevState)=>({...prevState, stud_no: studNum, degree_program: degree.toUpperCase(), Student: currStudentID, iname: {fname: studFName.toUpperCase(), mname: studMName.toUpperCase(), lname: studLName.toUpperCase()}}))
-    
-    // success message
-    Swal.fire({
-        title: 'Success',
-        text: 'Successfully edited student detail.',
-        icon: 'success',
-    })
-}
 
   // Function for adding new history after adding new row
   function handleHistory(data){
@@ -220,32 +240,39 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
                     handleClose={closeEditStud}
                     editModalSave={editModalSave}
 
-                    studNum={studNum}
-                    studFName={studFName}
-                    studMName={studMName}
-                    studLName={studLName}
-                    degree={degree}
-                    setStudNum={setStudNum}
-                    setStudFName={setStudFName}
-                    setStudMName={setStudMName}
-                    setStudLName={setStudLName}
-                    setDegree={setDegree}
-                    setcurrStudentID={currStudentID}
-
-                    studNumUnedited={studNumUnedited}
-                    studFNameUnedited={studFNameUnedited}
-                    studMNameUnedited={studMNameUnedited}
-                    studLNameUnedited={studLNameUnedited}
-                    degreeUnedited={degreeUnedited}
-                    setStudNumUnedited={setStudNumUnedited}
-                    setStudFNameUnedited={setStudFNameUnedited}
-                    setStudMNameUnedited={setStudMNameUnedited}
-                    setStudLNameUnedited={setStudLNameUnedited}
-                    setDegreeUnedited={setDegreeUnedited}
-
+                    values ={values}
+                    isValid ={isValid}
+                    errors={errors}
+                    touched={touched}
+                    changeHandler={changeHandler}
+                    submitHandler={submitHandler}
+                    
                     setJustModal={setJustModal}
                     setTitle={setTitle}
                     studentInfo={studentInfo}
+
+                    // studNum={studNum}
+                    // studFName={studFName}
+                    // studMName={studMName}
+                    // studLName={studLName}
+                    // degree={degree}
+                    // setStudNum={setStudNum}
+                    // setStudFName={setStudFName}
+                    // setStudMName={setStudMName}
+                    // setStudLName={setStudLName}
+                    // setDegree={setDegree}
+                    // setcurrStudentID={currStudentID}
+
+                    // studNumUnedited={studNumUnedited}
+                    // studFNameUnedited={studFNameUnedited}
+                    // studMNameUnedited={studMNameUnedited}
+                    // studLNameUnedited={studLNameUnedited}
+                    // degreeUnedited={degreeUnedited}
+                    // setStudNumUnedited={setStudNumUnedited}
+                    // setStudFNameUnedited={setStudFNameUnedited}
+                    // setStudMNameUnedited={setStudMNameUnedited}
+                    // setStudLNameUnedited={setStudLNameUnedited}
+                    // setDegreeUnedited={setDegreeUnedited}
                 /> : <></>
             }
 
