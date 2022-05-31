@@ -1,6 +1,6 @@
+import { useState, useEffect } from 'react';
 import RecordHistory from './StudentHistory';
 import 'tailwindcss/tailwind.css';
-import { useState, useEffect } from 'react';
 
 
 /* Parent component >> frontend/pages/student-record/StudentViewRecord */
@@ -18,7 +18,7 @@ const StudentRecordHistory = ({ historyData, ...rest }) => {
 
   return (
     <>
-      <div className="min-w-[25vw] max-w-[25vw] p-5 max-h-[41rem] flex-col my-0 mx-auto relative overflow-auto">
+      <div className="min-w-[25vw] max-w-[25vw] p-[1vw] max-h-[61vh] flex-col my-0 mx-auto relative overflow-auto">
         
         {/* History Body; Last modified and descriptions */}
         <div className="flex-col h-full m-0 overflow-y-auto p-0 relative w-full">
@@ -31,11 +31,11 @@ const StudentRecordHistory = ({ historyData, ...rest }) => {
               (
                 { date, info, i } // shows the changes done; date: modification data; info: modification entries; i: index
               ) => (
-                <section key={i} className="mb-3">
+                <section key={i}>
 
                   {/* History per date */}
-                  <div className=" text-sm xl:text-base rounded-lg border border-solid border-t-zinc-200 border-b-zinc-200">
-                    <h2 className="font-inter pt-2 pb-2 pl-4 font-light">
+                  <div className=" rounded-lg border border-solid border-t-zinc-200 border-b-zinc-200">
+                    <h2 className="font-inter text-[1vw] py-[0.75vh] pl-[0.75vw] font-light">
                       Last Modified: {date}
                     </h2>
 

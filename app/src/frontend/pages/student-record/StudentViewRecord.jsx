@@ -1,7 +1,7 @@
+import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import { useState, useEffect, useRef, Fragment } from 'react';
 import { Tab, Transition, Disclosure } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/solid';
-import { useState, useEffect, useRef, Fragment } from 'react';
-import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import { toNamespacedPath } from 'node:path/win32';
 import 'tailwindcss/tailwind.css';
 
@@ -304,16 +304,16 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
 
     // Styling for student detail header
     const detailStyle = { 
-        title: "font-inter table-cell text-left text-sm 2xl:text-xl",
-        text: "font-inter table-cell text-left text-xl 2xl:text-2xl font-bold",
+        title: "font-inter table-cell text-left text-xs xl:text-sm 1.75xl:text-[1vw] 2xl:leading-6 3xl:leading-8 5xl:leading-10",
+        text: "font-inter font-bold table-cell text-left text-base xl:text-xl 1.75xl:text-[1.3vw] 3xl:leading-8 5xl:leading-10",
     }
 
     return(
         <main>
-            <div className='w-100% pt-14 lg:pt-16 xl:pt-20 flex-column box-border'>
+            <div className='w-100% pt-[9vh] flex-column box-border'>
 
                 {/* Student Details */}
-                <div className="w-full top-16 flex px-7 py-5 rounded-lg mx-auto bg-sr-dark-gray shadow-lg box-border">
+                <div className="w-full flex px-[1.5vw] py-[2vh] rounded-lg mx-auto bg-sr-dark-gray shadow-lg box-border">
 
                 <div className="table w-0 table-fixed">
                         <div className={`table-header-group`}>
@@ -346,7 +346,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
 
 
                 {/* Student Grades */}
-                <div className="w-full flex mx-auto my-5 gap-[1.5vw]">
+                <div className="w-full flex mx-auto my-[3vh] gap-[1.5vw]">
 
                     {/* Container for the whole accordion component */}
                     <div className="w-[60vw] flex-1 overflow-auto mx-auto bg-white">
@@ -365,7 +365,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                                 
                     {/* Tabbed information card */}
 
-                    <div className="flex-none max-w-[100%] h-[45rem] sticky top-[2.5rem] shadow-lg rounded-lg">
+                    <div className="flex-none max-w-[100%] h-[68vh] sticky top-[2.5rem] shadow-lg rounded-lg">
                         <Tab.Group
                             selectedIndex={tabId}
                             onChange={(id) => {
@@ -373,15 +373,15 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                             }}
                             manual
                         >
-                            <Tab.List className="flex rounded-t-md font-inter text-sm md:text-md lg:text-lg 2xl:text-lg">
+                            <Tab.List className="flex rounded-t-md font-inter text-sm xl:text-base 1.75xl:text-lg 5xl:text-[1.05vw]">
                                 {Object.keys(tabContents).map((tab, idx) => (
                                         <Tab key={idx} as={Fragment}>
                                             {({selected}) => (
                                                 <button
                                                     className={
                                                         selected 
-                                                            ? 'transition-all ease-in duration-100 text-button-green pb-2 pt-4 w-1/3 border-b border-button-green focus:outline-none'  
-                                                            : 'transition-all ease-in duration-100 text-sr-tab-inactive pb-2 pt-4 w-1/3 border-b border-sr-divider-light focus:outline-none hover:text-button-green-hover hover:transition hover:ease-in hover:duration-300'
+                                                            ? 'transition-all ease-in duration-100 text-button-green pb-2 pt-4 5xl:py-[0.75vw] w-1/3 border-b border-button-green focus:outline-none'  
+                                                            : 'transition-all ease-in duration-100 text-sr-tab-inactive pb-2 pt-4 5xl:py-[0.75vw] w-1/3 border-b border-sr-divider-light focus:outline-none hover:text-button-green-hover hover:transition hover:ease-in hover:duration-300'
                                                     }
                                                 >
                                                     {tab}
@@ -395,7 +395,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                                 <AnimatePresence exitBeforeEnter>
                                     {Object.values(tabContents).map((component) =>( // ref used https://github.com/tailwindlabs/headlessui/discussions/1237
                                         <Tab.Panel 
-                                            className="h-[42rem] col-span-1 block"
+                                            className="h-[63.5vh] col-span-1 block"
                                             key={tabId}
                                             as={motion.div}
                                             initial="show"
