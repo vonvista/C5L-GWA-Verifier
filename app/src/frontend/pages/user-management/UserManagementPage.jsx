@@ -144,6 +144,7 @@ const UserManagementPage = () => {
         "Position": user.Position,
         "Role": user.Role,   // <-  ampotek 
         "_id": user._id,
+        "Password": user.Password,
       }
       setRows([...temp]);
       setShowEditModal(false);

@@ -73,8 +73,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
       middleName === '' ||
       lastName === '' ||
       un === '' ||
-      position === '' ||
-      pw === ''
+      position === ''
     ) {
       Swal.fire({
         icon: 'error',
@@ -206,10 +205,11 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                         className="ml-3 text-2xl leading-6 text-gray-900 flex"
                       >
                         {/* Close button */}
-                        <XIcon
-                          className="w-[1.5vw] cursor-pointer ml-auto mr-[0.75vw] transition-all ease-out text-sidebar-text hover:text-gray-400 hover:transition-all hover:ease-in"
+
+                        {/* <XIcon
+                          className="h-6 w-6 cursor-pointer ml-auto mr-0 transition-all ease-out text-sidebar-text hover:text-gray-400 hover:transition-all hover:ease-in"
                           onClick={handleClose}
-                        />
+                        /> */}
                       </Dialog.Title>
                     </div>
 
@@ -370,7 +370,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                     </div>
 
                                     <h4 className="mt-1 mb-2 w-full text-center text-white">
-                                      Password
+                                      Password (only fill up if you want to change password of user)
                                     </h4>
                                 </div>
                             </div>
@@ -382,7 +382,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                     className={modalBtnSave}
                                     type="button"
                                     disabled={
-                                        !( pw != '' &&
+                                        !( pw != '' ||
                                             (firstName != firstNameUnedited ||
                                             middleName != middleNameUnedited ||
                                             lastName != lastNameUnedited ||
