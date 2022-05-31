@@ -1,7 +1,8 @@
-import { useState } from 'react';
 import { ChevronUpIcon, PhotographIcon } from '@heroicons/react/solid';
-import 'tailwindcss/tailwind.css';
+import { useState } from 'react';
 import Swal from 'sweetalert2';
+import 'tailwindcss/tailwind.css';
+
 
 /* Parent component >> ./StudentRecordHistory */
 
@@ -76,14 +77,14 @@ const RecordHistory = ({ main, user, time, details, id, hasImage }) => {
 
   return (
     <div className="border-t border-b-zinc-300">
-      <div className="flex justify-between mt-2">
+      <div className="flex justify-between mt-[1vh]">
           
         {/* Main description */}
-        <p className="font-inter mb-3 m-1 font-semibold px-5">
+        <p className="font-inter p-[0.25vw] text-[0.95vw] mb-[1vh] font-semibold px-5 break-words">
           {main}
         </p>
         <button
-          className="outline-none relative ml-auto mr-5 grow-0"
+          className="outline-none relative ml-auto mr-[0.75vw] grow-0"
           type="button"
           onClick={() => setIsActive(!isActive)}
         >
@@ -99,15 +100,15 @@ const RecordHistory = ({ main, user, time, details, id, hasImage }) => {
       {/* Description about the changes */}
       {isActive && (
         <div>
-          <ul className="ml-14 mb-3 list-disc">
-            <li className="font-inter font-medium">{details}</li>
+          <ul className="ml-[3vw] mt-[0.5vh] mb-[1.5vh] pr-[2vw] text-[0.95vw] list-disc">
+            <li className="font-inter font-medium break-words">{details}</li>
           </ul>
 
           {hasImage && ( // create clickable 'view image' button
             <button
               onClick={handleImage}
-              className="font-poppins font-medium text-sm inline-block ml-5 px-2 py-1 bg-sr-dark-gray rounded-lg align-middle text-gray-700
-                        hover:bg-highlight hover:text-secondary-red
+              className="font-poppins font-medium text-[0.9vw] inline-block ml-5 px-2 py-1 rounded-lg align-middle 
+                        hover:bg-highlight hover:text-secondary-red bg-sr-dark-gray text-gray-700
                         transition ease-in-out duration-300 hover:transition hover:ease-in-out hover:duration-300" 
             >
               <PhotographIcon className="w-[1.25vw] h-[1.25vw] inline"/> 
@@ -120,7 +121,7 @@ const RecordHistory = ({ main, user, time, details, id, hasImage }) => {
       )}
 
       {/* User who applied the changes */}
-      <div className="font-inter mt-2 mb-3 mr-3.8 italic font-medium px-6">
+      <div className="mb-[1vh] px-5 text-[0.95vw] italic font-inter font-medium">
         Modified by {user} at {time}
       </div>
     </div>

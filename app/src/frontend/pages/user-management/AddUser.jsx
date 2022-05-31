@@ -163,7 +163,7 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                       >
                         {/* Close button */}
                         <XIcon
-                          className="h-6 w-6 cursor-pointer ml-auto mr-0 transition-all ease-out text-sidebar-text hover:text-gray-400 hover:transition-all hover:ease-in"
+                          className="w-[1.5vw] cursor-pointer ml-auto mr-[0.75vw] transition-all ease-out text-sidebar-text hover:text-gray-400 hover:transition-all hover:ease-in"
                           onClick={handleClose}
                         />
                       </Dialog.Title>

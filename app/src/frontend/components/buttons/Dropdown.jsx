@@ -249,10 +249,11 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
                 /> : <></>
             }
 
-            <div className="w-2/3 font-poppins relative ml-auto grow-0 text-sm 2xl:text-base">
+            <div className="w-2/3 font-poppins relative ml-auto grow-0 text-[0.9vw]">
             
                 {/* Active word and dropdown icon */}
-                <div className="grid-cols-2 divide-x w-full py-1.5 text-center text-sidebar-text bg-button-green hover:bg-button-green-hover flex items-center justify-items-center rounded-lg border border-slate-300 transition-all ease-in-out duration-300 hover:transition-all hover:ease-in-out hover:duration-300"
+                <div className="grid-cols-2 divide-x w-[9.5vw] py-[0.3vh] 1.75xl:py-[0.5vh] 5xl:py-[0.75vh] text-center text-sidebar-text bg-button-green hover:bg-button-green-hover flex items-center justify-items-center rounded-lg border
+                                transition-all ease-in-out duration-300 hover:transition-all hover:ease-in-out hover:duration-300"
                     onClick={() => {
                         setIsActive(!isActive);
                     }}
@@ -289,13 +290,13 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
                     leaveTo="transform scale-95 opacity-0"
                 >
                     <div
-                        className="origin-top-right z-10 absolute w-full mt-0.5 rounded-md shadow-lg text-sidebar-text"
+                        className="origin-top-right z-10 absolute w-[9.5vw] mt-[0.25vh] rounded-lg shadow-lg text-sidebar-text bg-button-green"
                         tabIndex="-1"
                     >
                         <div>
                             {/* Export button */}
                             <button
-                                className="rounded-t-lg block py-2 w-full bg-button-green transition ease-out hover:transition hover:ease-in  hover:bg-button-green-hover hover:rounded-t-lg"
+                                className="rounded-t-lg py-[0.75vh] 5xl:py-[0.75vh] w-full bg-button-green transition ease-out hover:transition hover:ease-in  hover:bg-button-green-hover hover:rounded-t-lg"
                                 type="button"
                                 onClick={() => {
                                     setIsActive(false);
@@ -307,7 +308,7 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
                             
                             {/* Edit button */}
                             <button
-                                className="bg-button-green transition ease-out hover:transition hover:ease-in hover:bg-button-green-hover block px-4 rounded-b-lg py-2  z-1 w-full"
+                                className="w-full py-[0.75vh] 5xl:py-[0.75vh] bg-button-green transition ease-out hover:transition hover:ease-in hover:bg-button-green-hover rounded-b-lg"
                                 type="button"
                                 onClick={openModal}
                             >

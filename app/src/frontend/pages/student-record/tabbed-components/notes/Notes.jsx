@@ -100,19 +100,19 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
                 </h2>
                 : notesData.map( (data, idx) => {
                     return (
-                        <div className="grid border rounded-lg p-5 mb-2" key={idx}>
+                        <div className="grid border rounded-lg px-[1.75vw] py-[2vh] mb-2" key={idx}>
                             {/* Note details */}
-                            <h1 className="text-lg 2xl:text-[19px] font-inter font-semibold">
+                            <h1 className="text-sm xl:text-base 1.75xl:text-lg 3xl:text-xl 4xl:text-[1.05vw] font-inter font-semibold">
                                 {data.Semyear}
                             </h1>
-                            <p className="font-inter text-base 2xl:text-[17px] mt-3 max-w-sm break-words">
+                            <p className="font-inter text-xs xl:text-sm 1.75xl:text-base 3xl:text-lg 4xl:text-[1vw] mt-3 max-w-sm 5xl:pt-3 break-words">
                                 {data.Details}
                             </p>
 
                             {/* Delete button */}
-                            <button className='w-max rounded-lg mt-4 p-2 items-center flex content-center hover:bg-gray-300' onClick={() => handleDeleteNote(data)}>
-                                <TrashIcon className="w-5"/>
-                                <span className="text-base 2xl:text-[17px] font-inter ml-2">Delete</span>
+                            <button className='w-max rounded-lg mt-[1vw] py-[0.5vw] px-[0.5vw] -ml-[0.7vw] items-center flex content-center hover:bg-gray-300' onClick={() => handleDeleteNote(data)}>
+                                <TrashIcon className="w-[1.25vw]"/>
+                                <span className="text-xs xl:text-sm 1.75xl:text-base 3xl:text-lg 4xl:text-[1vw] font-inter ml-2">Delete</span>
                             </button>
                         </div>
                     )
