@@ -128,24 +128,24 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                             leaveTo="opacity-0 scale-95"
                         >   
                             {/* Justification modal window */}
-                            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white py-6 px-7 text-left align-middle shadow-xl transition-all">
+                            <Dialog.Panel className="w-full max-w-md 4xl:max-w-xl transform overflow-hidden rounded-2xl 4xl:round-3xl 4xl:py-8 4xl:px-9 bg-white py-6 px-7 text-left align-middle shadow-xl transition-all">
                                 
                                 {/* Window Title */}
                                 <Dialog.Title
                                     as="h3"
-                                    className="font-montserrat mt-[0.5vh] mb-2 text-2xl font-black leading-6 text-gray-900 flex"
+                                    className="font-montserrat mt-[0.5vh] mb-2 text-2xl 4xl:text-4xl font-black leading-6 text-gray-900 flex"
                                 >
                                     <span className="self-start">Justification</span>
                                     {/* Close button */}
                                     <XIcon
-                                        className="w-5 cursor-pointer ml-auto mr-0 transition-all ease-out delay-200 hover:text-gray-500 hover:transition-all hover:ease-in hover:delay-200"
+                                        className="w-5 4xl:w-7 cursor-pointer ml-auto mr-0 transition-all ease-out duration-200 hover:text-gray-500 hover:transition-all hover:ease-in hover:duration-200"
                                         onClick={resetModalValues}
                                     />
                                 </Dialog.Title>
 
                                 {/* Window Body */}
                                 <textarea
-                                    className="font-inter mt-4 mb-3 mx-auto text-sm md:text-md lg:text-lg w-full h-[13vh] block resize-none focus:outline-none"
+                                    className="font-inter mt-4 mb-3 mx-auto text-sm md:text-md lg:text-lg 4xl:text-2xl w-full h-[13vh] block resize-none focus:outline-none"
                                     name="desc"
                                     placeholder="Enter description here."
                                     value={values.desc}
@@ -160,13 +160,13 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                 
                                 >
                                     <div className="flex w-full block gap-1">
-                                        <span className="flex-none font-poppins text-sm font-medium py-1 px-2 block bg-sr-dark-gray rounded-lg text-sm text-gray-700 hover:bg-yellow-100 hover:text-secondary-red transition ease-in-out duration-300 hover:transition hover:ease-in hover:duration-300">
+                                        <span className="flex-none font-poppins text-sm 4xl:text-lg font-medium py-1 px-2 block bg-sr-dark-gray rounded-lg text-sm text-gray-700 hover:bg-yellow-100 hover:text-secondary-red transition ease-in-out duration-300 hover:transition hover:ease-in hover:duration-300">
                                             Upload Image
                                         </span>
 
                                         <span // section that displays file name
                                             id="selectedFileName"
-                                            className="font-inter inline truncate text-xs self-center"
+                                            className="font-inter inline truncate text-xs 4xl:text-lg self-center"
                                         >
                                             {imgName}
                                         </span>
@@ -219,8 +219,8 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                 {/* Save Button */}
                                 <button
                                     type="submit"
-                                    className="rounded-lg mt-3 w-1/5 inline-flex justify-center border border-transparent bg-button-green px-3 py-1.5 text-sm lg:text-base font-poppins font-medium text-white
-                                        transition-all ease-out delay-200 hover:transition-all hover:ease-in hover:bg-button-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
+                                    className="rounded-lg mt-3 w-1/5 inline-flex justify-center border border-transparent bg-button-green px-3 py-1.5 text-sm 4xl:text-xl lg:text-base font-poppins font-medium text-white
+                                        transition-all ease-out duration-200 hover:transition-all hover:ease-in hover:bg-button-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
                                     onClick={saveChanges}
                                     disabled={!isValid}
                                 >
