@@ -44,7 +44,7 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
 
     // Change courseName handler
     const handleCourseChange = (event) => {
-        courseNameHandler(event.target.value);
+        courseNameHandler(event.target.value.toUpperCase());
     }
 
     // Change units handler
@@ -54,7 +54,7 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
 
     // Change grade handler
     const handleGradeChange = (event) => {
-        gradeHandler(event.target.value);
+        gradeHandler(event.target.value.toUpperCase());
     }
 
     // Used for disabling up-down arrows in input number textfield
@@ -134,6 +134,7 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
                                                         type="text"
                                                         name="courseName"
                                                         placeholder='Enter course name'
+                                                        value={courseNameState.toUpperCase()}
                                                         onChange={handleCourseChange}
                                                     />
                                                     <div className='w-full text-white text-center'>Course Name</div>
@@ -145,9 +146,11 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
                                                 <section className={sectionGrade}>
                                                     <input 
                                                         className={inputStyle}
-                                                        type="number"
+                                                        type="text"
+                                                        maxLength={3}
                                                         name="grade"
                                                         placeholder='0'
+                                                        value={gradeState.toUpperCase()}
                                                         onChange={handleGradeChange}
                                                     />
                                                     <div className='w-full text-white text-center'>Grade</div>
