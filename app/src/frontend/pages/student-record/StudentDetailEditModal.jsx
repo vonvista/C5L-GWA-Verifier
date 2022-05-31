@@ -17,30 +17,15 @@ import 'tailwindcss/tailwind.css';
     editModalSave       ---     closes edit student detail modal and opens justification modal
     setTitle            ---     used for updating history title for student detail edit
     
-    studNum             ---     holds the value of student number field
-    studFName           ---     holds the value of student first name field
-    studMName           ---     holds the value of student middle name field
-    studLName           ---     holds the value of student last name field
-    degree              ---     holds the value of student degree field
-    setStudNum          ---     change handler for studNum state
-    setStudFName        ---     change handler for studFName state
-    setStudMName        ---     change handler for studMName state
-    setStudLName        ---     change handler for studLName state
-    setDegree           ---     change handler for degree state
-    
-    studNumUnedited     ---     holds the value of the unedited student number field for save button access
-    studFNameUnedited   ---     holds the value of the unedited student first name field for save button access
-    studMNameUnedited   ---     holds the value of the unedited student middle name field for save button access
-    studLNameUnedited   ---     holds the value of the unedited student last name field for save button access
-    degreeUnedited      ---     holds the value of the unedited student degree field for save button access
-    setStudNumUnedited  ---     change handler for studNumUnedited state
-    setStudFNameUnedited---     change handler for studFNameUnedited state
-    setStudMNameUnedited---     change handler for studMNameUnedited state
-    setStudLNameUnedited---     change handler for studLNameUnedited state
-    setDegreeUnedited   ---     change handler for degreeUnedited state
-    
+    studentInfo         ---     values that will only updated when values in the row are saved
+    values              ---     values that are being edited in real time
+    isValid             ---     checks if given data is valid or not
+    errors              ---     holds errors when invalid inputs are given
+    touched             ---     holds object that tells whether an input has been touched
+    changeHandler       ---     holds the changeHandler for the inputs
+    submitHandler       ---     change handler for studFName state  
 */
-const EditStudent = ({ modalState, setTitle, handleClose,editModalSave,studentInfo,setJustModal,values, isValid, errors, touched, changeHandler, submitHandler}) => {
+const EditStudent = ({ modalState, handleClose, setJustModal, editModalSave, setTitle, studentInfo, values, isValid, errors, touched, changeHandler, submitHandler}) => {
 
     
     /*-------------------- Styling --------------------*/
@@ -134,84 +119,57 @@ const EditStudent = ({ modalState, setTitle, handleClose,editModalSave,studentIn
                                                     {/* First Name */}
                                                     <div className={inputContainer}>
                                                         <section className={sectionFLName}>
-                                                            {/* <input
-                                                                className={inputStyle}
-                                                                type="text"
-                                                                name="studFName"
-                                                                placeholder='First Name'
-                                                                value={values.studFName}
-                                                                onChange={changeHandler}
-                                                            /> */}
                                                             <Input
-                                                                labelStyle="w-full text-white text-center"                                 // styling for label
+                                                                labelStyle="w-full text-white text-center"      // styling for label
                                                                 labelVal="First Name"                           // label text
-                                                                inputStyle={inputStyle}                  // styling for input
-                                                                name="studFName"                                   // name of label-input components
-                                                                inputType="text"                                    // type of input password, email, text, etc.
-                                                                inputPlaceholder="First Name"           // placeholder text for input
-                                                                value={values.studFName.toUpperCase()}                      // value of the input
-                                                                changeHandler={changeHandler}                       // change handling
+                                                                inputStyle={inputStyle}                         // styling for input
+                                                                name="studFName"                                // name of label-input components
+                                                                inputType="text"                                // type of input password, email, text, etc.
+                                                                inputPlaceholder="First Name"                   // placeholder text for input
+                                                                value={values.studFName.toUpperCase()}          // value of the input
+                                                                changeHandler={changeHandler}                   // change handling
                                                             />
                                                             {touched.studFName && errors.studFName && 
                                                                 <p className={`text-left ${errorStyle}`}>{errors.studFName}</p>    // error message
                                                             }
-                                                            {/* <div className='w-full text-white text-center'>First Name</div> */}
                                                         </section>
                                                     </div>
 
                                                     {/* Middle Initial */}
                                                     <div className={inputContainer}>
                                                         <section className={sectionMI}>
-                                                            {/* <input
-                                                                className={inputStyle}
-                                                                type="text"
-                                                                name="studMName"
-                                                                placeholder='M.I.'
-                                                                value={values.studMName}
-                                                                onChange={changeHandler}
-                                                            /> */}
                                                             <Input
-                                                                labelStyle="w-full text-white text-center"                                 // styling for label
-                                                                labelVal="M.I."                           // label text
-                                                                inputStyle={inputStyle}                  // styling for input
-                                                                name="studMName"                                   // name of label-input components
-                                                                inputType="text"                                    // type of input password, email, text, etc.
-                                                                inputPlaceholder="-"           // placeholder text for input
-                                                                value={values.studMName.toUpperCase()}                      // value of the input
-                                                                changeHandler={changeHandler}                       // change handling
+                                                                labelStyle="w-full text-white text-center"  // styling for label
+                                                                labelVal="M.I."                             // label text
+                                                                inputStyle={inputStyle}                     // styling for input
+                                                                name="studMName"                            // name of label-input components
+                                                                inputType="text"                            // type of input password, email, text, etc.
+                                                                inputPlaceholder="-"                        // placeholder text for input
+                                                                value={values.studMName.toUpperCase()}      // value of the input
+                                                                changeHandler={changeHandler}               // change handling
                                                             />
                                                             {touched.studMName && errors.studMName && 
                                                                 <p className={`text-left ${errorStyle}`}>{errors.studMName}</p>    // error message
                                                             }
-                                                            {/* <div className='w-full text-white text-center'>Middle Initial</div> */}
                                                         </section>
                                                     </div>
 
                                                     {/* Last Name */}
                                                     <div className={inputContainer}>
                                                         <section className={sectionFLName}>
-                                                            {/* <input
-                                                                className={inputStyle}
-                                                                type="text"
-                                                                name="studLName"
-                                                                placeholder='Surname'
-                                                                value={values.studLName}
-                                                                onChange={changeHandler}
-                                                            /> */}
                                                             <Input
-                                                                labelStyle="w-full text-white text-center"                                 // styling for label
+                                                                labelStyle="w-full text-white text-center"     // styling for label
                                                                 labelVal="Last Name"                           // label text
-                                                                inputStyle={inputStyle}                  // styling for input
-                                                                name="studLName"                                   // names of label-input components
-                                                                inputType="text"                                    // type of input password, email, text, etc.
-                                                                inputPlaceholder="Last Name"           // placeholder text for input
-                                                                value={values.studLName.toUpperCase()}                      // value of the input
-                                                                changeHandler={changeHandler}                       // change handling
+                                                                inputStyle={inputStyle}                        // styling for input
+                                                                name="studLName"                               // names of label-input components
+                                                                inputType="text"                               // type of input password, email, text, etc.
+                                                                inputPlaceholder="Last Name"                   // placeholder text for input
+                                                                value={values.studLName.toUpperCase()}         // value of the input
+                                                                changeHandler={changeHandler}                  // change handling
                                                             />
                                                             {touched.studLName && errors.studLName && 
                                                                 <p className={`text-left ${errorStyle}`}>{errors.studLName}</p>    // error message
                                                             }
-                                                            {/* <div className='w-full text-white text-center'>Surname</div> */}
                                                         </section>
                                                     </div> 
                                                 </div>
@@ -221,57 +179,38 @@ const EditStudent = ({ modalState, setTitle, handleClose,editModalSave,studentIn
                                                     {/* Student Number */}
                                                     <div className={inputContainer}>
                                                         <section className={sectionInputField}>
-                                                            {/* <input
-                                                                className={inputStyle}
-                                                                type="text"
-                                                                name="studNum"
-                                                                placeholder='XXXX-XXXX'
-                                                                maxLength={10}
-                                                                value={values.studNum}
-                                                                onChange={changeHandler}
-                                                            /> */}
                                                             <Input
-                                                                labelStyle="w-full text-white text-center"                                 // styling for label
+                                                                labelStyle="w-full text-white text-center"          // styling for label
                                                                 labelVal="Student Number"                           // label text
-                                                                inputStyle={inputStyle}                  // styling for input
-                                                                name="studNum"                                   // name of label-input components
+                                                                inputStyle={inputStyle}                             // styling for input
+                                                                name="studNum"                                      // name of label-input components
                                                                 inputType="text"                                    // type of input password, email, text, etc.
-                                                                inputPlaceholder="XXXX-XXXXX"           // placeholder text for input
-                                                                value={values.studNum}                      // value of the input
+                                                                inputPlaceholder="XXXX-XXXXX"                       // placeholder text for input
+                                                                value={values.studNum}                              // value of the input
                                                                 changeHandler={changeHandler}                       // change handling
                                                             />
                                                             {touched.studNum && errors.studNum && 
                                                                 <p className={`text-left ${errorStyle}`}>{errors.studNum}</p>    // error message
                                                             }
-                                                            {/* <div className='w-full text-white text-center'>Student Number</div> */}
                                                         </section>
                                                     </div>
 
                                                     {/* Degree Program */}
                                                     <div className={inputContainer}>
                                                         <section className={sectionInputField}>
-                                                            {/* <input
-                                                                className={inputStyle}
-                                                                type="text"
-                                                                name="degree"
-                                                                placeholder='Degree Program'
-                                                                value={values.degree}
-                                                                onChange={changeHandler}
-                                                            /> */}
                                                             <Input
-                                                                labelStyle="w-full text-white text-center"                                 // styling for label
+                                                                labelStyle="w-full text-white text-center"          // styling for label
                                                                 labelVal="Degree Program"                           // label text
-                                                                inputStyle={inputStyle}                  // styling for input
-                                                                name="degree"                                   // name of label-input components
+                                                                inputStyle={inputStyle}                             // styling for input
+                                                                name="degree"                                       // name of label-input components
                                                                 inputType="text"                                    // type of input password, email, text, etc.
-                                                                inputPlaceholder="Degree Program"           // placeholder text for input
-                                                                value={values.degree}                      // value of the input
+                                                                inputPlaceholder="Degree Program"                   // placeholder text for input
+                                                                value={values.degree}                               // value of the input
                                                                 changeHandler={changeHandler}                       // change handling
                                                             />
                                                             {touched.degree && errors.degree && 
                                                                 <p className={`text-left ${errorStyle}`}>{errors.degree}</p>    // error message
                                                             }
-                                                            {/* <div className='w-full text-white text-center'>Degree Program</div> */}
                                                         </section>
                                                     </div>
                                                 </div> 
@@ -280,17 +219,6 @@ const EditStudent = ({ modalState, setTitle, handleClose,editModalSave,studentIn
                                             {/* Save button */}
                                             <div className={modalFooter}>
                                                 <button className={modalBtnSave} onClick={handleSave}
-                                                    // disabled={ !(studFName != studFNameUnedited ||
-                                                    //             studMName != studMNameUnedited ||
-                                                    //             studLName != studLNameUnedited ||
-                                                    //             studNum != studNumUnedited ||
-                                                    //             degree != degreeUnedited ) ||  
-                                                    //             !(studFName &&
-                                                    //              studMName &&
-                                                    //              studLName &&
-                                                    //              studNum   &&
-                                                    //              studNum.toString().length > 8 && 
-                                                    //              degree)}
                                                         disabled = { !(isValid && ( touched.studFName ||
                                                                                     touched.studMName ||
                                                                                     touched.studLName ||
