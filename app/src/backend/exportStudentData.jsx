@@ -50,7 +50,7 @@ function organizeRecord(info, grades){
     // storage of data to be exported
     let finalExportData = {
         studentNo: info.stud_no,
-        name: `${info.iname.lname}, ${info.iname.fname}, ${info.iname.mname}`,
+        name: `${info.iname.lname}, ${info.iname.fname}, ${info.iname.mname}.`,
         program: info.degree_program,
         grades: [],
         gwa: 0, 
