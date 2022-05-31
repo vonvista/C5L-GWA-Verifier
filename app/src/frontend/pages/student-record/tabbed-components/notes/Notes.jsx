@@ -66,7 +66,14 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
             body: JSON.stringify(deleteNote)
         })
             .then(response => response.json())
-            .then(body => console.log(body))
+            .then(body => {
+                Swal.fire({
+                    title: 'Note Deleted',
+                    text: 'Note has been deleted',
+                    icon: 'success',
+                })
+            
+            })
             .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
                 Swal.fire({
                     icon: 'error',
