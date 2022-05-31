@@ -23,8 +23,11 @@ const HeaderWithArrowbck = ({ pageTitle, arrow }) => {
         <header className="flex w-full items-center absolute top-0 right-0 z-10 pl-[4vw] py-[1vh] bg-secondary-red hover:text-highlight text-sidebar-text">
             {
                 arrow ?
-                    <div className="pl-[2vw] cursor-pointer  hover:bg-primary-red transition ease-out hover:transition hover:ease-in">
-                        <ChevronLeftIcon className="w-[2vw]" onClick={goBack}/>
+                    <div
+                        className="pl-[2vw] cursor-pointer  hover:bg-primary-red rounded-r-xl transition ease-out hover:transition hover:ease-in"
+                        onClick={goBack}
+                    >
+                        <ChevronLeftIcon className="w-[2vw]"/>
                     </div>
                 : <></>
             }

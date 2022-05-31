@@ -35,7 +35,7 @@ const LoginPage = () => {
 
     // useForm hook
     const {values, isValid, errors, touched, changeHandler, submitHandler, resetValues} = useForm(initialState, validations);
-    const errorStyle = "block w-full mt-1 pl-1 text-sm text-red-300"
+    const errorStyle = "block w-full mt-1 pl-1 text-sm text-red-400"
 
     const handleTeam = () => {
         //create sweetalert with image taking up all available space
@@ -226,7 +226,7 @@ const LoginPage = () => {
                                     inputPlaceholder="Database IP"                      // placeholder text for input
                                     value={values.databaseIP}                           // value of the input
                                     changeHandler={changeHandler}                       // change handling   
-                                    />
+                                />
 
                                 {touched.databaseIP && errors.databaseIP && 
                                     <p className={errorStyle}>{errors.databaseIP}</p>   // error message
@@ -239,12 +239,11 @@ const LoginPage = () => {
                                     labelVal="Username"                                 // label text
                                     inputStyle="shadow rounded border font-medium leading-tight py-[0.75vh] px-[0.75vw] w-full text-neutral-700"  // styling for input
                                     name="username"                                     // name of label-input components
-                                    max={17}                                            // character limit
                                     inputType="text"                                    // type of input password, email, text, etc.
                                     inputPlaceholder="Username"                         // placeholder text for input
                                     value={values.username}                             // value of the input
                                     changeHandler={changeHandler}                       // change handling   
-                                    />
+                                />
 
                                 {touched.username && errors.username && 
                                     <p className={errorStyle}>{errors.username}</p>     // error message
@@ -261,7 +260,7 @@ const LoginPage = () => {
                                     inputPlaceholder="******************"               // placeholder text for input
                                     value={values.password}                             // value of the input
                                     changeHandler={changeHandler}                       // change handling   
-                                    />
+                                />
 
                                 {touched.password && errors.password && 
                                     <p className={errorStyle}>{errors.password}</p>     // error message
@@ -272,7 +271,7 @@ const LoginPage = () => {
                     </div>
 
                     {/* Login Button */}
-                    <div className="flex justify-center mt-[4vh] text-[1.25vw]  text-sidebar-text">
+                    <div className="flex justify-center mt-[4vh]  text-sidebar-text">
                         <LoginBtn handleClick={handleLogIn} disabled={!isValid}/>
                     </div>                    
                 </form>

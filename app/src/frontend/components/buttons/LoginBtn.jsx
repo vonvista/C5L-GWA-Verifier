@@ -9,7 +9,7 @@ import 'tailwindcss/tailwind.css';
     disabled     ---  boolean; receives whether button should be disabled or not
 */
 export const LoginBtn = ({ handleClick, disabled }) => {
-  const loginbtn = `w-6/12 h-[4vh] text-[1vw] bg-button-green rounded-lg text-white font-montserrat font-semibold transition ease-out
+  const loginbtn = `w-6/12 h-[4.5vh] text-[1vw] bg-button-green rounded-lg text-white font-montserrat font-semibold transition ease-out
         duration-300 hover:transition hover:ease-in hover:duration-300 hover:shadow-lg hover:bg-button-green-hover disabled:bg-sr-disabled-green`;
 
   return (
