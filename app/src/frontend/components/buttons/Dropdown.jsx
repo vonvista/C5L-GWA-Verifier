@@ -92,6 +92,13 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
   // Function to close justification modal
   const closeJustModal = () => {
     setJustModal(false);
+
+    // drop changes in input fields
+    setStudNum(studentInfo.stud_no);
+    setDegree(studentInfo.degree_program.toUpperCase());
+    setStudFName(studentInfo.iname.fname.toUpperCase());
+    setStudMName(studentInfo.iname.mname.toUpperCase());
+    setStudLName(studentInfo.iname.lname.toUpperCase());
 }
 
   // Event handler for Export on dropdown
@@ -160,7 +167,7 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent }) => {
     setDegreeUnedited(degree.toUpperCase());
 
     // close modal windows
-    closeJustModal();
+    setJustModal(false);
     setEditModal(false);
 
     setSelectedStudent( (prevState)=>({...prevState, stud_no: studNum, degree_program: degree.toUpperCase(), Student: currStudentID, iname: {fname: studFName.toUpperCase(), mname: studMName.toUpperCase(), lname: studLName.toUpperCase()}}))
