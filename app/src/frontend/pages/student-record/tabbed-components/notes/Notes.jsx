@@ -130,9 +130,13 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
                             </p>
 
                             {/* Delete button */}
-                            <button className='w-max rounded-lg mt-[1vw] py-[0.5vw] px-[0.5vw] -ml-[0.7vw] items-center flex content-center hover:bg-gray-300' onClick={() => handleDeleteNote(data)}>
-                                <TrashIcon className="w-[1.25vw]"/>
-                                <span className="text-xs xl:text-sm 1.75xl:text-base 3xl:text-lg 4xl:text-[1vw] font-inter ml-2">Delete</span>
+                            <button
+                                className='w-max rounded-xl mt-[1vw] py-[0.25vw] px-[0.5vw] -ml-[0.7vw] items-center flex content-center hover:bg-gray-300
+                                           transition ease-out hover:transition hover:ease-in'
+                                onClick={() => handleDeleteNote(data)}
+                            >
+                                <TrashIcon className="w-[1vw]"/>
+                                <span className="text-[0.85vw] font-inter ml-2">Delete</span>
                             </button>
                         </div>
                     )

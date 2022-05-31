@@ -46,8 +46,8 @@ const Search = ({ user, handleSearch, searchValue, buttonHandler, handleEnter })
             <div className="flex relative">
                 <style>{searchBtn}</style>
                 <Input
-                    inputStyle="h-[3vw] text-[1vw] rounded-lg my-2 appearance-none border-2 rounded px-4
-                        border-gray-300 bg-gray-100 focus:border-orange-400 focus:bg-white text-gray-700 pr-[3.5vw] font-mono"  // styling for input
+                    inputStyle="h-[3vw] text-[1vw] pr-[3.5vw] font-mono rounded-xl my-2 appearance-none border-2 px-4
+                        border-gray-300 bg-gray-100 focus:border-orange-400 focus:bg-white text-gray-700"  // styling for input
                     name="search"                               // name of label-input components
                     inputType="text"                            // type of input password, email, text, etc.
                     inputPlaceholder="Search by student no."    // placeholder text for input
