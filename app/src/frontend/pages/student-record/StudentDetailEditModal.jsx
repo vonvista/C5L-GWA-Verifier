@@ -186,7 +186,8 @@ const EditStudent = ({ modalState, handleClose, setJustModal, editModalSave, set
                                                                 className={inputStyle}
                                                                 type="text"
                                                                 name="studNum"
-                                                                placeholder='20XX-XXXX'
+                                                                placeholder='XXXX-XXXX'
+                                                                maxLength={10}
                                                                 value={studNum}
                                                                 onChange={(e) => setStudNum(e.target.value)}
                                                             />
@@ -218,7 +219,13 @@ const EditStudent = ({ modalState, handleClose, setJustModal, editModalSave, set
                                                                 studMName != studMNameUnedited ||
                                                                 studLName != studLNameUnedited ||
                                                                 studNum != studNumUnedited ||
-                                                                degree != degreeUnedited )}>
+                                                                degree != degreeUnedited ) ||  
+                                                                !(studFName &&
+                                                                 studMName &&
+                                                                 studLName &&
+                                                                 studNum   &&
+                                                                 studNum.toString().length > 8 && 
+                                                                 degree)}>
                                                     Save
                                                 </button>
                                                 <button className={modalBtnCancel} onClick={handleClose}>

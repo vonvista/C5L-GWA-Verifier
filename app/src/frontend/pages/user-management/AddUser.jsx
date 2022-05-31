@@ -260,7 +260,6 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                                       labelVal="Username"               // label text
                                       inputStyle={inputStyle}           // styling for input
                                       name="username"                   // name of label-input components
-                                      max={17}                          // character limit - max no of char is 17
                                       inputType="text"                  // type of input password, email, text, etc.
                                       inputPlaceholder= "Username"      // placeholder text for input
                                       value={un}                        // value of the input
