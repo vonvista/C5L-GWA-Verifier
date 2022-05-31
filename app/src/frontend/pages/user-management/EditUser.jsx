@@ -369,7 +369,7 @@ const EditUser = ({ modalState, handleClose, editUser, uneditedUser, handleEditR
                                     </div>
 
                                     <h4 className="mt-1 mb-2 w-full text-center text-white">
-                                      Password (only put data if you want to change password of user)
+                                      Password (only fill up if you want to change password of user)
                                     </h4>
                                 </div>
                             </div>
