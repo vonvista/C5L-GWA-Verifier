@@ -162,10 +162,10 @@ const AddUser = ({ modalState, handleClose, handleAddRecord }) => {
                         className="ml-3 text-2xl leading-6 text-gray-900 flex"
                       >
                         {/* Close button */}
-                        <XIcon
+                        {/* <XIcon
                           className="h-6 w-6 cursor-pointer ml-auto mr-0 transition-all ease-out text-sidebar-text hover:text-gray-400 hover:transition-all hover:ease-in"
                           onClick={handleClose}
-                        />
+                        /> */}
                       </Dialog.Title>
                     </div>
 
