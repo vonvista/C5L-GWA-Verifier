@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import RecordPage from './StudentViewRecord';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 
 /* Parent component >> renderer/App.jsx */
@@ -229,7 +230,10 @@ export default function StudentRecord() {
     const [unitGPA, setunitGPA] = useState();
     const [reload, setReload] = useState('false');
 
+    const navigate = useNavigate();
+
     const fetchData = async () => {
+        console.log("HERE")
         await GetStudentGrades()
         await GetStudentHistory()
         await GetStudentInfo()
@@ -254,7 +258,7 @@ export default function StudentRecord() {
             degree_program: '',
             iname:{},
         }
-
+        
         await fetch(`http://${ip}:3001/student/update-status`, {
         method: "POST",
         headers: {"Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
@@ -262,6 +266,15 @@ export default function StudentRecord() {
         })
         .then(response => response.json())
         .then(body => {
+            
+            if(body.err){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Server Error',
+                    text: 'Check if the server is running or if database IP is correct',
+                })
+                return
+            }
         })
         .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
             Swal.fire({
@@ -279,7 +292,14 @@ export default function StudentRecord() {
         })
         .then(response => response.json())
         .then(body => {
-
+            if(body.err){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Server Error',
+                    text: 'Check if the server is running or if database IP is correct',
+                })
+                navigate("/in/user-dashboard");
+            }
             // save the following info to currUser
             currUser.stud_no = body.StudentID
             currUser.name = `${body.LastName}, ${body.FirstName} ${body.MiddleName}`
@@ -321,7 +341,14 @@ export default function StudentRecord() {
         })
         .then(response => response.json())
         .then(body => {
-            
+            if(body.err){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Server Error',
+                    text: 'Check if the server is running or if database IP is correct',
+                })
+                navigate("/in/user-dashboard");
+            }
             //organize the data for table contents
             const studentGrades = organizeGrades(body)
             
@@ -355,7 +382,14 @@ export default function StudentRecord() {
         })
         .then(response => response.json())
         .then(body => {
-
+            if(body.err){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Server Error',
+                    text: 'Check if the server is running or if database IP is correct',
+                })
+                navigate("/in/user-dashboard");
+            }
             // sort body ( sort by Date)
             // then organize the data for table contents
             const studentHistory = organizeHistory(body.sort((x,y)=> ( y.Date.localeCompare(x.r) )))
@@ -386,7 +420,14 @@ export default function StudentRecord() {
         })
         .then(response => response.json())
         .then(body => {
-
+            if(body.err){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Server Error',
+                    text: 'Check if the server is running or if database IP is correct',
+                })
+                navigate("/in/user-dashboard");
+            }
             // set Notes prop
             getNotesProp(body) 
             

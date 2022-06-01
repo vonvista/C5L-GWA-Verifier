@@ -35,12 +35,12 @@ exports.middleware = async function(req, res, next) {
       next();
     } else {
       res.send({err:'Failed to authenticate'});
-      console.log("HERE")
+      //console.log("HERE")
     }
   }
   else {
     res.send({err:'Failed to authenticate'});
-    console.log("HERE")
+    //console.log("HERE")
   }
 }
 
@@ -428,6 +428,9 @@ exports.studentUpdateStatus = async function(req, res, next) {
   
   //find student by StudentID
   var student = await Student.findOne({StudentID:req.body.StudentID});
+  if(!student){
+    return
+  }
 
   if (student.Status == 'Unchecked'){
     student.Status = 'Pending';
