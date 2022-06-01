@@ -69,13 +69,11 @@ const UserNav = ({ hoverRef, isHovering, setIsHovering }) => {
                 </div>
 
                 {/* User Account Details */}
-                <div className="flex 1.5xl:gap-x-[0.5vw] 1.75xl:gap-x-[0.75vw] 5xl:gap-x-[1.5vw] 1.75xl:mt-[2vh] items-center">
+                <div className="flex gap-x-[1.25vw] 5xl:gap-x-[1.5vw] mt-[2.5vh] items-center">
                     
                     {/* User Icon */}
                     <img
-                        className={` ${isHovering ? "scale-25 sm:scale-50 1.5xl:scale-60 3xl:scale-75 5xl:scale-100 xl:ml-[0.5vw] 1.5xl:ml-[1.3vw] 5xl:ml-[2vw]" : "scale-50 5xl:ml-[0.2vw]" } rounded-full duration-500`}
-                        width="90px"
-                        height="90px"
+                        className={` ${isHovering ? "w-[3.5vw] ml-[2.25vw]" : "w-[2.25vw] ml-[1vw]" } rounded-full duration-500`}
                         alt="user-icon"
                         src={UserIcon}
                     />
@@ -88,8 +86,8 @@ const UserNav = ({ hoverRef, isHovering, setIsHovering }) => {
                 </div>
                 
                 {/* Navigation Pages */}
-                <div className={` ${isHovering? "2xl:mt-[1.5vh] 5xl:mt-[2.5vh]" : "mt-1" } 
-                                cursor-pointer grid grid-cols-1 duration-250 gap-[0.25vw] font-poppins font-medium`}>
+                <div className={` ${isHovering? "mt-[3vh] 5xl:mt-[2.5vh]" : "mt-2" } 
+                                cursor-pointer grid grid-cols-1 duration-250 5xl:gap-[0.75vh] font-poppins font-medium`}>
                     
                     {/* User Dashboard */}
                     <div className="inline-flex items-center py-[1vh] gap-x-[1.5vw] hover:bg-secondary-red hover:text-highlight" onClick={() => {navigate('/in/user-dashboard')}}>
