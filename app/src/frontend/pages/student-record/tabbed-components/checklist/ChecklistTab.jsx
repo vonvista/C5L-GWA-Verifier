@@ -7,6 +7,7 @@ import ChecklistDetail from './ChecklistDetail';
 
 /* This function contains the list or details of the validation result from student's summary of record. */
 /* Props:
+    oldDataState    ---  old validation state of the student's summary of record
     checklistData   ---  validation state of the student's summary of record
     setValData      ---  function that handles the validation status
     handleApply     ---  function used to apply the changes done on the validation status of the record
@@ -18,30 +19,26 @@ export default function CheckListTab({
   handleApply,
 }) {
   const ApplyChangesButton = (index) => {
-      for(let i=0; i<checklistData.length; i++){
-          console.log('old', oldDataState[i].status);
-          console.log('new', checklistData[i].status);
+    for (let i = 0; i < checklistData.length; i++) {
+      if (oldDataState[i].status !== checklistData[i].status) {
+        // checks if there are changes on validation status
+        return (
+          <button
+            className="h-7 1.75xl:h-8 5xl:h-[3.25vh] px-4 5xl:px-[0.85vw] flex items-center mt-[2vh] rounded-xl bg-button-green text-white font-montserrat font-bold transition ease-out hover:transition hover:ease-in hover:shadow-lg hover:bg-button-green-hover"
+            type="button"
+            onClick={handleApply}
+          >
+            <p className="text-xs 1.75xl:text-sm 3xl:text-base 4xl:text-[0.8vw] font-poppins font-medium inline-block">
+              Apply Changes
+            </p>
+          </button>
+        );
       }
-
-    // for (let i = 0; i < checklistData.length; i++) {
-    //   if (checklistData[i].status) {
-    //     console.log('clicked ', i);
-    //     return (
-    //       <button
-    //         className="h-7 1.75xl:h-8 5xl:h-[3.25vh] px-4 5xl:px-[0.85vw] flex items-center mt-[2vh] rounded-xl bg-button-green text-white font-montserrat font-bold transition ease-out hover:transition hover:ease-in hover:shadow-lg hover:bg-button-green-hover"
-    //         type="button"
-    //         onClick={handleApply}
-    //       >
-    //         <p className="text-xs 1.75xl:text-sm 3xl:text-base 4xl:text-[0.8vw] font-poppins font-medium inline-block">
-    //           Apply Changes
-    //         </p>
-    //       </button>
-    //     );
-    //   }
-    // }
+    }
+    // disables button if no changes on status
     return (
       <button
-        className="h-7 1.75xl:h-8 5xl:h-[3.25vh] px-4 5xl:px-[0.85vw] flex items-center mt-[2vh] rounded-xl bg-button-green text-white font-montserrat font-bold transition ease-out hover:transition hover:ease-in hover:shadow-lg hover:bg-button-green-hover disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
+        className="h-7 1.75xl:h-8 5xl:h-[3.25vh] px-4 5xl:px-[0.85vw] flex items-center mt-[2vh] rounded-xl bg-button-green text-white font-montserrat font-bold transition ease-out disabled:bg-sr-disabled-green disabled:hover:bg-sr-disabled-green"
         type="button"
         onClick={handleApply}
         disabled
@@ -75,15 +72,6 @@ export default function CheckListTab({
 
       {/* Apply changes button */}
       <ApplyChangesButton />
-      {/* <button
-        className="h-7 1.75xl:h-8 5xl:h-[3.25vh] px-4 5xl:px-[0.85vw] flex items-center mt-[2vh] rounded-xl bg-button-green text-white font-montserrat font-bold transition ease-out hover:transition hover:ease-in hover:shadow-lg hover:bg-button-green-hover"
-        type="button"
-        onClick={handleApply}
-      >
-        <p className="text-xs 1.75xl:text-sm 3xl:text-base 4xl:text-[0.8vw] font-poppins font-medium inline-block">
-          Apply Changes
-        </p>
-      </button> */}
     </div>
   );
 }

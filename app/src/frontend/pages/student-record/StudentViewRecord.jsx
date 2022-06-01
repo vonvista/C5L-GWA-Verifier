@@ -40,12 +40,11 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
     const [notesState, setNotesState] = useState(notes)
     const [historyState, setHistoryState] = useState(history)
     const [validationsState, setValidationsState] = useState(checklist)
-    const [oldState, setOldState] = useState(checklist)
+    const [oldState, setOldValidationsState] = useState(validationsState)
     const [tabId, setTabId] = useState(0)
     const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
     const [gpaCalc, setGPA] = useState(gpa);
     const [currStudentID, setCurrStudentID] = useState(localStorage.getItem("currStudentID"))
-
 
     // Refresh functions
     const forceReload = async () => {
@@ -55,7 +54,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
     // Validation functions
     const handleValApply = () => {
         //console.log(ip)
-
+        setOldValidationsState(JSON.parse(JSON.stringify(validationsState)))    //sets the old validation state
         newStatus = true
         sendVal = []
         for (let i = 0; i < validationsState.length; i++) {
@@ -115,15 +114,11 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
     }
 
     const toggleValidation = (index) => {
-        // setOldValidationsState([...validationsState])
-        setOldState([...validationsState])
-        console.log("old in record", oldState[index].status)
+        setOldValidationsState(JSON.parse(JSON.stringify(validationsState))) //sets the old validation state
         let newValidation = validationsState
         newValidation[index].status = !newValidation[index].status
         setValidationsState([...newValidation])
-        console.log("new in record",validationsState[index].status)
     }
-
 
     // Tabbed components on the right side of the page
     // Uses components as values
