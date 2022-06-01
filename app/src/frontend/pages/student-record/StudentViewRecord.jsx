@@ -46,6 +46,10 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
     const [gpaCalc, setGPA] = useState(gpa);
     const [currStudentID, setCurrStudentID] = useState(localStorage.getItem("currStudentID"))
 
+    useEffect(() => {
+        setOldValidationsState(JSON.parse(JSON.stringify(validationsState))) //sets the old validation state
+    }, [])
+
     // Refresh functions
     const forceReload = async () => {
         await refresh();
@@ -114,7 +118,6 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
     }
 
     const toggleValidation = (index) => {
-        setOldValidationsState(JSON.parse(JSON.stringify(validationsState))) //sets the old validation state
         let newValidation = validationsState
         newValidation[index].status = !newValidation[index].status
         setValidationsState([...newValidation])
