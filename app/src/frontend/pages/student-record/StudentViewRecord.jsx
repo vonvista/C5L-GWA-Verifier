@@ -40,11 +40,15 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
     const [notesState, setNotesState] = useState(notes)
     const [historyState, setHistoryState] = useState(history)
     const [validationsState, setValidationsState] = useState(checklist)
+    const [oldState, setOldValidationsState] = useState(validationsState)
     const [tabId, setTabId] = useState(0)
     const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
     const [gpaCalc, setGPA] = useState(gpa);
     const [currStudentID, setCurrStudentID] = useState(localStorage.getItem("currStudentID"))
 
+    useEffect(() => {
+        setOldValidationsState(JSON.parse(JSON.stringify(validationsState))) //sets the old validation state
+    }, [])
 
     // Refresh functions
     const forceReload = async () => {
@@ -54,7 +58,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
     // Validation functions
     const handleValApply = () => {
         //console.log(ip)
-
+        setOldValidationsState(JSON.parse(JSON.stringify(validationsState)))    //sets the old validation state
         newStatus = true
         sendVal = []
         for (let i = 0; i < validationsState.length; i++) {
@@ -123,7 +127,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
     // Uses components as values
     const tabContents = { 
         Status: <Status state={statusState} gpaCalc={gpaCalc} />,    // status component
-        Validations: <CheckList checklistData={validationsState} setValData={toggleValidation} handleApply={handleValApply}/>,       //checklist component
+        Validations: <CheckList oldDataState={oldState} checklistData={validationsState} setValData={toggleValidation} handleApply={handleValApply}/>,       //checklist component
         Notes: <Notes notesData={notesState} semesters={gradeState} setNotesData={setNotesState} />,    // notes component
         History: <History historyData={historyState} />,            // history component
     }
