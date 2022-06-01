@@ -40,6 +40,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
     const [notesState, setNotesState] = useState(notes)
     const [historyState, setHistoryState] = useState(history)
     const [validationsState, setValidationsState] = useState(checklist)
+    const [oldState, setOldState] = useState(checklist)
     const [tabId, setTabId] = useState(0)
     const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
     const [gpaCalc, setGPA] = useState(gpa);
@@ -114,16 +115,21 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
     }
 
     const toggleValidation = (index) => {
+        // setOldValidationsState([...validationsState])
+        setOldState([...validationsState])
+        console.log("old in record", oldState[index].status)
         let newValidation = validationsState
         newValidation[index].status = !newValidation[index].status
         setValidationsState([...newValidation])
+        console.log("new in record",validationsState[index].status)
     }
+
 
     // Tabbed components on the right side of the page
     // Uses components as values
     const tabContents = { 
         Status: <Status state={statusState} gpaCalc={gpaCalc} />,    // status component
-        Validations: <CheckList checklistData={validationsState} setValData={toggleValidation} handleApply={handleValApply}/>,       //checklist component
+        Validations: <CheckList oldDataState={oldState} checklistData={validationsState} setValData={toggleValidation} handleApply={handleValApply}/>,       //checklist component
         Notes: <Notes notesData={notesState} semesters={gradeState} setNotesData={setNotesState} />,    // notes component
         History: <History historyData={historyState} />,            // history component
     }
