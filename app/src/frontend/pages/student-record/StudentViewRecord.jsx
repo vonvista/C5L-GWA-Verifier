@@ -339,7 +339,13 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                     </div>
 
                     <div className="w-1/5 flex items-center">
-                        <ActionsBtn studentInfo={selectedStudent} grades={gradeState} setHistory={setHistory} setSelectedStudent={setSelectedStudent}/>
+                        <ActionsBtn
+                            studentInfo={selectedStudent}
+                            grades={gradeState}
+                            setHistory={setHistory}
+                            setSelectedStudent={setSelectedStudent}
+                            forceReload={forceReload}
+                        />
                         <Refresh className="ml-2" handleClick={forceReload} />
                     </div>
                 </div>                   
