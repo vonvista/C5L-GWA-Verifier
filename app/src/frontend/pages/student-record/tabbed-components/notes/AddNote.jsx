@@ -74,7 +74,7 @@ const AddNote = ({ modalState, modalHandler, unedited, notesList, handleAddNote,
                 setNoteText('')
 
                 // new note to be stored in DB
-                newNote = {
+                var newNote = {
                     User: userName,
                     Student: currStudentID,
                     Details: noteText,

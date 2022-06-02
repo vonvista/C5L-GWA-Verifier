@@ -329,8 +329,8 @@ const readInputFile = (files, handleAddRecord) => {
         if (isSuccessful.success) { // verification is a success and no errors were catched
   
           //set validations
-          numOfValidations = 4
-          validations = []
+          var numOfValidations = 4
+          var validations = []
           for (let i = 0; i < numOfValidations; i++) {
             validations.push(false);
           }

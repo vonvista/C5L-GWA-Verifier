@@ -112,7 +112,7 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
     const handleAddGrade = async () => {
 
         // new grade from the AddRow fields to be added to DB
-        newGrade = {
+        var newGrade = {
             Student: localStorage.getItem('currStudentID'),
             Course: courseName,
             Unit: parseFloat(units),

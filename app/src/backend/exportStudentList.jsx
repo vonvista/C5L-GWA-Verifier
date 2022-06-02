@@ -119,7 +119,7 @@ function addWaterMark(doc, user) {
     doc.setFontSize(72);   // font size
 
     // loop for all page
-    for (i = 1; i <= totalPages; i++) {
+    for (let i = 1; i <= totalPages; i++) {
 
         // set current page
         doc.setPage(i)
@@ -146,7 +146,7 @@ function exportStudentList(sortOpt, list, user){
     const exportData = organizeList(list, sortOpt)
 
     // initialize pdf document
-    doc = new jsPDF({
+    var doc = new jsPDF({
         unit: 'px',
         format: 'letter',
     })

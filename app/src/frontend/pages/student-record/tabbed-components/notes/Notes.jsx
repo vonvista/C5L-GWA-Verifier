@@ -90,7 +90,7 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
 
         // note to be deleted
         // deletes note using: Student key and Semyear
-        deleteNote = {
+        var deleteNote = {
             Student: currStudentID,
             Semyear: values.Semyear,
         }

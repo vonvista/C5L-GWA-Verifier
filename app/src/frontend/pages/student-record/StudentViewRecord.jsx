@@ -85,8 +85,8 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
 
         //console.log(ip)
         setOldValidationsState(JSON.parse(JSON.stringify(validationsState)))    //sets the old validation state
-        newStatus = true
-        sendVal = []
+        var newStatus = true
+        var sendVal = []
         for (let i = 0; i < validationsState.length; i++) {
             sendVal.push(validationsState[i].status)
             newStatus = newStatus && validationsState[i].status

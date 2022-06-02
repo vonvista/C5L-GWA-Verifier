@@ -132,7 +132,7 @@ const UserManagementPage = () => {
 
     const handleEditRecordSave = (user) => {
       let temp = rows;
-      editIndex = temp.findIndex(x => x._id === user._id);
+      var editIndex = temp.findIndex(x => x._id === user._id);
       temp[editIndex] = {
         "uname": user.Username, 
         "name": user.FirstName + ' ' + user.LastName, 
