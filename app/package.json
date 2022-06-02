@@ -30,8 +30,8 @@
     ]
   },
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.erb.ElectronReact",
+    "productName": "Kalatas: CAS GWA Verifier",
+    "appId": "org.erb.Kalatas",
     "asar": true,
     "asarUnpack": "**\\*.{node,dll}",
     "files": [
