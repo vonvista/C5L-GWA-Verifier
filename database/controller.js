@@ -173,8 +173,19 @@ exports.userDeleteAll = function(req, res, next) {
 exports.userUpdate = async function(req, res, next) {
   // console.log(req.body);
 
-  var hashedPassword = await bcrypt.hash(req.body.Password, saltRounds); //encrpyt password first -vov
-  
+  var hashedPassword
+
+  if(req.body.Password){
+    hashedPassword = await bcrypt.hash(req.body.Password, saltRounds); //encrpyt password first -vov
+  }
+  else {
+    //set to old password, find old password by user _id
+    hashedPassword = await User.findOne({_id:req.body._id}).then(function(user){
+      return user.Password;
+    });
+  }
+
+  // var hashedPassword = await bcrypt.hash(req.body.Password, saltRounds); //encrpyt password first -vov
   User.updateOne({_id: mongoose.Types.ObjectId(req.body._id)},{"$set":{
     "Username" : req.body.Username,
     "FirstName": req.body.FirstName,
@@ -182,7 +193,7 @@ exports.userUpdate = async function(req, res, next) {
     "LastName": req.body.LastName,
     "Position": req.body.Position,
     // "Role": req.body.Role,    <- removed - vov
-    "Password": hashedPassword
+    "Password": hashedPassword,
   }}, {new : true}, function(err,result){
     if(!err && User){
       //send the updated user
