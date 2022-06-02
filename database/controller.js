@@ -262,7 +262,12 @@ exports.gradeFindOne = function(req, res, next) {
 exports.gradeFindByStudent = function(req,res,next){
   // requires student ObjectId
   Grade.find({Student:mongoose.Types.ObjectId(req.body.Student)}, null, {sort: {'_id': 1}},function(err,grades){
-    if(!err) res.send(grades);
+    if(grades) {
+      res.send(grades);
+    }
+    else {
+      res.send({err:'Unable to find grades'})
+    }
   })
 }
 
@@ -412,15 +417,14 @@ Student.find(function(err, student) {
 });
 }
 
-exports.studentFindOne = function(req, res, next) {
-  Student.findOne({StudentID:req.body.StudentID}, function(err, Student){
-    if(Student) {
-      res.send(Student);
-    }
-    else { 
-      res.send({err:'Unable to find student'}); 
-    }
-  });
+exports.studentFindOne = async function(req, res, next) {
+  var student = await Student.findOne({StudentID:req.body.StudentID})
+  if(student) {
+    res.send(student);
+  }
+  else { 
+    res.send({err:'Unable to find student'}); 
+  }
 }
 
 //student update status
@@ -429,6 +433,7 @@ exports.studentUpdateStatus = async function(req, res, next) {
   //find student by StudentID
   var student = await Student.findOne({StudentID:req.body.StudentID});
   if(!student){
+    res.send({err:'Unable to find student'}); 
     return
   }
 

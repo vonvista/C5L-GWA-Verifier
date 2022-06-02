@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { TrashIcon } from '@heroicons/react/solid';
+import { useNavigate } from 'react-router-dom';
 import AddNoteBtn from 'frontend/components/buttons/AddNoteBtn';
 import Swal from 'sweetalert2';
 
@@ -19,6 +20,7 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
     const [currStudentID, setStudentID] = useState(localStorage.getItem("currStudentID"));
     const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
 
+    const navigate = useNavigate();
 
     // Handler for adding/editing notes
     const handleAddNote = (text) => {
@@ -44,6 +46,27 @@ export default function NotesTab({notesData, semesters, setNotesData}) {
 
     // Handler for deleting notes
     const handleDeleteNote = async (values) => {
+
+        //if student exists check, if hindi, ikickout
+        var studentExist = await fetch(`http://${ip}:3001/student/find`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
+        body: JSON.stringify({StudentID: localStorage.getItem("currStudentKey")})
+        })
+        .then(response => response.json())
+        .then(body => {
+            if(body.err){
+                Swal.fire({icon: 'error', title: 'Error', text: body.err,})
+                navigate('/in/user-dashboard')
+                return false
+            }
+        })
+        .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+            Swal.fire({icon: 'error', title: 'Server Error', text: 'Check if the server is running or if database IP is correct',})
+        })
+        if(studentExist == false){
+            return
+        }
 
         //add confirm dialog
         var confirm = await Swal.fire({

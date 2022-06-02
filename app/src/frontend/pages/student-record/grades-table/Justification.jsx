@@ -1,5 +1,6 @@
 import { Fragment, useState, useEffect } from 'react';
 import { useForm, isRequired } from '../../../hooks/useForm';
+import { useNavigate } from 'react-router-dom';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/solid';
 import Input from 'frontend/components/inputs/Input';
@@ -32,6 +33,8 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
     const [imgName, setImgName] = useState("Max file size is 16MB");
     const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
 
+    const navigate = useNavigate();
+
     const initialState = {
         title: '',
         desc: '',
@@ -51,7 +54,30 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
     }
 
     // Function that will save changes
-    const saveChanges = (e) => {
+    const saveChanges = async (e) => {
+
+         //if student exists check, if hindi, ikickout
+        var studentExist = await fetch(`http://${ip}:3001/student/find`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
+        body: JSON.stringify({StudentID: localStorage.getItem("currStudentKey")})
+        })
+        .then(response => response.json())
+        .then(body => {
+            if(body.err){
+                Swal.fire({icon: 'error', title: 'Error', text: body.err,})
+                navigate('/in/user-dashboard')
+                return false
+            }
+        })
+        .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+            Swal.fire({icon: 'error', title: 'Server Error', text: 'Check if the server is running or if database IP is correct',})
+        })
+        if(studentExist == false){
+            return
+        }
+
+
         e.preventDefault()          // prevents refreshing of page
         parentSubmitHandler(e)      // submit contents of the form
         // submitHandler(e)            // update history log  <-moved to success to get id as well

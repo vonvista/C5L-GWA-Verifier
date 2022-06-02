@@ -43,6 +43,7 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent, forceRe
 
     //Function which updates Student input fields
     const updateStudent = async (values) => {
+
         const credentials = {
             StudentID: values.studNum,
             FirstName: values.studFName.toUpperCase(),     //put first name variable

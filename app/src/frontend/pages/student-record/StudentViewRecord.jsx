@@ -1,6 +1,7 @@
 import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 import { useState, useEffect, useRef, Fragment } from 'react';
 import { Tab, Transition, Disclosure } from '@headlessui/react';
+import { useNavigate } from 'react-router-dom';
 import { ChevronUpIcon } from '@heroicons/react/solid';
 import { toNamespacedPath } from 'node:path/win32';
 import 'tailwindcss/tailwind.css';
@@ -46,6 +47,8 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
     const [gpaCalc, setGPA] = useState(gpa);
     const [currStudentID, setCurrStudentID] = useState(localStorage.getItem("currStudentID"))
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         setOldValidationsState(JSON.parse(JSON.stringify(validationsState))) //sets the old validation state
     }, [])
@@ -56,7 +59,30 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
     };
 
     // Validation functions
-    const handleValApply = () => {
+    const handleValApply = async () => {
+
+        //if student exists check, if hindi, ikickout
+        var studentExist = await fetch(`http://${ip}:3001/student/find`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
+        body: JSON.stringify({StudentID: localStorage.getItem("currStudentKey")})
+        })
+        .then(response => response.json())
+        .then(body => {
+            if(body.err){
+                Swal.fire({icon: 'error', title: 'Error', text: body.err,})
+                navigate('/in/user-dashboard')
+                return false
+            }
+        })
+        .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+            Swal.fire({icon: 'error', title: 'Server Error', text: 'Check if the server is running or if database IP is correct',})
+        })
+        if(studentExist == false){
+            return
+        }
+
+
         //console.log(ip)
         setOldValidationsState(JSON.parse(JSON.stringify(validationsState)))    //sets the old validation state
         newStatus = true

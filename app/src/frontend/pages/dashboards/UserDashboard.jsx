@@ -351,6 +351,15 @@ const UserDashboard = () => {
       localStorage.clear();
       navigate('/');
     })
+    .catch((err) => {
+      // will activate if DB is not reachable or timed out or there are other errors
+      Swal.fire({
+        icon: 'error',
+        title: 'Server Error',
+        text: 'Check if the server is running or if database IP is correct',
+      });
+      // console.log(err)
+    });
     
   };
 
@@ -448,6 +457,15 @@ const UserDashboard = () => {
           }
         }
       )
+      .catch((err) => {
+        // will activate if DB is not reachable or timed out or there are other errors
+        Swal.fire({
+          icon: 'error',
+          title: 'Server Error',
+          text: 'Check if the server is running or if database IP is correct',
+        });
+        // console.log(err)
+      });
     }
 
 
@@ -539,7 +557,11 @@ const UserDashboard = () => {
 
                     {/* Delete buttons and Pagination */}
                     <div className="float-left mt-6">
-                        <Reset handleClick={handleReset} />
+                        {localStorage.getItem("Username") === "admin" ?
+                          <Reset handleClick={handleReset} />
+                          :
+                          <></>
+                        }
                         <BulkDeleteBtn handleClick={handleBulkDelete} />
                     </div>
                     <div className="float-right mt-6">
