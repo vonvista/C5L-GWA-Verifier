@@ -23,6 +23,15 @@ const userDelete = (username) => {
     .then(body => {
       //console.log(body);
   })
+  .catch((err) => {
+    // will activate if DB is not reachable or timed out or there are other errors
+    Swal.fire({
+      icon: 'error',
+      title: 'Server Error',
+      text: 'Check if the server is running or if database IP is correct',
+    });
+    // console.log(err)
+  });
 
 };
 
