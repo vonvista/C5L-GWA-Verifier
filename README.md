@@ -2,15 +2,22 @@
 
 Tech Stack: MERN (MongoDB, Express, React, Node) + ElectronJS
 
-To fully install everything, do:
+# Dependencies
 
-- go to app directory
+MongoDB, Node
+
+# Setup
+
+## Go to app directory
+
 - npm install
 - npm install pdfjs-dist
 - npm install @heroicons/react
 - npm install @headlessui/react
--npm update @headlessui/react 
+- npm update @headlessui/react 
+- to start app, do ```npm start```
 
-- go to database directory
+## Go to database directory
+
 - npm install
 - to start database, do ```node index.js```
