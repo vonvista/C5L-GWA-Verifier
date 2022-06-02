@@ -557,7 +557,11 @@ const UserDashboard = () => {
 
                     {/* Delete buttons and Pagination */}
                     <div className="float-left mt-6">
-                        <Reset handleClick={handleReset} />
+                        {localStorage.getItem("Username") === "admin" ?
+                          <Reset handleClick={handleReset} />
+                          :
+                          <></>
+                        }
                         <BulkDeleteBtn handleClick={handleBulkDelete} />
                     </div>
                     <div className="float-right mt-6">
