@@ -359,6 +359,7 @@ const readInputFile = (files, handleAddRecord) => {
           })
           .then(response => response.json())
           .then(body =>  {
+            console.log
             if (body.err == 'An error occured'){ // an error occured during finding
               fileStatuses.push({name: file.name, status: 'ERROR', message: `${body.err}`});
               displayFileStatuses();
