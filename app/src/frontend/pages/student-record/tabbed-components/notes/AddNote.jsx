@@ -1,5 +1,6 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition} from '@headlessui/react';
+import { useNavigate } from 'react-router-dom';
 import { XIcon } from '@heroicons/react/solid';
 import SemSelect from 'frontend/components/inputs/DropdownSelect';
 import Swal from 'sweetalert2';
@@ -27,6 +28,8 @@ const AddNote = ({ modalState, modalHandler, unedited, notesList, handleAddNote,
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
     const [currStudentID, setStudentID] = useState(localStorage.getItem("currStudentID"));
     const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
+
+    const navigate = useNavigate();
   
     // Handler for changes in text area
     const handleChange = (event) => {
@@ -40,7 +43,28 @@ const AddNote = ({ modalState, modalHandler, unedited, notesList, handleAddNote,
     }
 
     // Handler for save button
-    const handleSaveClick = () => {
+    const handleSaveClick = async () => {
+
+        //if student exists check, if hindi, ikickout
+        var studentExist = await fetch(`http://${ip}:3001/student/find`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
+        body: JSON.stringify({StudentID: localStorage.getItem("currStudentKey")})
+        })
+        .then(response => response.json())
+        .then(body => {
+            if(body.err){
+                Swal.fire({icon: 'error', title: 'Error', text: body.err,})
+                navigate('/in/user-dashboard')
+                return false
+            }
+        })
+        .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+            Swal.fire({icon: 'error', title: 'Server Error', text: 'Check if the server is running or if database IP is correct',})
+        })
+        if(studentExist == false){
+            return
+        }
 
         if (noteText.trim().length > 0){
 

@@ -1,6 +1,7 @@
 import { Disclosure, Transition } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/solid';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import List from 'frontend/components/table/List';
 import Swal from 'sweetalert2';
 import 'tailwindcss/tailwind.css';
@@ -23,6 +24,8 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
     const [currStudentID, setcurrStudentID] = useState(localStorage.getItem('currStudentID'));
     const [userName, setUserName] = useState(localStorage.getItem("Username"));
     const [ip, setIP] = useState(localStorage.getItem('ServerIP'));
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -55,7 +58,8 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
 
 
     // Handler for row changes
-    const setData = (values) => { // modifies values of a row
+    const setData = async (values) => { // modifies values of a row
+
         // get array index of object that was changed
         const targetIndex = semData.findIndex(obj => obj.idRow == values.idRow) 
 

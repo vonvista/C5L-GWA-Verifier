@@ -4,6 +4,7 @@ import AddRow from 'frontend/pages/student-record/grades-table/AddRow';
 import Justification from 'frontend/pages/student-record/grades-table/Justification';
 import Swal from 'sweetalert2';
 import 'tailwindcss/tailwind.css';
+import { useNavigate } from 'react-router-dom';
 
 
 /* Parent component >> frontend/components/table/List */
@@ -105,9 +106,10 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
         handleHistory(updateHistory);
     }
 
+    const navigate = useNavigate();
 
     // Function that handles adding grade to DB
-    const handleAddGrade = () => {
+    const handleAddGrade = async () => {
 
         // new grade from the AddRow fields to be added to DB
         newGrade = {
@@ -131,6 +133,7 @@ const AddRowBtn = ({ sem, grades, addHandler, handleHistory }) => {
             .then(response => response.json())
             .then(body => {
                 // adds new grade to list and updates row
+                console.log(body)
                 addHandler({
                     _id : body._id,
                     courseName: courseName,

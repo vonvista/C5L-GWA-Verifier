@@ -433,6 +433,7 @@ exports.studentUpdateStatus = async function(req, res, next) {
   //find student by StudentID
   var student = await Student.findOne({StudentID:req.body.StudentID});
   if(!student){
+    res.send({err:'Unable to find student'}); 
     return
   }
 
