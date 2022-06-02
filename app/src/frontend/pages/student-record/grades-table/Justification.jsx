@@ -185,8 +185,8 @@ const Justification = ({ modalState, modalHandler, parentSubmitHandler, handleHi
                                     className="cursor-pointer w-full focus:outline-none"
                                 
                                 >
-                                    <div className="flex w-full block gap-1">
-                                        <span className="flex-none font-poppins text-sm 4xl:text-lg font-medium py-1 px-2 block bg-sr-dark-gray rounded-lg text-sm text-gray-700 hover:bg-yellow-100 hover:text-secondary-red transition ease-in-out duration-300 hover:transition hover:ease-in hover:duration-300">
+                                    <div className="flex w-full gap-1">
+                                        <span className="flex-none font-poppins 4xl:text-lg font-medium py-1 px-2 block bg-sr-dark-gray rounded-lg text-sm text-gray-700 hover:bg-yellow-100 hover:text-secondary-red transition ease-in-out duration-300 hover:transition hover:ease-in hover:duration-300">
                                             Upload Image
                                         </span>
 

@@ -101,7 +101,7 @@ const EditStudent = ({ modalState, handleClose, setJustModal, editModalSave, set
                                         {/* Close button */}
                                         <div className={modalClose}>
                                             <XIcon
-                                                className="w-[1.5vw] cursor-pointer transition-all ease-out delay-200 hover:text-gray-400 hover:transition-all hover:ease-in hover:delay-200"
+                                                className="w-[1.5vw] cursor-pointer transition-all ease-out hover:text-gray-400 hover:transition-all hover:ease-in"
                                                 onClick={handleClose}
                                             />
                                         </div>
