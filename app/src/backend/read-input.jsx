@@ -302,6 +302,7 @@ const readInputFile = (files, handleAddRecord) => {
         // displaying the summary with custom class
         Swal.fire({
           title: 'Upload Summary',
+          width: '120vh',
           html: str,
           customClass: {  // class formatting detailed in swal.css
             popup: 'format-table',
