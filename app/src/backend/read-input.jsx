@@ -48,7 +48,11 @@ const readInputFile = (files, handleAddRecord) => {
     // NOTE: if one value is missing, the rightmost element (year and cumulative) would have an NaN and undefined value
     } else if (studentData.cumulative.includes(NaN) || studentData.year.includes(undefined)) {
       isSuccessful.success = false;
-      isSuccessful.message = "Amount of data is inconsistent."; 
+      isSuccessful.message = "Amount of data is inconsistent.";
+    // if the student GWA does not exist
+    } else if (studentData.OverallGWA == null){
+      isSuccessful.success = false;
+      isSuccessful.message = "Student does not have a valid GWA.";
     // if no error encountered
     } else {
       isSuccessful.success = true;
@@ -85,7 +89,6 @@ const readInputFile = (files, handleAddRecord) => {
     const term = [];
     const sem = [];
     const year = [];
-    const notes = [];
 
     let lastY; // last Y value or Y coordinate of the item; aka last line
     let line = ''; // content of the file per line
@@ -104,8 +107,7 @@ const readInputFile = (files, handleAddRecord) => {
     let numOfNotes = 0;
 
     // loops through each of the items in content
-    const items = content.items.map((item) => {
-
+    const items = content.items.map((item, i) => {
       // if the line coordinate is equal append normally
       if (lastY === item.transform[5] || !lastY) {
         line += item.str;
@@ -228,17 +230,9 @@ const readInputFile = (files, handleAddRecord) => {
             }
             arrayIndex += 1;
           } else {
-            // !! ---- NOTE: Formatting of the sample data is really weird (ie. UNITS EARNED not aligned with anything)
-            if (numOfLineAfterSubjs == 0) {
-              studentData.TotalUnits = parseInt(tempArray[0]);
-              studentData.TotalCumulative = parseFloat(tempArray[1]);
-            } else if (numOfLineAfterSubjs == 1) {
+            // ignore everything except GWA
+            if (tempArray[0].replace(/\W/g, '') == "GWA" && tempArray[1]){
               studentData.OverallGWA = parseFloat(tempArray[1]);
-            } else if (numOfLineAfterSubjs == 2) {
-              studentData.TotalUnits2 = parseInt(tempArray[0]);
-            } else {
-              notes[numOfNotes] = line;
-              numOfNotes += 1;
             }
             numOfLineAfterSubjs += 1;
           }
@@ -251,7 +245,16 @@ const readInputFile = (files, handleAddRecord) => {
 
       // update the last value of the line coordinate
       lastY = item.transform[5];
+
+      // catches the last line
+      if (content.items.length === i+1){
+        const tempArray = line.split(' ');
+        if (tempArray[0].replace(/\W/g, '') == "GWA" && tempArray[1]){
+          studentData.OverallGWA = parseFloat(tempArray[1]);
+        }
+      }
     });
+
     studentData.courses = courses;
     studentData.grades = grades;
     studentData.units = units;
@@ -259,8 +262,12 @@ const readInputFile = (files, handleAddRecord) => {
     studentData.cumulative = cumulative;
     studentData.term = term;
     studentData.sem = sem;
+
+    studentData.TotalUnits = 0;
+    studentData.TotalUnits2 = 0;
+    studentData.TotalCumulative = 0;
+    
     studentData.year = year;
-    studentData.notes = notes;
     return studentData;
   }
 
@@ -359,12 +366,11 @@ const readInputFile = (files, handleAddRecord) => {
           })
           .then(response => response.json())
           .then(body =>  {
-            console.log
             if (body.err == 'An error occured'){ // an error occured during finding
               fileStatuses.push({name: file.name, status: 'ERROR', message: `${body.err}`});
               displayFileStatuses();
             } else if (body.err == 'Unable to find student') { // no student found in the database, hence proceed
-              
+
               // posting to database
               fetch(`http://${ip}:3001/student/add`,{
                 method: "POST",
