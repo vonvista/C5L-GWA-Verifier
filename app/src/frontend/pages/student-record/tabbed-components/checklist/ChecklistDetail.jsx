@@ -14,12 +14,12 @@ import { CheckCircleIcon , XCircleIcon } from '@heroicons/react/outline'
 const ChecklistDetail = ({ icon, detail, setValData, index}) => {
   return (
     <div className="flex w-full items-center"
-    //on hover change cursor to pointer
-    onMouseEnter={() => document.body.style.cursor = 'pointer'}
-    onMouseLeave={() => document.body.style.cursor = 'default'}
-    onClick={() => {
-      setValData(index);
-    }}
+        //on hover change cursor to pointer
+        onMouseEnter={() => document.body.style.cursor = 'pointer'}
+        onMouseLeave={() => document.body.style.cursor = 'default'}
+        onClick={() => {
+        setValData(index);
+        }}
     >
       {/* Icon to be displayed */}
       {icon === true ? (

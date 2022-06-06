@@ -27,7 +27,6 @@ import 'tailwindcss/tailwind.css';
 */
 const EditStudent = ({ modalState, handleClose, setJustModal, editModalSave, setTitle, studentInfo, values, isValid, errors, touched, changeHandler, submitHandler}) => {
 
-    
     /*-------------------- Styling --------------------*/
     const editStudentModal = `relative bg-secondary-red h-[49vh] w-[50vw] rounded-[3.25vw] px-[3.25vw] font-normal font-montserrat m-auto overflow-hidden py-0 fixed inset-0 z-50`;
     const baybayinStyle = `bg-baybayin bg-repeat-y bg-contain -ml-[14.25vh] h-[49vh]`;

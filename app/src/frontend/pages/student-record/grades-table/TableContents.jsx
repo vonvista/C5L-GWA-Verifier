@@ -107,29 +107,6 @@ const TableContents = ({ Name, Total, Semester, historyHandler, autoSet }) => {
         })
     }
 
-    // // logs action of editing a row to history
-    // const setHistoryEditRow = (detailsObj) => {
-
-    //     const newHistObj = {
-    //         date: new Date().toLocaleDateString(),
-    //         info: [
-    //             {
-    //                 main: detailsObj.title,
-    //                 user: userName,
-    //                 time: new Date().toLocaleTimeString('en-US', { 
-    //                     hour12: false, 
-    //                     hour: "numeric", 
-    //                     minute: "numeric"
-    //                 }),
-    //                 details: detailsObj.desc,         // place justification into details
-    //             },
-    //         ],
-    //     }
-
-    //     historyHandler(newHistObj)  //set changes
-    // } 
-
-    
     // deletes row from table
     const delData = (values) => {
         // get array index of object that was changed

@@ -8,8 +8,6 @@ import { LoginBtn } from '../../components/buttons/LoginBtn';
 import TextBtn from '../../components/buttons/TextBtn';
 import AppIcon from '../../../../assets/icon.png';
 import Input from '../../components/inputs/Input';
-//import { electron } from 'process';
-
 import DevTeamImage from '../../../../assets/dev_team.png'
 
 
@@ -153,7 +151,6 @@ const LoginPage = () => {
                     title: 'Success',
                     text: 'Successfully logged in!',
                 })
-                //TODO: Route to dashboard, waiting lang muna
                 localStorage.setItem("FirstName", body.FirstName)
                 localStorage.setItem("LastName", body.LastName)
                 localStorage.setItem("MiddleName", body.MiddleName)
@@ -162,7 +159,6 @@ const LoginPage = () => {
                 localStorage.setItem("Role", body.Role)
                 localStorage.setItem("Username", body.Username)
                 localStorage.setItem("ServerIP", ip)
-
 
                 navigate('/in/user-dashboard') //redirect to user
             }
@@ -216,6 +212,8 @@ const LoginPage = () => {
                     {/* Input form */}
                     <div className="flex justify-center">               
                         <div className="overflow-hidden w-1/2 text-[1.25vw] font-montserrat rounded-lg px-[1vw] py-[1.5vh] bg-white text-gray-800">
+                            
+                            {/* Database IP */}
                             <div className="pb-[2vh]">
                                 <Input
                                     labelStyle="block mb-[1vh] font-semibold"           // styling for label
@@ -233,6 +231,8 @@ const LoginPage = () => {
                                 }
 
                             </div>
+
+                            {/* Username */}
                             <div className="pb-[2vh]">
                                 <Input
                                     labelStyle="block mb-[1vh] font-semibold"           // styling for label
@@ -250,6 +250,8 @@ const LoginPage = () => {
                                 }
 
                             </div>
+
+                            {/* Password */}
                             <div className="pb-[1vh]">
                                 <Input
                                     labelStyle="block mb-[1vh] font-semibold"           // styling for label

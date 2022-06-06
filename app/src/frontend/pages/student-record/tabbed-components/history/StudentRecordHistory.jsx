@@ -12,7 +12,6 @@ import 'tailwindcss/tailwind.css';
 const StudentRecordHistory = ({ historyData, ...rest }) => {
 
   useEffect(() => {
-
     console.log(historyData);
   }, []);
 
