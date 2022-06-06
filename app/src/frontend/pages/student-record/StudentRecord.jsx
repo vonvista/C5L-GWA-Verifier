@@ -101,11 +101,15 @@ function organizeGrades(data,ip,currStudentID){
             weight = parseFloat(finalGrades[i].data[j].units) * parseFloat(finalGrades[i].data[j].grade)
             
             // compute total units earned
-            if(finalGrades[i].data[j].units != "0" && finalGrades[i].data[j].grade != "0" && finalGrades[i].data[j].grade != 'S' && finalGrades[i].data[j].grade != 'INC' && finalGrades[i].data[j].grade != 'DRP'){
+            if(finalGrades[i].data[j].units != "0" && finalGrades[i].data[j].grade != "0" && finalGrades[i].data[j].grade != 'S' && finalGrades[i].data[j].grade != 'INC' && finalGrades[i].data[j].grade != 'DRP' && finalGrades[i].data[j].grade != 'P' && finalGrades[i].data[j].grade != 'DFG' && finalGrades[i].data[j].grade != 'U'){
                 finalTotal += parseFloat(finalGrades[i].data[j].units)
-                total += parseFloat(finalGrades[i].data[j].units)
+                // total += parseFloat(finalGrades[i].data[j].units)
             }
             
+            if(finalGrades[i].data[j].units != "0" && finalGrades[i].data[j].grade != "0"){
+                total += parseFloat(finalGrades[i].data[j].units)
+            }
+
             // if weight is a text then weight considered 0
             if(isNaN(weight)){
                 weight = 0;
@@ -118,7 +122,7 @@ function organizeGrades(data,ip,currStudentID){
 
             // computation of passed GPA units
             if(finalGrades[i].data[j].units != "0") {
-                if(finalGrades[i].data[j].grade != "0" && finalGrades[i].data[j].grade != 'S' && finalGrades[i].data[j].grade != 'INC' && finalGrades[i].data[j].grade != 'DRP') {
+                if(finalGrades[i].data[j].grade != "0" && finalGrades[i].data[j].grade != 'S' && finalGrades[i].data[j].grade != 'INC' && finalGrades[i].data[j].grade != 'DRP' && finalGrades[i].data[j].grade != 'P' && finalGrades[i].data[j].grade != 'DFG' && finalGrades[i].data[j].grade != 'U') {
                 punitTotal += parseFloat(finalGrades[i].data[j].units)
                 } 
             }
@@ -130,8 +134,8 @@ function organizeGrades(data,ip,currStudentID){
 
             // computation of passed non-GPA units
             if(finalGrades[i].data[j].units == "0") {
-                if(finalGrades[i].data[j].grade != "0" && finalGrades[i].data[j].grade != 'INC' && finalGrades[i].data[j].grade != 'DRP') {
-                pnunitTotal += 3;
+                if(finalGrades[i].data[j].grade != "0" && finalGrades[i].data[j].grade != 'S' && finalGrades[i].data[j].grade != 'INC' && finalGrades[i].data[j].grade != 'DRP' && finalGrades[i].data[j].grade != 'P' && finalGrades[i].data[j].grade != 'DFG' && finalGrades[i].data[j].grade != 'U') {
+                    pnunitTotal += 3;
                 }
             }
 
