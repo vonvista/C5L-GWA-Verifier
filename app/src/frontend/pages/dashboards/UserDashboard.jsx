@@ -38,7 +38,10 @@ const UserDashboard = () => {
   const [sortState, setSortState] = useState([0, 0, 0, 0]);
   const [latestSort, setLatestSort] = useState(-1);
 
-  
+  // used in Search component
+  const [searchStudent, setSearchStudent] = useState('');
+
+
   const fetchData = async () => {
     // Retrieve data from database
     fetch(`http://${ip}:3001/student/find-all`, {
@@ -188,13 +191,11 @@ const UserDashboard = () => {
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = rows.slice(indexOfFirstRow, indexOfLastRow);
-  // console.log('REFRESH');
+
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // used in Search component
-  const [searchStudent, setSearchStudent] = useState('');
-
+  // handles search function
   const handleSearch = () => {
     let onList = false;
 

@@ -336,13 +336,6 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
             })
     }
     
-    // const histAdd = (histObj) => {
-    //     // function for adding to history
-    //     // function to be passed to other child components that will update the state
-    //     // this function has to be in the parent component so that history tab will update
-    //     let newHist = [...historyState, histObj]
-    //     setHistoryState(newHist)
-    // }
 
     // Styling for student detail header
     const detailStyle = { 

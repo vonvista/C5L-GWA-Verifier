@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
-import 'tailwindcss/tailwind.css';
 import Swal from 'sweetalert2';
+import 'tailwindcss/tailwind.css';
 
 /* Components */
 import List from 'frontend/components/table/List';
 import Pagination from 'frontend/components/table/Pagination';
 import AddUserBtn from 'frontend/components/buttons/AddUserBtn';
-import Search from 'frontend/components/search/Search';
-import SearchModal from 'frontend/components/search/SearchModal';
 import EditUser from './EditUser';
 import AddUser from './AddUser';
 
@@ -80,31 +78,6 @@ const UserManagementPage = () => {
 
     //Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
-
-    //used in Search component
-    const [searchUser, setSearchUser] = useState("");
-
-    const handleSearch =()=>{
-      // console.log(searchStudent);
-      //Add code here to search student, fetch sa database, if wala sa DB, display student cannot be found, 
-      //if nasa DB, go to record of student
-
-      //if di mahanap si student
-
-      // Swal.fire({
-      //   icon: 'error',
-      //   title: 'Error',
-      //   text: 'Student does not exist',
-      // })
-
-      //if nahanap si student, go straight to record
-    }
-
-    const handleEnterPress = (e) =>{
-      if (e.key === "Enter") {
-        handleSearch();
-      }
-    }
 
     const handleAddRecord = (user) => {
       let temp = rows;

@@ -12,12 +12,8 @@ import ChecklistDetail from './ChecklistDetail';
     setValData      ---  function that handles the validation status
     handleApply     ---  function used to apply the changes done on the validation status of the record
 */
-export default function CheckListTab({
-  oldDataState,
-  checklistData,
-  setValData,
-  handleApply,
-}) {
+export default function CheckListTab({ oldDataState, checklistData, setValData, handleApply }) {
+  
   const ApplyChangesButton = (index) => {
     for (let i = 0; i < checklistData.length; i++) {
       if (oldDataState[i].status !== checklistData[i].status) {
@@ -49,6 +45,8 @@ export default function CheckListTab({
       </button>
     );
   };
+
+  
   return (
     <div className="min-w-[25vw] max-w-[25vw] h-full max-h-[61vh] mx-auto p-[1vw] block overflow-auto">
       <p className="text-xs xl:text-sm 1.75xl:text-base 3xl:text-lg 4xl:text-[0.95vw] 3xl:leading-7 5xl:leading-10 font-inter ml-[0.5vw] text-left mb-[2vh]">
