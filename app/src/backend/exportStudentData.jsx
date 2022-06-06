@@ -45,7 +45,7 @@ const styles = {
     head: tableHeader,
     };
 
-function organizeRecord(info, grades){
+function organizeRecord(info, grades, gpa){
 
     // storage of data to be exported
     let finalExportData = {
@@ -58,7 +58,7 @@ function organizeRecord(info, grades){
 
     // reformat grades to be jspdf-autotable ready
     let reGrades = [];
-    let totalUnits = 0;
+    // let totalUnits = 0;
     
     for (let i = 0; i < grades.length; i++){
 
@@ -73,9 +73,9 @@ function organizeRecord(info, grades){
             ]);
 
             
-            if (grades[i].data[j].grade != 'S' && grades[i].data[j].units != '0' && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP' && grades[i].data[j].grade != '0'){
-                totalUnits += parseFloat(grades[i].data[j].units)
-            }
+            // if (grades[i].data[j].grade != 'S' && grades[i].data[j].units != '0' && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP' && grades[i].data[j].grade != '0'){
+            //     totalUnits += parseFloat(grades[i].data[j].units)
+            // }
         }
 
         // add total units per sem and semester 
@@ -87,8 +87,8 @@ function organizeRecord(info, grades){
 
     // store grades
     finalExportData.grades = reGrades
-    finalExportData.grades.push(['', totalUnits, '', '', cumulative, '', ''])
-    finalExportData.gwa = cumulative / totalUnits
+    finalExportData.grades.push(['', gpa.totalUnitsGPA, '', '', gpa.totalGradePoints, '', ''])
+    finalExportData.gwa = gpa.gwa
 
     return finalExportData
 }
@@ -124,10 +124,10 @@ function addWaterMark(doc, user) {
     return doc;
 }
 
-function exportStudentData(info, grades, user){
+function exportStudentData(info, grades, user, gpa){
 
     // format data for export
-    var exportData = organizeRecord(info, grades)
+    var exportData = organizeRecord(info, grades, gpa)
 
     // initialize pdf document
     var doc = new jsPDF({
