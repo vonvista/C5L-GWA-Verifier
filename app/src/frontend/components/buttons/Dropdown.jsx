@@ -24,8 +24,9 @@ import Swal from 'sweetalert2';
     setHistory    ---   function to update history logs
     setSelectedStudent  ---  function that sets selectedStudent state in parent component
     forceReload   ---   reloads the page
+    gpa           ---   contains gpa calculation values
 */
-const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent, forceReload }) => {
+const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent, forceReload, gpa }) => {
 
     // State handlers for Dropdown
     const [isActive, setIsActive] = useState(false);
@@ -133,7 +134,8 @@ const Dropdown = ({ studentInfo, grades, setHistory, setSelectedStudent, forceRe
         // get student info and grades from props
         const student = studentInfo
         const studentGrades = grades
-        exportStudentData(student, studentGrades, currUser);
+        const gpaCalc = gpa
+        exportStudentData(student, studentGrades, currUser, gpaCalc);
 
         const Toast = Swal.mixin({
             toast: true,
