@@ -11,7 +11,6 @@ import Header from 'frontend/components/common/HeaderWithArrowbck';
 /* Pages */
 import LoginPage from 'frontend/pages/login-page/LoginPage'
 import UserDashboard from 'frontend/pages/dashboards/UserDashboard';
-// import AdminDashboard from 'frontend/pages/dashboards/AdminDashboard'; // depracated -vov
 import UserManagement from 'frontend/pages/user-management/UserManagementPage';
 import StudentRecord from 'frontend/pages/student-record/StudentRecord';
 
@@ -70,7 +69,6 @@ export default function App() {
             <Routes>
                 <Route path="/in" element={<NavigationBar />} >
                     <Route exact path="/in/user-dashboard" element={<UserDashboard />} />
-                    {/* <Route exact path="/admin-dashboard" element={<AdminDashboard />} /> */}
                     <Route exact path="/in/user-management" element={<UserManagement />} />
                     <Route exact path="/in/student-record" element={<StudentRecord />} />
                 </Route>
