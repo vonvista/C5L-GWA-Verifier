@@ -35,7 +35,7 @@ const EditRow = ({dataDynamic, dataStatic, changeHandler, onSubmit, toggleHandle
                     name="courseName"                                   // name of label-input components
                     inputType="text"                                    // type of input password, email, text, etc.
                     inputPlaceholder={dataDynamic.courseName}           // placeholder text for input
-                    value={dataDynamic.courseName}                      // value of the input
+                    value={dataDynamic.courseName.toUpperCase()}        // value of the input
                     changeHandler={changeHandler}                       // change handling
                 />
                 {touched.courseName && errors.courseName && 

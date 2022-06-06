@@ -24,7 +24,7 @@ const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, handl
   // State handler for modal button
   const [isOpen, setIsOpen] = useState(false);
   // State handler for history title for edit row
-  const [histTitle, setTitle] = useState(`Edited student grade row from Course: ${values.courseName}, Grade: ${values.grade}, and Units: ${values.units} to `);
+  const [histTitle, setTitle] = useState(`Edited student grade row from Course: ${values.courseName.toUpperCase()}, Grade: ${values.grade}, and Units: ${values.units} to `);
 
 
   if (isTouched==null) // if null, assume that inputs haven't been touched
@@ -74,7 +74,7 @@ const ActionsSaveCancel = ({ handleSave, handleCancel, isValid, isTouched, handl
                             openModal();
 
                             // add new values to end of history title
-                            setTitle(`${histTitle} Course: ${values.courseName}, Units: ${values.units}, and Grade: ${values.grade} on Semester: ${sem}`); 
+                            setTitle(`${histTitle} Course: ${values.courseName.toUpperCase()}, Units: ${values.units}, and Grade: ${values.grade} on Semester: ${sem}`); 
                         }} 
                     disabled={!(isValid && isTouched)}
                 >
