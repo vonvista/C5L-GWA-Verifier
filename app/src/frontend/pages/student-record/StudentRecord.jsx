@@ -116,26 +116,35 @@ function organizeGrades(data,ip,currStudentID){
             }
 
             // computation of taken GPA units
-            if(finalGrades[i].data[j].units != "0" && finalGrades[i].data[j].grade != 'S') {
+            if(finalGrades[i].data[j].units != "0" && finalGrades[i].data[j].grade != 'S' && finalGrades[i].data[j].grade != 'INC'  && finalGrades[i].data[j].grade != 'DRP' && finalGrades[i].data[j].grade != 'P' && finalGrades[i].data[j].grade != 'DFG' && finalGrades[i].data[j].grade != 'U') {
                 tunitTotal += parseFloat(finalGrades[i].data[j].units)
             } 
 
             // computation of passed GPA units
             if(finalGrades[i].data[j].units != "0") {
-                if(finalGrades[i].data[j].grade != "0" && finalGrades[i].data[j].grade != 'S' && finalGrades[i].data[j].grade != 'INC' && finalGrades[i].data[j].grade != 'DRP' && finalGrades[i].data[j].grade != 'P' && finalGrades[i].data[j].grade != 'DFG' && finalGrades[i].data[j].grade != 'U') {
+                if(finalGrades[i].data[j].grade != "0" && finalGrades[i].data[j].grade != 'S' && finalGrades[i].data[j].grade != 'INC'  && finalGrades[i].data[j].grade != 'DRP' && finalGrades[i].data[j].grade != 'P' && finalGrades[i].data[j].grade != 'DFG' && finalGrades[i].data[j].grade != 'U') {
                 punitTotal += parseFloat(finalGrades[i].data[j].units)
                 } 
             }
 
             // computation of taken non-GPA units
-            if(finalGrades[i].data[j].units == "0") {
-                tnunitTotal += 3;
+            if(finalGrades[i].data[j].units == "0" || finalGrades[i].data[j].grade == 'P' || finalGrades[i].data[j].grade == 'INC' || finalGrades[i].data[j].grade == 'DRP' || finalGrades[i].data[j].grade == 'S' || finalGrades[i].data[j].grade == 'DFG' || finalGrades[i].data[j].grade == 'U') {
+                
+                if(finalGrades[i].data[j].units == "0"){
+                    tnunitTotal += 3; 
+                } else {
+                    tnunitTotal += parseFloat(finalGrades[i].data[j].units)
+                }
             }
 
             // computation of passed non-GPA units
-            if(finalGrades[i].data[j].units == "0") {
-                if(finalGrades[i].data[j].grade != "0" && finalGrades[i].data[j].grade != 'S' && finalGrades[i].data[j].grade != 'INC' && finalGrades[i].data[j].grade != 'DRP' && finalGrades[i].data[j].grade != 'P' && finalGrades[i].data[j].grade != 'DFG' && finalGrades[i].data[j].grade != 'U') {
-                    pnunitTotal += 3;
+            if(finalGrades[i].data[j].units == "0" || finalGrades[i].data[j].grade == 'P' || finalGrades[i].data[j].grade == 'INC' || finalGrades[i].data[j].grade == 'DFG' || finalGrades[i].data[j].grade == 'S') {
+                if(finalGrades[i].data[j].grade != "0" && finalGrades[i].data[j].grade != 'DRP' && finalGrades[i].data[j].grade != 'U') {
+                    if(finalGrades[i].data[j].units == "0"){
+                        pnunitTotal += 3; 
+                    } else {
+                        pnunitTotal += parseFloat(finalGrades[i].data[j].units)
+                    }
                 }
             }
 
