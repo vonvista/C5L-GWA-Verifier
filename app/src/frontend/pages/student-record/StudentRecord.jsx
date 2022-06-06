@@ -29,7 +29,7 @@ const checklistDetails = [
 
 
 // Organize grades from database for RecordPage props
-function organizeGrades(data){
+function organizeGrades(data,ip,currStudentID){
 
     // final variable to be return
     let finalGrades = []
@@ -152,6 +152,31 @@ function organizeGrades(data){
     let unitsGPA = {GPAUnits: {taken: tunitTotal, passed: punitTotal}, NotGPAUnits: {taken: tnunitTotal, passed: pnunitTotal}}
     let gpaCalc = {totalGradePoints: cumulative, totalUnitsGPA: finalTotal, gwa: cumulative/finalTotal}
 
+    // data to be sent to DB for update
+    let newGPA = {
+        _id: currStudentID,
+        TotalUnits: parseFloat(gpaCalc.totalUnitsGPA),
+        TotalCumulative: parseFloat(gpaCalc.totalGradePoints),
+        OverallGWA: parseFloat(gpaCalc.gwa)
+    }
+    // update student gpa to DB
+    fetch(`http://${ip}:3001/student/update-gpa`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem("Username")} ${localStorage.getItem("Password")}` },
+        body: JSON.stringify(newGPA)// use studentID to find student info
+    })
+    .then(response => response.json())
+    .then(body => {
+        // console.log(body)
+    })
+    .catch(err => { //will activate if DB is not reachable or timed out or there are other errors
+        Swal.fire({
+            icon: 'error',
+            title: 'Server Error',
+            text: 'Check if the server is running or if database IP is correct',
+        })
+        //console.log(err)
+    })
     // console.log(gpaCalc)
     // console.log(finalTotal)
     // console.log(cumulative)
@@ -240,7 +265,7 @@ export default function StudentRecord() {
         await GetStudentNotes()
         setReload(!reload)
 
-        console.log("HERE")
+        // console.log("HERE")
     }  
         
     // get Grades, Student, Notes, History from database
@@ -287,7 +312,7 @@ export default function StudentRecord() {
                 title: 'Server Error',
                 text: 'Check if the server is running or if database IP is correct',
             })
-            console.log(err)
+            // console.log(err)
         })
 
         if(fetchResult == false){
@@ -301,7 +326,7 @@ export default function StudentRecord() {
         })
         .then(response => response.json())
         .then(body => {
-            console.log(body)
+            // console.log(body)
             if(body.err){
                 Swal.fire({
                     icon: 'error',
@@ -357,7 +382,7 @@ export default function StudentRecord() {
         })
         .then(response => response.json())
         .then(body => {
-            console.log(body)
+            // console.log(body)
             if(body.err){
                 Swal.fire({
                     icon: 'error',
@@ -367,7 +392,7 @@ export default function StudentRecord() {
                 navigate("/in/user-dashboard");
             }
             //organize the data for table contents
-            const studentGrades = organizeGrades(body)
+            const studentGrades = organizeGrades(body,ip,currStudentKey)
             
             // set Grades prop
             getGradesProp(studentGrades[0])
@@ -454,7 +479,7 @@ export default function StudentRecord() {
                 title: 'Server Error',
                 text: 'Check if the server is running or if database IP is correct',
             })
-            //console.log(err)
+            // console.log(err)
         })
     }
 
