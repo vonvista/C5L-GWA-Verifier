@@ -499,7 +499,7 @@ const UserDashboard = () => {
       Swal.fire({
         title: 'Delete Summary',
         html: str,
-        width: '120vh',
+        width: '90vw',
         customClass: {  // class formatting detailed in swal.css
           popup: 'format-table',
           htmlContainer: 'format-html-container',
