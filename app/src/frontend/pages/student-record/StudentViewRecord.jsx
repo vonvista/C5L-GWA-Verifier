@@ -251,7 +251,7 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                 weight = parseFloat(grades[i].data[j].units) * parseFloat(grades[i].data[j].grade)
 
                 // compute total untis earned
-                if(grades[i].data[j].units != "0" && grades[i].data[j].grade != "0" && grades[i].data[j].grade != 'S' && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP' && grades[i].data[j].grade != 'P' && grades[i].data[j].grade != 'DFG' && grades[i].data[j].grade != 'U'){
+                if(grades[i].data[j].units != "0" && grades[i].data[j].grade != "0" && grades[i].data[j].grade != 'S' && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP' && grades[i].data[j].grade != 'P' && grades[i].data[j].grade != 'DFG' && grades[i].data[j].grade != 'U' && !isNaN(grades[i].data[j].grade)){
                     finalTotal += parseFloat(grades[i].data[j].units)
                     // total += parseFloat(grades[i].data[j].units)
                 }
@@ -266,13 +266,13 @@ const RecordPage = ({student, notes, history, status, grades, checklist, gpa, re
                 }
 
                 // computation of taken GPA units
-                if(grades[i].data[j].units != "0" && grades[i].data[j].grade != 'S' && grades[i].data[j].grade != 'P' && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP' && grades[i].data[j].grade != 'DFG' && grades[i].data[j].grade != 'U') {
+                if(grades[i].data[j].units != "0" && grades[i].data[j].grade != 'S' && grades[i].data[j].grade != 'P' && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP' && grades[i].data[j].grade != 'DFG' && grades[i].data[j].grade != 'U' && !isNaN(grades[i].data[j].grade)) {
                     tunitTotal += parseFloat(grades[i].data[j].units)
                   } 
                 
                 // computation of passed GPA units
                 if(grades[i].data[j].units != "0") {
-                    if(grades[i].data[j].grade != "0" && grades[i].data[j].grade != 'S' && grades[i].data[j].grade != 'P' && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP' && grades[i].data[j].grade != 'DFG' && grades[i].data[j].grade != 'U') {
+                    if(grades[i].data[j].grade != "0" && grades[i].data[j].grade != 'S' && grades[i].data[j].grade != 'P' && grades[i].data[j].grade != 'INC' && grades[i].data[j].grade != 'DRP' && grades[i].data[j].grade != 'DFG' && grades[i].data[j].grade != 'U' && !isNaN(grades[i].data[j].grade)) {
                     punitTotal += parseFloat(grades[i].data[j].units)
                     } 
                 }
