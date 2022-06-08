@@ -550,9 +550,30 @@ exports.studentDeleteOne = async function(req, res, next) {
 
   Grade.deleteMany({Student: mongoose.Types.ObjectId(studentKey)},function(err, Student){
     if(!err && Student){
+      // res.send({suc:'Successfully deleted'});
+    } else {
+      res.send({err:'Unable to delete'});
+      return
+    }
+  });
+
+  //delete history with student key
+  History.deleteMany({Student: mongoose.Types.ObjectId(studentKey)},function(err, Student){
+    if(!err && Student){
+      // res.send({suc:'Successfully deleted'});
+    } else {
+      res.send({err:'Unable to delete'});
+      return
+    }
+  });
+
+  //delete notes with student key
+  Note.deleteMany({Student: mongoose.Types.ObjectId(studentKey)},function(err, Student){
+    if(!err && Student){
       res.send({suc:'Successfully deleted'});
     } else {
       res.send({err:'Unable to delete'});
+      return
     }
   });
 }
