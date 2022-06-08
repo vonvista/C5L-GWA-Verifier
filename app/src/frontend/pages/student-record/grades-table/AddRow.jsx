@@ -147,7 +147,7 @@ const AddRow = ({modalState, handleSave, handleClose,  courseNameState, courseNa
                                                     <input 
                                                         className={inputStyle}
                                                         type="text"
-                                                        maxLength={3}
+                                                        maxLength={4}
                                                         name="grade"
                                                         placeholder='0'
                                                         value={gradeState.toUpperCase()}
