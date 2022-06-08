@@ -4,7 +4,7 @@ import Justification from 'frontend/pages/student-record/grades-table/Justificat
 import 'tailwindcss/tailwind.css';
 
 
-/* Parent component >> frontend/ */
+/* Parent component >> frontend/pages/student-record/grades-table/ReadRow */
 
 /* This function contains the Actions buttons (edit and delete) */
 /* Props:
