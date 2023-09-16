@@ -1,4 +1,4 @@
-# C5L-GWA-Verifier
+# Katalas - C5L-GWA-Verifier
 
 Tech Stack: MERN (MongoDB, Express, React, Node) + ElectronJS
 
@@ -7,6 +7,8 @@ Tech Stack: MERN (MongoDB, Express, React, Node) + ElectronJS
 MongoDB, Node
 
 # Setup
+
+- when starting development environment, start database and api before starting app
 
 ## Go to app directory
 
